@@ -1,0 +1,41 @@
+package game;
+
+import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.Graphics;
+
+public class Debugger implements IMode {
+  private final Game game;
+  private float      framelength;
+  private boolean    F5_down;
+
+  public Debugger(final Game game) {
+    this.game = game;
+    framelength = 0.1f;
+    
+    F5_down = false;
+  }
+
+  @Override
+  public void update(final float dt) {
+    if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
+      if (!F5_down) {
+        game.update(framelength);
+      }
+      
+      F5_down = true;
+    }
+    else {
+      F5_down = false;
+    }
+  }
+
+  @Override
+  public void render(Graphics g) {
+    game.render(g);
+  }
+
+  @Override
+  public boolean isFinished() {
+    return game.isFinished();
+  }
+}

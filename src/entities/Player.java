@@ -1,0 +1,89 @@
+/*
+ * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
+ */
+
+package entities;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.SlickException;
+
+import other.GameTime;
+import ui.infobar.Bar;
+import basics.Vector2;
+
+import components.ICompAnim;
+import components.actions.Spawn;
+import components.basic.IArmed;
+import components.basic.Inventory;
+import components.control.SimpleControl;
+import components.holdables.Hand;
+import components.holdables.weapons.SingleWeapon;
+import components.holdables.weapons.Weapon;
+
+import entities.projectiles.Projectile;
+import entities.projectiles.ProjectileTemplate;
+
+public class Player extends Unit implements IArmed {
+  private final Inventory     inv;
+  private final Hand          hand;
+  private final Bar           weaponBar;
+  private final SimpleControl control;
+
+  public Player(final float x, final float y,
+                final float width, final float height,
+                final float handOffsetX, final float handOffsetY,
+                final float speed, final int maxHP, final int startingMoney,
+                final ICompAnim anim)
+    throws SlickException {
+    super(x, y, width, height, 0, 0, maxHP, anim);
+
+    inv = new Inventory(startingMoney);
+    hand = new Hand(handOffsetX, handOffsetY);
+    weaponBar = new Bar(Color.blue, null);
+    control = new SimpleControl(this, speed);
+    
+    add(hand);
+    addBar(weaponBar);
+    add(control);
+  }
+
+  @Override
+  public void update(final GameTime time) {
+    super.update(time);
+    weaponBar.setFraction(hand.getHoldable().getProgress());
+
+    // TODO: Get rid of instanceof
+    // Find out if there are any projectiles that want to be spawned
+    if (hand.getHoldable() instanceof SingleWeapon) {
+      final Weapon w = (Weapon) hand.getHoldable();
+      for (final ProjectileTemplate tmp : w.projectiles) {
+        final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
+        Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
+        actions.add(new Spawn(p));
+      }
+
+      w.projectiles.clear();
+    }
+  }
+
+  @Override
+  public void giveWeapon(final Weapon w) {
+    if (!inv.contains(w)) {
+      inv.add(w);
+    }
+    hand.grab(w);
+  }
+
+  public void previousWeapon() {
+    hand.grab(inv.previousWeapon());
+  }
+
+  public void nextWeapon() {
+    hand.grab(inv.nextWeapon());
+  }
+
+  public Hand getHand() {
+    return hand;
+  }
+
+}
