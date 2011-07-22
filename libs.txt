@@ -1,10 +1,11 @@
 slick http://slick.cokeandcode.com/:
 Copyright (c) 2007, Slick 2D
 
-All rights reserved.
-
 --------------------------------------------------------------------------------
 lwjgl  http://lwjgl.org/
 Copyright (c) 2002-2007 Lightweight Java Game Library Project
 
-All rights reserved.
+--------------------------------------------------------------------------------
+Gson http://code.google.com/p/google-gson
+Copyright 2008-2011 Google Inc.
+
