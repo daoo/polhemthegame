@@ -6,8 +6,8 @@ package entities;
 
 import org.newdawn.slick.SlickException;
 
-import components.ICompAnim;
-import components.basic.IUnit;
+import components.interfaces.ICompAnim;
+import components.interfaces.IUnit;
 
 public class Creep extends Unit implements IUnit {
   private final int moneyGain;
@@ -18,19 +18,19 @@ public class Creep extends Unit implements IUnit {
                final float speed,
                final int moneyGain, final float damage,
                final int maxHP, final float spawnTime,
-               final ICompAnim anim)
+               final ICompAnim walk, final ICompAnim death)
     throws SlickException {
     super(x, y, width, height,
           (float) Math.cos(ang) * speed,
           (float) Math.sin(ang) * speed,
-          maxHP, anim);
+          maxHP, walk, death);
 
     this.spawnTime = spawnTime;
 
     this.moneyGain = moneyGain;
     this.damage = damage;
 
-    add(anim);
+    add(walk);
   }
 
   public float getSpawnTime() {

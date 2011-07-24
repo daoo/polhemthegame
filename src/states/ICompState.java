@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
 
 import other.GameTime;
 
-import components.IComp;
+import components.interfaces.IComp;
 
 public interface ICompState extends IComp {
   public void update(final GameTime time);

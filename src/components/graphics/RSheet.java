@@ -12,7 +12,7 @@ import other.GameTime;
 
 import basics.Clock;
 
-import components.ICompAnim;
+import components.interfaces.ICompAnim;
 
 public class RSheet implements ICompAnim {
   protected final Clock       clock;
@@ -32,6 +32,7 @@ public class RSheet implements ICompAnim {
     this.sheet = sheet;
     running = false;
 
+    // TODO: There should be getters in 
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
 
@@ -77,7 +78,7 @@ public class RSheet implements ICompAnim {
 
   @Override
   public void render(final Graphics g) {
-    g.drawImage(sheet.getSprite(sx, sy), offsetX, offsetY);
+    g.drawImage(sheet.getSubImage(sx, sy), offsetX, offsetY);
   }
 
   @Override

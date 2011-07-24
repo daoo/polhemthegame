@@ -10,7 +10,7 @@ import org.newdawn.slick.Image;
 
 import other.GameTime;
 
-import components.ICompAnim;
+import components.interfaces.ICompAnim;
 
 public class TexturedQuad implements ICompAnim {
   private final Image img;
@@ -48,4 +48,14 @@ public class TexturedQuad implements ICompAnim {
 
   @Override
   public void restart() {}
+
+  @Override
+  public int getTileWidth() {
+    return img.getWidth();
+  }
+
+  @Override
+  public int getTileHeight() {
+    return img.getHeight();
+  }
 }

@@ -19,10 +19,13 @@ public class PlayerFactory {
 
   public static Player Make(float x, float y, PlayerData data)
     throws SlickException, ParserException, DataException, IOException {
-    RSheet anim = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
+    RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
+    RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
+    
     Player player = new Player(x, y, data.hitBox[0], data.hitBox[1],
                                data.handOffset[0], data.handOffset[1],
-                               data.speed, data.hitPoints, data.startMoney, anim);
+                               data.speed, data.hitPoints, data.startMoney,
+                               walk, death);
     
     player.giveWeapon(CacheTool.getWeapon(Launcher.cache, data.startWeapon));
     

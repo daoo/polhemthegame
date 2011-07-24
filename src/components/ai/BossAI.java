@@ -11,14 +11,14 @@ import basics.ExMath;
 import basics.Rectangle;
 import basics.Vector2;
 
-import components.ICompUpdate;
-import components.basic.Walker;
 import components.holdables.Hand;
+import components.interfaces.ICompUpdate;
+import components.interfaces.IUnit;
 import components.physics.AABB;
 
 public class BossAI implements ICompUpdate {
   private final AABB           body;
-  private final Walker         walker;
+  private final IUnit          unit;
   private final Hand           hand;
   private final Rectangle      arenaRect;
 
@@ -29,13 +29,13 @@ public class BossAI implements ICompUpdate {
   private final float          speed;
   private final Stack<Vector2> targets;
 
-  public BossAI(final Walker walker, final Hand hand,
+  public BossAI(final IUnit unit, final Hand hand,
                 final Rectangle consts, final AABB body, final float speed) {
     arenaRect = consts;
     this.hand = hand;
     this.body = body;
     this.speed = speed;
-    this.walker = walker;
+    this.unit = unit;
 
     isShooting = false;
 
@@ -78,7 +78,7 @@ public class BossAI implements ICompUpdate {
         // We're done here, stop shooting and start walking
         isShooting = false;
 
-        walker.startWalking(time);
+        unit.start();
         targets.push(newTarget());
         headFor(targets.peek());
       }
@@ -92,7 +92,7 @@ public class BossAI implements ICompUpdate {
         targets.pop();
         if (targets.empty()) {
           // No more targets, start shooting
-          walker.stopWalking();
+          unit.stop();
           hand.toggleUse();
           isShooting = true;
           shootingStartTime = time.getElapsed();
@@ -107,7 +107,7 @@ public class BossAI implements ICompUpdate {
   public void kill() {
     isShooting = false;
     hand.stopUse();
-    walker.stopWalking();
+    unit.stop();
     targets.clear();
   }
 

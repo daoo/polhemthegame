@@ -11,14 +11,14 @@ import other.GameTime;
 import ui.infobar.Bar;
 import basics.Vector2;
 
-import components.ICompAnim;
-import components.actions.Spawn;
-import components.basic.IArmed;
+import components.actions.SpawnProjectile;
 import components.basic.Inventory;
-import components.control.SimpleControl;
+import components.basic.SimpleControl;
 import components.holdables.Hand;
 import components.holdables.weapons.SingleWeapon;
 import components.holdables.weapons.Weapon;
+import components.interfaces.IArmed;
+import components.interfaces.ICompAnim;
 
 import entities.projectiles.Projectile;
 import entities.projectiles.ProjectileTemplate;
@@ -33,9 +33,9 @@ public class Player extends Unit implements IArmed {
                 final float width, final float height,
                 final float handOffsetX, final float handOffsetY,
                 final float speed, final int maxHP, final int startingMoney,
-                final ICompAnim anim)
+                final ICompAnim walk, final ICompAnim death)
     throws SlickException {
-    super(x, y, width, height, 0, 0, maxHP, anim);
+    super(x, y, width, height, 0, 0, maxHP, walk, death);
 
     inv = new Inventory(startingMoney);
     hand = new Hand(handOffsetX, handOffsetY);
@@ -59,7 +59,7 @@ public class Player extends Unit implements IArmed {
       for (final ProjectileTemplate tmp : w.projectiles) {
         final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
         Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
-        actions.add(new Spawn(p));
+        actions.add(new SpawnProjectile(p));
       }
 
       w.projectiles.clear();

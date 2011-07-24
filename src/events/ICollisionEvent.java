@@ -4,7 +4,7 @@
 
 package events;
 
-import components.basic.IUnit;
+import components.interfaces.IUnit;
 
 public interface ICollisionEvent {
   public boolean fire(final IUnit self, final IUnit other);

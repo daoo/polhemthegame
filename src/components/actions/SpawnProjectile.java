@@ -7,10 +7,10 @@ package components.actions;
 import main.World;
 import entities.projectiles.Projectile;
 
-public class Spawn implements IAction {
+public class SpawnProjectile implements IAction {
   private final Projectile object;
 
-  public Spawn(final Projectile object) {
+  public SpawnProjectile(final Projectile object) {
     this.object = object;
   }
 

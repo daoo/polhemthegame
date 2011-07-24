@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
-import components.ICompRender;
+import components.interfaces.ICompRender;
 
 public class InfoBar implements ICompRender {
   private final float          barWidth, barHeight;

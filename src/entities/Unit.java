@@ -11,39 +11,42 @@ import ui.infobar.Bar;
 import ui.infobar.InfoBar;
 import basics.Vector2;
 
-import components.ICompAnim;
 import components.actions.IAction;
-import components.basic.IUnit;
-import components.basic.Walker;
+import components.actions.SpawnAnimated;
+import components.interfaces.ICompAnim;
+import components.interfaces.IUnit;
 import components.physics.AABB;
 
 public class Unit extends Entity implements IUnit {
-  private final float              maxHP;
-  private float                    hp;
-  private boolean                  alive;
+  private final float                maxHP;
+  private float                      hp;
+  private boolean                    alive;
 
-  private final InfoBar            infoBar;
-  private final Bar                hpBar;
+  private final InfoBar              infoBar;
+  private final Bar                  hpBar;
 
-  private final Walker             walker;
+  private final ICompAnim            walk;
+  private final ICompAnim            death;
 
   protected final ArrayList<IAction> actions;
 
   public Unit(final float x, final float y,
               final float width, final float height,
               final float dx, final float dy,
-              final int maxHP, final ICompAnim anim)
+              final int maxHP,
+              final ICompAnim walk, final ICompAnim death)
     throws SlickException {
     super(x, y, width, height, dx, dy);
     actions = new ArrayList<IAction>();
+
+    this.walk = walk;
+    this.death = death;
 
     hp = maxHP;
     this.maxHP = maxHP;
     alive = true;
 
-    walker = new Walker(anim);
-
-    add(anim);
+    add(walk);
 
     infoBar = new InfoBar(width, 2, 0, -6);
     hpBar = new Bar(Color.green, Color.red);
@@ -51,7 +54,7 @@ public class Unit extends Entity implements IUnit {
 
     add(infoBar);
   }
-  
+
   protected void addBar(final Bar bar) {
     infoBar.add(bar);
   }
@@ -70,6 +73,10 @@ public class Unit extends Entity implements IUnit {
   @Override
   public void kill() {
     alive = false;
+
+    actions.add(new SpawnAnimated(body.getX1(), body.getY1(),
+                                  death.getTileWidth(), death.getTileHeight(),
+                                  death));
   }
 
   @Override
@@ -98,13 +105,14 @@ public class Unit extends Entity implements IUnit {
   }
 
   @Override
-  public void start(final GameTime time) {
-    walker.startWalking(time);
+  public void start() {
+    walk.start();
   }
 
   @Override
   public void stop() {
-    walker.stopWalking();
+    walk.stop();
+    walk.goToFirstFrame();
   }
 
   @Override

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import other.NotEnoughCashishException;
 
-import components.IComp;
 import components.holdables.weapons.Weapon;
+import components.interfaces.IComp;
 
 public class Inventory implements IComp {
   protected int                     money;

@@ -1,4 +1,4 @@
-package components.basic;
+package components.interfaces;
 
 import components.holdables.weapons.Weapon;
 

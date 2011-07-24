@@ -8,16 +8,16 @@ import basics.Vector2;
 
 import other.GameTime;
 
-import components.ICompRender;
-import components.ICompUpRend;
-import components.ICompUpdate;
-import components.basic.IEntity;
+import components.interfaces.ICompRender;
+import components.interfaces.ICompUpRend;
+import components.interfaces.ICompUpdate;
+import components.interfaces.IEntity;
 import components.physics.AABB;
 
 public class Entity implements IEntity {
-  protected final AABB                   body;
+  protected final AABB                 body;
   private final ArrayList<ICompUpdate> updates;
-  private final ArrayList<ICompRender>   renders;
+  private final ArrayList<ICompRender> renders;
 
   public Entity(final float x, final float y,
                 final float w, final float h,
@@ -29,7 +29,7 @@ public class Entity implements IEntity {
 
   public void update(final GameTime time) {
     body.integrate(time.getFrameLength());
-    
+
     for (ICompUpdate comp : updates) {
       comp.update(time);
     }
@@ -38,11 +38,11 @@ public class Entity implements IEntity {
   public void render(final Graphics g) {
     g.pushTransform();
     g.translate(body.getX1(), body.getY1());
-    
+
     for (ICompRender comp : renders) {
       comp.render(g);
     }
-    
+
     g.popTransform();
   }
 
@@ -50,11 +50,11 @@ public class Entity implements IEntity {
     updates.add(comp);
     renders.add(comp);
   }
-  
+
   public void add(final ICompRender comp) {
     renders.add(comp);
   }
-  
+
   public void add(final ICompUpdate comp) {
     updates.add(comp);
   }

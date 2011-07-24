@@ -1,4 +1,4 @@
-package components.basic;
+package components.interfaces;
 
 public interface IDamagable {
   public void damage(final float damage);

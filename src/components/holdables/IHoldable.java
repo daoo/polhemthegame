@@ -4,7 +4,7 @@
 
 package components.holdables;
 
-import components.ICompUpRend;
+import components.interfaces.ICompUpRend;
 
 public interface IHoldable extends ICompUpRend {
   public void useOnce();

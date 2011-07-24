@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
  */
 
-package components.control;
+package components.basic;
 
 
 import org.lwjgl.input.Keyboard;
@@ -11,8 +11,8 @@ import org.newdawn.slick.Input;
 import other.GameTime;
 import basics.Vector2;
 
-import components.ICompUpdate;
 import components.holdables.Hand;
+import components.interfaces.ICompUpdate;
 
 import entities.Player;
 
@@ -86,7 +86,7 @@ public class SimpleControl implements ICompUpdate {
       }
 
       if ((upOrDown != 0) || (rightOrLeft != 0)) {
-        player.start(time);
+        player.start();
       } else {
         player.stop();
       }

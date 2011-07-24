@@ -7,13 +7,13 @@ package entities.projectiles;
 import other.GameTime;
 import basics.Vector2;
 
-import components.ICompAnim;
-import components.basic.IDynamic;
-import components.basic.IRenderable;
+import components.interfaces.ICompAnim;
+import components.interfaces.IDamagable;
+import components.interfaces.IEntity;
 
 import entities.Entity;
 
-public class Projectile extends Entity implements IDynamic, IRenderable {
+public class Projectile extends Entity implements IEntity, IDamagable {
   private final float duration, range, damage, maxHP;
   private final boolean gravity, collides;
 

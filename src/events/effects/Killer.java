@@ -4,7 +4,7 @@
 
 package events.effects;
 
-import components.basic.IUnit;
+import components.interfaces.IUnit;
 
 import events.ICollisionEvent;
 

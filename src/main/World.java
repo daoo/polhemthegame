@@ -10,16 +10,17 @@ import java.util.Iterator;
 import org.newdawn.slick.Graphics;
 
 import other.GameTime;
-
 import physics.CollisionHelper;
 
 import components.actions.IAction;
-import components.basic.IDamagable;
-import components.basic.IDynamic;
-import components.basic.IUnit;
+import components.interfaces.IDamagable;
+import components.interfaces.IEntity;
+import components.interfaces.IUnit;
 import components.physics.AABB;
 
+import entities.Animated;
 import entities.Creep;
+import entities.Entity;
 import entities.Player;
 import entities.projectiles.Projectile;
 
@@ -27,6 +28,7 @@ public class World {
   private final float                 width, height;
   private final AABB                  smallBox, bigBox;
 
+  private final ArrayList<Entity>     entities;
   private final ArrayList<IUnit>      units;
   private final ArrayList<Projectile> projectiles;
   private final ArrayList<Player>     players;
@@ -34,9 +36,12 @@ public class World {
   public World(final float width, final float height) {
     this.width = width;
     this.height = height;
+    
     smallBox = new AABB(0, 0, width, height, 0, 0);
+    // TODO: Fix magic numbers
     bigBox = new AABB(-1000, -1000, width + 2000, height + 2000, 0, 0);
 
+    entities = new ArrayList<Entity>();
     units = new ArrayList<IUnit>();
     projectiles = new ArrayList<Projectile>();
     players = new ArrayList<Player>();
@@ -62,8 +67,9 @@ public class World {
     }
 
     // Update 
-    updateDynamics(units, time);
-    updateDynamics(projectiles, time);
+    updateEntities(entities, time);
+    updateEntities(units, time);
+    updateEntities(projectiles, time);
 
     // Update players
     for (final Player p : players) {
@@ -73,17 +79,22 @@ public class World {
       p.clearActions();
     }
 
-    // Remove dead objects
-    removeNoMores(units);
-    removeNoMores(projectiles);
-
-    // Finally execute all actions accumulated during the frame
+    // Execute all actions accumulated during the frame
     for (IAction a : actions) {
       a.execute(this);
     }
+    
+    // Remove dead objects, do this last so we make sure any actions
+    // are carried out properly
+    removeNoMores(units);
+    removeNoMores(projectiles);
   }
 
   public void render(final Graphics g) {
+    for (final IEntity e : entities) {
+      e.render(g);
+    }
+    
     for (final IUnit u : units) {
       u.render(g);
     }
@@ -109,6 +120,10 @@ public class World {
     units.add(c);
   }
 
+  public void add(final Animated animated) {
+    entities.add(animated);
+  }
+
   public int getX2() {
     return (int) width;
   }
@@ -126,14 +141,15 @@ public class World {
     }
   }
 
-  private <T extends IDynamic> void updateDynamics(final Iterable<T> list, final GameTime time) {
+  private <T extends IEntity> void updateEntities(final Iterable<T> list, final GameTime time) {
     final Iterator<T> it = list.iterator();
     while (it.hasNext()) {
-      final IDynamic e = it.next();
+      final IEntity e = it.next();
       e.update(time);
 
       if (!e.getBody().isIntersecting(bigBox)) {
-        e.kill();
+        // Do not kill entity here since it's unnecessary. This is a design
+        // decision.
         it.remove();
       }
     }

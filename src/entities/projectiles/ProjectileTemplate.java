@@ -12,9 +12,9 @@ import org.newdawn.slick.SpriteSheet;
 import other.CacheTool;
 import other.GameTime;
 
-import components.ICompAnim;
 import components.graphics.RSheet;
 import components.graphics.TexturedQuad;
+import components.interfaces.ICompAnim;
 
 public class ProjectileTemplate {
   private final ProjectileData data;

@@ -20,11 +20,12 @@ public class CreepFactory {
   public static Creep Make(final float x, final float y, final float ang,
                            final float spawnTime, final CreepData data)
     throws SlickException, ParserException, DataException, IOException {
-    final RSheet anim = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
+    final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
+    final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
 
     return new Creep(x, y, data.hitBox[0], data.hitBox[1],
                      ang, data.speed, data.moneyGain, data.damage,
-                     data.hitPoints, spawnTime, anim);
+                     data.hitPoints, spawnTime, walk, death);
   }
 
 }

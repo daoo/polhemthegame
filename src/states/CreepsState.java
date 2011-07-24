@@ -63,7 +63,7 @@ public class CreepsState implements ICompState {
       final Creep c = it.next();
 
       if (c.getSpawnTime() < time.getElapsed()) {
-        c.start(time);
+        c.start();
         world.add(c);
         it.remove();
       }

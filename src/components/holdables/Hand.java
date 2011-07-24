@@ -11,7 +11,7 @@ import other.GameTime;
 
 import basics.Vector2;
 
-import components.ICompUpRend;
+import components.interfaces.ICompUpRend;
 
 public class Hand implements ICompUpRend {
   protected IHoldable     item;

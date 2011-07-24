@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
  */
 
-package components;
+package components.interfaces;
 
 import org.newdawn.slick.Image;
 
@@ -18,4 +18,7 @@ public interface ICompAnim extends ICompUpRend {
   Image getLastFrame();
   
   void goToFirstFrame();
+  
+  int getTileWidth();
+  int getTileHeight();
 }
