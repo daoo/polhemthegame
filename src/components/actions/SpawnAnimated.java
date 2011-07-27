@@ -17,6 +17,7 @@ public class SpawnAnimated implements IAction {
 
   @Override
   public void execute(final World world) {
+    animated.start();
     world.add(animated);
   }
 }

@@ -4,6 +4,7 @@
 
 package main;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,6 +14,7 @@ import other.GameTime;
 import physics.CollisionHelper;
 
 import components.actions.IAction;
+import components.actions.IActions;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 import components.interfaces.IUnit;
@@ -75,9 +77,11 @@ public class World {
     for (final Player p : players) {
       p.update(time);
       CollisionHelper.BlockFromExiting(p.getBody(), smallBox);
-      actions.addAll(p.getActions());
-      p.clearActions();
     }
+    
+    // Get actions
+    getActions(players, actions);
+    getActions(units, actions);
 
     // Execute all actions accumulated during the frame
     for (IAction a : actions) {
@@ -130,6 +134,13 @@ public class World {
 
   public int getY2() {
     return (int) height;
+  }
+  
+  private <T extends IActions> void getActions(final Iterable<T> list, final AbstractList<IAction> result) {
+    for (IActions actions : list) {
+      result.addAll(actions.getActions());
+      actions.clearActions();
+    }
   }
 
   private <T extends IDamagable> void removeNoMores(final Iterable<T> list) {

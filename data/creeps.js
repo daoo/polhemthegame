@@ -29,9 +29,9 @@
         , "tileSize": [ 25, 44 ] }
       , { "animation": "death"
         , "framerate": 8
-        , "offset": [ 0, 0 ]
+        , "offset": [ 0, -26 ]
         , "sprite": "textures/creeps/ester-death.png"
-        , "tileSize": [ 400, 70 ] } ]
+        , "tileSize": [ 342, 70 ] } ]
     , "moneyGain": 100
     , "damage": 10 }
 

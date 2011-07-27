@@ -25,14 +25,14 @@ public class RSheet implements ICompAnim {
 
   public RSheet(final float targetFrameRate, final int offsetX,
                 final int offsetY, final SpriteSheet sheet) {
+    this.sheet = sheet;
+    clock = new Clock(1.0f / targetFrameRate);
+    running = false;
+
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    clock = new Clock(1.0f / targetFrameRate);
-    this.sheet = sheet;
-    running = false;
-
-    // TODO: There should be getters in 
+    // TODO: There should be getters in SpriteSheet 
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
 

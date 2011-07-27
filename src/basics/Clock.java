@@ -9,11 +9,14 @@ import org.lwjgl.Sys;
 public class Clock {
   // NOTE: All times are in seconds
   private float tStart, tLast, tNext, targetFrameTime;
+  private boolean forceSync;
 
   public Clock(final float targetFrameTime) {
     tStart = 0;
     tLast = 0;
     tNext = 0;
+    
+    forceSync = false;
 
     this.targetFrameTime = targetFrameTime;
   }
@@ -40,6 +43,8 @@ public class Clock {
   }
 
   public float sync(final float elapsed) {
+    forceSync = false;
+    
     final float tNow = elapsed;
     final float tDelta = tNow - tLast;
     tLast = tNow;
@@ -49,7 +54,11 @@ public class Clock {
   }
 
   public boolean needsSync(final float elapsed) {
-    return (targetFrameTime == 0) || (elapsed > tNext);
+    return forceSync || (targetFrameTime == 0) || (elapsed > tNext);
+  }
+  
+  public void forceSync() {
+    forceSync = true;
   }
 
   public float getTargetFrameTime() {

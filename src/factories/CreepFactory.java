@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 import other.CacheTool;
 
 import components.graphics.RSheet;
+import components.graphics.RSheetOnce;
 
 import entities.Creep;
 
@@ -21,7 +22,7 @@ public class CreepFactory {
                            final float spawnTime, final CreepData data)
     throws SlickException, ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
-    final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
+    final RSheetOnce death = CacheTool.getRSheetOnce(Launcher.cache, data.getSheet("death"));
 
     return new Creep(x, y, data.hitBox[0], data.hitBox[1],
                      ang, data.speed, data.moneyGain, data.damage,
