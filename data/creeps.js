@@ -11,9 +11,9 @@
         , "tileSize": [ 40, 50 ] }
       , { "animation": "death"
         , "framerate": 8
-        , "offset": [ 0, 0 ]
+        , "offset": [ -56, -50 ]
         , "sprite": "textures/creeps/bracke-death.png"
-        , "tileSize": [ 200, 100 ] } ]
+        , "tileSize": [ 174, 101 ] } ]
     , "moneyGain": 100
     , "damage": 10 }
 
