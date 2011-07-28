@@ -78,6 +78,6 @@ public class CreepsState implements ICompState {
 
   @Override
   public boolean isFinished() {
-    return notSpawnedCreeps.isEmpty();
+    return false; // TODO: Finished when all creeps have been killed in some way
   }
 }

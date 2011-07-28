@@ -18,11 +18,12 @@ public class GameCampaign {
     campaign = data;
 
     iterator = campaign.levels.iterator();
-    nextLevel();
   }
 
   public void nextLevel() throws ParserException, IOException {
-    currentLevel = CacheTool.getLevel(Launcher.cache, iterator.next());
+    if (iterator.hasNext()) {
+      currentLevel = CacheTool.getLevel(Launcher.cache, iterator.next());
+    }
   }
 
   public LevelData getCurrentLevel() {

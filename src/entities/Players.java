@@ -27,8 +27,8 @@ public class Players implements Iterable<Player> {
   private final int               count;
   private final ArrayList<Player> players;
 
-  public Players(final int count) throws ParserException, DataException,
-    IOException, SlickException {
+  public Players(final int count)
+    throws ParserException, DataException, IOException, SlickException {
     super();
 
     players = new ArrayList<Player>();
