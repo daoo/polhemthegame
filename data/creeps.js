@@ -65,9 +65,9 @@
         , "tileSize": [ 11, 24 ] }
       , { "animation": "death"
         , "framerate": 8
-        , "offset": [ 0, 0 ]
+        , "offset": [ -13, -3 ]
         , "sprite": "textures/creeps/ytc-death.png"
-        , "tileSize": [ 40, 30 ] } ]
+        , "tileSize": [ 42, 26 ] } ]
     , "moneygain": 75
     , "damage": 10 } ] }
 
