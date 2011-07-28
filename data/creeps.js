@@ -47,9 +47,9 @@
         , "tileSize": [ 112, 35 ] }
       , { "animation": "death"
         , "framerate": 8
-        , "offset": [ 0, 0 ]
+        , "offset": [ -19, -70 ]
         , "sprite": "textures/creeps/gtg-death.png"
-        , "tileSize": [ 220, 150 ] } ]
+        , "tileSize": [ 131, 105 ] } ]
     , "moneyGain": 100
     , "damage": 10 }
 
