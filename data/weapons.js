@@ -33,7 +33,7 @@
     , "launchAngle": -45
     , "muzzleOffset": [ 3, 2 ]
     , "reloadTime": -1
-    , "rpm": 3000
+    , "rpm": 20
     , "sprite":
       { "animation": "fire"
       , "framerate": 7
