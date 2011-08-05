@@ -4,6 +4,7 @@
 
 package main;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import loader.Cache;
@@ -47,6 +48,8 @@ public class Launcher extends StateBasedGame {
 
   public static void main(final String[] args) {
     try {
+      System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("java.library.path")).getAbsolutePath());
+
       // TODO: Fix config
       Launcher.cache = new Cache(new Enviroment().appDir);
 
