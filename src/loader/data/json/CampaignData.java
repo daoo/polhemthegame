@@ -14,5 +14,7 @@ public class CampaignData implements IClosable {
   public ArrayList<String> levels;
 
   @Override
-  public void close() throws DataException {}
+  public void close() throws DataException {
+    // Do nothing
+  }
 }

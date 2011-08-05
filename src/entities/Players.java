@@ -14,7 +14,6 @@ import loader.parser.ParserException;
 import main.Launcher;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import other.CacheTool;
 import other.GameTime;
@@ -28,7 +27,7 @@ public class Players implements Iterable<Player> {
   private final ArrayList<Player> players;
 
   public Players(final int count)
-    throws ParserException, DataException, IOException, SlickException {
+    throws ParserException, DataException, IOException {
     super();
 
     players = new ArrayList<Player>();

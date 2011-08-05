@@ -28,6 +28,7 @@ public class InfoBar implements ICompRender {
     bars = new ArrayList<Bar>();
   }
 
+  @Override
   public void render(final Graphics g) {
     int i = 0;
     for (final Bar b : bars) {

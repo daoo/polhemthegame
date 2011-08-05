@@ -6,9 +6,6 @@ import loader.data.DataException;
 import loader.data.json.PlayersData.PlayerData;
 import loader.parser.ParserException;
 import main.Launcher;
-
-import org.newdawn.slick.SlickException;
-
 import other.CacheTool;
 
 import components.graphics.RSheet;
@@ -19,7 +16,7 @@ import entities.Player;
 public class PlayerFactory {
 
   public static Player Make(final float x, final float y, final PlayerData data)
-    throws SlickException, ParserException, DataException, IOException {
+    throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
     final RSheetOnce death = CacheTool.getRSheetOnce(Launcher.cache, data.getSheet("death"));
 

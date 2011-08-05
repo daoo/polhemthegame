@@ -5,7 +5,6 @@
 package entities;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.SlickException;
 
 import other.GameTime;
 import ui.infobar.Bar;
@@ -14,6 +13,7 @@ import basics.Vector2;
 import components.actions.SpawnProjectile;
 import components.basic.Inventory;
 import components.basic.SimpleControl;
+import components.basic.Stats;
 import components.holdables.Hand;
 import components.holdables.weapons.SingleWeapon;
 import components.holdables.weapons.Weapon;
@@ -33,15 +33,14 @@ public class Player extends Unit implements IArmed {
                 final float width, final float height,
                 final float handOffsetX, final float handOffsetY,
                 final float speed, final int maxHP, final int startingMoney,
-                final ICompAnim walk, final ICompAnim death)
-    throws SlickException {
+                final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, 0, 0, maxHP, walk, death);
 
     inv = new Inventory(startingMoney);
     hand = new Hand(handOffsetX, handOffsetY);
     weaponBar = new Bar(Color.blue, null);
     control = new SimpleControl(this, speed);
-    
+
     add(hand);
     addBar(weaponBar);
     add(control);
@@ -58,7 +57,7 @@ public class Player extends Unit implements IArmed {
       final Weapon w = (Weapon) hand.getHoldable();
       for (final ProjectileTemplate tmp : w.projectiles) {
         final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
-        Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
+        final Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
         actions.add(new SpawnProjectile(p));
       }
 
@@ -84,6 +83,14 @@ public class Player extends Unit implements IArmed {
 
   public Hand getHand() {
     return hand;
+  }
+
+  public Inventory getInventory() {
+    return inv;
+  }
+
+  public Stats getStats() {
+    throw new UnsupportedOperationException("Not implemented");
   }
 
 }

@@ -19,5 +19,7 @@ public class ShopData implements IClosable {
   public ArrayList<ShopItemData> items;
 
   @Override
-  public void close() throws DataException {}
+  public void close() throws DataException {
+    // No data needs clean up
+  }
 }

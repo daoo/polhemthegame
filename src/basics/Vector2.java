@@ -9,8 +9,8 @@ public class Vector2 {
 
   public float                x, y;
 
-  private float sq(final float x) {
-    return x * x;
+  private float sq(final float a) {
+    return a * a;
   }
 
   public Vector2() {
@@ -79,8 +79,8 @@ public class Vector2 {
     return new Vector2(x + v.x, y + v.y);
   }
 
-  public Vector2 add(final float x, final float y) {
-    return new Vector2(this.x + x, this.y + y);
+  public Vector2 add(final float x2, final float y2) {
+    return new Vector2(x + x2, y + y2);
   }
 
   public void addSelf(final Vector2 v) {
@@ -88,15 +88,15 @@ public class Vector2 {
     y += v.y;
   }
 
-  public void addSelf(final float x, final float y) {
-    this.x += x;
-    this.y += y;
+  public void addSelf(final float x2, final float y2) {
+    x += x2;
+    y += y2;
   }
 
   public Vector2 subtract(final Vector2 v) {
     return new Vector2(x - v.x, y - v.y);
   }
-  
+
   public Vector2 multiply(final float scalar) {
     return new Vector2(x * scalar, y * scalar);
   }
@@ -117,6 +117,6 @@ public class Vector2 {
 
   @Override
   public String toString() {
-    return String.format("(%f, %f)", x, y);
+    return "(" + x + ", " + y + ")";
   }
 }

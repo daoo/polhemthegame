@@ -36,7 +36,7 @@ public class Launcher extends StateBasedGame {
   public static int        max_fps        = 100;
   public static Rectangle  rect           = new Rectangle(0, 0, width, height);
 
-  public Launcher() throws SlickException {
+  public Launcher() {
     super(Defines.NAME + " - " + Defines.VERSION);
 
     addState(new StateMenu(Launcher.MAINMENU));

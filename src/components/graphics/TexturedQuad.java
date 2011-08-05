@@ -20,7 +20,9 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void update(final GameTime time) {}
+  public void update(final GameTime time) {
+    // Do nothing
+  }
 
   @Override
   public void render(final Graphics g) {
@@ -33,10 +35,14 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void start() {}
+  public void start() {
+    // Do nothing
+  }
 
   @Override
-  public void stop() {}
+  public void stop() {
+    // Do nothing
+  }
 
   @Override
   public boolean isRunning() {
@@ -44,10 +50,14 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void goToFirstFrame() {}
+  public void goToFirstFrame() {
+    // Do nothing
+  }
 
   @Override
-  public void restart() {}
+  public void restart() {
+    // Do nothing
+  }
 
   @Override
   public int getTileWidth() {

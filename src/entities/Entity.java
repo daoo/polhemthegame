@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
-import basics.Vector2;
-
 import other.GameTime;
+import basics.Vector2;
 
 import components.interfaces.ICompRender;
 import components.interfaces.ICompUpRend;
@@ -27,19 +26,21 @@ public class Entity implements IEntity {
     renders = new ArrayList<ICompRender>();
   }
 
+  @Override
   public void update(final GameTime time) {
     body.integrate(time.getFrameLength());
 
-    for (ICompUpdate comp : updates) {
+    for (final ICompUpdate comp : updates) {
       comp.update(time);
     }
   }
 
+  @Override
   public void render(final Graphics g) {
     g.pushTransform();
     g.translate(body.getX1(), body.getY1());
 
-    for (ICompRender comp : renders) {
+    for (final ICompRender comp : renders) {
       comp.render(g);
     }
 
@@ -60,12 +61,12 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void setPosition(Vector2 v) {
+  public void setPosition(final Vector2 v) {
     body.setPosition(v);
   }
 
   @Override
-  public void setVelocity(Vector2 v) {
+  public void setVelocity(final Vector2 v) {
     body.setVelocity(v);
   }
 

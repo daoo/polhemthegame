@@ -8,7 +8,6 @@ package components.holdables;
 import org.newdawn.slick.Graphics;
 
 import other.GameTime;
-
 import basics.Vector2;
 
 import components.interfaces.ICompUpRend;
@@ -47,11 +46,11 @@ public class Hand implements ICompUpRend {
     }
   }
 
-  public void grab(final IHoldable item) {
+  public void grab(final IHoldable newItem) {
     // To grab a new holdable we need to stop using the current one
     stopUse();
 
-    this.item = item;
+    this.item = newItem;
   }
 
   @Override

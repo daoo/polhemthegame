@@ -16,24 +16,24 @@ import org.newdawn.slick.Image;
 import other.CacheTool;
 import other.GameTime;
 import basics.Rectangle;
-import basics.Timer;
 
 public class TransitionState implements ICompState {
   private final float x, y;
   private final Image text;
-  private final Timer timer;
+  private final float duration;
+  private float tSinceStart;
 
   public TransitionState(final TextStateData data, final Rectangle rect)
     throws IOException, ParserException {
     text = CacheTool.getImage(Launcher.cache, data.text);
     x = (rect.getWidth() / 2.0f) - (text.getWidth() / 2.0f);
     y = (rect.getHeight() / 2.0f) - (text.getWidth() / 2.0f);
-    timer = new Timer(data.duration);
+    duration = data.duration;
   }
 
   @Override
   public void start() {
-    timer.start(0);
+    tSinceStart = 0.0f;
   }
 
   @Override
@@ -43,12 +43,11 @@ public class TransitionState implements ICompState {
 
   @Override
   public void update(final GameTime time) {
-    timer.update(time);
+    tSinceStart += time.getFrameLength();
   }
 
   @Override
   public boolean isFinished() {
-    return timer.isFinished();
+    return tSinceStart >= duration;
   }
-
 }

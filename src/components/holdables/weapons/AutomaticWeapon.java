@@ -56,18 +56,20 @@ public class AutomaticWeapon extends Weapon {
   public void stopUse() {
     stopShooting();
   }
-  
+
   @Override
-  protected void fire(float elapsed) {
+  protected void fire(final float elapsed) {
     super.fire(elapsed);
-    
+
     anim.start();
   }
 
+  @Override
   public Vector2 getMuzzleOffset() {
     return muzzleOffset;
   }
 
+  @Override
   public float getAngle() {
     return angle;
   }

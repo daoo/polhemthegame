@@ -4,8 +4,6 @@
 
 package entities;
 
-import org.newdawn.slick.SlickException;
-
 import components.interfaces.ICompAnim;
 import components.interfaces.IUnit;
 
@@ -18,8 +16,7 @@ public class Creep extends Unit implements IUnit {
                final float speed,
                final int moneyGain, final float damage,
                final int maxHP, final float spawnTime,
-               final ICompAnim walk, final ICompAnim death)
-    throws SlickException {
+               final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height,
           (float) Math.cos(ang) * speed,
           (float) Math.sin(ang) * speed,

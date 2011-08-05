@@ -38,7 +38,7 @@ public class World {
   public World(final float width, final float height) {
     this.width = width;
     this.height = height;
-    
+
     smallBox = new AABB(0, 0, width, height, 0, 0);
     bigBox = new AABB(-width, -height, width * 2, height * 2, 0, 0);
 
@@ -67,7 +67,7 @@ public class World {
       }
     }
 
-    // Update 
+    // Update
     updateEntities(entities, time);
     updateEntities(units, time);
     updateEntities(projectiles, time);
@@ -77,16 +77,16 @@ public class World {
       p.update(time);
       CollisionHelper.BlockFromExiting(p.getBody(), smallBox);
     }
-    
+
     // Get actions
     getActions(players, actions);
     getActions(units, actions);
 
     // Execute all actions accumulated during the frame
-    for (IAction a : actions) {
+    for (final IAction a : actions) {
       a.execute(this);
     }
-    
+
     // Remove dead objects, do this last so we make sure any actions
     // are carried out properly
     removeNoMores(units);
@@ -97,7 +97,7 @@ public class World {
     for (final IEntity e : entities) {
       e.render(g);
     }
-    
+
     for (final IUnit u : units) {
       u.render(g);
     }
@@ -134,9 +134,9 @@ public class World {
   public int getY2() {
     return (int) height;
   }
-  
+
   private <T extends IActions> void getActions(final Iterable<T> list, final AbstractList<IAction> result) {
-    for (IActions actions : list) {
+    for (final IActions actions : list) {
       result.addAll(actions.getActions());
       actions.clearActions();
     }
@@ -167,7 +167,7 @@ public class World {
 
   /**
    * Handles collisons between a projectile and a unit.
-   * 
+   *
    * @return Returns true if the projecile still exists, false otherwise.
    */
   private boolean projCollisionWithUnit(final Projectile p, final IDamagable u) {

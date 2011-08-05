@@ -2,11 +2,9 @@ package components.holdables.weapons;
 
 import java.util.ArrayList;
 
-
 import org.newdawn.slick.Graphics;
 
 import other.GameTime;
-
 import basics.Vector2;
 
 import components.graphics.RSheetOnce;
@@ -25,7 +23,7 @@ public abstract class Weapon implements IHoldable {
   protected final float                      angle;
 
   /**
-   * Decides what the weapon should do next frame. 
+   * Decides what the weapon should do next frame.
    */
   protected WEAPON_ACTION                    nextAction;
   /**
@@ -61,7 +59,7 @@ public abstract class Weapon implements IHoldable {
   }
 
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     anim.update(time);
     if (currentState != null) {
       currentState.update(time);
@@ -73,7 +71,7 @@ public abstract class Weapon implements IHoldable {
   }
 
   @Override
-  public void render(Graphics g) {
+  public void render(final Graphics g) {
     anim.render(g);
   }
 
@@ -113,7 +111,7 @@ public abstract class Weapon implements IHoldable {
   }
 
   protected boolean isReadyToShoot() {
-    return !isEmpty() && currentState == null;
+    return !isEmpty() && (currentState == null);
   }
 
   protected boolean isEmpty() {

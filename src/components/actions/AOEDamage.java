@@ -8,5 +8,7 @@ import main.World;
 
 public class AOEDamage implements IAction {
   @Override
-  public void execute(final World world) {}
+  public void execute(final World world) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
 }

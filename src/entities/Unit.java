@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.SlickException;
 
 import other.GameTime;
 import ui.infobar.Bar;
@@ -34,8 +33,7 @@ public class Unit extends Entity implements IUnit {
               final float width, final float height,
               final float dx, final float dy,
               final int maxHP,
-              final ICompAnim walk, final ICompAnim death)
-    throws SlickException {
+              final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, dx, dy);
     actions = new ArrayList<IAction>();
 

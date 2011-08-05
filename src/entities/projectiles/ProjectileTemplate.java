@@ -34,7 +34,7 @@ public class ProjectileTemplate {
     }
 
     if (data.aoe != null) {
-      explosion = CacheTool.getSpriteSheet(Launcher.cache, data.aoe.sprite);
+      explosion = CacheTool.getSpriteSheet(Launcher.cache, data.aoe.explosionSprite);
     } else {
       explosion = null;
     }

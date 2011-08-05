@@ -14,7 +14,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import other.GameTime;
-
 import basics.Rectangle;
 import entities.Players;
 
@@ -63,7 +62,7 @@ public class Game implements IMode {
   /**
    * The update iteration of the game loop. Updates entities, switches levels,
    * etc.
-   * 
+   *
    * @param dt
    *          Approximate length of the current frame in seconds.
    * @throws DataException
@@ -71,6 +70,7 @@ public class Game implements IMode {
    * @throws IOException
    * @throws SlickException
    */
+  @Override
   public void update(final float dt) {
     elapsed += dt;
     final GameTime time = new GameTime(dt, elapsed);
@@ -79,16 +79,16 @@ public class Game implements IMode {
       if (campaign.hasMoreLevels()) {
         try {
           nextLevel();
-        } catch (DataException e) {
+        } catch (final DataException e) {
           System.exit(0);
           e.printStackTrace();
-        } catch (ParserException e) {
+        } catch (final ParserException e) {
           System.exit(0);
           e.printStackTrace();
-        } catch (IOException e) {
+        } catch (final IOException e) {
           System.exit(0);
           e.printStackTrace();
-        } catch (SlickException e) {
+        } catch (final SlickException e) {
           System.exit(0);
           e.printStackTrace();
         }
@@ -101,6 +101,7 @@ public class Game implements IMode {
     }
   }
 
+  @Override
   public void render(final Graphics g) {
     g.pushTransform();
     g.translate(arenaRect.getX1(), arenaRect.getY1());
@@ -110,6 +111,7 @@ public class Game implements IMode {
     g.popTransform();
   }
 
+  @Override
   public boolean isFinished() {
     return finished;
   }

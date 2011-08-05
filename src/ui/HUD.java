@@ -37,9 +37,10 @@ public class HUD {
   private void drawHUD(final Player p) {
     gfx_hud.clear();
 
-    money = 0; // TODO: Fix stats
-    kills = 0;
+    money = p.getInventory().getMoney();
+    kills = p.getStats().getKills();
 
+    // TODO: Fix magic numbers
     gfx_hud.drawString("Money:", 850, y + 10);
     gfx_hud.drawString("Kills:", 850, y + 30);
     gfx_hud.drawString(String.valueOf(money), 950, y + 10);

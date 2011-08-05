@@ -5,7 +5,7 @@ public class GameTime {
   private final float elapsed;
 
   public GameTime(final float frame, final float elapsed) {
-    this.frame = frame;
+    this.frame   = frame;
     this.elapsed = elapsed;
   }
 
@@ -19,6 +19,6 @@ public class GameTime {
 
   @Override
   public String toString() {
-    return String.format("Elapsed: %f, Delta: %f", elapsed, frame);
+    return "Elapsed: " + elapsed + ", Delta: " + frame;
   }
 }

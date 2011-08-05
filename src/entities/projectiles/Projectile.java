@@ -20,8 +20,8 @@ public class Projectile extends Entity implements IEntity, IDamagable {
   private boolean       alive;
   private float         hp;
 
-  private Vector2       startPos;
-  private float         startTime;
+  private final Vector2       startPos;
+  private final float         startTime;
 
   public Projectile(final float x, final float y,
                     final float width, final float height,
@@ -39,9 +39,9 @@ public class Projectile extends Entity implements IEntity, IDamagable {
     this.duration = duration;
     this.range = range;
     this.damage = damage;
-    this.maxHP = targets;
+    maxHP = targets;
 
-    alive = true; 
+    alive = true;
     hp = targets;
 
     startPos = new Vector2(x, y);
@@ -76,9 +76,9 @@ public class Projectile extends Entity implements IEntity, IDamagable {
   }
 
   @Override
-  public void damage(float damage) {
+  public void damage(final float value) {
     if (maxHP != -1) {
-      hp -= damage;
+      hp -= value;
       if (hp <= 0) {
         hp = 0;
         kill();

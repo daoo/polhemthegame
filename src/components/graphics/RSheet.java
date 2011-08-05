@@ -9,7 +9,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 import other.GameTime;
-
 import basics.Clock;
 
 import components.interfaces.ICompAnim;
@@ -105,10 +104,12 @@ public class RSheet implements ICompAnim {
     return sheet.getSubImage(horizontalTileCount - 1, verticalTileCount - 1);
   }
 
+  @Override
   public int getTileWidth() {
     return tw;
   }
 
+  @Override
   public int getTileHeight() {
     return th;
   }

@@ -5,7 +5,7 @@ import other.GameTime;
 public class ReloadingState implements IWeaponState {
   private final float tEnd, tLength;
   private float tCurrent;
-  
+
   public ReloadingState(final float timeStart, final float length) {
     tCurrent = timeStart;
     tEnd = timeStart + length;
@@ -27,7 +27,7 @@ public class ReloadingState implements IWeaponState {
     if (isFinished()) {
       return 1;
     }
-    
+
     return (tEnd - tCurrent) / tLength;
   }
 

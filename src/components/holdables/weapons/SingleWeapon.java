@@ -4,11 +4,9 @@
 
 package components.holdables.weapons;
 
-
 import org.newdawn.slick.Graphics;
 
 import other.GameTime;
-
 import basics.Vector2;
 
 import components.graphics.RSheetOnce;
@@ -27,7 +25,7 @@ public class SingleWeapon extends Weapon {
   @Override
   public void update(final GameTime time) {
     super.update(time);
-    
+
     if (isEmpty()) {
       // Start reloading
       currentState = new ReloadingState(time.getElapsed(), reloadTime);
@@ -51,22 +49,26 @@ public class SingleWeapon extends Weapon {
   }
 
   @Override
-  protected void fire(float elapsed) {
+  protected void fire(final float elapsed) {
     super.fire(elapsed);
-    
+
     anim.restart();
   }
-  
+
   @Override
   public void startUse() {
     useOnce();
   }
 
   @Override
-  public void toggleUse() {}
+  public void toggleUse() {
+    // SingleWeapon can't be continously used
+  }
 
   @Override
-  public void stopUse() {}
+  public void stopUse() {
+    // SingleWeapon can't be continously used
+  }
 
   @Override
   public boolean isInUse() {

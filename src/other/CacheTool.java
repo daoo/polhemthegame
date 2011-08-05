@@ -67,9 +67,9 @@ public class CacheTool {
     final WeaponsData weapons = (WeaponsData) cache.getCold("weapons.js", new GsonParser(WeaponsData.class));
     final WeaponData weapon = weapons.getWeapon(name);
 
-    Vector2 m = new Vector2(weapon.muzzleOffset[0], weapon.muzzleOffset[1]);
-    ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
-    RSheetOnce anim = CacheTool.getRSheetOnce(cache, weapon.sprite);
+    final Vector2 m = new Vector2(weapon.muzzleOffset[0], weapon.muzzleOffset[1]);
+    final ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
+    final RSheetOnce anim = CacheTool.getRSheetOnce(cache, weapon.sprite);
     if (weapon.automatic) {
       return new AutomaticWeapon(m, weapon.reloadTime, 60.0f / weapon.rpm,
                                  weapon.clipSize, weapon.launchAngle, anim,

@@ -6,8 +6,6 @@ package components.basic;
 
 import java.util.ArrayList;
 
-import other.NotEnoughCashishException;
-
 import components.holdables.weapons.Weapon;
 import components.interfaces.IComp;
 
@@ -22,12 +20,19 @@ public class Inventory implements IComp {
     currentWeapon = 0;
   }
 
-  public void takeMoney(final int v) throws NotEnoughCashishException {
+  /***
+   * Takes money from the inventory.
+   * @param v The ammount of money to take
+   * @return True if there is enough money in the inventory, false otherwise.
+   */
+  public boolean takeMoney(final int v) {
     if (money < v) {
-      throw new NotEnoughCashishException();
+      return false;
     }
 
     money -= v;
+    
+    return true;
   }
 
   public void addMoney(final int v) {
@@ -50,5 +55,9 @@ public class Inventory implements IComp {
   public Weapon nextWeapon() {
     currentWeapon = (currentWeapon + 1) % weapons.size();
     return weapons.get(currentWeapon);
+  }
+
+  public int getMoney() {
+    return money;
   }
 }

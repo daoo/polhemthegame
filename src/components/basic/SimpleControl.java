@@ -52,6 +52,7 @@ public class SimpleControl implements ICompUpdate {
     return TOGGLED.NO;
   }
 
+  @Override
   public void update(final GameTime time) {
     if (player.isAlive()) {
       TOGGLED t;

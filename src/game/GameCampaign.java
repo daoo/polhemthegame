@@ -14,7 +14,7 @@ public class GameCampaign {
   private LevelData              currentLevel;
   private final Iterator<String> iterator;
 
-  public GameCampaign(final CampaignData data) throws ParserException, IOException {
+  public GameCampaign(final CampaignData data) {
     campaign = data;
 
     iterator = campaign.levels.iterator();

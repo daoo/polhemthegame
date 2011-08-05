@@ -92,6 +92,12 @@ public class StateMenu extends BasicGameState {
   }
 
   @Override
+  public void update(GameContainer gc, StateBasedGame sb, int delta)
+    throws SlickException {
+    // Nothing to do here
+  }
+
+  @Override
   public void render(final GameContainer gc, final StateBasedGame sb,
                      final Graphics g) throws SlickException {
     if ((background != null) && (menu != null)) {
@@ -99,10 +105,6 @@ public class StateMenu extends BasicGameState {
       menu.render(g);
     }
   }
-
-  @Override
-  public void update(final GameContainer gc, final StateBasedGame sb,
-                     final int delta) throws SlickException {}
 
   @Override
   public void keyPressed(final int key, final char c) {

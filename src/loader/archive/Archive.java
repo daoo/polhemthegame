@@ -8,10 +8,10 @@ import java.io.File;
 
 public class Archive {
   public Archive(final File f) {
-
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   public boolean hasFile(final String id) {
-    return false;
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

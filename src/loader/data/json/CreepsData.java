@@ -28,5 +28,7 @@ public class CreepsData implements IClosable {
   }
 
   @Override
-  public void close() throws DataException {}
+  public void close() throws DataException {
+    // No data neededs clean up
+  }
 }

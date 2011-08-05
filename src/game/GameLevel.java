@@ -21,7 +21,6 @@ import main.WorldFactory;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 import other.CacheTool;
 import other.GameTime;
@@ -47,7 +46,7 @@ public class GameLevel {
 
   public GameLevel(final LevelData level, final Players players,
                    final float width, final float height)
-    throws DataException, IOException, ParserException, SlickException {
+    throws DataException, IOException, ParserException {
     final float left = level.constraints[0];
     final float top = level.constraints[1];
     final float bottom = level.constraints[2];
@@ -102,7 +101,7 @@ public class GameLevel {
   }
 
   public boolean isFinished() {
-    return (currentState == null || currentState.isFinished())
+    return ((currentState == null) || currentState.isFinished())
            && !current.hasNext();
   }
 

@@ -5,7 +5,7 @@ import other.GameTime;
 public class CoolDownState implements IWeaponState {
   private final float tStart, tEnd, tLength;
   private float tCurrent;
-  
+
   public CoolDownState(final float timeStart, final float length) {
     tCurrent = timeStart;
     tStart = timeStart;
@@ -22,7 +22,7 @@ public class CoolDownState implements IWeaponState {
   public boolean isFinished() {
     return tCurrent >= tEnd;
   }
-  
+
   /**
    * Goes from 1 (when started) to 0 (when finished).
    */
@@ -31,7 +31,7 @@ public class CoolDownState implements IWeaponState {
     if (isFinished()) {
       return 0;
     }
-    
+
     return (tCurrent - tStart) / tLength;
-  }  
+  }
 }

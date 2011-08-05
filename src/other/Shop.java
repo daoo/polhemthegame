@@ -17,10 +17,13 @@ public class Shop {
     items = new HashMap<String, ShopItemData>();
   }
 
-  public ShopItemData buyItem(final String id, final Inventory inv)
-    throws NotEnoughCashishException {
+  public ShopItemData buyItem(final String id, final Inventory inv) {
     final ShopItemData item = items.get(id);
-    inv.takeMoney(item.price);
-    return item;
+    if (inv.takeMoney(item.price)) {
+      return item;
+    }
+    else {
+      return null;
+    }
   }
 }

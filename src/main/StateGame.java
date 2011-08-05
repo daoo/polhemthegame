@@ -32,7 +32,7 @@ public class StateGame extends BasicGameState {
 
   private boolean exit;
 
-  private float timescale = 1.0f;
+  private final float timescale = 1.0f;
 
   public StateGame(final int id) {
     super();
@@ -107,7 +107,4 @@ public class StateGame extends BasicGameState {
       exit = true;
     }
   }
-
-  @Override
-  public void keyReleased(final int key, final char c) {}
 }

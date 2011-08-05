@@ -5,5 +5,5 @@
 package components.interfaces;
 
 public interface IComp {
-
+  // Empty interface superinterface for all components.
 }

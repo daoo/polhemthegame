@@ -15,5 +15,7 @@ public class SpriteData implements IClosable {
   public int[]  offset;
 
   @Override
-  public void close() throws DataException {}
+  public void close() throws DataException {
+    // No data needs clean up
+  }
 }

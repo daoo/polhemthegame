@@ -6,7 +6,6 @@ package ui.infobar;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 public class Bar {
   protected Color colorHave;
@@ -14,7 +13,7 @@ public class Bar {
 
   protected float fraction;
 
-  public Bar(final Color colorHave, final Color colorLost) throws SlickException {
+  public Bar(final Color colorHave, final Color colorLost) {
     fraction = 1.0f;
 
     this.colorHave = colorHave;
@@ -34,7 +33,7 @@ public class Bar {
 
     if (colorLost != null) {
       g.setColor(colorLost);
-      g.fillRect(x + fraction * width, y, (1.0f - fraction) * width, height);
+      g.fillRect(x + (fraction * width), y, (1.0f - fraction) * width, height);
     }
   }
 }

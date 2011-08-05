@@ -28,14 +28,14 @@ public class CollisionHelper {
   /**
    * Stops an AABB from exiting an container AABB by aligning the entity to the
    * edges of the container if it's on the outside.
-   * 
+   *
    * @param entity
    *          The AABB to restrict
    * @param cont
    *          The AABB to use as box
    */
   public static void BlockFromExiting(final AABB entity, final AABB cont) {
-    Vector2 e = entity.getMin();
+    final Vector2 e = entity.getMin();
     if (e.x < cont.getX1()) {
       e.x = cont.getX1();
     } else if ((e.x + entity.getWidth()) >= cont.getX2()) {

@@ -18,7 +18,6 @@ import main.Launcher;
 import main.World;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 import other.CacheTool;
 import other.GameTime;
@@ -39,7 +38,7 @@ public class CreepsState implements ICompState {
   }
 
   public CreepsState(final CreepStateData sd, final World world)
-    throws IOException, ParserException, SlickException, DataException {
+    throws IOException, ParserException, DataException {
     super();
     this.world = world;
 
@@ -71,10 +70,14 @@ public class CreepsState implements ICompState {
   }
 
   @Override
-  public void render(final Graphics g) {}
+  public void render(final Graphics g) {
+    // No rendering done by this state
+  }
 
   @Override
-  public void start() {}
+  public void start() {
+    // No special actions to take when starting this state
+  }
 
   @Override
   public boolean isFinished() {

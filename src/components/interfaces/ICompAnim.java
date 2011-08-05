@@ -16,9 +16,9 @@ public interface ICompAnim extends ICompUpRend {
   boolean isRunning();
 
   Image getLastFrame();
-  
+
   void goToFirstFrame();
-  
+
   int getTileWidth();
   int getTileHeight();
 }

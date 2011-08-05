@@ -31,7 +31,7 @@ public class StateCredits extends BasicGameState {
   private UnicodeFont           font_large, font_small;
   private final int             state_id;
 
-  public StateCredits(final int stateId) throws SlickException {
+  public StateCredits(final int stateId) {
     super();
 
     credits = new ArrayList<Line>();

@@ -14,7 +14,7 @@ public class ProjectilesData implements IClosable {
     public class AOE {
       public float      radius;
       public boolean    keepEffect;
-      public SpriteData sprite;
+      public SpriteData explosionSprite;
     }
 
     public String     name;
@@ -47,5 +47,7 @@ public class ProjectilesData implements IClosable {
   }
 
   @Override
-  public void close() throws DataException {}
+  public void close() throws DataException {
+    // Do nothing
+  }
 }

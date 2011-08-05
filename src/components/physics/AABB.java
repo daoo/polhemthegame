@@ -28,7 +28,7 @@ public class AABB extends Rectangle {
   public void setVelocity(final Vector2 v) {
     vel.set(v);
   }
-  
+
   public void addVelocity(final Vector2 v) {
     vel.addSelf(v);
   }

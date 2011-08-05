@@ -15,14 +15,14 @@ public class Clock {
     tStart = 0;
     tLast = 0;
     tNext = 0;
-    
+
     forceSync = false;
 
     this.targetFrameTime = targetFrameTime;
   }
 
   public static float getTime() {
-    double time = (double) Sys.getTime() / (double) Sys.getTimerResolution();
+    final double time = (double) Sys.getTime() / (double) Sys.getTimerResolution();
     return (float) time;
   }
 
@@ -44,7 +44,7 @@ public class Clock {
 
   public float sync(final float elapsed) {
     forceSync = false;
-    
+
     final float tNow = elapsed;
     final float tDelta = tNow - tLast;
     tLast = tNow;
@@ -56,7 +56,7 @@ public class Clock {
   public boolean needsSync(final float elapsed) {
     return forceSync || (targetFrameTime == 0) || (elapsed > tNext);
   }
-  
+
   public void forceSync() {
     forceSync = true;
   }
