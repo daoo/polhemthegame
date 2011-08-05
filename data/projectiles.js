@@ -49,7 +49,7 @@
   , { name: "ak47bullet"
     , aoe: null
     , collides: true
-    , damage: 100
+    , damage: 25
     , duration: -1
     , gravity: false
     , hitbox: [ 3, 2 ]
