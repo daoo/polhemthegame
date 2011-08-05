@@ -4,7 +4,7 @@
 
 package ui.infobar;
 
-// FIXME: A 1px high bar turns weird color-wise from time to time (probably because of aa)
+// TODO: A 1px high bar turns weird color-wise from time to time (probably because of aa)
 
 import java.util.ArrayList;
 

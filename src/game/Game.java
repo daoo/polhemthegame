@@ -80,19 +80,15 @@ public class Game implements IMode {
         try {
           nextLevel();
         } catch (DataException e) {
-          // TODO Auto-generated catch block
           System.exit(0);
           e.printStackTrace();
         } catch (ParserException e) {
-          // TODO Auto-generated catch block
           System.exit(0);
           e.printStackTrace();
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           System.exit(0);
           e.printStackTrace();
         } catch (SlickException e) {
-          // TODO Auto-generated catch block
           System.exit(0);
           e.printStackTrace();
         }
