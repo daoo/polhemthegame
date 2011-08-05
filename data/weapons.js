@@ -45,7 +45,6 @@
   , { name: "ak47"
     , automatic: true
     , clipSize: 30
-    , launchAngle: 0
     , muzzleOffset: [ 11, -4 ]
     , reloadTime: 1.0
     , rpm: 400
