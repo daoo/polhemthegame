@@ -61,7 +61,8 @@ public class ProjectileTemplate {
                             data.collides, data.duration, data.range,
                             data.damage, anim, time);
     }
-
-    return null;
+    else {
+      throw new UnsupportedOperationException("Not implemented");
+    }
   }
 }

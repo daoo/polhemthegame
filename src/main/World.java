@@ -112,19 +112,27 @@ public class World {
   }
 
   public void add(final Player p) {
+    assert (p != null);
+    
     players.add(p);
   }
 
   public void add(final Projectile p) {
+    assert (p != null);
+    
     projectiles.add(p);
   }
 
   public void add(final Creep c) {
+    assert (c != null);
+    
     units.add(c);
   }
 
-  public void add(final Animated animated) {
-    entities.add(animated);
+  public void add(final Animated a) {
+    assert (a != null);
+    
+    entities.add(a);
   }
 
   public int getX2() {

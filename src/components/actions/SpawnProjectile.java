@@ -11,6 +11,8 @@ public class SpawnProjectile implements IAction {
   private final Projectile object;
 
   public SpawnProjectile(final Projectile object) {
+    assert (object != null);
+    
     this.object = object;
   }
 
