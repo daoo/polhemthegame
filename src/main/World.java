@@ -40,8 +40,7 @@ public class World {
     this.height = height;
     
     smallBox = new AABB(0, 0, width, height, 0, 0);
-    // TODO: Fix magic numbers
-    bigBox = new AABB(-1000, -1000, width + 2000, height + 2000, 0, 0);
+    bigBox = new AABB(-width, -height, width * 2, height * 2, 0, 0);
 
     entities = new ArrayList<Entity>();
     units = new ArrayList<IUnit>();

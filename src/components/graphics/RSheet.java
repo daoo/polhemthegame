@@ -32,7 +32,7 @@ public class RSheet implements ICompAnim {
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    // TODO: There should be getters in SpriteSheet 
+    // TODO: There should be getters in SpriteSheet
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
 
