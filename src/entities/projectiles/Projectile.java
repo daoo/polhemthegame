@@ -47,7 +47,11 @@ public class Projectile extends Entity implements IEntity, IDamagable {
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
 
-    add(renderer);
+    // Invisible projectile
+    // TODO: Do not use null
+    if (renderer != null) {
+      add(renderer);
+    }
   }
 
   @Override

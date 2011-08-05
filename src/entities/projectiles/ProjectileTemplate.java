@@ -54,6 +54,8 @@ public class ProjectileTemplate {
     }
 
     if (data.aoe == null) {
+      // If anim is null here, it's should be handled as an invisilbe
+      // projectile
       return new Projectile(x, y, data.hitbox[0], data.hitbox[1], rot,
                             data.speed, data.targets, data.gravity,
                             data.collides, data.duration, data.range,
