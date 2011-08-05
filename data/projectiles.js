@@ -29,7 +29,7 @@
     , "aoe": 
       { "radius": 100
       , "keepEffect": true
-      , "sprite":
+      , "explosionSprite":
         { "animation": "explosion"
         , "framerate": 8
         , "offset": [ 0, 0 ]
