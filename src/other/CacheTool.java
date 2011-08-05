@@ -69,13 +69,14 @@ public class CacheTool {
 
     final Vector2 m = new Vector2(weapon.muzzleOffset[0], weapon.muzzleOffset[1]);
     final ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
-    final RSheetOnce anim = CacheTool.getRSheetOnce(cache, weapon.sprite);
     if (weapon.automatic) {
+      final RSheet anim = CacheTool.getRSheet(cache, weapon.sprite);
       return new AutomaticWeapon(m, weapon.reloadTime, 60.0f / weapon.rpm,
                                  weapon.clipSize, weapon.launchAngle, anim,
                                  new ProjectileTemplate(p));
     }
     else {
+      final RSheetOnce anim = CacheTool.getRSheetOnce(cache, weapon.sprite);
       return new SingleWeapon(m, weapon.reloadTime, 60.0f / weapon.rpm,
                               weapon.clipSize, weapon.launchAngle, anim,
                               new ProjectileTemplate(p));

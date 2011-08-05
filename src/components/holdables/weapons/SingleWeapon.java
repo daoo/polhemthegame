@@ -1,16 +1,10 @@
-/*
- * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
- */
-
 package components.holdables.weapons;
 
 import org.newdawn.slick.Graphics;
 
-import other.GameTime;
 import basics.Vector2;
 
 import components.graphics.RSheetOnce;
-import components.holdables.weapons.states.ReloadingState;
 
 import entities.projectiles.ProjectileTemplate;
 
@@ -20,20 +14,6 @@ public class SingleWeapon extends Weapon {
                       final float angle, final RSheetOnce anim,
                       final ProjectileTemplate factory) {
     super(muzzleOffset, reloadTime, cooldownTime, magazineSize, angle, anim, factory);
-  }
-
-  @Override
-  public void update(final GameTime time) {
-    super.update(time);
-
-    if (isEmpty()) {
-      // Start reloading
-      currentState = new ReloadingState(time.getElapsed(), reloadTime);
-      rounds = magazineSize;
-    } else if (nextAction == WEAPON_ACTION.FIRE_ONCE) {
-      fire(time.getElapsed());
-      nextAction = WEAPON_ACTION.NONE;
-    }
   }
 
   @Override
@@ -62,12 +42,12 @@ public class SingleWeapon extends Weapon {
 
   @Override
   public void toggleUse() {
-    // SingleWeapon can't be continously used
+    // SingleWeapon can't be continuously used
   }
 
   @Override
   public void stopUse() {
-    // SingleWeapon can't be continously used
+    // SingleWeapon can't be continuously used
   }
 
   @Override

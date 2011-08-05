@@ -7,10 +7,11 @@ import org.newdawn.slick.Graphics;
 import other.GameTime;
 import basics.Vector2;
 
-import components.graphics.RSheetOnce;
+import components.graphics.RSheet;
 import components.holdables.IHoldable;
 import components.holdables.weapons.states.CoolDownState;
 import components.holdables.weapons.states.IWeaponState;
+import components.holdables.weapons.states.ReloadingState;
 
 import entities.projectiles.ProjectileTemplate;
 
@@ -36,36 +37,51 @@ public abstract class Weapon implements IHoldable {
    */
   public final ArrayList<ProjectileTemplate> projectiles;
 
-  protected final RSheetOnce                 anim;
-  protected final ProjectileTemplate         template;
+  protected final RSheet                 anim;
+  protected final ProjectileTemplate         projTemplate;
 
   protected IWeaponState                     currentState;
 
   public Weapon(final Vector2 muzzleOffset, final float reloadTime,
                 final float cooldownTime, final int magazineSize,
-                final float angle, final RSheetOnce anim,
-                final ProjectileTemplate template) {
+                final float angle, final RSheet anim,
+                final ProjectileTemplate projTemplate) {
     this.muzzleOffset = muzzleOffset;
-    this.reloadTime = reloadTime;
+    this.reloadTime   = reloadTime;
     this.cooldownTime = cooldownTime;
     this.magazineSize = magazineSize;
-    this.angle = angle;
-    this.anim = anim;
-    this.template = template;
+    this.angle        = angle;
+    this.anim         = anim;
+    this.projTemplate = projTemplate;
 
-    nextAction = WEAPON_ACTION.NONE;
-    rounds = magazineSize;
+    nextAction  = WEAPON_ACTION.NONE;
+    rounds      = magazineSize;
     projectiles = new ArrayList<ProjectileTemplate>();
   }
 
   @Override
   public void update(final GameTime time) {
     anim.update(time);
+    
     if (currentState != null) {
       currentState.update(time);
 
       if (currentState.isFinished()) {
         currentState = null;
+
+        if (isInUse()) {
+          anim.start();
+        }
+      }
+    }
+    else {    
+      if (isEmpty()) {
+        startReload(time);
+      } else if (nextAction == WEAPON_ACTION.FIRE_ONCE) {
+        fire(time.getElapsed());
+        nextAction = WEAPON_ACTION.NONE;
+      } else if (isInUse() && isReadyToShoot()) {
+        fire(time.getElapsed());
       }
     }
   }
@@ -100,21 +116,26 @@ public abstract class Weapon implements IHoldable {
     return angle;
   }
 
-  protected void fire(final float elapsed) {
-    if (magazineSize != -1) {
-      rounds -= 1;
-    }
-
-    projectiles.add(template);
-
-    currentState = new CoolDownState(elapsed, cooldownTime);
-  }
-
   protected boolean isReadyToShoot() {
     return !isEmpty() && (currentState == null);
   }
 
   protected boolean isEmpty() {
     return (magazineSize != -1) && (rounds <= 0);
+  }
+
+  protected void fire(final float elapsed) {
+    if (magazineSize != -1) {
+      rounds -= 1;
+    }
+
+    projectiles.add(projTemplate);
+
+    currentState = new CoolDownState(elapsed, cooldownTime);
+  }
+
+  protected void startReload(final GameTime time) {
+    currentState = new ReloadingState(time.getElapsed(), reloadTime);
+    rounds = magazineSize;
   }
 }
