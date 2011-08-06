@@ -24,6 +24,6 @@ public class Animated extends Entity implements IWalking {
 
   @Override
   public void stop() {
-    anim.setAnimator(new RunTo(anim.getTileCount(), anim.getTileCount()));
+    anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
   }
 }

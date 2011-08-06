@@ -12,9 +12,8 @@ import basics.Vector2;
 
 import components.actions.IAction;
 import components.actions.SpawnDeathAnim;
-import components.graphics.Tile;
 import components.graphics.animations.Continuous;
-import components.graphics.animations.RunTo;
+import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 import components.interfaces.IUnit;
 import components.physics.AABB;
@@ -113,7 +112,8 @@ public class Unit extends Entity implements IUnit {
   @Override
   public void stop() {
     if (!walk.getAnimator().isFinished()) {
-      walk.setAnimator(new RunTo(walk.getTileCount(), Tile.ZERO));
+      walk.goToFirstFrame();
+      walk.setAnimator(new Idle());
     }
   }
 

@@ -19,9 +19,9 @@ public class RSheet implements ICompAnim {
 
   private final SpriteSheet sheet;
   private final Tile        size;
-  private final int         horizontalTileCount, verticalTileCount, tw, th;
+  private final int         tw, th;
   private final int         offsetX, offsetY;
-  private Tile              tile;
+  private Tile              current;
   private IAnimator         animator;
 
   public RSheet(final float targetFrameRate, final int offsetX,
@@ -38,10 +38,8 @@ public class RSheet implements ICompAnim {
     th = sheet.getSubImage(0, 0).getHeight();
 
     size = new Tile(sheet.getHorizontalCount(), sheet.getVerticalCount());
-    horizontalTileCount = sheet.getHorizontalCount();
-    verticalTileCount = sheet.getVerticalCount();
 
-    tile = Tile.ZERO;
+    current = Tile.ZERO;
 
     this.animator = animator;
   }
@@ -51,18 +49,18 @@ public class RSheet implements ICompAnim {
     if (clock.needsSync(time.getElapsed())) {
       clock.sync(time.getElapsed());
 
-      tile = animator.next(tile);
+      current = animator.next(current);
     }
   }
 
   @Override
   public void render(final Graphics g) {
-    g.drawImage(sheet.getSubImage(tile.x, tile.y), offsetX, offsetY);
+    g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
   }
 
   @Override
   public void goToFirstFrame() {
-    tile = Tile.ZERO;
+    current = Tile.ZERO;
   }
 
   @Override
@@ -75,12 +73,12 @@ public class RSheet implements ICompAnim {
   }
 
   public Image getCurrentFrame() {
-    return sheet.getSubImage(tile.x, tile.y);
+    return sheet.getSubImage(current.x, current.y);
   }
 
   @Override
   public Image getLastFrame() {
-    return sheet.getSubImage(horizontalTileCount - 1, verticalTileCount - 1);
+    return sheet.getSubImage(size.x - 1, size.y - 1);
   }
 
   @Override
@@ -101,5 +99,10 @@ public class RSheet implements ICompAnim {
   @Override
   public IAnimator getAnimator() {
     return animator;
+  }
+
+  @Override
+  public Tile getLastTile() {
+    return new Tile(size.x - 1, size.y - 1);
   }
 }

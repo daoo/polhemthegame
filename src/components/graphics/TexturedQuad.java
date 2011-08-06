@@ -64,4 +64,9 @@ public class TexturedQuad implements ICompAnim {
   public IAnimator getAnimator() {
     return new Idle();
   }
+
+  @Override
+  public Tile getLastTile() {
+    return Tile.ZERO;
+  }
 }

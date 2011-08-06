@@ -21,4 +21,5 @@ public interface ICompAnim extends ICompUpRend {
   int getTileHeight();
 
   Tile getTileCount();
+  Tile getLastTile();
 }

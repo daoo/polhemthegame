@@ -8,7 +8,7 @@ public class Idle implements IAnimator {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
