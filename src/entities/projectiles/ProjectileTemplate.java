@@ -14,6 +14,7 @@ import other.GameTime;
 
 import components.graphics.RSheet;
 import components.graphics.TexturedQuad;
+import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 
 public class ProjectileTemplate {
@@ -49,7 +50,9 @@ public class ProjectileTemplate {
       } else if (data.sprite != null) {
         anim = new RSheet(data.sprite.framerate,
                           data.sprite.offset[0],
-                          data.sprite.offset[1], (SpriteSheet) img);
+                          data.sprite.offset[1],
+                          (SpriteSheet) img,
+                          new Idle());
       }
     }
 

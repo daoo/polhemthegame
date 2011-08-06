@@ -9,7 +9,6 @@ import main.Launcher;
 import other.CacheTool;
 
 import components.graphics.RSheet;
-import components.graphics.RSheetOnce;
 
 import entities.Player;
 
@@ -18,7 +17,7 @@ public class PlayerFactory {
   public static Player Make(final float x, final float y, final PlayerData data)
     throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
-    final RSheetOnce death = CacheTool.getRSheetOnce(Launcher.cache, data.getSheet("death"));
+    final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
 
     final Player player = new Player(x, y, data.hitBox[0], data.hitBox[1],
                                      data.handOffset[0], data.handOffset[1],

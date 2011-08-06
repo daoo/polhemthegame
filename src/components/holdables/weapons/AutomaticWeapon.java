@@ -4,6 +4,8 @@ import other.GameTime;
 import basics.Vector2;
 
 import components.graphics.RSheet;
+import components.graphics.Tile;
+import components.graphics.animations.RunTo;
 
 import entities.projectiles.ProjectileTemplate;
 
@@ -42,21 +44,13 @@ public class AutomaticWeapon extends Weapon {
   }
 
   @Override
-  protected void fire(final float elapsed) {
-    super.fire(elapsed);
-
-    anim.start();
-  }
-
-  @Override
   public boolean isInUse() {
     return inUse;
   }
 
   private void stopShooting() {
     inUse = false;
-    anim.stop();
-    anim.goToFirstFrame();
+    anim.setAnimator(null);
   }
 
   private void startShooting() {
@@ -67,6 +61,6 @@ public class AutomaticWeapon extends Weapon {
   protected void startReload(GameTime time) {
     super.startReload(time);
     
-    anim.stop();
+    anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
   }
 }

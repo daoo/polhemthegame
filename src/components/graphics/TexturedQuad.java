@@ -4,12 +4,13 @@
 
 package components.graphics;
 
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import other.GameTime;
 
+import components.graphics.animations.IAnimator;
+import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 
 public class TexturedQuad implements ICompAnim {
@@ -30,33 +31,18 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public Image getLastFrame() {
-    return img;
-  }
-
-  @Override
-  public void start() {
-    // Do nothing
-  }
-
-  @Override
-  public void stop() {
-    // Do nothing
-  }
-
-  @Override
-  public boolean isRunning() {
-    return false;
-  }
-
-  @Override
   public void goToFirstFrame() {
     // Do nothing
   }
 
   @Override
-  public void restart() {
+  public void setAnimator(IAnimator animator) {
     // Do nothing
+  }
+
+  @Override
+  public Image getLastFrame() {
+    return img;
   }
 
   @Override
@@ -67,5 +53,15 @@ public class TexturedQuad implements ICompAnim {
   @Override
   public int getTileHeight() {
     return img.getHeight();
+  }
+
+  @Override
+  public Tile getTileCount() {
+    return new Tile(1, 1);
+  }
+
+  @Override
+  public IAnimator getAnimator() {
+    return new Idle();
   }
 }

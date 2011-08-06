@@ -8,6 +8,7 @@ import other.GameTime;
 import basics.Vector2;
 
 import components.graphics.RSheet;
+import components.graphics.animations.Continuous;
 import components.holdables.IHoldable;
 import components.holdables.weapons.states.CoolDownState;
 import components.holdables.weapons.states.IWeaponState;
@@ -37,7 +38,7 @@ public abstract class Weapon implements IHoldable {
    */
   public final ArrayList<ProjectileTemplate> projectiles;
 
-  protected final RSheet                 anim;
+  protected final RSheet                     anim;
   protected final ProjectileTemplate         projTemplate;
 
   protected IWeaponState                     currentState;
@@ -70,7 +71,7 @@ public abstract class Weapon implements IHoldable {
         currentState = null;
 
         if (isInUse()) {
-          anim.start();
+          anim.setAnimator(new Continuous(anim.getTileCount()));
         }
       }
     }
@@ -115,9 +116,13 @@ public abstract class Weapon implements IHoldable {
   public float getAngle() {
     return angle;
   }
+  
+  protected boolean isIdle() {
+    return currentState == null;
+  }
 
   protected boolean isReadyToShoot() {
-    return !isEmpty() && (currentState == null);
+    return !isEmpty() && isIdle();
   }
 
   protected boolean isEmpty() {

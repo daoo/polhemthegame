@@ -11,7 +11,10 @@ import ui.infobar.InfoBar;
 import basics.Vector2;
 
 import components.actions.IAction;
-import components.actions.SpawnAnimated;
+import components.actions.SpawnDeathAnim;
+import components.graphics.Tile;
+import components.graphics.animations.Continuous;
+import components.graphics.animations.RunTo;
 import components.interfaces.ICompAnim;
 import components.interfaces.IUnit;
 import components.physics.AABB;
@@ -72,9 +75,9 @@ public class Unit extends Entity implements IUnit {
   public void kill() {
     alive = false;
 
-    actions.add(new SpawnAnimated(body.getX1(), body.getY1(),
-                                  death.getTileWidth(), death.getTileHeight(),
-                                  death));
+    actions.add(new SpawnDeathAnim(body.getX1(), body.getY1(),
+                                   death.getTileWidth(), death.getTileHeight(),
+                                   death));
   }
 
   @Override
@@ -104,13 +107,14 @@ public class Unit extends Entity implements IUnit {
 
   @Override
   public void start() {
-    walk.start();
+    walk.setAnimator(new Continuous(walk.getTileCount()));
   }
 
   @Override
   public void stop() {
-    walk.stop();
-    walk.goToFirstFrame();
+    if (!walk.getAnimator().isFinished()) {
+      walk.setAnimator(new RunTo(walk.getTileCount(), Tile.ZERO));
+    }
   }
 
   @Override

@@ -27,7 +27,7 @@ import org.newdawn.slick.SpriteSheet;
 import basics.Vector2;
 
 import components.graphics.RSheet;
-import components.graphics.RSheetOnce;
+import components.graphics.animations.Idle;
 import components.holdables.weapons.AutomaticWeapon;
 import components.holdables.weapons.SingleWeapon;
 import components.holdables.weapons.Weapon;
@@ -48,13 +48,9 @@ public class CacheTool {
   public static RSheet getRSheet(final Cache cache, final SpriteData sprite)
     throws ParserException, IOException {
     final SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
-    return new RSheet(sprite.framerate, sprite.offset[0], sprite.offset[1], sheet);
-  }
-
-  public static RSheetOnce getRSheetOnce(final Cache cache, final SpriteData sprite)
-    throws ParserException, IOException {
-    final SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
-    return new RSheetOnce(sprite.framerate, sprite.offset[0], sprite.offset[1], sheet);
+    return new RSheet(sprite.framerate,
+                      sprite.offset[0], sprite.offset[1],
+                      sheet, new Idle());
   }
 
   public static LevelData getLevel(final Cache cache, final String level)
@@ -69,14 +65,13 @@ public class CacheTool {
 
     final Vector2 m = new Vector2(weapon.muzzleOffset[0], weapon.muzzleOffset[1]);
     final ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
+    final RSheet anim = CacheTool.getRSheet(cache, weapon.sprite);
     if (weapon.automatic) {
-      final RSheet anim = CacheTool.getRSheet(cache, weapon.sprite);
       return new AutomaticWeapon(m, weapon.reloadTime, 60.0f / weapon.rpm,
                                  weapon.clipSize, weapon.launchAngle, anim,
                                  new ProjectileTemplate(p));
     }
     else {
-      final RSheetOnce anim = CacheTool.getRSheetOnce(cache, weapon.sprite);
       return new SingleWeapon(m, weapon.reloadTime, 60.0f / weapon.rpm,
                               weapon.clipSize, weapon.launchAngle, anim,
                               new ProjectileTemplate(p));

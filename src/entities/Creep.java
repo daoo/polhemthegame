@@ -5,9 +5,8 @@
 package entities;
 
 import components.interfaces.ICompAnim;
-import components.interfaces.IUnit;
 
-public class Creep extends Unit implements IUnit {
+public class Creep extends Unit {
   private final int moneyGain;
   private final float spawnTime, damage;
 
@@ -26,8 +25,6 @@ public class Creep extends Unit implements IUnit {
 
     this.moneyGain = moneyGain;
     this.damage = damage;
-
-    add(walk);
   }
 
   public float getSpawnTime() {

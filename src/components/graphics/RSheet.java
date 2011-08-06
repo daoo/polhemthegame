@@ -11,22 +11,24 @@ import org.newdawn.slick.SpriteSheet;
 import other.GameTime;
 import basics.Clock;
 
+import components.graphics.animations.IAnimator;
 import components.interfaces.ICompAnim;
 
 public class RSheet implements ICompAnim {
-  protected final Clock       clock;
+  private final Clock       clock;
 
-  protected final SpriteSheet sheet;
-  protected final int         horizontalTileCount, verticalTileCount, tw, th;
-  protected final int         offsetX, offsetY;
-  protected int               sx, sy;
-  protected boolean           running;
+  private final SpriteSheet sheet;
+  private final Tile        size;
+  private final int         horizontalTileCount, verticalTileCount, tw, th;
+  private final int         offsetX, offsetY;
+  private Tile              tile;
+  private IAnimator         animator;
 
   public RSheet(final float targetFrameRate, final int offsetX,
-                final int offsetY, final SpriteSheet sheet) {
+                final int offsetY, final SpriteSheet sheet,
+                final IAnimator animator) {
     this.sheet = sheet;
     clock = new Clock(1.0f / targetFrameRate);
-    running = false;
 
     this.offsetX = offsetX;
     this.offsetY = offsetY;
@@ -35,60 +37,37 @@ public class RSheet implements ICompAnim {
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
 
+    size = new Tile(sheet.getHorizontalCount(), sheet.getVerticalCount());
     horizontalTileCount = sheet.getHorizontalCount();
     verticalTileCount = sheet.getVerticalCount();
 
-    sx = 0;
-    sy = 0;
-  }
+    tile = Tile.ZERO;
 
-  @Override
-  public void start() {
-    running = true;
-  }
-
-  @Override
-  public void stop() {
-    running = false;
-  }
-
-  @Override
-  public void restart() {
-    goToFirstFrame();
-    start();
+    this.animator = animator;
   }
 
   @Override
   public void update(final GameTime time) {
-    if (running && clock.needsSync(time.getElapsed())) {
+    if (clock.needsSync(time.getElapsed())) {
       clock.sync(time.getElapsed());
 
-      sx++;
-      if (sx >= horizontalTileCount) {
-        sx = 0;
-        sy++;
-
-        if (sy >= verticalTileCount) {
-          sy = 0;
-        }
-      }
+      tile = animator.next(tile);
     }
   }
 
   @Override
   public void render(final Graphics g) {
-    g.drawImage(sheet.getSubImage(sx, sy), offsetX, offsetY);
+    g.drawImage(sheet.getSubImage(tile.x, tile.y), offsetX, offsetY);
   }
 
   @Override
   public void goToFirstFrame() {
-    sx = 0;
-    sy = 0;
+    tile = Tile.ZERO;
   }
 
   @Override
-  public boolean isRunning() {
-    return running;
+  public void setAnimator(final IAnimator animator) {
+    this.animator = animator;
   }
 
   public SpriteSheet getSpriteSheet() {
@@ -96,7 +75,7 @@ public class RSheet implements ICompAnim {
   }
 
   public Image getCurrentFrame() {
-    return sheet.getSubImage(sx, sy);
+    return sheet.getSubImage(tile.x, tile.y);
   }
 
   @Override
@@ -112,5 +91,15 @@ public class RSheet implements ICompAnim {
   @Override
   public int getTileHeight() {
     return th;
+  }
+
+  @Override
+  public Tile getTileCount() {
+    return size;
+  }
+
+  @Override
+  public IAnimator getAnimator() {
+    return animator;
   }
 }
