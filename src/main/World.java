@@ -68,9 +68,9 @@ public class World {
     }
 
     // Update
+    updateEntities(projectiles, time);
     updateEntities(entities, time);
     updateEntities(units, time);
-    updateEntities(projectiles, time);
 
     // Update players
     for (final Player p : players) {

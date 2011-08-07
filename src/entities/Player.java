@@ -15,7 +15,6 @@ import components.basic.Inventory;
 import components.basic.SimpleControl;
 import components.basic.Stats;
 import components.holdables.Hand;
-import components.holdables.weapons.SingleWeapon;
 import components.holdables.weapons.Weapon;
 import components.interfaces.IArmed;
 import components.interfaces.ICompAnim;
@@ -49,20 +48,16 @@ public class Player extends Unit implements IArmed {
   @Override
   public void update(final GameTime time) {
     super.update(time);
-    weaponBar.setFraction(hand.getHoldable().getProgress());
+    weaponBar.setFraction(hand.getWeapon().getProgress());
 
-    // TODO: Get rid of instanceof
     // Find out if there are any projectiles that want to be spawned
-    if (hand.getHoldable() instanceof SingleWeapon) {
-      final Weapon w = (Weapon) hand.getHoldable();
-      for (final ProjectileTemplate tmp : w.projectiles) {
-        final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
-        final Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
-        actions.add(new SpawnProjectile(p));
-      }
-
-      w.projectiles.clear();
+    final Weapon w = hand.getWeapon();
+    for (final ProjectileTemplate tmp : w.projectiles) {
+      final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
+      final Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
+      actions.add(new SpawnProjectile(p));
     }
+    w.projectiles.clear();
   }
 
   @Override

@@ -98,7 +98,7 @@ public abstract class Weapon implements IHoldable {
     if (magazineSize != -1) {
       rounds -= 1;
     }
-
+    
     projectiles.add(projTemplate);
 
     currentState = new CoolDownState(elapsed, cooldownTime);
