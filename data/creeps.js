@@ -1,7 +1,7 @@
 { creeps:
   [ { name: "bracke"
     , hitbox: { width: 40, height: 50 }
-    , hitpoints: 100
+    , hitpoints: 150
     , speed: 80
     , sprites:
       [ { animation: "walk"

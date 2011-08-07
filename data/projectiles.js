@@ -27,18 +27,18 @@
 
   , { name: "acinade"
     , aoe: 
-      { damage: 100 
-      , radius: 100
+      { damage: 75
+      , radius: 300
       , keepEffect: true
       , explosionSprite:
         { animation: "explosion"
         , framerate: 8
-        , offset: { x: 0, y: 0 }
+        , offset: { x: -98, y: -77 }
         , sprite: "textures/projectiles/acinadehit.png"
         , tileSize: { width: 200, height: 83 } } }
     , collides: false
     , damage: 0
-    , duration: 3.4
+    , duration: 3.5
     , gravity: true
     , hitbox: { width: 4, height: 4 }
     , range: -1
