@@ -79,6 +79,7 @@ public class World {
     }
 
     // Get actions
+    getActions(projectiles, actions);
     getActions(players, actions);
     getActions(units, actions);
 

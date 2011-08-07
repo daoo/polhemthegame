@@ -11,7 +11,7 @@ import ui.infobar.InfoBar;
 import basics.Vector2;
 
 import components.actions.IAction;
-import components.actions.SpawnDeathAnim;
+import components.actions.SpawnRunToEndAnim;
 import components.graphics.animations.Continuous;
 import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
@@ -74,7 +74,7 @@ public class Unit extends Entity implements IUnit {
   public void kill() {
     alive = false;
 
-    actions.add(new SpawnDeathAnim(body.getX1(), body.getY1(),
+    actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
                                    death.getTileWidth(), death.getTileHeight(),
                                    death));
   }

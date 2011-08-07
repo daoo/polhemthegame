@@ -8,7 +8,7 @@ import other.GameTime;
 
 import components.actions.AOEDamage;
 import components.actions.IAction;
-import components.actions.SpawnAnimated;
+import components.actions.SpawnRunToEndAnim;
 import components.interfaces.ICompAnim;
 
 public class ExplodingProjectile extends Projectile {
@@ -25,11 +25,11 @@ public class ExplodingProjectile extends Projectile {
     super(x, y, rot, data, renderer, time);
 
     actions = new ArrayList<IAction>();
-    
+
     aoeRange = data.aoe.radius;
     aoeDamage = data.aoe.damage;
 
-    this.explosion = explosion; 
+    this.explosion = explosion;
   }
 
   @Override
@@ -37,10 +37,10 @@ public class ExplodingProjectile extends Projectile {
     super.kill();
 
     actions.add(new AOEDamage(body.getCenter(), aoeRange, aoeDamage));
-    actions.add(new SpawnAnimated(body.getX1(), body.getY1(),
-                                  explosion.getTileWidth(),
-                                  explosion.getTileHeight(),
-                                  explosion));
+    actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                      explosion.getTileWidth(),
+                                      explosion.getTileHeight(),
+                                      explosion));
   }
 
   @Override
