@@ -19,9 +19,9 @@ public class PlayerFactory {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
 
-    final Player player = new Player(x, y, data.hitBox[0], data.hitBox[1],
-                                     data.handOffset[0], data.handOffset[1],
-                                     data.speed, data.hitPoints, data.startMoney,
+    final Player player = new Player(x, y, data.hitbox.width, data.hitbox.height,
+                                     data.handOffset.x, data.handOffset.y,
+                                     data.speed, data.hitpoints, data.startMoney,
                                      walk, death);
 
     player.giveWeapon(CacheTool.getWeapon(Launcher.cache, data.startWeapon));

@@ -8,7 +8,6 @@ import other.GameTime;
 import basics.Vector2;
 
 import components.graphics.RSheet;
-import components.graphics.animations.Continuous;
 import components.holdables.IHoldable;
 import components.holdables.weapons.states.CoolDownState;
 import components.holdables.weapons.states.IWeaponState;
@@ -24,10 +23,6 @@ public abstract class Weapon implements IHoldable {
 
   protected final float                      angle;
 
-  /**
-   * Decides what the weapon should do next frame.
-   */
-  protected WEAPON_ACTION                    nextAction;
   /**
    * How many rounds there are left in the magazine.
    */
@@ -55,7 +50,6 @@ public abstract class Weapon implements IHoldable {
     this.anim         = anim;
     this.projTemplate = projTemplate;
 
-    nextAction  = WEAPON_ACTION.NONE;
     rounds      = magazineSize;
     projectiles = new ArrayList<ProjectileTemplate>();
   }
@@ -63,40 +57,11 @@ public abstract class Weapon implements IHoldable {
   @Override
   public void update(final GameTime time) {
     anim.update(time);
-    
-    if (currentState != null) {
-      currentState.update(time);
-
-      if (currentState.isFinished()) {
-        currentState = null;
-
-        if (isInUse()) {
-          anim.setAnimator(new Continuous(anim.getTileCount()));
-        }
-      }
-    }
-    else {    
-      if (isEmpty()) {
-        startReload(time);
-      } else if (nextAction == WEAPON_ACTION.FIRE_ONCE) {
-        fire(time.getElapsed());
-        nextAction = WEAPON_ACTION.NONE;
-      } else if (isInUse() && isReadyToShoot()) {
-        fire(time.getElapsed());
-      }
-    }
   }
 
   @Override
   public void render(final Graphics g) {
     anim.render(g);
-  }
-
-  @Override
-  public void useOnce() {
-    if (isReadyToShoot()) {
-      nextAction = WEAPON_ACTION.FIRE_ONCE;
-    }
   }
 
   @Override

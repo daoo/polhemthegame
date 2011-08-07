@@ -11,10 +11,10 @@ import loader.data.IClosable;
 
 public class UnitData implements IClosable {
   public String                name;
-  public int[]                 hitBox;
+  public Size                  hitbox;
   public ArrayList<SpriteData> sprites;
   public int                   speed;
-  public int                   hitPoints;
+  public int                   hitpoints;
 
   @Override
   public void close() throws DataException {

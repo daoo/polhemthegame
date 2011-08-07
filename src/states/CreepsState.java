@@ -48,8 +48,8 @@ public class CreepsState implements ICompState {
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 
-      notSpawnedCreeps.add(CreepFactory.Make(getCreepX(data.hitBox[0]),
-                                             getCreepY(data.hitBox[1]),
+      notSpawnedCreeps.add(CreepFactory.Make(getCreepX(data.hitbox.width),
+                                             getCreepY(data.hitbox.height),
                                              (float) -Math.PI,
                                              spawnData.spawnTime, data));
     }

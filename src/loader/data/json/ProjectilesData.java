@@ -15,12 +15,13 @@ public class ProjectilesData implements IClosable {
       public float      radius;
       public boolean    keepEffect;
       public SpriteData explosionSprite;
+      public float      damage;
     }
 
     public String     name;
 
     public boolean    collides, gravity;
-    public int[]      hitbox;
+    public Size       hitbox;
 
     public AOE        aoe;
     public float      damage;

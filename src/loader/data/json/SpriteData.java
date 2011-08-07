@@ -10,9 +10,9 @@ import loader.data.IClosable;
 public class SpriteData implements IClosable {
   public String animation;
   public String sprite;
-  public int[]  tileSize;
+  public Size   tileSize;
   public int    framerate;
-  public int[]  offset;
+  public Offset offset;
 
   @Override
   public void close() throws DataException {

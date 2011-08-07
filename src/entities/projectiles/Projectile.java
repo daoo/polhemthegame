@@ -4,45 +4,47 @@
 
 package entities.projectiles;
 
+import java.util.Collection;
+import java.util.Collections;
+
+import loader.data.json.ProjectilesData.ProjectileData;
 import other.GameTime;
 import basics.Vector2;
 
+import components.actions.IAction;
+import components.actions.IActions;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 
 import entities.Entity;
 
-public class Projectile extends Entity implements IEntity, IDamagable {
+public class Projectile extends Entity implements IEntity, IDamagable, IActions {
   private final float duration, range, damage, maxHP;
   private final boolean gravity, collides;
 
   private boolean       alive;
   private float         hp;
 
-  private final Vector2       startPos;
-  private final float         startTime;
+  private final Vector2 startPos;
+  private final float   startTime;
 
-  public Projectile(final float x, final float y,
-                    final float width, final float height,
-                    final float rot, final float speed, final int targets,
-                    final boolean gravity, final boolean collides,
-                    final float duration, final float range,
-                    final float damage, final ICompAnim renderer,
-                    final GameTime time) {
-    super(x, y, width, height,
-          (float) Math.cos(rot) * speed,
-          (float) Math.sin(rot) * speed);
+  public Projectile(final float x, final float y, final float rot,
+                    final ProjectileData data,
+                    final ICompAnim renderer, final GameTime time) {
+    super(x, y, data.hitbox.width, data.hitbox.height,
+          (float) Math.cos(rot) * data.speed,
+          (float) Math.sin(rot) * data.speed);
 
-    this.gravity = gravity;
-    this.collides = collides;
-    this.duration = duration;
-    this.range = range;
-    this.damage = damage;
-    maxHP = targets;
+    this.gravity = data.gravity;
+    this.collides = data.collides;
+    this.duration = data.duration;
+    this.range = data.range;
+    this.damage = data.damage;
 
+    maxHP = data.targets;
     alive = true;
-    hp = targets;
+    hp = data.targets;
 
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
@@ -98,5 +100,20 @@ public class Projectile extends Entity implements IEntity, IDamagable {
   @Override
   public boolean isAlive() {
     return alive;
+  }
+
+  @Override
+  public boolean hasActions() {
+    return false;
+  }
+
+  @Override
+  public Collection<IAction> getActions() {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public void clearActions() {
+    // Do nothing
   }
 }

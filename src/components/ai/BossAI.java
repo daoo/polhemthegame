@@ -93,7 +93,7 @@ public class BossAI implements ICompUpdate {
         if (targets.empty()) {
           // No more targets, start shooting
           unit.stop();
-          hand.toggleUse();
+          hand.stopUse();
           isShooting = true;
           shootingStartTime = time.getElapsed();
           shootingTargetTime = ExMath.random(1.0f, 5.0f);

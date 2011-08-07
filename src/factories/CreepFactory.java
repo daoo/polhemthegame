@@ -20,8 +20,8 @@ public class CreepFactory {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
 
-    return new Creep(x, y, data.hitBox[0], data.hitBox[1],
+    return new Creep(x, y, data.hitbox.width, data.hitbox.height,
                      ang, data.speed, data.moneyGain, data.damage,
-                     data.hitPoints, spawnTime, walk, death);
+                     data.hitpoints, spawnTime, walk, death);
   }
 }

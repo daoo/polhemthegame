@@ -23,7 +23,7 @@ public class WeaponsData implements IClosable {
     public String     texture;
 
     public String     projectile;
-    public int[]      muzzleOffset;
+    public Offset     muzzleOffset;
   }
 
   public ArrayList<WeaponData> weapons;

@@ -13,7 +13,7 @@ public class PlayersData implements IClosable {
   public class PlayerData extends UnitData implements IClosable {
     public int    startMoney;
     public String startWeapon;
-    public int[]  handOffset;
+    public Offset handOffset;
   }
 
   public ArrayList<PlayerData> players;

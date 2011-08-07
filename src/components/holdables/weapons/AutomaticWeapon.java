@@ -5,6 +5,7 @@ import basics.Vector2;
 
 import components.graphics.RSheet;
 import components.graphics.Tile;
+import components.graphics.animations.Continuous;
 import components.graphics.animations.RunTo;
 
 import entities.projectiles.ProjectileTemplate;
@@ -23,23 +24,36 @@ public class AutomaticWeapon extends Weapon {
   }
 
   @Override
-  public void startUse() {
-    startShooting();
-  }
+  public void update(final GameTime time) {
+    anim.update(time);
+    
+    if (currentState != null) {
+      currentState.update(time);
 
-  @Override
-  public void toggleUse() {
-    if (isReadyToShoot()) {
-      if (isInUse()) {
-        stopUse();
-      } else {
-        startUse();
+      if (currentState.isFinished()) {
+        currentState = null;
+
+        if (isInUse()) {
+          anim.setAnimator(new Continuous(anim.getTileCount()));
+        }
+      }
+    }
+    else {    
+      if (isEmpty()) {
+        startReload(time);
+      } else if (isInUse() && isReadyToShoot()) {
+        fire(time.getElapsed());
       }
     }
   }
 
   @Override
-  public void stopUse() {
+  public void toggleOn() {
+    startShooting();
+  }
+
+  @Override
+  public void toggleOff() {
     stopShooting();
   }
 
@@ -50,7 +64,7 @@ public class AutomaticWeapon extends Weapon {
 
   private void stopShooting() {
     inUse = false;
-    anim.setAnimator(null);
+    anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
   }
 
   private void startShooting() {
@@ -60,7 +74,7 @@ public class AutomaticWeapon extends Weapon {
   @Override
   protected void startReload(GameTime time) {
     super.startReload(time);
-    
+
     anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
   }
 }

@@ -22,27 +22,15 @@ public class Hand implements ICompUpRend {
     item = null;
   }
 
-  public void useOnce() {
-    if (item != null) {
-      item.useOnce();
-    }
-  }
-
   public void startUse() {
     if (item != null) {
-      item.startUse();
+      item.toggleOn();
     }
   }
 
   public void stopUse() {
     if (item != null) {
-      item.stopUse();
-    }
-  }
-
-  public void toggleUse() {
-    if (item != null) {
-      item.toggleUse();
+      item.toggleOff();
     }
   }
 

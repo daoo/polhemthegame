@@ -49,8 +49,8 @@ public class ProjectileTemplate {
         anim = new TexturedQuad(img);
       } else if (data.sprite != null) {
         anim = new RSheet(data.sprite.framerate,
-                          data.sprite.offset[0],
-                          data.sprite.offset[1],
+                          data.sprite.offset.x,
+                          data.sprite.offset.y,
                           (SpriteSheet) img,
                           new Idle());
       }
@@ -59,13 +59,14 @@ public class ProjectileTemplate {
     if (data.aoe == null) {
       // If anim is null here, it's should be handled as an invisilbe
       // projectile
-      return new Projectile(x, y, data.hitbox[0], data.hitbox[1], rot,
-                            data.speed, data.targets, data.gravity,
-                            data.collides, data.duration, data.range,
-                            data.damage, anim, time);
+      return new Projectile(x, y, rot, data, anim, time);
     }
     else {
-      throw new UnsupportedOperationException("Not implemented");
+      final RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
+                                              data.aoe.explosionSprite.offset.x,
+                                              data.aoe.explosionSprite.offset.y,
+                                              explosion, new Idle());
+      return new ExplodingProjectile(x, y, rot, data, anim, explosionAnim, time);
     }
   }
 }

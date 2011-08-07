@@ -5,7 +5,7 @@
 package basics;
 
 public class Rectangle {
-  protected final Vector2 min, max;
+  protected final Vector2 min, max, center;
   protected final Vector2 size;
 
   public Rectangle(final float x1, final float y1, final float width, final float height) {
@@ -14,6 +14,7 @@ public class Rectangle {
     min = new Vector2(x1, y1);
     max = new Vector2(x2, y2);
     size = new Vector2(width, height);
+    center = min.add(size.divide(2.0f));
   }
 
   public Rectangle(final Vector2 upperLeft, final Vector2 bottomRight) {
@@ -21,6 +22,8 @@ public class Rectangle {
     max = new Vector2(bottomRight);
     size = new Vector2(bottomRight.x - upperLeft.x,
                        bottomRight.y - upperLeft.x);
+    center = min.add(size.divide(2.0f));
+    
   }
 
   public boolean isIntersecting(final Rectangle other) {
@@ -52,6 +55,10 @@ public class Rectangle {
    */
   public Vector2 getMax() {
     return max;
+  }
+  
+  public Vector2 getCenter() {
+    return center;
   }
 
   public Vector2 getSize() {

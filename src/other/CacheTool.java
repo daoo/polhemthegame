@@ -42,14 +42,16 @@ public class CacheTool {
 
   public static SpriteSheet getSpriteSheet(final Cache cache, final SpriteData sprite)
     throws ParserException, IOException {
-    return (SpriteSheet) cache.getCold(sprite.sprite, new SpriteSheetParser(sprite.tileSize[0], sprite.tileSize[1]));
+    return (SpriteSheet) cache.getCold(sprite.sprite,
+                                       new SpriteSheetParser(sprite.tileSize.width,
+                                                             sprite.tileSize.height));
   }
 
   public static RSheet getRSheet(final Cache cache, final SpriteData sprite)
     throws ParserException, IOException {
     final SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
     return new RSheet(sprite.framerate,
-                      sprite.offset[0], sprite.offset[1],
+                      sprite.offset.x, sprite.offset.y,
                       sheet, new Idle());
   }
 
@@ -63,7 +65,7 @@ public class CacheTool {
     final WeaponsData weapons = (WeaponsData) cache.getCold("weapons.js", new GsonParser(WeaponsData.class));
     final WeaponData weapon = weapons.getWeapon(name);
 
-    final Vector2 m = new Vector2(weapon.muzzleOffset[0], weapon.muzzleOffset[1]);
+    final Vector2 m = new Vector2(weapon.muzzleOffset.x, weapon.muzzleOffset.y);
     final ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
     final RSheet anim = CacheTool.getRSheet(cache, weapon.sprite);
     if (weapon.automatic) {

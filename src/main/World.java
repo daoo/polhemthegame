@@ -190,4 +190,8 @@ public class World {
 
     return true;
   }
+
+  public Iterable<IUnit> getUnits() {
+    return units;
+  }
 }

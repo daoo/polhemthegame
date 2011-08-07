@@ -5,7 +5,7 @@
     , damage: 100
     , duration: -1
     , gravity: false
-    , hitbox: [ 1, 1 ]
+    , hitbox: { width: 1, height: 1 }
     , range: 20
     , speed: 250
     , sprite: null
@@ -18,7 +18,7 @@
     , damage: 50
     , duration: -1
     , gravity: false
-    , hitbox: [ 3, 2 ]
+    , hitbox: { width: 3, height: 2 }
     , range: -1
     , speed: 500
     , sprite: null
@@ -27,19 +27,20 @@
 
   , { name: "acinade"
     , aoe: 
-      { radius: 100
+      { damage: 100 
+      , radius: 100
       , keepEffect: true
       , explosionSprite:
         { animation: "explosion"
         , framerate: 8
-        , offset: [ 0, 0 ]
+        , offset: { x: 0, y: 0 }
         , sprite: "textures/projectiles/acinadehit.png"
-        , tileSize: [ 200, 83 ] } }
+        , tileSize: { width: 200, height: 83 } } }
     , collides: false
-    , damage: 100
+    , damage: 0
     , duration: 3.4
     , gravity: true
-    , hitbox: [ 4, 4 ]
+    , hitbox: { width: 4, height: 4 }
     , range: -1
     , speed: 200
     , sprite: null
@@ -52,7 +53,7 @@
     , damage: 25
     , duration: -1
     , gravity: false
-    , hitbox: [ 3, 2 ]
+    , hitbox: { width: 3, height: 2 }
     , range: -1
     , speed: 1000
     , sprite: null
@@ -70,7 +71,7 @@
     , sprite:
       { animation: "travel"
       , framerate: 8
-      , tileSize: [ 50, 50 ]
+      , tileSize: { width: 50, height: 50 }
       , sprite: "textures/projectiles/saltlauncher.png" }
     , targets: 1
     , texture: null }
@@ -86,7 +87,7 @@
     , sprite:
       { animation: "travel"
       , framerate: 8
-      , tileSize: [ 680, 10 ]
+      , tileSize: { width: 680, height: 10 }
       , sprite: "textures/projectiles/casio.png" }
     , targets: -1
     , texture: null }
