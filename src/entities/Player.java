@@ -48,10 +48,12 @@ public class Player extends Unit implements IArmed {
   @Override
   public void update(final GameTime time) {
     super.update(time);
-    weaponBar.setFraction(hand.getWeapon().getProgress());
+    
+    final Weapon w = hand.getWeapon();
+    
+    weaponBar.setFraction(w.getProgress());
 
     // Find out if there are any projectiles that want to be spawned
-    final Weapon w = hand.getWeapon();
     for (final ProjectileTemplate tmp : w.projectiles) {
       final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
       final Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
