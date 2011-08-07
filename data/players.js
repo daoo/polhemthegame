@@ -15,7 +15,7 @@
         , offset: { x: 0, y: 0 }
         , sprite: "textures/players/blue-death.png"
         , tileSize: { width: 50, height: 38 } } ]
-    , startWeapon: "ak47"
+    , startWeapon: "saltsyra"
     , startMoney: 100 }
 
   , { name: "Red"

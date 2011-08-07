@@ -65,8 +65,8 @@
     , sprite:
       { animation: "fire"
       , framerate: 8
-      , offset: { x: 0, y: 0 }
-      , tileSize: { width: 26, height: 37 }
+      , offset: { x: -10, y: -7 }
+      , tileSize: { width: 21, height: 15 }
       , sprite: "textures/weapons/saltsyra.png" }
     , projectile: "saltsyra" }
 
