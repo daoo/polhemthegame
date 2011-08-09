@@ -11,6 +11,7 @@ import loader.data.json.ProjectilesData.ProjectileData;
 import other.GameTime;
 import basics.Vector2;
 
+import components.graphics.animations.Continuous;
 import components.interfaces.IActions;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
@@ -44,7 +45,7 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
 
     maxHP = data.targets;
     alive = true;
-    hp = data.targets;
+    hp = maxHP;
 
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
@@ -52,6 +53,7 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
     // Invisible projectile
     // TODO: Do not use null
     if (renderer != null) {
+      renderer.setAnimator(new Continuous(renderer.getTileCount()));
       add(renderer);
     }
   }

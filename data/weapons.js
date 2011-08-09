@@ -59,14 +59,14 @@
   , { name: "saltsyra"
     , automatic: true
     , clipSize: -1
-    , muzzleOffset: { x: 0, y: 0 }
+    , muzzleOffset: { x: 10, y: -25 }
     , reloadTime: -1
     , rpm: 120
     , sprite:
       { animation: "fire"
       , framerate: 8
       , offset: { x: -10, y: -7 }
-      , tileSize: { width: 21, height: 15 }
+      , tileSize: { width: 22, height: 15 }
       , sprite: "textures/weapons/saltsyra.png" }
     , projectile: "saltsyra" }
 
