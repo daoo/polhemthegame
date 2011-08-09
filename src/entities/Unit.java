@@ -10,13 +10,13 @@ import ui.infobar.Bar;
 import ui.infobar.InfoBar;
 import basics.Vector2;
 
-import components.actions.IAction;
-import components.actions.SpawnRunToEndAnim;
 import components.graphics.animations.Continuous;
 import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 import components.interfaces.IUnit;
 import components.physics.AABB;
+import components.triggers.actions.IAction;
+import components.triggers.actions.SpawnRunToEndAnim;
 
 public class Unit extends Entity implements IUnit {
   private final float                maxHP;
@@ -71,8 +71,13 @@ public class Unit extends Entity implements IUnit {
   }
 
   @Override
-  public void kill() {
+  public void killSilently() {
     alive = false;
+  }
+
+  @Override
+  public void kill() {
+    killSilently();
 
     actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
                                    death.getTileWidth(), death.getTileHeight(),

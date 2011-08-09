@@ -26,7 +26,7 @@ public class AutomaticWeapon extends Weapon {
   @Override
   public void update(final GameTime time) {
     anim.update(time);
-    
+
     if (currentState != null) {
       currentState.update(time);
 
@@ -38,7 +38,7 @@ public class AutomaticWeapon extends Weapon {
         }
       }
     }
-    else {    
+    else {
       if (isEmpty()) {
         startReload(time);
       } else if (isInUse() && isReadyToShoot()) {
@@ -70,9 +70,9 @@ public class AutomaticWeapon extends Weapon {
   private void startShooting() {
     inUse = true;
   }
-  
+
   @Override
-  protected void startReload(GameTime time) {
+  protected void startReload(final GameTime time) {
     super.startReload(time);
 
     anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));

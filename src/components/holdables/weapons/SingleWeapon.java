@@ -22,7 +22,7 @@ public class SingleWeapon extends Weapon {
   }
 
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     super.update(time);
 
     if (currentState != null) {

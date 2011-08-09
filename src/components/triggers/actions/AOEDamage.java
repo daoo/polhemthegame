@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
  */
 
-package components.actions;
+package components.triggers.actions;
 
 import main.World;
 import basics.Vector2;
@@ -13,7 +13,7 @@ public class AOEDamage implements IAction {
   final Vector2 center;
   final float   range, damage;
 
-  public AOEDamage(Vector2 center, float range, float damage) {
+  public AOEDamage(final Vector2 center, final float range, final float damage) {
     this.center = center;
     this.range = range;
     this.damage = damage;
@@ -21,7 +21,7 @@ public class AOEDamage implements IAction {
 
   @Override
   public void execute(final World world) {
-    for (IUnit unit : world.getUnits()) {
+    for (final IUnit unit : world.getUnits()) {
       if (unit.getBody().getCenter().distance(center) < range) {
         unit.damage(damage);
       }

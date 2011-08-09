@@ -38,7 +38,7 @@ public class Hand implements ICompUpRend {
     // To grab a new holdable we need to stop using the current one
     stopUse();
 
-    this.weapon = newItem;
+    weapon = newItem;
   }
 
   @Override

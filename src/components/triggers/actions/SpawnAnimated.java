@@ -1,4 +1,4 @@
-package components.actions;
+package components.triggers.actions;
 
 import main.World;
 

@@ -34,7 +34,7 @@ public class CollisionHelper {
    * @param cont
    *          The AABB to use as box
    */
-  public static void BlockFromExiting(final AABB entity, final AABB cont) {
+  public static void BlockFromExiting(final AABB entity, final Rectangle cont) {
     final Vector2 e = entity.getMin();
     if (e.x < cont.getX1()) {
       e.x = cont.getX1();

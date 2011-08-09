@@ -12,7 +12,7 @@ public class Idle implements IAnimator {
   }
 
   @Override
-  public Tile next(Tile tile) {
+  public Tile next(final Tile tile) {
     return tile;
   }
 }

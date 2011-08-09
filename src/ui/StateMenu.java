@@ -92,7 +92,7 @@ public class StateMenu extends BasicGameState {
   }
 
   @Override
-  public void update(GameContainer gc, StateBasedGame sb, int delta)
+  public void update(final GameContainer gc, final StateBasedGame sb, final int delta)
     throws SlickException {
     // Nothing to do here
   }

@@ -13,7 +13,7 @@ public interface ICompAnim extends ICompUpRend {
   Image getLastFrame();
 
   void goToFirstFrame();
-  
+
   void setAnimator(final IAnimator animator);
   IAnimator getAnimator();
 

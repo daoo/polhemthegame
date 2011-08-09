@@ -31,7 +31,7 @@ public class Inventory implements IComp {
     }
 
     money -= v;
-    
+
     return true;
   }
 

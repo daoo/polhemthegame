@@ -4,7 +4,7 @@ import components.graphics.Tile;
 
 public class RunTo implements IAnimator {
   private boolean finished;
-  private final Tile size, target; 
+  private final Tile size, target;
 
   public RunTo(final Tile size, final Tile target) {
     this.size = size;
@@ -22,7 +22,7 @@ public class RunTo implements IAnimator {
     if (!finished) {
       int x = tile.x + 1;
       int y = tile.y;
-      
+
       if (x >= size.x) {
         x = 0;
         ++y;
@@ -31,12 +31,12 @@ public class RunTo implements IAnimator {
           y = 0;
         }
       }
-      
+
       final Tile result = new Tile(x, y);
       if (target.sameAs(result)) {
         finished = true;
       }
-      
+
       return result;
     }
     else {

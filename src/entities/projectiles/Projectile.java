@@ -11,11 +11,11 @@ import loader.data.json.ProjectilesData.ProjectileData;
 import other.GameTime;
 import basics.Vector2;
 
-import components.actions.IAction;
-import components.actions.IActions;
+import components.interfaces.IActions;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
+import components.triggers.actions.IAction;
 
 import entities.Entity;
 
@@ -36,11 +36,11 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
           (float) Math.cos(rot) * data.speed,
           (float) Math.sin(rot) * data.speed);
 
-    this.gravity = data.gravity;
-    this.collides = data.collides;
-    this.duration = data.duration;
-    this.range = data.range;
-    this.damage = data.damage;
+    gravity = data.gravity;
+    collides = data.collides;
+    duration = data.duration;
+    range = data.range;
+    damage = data.damage;
 
     maxHP = data.targets;
     alive = true;
@@ -93,8 +93,13 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
   }
 
   @Override
-  public void kill() {
+  public void killSilently() {
     alive = false;
+  }
+
+  @Override
+  public void kill() {
+    killSilently();
   }
 
   @Override

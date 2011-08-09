@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see licence.txt for more info.
  */
 
-package components.actions;
+package components.triggers.actions;
 
 import main.World;
 

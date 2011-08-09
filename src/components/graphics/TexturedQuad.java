@@ -36,7 +36,7 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(IAnimator animator) {
+  public void setAnimator(final IAnimator animator) {
     // Do nothing
   }
 

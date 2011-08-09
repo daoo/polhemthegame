@@ -12,13 +12,14 @@ import org.newdawn.slick.Graphics;
 
 import other.GameTime;
 import physics.CollisionHelper;
+import basics.Rectangle;
 
-import components.actions.IAction;
-import components.actions.IActions;
+import components.interfaces.IActions;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 import components.interfaces.IUnit;
 import components.physics.AABB;
+import components.triggers.actions.IAction;
 
 import entities.Animated;
 import entities.Creep;
@@ -28,10 +29,11 @@ import entities.projectiles.Projectile;
 
 public class World {
   private final float                 width, height;
-  private final AABB                  smallBox, bigBox;
+  private final Rectangle             smallBox, bigBox, creepKiller;
 
   private final ArrayList<Entity>     entities;
   private final ArrayList<IUnit>      units;
+  private final ArrayList<Creep>      creeps;
   private final ArrayList<Projectile> projectiles;
   private final ArrayList<Player>     players;
 
@@ -39,11 +41,13 @@ public class World {
     this.width = width;
     this.height = height;
 
-    smallBox = new AABB(0, 0, width, height, 0, 0);
-    bigBox = new AABB(-width, -height, width * 2, height * 2, 0, 0);
+    smallBox = new Rectangle(0, 0, width, height);
+    bigBox = new Rectangle(-width, -height, width * 2, height * 2);
+    creepKiller = new Rectangle(-width, 0, width, height);
 
     entities = new ArrayList<Entity>();
     units = new ArrayList<IUnit>();
+    creeps = new ArrayList<Creep>();
     projectiles = new ArrayList<Projectile>();
     players = new ArrayList<Player>();
   }
@@ -78,6 +82,16 @@ public class World {
       CollisionHelper.BlockFromExiting(p.getBody(), smallBox);
     }
 
+    // Kill creeps when they've reach their goal
+    for (final Creep creep : creeps) {
+      if (creepKiller.isContaining(creep.getBody())) {
+        creep.killSilently();
+        for (Player p : players) {
+          p.damage(creep.getDamage());
+        }
+      }
+    }
+
     // Get actions
     getActions(projectiles, actions);
     getActions(players, actions);
@@ -91,6 +105,7 @@ public class World {
     // Remove dead objects, do this last so we make sure any actions
     // are carried out properly
     removeNoMores(units);
+    removeNoMores(creeps);
     removeNoMores(projectiles);
   }
 
@@ -114,25 +129,26 @@ public class World {
 
   public void add(final Player p) {
     assert (p != null);
-    
+
     players.add(p);
   }
 
   public void add(final Projectile p) {
     assert (p != null);
-    
+
     projectiles.add(p);
   }
 
   public void add(final Creep c) {
     assert (c != null);
-    
+
     units.add(c);
+    creeps.add(c);
   }
 
   public void add(final Animated a) {
     assert (a != null);
-    
+
     entities.add(a);
   }
 
@@ -176,7 +192,7 @@ public class World {
 
   /**
    * Handles collisons between a projectile and a unit.
-   *
+   * 
    * @return Returns true if the projecile still exists, false otherwise.
    */
   private boolean projCollisionWithUnit(final Projectile p, final IDamagable u) {

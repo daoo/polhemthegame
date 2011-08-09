@@ -6,22 +6,22 @@ import java.util.Collection;
 import loader.data.json.ProjectilesData.ProjectileData;
 import other.GameTime;
 
-import components.actions.AOEDamage;
-import components.actions.IAction;
-import components.actions.SpawnRunToEndAnim;
 import components.interfaces.ICompAnim;
+import components.triggers.actions.AOEDamage;
+import components.triggers.actions.IAction;
+import components.triggers.actions.SpawnRunToEndAnim;
 
 public class ExplodingProjectile extends Projectile {
-  private ArrayList<IAction> actions;
+  private final ArrayList<IAction> actions;
 
   private final float        aoeRange, aoeDamage;
 
   private final ICompAnim    explosion;
 
-  public ExplodingProjectile(float x, float y, float rot,
-                             ProjectileData data,
-                             ICompAnim renderer, ICompAnim explosion,
-                             GameTime time) {
+  public ExplodingProjectile(final float x, final float y, final float rot,
+                             final ProjectileData data,
+                             final ICompAnim renderer, final ICompAnim explosion,
+                             final GameTime time) {
     super(x, y, rot, data, renderer, time);
 
     actions = new ArrayList<IAction>();

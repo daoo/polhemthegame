@@ -10,7 +10,6 @@ import other.GameTime;
 import ui.infobar.Bar;
 import basics.Vector2;
 
-import components.actions.SpawnProjectile;
 import components.basic.Inventory;
 import components.basic.SimpleControl;
 import components.basic.Stats;
@@ -18,6 +17,7 @@ import components.holdables.Hand;
 import components.holdables.weapons.Weapon;
 import components.interfaces.IArmed;
 import components.interfaces.ICompAnim;
+import components.triggers.actions.SpawnProjectile;
 
 import entities.projectiles.Projectile;
 import entities.projectiles.ProjectileTemplate;
@@ -48,9 +48,9 @@ public class Player extends Unit implements IArmed {
   @Override
   public void update(final GameTime time) {
     super.update(time);
-    
+
     final Weapon w = hand.getWeapon();
-    
+
     weaponBar.setFraction(w.getProgress());
 
     // Find out if there are any projectiles that want to be spawned

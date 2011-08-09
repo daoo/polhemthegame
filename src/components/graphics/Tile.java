@@ -11,6 +11,6 @@ public class Tile {
   }
 
   public boolean sameAs(final Tile other) {
-    return x == other.x && y == other.y;
+    return (x == other.x) && (y == other.y);
   }
 }
