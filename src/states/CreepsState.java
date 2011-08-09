@@ -27,7 +27,7 @@ import factories.CreepFactory;
 
 public class CreepsState implements ICompState {
   private final World            world;
-  private final ArrayList<Creep> notSpawnedCreeps;
+  private final ArrayList<Creep> toBeSpawned, spawned;
 
   private float getCreepX(final int width) {
     return world.getX2() + width;
@@ -42,29 +42,40 @@ public class CreepsState implements ICompState {
     super();
     this.world = world;
 
-    notSpawnedCreeps = new ArrayList<Creep>(sd.creeps.size());
+    spawned     = new ArrayList<Creep>(sd.creeps.size());
+    toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
 
     final CreepsData creepsData = CacheTool.getCreeps(Launcher.cache);
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 
-      notSpawnedCreeps.add(CreepFactory.Make(getCreepX(data.hitbox.width),
-                                             getCreepY(data.hitbox.height),
-                                             (float) -Math.PI,
-                                             spawnData.spawnTime, data));
+      toBeSpawned.add(CreepFactory.Make(getCreepX(data.hitbox.width),
+                                        getCreepY(data.hitbox.height),
+                                        (float) -Math.PI,
+                                        spawnData.spawnTime, data));
     }
   }
 
   @Override
   public void update(final GameTime time) {
-    final Iterator<Creep> it = notSpawnedCreeps.iterator();
-    while (it.hasNext()) {
-      final Creep c = it.next();
+    final Iterator<Creep> itc = toBeSpawned.iterator();
+    while (itc.hasNext()) {
+      final Creep c = itc.next();
 
       if (c.getSpawnTime() < time.getElapsed()) {
         c.start();
         world.add(c);
-        it.remove();
+        spawned.add(c);
+        itc.remove();
+      }
+    }
+
+    final Iterator<Creep> itr = spawned.iterator();
+    while (itr.hasNext()) {
+      final Creep c = itr.next();
+
+      if (!c.isAlive()) {
+        itr.remove();
       }
     }
   }
@@ -81,6 +92,6 @@ public class CreepsState implements ICompState {
 
   @Override
   public boolean isFinished() {
-    return false; // TODO: Finished when all creeps have been killed in some way
+    return toBeSpawned.isEmpty() && spawned.isEmpty();
   }
 }
