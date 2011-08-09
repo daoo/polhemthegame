@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 
 import entities.Player;
 
+// TODO: Fix HUD
 public class HUD {
   public static final int height = 75;
   public static final int width  = 1024;
