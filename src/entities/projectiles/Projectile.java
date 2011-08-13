@@ -16,13 +16,14 @@ import components.interfaces.IActions;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
+import components.physics.Gravity;
 import components.triggers.actions.IAction;
 
 import entities.Entity;
 
 public class Projectile extends Entity implements IEntity, IDamagable, IActions {
   private final float duration, range, damage, maxHP;
-  private final boolean gravity, collides;
+  private final boolean collides;
 
   private boolean       alive;
   private float         hp;
@@ -36,8 +37,10 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
     super(x, y, data.hitbox.width, data.hitbox.height,
           (float) Math.cos(rot) * data.speed,
           (float) Math.sin(rot) * data.speed);
+    
+    assert (renderer != null);
+    assert (data != null);
 
-    gravity = data.gravity;
     collides = data.collides;
     duration = data.duration;
     range = data.range;
@@ -50,7 +53,10 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
 
-    // Invisible projectile
+    if (data.gravity) {
+      add(new Gravity(body, Gravity.FACTOR));
+    }
+
     renderer.setAnimator(new Continuous(renderer.getTileCount()));
     add(renderer);
   }
@@ -58,11 +64,6 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
   @Override
   public void update(final GameTime time) {
     super.update(time);
-
-    if (gravity) {
-      // TODO: Move gravity somewhere else
-      body.addVelocity(new Vector2(0, 100.0f * time.getFrameLength()));
-    }
 
     if ((duration != -1) && ((time.getElapsed() - startTime) > duration)) {
       kill();
