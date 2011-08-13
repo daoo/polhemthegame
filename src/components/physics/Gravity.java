@@ -1,6 +1,8 @@
 package components.physics;
 
 import other.GameTime;
+import basics.Vector2;
+
 import components.interfaces.ICompUpdate;
 
 public class Gravity implements ICompUpdate {
@@ -17,6 +19,6 @@ public class Gravity implements ICompUpdate {
   @Override
   public void update(GameTime time) {
     final float g = time.getFrameLength() * factor;
-    body.addPosition(body.getVelocity().multiply(g));
+    body.addVelocity(new Vector2(0, g));
   }
 }
