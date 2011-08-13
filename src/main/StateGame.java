@@ -59,9 +59,9 @@ public class StateGame extends BasicGameState {
       final CampaignData campaign = (CampaignData) cache.getCold("campaigns/polhem.js",
                                                                  new GsonParser(CampaignData.class));
 
-      final Game game = new Game(campaign, 0, HUD.height,
+      final Game game = new Game(campaign, 0, HUD.HEIGHT,
                                  Launcher.width,
-                                 Launcher.height - (2 * HUD.height));
+                                 Launcher.height - (2 * HUD.HEIGHT));
       mode = game;
       //mode = new Debugger(game);
 
