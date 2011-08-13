@@ -51,11 +51,8 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActions 
     startTime = time.getElapsed();
 
     // Invisible projectile
-    // TODO: Do not use null
-    if (renderer != null) {
-      renderer.setAnimator(new Continuous(renderer.getTileCount()));
-      add(renderer);
-    }
+    renderer.setAnimator(new Continuous(renderer.getTileCount()));
+    add(renderer);
   }
 
   @Override

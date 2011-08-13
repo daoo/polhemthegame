@@ -12,6 +12,7 @@ import org.newdawn.slick.SpriteSheet;
 import other.CacheTool;
 import other.GameTime;
 
+import components.graphics.Invisible;
 import components.graphics.RSheet;
 import components.graphics.TexturedQuad;
 import components.graphics.animations.Idle;
@@ -44,21 +45,19 @@ public class ProjectileTemplate {
   public Projectile makeProjectile(final float x, final float y, final float rot,
                                    final GameTime time) {
     ICompAnim anim = null;
-    if (img != null) {
-      if (data.texture != null) {
-        anim = new TexturedQuad(img);
-      } else if (data.sprite != null) {
-        anim = new RSheet(data.sprite.framerate,
-                          data.sprite.offset.x,
-                          data.sprite.offset.y,
-                          (SpriteSheet) img,
-                          new Idle());
-      }
+    if (img == null) {
+      anim = new Invisible();
+    } else if (data.texture != null) {
+      anim = new TexturedQuad(img);
+    } else if (data.sprite != null) {
+      anim = new RSheet(data.sprite.framerate,
+                        data.sprite.offset.x,
+                        data.sprite.offset.y,
+                        (SpriteSheet) img,
+                        new Idle());
     }
 
     if (data.aoe == null) {
-      // If anim is null here, it's should be handled as an invisilbe
-      // projectile
       return new Projectile(x, y, rot, data, anim, time);
     }
     else {
