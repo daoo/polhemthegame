@@ -60,8 +60,8 @@ public class StateGame extends BasicGameState {
                                                                  new GsonParser(CampaignData.class));
 
       final Game game = new Game(campaign, 0, HUD.HEIGHT,
-                                 Launcher.width,
-                                 Launcher.height - (2 * HUD.HEIGHT));
+                                 Launcher.WIDTH,
+                                 Launcher.HEIGHT - (2 * HUD.HEIGHT));
       mode = game;
       //mode = new Debugger(game);
 

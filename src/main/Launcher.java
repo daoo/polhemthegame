@@ -22,40 +22,49 @@ import basics.Rectangle;
 import credits.StateCredits;
 
 public class Launcher extends StateBasedGame {
-  public static final int  MAINMENU       = 0;
-  public static final int  CREDITS        = 1;
-  public static final int  GAMEPLAY       = 2;
+  public static final int       MAINMENU   = 0;
+  public static final int       CREDITS    = 1;
+  public static final int       GAMEPLAY   = 2;
 
-  public static Cache      cache;
+  public static final int       WIDTH      = 1024;
+  public static final int       HEIGHT     = 768;
+  public static final boolean   FULLSCREEN = false;
+  public static final int       MAX_FPS    = 100;
+  public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-  private static final int DEFAULT_WIDTH  = 1024;
-  private static final int DEFAULT_HEIGHT = 768;
+  public static Cache           cache;
 
-  public static int        width          = Launcher.DEFAULT_WIDTH;
-  public static int        height         = Launcher.DEFAULT_HEIGHT;
-  public static boolean    fullscreen     = false;
-  public static int        max_fps        = 100;
-  public static Rectangle  rect           = new Rectangle(0, 0, width, height);
-
-  public Launcher() {
+  public Launcher(final boolean skipMenu) {
     super(Defines.NAME + " - " + Defines.VERSION);
 
     addState(new StateMenu(Launcher.MAINMENU));
     addState(new StateGame(Launcher.GAMEPLAY));
     addState(new StateCredits(Launcher.CREDITS));
-    enterState(Launcher.MAINMENU);
+
+    if (skipMenu) {
+      enterState(Launcher.GAMEPLAY);
+    } else {
+      enterState(Launcher.MAINMENU);
+    }
   }
 
   public static void main(final String[] args) {
     try {
-      System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("java.library.path")).getAbsolutePath());
+      String libPath = new File(System.getProperty("java.library.path")).getAbsolutePath();
+      System.setProperty("org.lwjgl.librarypath", libPath);
 
-      // TODO: Fix config
       Launcher.cache = new Cache(new Enviroment().appDir);
 
-      final AppGameContainer app = new AppGameContainer(new Launcher());
+      boolean skipMenu = false;
+      for (String s : args) {
+        if (s.equals("-s")) {
+          skipMenu = true;
+        }
+      }
 
-      app.setDisplayMode(Launcher.width, Launcher.height, Launcher.fullscreen);
+      final AppGameContainer app = new AppGameContainer(new Launcher(skipMenu));
+
+      app.setDisplayMode(Launcher.WIDTH, Launcher.HEIGHT, Launcher.FULLSCREEN);
       app.start();
     } catch (final FileNotFoundException e) {
       e.printStackTrace();

@@ -43,11 +43,11 @@ public class StateCredits extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     gc.setClearEachFrame(true);
-    gc.setTargetFrameRate(Launcher.max_fps);
+    gc.setTargetFrameRate(Launcher.MAX_FPS);
 
     final float speed = -100;
-    final float tmp_x = Launcher.width / 2.0f;
-    float tmp_y = Launcher.height;
+    final float tmp_x = Launcher.WIDTH / 2.0f;
+    float tmp_y = Launcher.HEIGHT;
 
     credits.clear();
     credits.ensureCapacity(Credits.CreditsText.length);

@@ -77,7 +77,7 @@ public class GameLevel {
     for (final String state : level.states) {
       final StateData sd = level.findState(state);
       if (sd.type.equals("text")) {
-        states.add(new TransitionState((TextStateData) sd, Launcher.rect));
+        states.add(new TransitionState((TextStateData) sd, Launcher.RECT));
       } else if (sd.type.equals("creeps")) {
         states.add(new CreepsState(availible, (CreepStateData) sd));
       } else if (sd.type.equals("boss")) {

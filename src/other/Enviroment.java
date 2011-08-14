@@ -7,7 +7,7 @@ package other;
 import java.io.File;
 
 public class Enviroment {
-  public File appDir;
+  public final File appDir;
 
   public Enviroment() {
     appDir = new File("./");

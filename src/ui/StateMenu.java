@@ -74,7 +74,7 @@ public class StateMenu extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     gc.setClearEachFrame(true);
-    gc.setTargetFrameRate(Launcher.max_fps);
+    gc.setTargetFrameRate(Launcher.MAX_FPS);
 
     try {
       background = CacheTool.getImage(Launcher.cache, "textures/menu/main.png");
