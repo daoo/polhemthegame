@@ -10,12 +10,14 @@ import loader.data.json.LevelData.BossStateData;
 
 import org.newdawn.slick.Graphics;
 
+import basics.Rectangle;
+
 import components.triggers.actions.IAction;
 
 import other.GameTime;
 
 public class BossState implements ICompState {
-  public BossState(final BossStateData sd) {
+  public BossState(Rectangle rect, final BossStateData sd) {
     // TODO: Implement Boss State
     throw new UnsupportedOperationException("Not implemented");
   }

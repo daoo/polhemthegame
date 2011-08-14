@@ -34,13 +34,25 @@ import basics.Rectangle;
 import entities.Players;
 
 public class GameLevel {
+  /**
+   * The world, rendering is happening relative to what's actually availible. I.e.
+   * all constraints, HUD stuff etc have been accounted for. Adding something at
+   * (0, 0) would make it appear in the top left of the area units are allowed to
+   * move around in.
+   */
   private final World                 world;
   private final Image                 background;
+
   /**
-   * The area availible for the current level, i.e. with constraints for the
+   * The area availible for the current level, e.g. with constraints for the
    * active level. Relative to the visible background.
    */
   private final Rectangle             rect;
+
+  /**
+   * The area actually used. Top left will always be (0, 0).
+   */
+  private final Rectangle             availible;
 
   private final ArrayList<ICompState> states;
   private Iterator<ICompState>        current;
@@ -54,6 +66,7 @@ public class GameLevel {
     final float bottom = level.constraints[2];
     final float right = level.constraints[3];
     rect = new Rectangle(left, top, width - left - right, height - top - bottom);
+    availible = new Rectangle(0, 0, rect.getWidth(), rect.getHeight());
 
     background = CacheTool.getImage(Launcher.cache, level.background);
     world = WorldFactory.make(rect, players);
@@ -66,9 +79,9 @@ public class GameLevel {
       if (sd.type.equals("text")) {
         states.add(new TransitionState((TextStateData) sd, Launcher.rect));
       } else if (sd.type.equals("creeps")) {
-        states.add(new CreepsState(rect, (CreepStateData) sd));
+        states.add(new CreepsState(availible, (CreepStateData) sd));
       } else if (sd.type.equals("boss")) {
-        states.add(new BossState((BossStateData) sd));
+        states.add(new BossState(availible, (BossStateData) sd));
       }
     }
   }

@@ -31,6 +31,7 @@ public class World {
   private final float                 width, height;
   private final Rectangle             smallBox, bigBox, creepKiller;
 
+  // TODO: The multiple-lists solution isn't really nice. Make something better.
   private final ArrayList<Entity>     entities;
   private final ArrayList<IUnit>      units;
   private final ArrayList<Creep>      creeps;
