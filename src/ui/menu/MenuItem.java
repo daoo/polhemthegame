@@ -15,7 +15,6 @@ import org.newdawn.slick.Image;
 
 import other.CacheTool;
 
-// TODO: Disabled menu items
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;
 
