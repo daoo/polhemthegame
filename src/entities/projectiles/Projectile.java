@@ -12,7 +12,7 @@ import other.GameTime;
 import basics.Vector2;
 
 import components.graphics.animations.Continuous;
-import components.interfaces.IActions;
+import components.interfaces.IActionProducer;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
@@ -21,7 +21,7 @@ import components.triggers.actions.IAction;
 
 import entities.Entity;
 
-public class Projectile extends Entity implements IEntity, IDamagable, IActions {
+public class Projectile extends Entity implements IEntity, IDamagable, IActionProducer {
   private final float duration, range, damage, maxHP;
   private final boolean collides;
 

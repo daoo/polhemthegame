@@ -5,6 +5,6 @@
 package components.interfaces;
 
 
-public interface IUnit extends IEntity, IDamagable, IWalking, IActions {
+public interface IUnit extends IEntity, IDamagable, IWalking, IActionProducer {
   // Empty merge interface
 }

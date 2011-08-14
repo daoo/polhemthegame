@@ -8,7 +8,7 @@ import java.util.Collection;
 
 import components.triggers.actions.IAction;
 
-public interface IActions {
+public interface IActionProducer {
   public boolean hasActions();
   public Collection<IAction> getActions();
   public void clearActions();

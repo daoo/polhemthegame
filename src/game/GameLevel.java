@@ -22,6 +22,8 @@ import main.WorldFactory;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import components.triggers.actions.IAction;
+
 import other.CacheTool;
 import other.GameTime;
 import states.BossState;
@@ -64,7 +66,7 @@ public class GameLevel {
       if (sd.type.equals("text")) {
         states.add(new TransitionState((TextStateData) sd, Launcher.rect));
       } else if (sd.type.equals("creeps")) {
-        states.add(new CreepsState((CreepStateData) sd, world));
+        states.add(new CreepsState(rect, (CreepStateData) sd));
       } else if (sd.type.equals("boss")) {
         states.add(new BossState((BossStateData) sd));
       }
@@ -90,6 +92,13 @@ public class GameLevel {
     } else {
       currentState.update(time);
       world.update(time);
+
+      if (currentState.hasActions()) {
+        for (IAction action : currentState.getActions()) {
+          action.execute(world);
+        }
+        currentState.clearActions();
+      }
     }
   }
 

@@ -14,7 +14,7 @@ import other.GameTime;
 import physics.CollisionHelper;
 import basics.Rectangle;
 
-import components.interfaces.IActions;
+import components.interfaces.IActionProducer;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 import components.interfaces.IUnit;
@@ -160,8 +160,8 @@ public class World {
     return (int) height;
   }
 
-  private <T extends IActions> void getActions(final Iterable<T> list, final AbstractList<IAction> result) {
-    for (final IActions actions : list) {
+  private <T extends IActionProducer> void getActions(final Iterable<T> list, final AbstractList<IAction> result) {
+    for (final IActionProducer actions : list) {
       result.addAll(actions.getActions());
       actions.clearActions();
     }

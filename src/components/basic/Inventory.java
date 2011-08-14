@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import components.holdables.weapons.Weapon;
 import components.interfaces.IComp;
 
+// TODO: Shop
+
 public class Inventory implements IComp {
   protected int                     money;
   protected final ArrayList<Weapon> weapons;

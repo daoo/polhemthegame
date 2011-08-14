@@ -12,6 +12,8 @@ import org.newdawn.slick.SlickException;
 
 import entities.Player;
 
+// TODO: Hud drawing
+
 public class HUD {
   public static final int     HEIGHT  = 75;
   public static final int     WIDTH   = 1024;

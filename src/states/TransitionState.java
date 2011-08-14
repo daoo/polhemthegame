@@ -5,6 +5,8 @@
 package states;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
@@ -12,6 +14,8 @@ import main.Launcher;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import components.triggers.actions.IAction;
 
 import other.CacheTool;
 import other.GameTime;
@@ -21,7 +25,7 @@ public class TransitionState implements ICompState {
   private final float x, y;
   private final Image text;
   private final float duration;
-  private float tSinceStart;
+  private float       tSinceStart;
 
   public TransitionState(final TextStateData data, final Rectangle rect)
     throws IOException, ParserException {
@@ -49,5 +53,20 @@ public class TransitionState implements ICompState {
   @Override
   public boolean isFinished() {
     return tSinceStart >= duration;
+  }
+
+  @Override
+  public boolean hasActions() {
+    return false;
+  }
+
+  @Override
+  public Collection<IAction> getActions() {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public void clearActions() {
+    // No actions to clear
   }
 }

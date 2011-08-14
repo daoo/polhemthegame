@@ -6,6 +6,7 @@ package states;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import loader.data.DataException;
@@ -15,42 +16,45 @@ import loader.data.json.LevelData.CreepSpawnData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
 import main.Launcher;
-import main.World;
 
 import org.newdawn.slick.Graphics;
 
 import other.CacheTool;
 import other.GameTime;
 import basics.ExMath;
+import basics.Rectangle;
+
+import components.triggers.actions.IAction;
+import components.triggers.actions.SpawnCreep;
+
 import entities.Creep;
 import factories.CreepFactory;
 
 public class CreepsState implements ICompState {
-  private final World            world;
-  private final ArrayList<Creep> toBeSpawned, spawned;
+  private final ArrayList<IAction> actions;
+  private final ArrayList<Creep>   toBeSpawned, spawned;
 
-  private float getCreepX(final int width) {
-    return world.getX2() + width;
+  private float getCreepX(Rectangle rect, final int width) {
+    return rect.getX2() + width;
   }
 
-  private float getCreepY(final int height) {
-    return ExMath.random(0, world.getY2() - height);
+  private float getCreepY(Rectangle rect, final int height) {
+    return ExMath.random(0, rect.getY2() - height);
   }
 
-  public CreepsState(final CreepStateData sd, final World world)
+  public CreepsState(final Rectangle rect, final CreepStateData sd)
     throws IOException, ParserException, DataException {
-    super();
-    this.world = world;
-
-    spawned     = new ArrayList<Creep>(sd.creeps.size());
+    actions = new ArrayList<IAction>();
+    
+    spawned = new ArrayList<Creep>(sd.creeps.size());
     toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
 
     final CreepsData creepsData = CacheTool.getCreeps(Launcher.cache);
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 
-      toBeSpawned.add(CreepFactory.Make(getCreepX(data.hitbox.width),
-                                        getCreepY(data.hitbox.height),
+      toBeSpawned.add(CreepFactory.Make(getCreepX(rect, data.hitbox.width),
+                                        getCreepY(rect, data.hitbox.height),
                                         (float) -Math.PI,
                                         spawnData.spawnTime, data));
     }
@@ -63,8 +67,7 @@ public class CreepsState implements ICompState {
       final Creep c = itc.next();
 
       if (c.getSpawnTime() < time.getElapsed()) {
-        c.start();
-        world.add(c);
+        actions.add(new SpawnCreep(c));
         spawned.add(c);
         itc.remove();
       }
@@ -93,5 +96,20 @@ public class CreepsState implements ICompState {
   @Override
   public boolean isFinished() {
     return toBeSpawned.isEmpty() && spawned.isEmpty();
+  }
+
+  @Override
+  public boolean hasActions() {
+    return !actions.isEmpty();
+  }
+
+  @Override
+  public Collection<IAction> getActions() {
+    return actions;
+  }
+
+  @Override
+  public void clearActions() {
+    actions.clear();
   }
 }

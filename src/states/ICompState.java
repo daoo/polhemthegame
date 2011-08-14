@@ -9,9 +9,10 @@ import org.newdawn.slick.Graphics;
 
 import other.GameTime;
 
+import components.interfaces.IActionProducer;
 import components.interfaces.IComp;
 
-public interface ICompState extends IComp {
+public interface ICompState extends IComp, IActionProducer {
   public void update(final GameTime time);
 
   public void render(final Graphics g);
