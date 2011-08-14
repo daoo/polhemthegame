@@ -28,6 +28,7 @@ public class Menu {
       current = 0;
       item.setState(MENU_ITEM_STATE.ACTIVE);
     }
+
     items.add(item);
   }
 
@@ -39,12 +40,8 @@ public class Menu {
 
   public void up() {
     int i = current - 1;
-    while (i >= 0) {
-      if ((items.get(i).getState() != MENU_ITEM_STATE.NORMAL)) {
-        i--;
-      } else {
-        break;
-      }
+    while (i >= 0 && items.get(i).getState() != MENU_ITEM_STATE.NORMAL) {
+      --i;
     }
 
     if (i > -1) {
@@ -56,12 +53,8 @@ public class Menu {
 
   public void down() {
     int i = current + 1;
-    while (i < items.size()) {
-      if ((items.get(i).getState() != MENU_ITEM_STATE.NORMAL)) {
-        i++;
-      } else {
-        break;
-      }
+    while (i < items.size() && items.get(i).getState() != MENU_ITEM_STATE.NORMAL) {
+      ++i;
     }
 
     if (i < items.size()) {

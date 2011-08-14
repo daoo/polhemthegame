@@ -17,31 +17,32 @@ import other.CacheTool;
 
 // TODO: Disabled menu items
 public class MenuItem {
-  protected final String name;
-  protected final int    x, y;
-  protected Image        current;
-  protected final Image  iNormal, iActive;
-  protected final Color  colorDisabled = Color.gray;
+  private static final Color COLOR_DISABLED = Color.gray;
 
-  MENU_ITEM_STATE        state;
+  private final int          x, y;
+  private Image              current;
+  private final Image        imgNormal, imgActive, imgDisabled;
 
-  public MenuItem(final String name, final int x, final int y,
-                  final boolean disabled) throws IOException, ParserException {
-    this.name = name;
+  private MENU_ITEM_STATE    state;
 
+  public MenuItem(final String name, final int x, final int y)
+    throws IOException, ParserException {
     this.x = x;
     this.y = y;
 
-    iNormal = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + ".png");
-    iActive = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + "m.png");
+    imgNormal = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + ".png");
+    imgActive = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + "m.png");
+    imgDisabled = imgNormal.copy();
 
-    current = iNormal;
+    // Make disabled gray
+    imgDisabled.setAlpha(0.5f);
+    imgDisabled.setColor(Image.TOP_LEFT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
+    imgDisabled.setColor(Image.TOP_RIGHT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
+    imgDisabled.setColor(Image.BOTTOM_RIGHT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
+    imgDisabled.setColor(Image.BOTTOM_LEFT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
 
-    if (disabled) {
-      state = MENU_ITEM_STATE.DISABLED;
-    } else {
-      state = MENU_ITEM_STATE.NORMAL;
-    }
+    current = imgNormal;
+    state = MENU_ITEM_STATE.NORMAL;
   }
 
   void render(final Graphics g) {
@@ -50,12 +51,14 @@ public class MenuItem {
 
   public void setState(final MENU_ITEM_STATE state) {
     if (state == MENU_ITEM_STATE.ACTIVE) {
-      current = iActive;
+      current = imgActive;
     } else if (state == MENU_ITEM_STATE.DISABLED) {
-      current = iNormal;
+      current = imgDisabled;
     } else if (state == MENU_ITEM_STATE.NORMAL) {
-      current = iNormal;
+      current = imgNormal;
     }
+
+    this.state = state;
   }
 
   public MENU_ITEM_STATE getState() {

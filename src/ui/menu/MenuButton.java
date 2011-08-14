@@ -12,10 +12,11 @@ import events.IEvent;
 public class MenuButton extends MenuItem {
   public final IEvent onClick;
 
-  public MenuButton(final String name, final int x, final int y,
-                    final IEvent e, final boolean disabled) throws IOException,
-    ParserException {
-    super(name, x, y, disabled);
+  public MenuButton(final String name, final int x, final int y, final IEvent e)
+    throws IOException, ParserException {
+    super(name, x, y);
+
+    assert (e != null);
 
     onClick = e;
   }

@@ -20,6 +20,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import other.CacheTool;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
+import ui.menu.MenuItemDisabled;
 import events.IEvent;
 
 public class StateMenu extends BasicGameState {
@@ -80,10 +81,10 @@ public class StateMenu extends BasicGameState {
 
       menu = new Menu();
 
-      menu.add(new MenuButton("singleplayer", 60, 280, new singleplayer(sb), false));
-      menu.add(new MenuButton("coop", 60, 380, null, true));
-      menu.add(new MenuButton("options", 60, 480, null, true));
-      menu.add(new MenuButton("exit", 60, 580, new exit(gc), false));
+      menu.add(new MenuButton("singleplayer", 60, 280, new singleplayer(sb)));
+      menu.add(new MenuItemDisabled("coop", 60, 380));
+      menu.add(new MenuItemDisabled("options", 60, 480));
+      menu.add(new MenuButton("exit", 60, 580, new exit(gc)));
     } catch (final IOException e) {
       e.printStackTrace();
     } catch (final ParserException e) {
@@ -108,20 +109,13 @@ public class StateMenu extends BasicGameState {
 
   @Override
   public void keyPressed(final int key, final char c) {
-    if (key == Input.KEY_F2) {
+    if (key == Input.KEY_F2)
       System.exit(0);
-    }
-
-    switch (key) {
-      case Input.KEY_UP:
-        menu.up();
-        break;
-      case Input.KEY_DOWN:
-        menu.down();
-        break;
-      case Input.KEY_ENTER:
-        menu.click();
-        break;
-    }
+    else if (key == Input.KEY_UP)
+      menu.up();
+    else if (key == Input.KEY_DOWN)
+      menu.down();
+    else if (key == Input.KEY_ENTER)
+      menu.click();
   }
 }
