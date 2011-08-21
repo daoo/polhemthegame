@@ -43,7 +43,7 @@ public class World {
     this.height = height;
 
     smallBox = new Rectangle(0, 0, width, height);
-    bigBox = new Rectangle(-width, -height, width * 2, height * 2);
+    bigBox = new Rectangle(-width, -height, width * 3, height * 3);
     creepKiller = new Rectangle(-width, 0, width, height);
 
     entities = new ArrayList<Entity>();
