@@ -29,7 +29,20 @@ import entities.projectiles.Projectile;
 
 public class World {
   private final float                 width, height;
-  private final Rectangle             smallBox, bigBox, creepKiller;
+  /**
+   * |-----------------------------|
+   * | bigRect                     |
+   * |                             |
+   * |                             |
+   * |---------|---------|         |
+   * | cKiller |smallRect|         |
+   * |---------|---------|         |
+   * |                             |
+   * |                             |
+   * |                             |
+   * |-----------------------------|
+   */
+  private final Rectangle             smallRect, bigRect, creepKiller;
 
   // TODO: The multiple-lists solution isn't really nice. Make something better.
   private final ArrayList<Entity>     entities;
@@ -42,8 +55,8 @@ public class World {
     this.width = width;
     this.height = height;
 
-    smallBox = new Rectangle(0, 0, width, height);
-    bigBox = new Rectangle(-width, -height, width * 3, height * 3);
+    smallRect = new Rectangle(0, 0, width, height);
+    bigRect = new Rectangle(-width, -height, width * 3, height * 3);
     creepKiller = new Rectangle(-width, 0, width, height);
 
     entities = new ArrayList<Entity>();
@@ -80,7 +93,7 @@ public class World {
     // Update players
     for (final Player p : players) {
       p.update(time);
-      CollisionHelper.BlockFromExiting(p.getBody(), smallBox);
+      CollisionHelper.BlockFromExiting(p.getBody(), smallRect);
     }
 
     // Kill creeps when they've reach their goal
@@ -183,7 +196,7 @@ public class World {
       final IEntity e = it.next();
       e.update(time);
 
-      if (!e.getBody().isIntersecting(bigBox)) {
+      if (!e.getBody().isIntersecting(bigRect)) {
         // Do not kill entity here since it's unnecessary. This is a design
         // decision.
         it.remove();
