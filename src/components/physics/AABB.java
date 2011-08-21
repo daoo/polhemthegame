@@ -32,4 +32,17 @@ public class AABB extends Rectangle {
   public void addVelocity(final Vector2 v) {
     vel.addSelf(v);
   }
+  
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("min: ");
+    sb.append(min.toString());
+    sb.append(", max: ");
+    sb.append(max.toString());
+    sb.append(", size: ");
+    sb.append(size.toString());
+    
+    return sb.toString();
+  }
 }
