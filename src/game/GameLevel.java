@@ -50,7 +50,8 @@ public class GameLevel {
   private final Rectangle             rect;
 
   /**
-   * The area actually used. Top left will always be (0, 0).
+   * The area actually used.  Has the same size as rect but top left will always
+   * be (0, 0).
    */
   private final Rectangle             availible;
 
@@ -65,12 +66,13 @@ public class GameLevel {
     final float top = level.constraints[1];
     final float bottom = level.constraints[2];
     final float right = level.constraints[3];
+
     rect = new Rectangle(left, top, width - left - right, height - top - bottom);
     availible = new Rectangle(0, 0, rect.getWidth(), rect.getHeight());
 
     background = CacheTool.getImage(Launcher.cache, level.background);
-    world = WorldFactory.make(rect, players);
-    players.reposition(rect);
+    world = WorldFactory.make(availible, players);
+    players.reposition(availible);
 
     // Setup level and it's states
     states = new ArrayList<ICompState>();
