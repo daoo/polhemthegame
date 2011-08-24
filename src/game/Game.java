@@ -80,17 +80,17 @@ public class Game implements IMode {
         try {
           nextLevel();
         } catch (final DataException e) {
-          System.exit(0);
           e.printStackTrace();
+          System.exit(0);
         } catch (final ParserException e) {
-          System.exit(0);
           e.printStackTrace();
+          System.exit(0);
         } catch (final IOException e) {
-          System.exit(0);
           e.printStackTrace();
+          System.exit(0);
         } catch (final SlickException e) {
-          System.exit(0);
           e.printStackTrace();
+          System.exit(0);
         }
       }
       else {
