@@ -6,10 +6,11 @@ package entities;
 
 import java.util.ArrayList;
 
+import math.Vector2;
+
 import org.newdawn.slick.Graphics;
 
-import other.GameTime;
-import basics.Vector2;
+import time.GameTime;
 
 import components.interfaces.ICompRender;
 import components.interfaces.ICompUpRend;

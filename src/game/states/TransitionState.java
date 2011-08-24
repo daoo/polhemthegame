@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package states;
+package game.states;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -10,16 +10,16 @@ import java.util.Collections;
 
 import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import components.triggers.actions.IAction;
 
-import other.CacheTool;
-import other.GameTime;
-import basics.Rectangle;
+import time.GameTime;
 
 public class TransitionState implements ICompState {
   private final float x, y;

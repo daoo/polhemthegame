@@ -4,10 +4,11 @@
 
 package credits;
 
+import math.Vector2;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import basics.Vector2;
 
 class Line {
   private final Vector2 pos, vel;

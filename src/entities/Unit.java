@@ -7,12 +7,13 @@ package entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import math.Vector2;
+
 import org.newdawn.slick.Color;
 
-import other.GameTime;
+import time.GameTime;
 import ui.infobar.Bar;
 import ui.infobar.InfoBar;
-import basics.Vector2;
 
 import components.graphics.animations.Continuous;
 import components.graphics.animations.Idle;

@@ -4,8 +4,8 @@
 
 package components.physics;
 
-import other.GameTime;
-import basics.Vector2;
+import math.Vector2;
+import time.GameTime;
 
 import components.interfaces.ICompUpdate;
 

@@ -9,8 +9,8 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.PlayersData.PlayerData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
-import other.CacheTool;
 
 import components.graphics.RSheet;
 

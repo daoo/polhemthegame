@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package states;
+package game.states;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,14 +15,14 @@ import loader.data.json.CreepsData.CreepData;
 import loader.data.json.LevelData.CreepSpawnData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
+import math.ExMath;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-import other.CacheTool;
-import other.GameTime;
-import basics.ExMath;
-import basics.Rectangle;
+import time.GameTime;
 
 import components.triggers.actions.IAction;
 import components.triggers.actions.SpawnCreep;

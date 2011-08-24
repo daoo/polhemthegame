@@ -4,7 +4,7 @@
 
 package components.holdables.weapons.states;
 
-import other.GameTime;
+import time.GameTime;
 
 public class CoolDownState implements IWeaponState {
   private final float tStart, tEnd, tLength;

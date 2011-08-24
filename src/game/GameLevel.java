@@ -15,28 +15,28 @@ import loader.data.json.LevelData.CreepStateData;
 import loader.data.json.LevelData.StateData;
 import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
 import main.World;
 import main.WorldFactory;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import components.triggers.actions.IAction;
 
-import other.CacheTool;
-import other.GameTime;
-import states.BossState;
-import states.CreepsState;
-import states.ICompState;
-import states.TransitionState;
-import basics.Rectangle;
+import time.GameTime;
 import entities.Players;
+import game.states.BossState;
+import game.states.CreepsState;
+import game.states.ICompState;
+import game.states.TransitionState;
 
 public class GameLevel {
   /**
-   * The world, rendering is happening relative to what's actually availible. I.e.
-   * all constraints, HUD stuff etc have been accounted for. Adding something at
+   * The world, rendering is happening relative to what's actually availible.
+   * I.e. all constraints, HUD stuff etc have been accounted for. Adding something at
    * (0, 0) would make it appear in the top left of the area units are allowed to
    * move around in.
    */
@@ -44,14 +44,14 @@ public class GameLevel {
   private final Image                 background;
 
   /**
-   * The area availible for the current level, e.g. with constraints for the
-   * active level. Relative to the visible background.
+   * The area availible for the current level.
+   * E.g. with constraints for the active level. Relative to the visible background.
    */
   private final Rectangle             rect;
 
   /**
-   * The area actually used.  Has the same size as rect but top left will always
-   * be (0, 0).
+   * The area actually used.
+   * Has the same size as rect but top left will always be (0, 0).
    */
   private final Rectangle             availible;
 
@@ -62,10 +62,10 @@ public class GameLevel {
   public GameLevel(final LevelData level, final Players players,
                    final float width, final float height)
     throws DataException, IOException, ParserException {
-    final float left = level.constraints[0];
-    final float top = level.constraints[1];
+    final float left   = level.constraints[0];
+    final float top    = level.constraints[1];
     final float bottom = level.constraints[2];
-    final float right = level.constraints[3];
+    final float right  = level.constraints[3];
 
     rect = new Rectangle(left, top, width - left - right, height - top - bottom);
     availible = new Rectangle(0, 0, rect.getWidth(), rect.getHeight());
@@ -95,6 +95,7 @@ public class GameLevel {
     g.translate(rect.getX1(), rect.getY1());
 
     world.render(g);
+    currentState.render(g);
 
     g.popTransform();
   }

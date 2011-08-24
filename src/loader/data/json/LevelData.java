@@ -25,7 +25,7 @@ public class LevelData implements IClosable {
   }
 
   public class BossStateData extends StateData {
-    String boss;
+    public String boss;
   }
 
   public class StateData {

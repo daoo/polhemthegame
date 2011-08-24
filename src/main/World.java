@@ -8,11 +8,12 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import math.CollisionHelper;
+import math.Rectangle;
+
 import org.newdawn.slick.Graphics;
 
-import other.GameTime;
-import physics.CollisionHelper;
-import basics.Rectangle;
+import time.GameTime;
 
 import components.interfaces.IActionProducer;
 import components.interfaces.IDamagable;
@@ -30,6 +31,7 @@ import entities.projectiles.Projectile;
 public class World {
   private final float                 width, height;
   /**
+   * The layout of rectangles:
    * |-----------------------------|
    * | bigRect                     |
    * |                             |

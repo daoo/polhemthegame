@@ -4,10 +4,11 @@
 
 package components.interfaces;
 
+import math.Vector2;
+
 import org.newdawn.slick.Graphics;
 
-import other.GameTime;
-import basics.Vector2;
+import time.GameTime;
 
 import components.physics.AABB;
 

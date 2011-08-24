@@ -9,12 +9,12 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import other.GameTime;
-import basics.Rectangle;
+import time.GameTime;
 import entities.Players;
 
 public class Game implements IMode {

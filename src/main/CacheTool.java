@@ -2,12 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package other;
+package main;
 
 import java.io.IOException;
 
 import loader.Cache;
 import loader.data.DataException;
+import loader.data.json.BossesData.BossData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
 import loader.data.json.PlayersData;
@@ -20,11 +21,11 @@ import loader.parser.GsonParser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
 import loader.parser.SpriteSheetParser;
+import math.Vector2;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import basics.Vector2;
 
 import components.graphics.RSheet;
 import components.graphics.animations.Idle;
@@ -94,5 +95,10 @@ public class CacheTool {
   public static CreepsData getCreeps(final Cache cache)
     throws ParserException, IOException {
     return (CreepsData) cache.getCold("creeps.js", new GsonParser(CreepsData.class));
+  }
+
+  public static BossData getBoss(final Cache cache, final String boss)
+  throws ParserException, IOException {
+    return (BossData) cache.getCold("boss/" + boss + ".js", new GsonParser(BossData.class));
   }
 }

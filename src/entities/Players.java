@@ -11,14 +11,14 @@ import java.util.Iterator;
 import loader.data.DataException;
 import loader.data.json.PlayersData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
+import math.Rectangle;
+import math.Vector2;
 
 import org.newdawn.slick.Graphics;
 
-import other.CacheTool;
-import other.GameTime;
-import basics.Rectangle;
-import basics.Vector2;
+import time.GameTime;
 import factories.PlayerFactory;
 
 public class Players implements Iterable<Player> {

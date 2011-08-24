@@ -2,44 +2,56 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package states;
+package game.states;
 
+import java.io.IOException;
 import java.util.Collection;
 
+import loader.data.DataException;
 import loader.data.json.LevelData.BossStateData;
+import loader.parser.ParserException;
+import main.CacheTool;
+import main.Launcher;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-import basics.Rectangle;
+import time.GameTime;
 
 import components.triggers.actions.IAction;
 
-import other.GameTime;
+import entities.Boss;
+import factories.BossFactory;
 
 public class BossState implements ICompState {
-  public BossState(Rectangle rect, final BossStateData sd) {
-    // TODO: Implement Boss State
-    throw new UnsupportedOperationException("Not implemented");
+  private final Boss boss;
+  private boolean    finished;
+
+  public BossState(final Rectangle rect, final BossStateData sd)
+    throws ParserException, DataException, IOException {
+    boss = BossFactory.Make(0, 0, CacheTool.getBoss(Launcher.cache, sd.boss));
+
+    finished = true;
   }
 
   @Override
   public void render(final Graphics g) {
-    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void update(final GameTime time) {
-    throw new UnsupportedOperationException("Not implemented");
+    if (!boss.isAlive()) {
+      // TODO: When animiation has finished, we're done here 
+    }
   }
 
   @Override
   public void start() {
-    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 
   @Override
@@ -57,6 +69,5 @@ public class BossState implements ICompState {
   @Override
   public void clearActions() {
     // TODO Auto-generated method stub
-    
   }
 }

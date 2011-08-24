@@ -7,13 +7,13 @@ package ui.menu;
 import java.io.IOException;
 
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import other.CacheTool;
 
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;

@@ -4,11 +4,12 @@
 
 package entities;
 
+import math.Vector2;
+
 import org.newdawn.slick.Color;
 
-import other.GameTime;
+import time.GameTime;
 import ui.infobar.Bar;
-import basics.Vector2;
 
 import components.basic.Inventory;
 import components.basic.SimpleControl;

@@ -4,7 +4,7 @@
 
 package main;
 
-import basics.Rectangle;
+import math.Rectangle;
 import entities.Player;
 import entities.Players;
 

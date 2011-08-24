@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 import loader.data.json.ProjectilesData.ProjectileData;
-import other.GameTime;
-import basics.Vector2;
+import math.Vector2;
+import time.GameTime;
 
 import components.graphics.animations.Continuous;
 import components.interfaces.IActionProducer;

@@ -7,7 +7,7 @@ package components.graphics;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import other.GameTime;
+import time.GameTime;
 
 import components.graphics.animations.IAnimator;
 import components.graphics.animations.Idle;

@@ -4,10 +4,11 @@
 
 package components.holdables;
 
+import math.Vector2;
+
 import org.newdawn.slick.Graphics;
 
-import other.GameTime;
-import basics.Vector2;
+import time.GameTime;
 
 import components.holdables.weapons.Weapon;
 import components.interfaces.ICompUpRend;

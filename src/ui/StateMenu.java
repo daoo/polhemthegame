@@ -7,6 +7,7 @@ package ui;
 import java.io.IOException;
 
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
 
 import org.newdawn.slick.GameContainer;
@@ -17,7 +18,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import other.CacheTool;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItemDisabled;

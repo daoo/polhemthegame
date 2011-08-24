@@ -4,8 +4,8 @@
 
 package components.physics;
 
-import basics.Rectangle;
-import basics.Vector2;
+import math.Rectangle;
+import math.Vector2;
 
 public class AABB extends Rectangle {
   private final Vector2 vel;

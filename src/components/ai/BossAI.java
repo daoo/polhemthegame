@@ -6,10 +6,11 @@ package components.ai;
 
 import java.util.Stack;
 
-import other.GameTime;
-import basics.ExMath;
-import basics.Rectangle;
-import basics.Vector2;
+import math.ExMath;
+import math.Rectangle;
+import math.Vector2;
+
+import time.GameTime;
 
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;

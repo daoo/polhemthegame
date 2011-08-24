@@ -4,7 +4,7 @@
 
 package components.holdables.weapons.states;
 
-import other.GameTime;
+import time.GameTime;
 
 public class ReloadingState implements IWeaponState {
   private final float tEnd, tLength;

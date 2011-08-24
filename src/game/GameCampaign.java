@@ -10,8 +10,8 @@ import java.util.Iterator;
 import loader.data.json.CampaignData;
 import loader.data.json.LevelData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
-import other.CacheTool;
 
 public class GameCampaign {
   private final CampaignData     campaign;

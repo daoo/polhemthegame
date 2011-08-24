@@ -8,13 +8,13 @@ import java.io.IOException;
 
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import other.CacheTool;
-import other.GameTime;
+import time.GameTime;
 
 import components.graphics.Invisible;
 import components.graphics.RSheet;

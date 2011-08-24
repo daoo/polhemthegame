@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import loader.parser.ParserException;
+import main.CacheTool;
 import main.Launcher;
 
 import org.newdawn.slick.GameContainer;
@@ -22,7 +23,6 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import other.CacheTool;
 
 public class StateCredits extends BasicGameState {
   private final ArrayList<Line> credits;
