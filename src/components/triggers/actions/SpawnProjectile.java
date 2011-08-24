@@ -4,8 +4,8 @@
 
 package components.triggers.actions;
 
-import main.World;
 import entities.projectiles.Projectile;
+import game.World;
 
 public class SpawnProjectile implements IAction {
   private final Projectile object;

@@ -17,8 +17,6 @@ import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
-import main.World;
-import main.WorldFactory;
 import math.Rectangle;
 import math.time.GameTime;
 
@@ -28,6 +26,7 @@ import org.newdawn.slick.Image;
 import components.triggers.actions.IAction;
 
 import entities.Players;
+import factories.WorldFactory;
 import game.states.BossState;
 import game.states.CreepsState;
 import game.states.ICompState;

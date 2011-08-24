@@ -4,7 +4,7 @@
 
 package components.triggers.actions;
 
-import main.World;
+import game.World;
 import math.Vector2;
 
 import components.interfaces.IUnit;

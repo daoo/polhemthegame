@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package main;
+package game;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

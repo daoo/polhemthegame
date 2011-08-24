@@ -4,7 +4,7 @@
 
 package components.triggers.actions;
 
-import main.World;
+import game.World;
 
 public interface IAction {
   public void execute(final World world);

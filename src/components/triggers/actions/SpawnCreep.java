@@ -1,7 +1,7 @@
 package components.triggers.actions;
 
-import main.World;
 import entities.Creep;
+import game.World;
 
 public class SpawnCreep implements IAction {
   private final Creep creep;

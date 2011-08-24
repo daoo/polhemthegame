@@ -4,11 +4,11 @@
 
 package components.triggers.actions;
 
-import main.World;
 
 import components.interfaces.ICompAnim;
 
 import entities.Animated;
+import game.World;
 
 public class SpawnRunToEndAnim implements IAction {
   private final Animated animated;
