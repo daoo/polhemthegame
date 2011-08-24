@@ -20,13 +20,13 @@ import main.Launcher;
 import main.World;
 import main.WorldFactory;
 import math.Rectangle;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import components.triggers.actions.IAction;
 
-import time.GameTime;
 import entities.Players;
 import game.states.BossState;
 import game.states.CreepsState;

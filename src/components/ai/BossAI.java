@@ -9,8 +9,8 @@ import java.util.Stack;
 import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
+import math.time.GameTime;
 
-import time.GameTime;
 
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;

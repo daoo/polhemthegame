@@ -4,7 +4,7 @@
 
 package components.holdables.weapons.states;
 
-import time.GameTime;
+import math.time.GameTime;
 
 public interface IWeaponState {
   public void update(final GameTime time);

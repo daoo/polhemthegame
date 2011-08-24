@@ -10,11 +10,11 @@ import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
+import math.time.GameTime;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import time.GameTime;
 
 import components.graphics.Invisible;
 import components.graphics.RSheet;

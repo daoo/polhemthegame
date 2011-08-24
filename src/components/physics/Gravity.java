@@ -5,7 +5,7 @@
 package components.physics;
 
 import math.Vector2;
-import time.GameTime;
+import math.time.GameTime;
 
 import components.interfaces.ICompUpdate;
 

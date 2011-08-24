@@ -5,12 +5,13 @@
 package components.graphics;
 
 
+import math.time.Clock;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import time.Clock;
-import time.GameTime;
 
 import components.graphics.animations.IAnimator;
 import components.interfaces.ICompAnim;

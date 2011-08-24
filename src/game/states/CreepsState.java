@@ -19,10 +19,10 @@ import main.CacheTool;
 import main.Launcher;
 import math.ExMath;
 import math.Rectangle;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 
 import components.triggers.actions.IAction;
 import components.triggers.actions.SpawnCreep;

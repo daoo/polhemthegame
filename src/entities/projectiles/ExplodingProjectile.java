@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import loader.data.json.ProjectilesData.ProjectileData;
-import time.GameTime;
+import math.time.GameTime;
 
 import components.interfaces.ICompAnim;
 import components.triggers.actions.AOEDamage;

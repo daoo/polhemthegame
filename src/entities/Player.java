@@ -5,10 +5,10 @@
 package entities;
 
 import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 
-import time.GameTime;
 import ui.infobar.Bar;
 
 import components.basic.Inventory;

@@ -4,9 +4,10 @@
 
 package game.states;
 
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 
 import components.interfaces.IActionProducer;
 import components.interfaces.IComp;

@@ -4,7 +4,7 @@
 
 package components.interfaces;
 
-import time.GameTime;
+import math.time.GameTime;
 
 public interface ICompUpdate extends IComp {
   public void update(final GameTime time);

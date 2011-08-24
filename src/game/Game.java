@@ -10,11 +10,11 @@ import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
 import math.Rectangle;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import time.GameTime;
 import entities.Players;
 
 public class Game implements IMode {

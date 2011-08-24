@@ -15,10 +15,10 @@ import main.CacheTool;
 import main.Launcher;
 import math.Rectangle;
 import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 import factories.PlayerFactory;
 
 public class Players implements Iterable<Player> {

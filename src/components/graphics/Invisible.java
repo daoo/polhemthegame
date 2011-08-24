@@ -4,10 +4,11 @@
 
 package components.graphics;
 
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import time.GameTime;
 
 import components.graphics.animations.IAnimator;
 import components.graphics.animations.Idle;

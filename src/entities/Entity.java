@@ -7,10 +7,10 @@ package entities;
 import java.util.ArrayList;
 
 import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 
 import components.interfaces.ICompRender;
 import components.interfaces.ICompUpRend;

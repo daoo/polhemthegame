@@ -6,11 +6,11 @@ package components.basic;
 
 
 import math.Vector2;
+import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
-import time.GameTime;
 
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;

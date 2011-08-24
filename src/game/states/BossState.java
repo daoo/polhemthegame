@@ -13,10 +13,10 @@ import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
 import math.Rectangle;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 
 import components.triggers.actions.IAction;
 

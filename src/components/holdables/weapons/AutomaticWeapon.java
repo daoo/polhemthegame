@@ -5,7 +5,7 @@
 package components.holdables.weapons;
 
 import math.Vector2;
-import time.GameTime;
+import math.time.GameTime;
 
 import components.graphics.RSheet;
 import components.graphics.Tile;

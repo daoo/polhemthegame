@@ -7,10 +7,10 @@ package components.holdables.weapons;
 import java.util.ArrayList;
 
 import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import time.GameTime;
 
 import components.graphics.RSheet;
 import components.holdables.IHoldable;
