@@ -7,9 +7,10 @@ package loader.data.json;
 import java.util.ArrayList;
 
 import loader.data.DataException;
+import loader.data.IClosable;
 
-public class BossesData {
-  public class BossData extends UnitData {
+public class BossesData implements IClosable {
+  public class BossData extends UnitData implements IClosable {
     public int    locationX;
     public String weapon;
     public float  fireLength;
@@ -25,5 +26,10 @@ public class BossesData {
     }
 
     throw new DataException("No boss by the name \"" + name + "\".");
+  }
+
+  @Override
+  public void close() throws DataException {
+    // Do nothing
   }
 }
