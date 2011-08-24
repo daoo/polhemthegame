@@ -39,7 +39,7 @@
     , weapon: "socialism"
     , fireLength: 2.0 }
 
-  , { name: "Datateknikern"
+  , { name: "datateknikern"
     , hitbox: { width: 28, height: 50 }
     , hitpoints: 200
     , speed: 100
