@@ -4,7 +4,6 @@
 
 package components.triggers.actions;
 
-
 import components.interfaces.ICompAnim;
 
 import entities.Animated;
