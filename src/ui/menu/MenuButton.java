@@ -7,12 +7,12 @@ package ui.menu;
 import java.io.IOException;
 
 import loader.parser.ParserException;
-import events.IEvent;
+import ui.IUiEvent;
 
 public class MenuButton extends MenuItem {
-  public final IEvent onClick;
+  public final IUiEvent onClick;
 
-  public MenuButton(final String name, final int x, final int y, final IEvent e)
+  public MenuButton(final String name, final int x, final int y, final IUiEvent e)
     throws IOException, ParserException {
     super(name, x, y);
 

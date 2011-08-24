@@ -21,14 +21,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItemDisabled;
-import events.IEvent;
 
 public class StateMenu extends BasicGameState {
   private final int stateId;
   private Image     background;
   private Menu      menu;
 
-  class singleplayer implements IEvent {
+  class singleplayer implements IUiEvent {
     final StateBasedGame sb;
 
     public singleplayer(final StateBasedGame sb) {
@@ -41,7 +40,7 @@ public class StateMenu extends BasicGameState {
     }
   }
 
-  class exit implements IEvent {
+  class exit implements IUiEvent {
     final GameContainer gc;
 
     public exit(final GameContainer gc) {
