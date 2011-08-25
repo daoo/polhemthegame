@@ -10,7 +10,7 @@ import loader.data.DataException;
 import loader.data.json.CreepsData.CreepData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 
 import components.graphics.RSheet;
 
@@ -20,8 +20,8 @@ public class CreepFactory {
   public static Creep Make(final float x, final float y, final float ang,
                            final float spawnTime, final CreepData data)
     throws ParserException, DataException, IOException {
-    final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
-    final RSheet death = CacheTool.getRSheet(Launcher.cache, data.getSheet("death"));
+    final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     return new Creep(x, y, data.hitbox.width, data.hitbox.height,
                      ang, data.speed, data.moneyGain, data.damage,

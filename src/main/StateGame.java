@@ -9,7 +9,6 @@ import game.IMode;
 
 import java.io.IOException;
 
-import loader.Cache;
 import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.GsonParser;
@@ -28,7 +27,6 @@ public class StateGame extends BasicGameState {
   private int     stateID = 0;
 
   private IMode   mode;
-  private Cache   cache;
 
   private boolean exit;
 
@@ -48,16 +46,16 @@ public class StateGame extends BasicGameState {
   public void init(final GameContainer gc, final StateBasedGame sb) {
     gc.setVerbose(false);
     gc.setClearEachFrame(true);
-
-    cache = Launcher.cache;
   }
 
   @Override
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     try {
-      final CampaignData campaign = (CampaignData) cache.getCold("campaigns/polhem.js",
-                                                                 new GsonParser(CampaignData.class));
+      final CampaignData campaign = (CampaignData)  
+        Locator.getCache().getCold(
+          "campaigns/polhem.js",
+          new GsonParser(CampaignData.class));
 
       final Game game = new Game(campaign, 0, HUD.HEIGHT,
                                  Launcher.WIDTH,

@@ -9,6 +9,7 @@ import java.io.IOException;
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
+import main.Locator;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -76,7 +77,7 @@ public class StateMenu extends BasicGameState {
     gc.setTargetFrameRate(Launcher.MAX_FPS);
 
     try {
-      background = CacheTool.getImage(Launcher.cache, "textures/menu/main.png");
+      background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
       menu = new Menu();
 

@@ -11,12 +11,11 @@ import loader.data.DataException;
 import loader.data.json.LevelData.BossStateData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-
 
 import components.triggers.actions.IAction;
 
@@ -29,7 +28,7 @@ public class BossState implements IState {
 
   public BossState(final Rectangle rect, final BossStateData sd)
     throws ParserException, DataException, IOException {
-    boss = BossFactory.Make(0, 0, CacheTool.getBoss(Launcher.cache, sd.boss));
+    boss = BossFactory.Make(0, 0, CacheTool.getBoss(Locator.getCache(), sd.boss));
 
     finished = true;
   }

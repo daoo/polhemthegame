@@ -11,7 +11,7 @@ import loader.data.json.CampaignData;
 import loader.data.json.LevelData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 
 public class GameCampaign {
   private final CampaignData     campaign;
@@ -26,7 +26,7 @@ public class GameCampaign {
 
   public void nextLevel() throws ParserException, IOException {
     if (iterator.hasNext()) {
-      currentLevel = CacheTool.getLevel(Launcher.cache, iterator.next());
+      currentLevel = CacheTool.getLevel(Locator.getCache(), iterator.next());
     }
   }
 

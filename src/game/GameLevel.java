@@ -15,7 +15,7 @@ import loader.data.json.LevelData.StateData;
 import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
@@ -73,7 +73,7 @@ public class GameLevel {
     rect      = new Rectangle(left , top , width - left - right , height - top - bottom);
     availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
 
-    background = CacheTool.getImage(Launcher.cache, level.background);
+    background = CacheTool.getImage(Locator.getCache(), level.background);
     world      = WorldFactory.make(availible, players);
 
     // Players
@@ -90,7 +90,7 @@ public class GameLevel {
       if (sd.type.equals("text")) {
         TextStateData data = (TextStateData) sd;
         states.add(new TransitionState(
-          CacheTool.getImage(Launcher.cache, data.text),
+          CacheTool.getImage(Locator.getCache(), data.text),
           data.duration, availible));
       } else if (sd.type.equals("creeps")) {
         states.add(new CreepsState(availible, (CreepStateData) sd));

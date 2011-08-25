@@ -33,8 +33,6 @@ public class Launcher extends StateBasedGame {
   public static final int       MAX_FPS    = 100;
   public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-  public static Cache           cache;
-
   public Launcher(final boolean skipMenu) {
     super(NAME + " - " + VERSION);
 
@@ -54,7 +52,7 @@ public class Launcher extends StateBasedGame {
       String libPath = new File(System.getProperty("java.library.path")).getAbsolutePath();
       System.setProperty("org.lwjgl.librarypath", libPath);
 
-      Launcher.cache = new Cache(new Enviroment().appDir);
+      Locator.registerCache(new Cache(new Enviroment().appDir));
 
       boolean skipMenu = false;
       for (String s : args) {
@@ -73,7 +71,7 @@ public class Launcher extends StateBasedGame {
       e.printStackTrace();
     } finally {
       try {
-        Launcher.cache.close();
+        Locator.getCache().close();
       } catch (final CacheException e) {
         e.printStackTrace();
       }

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -29,8 +29,8 @@ public class MenuItem {
     this.x = x;
     this.y = y;
 
-    imgNormal = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + ".png");
-    imgActive = CacheTool.getImage(Launcher.cache, "textures/menu/" + name + "m.png");
+    imgNormal = CacheTool.getImage(Locator.getCache(), "textures/menu/" + name + ".png");
+    imgActive = CacheTool.getImage(Locator.getCache(), "textures/menu/" + name + "m.png");
     imgDisabled = imgNormal.copy();
 
     // Make disabled gray

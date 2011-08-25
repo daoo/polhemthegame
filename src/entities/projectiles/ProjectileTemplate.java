@@ -9,12 +9,11 @@ import java.io.IOException;
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.time.GameTime;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
-
 
 import components.graphics.Invisible;
 import components.graphics.RSheet;
@@ -32,15 +31,15 @@ public class ProjectileTemplate {
     this.data = data;
 
     if (data.texture != null) {
-      img = CacheTool.getImage(Launcher.cache, data.texture);
+      img = CacheTool.getImage(Locator.getCache(), data.texture);
     } else if (data.sprite != null) {
-      img = CacheTool.getSpriteSheet(Launcher.cache, data.sprite);
+      img = CacheTool.getSpriteSheet(Locator.getCache(), data.sprite);
     } else {
       img = null;
     }
 
     if (data.aoe != null) {
-      explosion = CacheTool.getSpriteSheet(Launcher.cache, data.aoe.explosionSprite);
+      explosion = CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
     } else {
       explosion = null;
     }

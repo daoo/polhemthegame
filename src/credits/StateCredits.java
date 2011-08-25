@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
+import main.Locator;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -70,7 +71,7 @@ public class StateCredits extends BasicGameState {
           ImageWithLocation img;
 
           if (s.startsWith("img:")) {
-            Image a = CacheTool.getImage(Launcher.cache, s.substring(4));
+            Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
             float x = tmp_x - a.getWidth() / 2.0f;
             float y = tmp_y - a.getHeight() / 2.0f;
             img = new ImageWithLocation(x, y, a);

@@ -14,7 +14,7 @@ import loader.data.IClosable;
 import loader.parser.IParser;
 import loader.parser.ParserException;
 
-public class Cache {
+public class Cache implements ICache {
   private final FileBeacon                 beacon;
   private final HashMap<String, CacheItem> cache;
 
@@ -40,6 +40,7 @@ public class Cache {
     cache = new HashMap<String, CacheItem>();
   }
 
+  @Override
   public void close() throws CacheException {
     for (final CacheItem cacheItem : cache.values()) {
       cacheItem.close();
@@ -48,23 +49,13 @@ public class Cache {
     cache.clear();
   }
 
-  public void deleteFromCache(final String id) throws CacheException {
+  @Override
+  public void delete(final String id) throws CacheException {
     cache.get(id).close();
     cache.remove(id);
   }
 
-  public void addToCache(final String id, final IClosable data) {
-    cache.put(id, new CacheItem(id, data));
-  }
-
-  public void readToCache(final String id, final IParser parser)
-    throws IOException, ParserException {
-    if (!cache.containsKey(id)) {
-      cache.put(id, new CacheItem(id, readAndParse(id, parser)));
-    }
-  }
-
-  // TODO: Better naming for getCold and getWarm
+  @Override
   public IClosable getCold(final String id, final IParser parser)
     throws IOException, ParserException {
     final IClosable data;
@@ -78,6 +69,7 @@ public class Cache {
     return data;
   }
 
+  @Override
   public IClosable getWarm(final String id) throws ObjectNotInCacheException {
     final CacheItem c = cache.get(id);
     if (c != null) {
@@ -87,7 +79,8 @@ public class Cache {
     throw new ObjectNotInCacheException(id);
   }
 
-  public int itemsInCache() {
+  @Override
+  public int count() {
     return cache.size();
   }
 

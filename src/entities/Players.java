@@ -12,7 +12,7 @@ import loader.data.DataException;
 import loader.data.json.PlayersData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
@@ -33,7 +33,7 @@ public class Players implements Iterable<Player> {
     players = new ArrayList<Player>();
     this.count = count;
 
-    final PlayersData data = CacheTool.getPlayers(Launcher.cache);
+    final PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
       players.add(PlayerFactory.Make(0, 0, data.players.get(i)));

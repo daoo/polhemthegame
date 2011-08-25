@@ -16,13 +16,12 @@ import loader.data.json.LevelData.CreepSpawnData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.ExMath;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-
 
 import components.triggers.actions.IAction;
 import components.triggers.actions.SpawnCreep;
@@ -49,7 +48,7 @@ public class CreepsState implements IState {
     spawned = new ArrayList<Creep>(sd.creeps.size());
     toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
 
-    final CreepsData creepsData = CacheTool.getCreeps(Launcher.cache);
+    final CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 

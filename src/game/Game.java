@@ -14,7 +14,7 @@ import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
 import main.CacheTool;
-import main.Launcher;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
@@ -49,7 +49,7 @@ public class Game implements IMode {
     
     gameOverState = new DoubleState(
       new TransitionState(
-        CacheTool.getImage(Launcher.cache, "textures/text/gameover.png"),
+        CacheTool.getImage(Locator.getCache(), "textures/text/gameover.png"),
         2.5f, arenaRect));
 
     nextLevel();

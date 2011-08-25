@@ -7,7 +7,7 @@ package main;
 import java.io.File;
 import java.io.IOException;
 
-import loader.Cache;
+import loader.ICache;
 import loader.data.DataException;
 import loader.data.json.BossesData;
 import loader.data.json.BossesData.BossData;
@@ -46,19 +46,19 @@ public class CacheTool {
   public static final String FILE_PROJECTILES = "projectiles.js";
   public static final String FILE_WEAPONS     = "weapons.js";
 
-  public static Image getImage(final Cache cache, final String id)
+  public static Image getImage(final ICache cache, final String id)
     throws ParserException, IOException {
     return (Image) cache.getCold(id, new PNGParser());
   }
 
-  public static SpriteSheet getSpriteSheet(final Cache cache, final SpriteData sprite)
+  public static SpriteSheet getSpriteSheet(final ICache cache, final SpriteData sprite)
     throws ParserException, IOException {
     return (SpriteSheet) cache.getCold(sprite.sprite,
                                        new SpriteSheetParser(sprite.tileSize.width,
                                                              sprite.tileSize.height));
   }
 
-  public static RSheet getRSheet(final Cache cache, final SpriteData sprite)
+  public static RSheet getRSheet(final ICache cache, final SpriteData sprite)
     throws ParserException, IOException {
     final SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
     return new RSheet(sprite.framerate,
@@ -66,12 +66,12 @@ public class CacheTool {
                       sheet, new Idle());
   }
 
-  public static LevelData getLevel(final Cache cache, final String level)
+  public static LevelData getLevel(final ICache cache, final String level)
     throws ParserException, IOException {
     return (LevelData) cache.getCold(DIR_LEVELS + File.separator + level + EXT_JS, new GsonParser(LevelData.class));
   }
 
-  public static Weapon getWeapon(final Cache cache, final String name)
+  public static Weapon getWeapon(final ICache cache, final String name)
     throws DataException, ParserException, IOException {
     final WeaponsData weapons = (WeaponsData) cache.getCold(FILE_WEAPONS, new GsonParser(WeaponsData.class));
     final WeaponData weapon = weapons.getWeapon(name);
@@ -91,28 +91,28 @@ public class CacheTool {
     }
   }
 
-  public static ProjectileData getProjectile(final Cache cache, final String projectile)
+  public static ProjectileData getProjectile(final ICache cache, final String projectile)
     throws DataException, ParserException, IOException {
     final ProjectilesData data = (ProjectilesData) cache.getCold(FILE_PROJECTILES, new GsonParser(ProjectilesData.class));
     return data.getProjectile(projectile);
   }
 
-  public static PlayersData getPlayers(final Cache cache)
+  public static PlayersData getPlayers(final ICache cache)
     throws ParserException, IOException {
     return (PlayersData) cache.getCold(FILE_PLAYERS, new GsonParser(PlayersData.class));
   }
 
-  public static CreepsData getCreeps(final Cache cache)
+  public static CreepsData getCreeps(final ICache cache)
     throws ParserException, IOException {
     return (CreepsData) cache.getCold(FILE_CREEPS, new GsonParser(CreepsData.class));
   }
 
-  public static BossesData getBosses(final Cache cache)
+  public static BossesData getBosses(final ICache cache)
     throws ParserException, IOException {
     return (BossesData) cache.getCold(FILE_BOSSES, new GsonParser(BossesData.class));
   }
 
-  public static BossData getBoss(final Cache cache, final String boss)
+  public static BossData getBoss(final ICache cache, final String boss)
   throws ParserException, IOException, DataException {
     final BossesData data = CacheTool.getBosses(cache);
 
