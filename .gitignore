@@ -2,7 +2,6 @@
 .project
 .settings/
 bin
-libs
 release
 *.log
 
