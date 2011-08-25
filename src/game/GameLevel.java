@@ -6,7 +6,6 @@ package game;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import loader.data.DataException;
 import loader.data.json.LevelData;
@@ -29,7 +28,9 @@ import entities.Players;
 import factories.WorldFactory;
 import game.states.BossState;
 import game.states.CreepsState;
-import game.states.ICompState;
+import game.states.DoubleState;
+import game.states.IState;
+import game.states.StateIterator;
 import game.states.TransitionState;
 
 public class GameLevel {
@@ -39,52 +40,66 @@ public class GameLevel {
    * (0, 0) would make it appear in the top left of the area units are allowed to
    * move around in.
    */
-  private final World                 world;
-  private final Image                 background;
+  private final World             world;
+  private final Image             background;
+  private final Players           players;
 
   /**
    * The area availible for the current level.
    * E.g. with constraints for the active level. Relative to the visible background.
    */
-  private final Rectangle             rect;
+  private final Rectangle         rect;
 
   /**
    * The area actually used.
    * Has the same size as rect but top left will always be (0, 0).
    */
-  private final Rectangle             availible;
+  private final Rectangle         availible;
 
-  private final ArrayList<ICompState> states;
-  private Iterator<ICompState>        current;
-  private ICompState                  currentState;
+  private final DoubleState       gameOverState;
+  private final ArrayList<IState> states;
+  private final StateIterator     current;
 
   public GameLevel(final LevelData level, final Players players,
-                   final float width, final float height)
+                   final float width, final float height,
+                   final DoubleState gameOverState)
     throws DataException, IOException, ParserException {
+    // World and it's rectangles
     final float left   = level.constraints[0];
     final float top    = level.constraints[1];
     final float bottom = level.constraints[2];
     final float right  = level.constraints[3];
 
-    rect = new Rectangle(left, top, width - left - right, height - top - bottom);
-    availible = new Rectangle(0, 0, rect.getWidth(), rect.getHeight());
+    rect      = new Rectangle(left , top , width - left - right , height - top - bottom);
+    availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
 
     background = CacheTool.getImage(Launcher.cache, level.background);
-    world = WorldFactory.make(availible, players);
+    world      = WorldFactory.make(availible, players);
+
+    // Players
+    this.players = players;
     players.reposition(availible);
 
     // Setup level and it's states
-    states = new ArrayList<ICompState>();
+    this.states        = new ArrayList<IState>();
+    this.gameOverState = gameOverState;
+
     for (final String state : level.states) {
       final StateData sd = level.findState(state);
+
       if (sd.type.equals("text")) {
-        states.add(new TransitionState((TextStateData) sd, Launcher.RECT));
+        TextStateData data = (TextStateData) sd;
+        states.add(new TransitionState(
+          CacheTool.getImage(Launcher.cache, data.text),
+          data.duration, availible));
       } else if (sd.type.equals("creeps")) {
         states.add(new CreepsState(availible, (CreepStateData) sd));
       } else if (sd.type.equals("boss")) {
         states.add(new BossState(availible, (BossStateData) sd));
       }
     }
+    
+    current = new StateIterator(states);
   }
 
   public void render(final Graphics g) {
@@ -94,43 +109,48 @@ public class GameLevel {
     g.translate(rect.getX1(), rect.getY1());
 
     world.render(g);
-    currentState.render(g);
+    
+    current.getCurrent().render(g);
 
     g.popTransform();
   }
 
   public void update(final GameTime time) {
-    if (currentState.isFinished()) {
-      if (current.hasNext()) {
-        nextState();
-      }
+    if (current.getCurrent().isFinished()) {
+      nextState();
     } else {
-      currentState.update(time);
+      current.getCurrent().update(time);
+
       world.update(time);
 
-      if (currentState.hasActions()) {
-        for (IAction action : currentState.getActions()) {
+      if (current.getCurrent().hasActions()) {
+        for (IAction action : current.getCurrent().getActions()) {
           action.execute(world);
         }
-        currentState.clearActions();
+        current.getCurrent().clearActions();
+      }
+
+      if (!players.isAlive() && !current.isFinished()) {
+        final IState oldState = current.getCurrent();
+
+        current.endNowWith(gameOverState);
+        gameOverState.start(oldState);
       }
     }
   }
 
   public void start() {
-    if (!states.isEmpty()) {
-      current = states.iterator();
-      nextState();
-    }
+    nextState();
   }
 
   public boolean isFinished() {
-    return ((currentState == null) || currentState.isFinished())
-           && !current.hasNext();
+    return current.isFinished()
+        || (current.getCurrent().isFinished() && !current.hasNext());
   }
 
   private void nextState() {
-    currentState = current.next();
-    currentState.start();
+    if (current.hasNext()) {
+      current.next();
+    }
   }
 }

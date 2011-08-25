@@ -23,7 +23,7 @@ import components.triggers.actions.IAction;
 import entities.Boss;
 import factories.BossFactory;
 
-public class BossState implements ICompState {
+public class BossState implements IState {
   private final Boss boss;
   private boolean    finished;
 
@@ -43,10 +43,6 @@ public class BossState implements ICompState {
     if (!boss.isAlive()) {
       // TODO: When animiation has finished, we're done here 
     }
-  }
-
-  @Override
-  public void start() {
   }
 
   @Override

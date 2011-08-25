@@ -30,7 +30,7 @@ import components.triggers.actions.SpawnCreep;
 import entities.Creep;
 import factories.CreepFactory;
 
-public class CreepsState implements ICompState {
+public class CreepsState implements IState {
   private final ArrayList<IAction> actions;
   private final ArrayList<Creep>   toBeSpawned, spawned;
 
@@ -86,11 +86,6 @@ public class CreepsState implements ICompState {
   @Override
   public void render(final Graphics g) {
     // No rendering done by this state
-  }
-
-  @Override
-  public void start() {
-    // No special actions to take when starting this state
   }
 
   @Override

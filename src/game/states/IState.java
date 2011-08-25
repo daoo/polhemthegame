@@ -8,16 +8,12 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
 import components.interfaces.IActionProducer;
-import components.interfaces.IComp;
 
-public interface ICompState extends IActionProducer {
+public interface IState extends IActionProducer {
   public void update(final GameTime time);
 
   public void render(final Graphics g);
 
   public boolean isFinished();
-
-  public void start();
 }

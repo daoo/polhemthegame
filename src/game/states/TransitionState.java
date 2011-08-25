@@ -4,14 +4,9 @@
 
 package game.states;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 
-import loader.data.json.LevelData.TextStateData;
-import loader.parser.ParserException;
-import main.CacheTool;
-import main.Launcher;
 import math.Rectangle;
 import math.time.GameTime;
 
@@ -21,28 +16,26 @@ import org.newdawn.slick.Image;
 import components.triggers.actions.IAction;
 
 
-public class TransitionState implements ICompState {
+public class TransitionState implements IState {
   private final float x, y;
-  private final Image text;
+  private final Image img;
   private final float duration;
   private float       tSinceStart;
 
-  public TransitionState(final TextStateData data, final Rectangle rect)
-    throws IOException, ParserException {
-    text = CacheTool.getImage(Launcher.cache, data.text);
-    x = (rect.getWidth() / 2.0f) - (text.getWidth() / 2.0f);
-    y = (rect.getHeight() / 2.0f) - (text.getWidth() / 2.0f);
-    duration = data.duration;
-  }
+  public TransitionState(final Image img, final float duration, final Rectangle rect) {
+    this.img = img;
 
-  @Override
-  public void start() {
+    x = (rect.getWidth() / 2.0f) - (img.getWidth() / 2.0f);
+    y = (rect.getHeight() / 2.0f) - (img.getWidth() / 2.0f);
+
+    this.duration = duration;
+
     tSinceStart = 0.0f;
   }
 
   @Override
   public void render(final Graphics g) {
-    g.drawImage(text, x, y);
+    g.drawImage(img, x, y);
   }
 
   @Override
