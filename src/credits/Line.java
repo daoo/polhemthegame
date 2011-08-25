@@ -35,4 +35,8 @@ class Line {
   public float getHeight() {
     return img.getHeight();
   }
+  
+  public void addVelocity(final Vector2 v) {
+    vel.addSelf(v);
+  }
 }

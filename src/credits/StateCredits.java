@@ -12,6 +12,7 @@ import java.util.Iterator;
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
+import math.Vector2;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -25,6 +26,13 @@ import org.newdawn.slick.state.StateBasedGame;
 
 
 public class StateCredits extends BasicGameState {
+  private static final int FONT_SIZE_SMALL = 24;
+  private static final int FONT_SIZE_BIG = 30;
+  
+  private static final int DEFAULT_Y_SPEED = 100;
+  private static final int DEFAULT_SPACING = 5;
+  private static final int EMPTY_SPACING = 30;
+
   private final ArrayList<Line> credits;
 
   private boolean               exit;
@@ -45,7 +53,7 @@ public class StateCredits extends BasicGameState {
     gc.setClearEachFrame(true);
     gc.setTargetFrameRate(Launcher.MAX_FPS);
 
-    final float speed = -100;
+    final float speed = -DEFAULT_Y_SPEED;
     final float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = Launcher.HEIGHT;
 
@@ -56,16 +64,16 @@ public class StateCredits extends BasicGameState {
         try {
           Line l;
           if (s.startsWith("img:")) {
-            l = new Line(tmp_x, tmp_y, speed, CacheTool.getImage(Launcher.cache, s.substring(4)));
+            l = new Line(tmp_x, tmp_y, speed,
+              CacheTool.getImage(Launcher.cache, s.substring(4)));
           } else if (s.startsWith("big:")) {
-            l = line_from_string(tmp_x, tmp_y, speed, s.substring(4),
-                                 font_large);
+            l = line_from_string(tmp_x, tmp_y, speed, s.substring(4), font_large);
           } else {
             l = line_from_string(tmp_x, tmp_y, speed, s, font_small);
           }
 
           credits.add(l);
-          tmp_y += l.getHeight() + 5;
+          tmp_y += l.getHeight() + DEFAULT_SPACING;
         } catch (final IOException ex) {
           ex.printStackTrace();
         } catch (final ParserException ex) {
@@ -74,7 +82,7 @@ public class StateCredits extends BasicGameState {
           ex.printStackTrace();
         }
       } else {
-        tmp_y += 30;
+        tmp_y += EMPTY_SPACING;
       }
     }
   }
@@ -89,14 +97,18 @@ public class StateCredits extends BasicGameState {
     throws SlickException {
     gc.setVerbose(false);
 
-    font_large = get_font("Verdana", 30);
-    font_small = get_font("Verdana", 24);
+    font_large = get_font("Verdana", FONT_SIZE_BIG);
+    font_small = get_font("Verdana", FONT_SIZE_SMALL);
   }
 
   @Override
   public void keyPressed(final int key, final char c) {
     if (key == Input.KEY_F2) {
       exit = true;
+    } else if (key == Input.KEY_ENTER || key == Input.KEY_SPACE) {
+      for (final Line l : credits) {
+        l.addVelocity(new Vector2(0, -50));
+      }
     }
   }
 
