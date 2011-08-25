@@ -39,7 +39,7 @@ public class Player extends Unit implements IArmed {
     inv = new Inventory(startingMoney);
     hand = new Hand(handOffsetX, handOffsetY);
     weaponBar = new Bar(Color.blue, null);
-    control = new SimpleControl(this, speed);
+    control = new SimpleControl(this, hand, speed);
 
     add(hand);
     addBar(weaponBar);
@@ -77,10 +77,6 @@ public class Player extends Unit implements IArmed {
 
   public void nextWeapon() {
     hand.grab(inv.nextWeapon());
-  }
-
-  public Hand getHand() {
-    return hand;
   }
 
   public Inventory getInventory() {

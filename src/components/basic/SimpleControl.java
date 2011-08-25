@@ -11,11 +11,10 @@ import math.time.GameTime;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
-
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;
 
-import entities.Player;
+import entities.Unit;
 
 public class SimpleControl implements ICompUpdate {
   private static final int KEY_COUNT = 1024;
@@ -24,17 +23,17 @@ public class SimpleControl implements ICompUpdate {
     NO, OFF, ON
   }
 
-  boolean[]            keyStatus;
+  boolean[] keyStatus;
 
-  private float        upOrDown, rightOrLeft;
-  private final Player player;
-  private final Hand   hand;
-  private final float  speed;
+  private float       upOrDown, rightOrLeft;
+  private final Unit  player;
+  private final Hand  hand;
+  private final float speed;
 
-  public SimpleControl(final Player player, final float speed) {
+  public SimpleControl(final Unit player, final Hand hand, final float speed) {
     this.player = player;
     this.speed = speed;
-    hand = player.getHand();
+    this.hand = hand;
 
     keyStatus = new boolean[SimpleControl.KEY_COUNT];
 
