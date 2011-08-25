@@ -29,7 +29,6 @@ import entities.Player;
 import entities.projectiles.Projectile;
 
 public class World {
-  private final float                 width, height;
   /**
    * The layout of rectangles:
    * |-----------------------------|
@@ -54,9 +53,6 @@ public class World {
   private final ArrayList<Player>     players;
 
   public World(final float width, final float height) {
-    this.width = width;
-    this.height = height;
-
     smallRect = new Rectangle(0, 0, width, height);
     bigRect = new Rectangle(-width, -height, width * 3, height * 3);
     creepKiller = new Rectangle(-width, 0, width, height);
@@ -169,11 +165,11 @@ public class World {
   }
 
   public int getX2() {
-    return (int) width;
+    return (int) smallRect.getX2();
   }
 
   public int getY2() {
-    return (int) height;
+    return (int) smallRect.getY2();
   }
 
   private <T extends IActionProducer> void getActions(final Iterable<T> list, final AbstractList<IAction> result) {
