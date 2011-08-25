@@ -7,12 +7,10 @@ package credits;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import loader.parser.ParserException;
 import main.CacheTool;
 import main.Launcher;
-import math.Vector2;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -32,17 +30,22 @@ public class StateCredits extends BasicGameState {
   private static final int DEFAULT_Y_SPEED = 100;
   private static final int DEFAULT_SPACING = 5;
   private static final int EMPTY_SPACING = 30;
+  
+  private final int state_id;
 
-  private final ArrayList<Line> credits;
+  private float speed;
+  private float pos_y;
 
-  private boolean               exit;
-  private UnicodeFont           font_large, font_small;
-  private final int             state_id;
+  private final ArrayList<ImageWithLocation> credits;
+
+  private boolean exit, menu;
+  
+  private UnicodeFont font_large, font_small;
 
   public StateCredits(final int stateId) {
     super();
 
-    credits = new ArrayList<Line>();
+    credits = new ArrayList<ImageWithLocation>();
 
     state_id = stateId;
   }
@@ -53,27 +56,32 @@ public class StateCredits extends BasicGameState {
     gc.setClearEachFrame(true);
     gc.setTargetFrameRate(Launcher.MAX_FPS);
 
-    final float speed = -DEFAULT_Y_SPEED;
-    final float tmp_x = Launcher.WIDTH / 2.0f;
-    float tmp_y = Launcher.HEIGHT;
+    speed = DEFAULT_Y_SPEED;
+    pos_y = gc.getHeight();
+
+    float tmp_x = Launcher.WIDTH / 2.0f;
+    float tmp_y = 0;
 
     credits.clear();
     credits.ensureCapacity(Credits.CreditsText.length);
     for (final String s : Credits.CreditsText) {
       if (!s.isEmpty()) {
         try {
-          Line l;
+          ImageWithLocation img;
+
           if (s.startsWith("img:")) {
-            l = new Line(tmp_x, tmp_y, speed,
-              CacheTool.getImage(Launcher.cache, s.substring(4)));
+            Image a = CacheTool.getImage(Launcher.cache, s.substring(4));
+            float x = tmp_x - a.getWidth() / 2.0f;
+            float y = tmp_y - a.getHeight() / 2.0f;
+            img = new ImageWithLocation(x, y, a);
           } else if (s.startsWith("big:")) {
-            l = line_from_string(tmp_x, tmp_y, speed, s.substring(4), font_large);
+            img = line_from_string(tmp_x, tmp_y, s.substring(4), font_large);
           } else {
-            l = line_from_string(tmp_x, tmp_y, speed, s, font_small);
+            img = line_from_string(tmp_x, tmp_y, s, font_small);
           }
 
-          credits.add(l);
-          tmp_y += l.getHeight() + DEFAULT_SPACING;
+          credits.add(img);
+          tmp_y += img.getHeight() + DEFAULT_SPACING;
         } catch (final IOException ex) {
           ex.printStackTrace();
         } catch (final ParserException ex) {
@@ -103,20 +111,24 @@ public class StateCredits extends BasicGameState {
 
   @Override
   public void keyPressed(final int key, final char c) {
+    if (key == Input.KEY_ESCAPE) {
+      menu = true;
+    }
     if (key == Input.KEY_F2) {
       exit = true;
-    } else if (key == Input.KEY_ENTER || key == Input.KEY_SPACE) {
-      for (final Line l : credits) {
-        l.addVelocity(new Vector2(0, -50));
-      }
+    } else if (key == Input.KEY_SPACE) {
+      speed += 50;
     }
   }
 
   @Override
   public void render(final GameContainer gc, final StateBasedGame sb,
                      final Graphics g) throws SlickException {
-    for (final Line l : credits) {
-      l.draw(g);
+    g.pushTransform();
+    g.translate(0, pos_y);
+
+    for (final ImageWithLocation l : credits) {
+      l.render(g);
     }
   }
 
@@ -127,21 +139,13 @@ public class StateCredits extends BasicGameState {
       gc.exit();
     }
 
-    if (credits.isEmpty()) {
+    if (menu) {
       sb.enterState(Launcher.MAINMENU);
     }
 
     final float dt = delta / 1000.0f;
 
-    final Iterator<Line> it = credits.iterator();
-    while (it.hasNext()) {
-      final Line l = it.next();
-      l.update(dt);
-
-      if ((l.getY() + l.getHeight()) <= 0) {
-        it.remove();
-      }
-    }
+    pos_y -= speed * dt;
   }
 
   private UnicodeFont get_font(final String name, final int size)
@@ -155,8 +159,8 @@ public class StateCredits extends BasicGameState {
     return ufont;
   }
 
-  private Line line_from_string(final float x, final float y,
-                                final float speed, final String s, final UnicodeFont font)
+  private ImageWithLocation line_from_string(final float x, final float y,
+    final String s, final UnicodeFont font)
     throws SlickException {
     final int width = font.getWidth(s);
     final int height = font.getHeight(s);
@@ -169,6 +173,6 @@ public class StateCredits extends BasicGameState {
     g.drawString(s, 0, 0);
     g.flush();
 
-    return new Line(x - (width / 2.0f), y - (height / 2.0f), speed, img);
+    return new ImageWithLocation(x - (width / 2.0f), y - (height / 2.0f), img);
   }
 }
