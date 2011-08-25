@@ -11,7 +11,7 @@
         , sprite: "textures/players/blue-walk.png"
         , tileSize: { width: 18, height: 37 } }
       , { animation: "death"
-        , framerate: 10
+        , framerate: 8
         , offset: { x: 0, y: 0 }
         , sprite: "textures/players/blue-death.png"
         , tileSize: { width: 50, height: 38 } } ]
