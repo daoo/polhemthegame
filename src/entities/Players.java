@@ -62,6 +62,16 @@ public class Players implements Iterable<Player> {
     }
   }
 
+  public boolean isAlive() {
+    for (final Player p : players) {
+      if (p.isAlive()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   @Override
   public Iterator<Player> iterator() {
     return players.iterator();

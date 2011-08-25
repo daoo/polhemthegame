@@ -82,11 +82,14 @@ public class Unit extends Entity implements IUnit {
 
   @Override
   public void kill() {
-    killSilently();
+    if (isAlive()) {
+      killSilently();
 
-    actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                   death.getTileWidth(), death.getTileHeight(),
-                                   death));
+      clearComponents();
+      actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                        death.getTileWidth(), death.getTileHeight(),
+                                        death));
+    }
   }
 
   @Override

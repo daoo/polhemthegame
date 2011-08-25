@@ -65,6 +65,11 @@ public class Entity implements IEntity {
     updates.add(comp);
   }
 
+  public void clearComponents() {
+    updates.clear();
+    renders.clear();
+  }
+
   @Override
   public void setPosition(final Vector2 v) {
     body.setPosition(v);

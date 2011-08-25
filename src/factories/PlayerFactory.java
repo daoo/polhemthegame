@@ -17,7 +17,6 @@ import components.graphics.RSheet;
 import entities.Player;
 
 public class PlayerFactory {
-
   public static Player Make(final float x, final float y, final PlayerData data)
     throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Launcher.cache, data.getSheet("walk"));
@@ -32,5 +31,4 @@ public class PlayerFactory {
 
     return player;
   }
-
 }
