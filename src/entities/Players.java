@@ -19,7 +19,7 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import factories.PlayerFactory;
+import factories.Factory;
 
 public class Players implements Iterable<Player> {
   private static final float      STARING_X = 0.1f;
@@ -36,7 +36,7 @@ public class Players implements Iterable<Player> {
     final PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
-      players.add(PlayerFactory.Make(0, 0, data.players.get(i)));
+      players.add(Factory.MakePlayer(0, 0, data.players.get(i)));
       j = (j + 1) % data.players.size();
     }
   }

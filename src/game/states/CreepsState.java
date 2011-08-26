@@ -27,7 +27,7 @@ import components.triggers.actions.IAction;
 import components.triggers.actions.SpawnCreep;
 
 import entities.Creep;
-import factories.CreepFactory;
+import factories.Factory;
 
 public class CreepsState implements IState {
   private final ArrayList<IAction> actions;
@@ -52,7 +52,7 @@ public class CreepsState implements IState {
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 
-      toBeSpawned.add(CreepFactory.Make(getCreepX(rect, data.hitbox.width),
+      toBeSpawned.add(Factory.MakeCreep(getCreepX(rect, data.hitbox.width),
                                         getCreepY(rect, data.hitbox.height),
                                         (float) -Math.PI,
                                         spawnData.spawnTime, data));

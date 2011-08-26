@@ -25,7 +25,7 @@ import org.newdawn.slick.Image;
 import components.triggers.actions.IAction;
 
 import entities.Players;
-import factories.WorldFactory;
+import factories.Factory;
 import game.states.BossState;
 import game.states.CreepsState;
 import game.states.DoubleState;
@@ -74,7 +74,7 @@ public class GameLevel {
     availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
 
     background = CacheTool.getImage(Locator.getCache(), level.background);
-    world      = WorldFactory.make(availible, players);
+    world      = Factory.MakeWorld(availible, players);
 
     // Players
     this.players = players;

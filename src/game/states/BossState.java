@@ -20,7 +20,7 @@ import org.newdawn.slick.Graphics;
 import components.triggers.actions.IAction;
 
 import entities.Boss;
-import factories.BossFactory;
+import factories.Factory;
 
 public class BossState implements IState {
   private final Boss boss;
@@ -28,7 +28,7 @@ public class BossState implements IState {
 
   public BossState(final Rectangle rect, final BossStateData sd)
     throws ParserException, DataException, IOException {
-    boss = BossFactory.Make(0, 0, CacheTool.getBoss(Locator.getCache(), sd.boss));
+    boss = Factory.MakeBoss(0, 0, CacheTool.getBoss(Locator.getCache(), sd.boss));
 
     finished = true;
   }
