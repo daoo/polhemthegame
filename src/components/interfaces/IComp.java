@@ -4,6 +4,8 @@
 
 package components.interfaces;
 
+import components.ComponentMessages;
+
 public interface IComp {
-  // Empty interface superinterface for all components.
+  void reciveMessage(final ComponentMessages message);
 }

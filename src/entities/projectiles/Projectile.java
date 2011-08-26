@@ -4,29 +4,23 @@
 
 package entities.projectiles;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import loader.data.json.ProjectilesData.ProjectileData;
 import math.Vector2;
 import math.time.GameTime;
 
 import components.graphics.animations.Continuous;
-import components.interfaces.IActionProducer;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
-import components.interfaces.IEntity;
 import components.physics.Gravity;
-import components.triggers.actions.IAction;
 
 import entities.Entity;
 
-public class Projectile extends Entity implements IEntity, IDamagable, IActionProducer {
-  private final float duration, range, damage, maxHP;
+public class Projectile extends Entity implements IDamagable {
+  private final float   duration, range, damage, maxHP;
   private final boolean collides;
 
-  private boolean       alive;
-  private float         hp;
+  private boolean alive;
+  private float   hp;
 
   private final Vector2 startPos;
   private final float   startTime;
@@ -93,32 +87,11 @@ public class Projectile extends Entity implements IEntity, IDamagable, IActionPr
   }
 
   @Override
-  public void killSilently() {
-    alive = false;
-  }
-
-  @Override
   public void kill() {
-    killSilently();
   }
 
   @Override
   public boolean isAlive() {
     return alive;
-  }
-
-  @Override
-  public boolean hasActions() {
-    return false;
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void clearActions() {
-    // Do nothing
   }
 }

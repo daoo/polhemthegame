@@ -10,6 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 
+import components.ComponentMessages;
 import components.graphics.animations.IAnimator;
 import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
@@ -69,5 +70,10 @@ public class TexturedQuad implements ICompAnim {
   @Override
   public Tile getLastTile() {
     return Tile.ZERO;
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

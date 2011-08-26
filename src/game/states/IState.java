@@ -8,7 +8,7 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import components.interfaces.IActionProducer;
+import components.triggers.actions.IActionProducer;
 
 public interface IState extends IActionProducer {
   public void update(final GameTime time);

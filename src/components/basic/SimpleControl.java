@@ -11,6 +11,7 @@ import math.time.GameTime;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
+import components.ComponentMessages;
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;
 
@@ -101,8 +102,11 @@ public class SimpleControl implements ICompUpdate {
       } else if (t == TOGGLED.OFF) {
         hand.stopUse();
       }
-
-      // Other
     }
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

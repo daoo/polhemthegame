@@ -13,6 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 
+import components.ComponentMessages;
 import components.graphics.animations.IAnimator;
 import components.interfaces.ICompAnim;
 
@@ -106,5 +107,10 @@ public class RSheet implements ICompAnim {
   @Override
   public Tile getLastTile() {
     return new Tile(size.x - 1, size.y - 1);
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

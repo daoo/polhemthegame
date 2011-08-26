@@ -5,21 +5,28 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
+import components.ComponentMessages;
+import components.interfaces.IComp;
 import components.interfaces.ICompRender;
 import components.interfaces.ICompUpRend;
 import components.interfaces.ICompUpdate;
 import components.interfaces.IEntity;
 import components.physics.AABB;
+import components.triggers.actions.IAction;
 
 public class Entity implements IEntity {
-  protected final AABB                 body;
+  protected final AABB body;
+  
+  protected final ArrayList<IAction> actions;
+  
+  private final ArrayList<IComp>       all;
   private final ArrayList<ICompUpdate> updates;
   private final ArrayList<ICompRender> renders;
 
@@ -27,6 +34,10 @@ public class Entity implements IEntity {
                 final float w, final float h,
                 final float dx, final float dy) {
     body = new AABB(x, y, w, h, dx, dy);
+
+    actions = new ArrayList<IAction>();
+
+    all = new ArrayList<IComp>();
     updates = new ArrayList<ICompUpdate>();
     renders = new ArrayList<ICompRender>();
   }
@@ -53,15 +64,18 @@ public class Entity implements IEntity {
   }
 
   public void add(final ICompUpRend comp) {
+    all.add(comp);
     updates.add(comp);
     renders.add(comp);
   }
 
   public void add(final ICompRender comp) {
+    all.add(comp);
     renders.add(comp);
   }
 
   public void add(final ICompUpdate comp) {
+    all.add(comp);
     updates.add(comp);
   }
 
@@ -83,5 +97,31 @@ public class Entity implements IEntity {
   @Override
   public AABB getBody() {
     return body;
+  }
+
+  public void sendMessage(ComponentMessages message) {
+    for (IComp comp : all) {
+      comp.reciveMessage(message);
+    } 
+  }
+
+  @Override
+  public boolean hasActions() {
+    return !actions.isEmpty();
+  }
+
+  @Override
+  public Collection<IAction> getActions() {
+    return actions;
+  }
+
+  @Override
+  public void clearActions() {
+    actions.clear();
+  }
+
+  @Override
+  public boolean isAlive() {
+    return true;
   }
 }

@@ -15,7 +15,7 @@ import math.time.GameTime;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import components.graphics.Invisible;
+import components.graphics.DummyAnimation;
 import components.graphics.RSheet;
 import components.graphics.TexturedQuad;
 import components.graphics.animations.Idle;
@@ -49,7 +49,7 @@ public class ProjectileTemplate {
                                    final GameTime time) {
     ICompAnim anim = null;
     if (img == null) {
-      anim = new Invisible();
+      anim = new DummyAnimation();
     } else if (data.texture != null) {
       anim = new TexturedQuad(img);
     } else if (data.sprite != null) {

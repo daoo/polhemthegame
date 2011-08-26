@@ -29,12 +29,9 @@ public class HUD {
   private final int           stats_x, stats_y;
   private final int           kills_y;
 
-  private final Player        player;
   private int                 money, kills;
 
   public HUD(final Player player) throws SlickException {
-    this.player = player;
-
     money = -1;
     kills = -1;
 
@@ -56,8 +53,8 @@ public class HUD {
   }
 
   private void drawHUD() {
-    final int m = player.getInventory().getMoney();
-    final int k = player.getStats().getKills();
+    final int m = -1; // TODO
+    final int k = -1; // TODO
     if (m != money || k != kills) {
       gfx_hud.clear();
 

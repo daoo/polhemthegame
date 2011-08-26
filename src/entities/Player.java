@@ -13,10 +13,9 @@ import ui.infobar.Bar;
 
 import components.basic.Inventory;
 import components.basic.SimpleControl;
-import components.basic.Stats;
 import components.holdables.Hand;
+import components.holdables.IArmed;
 import components.holdables.weapons.Weapon;
-import components.interfaces.IArmed;
 import components.interfaces.ICompAnim;
 import components.triggers.actions.SpawnProjectile;
 
@@ -78,13 +77,4 @@ public class Player extends Unit implements IArmed {
   public void nextWeapon() {
     hand.grab(inv.nextWeapon());
   }
-
-  public Inventory getInventory() {
-    return inv;
-  }
-
-  public Stats getStats() {
-    throw new UnsupportedOperationException("Not implemented");
-  }
-
 }

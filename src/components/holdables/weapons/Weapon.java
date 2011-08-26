@@ -11,7 +11,7 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
+import components.ComponentMessages;
 import components.graphics.RSheet;
 import components.holdables.IHoldable;
 import components.holdables.weapons.states.CoolDownState;
@@ -112,5 +112,12 @@ public abstract class Weapon implements IHoldable {
   protected void startReload(final GameTime time) {
     currentState = new ReloadingState(time.getElapsed(), reloadTime);
     rounds = magazineSize;
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    if (message == ComponentMessages.KILLED) {
+      toggleOff();
+    }
   }
 }

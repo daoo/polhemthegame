@@ -6,6 +6,7 @@ package components.basic;
 
 import java.util.ArrayList;
 
+import components.ComponentMessages;
 import components.holdables.weapons.Weapon;
 import components.interfaces.IComp;
 
@@ -61,5 +62,10 @@ public class Inventory implements IComp {
 
   public int getMoney() {
     return money;
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

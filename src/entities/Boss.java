@@ -4,8 +4,8 @@
 
 package entities;
 
+import components.holdables.IArmed;
 import components.holdables.weapons.Weapon;
-import components.interfaces.IArmed;
 import components.interfaces.ICompAnim;
 
 public class Boss extends Unit implements IArmed {

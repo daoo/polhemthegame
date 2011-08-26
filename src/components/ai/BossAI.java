@@ -11,15 +11,16 @@ import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
 
-
+import components.ComponentMessages;
 import components.holdables.Hand;
 import components.interfaces.ICompUpdate;
-import components.interfaces.IUnit;
 import components.physics.AABB;
+
+import entities.Unit;
 
 public class BossAI implements ICompUpdate {
   private final AABB           body;
-  private final IUnit          unit;
+  private final Unit          unit;
   private final Hand           hand;
   private final Rectangle      arenaRect;
 
@@ -30,7 +31,7 @@ public class BossAI implements ICompUpdate {
   private final float          speed;
   private final Stack<Vector2> targets;
 
-  public BossAI(final IUnit unit, final Hand hand,
+  public BossAI(final Unit unit, final Hand hand,
                 final Rectangle consts, final AABB body, final float speed) {
     arenaRect = consts;
     this.hand = hand;
@@ -105,7 +106,7 @@ public class BossAI implements ICompUpdate {
     }
   }
 
-  public void kill() {
+  private void kill() {
     isShooting = false;
     hand.stopUse();
     unit.stop();
@@ -114,5 +115,12 @@ public class BossAI implements ICompUpdate {
 
   public void addTarget(final Vector2 target) {
     targets.push(target);
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    if (message == ComponentMessages.KILLED) {
+      kill();
+    }
   }
 }

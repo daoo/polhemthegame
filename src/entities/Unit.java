@@ -4,10 +4,6 @@
 
 package entities;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Color;
@@ -15,26 +11,24 @@ import org.newdawn.slick.Color;
 import ui.infobar.Bar;
 import ui.infobar.InfoBar;
 
+import components.ComponentMessages;
+import components.basic.Life;
 import components.graphics.animations.Continuous;
 import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
-import components.interfaces.IUnit;
+import components.interfaces.IDamagable;
+import components.interfaces.IWalking;
 import components.physics.AABB;
-import components.triggers.actions.IAction;
 import components.triggers.actions.SpawnRunToEndAnim;
 
-public class Unit extends Entity implements IUnit {
-  private final float                maxHP;
-  private float                      hp;
-  private boolean                    alive;
+public class Unit extends Entity implements IDamagable, IWalking {
+  private final Life life;
 
-  private final InfoBar              infoBar;
-  private final Bar                  hpBar;
+  private final InfoBar infoBar;
+  private final Bar hpBar;
 
-  private final ICompAnim            walk;
-  private final ICompAnim            death;
-
-  protected final ArrayList<IAction> actions;
+  private final ICompAnim walk;
+  private final ICompAnim death;
 
   public Unit(final float x, final float y,
               final float width, final float height,
@@ -42,14 +36,11 @@ public class Unit extends Entity implements IUnit {
               final int maxHP,
               final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, dx, dy);
-    actions = new ArrayList<IAction>();
 
     this.walk = walk;
     this.death = death;
 
-    hp = maxHP;
-    this.maxHP = maxHP;
-    alive = true;
+    life = new Life(this, maxHP);
 
     add(walk);
 
@@ -67,29 +58,17 @@ public class Unit extends Entity implements IUnit {
   @Override
   public void update(final GameTime time) {
     super.update(time);
-    hpBar.setFraction(hp / maxHP);
+    hpBar.setFraction(life.getHPFraction());
   }
 
   @Override
   public boolean isAlive() {
-    return alive;
-  }
-
-  @Override
-  public void killSilently() {
-    alive = false;
+    return life.isAlive();
   }
 
   @Override
   public void kill() {
-    if (isAlive()) {
-      killSilently();
-
-      clearComponents();
-      actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                        death.getTileWidth(), death.getTileHeight(),
-                                        death));
-    }
+    life.kill();
   }
 
   @Override
@@ -98,23 +77,8 @@ public class Unit extends Entity implements IUnit {
   }
 
   @Override
-  public void setPosition(final Vector2 v) {
-    body.setPosition(v);
-  }
-
-  @Override
-  public void setVelocity(final Vector2 v) {
-    body.setVelocity(v);
-  }
-
-  @Override
   public void damage(final float damage) {
-    hp -= damage;
-
-    if (hp <= 0) {
-      hp = 0;
-      kill();
-    }
+    life.damage(damage);
   }
 
   @Override
@@ -129,19 +93,16 @@ public class Unit extends Entity implements IUnit {
       walk.setAnimator(new Idle());
     }
   }
-
+  
   @Override
-  public boolean hasActions() {
-    return !actions.isEmpty();
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return actions;
-  }
-
-  @Override
-  public void clearActions() {
-    actions.clear();
+  public void sendMessage(ComponentMessages message) {
+    if (message == ComponentMessages.KILLED) {
+      clearComponents();
+      actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                        death.getTileWidth(), death.getTileHeight(),
+                                        death));
+    }
+  
+    super.sendMessage(message);
   }
 }

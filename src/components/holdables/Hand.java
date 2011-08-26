@@ -10,6 +10,7 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 
+import components.ComponentMessages;
 import components.holdables.weapons.Weapon;
 import components.interfaces.ICompUpRend;
 
@@ -63,5 +64,10 @@ public class Hand implements ICompUpRend {
 
   public Vector2 getOffset() {
     return offset;
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

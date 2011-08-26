@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import components.ComponentMessages;
 import components.interfaces.ICompRender;
 
 public class InfoBar implements ICompRender {
@@ -43,5 +44,10 @@ public class InfoBar implements ICompRender {
 
   public float getWidth() {
     return barWidth;
+  }
+
+  @Override
+  public void reciveMessage(ComponentMessages message) {
+    // Do nothing
   }
 }

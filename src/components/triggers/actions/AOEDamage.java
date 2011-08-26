@@ -4,10 +4,11 @@
 
 package components.triggers.actions;
 
+import entities.Unit;
 import game.World;
 import math.Vector2;
 
-import components.interfaces.IUnit;
+import components.interfaces.IEntity;
 
 public class AOEDamage implements IAction {
   final Vector2 center;
@@ -21,7 +22,8 @@ public class AOEDamage implements IAction {
 
   @Override
   public void execute(final World world) {
-    for (final IUnit unit : world.getUnits()) {
+    for (final IEntity e : world.getUnits()) {
+      Unit unit = (Unit) e;
       if (unit.getBody().getCenter().distance(center) < range) {
         unit.damage(damage);
       }
