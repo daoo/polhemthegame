@@ -11,14 +11,16 @@ public class GroupContainer<K,V> {
     map = new HashMap<K, ArrayList<V>>();
   }
   
-  public Iterable<V> getAll() {
-    // Concat
-    ArrayList<V> tmp = new ArrayList<V>(count());
-    for (ArrayList<V> a : map.values()) {
-      tmp.addAll(a);
-    }
+  private ArrayList<V> getMakeDefault(K key) {
+    ArrayList<V> value = map.get(key);
     
-    return tmp;
+    if (value == null) {
+      ArrayList<V> tmp = new ArrayList<V>();
+      map.put(key, tmp);
+      return tmp; 
+    } else {
+      return map.get(key);
+    }
   }
   
   public int count() {
@@ -29,15 +31,25 @@ public class GroupContainer<K,V> {
     
     return tmp;
   }
+  
+  public Iterable<V> getAll() {
+    // Concat
+    ArrayList<V> tmp = new ArrayList<V>(count());
+    for (ArrayList<V> a : map.values()) {
+      tmp.addAll(a);
+    }
+    
+    return tmp;
+  }
 
   public Iterable<V> get(K key) {
-    return map.get(key);
+    return getMakeDefault(key);
   }
 
   public Iterable<V> get(K[] keys) {
     ArrayList<V> tmp = new ArrayList<V>();
     for (K key : keys) {
-      tmp.addAll(map.get(key));
+      tmp.addAll(getMakeDefault(key));
     }
     return tmp;
   }
@@ -46,5 +58,9 @@ public class GroupContainer<K,V> {
     for (ArrayList<V> a : map.values()) {
       a.removeAll(list);
     }
+  }
+
+  public void add(K key, V value) {
+    getMakeDefault(key).add(value);
   }
 }

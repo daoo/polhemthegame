@@ -8,6 +8,7 @@ import loader.data.json.ProjectilesData.ProjectileData;
 import math.Vector2;
 import math.time.GameTime;
 
+import components.basic.Life;
 import components.graphics.animations.Continuous;
 import components.interfaces.ICompAnim;
 import components.interfaces.IDamagable;
@@ -16,11 +17,10 @@ import components.physics.Gravity;
 import entities.Entity;
 
 public class Projectile extends Entity implements IDamagable {
-  private final float   duration, range, damage, maxHP;
+  private final float   duration, range, damage;
   private final boolean collides;
 
-  private boolean alive;
-  private float   hp;
+  private final Life life;
 
   private final Vector2 startPos;
   private final float   startTime;
@@ -40,9 +40,7 @@ public class Projectile extends Entity implements IDamagable {
     range = data.range;
     damage = data.damage;
 
-    maxHP = data.targets;
-    alive = true;
-    hp = maxHP;
+    life = new Life(this, data.targets);
 
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
@@ -77,21 +75,16 @@ public class Projectile extends Entity implements IDamagable {
 
   @Override
   public void damage(final float value) {
-    if (maxHP != -1) {
-      hp -= value;
-      if (hp <= 0) {
-        hp = 0;
-        kill();
-      }
-    }
+    life.damage(value);
   }
 
   @Override
   public void kill() {
+    life.kill();
   }
 
   @Override
   public boolean isAlive() {
-    return alive;
+    return life.isAlive();
   }
 }
