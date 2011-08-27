@@ -6,6 +6,7 @@ package factories;
 
 import entities.Boss;
 import entities.Creep;
+import entities.InvisibleRectangle;
 import entities.Player;
 import entities.Players;
 import game.World;
@@ -41,6 +42,11 @@ public class Factory {  /**
     final World w = new World();
 
     // TODO: Big rect
+    final InvisibleRectangle rectBig = new InvisibleRectangle(-rectWorld.getWidth(),
+                                                              -rectWorld.getHeight(),
+                                                              3 * rectWorld.getWidth(),
+                                                              3 * rectWorld.getHeight());
+    rectBig.onNotContainsEvent.add();
     // TODO: Restrict players
     // TODO: Creep killer
 

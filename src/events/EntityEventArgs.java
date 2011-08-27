@@ -2,10 +2,10 @@ package events;
 
 import entities.Unit;
 
-public class UnitEventArgs implements IEventArgs {
+public class EntityEventArgs extends EventArgs {
   private final Unit unit;
 
-  public UnitEventArgs(final Unit unit) {
+  public EntityEventArgs(final Unit unit) {
     this.unit = unit;
   }
 

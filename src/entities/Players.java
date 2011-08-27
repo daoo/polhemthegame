@@ -15,12 +15,7 @@ import main.CacheTool;
 import main.Locator;
 import math.Rectangle;
 import math.Vector2;
-import math.time.GameTime;
-
-import org.newdawn.slick.Graphics;
-
 import factories.Factory;
-import game.World;
 
 public class Players implements Iterable<Player> {
   private static final float      STARING_X = 0.1f;
@@ -39,18 +34,6 @@ public class Players implements Iterable<Player> {
     for (int i = 0; i < count; i++) {
       players.add(Factory.MakePlayer(0, 0, data.players.get(i)));
       j = (j + 1) % data.players.size();
-    }
-  }
-
-  public void update(final GameTime time, final World world) {
-    for (final Player p : players) {
-      p.update(time, world);
-    }
-  }
-
-  public void render(final Graphics g) {
-    for (final Player p : players) {
-      p.render(g);
     }
   }
 
