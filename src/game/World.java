@@ -16,6 +16,7 @@ import org.newdawn.slick.Graphics;
 import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 import components.physics.AABB;
+import components.triggers.Trigger;
 import components.triggers.actions.IAction;
 
 import entities.Animated;
@@ -45,12 +46,16 @@ public class World {
    */
   private final Rectangle             smallRect, bigRect, creepKiller;
 
+  private final ArrayList<Trigger> triggers;
+
   private final GroupContainer<Entities, IEntity> entities;
 
   public World(final float width, final float height) {
     smallRect = new Rectangle(0, 0, width, height);
     bigRect = new Rectangle(-width, -height, width * 3, height * 3);
     creepKiller = new Rectangle(-width, 0, width, height);
+
+    triggers = new ArrayList<Trigger>();
 
     entities = new GroupContainer<Entities, IEntity>();
   }
@@ -98,6 +103,10 @@ public class World {
           ((Player) e2).damage(c.getDamage());
         }
       }
+    }
+
+    for (final Trigger t : triggers) {
+      t.update(time, this);
     }
 
     // Get actions
@@ -153,6 +162,10 @@ public class World {
     assert (a != null);
     
     entities.add(Entities.ANIMATED, a);
+  }
+
+  public void addTrigger(final Trigger trigger) {
+    triggers.add(trigger);
   }
 
   public int getX2() {
