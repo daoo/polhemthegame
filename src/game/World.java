@@ -109,7 +109,7 @@ public class World {
 
     // Execute all actions
     for (final IAction a : actions) {
-      a.execute(this);
+      a.execute(time, this);
     }
 
     // Remove dead objects, do this last so we make sure any actions
@@ -185,5 +185,9 @@ public class World {
 
   public Iterable<IEntity> getUnits() {
     return entities.get(UNITS);
+  }
+
+  public Iterable<IEntity> get(Entities e) {
+    return entities.get(e);
   }
 }

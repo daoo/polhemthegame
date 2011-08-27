@@ -4,6 +4,7 @@
 
 package components.triggers.actions;
 
+import math.time.GameTime;
 import entities.projectiles.Projectile;
 import game.World;
 
@@ -17,7 +18,7 @@ public class SpawnProjectile implements IAction {
   }
 
   @Override
-  public void execute(final World world) {
+  public void execute(final GameTime time, final World world) {
     world.add(object);
   }
 }

@@ -125,7 +125,7 @@ public class GameLevel {
 
       if (current.getCurrent().hasActions()) {
         for (IAction action : current.getCurrent().getActions()) {
-          action.execute(world);
+          action.execute(time, world);
         }
         current.getCurrent().clearActions();
       }
