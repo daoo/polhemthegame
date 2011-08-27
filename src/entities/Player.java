@@ -21,6 +21,7 @@ import components.triggers.actions.SpawnProjectile;
 
 import entities.projectiles.Projectile;
 import entities.projectiles.ProjectileTemplate;
+import game.World;
 
 public class Player extends Unit implements IArmed {
   private final Inventory     inv;
@@ -46,8 +47,8 @@ public class Player extends Unit implements IArmed {
   }
 
   @Override
-  public void update(final GameTime time) {
-    super.update(time);
+  public void update(final GameTime time, final World world) {
+    super.update(time, world);
 
     final Weapon w = hand.getWeapon();
 

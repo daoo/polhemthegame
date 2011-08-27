@@ -57,7 +57,7 @@ public class World {
     // Update
     ArrayList<IObject> toRemove = new ArrayList<IObject>();
     for (IObject e : entities.getAll()) {
-      e.update(time);
+      e.update(time, this);
     }
 
     entities.remove(toRemove);

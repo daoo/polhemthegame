@@ -5,7 +5,7 @@
 package components.triggers.actions;
 
 import entities.Unit;
-import entities.interfaces.IEntity;
+import entities.interfaces.IObject;
 import game.World;
 import math.Vector2;
 import math.time.GameTime;
@@ -23,8 +23,8 @@ public class AOEDamage implements IAction {
 
   @Override
   public void execute(final GameTime time, final World world) {
-    for (final IEntity e : world.getUnits()) {
-      Unit unit = (Unit) e;
+    for (final IObject o : world.getUnits()) {
+      Unit unit = (Unit) o;
       if (unit.getBody().getCenter().distance(center) < range) {
         unit.damage(damage);
       }

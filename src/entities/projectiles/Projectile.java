@@ -15,6 +15,7 @@ import components.physics.Gravity;
 
 import entities.Entity;
 import entities.interfaces.IDamagable;
+import game.World;
 
 public class Projectile extends Entity implements IDamagable {
   private final float   duration, range, damage;
@@ -31,7 +32,7 @@ public class Projectile extends Entity implements IDamagable {
     super(x, y, data.hitbox.width, data.hitbox.height,
           (float) Math.cos(rot) * data.speed,
           (float) Math.sin(rot) * data.speed);
-    
+
     assert (renderer != null);
     assert (data != null);
 
@@ -54,8 +55,8 @@ public class Projectile extends Entity implements IDamagable {
   }
 
   @Override
-  public void update(final GameTime time) {
-    super.update(time);
+  public void update(final GameTime time, final World world) {
+    super.update(time, world);
 
     if ((duration != -1) && ((time.getElapsed() - startTime) > duration)) {
       kill();

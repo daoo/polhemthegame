@@ -20,12 +20,13 @@ import components.interfaces.ICompUpdate;
 import components.physics.AABB;
 import components.triggers.actions.IAction;
 import entities.interfaces.IEntity;
+import game.World;
 
 public class Entity implements IEntity {
   protected final AABB body;
-  
+
   protected final ArrayList<IAction> actions;
-  
+
   private final ArrayList<IComp>       all;
   private final ArrayList<ICompUpdate> updates;
   private final ArrayList<ICompRender> renders;
@@ -43,7 +44,7 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(final GameTime time, final World world) {
     body.integrate(time.getFrameLength());
 
     for (final ICompUpdate comp : updates) {
@@ -102,7 +103,7 @@ public class Entity implements IEntity {
   public void sendMessage(ComponentMessages message) {
     for (IComp comp : all) {
       comp.reciveMessage(message);
-    } 
+    }
   }
 
   @Override

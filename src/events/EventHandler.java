@@ -15,9 +15,9 @@ public class EventHandler {
     events.add(event);
   }
 
-  public void execute(final IObject sender) {
+  public void execute(final IObject sender, final IEventArgs args) {
     for (final IEvent e : events) {
-      e.execute(sender);
+      e.execute(sender, args);
     }
   }
 }

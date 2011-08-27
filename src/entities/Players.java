@@ -20,6 +20,7 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 import factories.Factory;
+import game.World;
 
 public class Players implements Iterable<Player> {
   private static final float      STARING_X = 0.1f;
@@ -41,9 +42,9 @@ public class Players implements Iterable<Player> {
     }
   }
 
-  public void update(final GameTime time) {
+  public void update(final GameTime time, final World world) {
     for (final Player p : players) {
-      p.update(time);
+      p.update(time, world);
     }
   }
 

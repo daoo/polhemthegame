@@ -10,18 +10,32 @@ import org.newdawn.slick.Graphics;
 
 import components.physics.AABB;
 import components.triggers.actions.IAction;
+
 import entities.interfaces.IEntity;
+import entities.interfaces.IObject;
+import events.EventHandler;
+import events.UnitEventArgs;
+import game.World;
 
 public class InvisibleRectangle implements IEntity {
   private final AABB body;
 
+  public final EventHandler onNotContainsEvent;
+
   public InvisibleRectangle(float x, float y, float w, float h) {
     body = new AABB(x, y, w, h, 0, 0);
+
+    onNotContainsEvent = new EventHandler();
   }
 
   @Override
-  public void update(GameTime time) {
-
+  public void update(final GameTime time, final World world) {
+    for (final IObject o : world.getUnits()) {
+      final Unit u = (Unit) o;
+      if (!body.isContaining(u.getBody())) {
+        onNotContainsEvent.execute(this, new UnitEventArgs(u));
+      }
+    }
   }
 
   @Override

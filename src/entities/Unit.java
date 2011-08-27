@@ -18,8 +18,10 @@ import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 import components.physics.AABB;
 import components.triggers.actions.SpawnRunToEndAnim;
+
 import entities.interfaces.IDamagable;
 import entities.interfaces.IWalking;
+import game.World;
 
 public class Unit extends Entity implements IDamagable, IWalking {
   private final Life life;
@@ -56,8 +58,8 @@ public class Unit extends Entity implements IDamagable, IWalking {
   }
 
   @Override
-  public void update(final GameTime time) {
-    super.update(time);
+  public void update(final GameTime time, final World world) {
+    super.update(time, world);
     hpBar.setFraction(life.getHPFraction());
   }
 
@@ -93,7 +95,7 @@ public class Unit extends Entity implements IDamagable, IWalking {
       walk.setAnimator(new Idle());
     }
   }
-  
+
   @Override
   public void sendMessage(ComponentMessages message) {
     if (message == ComponentMessages.KILLED) {
@@ -102,7 +104,7 @@ public class Unit extends Entity implements IDamagable, IWalking {
                                         death.getTileWidth(), death.getTileHeight(),
                                         death));
     }
-  
+
     super.sendMessage(message);
   }
 }
