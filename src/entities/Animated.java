@@ -7,7 +7,7 @@ package entities;
 import components.graphics.animations.Continuous;
 import components.graphics.animations.RunTo;
 import components.interfaces.ICompAnim;
-import components.interfaces.IWalking;
+import entities.interfaces.IWalking;
 
 public class Animated extends Entity implements IWalking {
   private final ICompAnim anim;

@@ -23,16 +23,34 @@ import math.Rectangle;
 
 import components.graphics.RSheet;
 
-public class Factory {
-  public static World MakeWorld(final Rectangle rect, final Players players) {
-    final World w = new World(rect.getWidth(), rect.getHeight());
+public class Factory {  /**
+   * The layout of rectangles:
+   * |-----------------------------|
+   * | bigRect                     |
+   * |                             |
+   * |                             |
+   * |---------|---------|         |
+   * | cKiller |smallRect|         |
+   * |---------|---------|         |
+   * |                             |
+   * |                             |
+   * |                             |
+   * |-----------------------------|
+   */
+  public static World MakeWorld(final Rectangle rectWorld, final Players players) {
+    final World w = new World();
+
+    // TODO: Big rect
+    // TODO: Restrict players
+    // TODO: Creep killer
+
     for (final Player p : players) {
       w.addPlayer(p);
     }
 
     return w;
   }
-  
+
   public static Boss MakeBoss(final float x, final float y, final BossData data)
   throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
@@ -41,7 +59,7 @@ public class Factory {
     return new Boss(x, y, data.hitbox.width, data.hitbox.height,
                     0, 0, data.hitpoints, walk, death);
   }
-  
+
   public static Creep MakeCreep(final float x, final float y, final float ang,
                                 final float spawnTime, final CreepData data)
     throws ParserException, DataException, IOException {
@@ -52,7 +70,7 @@ public class Factory {
                      ang, data.speed, data.moneyGain, data.damage,
                      data.hitpoints, spawnTime, walk, death);
   }
-  
+
   public static Player MakePlayer(final float x, final float y, final PlayerData data)
     throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));

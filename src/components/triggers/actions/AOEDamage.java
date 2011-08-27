@@ -5,11 +5,11 @@
 package components.triggers.actions;
 
 import entities.Unit;
+import entities.interfaces.IEntity;
 import game.World;
 import math.Vector2;
 import math.time.GameTime;
 
-import components.interfaces.IEntity;
 
 public class AOEDamage implements IAction {
   final Vector2 center;

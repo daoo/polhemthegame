@@ -4,8 +4,8 @@
 
 package main;
 
-import game.Game;
-import game.IMode;
+import game.modes.Game;
+import game.modes.IMode;
 
 import java.io.IOException;
 

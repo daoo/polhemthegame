@@ -11,10 +11,10 @@ import math.time.GameTime;
 import components.basic.Life;
 import components.graphics.animations.Continuous;
 import components.interfaces.ICompAnim;
-import components.interfaces.IDamagable;
 import components.physics.Gravity;
 
 import entities.Entity;
+import entities.interfaces.IDamagable;
 
 public class Projectile extends Entity implements IDamagable {
   private final float   duration, range, damage;

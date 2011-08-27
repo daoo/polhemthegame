@@ -17,9 +17,9 @@ import components.interfaces.IComp;
 import components.interfaces.ICompRender;
 import components.interfaces.ICompUpRend;
 import components.interfaces.ICompUpdate;
-import components.interfaces.IEntity;
 import components.physics.AABB;
 import components.triggers.actions.IAction;
+import entities.interfaces.IEntity;
 
 public class Entity implements IEntity {
   protected final AABB body;

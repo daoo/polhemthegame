@@ -16,10 +16,10 @@ import components.basic.Life;
 import components.graphics.animations.Continuous;
 import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
-import components.interfaces.IDamagable;
-import components.interfaces.IWalking;
 import components.physics.AABB;
 import components.triggers.actions.SpawnRunToEndAnim;
+import entities.interfaces.IDamagable;
+import entities.interfaces.IWalking;
 
 public class Unit extends Entity implements IDamagable, IWalking {
   private final Life life;

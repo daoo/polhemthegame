@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game;
+package game.modes;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
