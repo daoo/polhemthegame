@@ -13,7 +13,6 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import components.interfaces.IDamagable;
 import components.interfaces.IEntity;
 import components.physics.AABB;
 import components.triggers.Trigger;
@@ -136,7 +135,7 @@ public class World {
         }
       }
     }
-    
+
     entities.remove(toRemove);
   }
 
@@ -148,25 +147,25 @@ public class World {
 
   public void addPlayer(final Player p) {
     assert (p != null);
-    
+
     entities.add(Entities.PLAYER, p);
   }
 
   public void addProjectile(final Projectile p) {
     assert (p != null);
-    
+
     entities.add(Entities.PROJECTILE, p);
   }
 
   public void addCreep(final Creep c) {
     assert (c != null);
-    
+
     entities.add(Entities.CREEP, c);
   }
 
   public void addAnimated(final Animated a) {
     assert (a != null);
-    
+
     entities.add(Entities.ANIMATED, a);
   }
 
