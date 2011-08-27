@@ -70,7 +70,13 @@ public class World {
         for (final IEntity e2 : entities.get(UNITS)) {
           Unit u = (Unit) e2;
           if (CollisionHelper.SweepCollisionTest(a, u.getBody(), time.getFrameLength())) {
-            if (!projCollisionWithUnit(p, u)) {
+            // FIXME: If the projectile can hit multiple targets and is sufficently slow,
+            //        it might hit the same target multiple times.
+            if (p.isAlive()) {
+              p.damage(1);
+              u.damage(p.getDamage());
+            } else {
+              p.kill();
               break;
             }
           }
@@ -174,26 +180,6 @@ public class World {
 
   public int getY2() {
     return (int) smallRect.getY2();
-  }
-
-  /**
-   * Handles collisons between a projectile and a unit.
-   * 
-   * @return Returns true if the projecile still exists, false otherwise.
-   */
-  private boolean projCollisionWithUnit(final Projectile p, final IDamagable u) {
-    // FIXME: If the projectile can hit multiple targets and is sufficently slow,
-    //        it might hit the same target multiple times.
-    if (p.isAlive()) {
-      p.damage(1);
-      u.damage(p.getDamage());
-    } else {
-      p.kill();
-
-      return false;
-    }
-
-    return true;
   }
 
   public Iterable<IEntity> getUnits() {
