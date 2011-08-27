@@ -14,7 +14,7 @@ import components.triggers.actions.IAction;
 import entities.interfaces.IEntity;
 import entities.interfaces.IObject;
 import events.EventHandler;
-import events.EntityEventArgs;
+import events.ObjectEventArgs;
 import game.World;
 
 public class InvisibleRectangle implements IEntity {
@@ -33,7 +33,7 @@ public class InvisibleRectangle implements IEntity {
     for (final IObject o : world.getUnits()) {
       final Unit u = (Unit) o;
       if (!body.isContaining(u.getBody())) {
-        onNotContainsEvent.execute(this, new EntityEventArgs(u));
+        onNotContainsEvent.execute(this, new ObjectEventArgs(u));
       }
     }
   }
