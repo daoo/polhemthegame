@@ -19,6 +19,6 @@ public class SpawnProjectile implements IAction {
 
   @Override
   public void execute(final GameTime time, final World world) {
-    world.add(object);
+    world.addProjectile(object);
   }
 }

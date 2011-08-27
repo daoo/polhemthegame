@@ -27,7 +27,7 @@ public class Factory {
   public static World MakeWorld(final Rectangle rect, final Players players) {
     final World w = new World(rect.getWidth(), rect.getHeight());
     for (final Player p : players) {
-      w.add(p);
+      w.addPlayer(p);
     }
 
     return w;

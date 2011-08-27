@@ -20,6 +20,6 @@ public class SpawnCreep implements IAction {
   @Override
   public void execute(final GameTime time, final World world) {
     creep.start();
-    world.add(creep);
+    world.addCreep(creep);
   }
 }

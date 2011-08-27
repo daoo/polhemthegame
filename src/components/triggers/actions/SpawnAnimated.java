@@ -23,6 +23,6 @@ public class SpawnAnimated implements IAction {
   @Override
   public void execute(final GameTime time, final World world) {
     animated.start();
-    world.add(animated);
+    world.addAnimated(animated);
   }
 }

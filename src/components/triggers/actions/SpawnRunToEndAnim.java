@@ -24,6 +24,6 @@ public class SpawnRunToEndAnim implements IAction {
   @Override
   public void execute(final GameTime time, final World world) {
     animated.stop();
-    world.add(animated);
+    world.addAnimated(animated);
   }
 }
