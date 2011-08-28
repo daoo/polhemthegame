@@ -4,9 +4,9 @@
   <groupId>com.daoo.ptg</groupId>
   <artifactId>ptg</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>ptg</name>
-  <url>http://maven.apache.org</url>
+  <url>http://www.github.com/daoo/ptg/</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
