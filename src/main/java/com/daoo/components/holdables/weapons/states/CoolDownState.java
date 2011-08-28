@@ -2,9 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.holdables.weapons.states;
+package com.daoo.components.holdables.weapons.states;
 
-import math.time.GameTime;
+import com.daoo.math.time.GameTime;
 
 public class CoolDownState implements IWeaponState {
   private final float tStart, tEnd, tLength;

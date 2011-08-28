@@ -2,11 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.triggers.actions;
+package com.daoo.components.triggers.actions;
 
-import math.time.GameTime;
-import entities.projectiles.Projectile;
-import game.World;
+import com.daoo.entities.projectiles.Projectile;
+import com.daoo.game.World;
+import com.daoo.math.time.GameTime;
 
 public class SpawnProjectile implements IAction {
   private final Projectile object;

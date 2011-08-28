@@ -2,9 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package loader.data;
+package com.daoo.loader.data;
 
-import loader.CacheException;
+import com.daoo.loader.CacheException;
 
 public class DataException extends CacheException {
   private static final long serialVersionUID = 1L;

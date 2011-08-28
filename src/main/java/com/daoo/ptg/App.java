@@ -7,17 +7,16 @@ package com.daoo.ptg;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import loader.Cache;
-import loader.CacheException;
-import math.Rectangle;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import ui.StateMenu;
-import credits.StateCredits;
+import com.daoo.credits.StateCredits;
+import com.daoo.loader.Cache;
+import com.daoo.loader.CacheException;
+import com.daoo.math.Rectangle;
+import com.daoo.ui.StateMenu;
 
 public class App extends StateBasedGame {
   public static final String NAME    = "PolhemTheGame";

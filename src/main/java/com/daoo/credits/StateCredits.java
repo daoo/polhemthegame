@@ -2,16 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package credits;
+package com.daoo.credits;
 
 import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import loader.parser.ParserException;
-import main.CacheTool;
-import main.Launcher;
-import main.Locator;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -22,6 +17,11 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import com.daoo.loader.parser.ParserException;
+import com.daoo.ptg.App;
+import com.daoo.ptg.CacheTool;
+import com.daoo.ptg.Locator;
 
 
 public class StateCredits extends BasicGameState {
@@ -55,12 +55,12 @@ public class StateCredits extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     gc.setClearEachFrame(true);
-    gc.setTargetFrameRate(Launcher.MAX_FPS);
+    gc.setTargetFrameRate(App.MAX_FPS);
 
     speed = DEFAULT_Y_SPEED;
     pos_y = gc.getHeight();
 
-    float tmp_x = Launcher.WIDTH / 2.0f;
+    float tmp_x = App.WIDTH / 2.0f;
     float tmp_y = 0;
 
     credits.clear();
@@ -141,7 +141,7 @@ public class StateCredits extends BasicGameState {
     }
 
     if (menu) {
-      sb.enterState(Launcher.MAINMENU);
+      sb.enterState(App.MAINMENU);
     }
 
     final float dt = delta / 1000.0f;

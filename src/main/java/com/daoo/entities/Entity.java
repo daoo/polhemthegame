@@ -2,25 +2,24 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package entities;
+package com.daoo.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import math.Vector2;
-import math.time.GameTime;
-
 import org.newdawn.slick.Graphics;
 
-import components.ComponentMessages;
-import components.interfaces.IComp;
-import components.interfaces.ICompRender;
-import components.interfaces.ICompUpRend;
-import components.interfaces.ICompUpdate;
-import components.physics.AABB;
-import components.triggers.actions.IAction;
-import entities.interfaces.IEntity;
-import game.World;
+import com.daoo.components.ComponentMessages;
+import com.daoo.components.interfaces.IComp;
+import com.daoo.components.interfaces.ICompRender;
+import com.daoo.components.interfaces.ICompUpRend;
+import com.daoo.components.interfaces.ICompUpdate;
+import com.daoo.components.physics.AABB;
+import com.daoo.components.triggers.actions.IAction;
+import com.daoo.entities.interfaces.IEntity;
+import com.daoo.game.World;
+import com.daoo.math.Vector2;
+import com.daoo.math.time.GameTime;
 
 public class Entity implements IEntity {
   protected final AABB body;

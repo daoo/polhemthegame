@@ -2,12 +2,12 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.interfaces;
+package com.daoo.components.interfaces;
 
 import org.newdawn.slick.Image;
 
-import components.graphics.Tile;
-import components.graphics.animations.IAnimator;
+import com.daoo.components.graphics.Tile;
+import com.daoo.components.graphics.animations.IAnimator;
 
 public interface ICompAnim extends ICompUpRend {
   Image getLastFrame();

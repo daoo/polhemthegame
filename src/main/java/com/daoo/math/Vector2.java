@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package math;
+package com.daoo.math;
 
 public class Vector2 {
   public static final Vector2 ZERO = new Vector2(0, 0);

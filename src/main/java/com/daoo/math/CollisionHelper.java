@@ -2,10 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package math;
+package com.daoo.math;
 
-
-import components.physics.AABB;
+import com.daoo.components.physics.AABB;
 
 public class CollisionHelper {
   public static boolean SweepCollisionTest(final AABB a, final AABB b, final float dt) {

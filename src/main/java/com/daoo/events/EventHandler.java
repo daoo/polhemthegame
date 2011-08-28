@@ -1,8 +1,8 @@
-package events;
+package com.daoo.events;
 
 import java.util.ArrayList;
 
-import entities.interfaces.IObject;
+import com.daoo.entities.interfaces.IObject;
 
 public class EventHandler {
   private final ArrayList<IEvent> events;

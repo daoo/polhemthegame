@@ -1,21 +1,19 @@
-package entities;
+package com.daoo.entities;
 
 import java.util.Collection;
 import java.util.Collections;
 
-import math.Vector2;
-import math.time.GameTime;
-
 import org.newdawn.slick.Graphics;
 
-import components.physics.AABB;
-import components.triggers.actions.IAction;
-
-import entities.interfaces.IEntity;
-import entities.interfaces.IObject;
-import events.EventHandler;
-import events.ObjectEventArgs;
-import game.World;
+import com.daoo.components.physics.AABB;
+import com.daoo.components.triggers.actions.IAction;
+import com.daoo.entities.interfaces.IEntity;
+import com.daoo.entities.interfaces.IObject;
+import com.daoo.events.EventHandler;
+import com.daoo.events.ObjectEventArgs;
+import com.daoo.game.World;
+import com.daoo.math.Vector2;
+import com.daoo.math.time.GameTime;
 
 public class InvisibleRectangle implements IEntity {
   private final AABB body;

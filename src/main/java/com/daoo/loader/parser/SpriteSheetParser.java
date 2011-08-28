@@ -2,14 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package loader.parser;
+package com.daoo.loader.parser;
 
 import java.io.InputStream;
 
-import loader.data.ClosableSpriteSheet;
-import loader.data.IClosable;
-
 import org.newdawn.slick.SlickException;
+
+import com.daoo.loader.data.ClosableSpriteSheet;
+import com.daoo.loader.data.IClosable;
 
 public class SpriteSheetParser implements IParser {
   private final int tw, th;

@@ -2,12 +2,12 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package loader.data.json;
+package com.daoo.loader.data.json;
 
 import java.util.ArrayList;
 
-import loader.data.DataException;
-import loader.data.IClosable;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.IClosable;
 
 public class BossesData implements IClosable {
   public class BossData extends UnitData implements IClosable {

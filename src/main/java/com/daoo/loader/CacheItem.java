@@ -2,10 +2,10 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package loader;
+package com.daoo.loader;
 
-import loader.data.DataException;
-import loader.data.IClosable;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.IClosable;
 
 public class CacheItem {
   private final String    id;

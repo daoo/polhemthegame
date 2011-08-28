@@ -2,27 +2,25 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package factories;
-
-import entities.Boss;
-import entities.Creep;
-import entities.InvisibleRectangle;
-import entities.Player;
-import entities.Players;
-import game.World;
+package com.daoo.factories;
 
 import java.io.IOException;
 
-import loader.data.DataException;
-import loader.data.json.BossesData.BossData;
-import loader.data.json.CreepsData.CreepData;
-import loader.data.json.PlayersData.PlayerData;
-import loader.parser.ParserException;
-import main.CacheTool;
-import main.Locator;
-import math.Rectangle;
-
-import components.graphics.RSheet;
+import com.daoo.components.graphics.RSheet;
+import com.daoo.entities.Boss;
+import com.daoo.entities.Creep;
+import com.daoo.entities.InvisibleRectangle;
+import com.daoo.entities.Player;
+import com.daoo.entities.Players;
+import com.daoo.game.World;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.json.BossesData.BossData;
+import com.daoo.loader.data.json.CreepsData.CreepData;
+import com.daoo.loader.data.json.PlayersData.PlayerData;
+import com.daoo.loader.parser.ParserException;
+import com.daoo.math.Rectangle;
+import com.daoo.ptg.CacheTool;
+import com.daoo.ptg.Locator;
 
 public class Factory {  /**
    * The layout of rectangles:

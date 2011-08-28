@@ -1,6 +1,6 @@
-package events;
+package com.daoo.events;
 
-import entities.interfaces.IObject;
+import com.daoo.entities.interfaces.IObject;
 
 public class KillEvent implements IEvent {
   @Override

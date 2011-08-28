@@ -2,21 +2,19 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.ai;
+package com.daoo.components.ai;
 
 import java.util.Stack;
 
-import math.ExMath;
-import math.Rectangle;
-import math.Vector2;
-import math.time.GameTime;
-
-import components.ComponentMessages;
-import components.holdables.Hand;
-import components.interfaces.ICompUpdate;
-import components.physics.AABB;
-
-import entities.Unit;
+import com.daoo.components.ComponentMessages;
+import com.daoo.components.holdables.Hand;
+import com.daoo.components.interfaces.ICompUpdate;
+import com.daoo.components.physics.AABB;
+import com.daoo.entities.Unit;
+import com.daoo.math.ExMath;
+import com.daoo.math.Rectangle;
+import com.daoo.math.Vector2;
+import com.daoo.math.time.GameTime;
 
 public class BossAI implements ICompUpdate {
   private final AABB           body;

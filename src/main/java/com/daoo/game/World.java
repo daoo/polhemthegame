@@ -2,26 +2,24 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game;
+package com.daoo.game;
 
 import java.util.ArrayList;
 
-import main.GroupContainer;
-import math.CollisionHelper;
-import math.time.GameTime;
-
 import org.newdawn.slick.Graphics;
 
-import components.physics.AABB;
-
-import entities.Animated;
-import entities.Creep;
-import entities.Player;
-import entities.Unit;
-import entities.groups.Entities;
-import entities.groups.Groups;
-import entities.interfaces.IObject;
-import entities.projectiles.Projectile;
+import com.daoo.components.physics.AABB;
+import com.daoo.entities.Animated;
+import com.daoo.entities.Creep;
+import com.daoo.entities.Player;
+import com.daoo.entities.Unit;
+import com.daoo.entities.groups.Entities;
+import com.daoo.entities.groups.Groups;
+import com.daoo.entities.interfaces.IObject;
+import com.daoo.entities.projectiles.Projectile;
+import com.daoo.math.CollisionHelper;
+import com.daoo.math.time.GameTime;
+import com.daoo.ptg.GroupContainer;
 
 public class World {
   private final ArrayList<IObject> toRemove;

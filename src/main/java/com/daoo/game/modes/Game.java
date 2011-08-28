@@ -2,25 +2,24 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.modes;
-
-import entities.Players;
-import game.GameCampaign;
-import game.GameLevel;
-import game.states.DoubleState;
-import game.states.TransitionState;
+package com.daoo.game.modes;
 
 import java.io.IOException;
 
-import loader.data.DataException;
-import loader.data.json.CampaignData;
-import loader.parser.ParserException;
-import main.CacheTool;
-import main.Locator;
-import math.Rectangle;
-import math.time.GameTime;
-
 import org.newdawn.slick.Graphics;
+
+import com.daoo.entities.Players;
+import com.daoo.game.GameCampaign;
+import com.daoo.game.GameLevel;
+import com.daoo.game.states.DoubleState;
+import com.daoo.game.states.TransitionState;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.json.CampaignData;
+import com.daoo.loader.parser.ParserException;
+import com.daoo.math.Rectangle;
+import com.daoo.math.time.GameTime;
+import com.daoo.ptg.CacheTool;
+import com.daoo.ptg.Locator;
 
 public class Game implements IMode {
   private GameLevel          level;

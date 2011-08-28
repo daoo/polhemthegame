@@ -2,15 +2,12 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.triggers.actions;
+package com.daoo.components.triggers.actions;
 
-
-import math.time.GameTime;
-
-import components.interfaces.ICompAnim;
-
-import entities.Animated;
-import game.World;
+import com.daoo.components.interfaces.ICompAnim;
+import com.daoo.entities.Animated;
+import com.daoo.game.World;
+import com.daoo.math.time.GameTime;
 
 public class SpawnRunToEndAnim implements IAction {
   private final Animated animated;

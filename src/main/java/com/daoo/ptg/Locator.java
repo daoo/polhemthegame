@@ -4,7 +4,7 @@
 
 package com.daoo.ptg;
 
-import loader.ICache;
+import com.daoo.loader.ICache;
 
 public class Locator {
   private static ICache _cache;

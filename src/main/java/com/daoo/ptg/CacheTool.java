@@ -7,34 +7,32 @@ package com.daoo.ptg;
 import java.io.File;
 import java.io.IOException;
 
-import loader.ICache;
-import loader.data.DataException;
-import loader.data.json.BossesData;
-import loader.data.json.BossesData.BossData;
-import loader.data.json.CreepsData;
-import loader.data.json.LevelData;
-import loader.data.json.PlayersData;
-import loader.data.json.ProjectilesData;
-import loader.data.json.ProjectilesData.ProjectileData;
-import loader.data.json.SpriteData;
-import loader.data.json.WeaponsData;
-import loader.data.json.WeaponsData.WeaponData;
-import loader.parser.GsonParser;
-import loader.parser.PNGParser;
-import loader.parser.ParserException;
-import loader.parser.SpriteSheetParser;
-import math.Vector2;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import components.graphics.RSheet;
-import components.graphics.animations.Idle;
-import components.holdables.weapons.AutomaticWeapon;
-import components.holdables.weapons.SingleWeapon;
-import components.holdables.weapons.Weapon;
-
-import entities.projectiles.ProjectileTemplate;
+import com.daoo.components.graphics.RSheet;
+import com.daoo.components.graphics.animations.Idle;
+import com.daoo.components.holdables.weapons.AutomaticWeapon;
+import com.daoo.components.holdables.weapons.SingleWeapon;
+import com.daoo.components.holdables.weapons.Weapon;
+import com.daoo.entities.projectiles.ProjectileTemplate;
+import com.daoo.loader.ICache;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.json.BossesData;
+import com.daoo.loader.data.json.BossesData.BossData;
+import com.daoo.loader.data.json.CreepsData;
+import com.daoo.loader.data.json.LevelData;
+import com.daoo.loader.data.json.PlayersData;
+import com.daoo.loader.data.json.ProjectilesData;
+import com.daoo.loader.data.json.ProjectilesData.ProjectileData;
+import com.daoo.loader.data.json.SpriteData;
+import com.daoo.loader.data.json.WeaponsData;
+import com.daoo.loader.data.json.WeaponsData.WeaponData;
+import com.daoo.loader.parser.GsonParser;
+import com.daoo.loader.parser.PNGParser;
+import com.daoo.loader.parser.ParserException;
+import com.daoo.loader.parser.SpriteSheetParser;
+import com.daoo.math.Vector2;
 
 public class CacheTool {
   public static final String EXT_JS = ".js";

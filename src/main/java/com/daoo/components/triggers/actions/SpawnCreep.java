@@ -2,11 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.triggers.actions;
+package com.daoo.components.triggers.actions;
 
-import math.time.GameTime;
-import entities.Creep;
-import game.World;
+import com.daoo.entities.Creep;
+import com.daoo.game.World;
+import com.daoo.math.time.GameTime;
 
 public class SpawnCreep implements IAction {
   private final Creep creep;

@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package ui.infobar;
+package com.daoo.ui.infobar;
 
 // TODO: A 1px high bar turns weird color-wise from time to time (probably because of aa)
 
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
-import components.ComponentMessages;
-import components.interfaces.ICompRender;
+import com.daoo.components.ComponentMessages;
+import com.daoo.components.interfaces.ICompRender;
 
 public class InfoBar implements ICompRender {
   private final float          barWidth, barHeight;

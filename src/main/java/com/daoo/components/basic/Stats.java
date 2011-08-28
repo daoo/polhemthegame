@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.basic;
+package com.daoo.components.basic;
 
 public class Stats {
   private int kills;

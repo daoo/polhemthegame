@@ -1,9 +1,8 @@
-package components.basic;
+package com.daoo.components.basic;
 
-import components.ComponentMessages;
-import components.interfaces.IComp;
-
-import entities.Entity;
+import com.daoo.components.ComponentMessages;
+import com.daoo.components.interfaces.IComp;
+import com.daoo.entities.Entity;
 
 public class Life implements IComp {
   private final Entity owner;

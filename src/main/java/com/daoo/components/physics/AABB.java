@@ -2,10 +2,10 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.physics;
+package com.daoo.components.physics;
 
-import math.Rectangle;
-import math.Vector2;
+import com.daoo.math.Rectangle;
+import com.daoo.math.Vector2;
 
 public class AABB extends Rectangle {
   private final Vector2 vel;

@@ -2,10 +2,10 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package loader.data.json;
+package com.daoo.loader.data.json;
 
-import loader.data.DataException;
-import loader.data.IClosable;
+import com.daoo.loader.data.DataException;
+import com.daoo.loader.data.IClosable;
 
 public class SpriteData implements IClosable {
   public String animation;

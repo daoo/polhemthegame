@@ -2,20 +2,18 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package entities.projectiles;
+package com.daoo.entities.projectiles;
 
-import loader.data.json.ProjectilesData.ProjectileData;
-import math.Vector2;
-import math.time.GameTime;
-
-import components.basic.Life;
-import components.graphics.animations.Continuous;
-import components.interfaces.ICompAnim;
-import components.physics.Gravity;
-
-import entities.Entity;
-import entities.interfaces.IDamagable;
-import game.World;
+import com.daoo.components.basic.Life;
+import com.daoo.components.graphics.animations.Continuous;
+import com.daoo.components.interfaces.ICompAnim;
+import com.daoo.components.physics.Gravity;
+import com.daoo.entities.Entity;
+import com.daoo.entities.interfaces.IDamagable;
+import com.daoo.game.World;
+import com.daoo.loader.data.json.ProjectilesData.ProjectileData;
+import com.daoo.math.Vector2;
+import com.daoo.math.time.GameTime;
 
 public class Projectile extends Entity implements IDamagable {
   private final float   duration, range, damage;

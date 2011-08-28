@@ -1,6 +1,6 @@
-package events;
+package com.daoo.events;
 
-import game.World;
+import com.daoo.game.World;
 
 public class EventArgs implements IEventArgs {
   private final World world;

@@ -2,9 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package components.graphics.animations;
+package com.daoo.components.graphics.animations;
 
-import components.graphics.Tile;
+import com.daoo.components.graphics.Tile;
 
 public class Idle implements IAnimator {
   public Idle() {

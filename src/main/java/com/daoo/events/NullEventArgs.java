@@ -1,4 +1,4 @@
-package events;
+package com.daoo.events;
 
 public class NullEventArgs implements IEventArgs {
   // Empty Class

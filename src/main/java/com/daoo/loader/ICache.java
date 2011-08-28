@@ -1,10 +1,10 @@
-package loader;
+package com.daoo.loader;
 
 import java.io.IOException;
 
-import loader.data.IClosable;
-import loader.parser.IParser;
-import loader.parser.ParserException;
+import com.daoo.loader.data.IClosable;
+import com.daoo.loader.parser.IParser;
+import com.daoo.loader.parser.ParserException;
 
 public interface ICache {
 
