@@ -1,7 +1,7 @@
+*.log
 .classpath
 .project
 .settings/
 bin
 release
-*.log
-
+target
