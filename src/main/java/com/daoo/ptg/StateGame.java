@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package main;
+package com.daoo.ptg;
 
 import game.modes.Game;
 import game.modes.IMode;
