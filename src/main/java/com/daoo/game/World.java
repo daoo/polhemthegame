@@ -24,9 +24,11 @@ import entities.interfaces.IObject;
 import entities.projectiles.Projectile;
 
 public class World {
+  private final ArrayList<IObject> toRemove;
   private final GroupContainer<Entities, IObject> entities;
 
   public World() {
+    toRemove = new ArrayList<IObject>();
     entities = new GroupContainer<Entities, IObject>();
   }
 
@@ -55,7 +57,6 @@ public class World {
     }
 
     // Update
-    ArrayList<IObject> toRemove = new ArrayList<IObject>();
     for (IObject e : entities.getAll()) {
       e.update(time, this);
     }
@@ -101,7 +102,11 @@ public class World {
     return entities.get(Groups.UNITS);
   }
 
-  public Iterable<IObject> get(Entities e) {
+  public Iterable<IObject> get(final Entities e) {
     return entities.get(e);
+  }
+
+  public void scheduleForRemoval(final IObject object) {
+    toRemove.add(object);
   }
 }

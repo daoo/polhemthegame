@@ -12,6 +12,8 @@ public class EventHandler {
   }
 
   public void add(final IEvent event) {
+    assert (event != null);
+
     events.add(event);
   }
 

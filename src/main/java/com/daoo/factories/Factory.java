@@ -46,7 +46,7 @@ public class Factory {  /**
                                                               -rectWorld.getHeight(),
                                                               3 * rectWorld.getWidth(),
                                                               3 * rectWorld.getHeight());
-    rectBig.onNotContainsEvent.add();
+    rectBig.onNotContainsEvent.add(null);
     // TODO: Restrict players
     // TODO: Creep killer
 

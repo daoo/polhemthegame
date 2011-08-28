@@ -33,7 +33,7 @@ public class InvisibleRectangle implements IEntity {
     for (final IObject o : world.getUnits()) {
       final Unit u = (Unit) o;
       if (!body.isContaining(u.getBody())) {
-        onNotContainsEvent.execute(this, new ObjectEventArgs(u));
+        onNotContainsEvent.execute(this, new ObjectEventArgs(world, u));
       }
     }
   }
