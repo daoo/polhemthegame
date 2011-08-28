@@ -22,21 +22,24 @@ import com.daoo.math.Rectangle;
 import com.daoo.ptg.CacheTool;
 import com.daoo.ptg.Locator;
 
-public class Factory {  /**
-   * The layout of rectangles:
-   * |-----------------------------|
-   * | bigRect                     |
-   * |                             |
-   * |                             |
-   * |---------|---------|         |
-   * | cKiller |smallRect|         |
-   * |---------|---------|         |
-   * |                             |
-   * |                             |
-   * |                             |
-   * |-----------------------------|
-   */
+public class Factory {
+
   public static World MakeWorld(final Rectangle rectWorld, final Players players) {
+    /**
+     * The layout of rectangles:
+     * |-----------------------------|
+     * | bigRect                     |
+     * |                             |
+     * |                             |
+     * |---------|---------|         |
+     * | cKiller |smallRect|         |
+     * |---------|---------|         |
+     * |                             |
+     * |                             |
+     * |                             |
+     * |-----------------------------|
+     */
+
     final World w = new World();
 
     // TODO: Big rect

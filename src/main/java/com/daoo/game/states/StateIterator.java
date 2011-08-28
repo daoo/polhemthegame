@@ -13,7 +13,7 @@ public class StateIterator implements Iterator<IState> {
 
   public StateIterator(Iterable<IState> iterable) {
     internal = iterable.iterator();
-    
+
     current = null;
     finished = false;
   }
@@ -27,7 +27,7 @@ public class StateIterator implements Iterator<IState> {
   public IState next() {
     if (!finished)
       current = internal.next();
-       
+
     return current;
   }
 
@@ -35,13 +35,14 @@ public class StateIterator implements Iterator<IState> {
   public void remove() {
     internal.remove();
   }
-  
+
   public IState getCurrent() {
     return current;
   }
-  
+
   /**
    * Stops the iterator from iterating and points it at state.
+   * @param state
    */
   public void endNowWith(final IState state) {
     current = state;

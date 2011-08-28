@@ -33,12 +33,13 @@ public class BossState implements IState {
 
   @Override
   public void render(final Graphics g) {
+    // TODO
   }
 
   @Override
   public void update(final GameTime time) {
     if (!boss.isAlive()) {
-      // TODO: When animiation has finished, we're done here 
+      // TODO: When animiation has finished, we're done here
     }
   }
 
