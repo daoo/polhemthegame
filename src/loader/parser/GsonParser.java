@@ -2,13 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.loader.parser;
+package loader.parser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 
-import com.daoo.loader.data.IClosable;
+import loader.data.IClosable;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 

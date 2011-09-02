@@ -2,13 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.triggers.actions;
+package components.triggers.actions;
 
-import com.daoo.entities.Unit;
-import com.daoo.entities.interfaces.IObject;
-import com.daoo.game.World;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import entities.Unit;
+import entities.interfaces.IObject;
+import game.World;
+import math.Vector2;
+import math.time.GameTime;
 
 public class AOEDamage implements IAction {
   final Vector2 center;

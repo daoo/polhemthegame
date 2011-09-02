@@ -2,12 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.triggers.actions;
+package components.triggers.actions;
 
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.entities.Animated;
-import com.daoo.game.World;
-import com.daoo.math.time.GameTime;
+import math.time.GameTime;
+
+import components.interfaces.ICompAnim;
+
+import entities.Animated;
+import game.World;
 
 public class SpawnAnimated implements IAction {
   private final Animated animated;

@@ -2,15 +2,16 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.game.states;
+package game.states;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 
-import com.daoo.components.triggers.actions.IAction;
-import com.daoo.math.time.GameTime;
+import components.triggers.actions.IAction;
 
 public class DoubleState implements IState {
   private final IState fgState;

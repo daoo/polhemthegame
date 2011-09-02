@@ -1,4 +1,4 @@
-package com.daoo.entities.groups;
+package entities.groups;
 
 public class Groups {
   public static final Entities[] UNITS = { Entities.CREEP,

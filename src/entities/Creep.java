@@ -2,9 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
 
-import com.daoo.components.interfaces.ICompAnim;
+import components.interfaces.ICompAnim;
 
 public class Creep extends Unit {
   private final int moneyGain;

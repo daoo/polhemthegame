@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.ui;
+package ui;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
@@ -10,7 +10,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import com.daoo.entities.Player;
+import entities.Player;
 
 // TODO: Hud drawing
 

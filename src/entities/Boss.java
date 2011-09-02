@@ -2,11 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
 
-import com.daoo.components.holdables.IArmed;
-import com.daoo.components.holdables.weapons.Weapon;
-import com.daoo.components.interfaces.ICompAnim;
+import components.holdables.IArmed;
+import components.holdables.weapons.Weapon;
+import components.interfaces.ICompAnim;
 
 public class Boss extends Unit implements IArmed {
 

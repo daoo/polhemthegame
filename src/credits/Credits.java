@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.credits;
+package credits;
 
 public class Credits {
   private static final String  daniel      = "Daniel Oom";

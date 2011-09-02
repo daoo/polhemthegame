@@ -2,12 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
 
-import com.daoo.components.graphics.animations.Continuous;
-import com.daoo.components.graphics.animations.RunTo;
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.entities.interfaces.IWalking;
+import components.graphics.animations.Continuous;
+import components.graphics.animations.RunTo;
+import components.interfaces.ICompAnim;
+
+import entities.interfaces.IWalking;
 
 public class Animated extends Entity implements IWalking {
   private final ICompAnim anim;

@@ -2,9 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.ui;
+package ui;
 
 import java.io.IOException;
+
+import loader.parser.ParserException;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,13 +16,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.daoo.loader.parser.ParserException;
-import com.daoo.ptg.App;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
-import com.daoo.ui.menu.Menu;
-import com.daoo.ui.menu.MenuButton;
-import com.daoo.ui.menu.MenuItemDisabled;
+import ptg.App;
+import ptg.CacheTool;
+import ptg.Locator;
+import ui.menu.Menu;
+import ui.menu.MenuButton;
+import ui.menu.MenuItemDisabled;
 
 public class StateMenu extends BasicGameState {
   private final int stateId;

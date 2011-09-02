@@ -2,9 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.graphics.animations;
+package components.graphics.animations;
 
-import com.daoo.components.graphics.Tile;
+import components.graphics.Tile;
 
 public class RunTo implements IAnimator {
   private boolean finished;

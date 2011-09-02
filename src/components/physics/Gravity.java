@@ -2,12 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.physics;
+package components.physics;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.interfaces.ICompUpdate;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import math.Vector2;
+import math.time.GameTime;
+
+import components.ComponentMessages;
+import components.interfaces.ICompUpdate;
 
 public class Gravity implements ICompUpdate {
   public static final float FACTOR = 100.0f;

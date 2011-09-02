@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.loader;
+package loader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-import com.daoo.loader.data.IClosable;
-import com.daoo.loader.parser.IParser;
-import com.daoo.loader.parser.ParserException;
+import loader.data.IClosable;
+import loader.parser.IParser;
+import loader.parser.ParserException;
 
 public class Cache implements ICache {
   private final FileBeacon                 beacon;

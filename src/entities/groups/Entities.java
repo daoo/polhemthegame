@@ -1,4 +1,4 @@
-package com.daoo.entities.groups;
+package entities.groups;
 
 public enum Entities {
   ANIMATED,

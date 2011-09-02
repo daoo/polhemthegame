@@ -2,23 +2,25 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities.projectiles;
+package entities.projectiles;
 
 import java.io.IOException;
+
+import loader.data.json.ProjectilesData.ProjectileData;
+import loader.parser.ParserException;
+import math.time.GameTime;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import com.daoo.components.graphics.DummyAnimation;
-import com.daoo.components.graphics.RSheet;
-import com.daoo.components.graphics.TexturedQuad;
-import com.daoo.components.graphics.animations.Idle;
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.loader.data.json.ProjectilesData.ProjectileData;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.math.time.GameTime;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.CacheTool;
+import ptg.Locator;
+
+import components.graphics.DummyAnimation;
+import components.graphics.RSheet;
+import components.graphics.TexturedQuad;
+import components.graphics.animations.Idle;
+import components.interfaces.ICompAnim;
 
 public class ProjectileTemplate {
   private final ProjectileData data;

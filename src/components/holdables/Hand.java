@@ -2,15 +2,16 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.holdables;
+package components.holdables;
+
+import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.holdables.weapons.Weapon;
-import com.daoo.components.interfaces.ICompUpRend;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import components.ComponentMessages;
+import components.holdables.weapons.Weapon;
+import components.interfaces.ICompUpRend;
 
 public class Hand implements ICompUpRend {
   private Weapon                   weapon;

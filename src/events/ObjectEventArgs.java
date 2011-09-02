@@ -1,7 +1,7 @@
-package com.daoo.events;
+package events;
 
-import com.daoo.entities.interfaces.IObject;
-import com.daoo.game.World;
+import entities.interfaces.IObject;
+import game.World;
 
 public class ObjectEventArgs extends EventArgs {
   private final IObject object;

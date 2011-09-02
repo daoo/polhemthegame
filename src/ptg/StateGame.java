@@ -2,9 +2,17 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.ptg;
+package ptg;
+
+import game.modes.Game;
+import game.modes.IMode;
 
 import java.io.IOException;
+
+import loader.data.DataException;
+import loader.data.json.CampaignData;
+import loader.parser.GsonParser;
+import loader.parser.ParserException;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,13 +21,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.daoo.game.modes.Game;
-import com.daoo.game.modes.IMode;
-import com.daoo.loader.data.DataException;
-import com.daoo.loader.data.json.CampaignData;
-import com.daoo.loader.parser.GsonParser;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.ui.HUD;
+import ui.HUD;
 
 public class StateGame extends BasicGameState {
   private int     stateID = 0;
@@ -50,7 +52,7 @@ public class StateGame extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     try {
-      final CampaignData campaign = (CampaignData)  
+      final CampaignData campaign = (CampaignData)
         Locator.getCache().getCold(
           "campaigns/polhem.js",
           new GsonParser(CampaignData.class));

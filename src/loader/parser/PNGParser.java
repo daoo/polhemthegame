@@ -2,14 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.loader.parser;
+package loader.parser;
 
 import java.io.InputStream;
 
-import org.newdawn.slick.SlickException;
+import loader.data.ClosableImage;
+import loader.data.IClosable;
 
-import com.daoo.loader.data.ClosableImage;
-import com.daoo.loader.data.IClosable;
+import org.newdawn.slick.SlickException;
 
 public class PNGParser implements IParser {
   @Override

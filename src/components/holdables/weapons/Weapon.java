@@ -2,21 +2,23 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.holdables.weapons;
+package components.holdables.weapons;
 
 import java.util.ArrayList;
 
+import math.Vector2;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.graphics.RSheet;
-import com.daoo.components.holdables.IHoldable;
-import com.daoo.components.holdables.weapons.states.CoolDownState;
-import com.daoo.components.holdables.weapons.states.IWeaponState;
-import com.daoo.components.holdables.weapons.states.ReloadingState;
-import com.daoo.entities.projectiles.ProjectileTemplate;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import components.ComponentMessages;
+import components.graphics.RSheet;
+import components.holdables.IHoldable;
+import components.holdables.weapons.states.CoolDownState;
+import components.holdables.weapons.states.IWeaponState;
+import components.holdables.weapons.states.ReloadingState;
+
+import entities.projectiles.ProjectileTemplate;
 
 public abstract class Weapon implements IHoldable {
   protected final Vector2                    muzzleOffset;

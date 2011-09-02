@@ -2,17 +2,18 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.game.states;
+package game.states;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import math.Rectangle;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import com.daoo.components.triggers.actions.IAction;
-import com.daoo.math.Rectangle;
-import com.daoo.math.time.GameTime;
+import components.triggers.actions.IAction;
 
 public class TransitionState implements IState {
   private final float x, y;

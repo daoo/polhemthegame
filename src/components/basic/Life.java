@@ -1,22 +1,23 @@
-package com.daoo.components.basic;
+package components.basic;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.interfaces.IComp;
-import com.daoo.entities.Entity;
+import components.ComponentMessages;
+import components.interfaces.IComp;
+
+import entities.Entity;
 
 public class Life implements IComp {
   private final Entity owner;
-  
+
   private boolean alive;
-  
+
   private final float maxHP;
   private float hp;
 
   public Life(final Entity owner, float maxHP) {
     this.owner = owner;
-  
+
     this.alive = true;
-  
+
     this.hp = maxHP;
     this.maxHP = maxHP;
   }
@@ -26,7 +27,7 @@ public class Life implements IComp {
     alive = false;
     owner.sendMessage(ComponentMessages.KILLED);
   }
-  
+
   public void damage(final float dmg) {
     hp -= dmg;
     if (hp <= 0) {
@@ -36,13 +37,13 @@ public class Life implements IComp {
 
   @Override
   public void reciveMessage(ComponentMessages message) {
-    // Do nothing    
+    // Do nothing
   }
-  
+
   public boolean isAlive() {
     return alive;
   }
-  
+
   public float getHPFraction() {
     return hp / maxHP;
   }

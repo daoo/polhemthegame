@@ -2,13 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.basic;
+package components.basic;
 
 import java.util.ArrayList;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.holdables.weapons.Weapon;
-import com.daoo.components.interfaces.IComp;
+import components.ComponentMessages;
+import components.holdables.weapons.Weapon;
+import components.interfaces.IComp;
 
 // TODO: Shop
 

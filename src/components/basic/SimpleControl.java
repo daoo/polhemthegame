@@ -2,18 +2,20 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.basic;
+package components.basic;
 
+
+import math.Vector2;
+import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.holdables.Hand;
-import com.daoo.components.interfaces.ICompUpdate;
-import com.daoo.entities.Unit;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import components.ComponentMessages;
+import components.holdables.Hand;
+import components.interfaces.ICompUpdate;
+
+import entities.Unit;
 
 public class SimpleControl implements ICompUpdate {
   private static final int KEY_COUNT = 1024;

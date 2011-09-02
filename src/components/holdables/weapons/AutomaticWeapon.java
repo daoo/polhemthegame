@@ -2,15 +2,17 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.holdables.weapons;
+package components.holdables.weapons;
 
-import com.daoo.components.graphics.RSheet;
-import com.daoo.components.graphics.Tile;
-import com.daoo.components.graphics.animations.Continuous;
-import com.daoo.components.graphics.animations.RunTo;
-import com.daoo.entities.projectiles.ProjectileTemplate;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
+import math.Vector2;
+import math.time.GameTime;
+
+import components.graphics.RSheet;
+import components.graphics.Tile;
+import components.graphics.animations.Continuous;
+import components.graphics.animations.RunTo;
+
+import entities.projectiles.ProjectileTemplate;
 
 public class AutomaticWeapon extends Weapon {
   /**

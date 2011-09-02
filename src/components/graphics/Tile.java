@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.graphics;
+package components.graphics;
 
 public class Tile {
   public static final Tile ZERO = new Tile(0, 0);

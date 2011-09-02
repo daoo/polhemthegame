@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.math.time;
+package math.time;
 
 public class GameTime {
   private final float frame;

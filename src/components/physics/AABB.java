@@ -2,10 +2,10 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.physics;
+package components.physics;
 
-import com.daoo.math.Rectangle;
-import com.daoo.math.Vector2;
+import math.Rectangle;
+import math.Vector2;
 
 public class AABB extends Rectangle {
   private final Vector2 vel;
@@ -32,7 +32,7 @@ public class AABB extends Rectangle {
   public void addVelocity(final Vector2 v) {
     vel.addSelf(v);
   }
-  
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -42,7 +42,7 @@ public class AABB extends Rectangle {
     sb.append(max.toString());
     sb.append(", size: ");
     sb.append(size.toString());
-    
+
     return sb.toString();
   }
 }

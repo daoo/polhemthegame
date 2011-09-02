@@ -2,20 +2,20 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.daoo.factories.Factory;
-import com.daoo.loader.data.DataException;
-import com.daoo.loader.data.json.PlayersData;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.math.Rectangle;
-import com.daoo.math.Vector2;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import loader.data.DataException;
+import loader.data.json.PlayersData;
+import loader.parser.ParserException;
+import math.Rectangle;
+import math.Vector2;
+import ptg.CacheTool;
+import ptg.Locator;
+import factories.Factory;
 
 public class Players implements Iterable<Player> {
   private static final float      STARING_X = 0.1f;

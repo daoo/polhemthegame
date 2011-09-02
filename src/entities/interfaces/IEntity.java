@@ -2,11 +2,12 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities.interfaces;
+package entities.interfaces;
 
-import com.daoo.components.physics.AABB;
-import com.daoo.components.triggers.actions.IActionProducer;
-import com.daoo.math.Vector2;
+import math.Vector2;
+
+import components.physics.AABB;
+import components.triggers.actions.IActionProducer;
 
 public interface IEntity extends IActionProducer, IObject {
   public void setPosition(final Vector2 v);

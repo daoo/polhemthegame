@@ -2,11 +2,13 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.credits;
+package credits;
 
 import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import loader.parser.ParserException;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,20 +20,19 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.daoo.loader.parser.ParserException;
-import com.daoo.ptg.App;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.App;
+import ptg.CacheTool;
+import ptg.Locator;
 
 
 public class StateCredits extends BasicGameState {
   private static final int FONT_SIZE_SMALL = 24;
   private static final int FONT_SIZE_BIG = 30;
-  
+
   private static final int DEFAULT_Y_SPEED = 100;
   private static final int DEFAULT_SPACING = 5;
   private static final int EMPTY_SPACING = 30;
-  
+
   private final int state_id;
 
   private float speed;
@@ -40,7 +41,7 @@ public class StateCredits extends BasicGameState {
   private final ArrayList<ImageWithLocation> credits;
 
   private boolean exit, menu;
-  
+
   private UnicodeFont font_large, font_small;
 
   public StateCredits(final int stateId) {

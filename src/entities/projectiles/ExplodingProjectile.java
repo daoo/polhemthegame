@@ -2,13 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities.projectiles;
+package entities.projectiles;
 
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.components.triggers.actions.AOEDamage;
-import com.daoo.components.triggers.actions.SpawnRunToEndAnim;
-import com.daoo.loader.data.json.ProjectilesData.ProjectileData;
-import com.daoo.math.time.GameTime;
+import loader.data.json.ProjectilesData.ProjectileData;
+import math.time.GameTime;
+
+import components.interfaces.ICompAnim;
+import components.triggers.actions.AOEDamage;
+import components.triggers.actions.SpawnRunToEndAnim;
 
 public class ExplodingProjectile extends Projectile {
   private final float        aoeRange, aoeDamage;

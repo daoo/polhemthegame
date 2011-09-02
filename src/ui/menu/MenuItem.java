@@ -2,17 +2,18 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.ui.menu;
+package ui.menu;
 
 import java.io.IOException;
+
+import loader.parser.ParserException;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import com.daoo.loader.parser.ParserException;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.CacheTool;
+import ptg.Locator;
 
 
 public class MenuItem {

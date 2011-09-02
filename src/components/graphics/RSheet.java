@@ -2,18 +2,19 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.components.graphics;
+package components.graphics;
 
+
+import math.time.Clock;
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.graphics.animations.IAnimator;
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.math.time.Clock;
-import com.daoo.math.time.GameTime;
+import components.ComponentMessages;
+import components.graphics.animations.IAnimator;
+import components.interfaces.ICompAnim;
 
 public class RSheet implements ICompAnim {
   private final Clock       clock;

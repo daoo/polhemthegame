@@ -2,23 +2,26 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
+
+import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 
-import com.daoo.components.ComponentMessages;
-import com.daoo.components.basic.Life;
-import com.daoo.components.graphics.animations.Continuous;
-import com.daoo.components.graphics.animations.Idle;
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.components.physics.AABB;
-import com.daoo.components.triggers.actions.SpawnRunToEndAnim;
-import com.daoo.entities.interfaces.IDamagable;
-import com.daoo.entities.interfaces.IWalking;
-import com.daoo.game.World;
-import com.daoo.math.time.GameTime;
-import com.daoo.ui.infobar.Bar;
-import com.daoo.ui.infobar.InfoBar;
+import ui.infobar.Bar;
+import ui.infobar.InfoBar;
+
+import components.ComponentMessages;
+import components.basic.Life;
+import components.graphics.animations.Continuous;
+import components.graphics.animations.Idle;
+import components.interfaces.ICompAnim;
+import components.physics.AABB;
+import components.triggers.actions.SpawnRunToEndAnim;
+
+import entities.interfaces.IDamagable;
+import entities.interfaces.IWalking;
+import game.World;
 
 public class Unit extends Entity implements IDamagable, IWalking {
   private final Life life;

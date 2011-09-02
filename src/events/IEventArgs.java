@@ -1,4 +1,4 @@
-package com.daoo.events;
+package events;
 
 public interface IEventArgs {
   // Empty Interface

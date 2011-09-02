@@ -2,23 +2,25 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.entities;
+package entities;
+
+import entities.projectiles.Projectile;
+import entities.projectiles.ProjectileTemplate;
+import game.World;
+import math.Vector2;
+import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 
-import com.daoo.components.basic.Inventory;
-import com.daoo.components.basic.SimpleControl;
-import com.daoo.components.holdables.Hand;
-import com.daoo.components.holdables.IArmed;
-import com.daoo.components.holdables.weapons.Weapon;
-import com.daoo.components.interfaces.ICompAnim;
-import com.daoo.components.triggers.actions.SpawnProjectile;
-import com.daoo.entities.projectiles.Projectile;
-import com.daoo.entities.projectiles.ProjectileTemplate;
-import com.daoo.game.World;
-import com.daoo.math.Vector2;
-import com.daoo.math.time.GameTime;
-import com.daoo.ui.infobar.Bar;
+import ui.infobar.Bar;
+
+import components.basic.Inventory;
+import components.basic.SimpleControl;
+import components.holdables.Hand;
+import components.holdables.IArmed;
+import components.holdables.weapons.Weapon;
+import components.interfaces.ICompAnim;
+import components.triggers.actions.SpawnProjectile;
 
 public class Player extends Unit implements IArmed {
   private final Inventory     inv;

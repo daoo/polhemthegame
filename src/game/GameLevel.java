@@ -2,34 +2,37 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.game;
+package game;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import loader.data.DataException;
+import loader.data.json.LevelData;
+import loader.data.json.LevelData.BossStateData;
+import loader.data.json.LevelData.CreepStateData;
+import loader.data.json.LevelData.StateData;
+import loader.data.json.LevelData.TextStateData;
+import loader.parser.ParserException;
+import math.Rectangle;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import com.daoo.components.triggers.actions.IAction;
-import com.daoo.entities.Players;
-import com.daoo.factories.Factory;
-import com.daoo.game.states.BossState;
-import com.daoo.game.states.CreepsState;
-import com.daoo.game.states.DoubleState;
-import com.daoo.game.states.IState;
-import com.daoo.game.states.StateIterator;
-import com.daoo.game.states.TransitionState;
-import com.daoo.loader.data.DataException;
-import com.daoo.loader.data.json.LevelData;
-import com.daoo.loader.data.json.LevelData.BossStateData;
-import com.daoo.loader.data.json.LevelData.CreepStateData;
-import com.daoo.loader.data.json.LevelData.StateData;
-import com.daoo.loader.data.json.LevelData.TextStateData;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.math.Rectangle;
-import com.daoo.math.time.GameTime;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.CacheTool;
+import ptg.Locator;
+
+import components.triggers.actions.IAction;
+
+import entities.Players;
+import factories.Factory;
+import game.states.BossState;
+import game.states.CreepsState;
+import game.states.DoubleState;
+import game.states.IState;
+import game.states.StateIterator;
+import game.states.TransitionState;
 
 public class GameLevel {
   /**
@@ -96,7 +99,7 @@ public class GameLevel {
         states.add(new BossState(availible, (BossStateData) sd));
       }
     }
-    
+
     current = new StateIterator(states);
   }
 
@@ -107,7 +110,7 @@ public class GameLevel {
     g.translate(rect.getX1(), rect.getY1());
 
     world.render(g);
-    
+
     current.getCurrent().render(g);
 
     g.popTransform();

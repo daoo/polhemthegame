@@ -2,23 +2,26 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.game.states;
+package game.states;
 
 import java.io.IOException;
 import java.util.Collection;
 
+import loader.data.DataException;
+import loader.data.json.LevelData.BossStateData;
+import loader.parser.ParserException;
+import math.Rectangle;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 
-import com.daoo.components.triggers.actions.IAction;
-import com.daoo.entities.Boss;
-import com.daoo.factories.Factory;
-import com.daoo.loader.data.DataException;
-import com.daoo.loader.data.json.LevelData.BossStateData;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.math.Rectangle;
-import com.daoo.math.time.GameTime;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.CacheTool;
+import ptg.Locator;
+
+import components.triggers.actions.IAction;
+
+import entities.Boss;
+import factories.Factory;
 
 public class BossState implements IState {
   private final Boss boss;

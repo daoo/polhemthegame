@@ -2,30 +2,33 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package com.daoo.game.states;
+package game.states;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import loader.data.DataException;
+import loader.data.json.CreepsData;
+import loader.data.json.CreepsData.CreepData;
+import loader.data.json.LevelData.CreepSpawnData;
+import loader.data.json.LevelData.CreepStateData;
+import loader.parser.ParserException;
+import math.ExMath;
+import math.Rectangle;
+import math.time.GameTime;
+
 import org.newdawn.slick.Graphics;
 
-import com.daoo.components.triggers.actions.IAction;
-import com.daoo.components.triggers.actions.SpawnCreep;
-import com.daoo.entities.Creep;
-import com.daoo.factories.Factory;
-import com.daoo.loader.data.DataException;
-import com.daoo.loader.data.json.CreepsData;
-import com.daoo.loader.data.json.CreepsData.CreepData;
-import com.daoo.loader.data.json.LevelData.CreepSpawnData;
-import com.daoo.loader.data.json.LevelData.CreepStateData;
-import com.daoo.loader.parser.ParserException;
-import com.daoo.math.ExMath;
-import com.daoo.math.Rectangle;
-import com.daoo.math.time.GameTime;
-import com.daoo.ptg.CacheTool;
-import com.daoo.ptg.Locator;
+import ptg.CacheTool;
+import ptg.Locator;
+
+import components.triggers.actions.IAction;
+import components.triggers.actions.SpawnCreep;
+
+import entities.Creep;
+import factories.Factory;
 
 public class CreepsState implements IState {
   private final ArrayList<IAction> actions;
@@ -42,7 +45,7 @@ public class CreepsState implements IState {
   public CreepsState(final Rectangle rect, final CreepStateData sd)
     throws IOException, ParserException, DataException {
     actions = new ArrayList<IAction>();
-    
+
     spawned = new ArrayList<Creep>(sd.creeps.size());
     toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
 
