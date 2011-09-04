@@ -48,7 +48,7 @@ public class Rectangle {
 
   /**
    * Top left corner of the rectangle.
-   * @return A Vector2
+   * @return a vector2
    */
   public Vector2 getMin() {
     return min;
@@ -56,7 +56,7 @@ public class Rectangle {
 
   /**
    * Bottom right corner of the rectangle.
-   * @return A Vector2
+   * @return a vector2
    */
   public Vector2 getMax() {
     return max;

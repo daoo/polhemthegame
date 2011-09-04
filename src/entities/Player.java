@@ -35,10 +35,10 @@ public class Player extends Unit implements IArmed {
                 final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, 0, 0, maxHP, walk, death);
 
-    inv = new Inventory(startingMoney);
-    hand = new Hand(handOffsetX, handOffsetY);
+    inv       = new Inventory(startingMoney);
+    hand      = new Hand(handOffsetX, handOffsetY);
     weaponBar = new Bar(Color.blue, null);
-    control = new SimpleControl(this, hand, speed);
+    control   = new SimpleControl(this, hand, speed);
 
     add(hand);
     addBar(weaponBar);
