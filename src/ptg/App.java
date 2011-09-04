@@ -49,9 +49,6 @@ public class App extends StateBasedGame {
 
   public static void main(final String[] args) {
     try {
-      String libPath = new File(System.getProperty("java.library.path")).getAbsolutePath();
-      System.setProperty("org.lwjgl.librarypath", libPath);
-
       Locator.registerCache(new Cache(new Enviroment().appDir));
 
       boolean skipMenu = false;
