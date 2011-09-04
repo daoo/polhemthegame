@@ -28,5 +28,4 @@ public class GsonParser implements IParser {
       throw new ParserException(e);
     }
   }
-
 }
