@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 
 import loader.Cache;
 import loader.CacheException;
+import math.Random;
 import math.Rectangle;
 
 import org.newdawn.slick.AppGameContainer;
@@ -50,6 +51,7 @@ public class App extends StateBasedGame {
   public static void main(final String[] args) {
     try {
       Locator.registerCache(new Cache(new Enviroment().appDir));
+      Locator.registerRandom(new Random());
 
       boolean skipMenu = false;
       for (String s : args) {
