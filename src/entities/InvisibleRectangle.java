@@ -20,11 +20,13 @@ import game.World;
 public class InvisibleRectangle implements IEntity {
   private final AABB body;
 
+  public final EventHandler onContainsEvent;
   public final EventHandler onNotContainsEvent;
 
   public InvisibleRectangle(float x, float y, float w, float h) {
     body = new AABB(x, y, w, h, 0, 0);
 
+    onContainsEvent = new EventHandler();
     onNotContainsEvent = new EventHandler();
   }
 
@@ -32,7 +34,9 @@ public class InvisibleRectangle implements IEntity {
   public void update(final GameTime time, final World world) {
     for (final IObject o : world.getUnits()) {
       final Unit u = (Unit) o;
-      if (!body.isContaining(u.getBody())) {
+      if (body.isContaining(u.getBody())) {
+        onContainsEvent.execute(this, new ObjectEventArgs(world, u));
+      } else {
         onNotContainsEvent.execute(this, new ObjectEventArgs(world, u));
       }
     }

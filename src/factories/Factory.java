@@ -9,6 +9,8 @@ import entities.Creep;
 import entities.InvisibleRectangle;
 import entities.Player;
 import entities.Players;
+import events.DamagePlayerEvent;
+import events.KillEvent;
 import game.World;
 
 import java.io.IOException;
@@ -44,14 +46,19 @@ public class Factory {
 
     final World w = new World();
 
-    // TODO: Big rect
-    final InvisibleRectangle rectBig = new InvisibleRectangle(-rectWorld.getWidth(),
-                                                              -rectWorld.getHeight(),
-                                                              3 * rectWorld.getWidth(),
-                                                              3 * rectWorld.getHeight());
-    rectBig.onNotContainsEvent.add(null);
+    final InvisibleRectangle rectBig =
+      new InvisibleRectangle(-rectWorld.getWidth(), -rectWorld.getHeight(),
+                             3 * rectWorld.getWidth(), 3 * rectWorld.getHeight());
+    rectBig.onNotContainsEvent.add(new KillEvent());
+    w.add(rectBig);
+
     // TODO: Restrict players
-    // TODO: Creep killer
+
+    final InvisibleRectangle rectCreepKiller =
+      new InvisibleRectangle(-rectWorld.getWidth(), 0,
+                             rectWorld.getWidth(), rectWorld.getHeight());
+    rectCreepKiller.onContainsEvent.add(new KillEvent());
+    rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
 
     for (final Player p : players) {
       w.addPlayer(p);
