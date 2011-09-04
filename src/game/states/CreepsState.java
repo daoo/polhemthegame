@@ -15,7 +15,6 @@ import loader.data.json.CreepsData.CreepData;
 import loader.data.json.LevelData.CreepSpawnData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
-import math.ExMath;
 import math.Rectangle;
 import math.time.GameTime;
 
@@ -39,7 +38,7 @@ public class CreepsState implements IState {
   }
 
   private float getCreepY(Rectangle rect, final int height) {
-    return ExMath.random(0, rect.getY2() - height);
+    return Locator.getRandom().nextFloat(0.0f, rect.getY2() - height);
   }
 
   public CreepsState(final Rectangle rect, final CreepStateData sd)

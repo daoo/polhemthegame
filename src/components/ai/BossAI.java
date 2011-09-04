@@ -6,6 +6,8 @@ package components.ai;
 
 import java.util.Stack;
 
+import ptg.Locator;
+
 import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
@@ -61,13 +63,17 @@ public class BossAI implements ICompUpdate {
 
   private Vector2 newTarget() {
     final Vector2 target = new Vector2();
-    target.x = ExMath.random(body.getX1() - 10, body.getX1() + 10);
+    target.x = Locator.getRandom().nextFloat(
+      body.getX1() - 10,
+      body.getX1() + 10);
     if (body.getY1() <= (arenaRect.getHeight() / 2)) {
-      target.y = ExMath.random((int) body.getY1() + 50,
-                               arenaRect.getMax().y - body.getHeight());
+      target.y = Locator.getRandom().nextFloat(
+        body.getY1() + 50,
+        arenaRect.getMax().y - body.getHeight());
     } else {
-      target.y = ExMath.random(arenaRect.getMin().y,
-                               (int) body.getY1() - 50);
+      target.y = Locator.getRandom().nextFloat(
+        arenaRect.getMin().y,
+        body.getY1() - 50);
     }
 
     return target;
@@ -98,7 +104,7 @@ public class BossAI implements ICompUpdate {
           hand.stopUse();
           isShooting = true;
           shootingStartTime = time.getElapsed();
-          shootingTargetTime = ExMath.random(1.0f, 5.0f);
+          shootingTargetTime = Locator.getRandom().nextFloat(1.0f, 5.0f);
         } else {
           headFor(targets.peek());
         }
