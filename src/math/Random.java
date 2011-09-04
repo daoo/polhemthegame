@@ -13,7 +13,7 @@ public class Random implements IRandom {
   }
 
   @Override
-  public int nextInt(int max) {
+  public int nextInt(final int max) {
     return random.nextInt(max);
   }
 
