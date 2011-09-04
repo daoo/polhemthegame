@@ -12,8 +12,7 @@ public class ExMath {
     return x * x;
   }
 
-  public static float min(final float a, final float b, final float c,
-                          final float d) {
+  public static float min(final float a, final float b, final float c, final float d) {
     float min = a;
     if (b < min) {
       min = b;

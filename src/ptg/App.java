@@ -4,7 +4,6 @@
 
 package ptg;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import loader.Cache;
