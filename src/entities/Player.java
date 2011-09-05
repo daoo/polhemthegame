@@ -37,7 +37,7 @@ public class Player extends Unit implements IArmed {
 
     inv       = new Inventory(startingMoney);
     hand      = new Hand(handOffsetX, handOffsetY);
-    weaponBar = new Bar(Color.blue, null);
+    weaponBar = new Bar(Color.blue, new Color(0, 0, 0, 0));
     control   = new SimpleControl(this, hand, speed);
 
     add(hand);

@@ -14,6 +14,9 @@ public class Bar {
   protected float fraction;
 
   public Bar(final Color colorHave, final Color colorLost) {
+    assert (colorHave != null);
+    assert (colorLost != null);
+
     fraction = 1.0f;
 
     this.colorHave = colorHave;
@@ -26,14 +29,10 @@ public class Bar {
 
   public void render(final Graphics g, final float x, final float y,
                      final float width, final float height) {
-    if (colorHave != null) {
-      g.setColor(colorHave);
-      g.fillRect(x, y, fraction * width, height);
-    }
+    g.setColor(colorHave);
+    g.fillRect(x, y, fraction * width, height);
 
-    if (colorLost != null) {
-      g.setColor(colorLost);
-      g.fillRect(x + (fraction * width), y, (1.0f - fraction) * width, height);
-    }
+    g.setColor(colorLost);
+    g.fillRect(x + (fraction * width), y, (1.0f - fraction) * width, height);
   }
 }
