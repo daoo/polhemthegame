@@ -6,12 +6,11 @@ package components.ai;
 
 import java.util.Stack;
 
-import ptg.Locator;
-
 import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
+import ptg.Locator;
 
 import components.ComponentMessages;
 import components.holdables.Hand;
