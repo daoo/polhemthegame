@@ -59,6 +59,7 @@ public class Factory {
                              rectWorld.getWidth(), rectWorld.getHeight());
     rectCreepKiller.onContainsEvent.add(new KillEvent());
     rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
+    w.add(rectCreepKiller);
 
     for (final Player p : players) {
       w.addPlayer(p);
