@@ -9,6 +9,10 @@ import loader.CacheException;
 public class ParserException extends CacheException {
   private static final long serialVersionUID = 1L;
 
+  public ParserException(final String message) {
+    super(message);
+  }
+
   public ParserException(final Throwable cause) {
     super(cause);
   }

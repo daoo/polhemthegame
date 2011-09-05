@@ -32,7 +32,7 @@ public class Cache implements ICache {
       }
     }
 
-    return null;
+    throw new ParserException("Error parsing: " + id);
   }
 
   public Cache(final File rootDir) throws FileNotFoundException {
