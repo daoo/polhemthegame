@@ -79,11 +79,6 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public Image getLastFrame() {
-    return sheet.getSubImage(size.x - 1, size.y - 1);
-  }
-
-  @Override
   public int getTileWidth() {
     return tw;
   }

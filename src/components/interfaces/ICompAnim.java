@@ -4,14 +4,10 @@
 
 package components.interfaces;
 
-import org.newdawn.slick.Image;
-
 import components.graphics.Tile;
 import components.graphics.animations.IAnimator;
 
 public interface ICompAnim extends ICompUpRend {
-  Image getLastFrame();
-
   void goToFirstFrame();
 
   void setAnimator(final IAnimator animator);

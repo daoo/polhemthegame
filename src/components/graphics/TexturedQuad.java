@@ -42,11 +42,6 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public Image getLastFrame() {
-    return img;
-  }
-
-  @Override
   public int getTileWidth() {
     return img.getWidth();
   }

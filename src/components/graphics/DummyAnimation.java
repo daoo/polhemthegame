@@ -7,7 +7,6 @@ package components.graphics;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 import components.ComponentMessages;
 import components.graphics.animations.IAnimator;
@@ -15,6 +14,9 @@ import components.graphics.animations.Idle;
 import components.interfaces.ICompAnim;
 
 public class DummyAnimation implements ICompAnim {
+  public DummyAnimation() {
+    // Do nothing
+  }
 
   @Override
   public void update(GameTime time) {
@@ -24,11 +26,6 @@ public class DummyAnimation implements ICompAnim {
   @Override
   public void render(Graphics g) {
     // Do nothing
-  }
-
-  @Override
-  public Image getLastFrame() {
-    return null;
   }
 
   @Override
