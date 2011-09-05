@@ -7,7 +7,7 @@ public class ObjectEventArgs extends EventArgs {
   private final IObject object;
 
   public ObjectEventArgs(final World world, final IObject object) {
-	super(world);
+    super(world);
     this.object = object;
   }
 
