@@ -4,9 +4,9 @@
 
 package game.components.triggers.actions;
 
-import game.World;
 import game.entities.Unit;
 import game.entities.interfaces.IObject;
+import game.world.World;
 import math.Vector2;
 import math.time.GameTime;
 

@@ -4,16 +4,6 @@
 
 package game.entities;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import math.Vector2;
-import math.time.GameTime;
-
-import org.newdawn.slick.Graphics;
-
-
-import game.World;
 import game.components.physics.AABB;
 import game.components.triggers.actions.IAction;
 import game.entities.groups.Entities;
@@ -21,6 +11,15 @@ import game.entities.interfaces.IEntity;
 import game.entities.interfaces.IObject;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
+import game.world.World;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import math.Vector2;
+import math.time.GameTime;
+
+import org.newdawn.slick.Graphics;
 
 public class InvisibleRectangle implements IEntity {
   private final AABB body;

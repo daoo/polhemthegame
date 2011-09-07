@@ -4,16 +4,6 @@
 
 package game.entities;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import math.Vector2;
-import math.time.GameTime;
-
-import org.newdawn.slick.Graphics;
-
-
-import game.World;
 import game.components.ComponentMessages;
 import game.components.interfaces.IComp;
 import game.components.interfaces.ICompRender;
@@ -23,6 +13,15 @@ import game.components.physics.AABB;
 import game.components.triggers.actions.IAction;
 import game.entities.groups.Entities;
 import game.entities.interfaces.IEntity;
+import game.world.World;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import math.Vector2;
+import math.time.GameTime;
+
+import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
   protected final AABB body;

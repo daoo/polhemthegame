@@ -4,9 +4,9 @@
 
 package game.components.triggers.actions;
 
-import math.time.GameTime;
-import game.World;
 import game.entities.projectiles.Projectile;
+import game.world.World;
+import math.time.GameTime;
 
 public class SpawnProjectile implements IAction {
   private final Projectile object;
@@ -19,6 +19,6 @@ public class SpawnProjectile implements IAction {
 
   @Override
   public void execute(final GameTime time, final World world) {
-    world.addProjectile(object);
+    world.add(object);
   }
 }

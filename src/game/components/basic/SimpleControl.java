@@ -5,17 +5,15 @@
 package game.components.basic;
 
 
+import game.components.ComponentMessages;
+import game.components.holdables.Hand;
+import game.components.interfaces.ICompUpdate;
+import game.entities.Unit;
 import math.Vector2;
 import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
-
-
-import game.components.ComponentMessages;
-import game.components.holdables.Hand;
-import game.components.interfaces.ICompUpdate;
-import game.entities.Unit;
 
 public class SimpleControl implements ICompUpdate {
   private static final int KEY_COUNT = 1024;

@@ -4,6 +4,12 @@
 
 package game.components.ai;
 
+import game.components.ComponentMessages;
+import game.components.holdables.Hand;
+import game.components.interfaces.ICompUpdate;
+import game.components.physics.AABB;
+import game.entities.Unit;
+
 import java.util.Stack;
 
 import main.Locator;
@@ -11,13 +17,6 @@ import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
-
-
-import game.components.ComponentMessages;
-import game.components.holdables.Hand;
-import game.components.interfaces.ICompUpdate;
-import game.components.physics.AABB;
-import game.entities.Unit;
 
 public class BossAI implements ICompUpdate {
   private final AABB           body;

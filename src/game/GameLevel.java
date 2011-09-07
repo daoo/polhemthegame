@@ -4,6 +4,17 @@
 
 package game;
 
+import game.components.triggers.actions.IAction;
+import game.entities.Players;
+import game.factories.Factory;
+import game.states.BossState;
+import game.states.CreepsState;
+import game.states.DoubleState;
+import game.states.IState;
+import game.states.StateIterator;
+import game.states.TransitionState;
+import game.world.World;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,18 +31,6 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-
-
-
-import game.components.triggers.actions.IAction;
-import game.entities.Players;
-import game.factories.Factory;
-import game.states.BossState;
-import game.states.CreepsState;
-import game.states.DoubleState;
-import game.states.IState;
-import game.states.StateIterator;
-import game.states.TransitionState;
 
 public class GameLevel {
   /**

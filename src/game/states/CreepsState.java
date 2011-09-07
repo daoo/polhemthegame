@@ -4,6 +4,12 @@
 
 package game.states;
 
+import game.CacheTool;
+import game.components.triggers.actions.IAction;
+import game.components.triggers.actions.SpawnCreep;
+import game.entities.Creep;
+import game.factories.Factory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,14 +26,6 @@ import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-
-
-
-import game.CacheTool;
-import game.components.triggers.actions.IAction;
-import game.components.triggers.actions.SpawnCreep;
-import game.entities.Creep;
-import game.factories.Factory;
 
 public class CreepsState implements IState {
   private final ArrayList<IAction> actions;

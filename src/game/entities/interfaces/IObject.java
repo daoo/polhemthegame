@@ -4,12 +4,11 @@
 
 package game.entities.interfaces;
 
+import game.entities.groups.Entities;
+import game.world.World;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-
-import game.World;
-import game.entities.groups.Entities;
 
 public interface IObject {
   Entities getType();

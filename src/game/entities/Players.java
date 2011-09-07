@@ -4,6 +4,9 @@
 
 package game.entities;
 
+import game.CacheTool;
+import game.factories.Factory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,8 +17,6 @@ import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
 import math.Vector2;
-import game.CacheTool;
-import game.factories.Factory;
 
 public class Players implements Iterable<Player> {
   private static final float      STARING_X = 0.1f;

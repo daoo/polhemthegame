@@ -4,6 +4,13 @@
 
 package game;
 
+import game.components.graphics.RSheet;
+import game.components.graphics.animations.Idle;
+import game.components.holdables.weapons.AutomaticWeapon;
+import game.components.holdables.weapons.SingleWeapon;
+import game.components.holdables.weapons.Weapon;
+import game.entities.projectiles.ProjectileTemplate;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -27,14 +34,6 @@ import math.Vector2;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
-
-
-import game.components.graphics.RSheet;
-import game.components.graphics.animations.Idle;
-import game.components.holdables.weapons.AutomaticWeapon;
-import game.components.holdables.weapons.SingleWeapon;
-import game.components.holdables.weapons.Weapon;
-import game.entities.projectiles.ProjectileTemplate;
 
 public class CacheTool {
   public static final String EXT_JS = ".js";

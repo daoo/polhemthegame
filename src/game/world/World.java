@@ -2,7 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game;
+package game.world;
+
+import game.components.physics.AABB;
+import game.entities.Unit;
+import game.entities.groups.Entities;
+import game.entities.groups.Groups;
+import game.entities.interfaces.IObject;
+import game.entities.projectiles.Projectile;
 
 import java.util.ArrayList;
 
@@ -11,35 +18,23 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
-
-import game.components.physics.AABB;
-import game.entities.Animated;
-import game.entities.Creep;
-import game.entities.Player;
-import game.entities.Unit;
-import game.entities.groups.Entities;
-import game.entities.groups.Groups;
-import game.entities.interfaces.IObject;
-import game.entities.projectiles.Projectile;
-
 public class World {
   private final ArrayList<IObject> toRemove;
-  private final GroupContainer<Entities, IObject> entities;
+  private final WorldContainer entities;
 
   public World() {
     toRemove = new ArrayList<IObject>();
-    entities = new GroupContainer<Entities, IObject>();
+    entities = new WorldContainer();
   }
 
   public void update(final GameTime time) {
     // Do projectile collisions first, I think it leads to more accurate collisions
-    for (final IObject e1 : entities.get(Entities.PROJECTILE)) {
+    for (final IObject e1 : entities.iterate(Entities.PROJECTILE)) {
       Projectile p = (Projectile) e1;
       if (p.canCollide()) {
         // Check for collisions with units
         final AABB a = p.getBody();
-        for (final IObject e2 : entities.get(Groups.UNITS)) {
+        for (final IObject e2 : entities.iterate(Groups.UNITS)) {
           Unit u = (Unit) e2;
           if (CollisionHelper.SweepCollisionTest(a, u.getBody(), time.getFrameLength())) {
             // FIXME: If the projectile can hit multiple targets and is sufficently slow,
@@ -57,7 +52,7 @@ public class World {
     }
 
     // Update
-    for (IObject e : entities.getAll()) {
+    for (IObject e : entities.iterateAll()) {
       e.update(time, this);
     }
 
@@ -65,45 +60,23 @@ public class World {
   }
 
   public void render(final Graphics g) {
-    for (final IObject e : entities.getAll()) {
+    for (final IObject e : entities.iterateAll()) {
       e.render(g);
     }
   }
 
   public void add(final IObject obj) {
-    entities.add(Entities.GENERAL, obj);
-  }
+    assert (obj != null);
 
-  public void addPlayer(final Player p) {
-    assert (p != null);
-
-    entities.add(Entities.PLAYER, p);
-  }
-
-  public void addProjectile(final Projectile p) {
-    assert (p != null);
-
-    entities.add(Entities.PROJECTILE, p);
-  }
-
-  public void addCreep(final Creep c) {
-    assert (c != null);
-
-    entities.add(Entities.CREEP, c);
-  }
-
-  public void addAnimated(final Animated a) {
-    assert (a != null);
-
-    entities.add(Entities.ANIMATED, a);
+    entities.add(obj);
   }
 
   public Iterable<IObject> getUnits() {
-    return entities.get(Groups.UNITS);
+    return entities.iterate(Groups.UNITS);
   }
 
   public Iterable<IObject> get(final Entities e) {
-    return entities.get(e);
+    return entities.iterate(e);
   }
 
   public void scheduleForRemoval(final IObject object) {

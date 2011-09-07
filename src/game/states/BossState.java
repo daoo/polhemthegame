@@ -4,6 +4,11 @@
 
 package game.states;
 
+import game.CacheTool;
+import game.components.triggers.actions.IAction;
+import game.entities.Boss;
+import game.factories.Factory;
+
 import java.io.IOException;
 import java.util.Collection;
 
@@ -15,13 +20,6 @@ import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
-
-
-
-import game.CacheTool;
-import game.components.triggers.actions.IAction;
-import game.entities.Boss;
-import game.factories.Factory;
 
 public class BossState implements IState {
   private final Boss boss;

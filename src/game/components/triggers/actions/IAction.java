@@ -4,7 +4,7 @@
 
 package game.components.triggers.actions;
 
-import game.World;
+import game.world.World;
 import math.time.GameTime;
 
 public interface IAction {

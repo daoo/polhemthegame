@@ -4,7 +4,6 @@
 
 package game.entities;
 
-import game.World;
 import game.components.basic.Inventory;
 import game.components.basic.SimpleControl;
 import game.components.holdables.Hand;
@@ -14,6 +13,7 @@ import game.components.interfaces.ICompAnim;
 import game.components.triggers.actions.SpawnProjectile;
 import game.entities.projectiles.Projectile;
 import game.entities.projectiles.ProjectileTemplate;
+import game.world.World;
 import math.Vector2;
 import math.time.GameTime;
 

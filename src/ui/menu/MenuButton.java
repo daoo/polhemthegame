@@ -7,9 +7,8 @@ package ui.menu;
 
 import java.io.IOException;
 
-import ui.IUiEvent;
-
 import loader.parser.ParserException;
+import ui.IUiEvent;
 
 public class MenuButton extends MenuItem {
   public final IUiEvent onClick;

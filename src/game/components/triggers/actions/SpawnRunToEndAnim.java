@@ -4,12 +4,10 @@
 
 package game.components.triggers.actions;
 
-import math.time.GameTime;
-
-
-import game.World;
 import game.components.interfaces.ICompAnim;
 import game.entities.Animated;
+import game.world.World;
+import math.time.GameTime;
 
 public class SpawnRunToEndAnim implements IAction {
   private final Animated animated;
@@ -23,6 +21,6 @@ public class SpawnRunToEndAnim implements IAction {
   @Override
   public void execute(final GameTime time, final World world) {
     animated.stop();
-    world.addAnimated(animated);
+    world.add(animated);
   }
 }

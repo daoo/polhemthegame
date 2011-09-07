@@ -5,7 +5,6 @@
 package game.factories;
 
 import game.CacheTool;
-import game.World;
 import game.components.graphics.RSheet;
 import game.entities.Boss;
 import game.entities.Creep;
@@ -14,6 +13,7 @@ import game.entities.Player;
 import game.entities.Players;
 import game.events.impl.DamagePlayerEvent;
 import game.events.impl.KillEvent;
+import game.world.World;
 
 import java.io.IOException;
 
@@ -62,7 +62,7 @@ public class Factory {
     w.add(rectCreepKiller);
 
     for (final Player p : players) {
-      w.addPlayer(p);
+      w.add(p);
     }
 
     return w;

@@ -4,8 +4,8 @@
 
 package game.events.impl;
 
-import game.World;
 import game.events.IEventArgs;
+import game.world.World;
 
 public class EventArgs implements IEventArgs {
   private final World world;

@@ -4,9 +4,9 @@
 
 package game.events;
 
-import java.util.ArrayList;
-
 import game.entities.interfaces.IObject;
+
+import java.util.ArrayList;
 
 public class EventHandler<T extends IEventArgs> {
   private final ArrayList<IEvent<T>> events;

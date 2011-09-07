@@ -4,14 +4,6 @@
 
 package game.components.holdables.weapons;
 
-import java.util.ArrayList;
-
-import math.Vector2;
-import math.time.GameTime;
-
-import org.newdawn.slick.Graphics;
-
-
 import game.components.ComponentMessages;
 import game.components.graphics.RSheet;
 import game.components.holdables.IHoldable;
@@ -19,6 +11,13 @@ import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
 import game.entities.projectiles.ProjectileTemplate;
+
+import java.util.ArrayList;
+
+import math.Vector2;
+import math.time.GameTime;
+
+import org.newdawn.slick.Graphics;
 
 public abstract class Weapon implements IHoldable {
   protected final Vector2                    muzzleOffset;

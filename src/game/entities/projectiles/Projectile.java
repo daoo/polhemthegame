@@ -4,18 +4,16 @@
 
 package game.entities.projectiles;
 
-import loader.data.json.ProjectilesData.ProjectileData;
-import math.Vector2;
-import math.time.GameTime;
-
-
-import game.World;
 import game.components.basic.Life;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.ICompAnim;
 import game.components.physics.Gravity;
 import game.entities.Entity;
 import game.entities.interfaces.IDamagable;
+import game.world.World;
+import loader.data.json.ProjectilesData.ProjectileData;
+import math.Vector2;
+import math.time.GameTime;
 
 public class Projectile extends Entity implements IDamagable {
   private final float   duration, range, damage;
