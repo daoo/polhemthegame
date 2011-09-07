@@ -6,7 +6,6 @@ package main;
 
 import game.modes.Game;
 import game.modes.IMode;
-import game.ui.HUD;
 
 import java.io.IOException;
 
@@ -21,6 +20,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import ui.hud.HUD;
 
 
 public class StateGame extends BasicGameState {

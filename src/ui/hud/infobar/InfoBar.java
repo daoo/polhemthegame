@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.ui.infobar;
+package ui.hud.infobar;
 
 // TODO: A 1px high bar turns weird color-wise from time to time (probably because of aa)
 

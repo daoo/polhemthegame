@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.ui;
+package ui.hud;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;

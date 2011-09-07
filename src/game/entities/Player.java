@@ -14,11 +14,12 @@ import game.components.interfaces.ICompAnim;
 import game.components.triggers.actions.SpawnProjectile;
 import game.entities.projectiles.Projectile;
 import game.entities.projectiles.ProjectileTemplate;
-import game.ui.infobar.Bar;
 import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Color;
+
+import ui.hud.infobar.Bar;
 
 
 

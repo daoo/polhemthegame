@@ -8,6 +8,9 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 
+import ui.hud.infobar.Bar;
+import ui.hud.infobar.InfoBar;
+
 
 
 import game.World;
@@ -20,8 +23,6 @@ import game.components.physics.AABB;
 import game.components.triggers.actions.SpawnRunToEndAnim;
 import game.entities.interfaces.IDamagable;
 import game.entities.interfaces.IWalking;
-import game.ui.infobar.Bar;
-import game.ui.infobar.InfoBar;
 
 public class Unit extends Entity implements IDamagable, IWalking {
   private final Life life;

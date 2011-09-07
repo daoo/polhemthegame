@@ -2,12 +2,9 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.ui;
+package ui;
 
 import game.CacheTool;
-import game.ui.menu.Menu;
-import game.ui.menu.MenuButton;
-import game.ui.menu.MenuItemDisabled;
 
 import java.io.IOException;
 
@@ -22,6 +19,10 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import ui.menu.Menu;
+import ui.menu.MenuButton;
+import ui.menu.MenuItemDisabled;
 
 
 public class StateMenu extends BasicGameState {
