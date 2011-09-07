@@ -4,6 +4,8 @@
 
 package game.states;
 
+import game.components.triggers.actions.IAction;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -11,7 +13,6 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import components.triggers.actions.IAction;
 
 public class DoubleState implements IState {
   private final IState fgState;

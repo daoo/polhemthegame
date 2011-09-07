@@ -4,11 +4,11 @@
 
 package game.states;
 
+import game.components.triggers.actions.IActionProducer;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import components.triggers.actions.IActionProducer;
 
 public interface IState extends IActionProducer {
   public void update(final GameTime time);

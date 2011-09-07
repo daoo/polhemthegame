@@ -10,18 +10,18 @@ import java.util.Collection;
 import loader.data.DataException;
 import loader.data.json.LevelData.BossStateData;
 import loader.parser.ParserException;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import ptg.CacheTool;
-import ptg.Locator;
 
-import components.triggers.actions.IAction;
 
-import entities.Boss;
-import factories.Factory;
+import game.CacheTool;
+import game.components.triggers.actions.IAction;
+import game.entities.Boss;
+import game.factories.Factory;
 
 public class BossState implements IState {
   private final Boss boss;

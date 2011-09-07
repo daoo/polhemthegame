@@ -15,19 +15,19 @@ import loader.data.json.CreepsData.CreepData;
 import loader.data.json.LevelData.CreepSpawnData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import ptg.CacheTool;
-import ptg.Locator;
 
-import components.triggers.actions.IAction;
-import components.triggers.actions.SpawnCreep;
 
-import entities.Creep;
-import factories.Factory;
+import game.CacheTool;
+import game.components.triggers.actions.IAction;
+import game.components.triggers.actions.SpawnCreep;
+import game.entities.Creep;
+import game.factories.Factory;
 
 public class CreepsState implements IState {
   private final ArrayList<IAction> actions;

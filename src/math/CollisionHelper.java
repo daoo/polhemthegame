@@ -4,7 +4,7 @@
 
 package math;
 
-import components.physics.AABB;
+import game.components.physics.AABB;
 
 public class CollisionHelper {
   public static boolean SweepCollisionTest(final AABB a, final AABB b, final float dt) {

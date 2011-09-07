@@ -4,6 +4,8 @@
 
 package game.states;
 
+import game.components.triggers.actions.IAction;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -13,7 +15,6 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import components.triggers.actions.IAction;
 
 public class TransitionState implements IState {
   private final float x, y;

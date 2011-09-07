@@ -11,18 +11,17 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import ptg.GroupContainer;
 
-import components.physics.AABB;
 
-import entities.Animated;
-import entities.Creep;
-import entities.Player;
-import entities.Unit;
-import entities.groups.Entities;
-import entities.groups.Groups;
-import entities.interfaces.IObject;
-import entities.projectiles.Projectile;
+import game.components.physics.AABB;
+import game.entities.Animated;
+import game.entities.Creep;
+import game.entities.Player;
+import game.entities.Unit;
+import game.entities.groups.Entities;
+import game.entities.groups.Groups;
+import game.entities.interfaces.IObject;
+import game.entities.projectiles.Projectile;
 
 public class World {
   private final ArrayList<IObject> toRemove;

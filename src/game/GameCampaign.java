@@ -10,8 +10,7 @@ import java.util.Iterator;
 import loader.data.json.CampaignData;
 import loader.data.json.LevelData;
 import loader.parser.ParserException;
-import ptg.CacheTool;
-import ptg.Locator;
+import main.Locator;
 
 public class GameCampaign {
   private final CampaignData     campaign;

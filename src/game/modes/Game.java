@@ -4,9 +4,10 @@
 
 package game.modes;
 
-import entities.Players;
+import game.CacheTool;
 import game.GameCampaign;
 import game.GameLevel;
+import game.entities.Players;
 import game.states.DoubleState;
 import game.states.TransitionState;
 
@@ -15,13 +16,12 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-import ptg.CacheTool;
-import ptg.Locator;
 
 public class Game implements IMode {
   private GameLevel          level;

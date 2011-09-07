@@ -14,19 +14,18 @@ import loader.data.json.LevelData.CreepStateData;
 import loader.data.json.LevelData.StateData;
 import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
+import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import ptg.CacheTool;
-import ptg.Locator;
 
-import components.triggers.actions.IAction;
 
-import entities.Players;
-import factories.Factory;
+import game.components.triggers.actions.IAction;
+import game.entities.Players;
+import game.factories.Factory;
 import game.states.BossState;
 import game.states.CreepsState;
 import game.states.DoubleState;
