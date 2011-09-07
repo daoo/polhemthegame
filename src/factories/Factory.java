@@ -9,8 +9,8 @@ import entities.Creep;
 import entities.InvisibleRectangle;
 import entities.Player;
 import entities.Players;
-import events.DamagePlayerEvent;
-import events.KillEvent;
+import events.impl.DamagePlayerEvent;
+import events.impl.KillEvent;
 import game.World;
 
 import java.io.IOException;

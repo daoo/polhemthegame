@@ -1,4 +1,4 @@
-package events;
+package events.impl;
 
 import entities.interfaces.IObject;
 import game.World;

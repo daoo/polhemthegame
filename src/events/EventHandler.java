@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 import entities.interfaces.IObject;
 
-public class EventHandler {
-  private final ArrayList<IEvent> events;
+public class EventHandler<T extends IEventArgs> {
+  private final ArrayList<IEvent<T>> events;
 
   public EventHandler() {
-    events = new ArrayList<IEvent>();
+    events = new ArrayList<IEvent<T>>();
   }
 
-  public void add(final IEvent event) {
+  public void add(final IEvent<T> event) {
     assert (event != null);
 
     events.add(event);
   }
 
-  public void execute(final IObject sender, final IEventArgs args) {
-    for (final IEvent e : events) {
+  public void execute(final IObject sender, final T args) {
+    for (final IEvent<T> e : events) {
       e.execute(sender, args);
     }
   }

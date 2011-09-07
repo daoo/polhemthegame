@@ -1,5 +1,6 @@
-package events;
+package events.impl;
 
+import events.IEventArgs;
 import game.World;
 
 public class EventArgs implements IEventArgs {

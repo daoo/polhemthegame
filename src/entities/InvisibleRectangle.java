@@ -11,23 +11,24 @@ import org.newdawn.slick.Graphics;
 import components.physics.AABB;
 import components.triggers.actions.IAction;
 
+import entities.groups.Entities;
 import entities.interfaces.IEntity;
 import entities.interfaces.IObject;
 import events.EventHandler;
-import events.ObjectEventArgs;
+import events.impl.ObjectEventArgs;
 import game.World;
 
 public class InvisibleRectangle implements IEntity {
   private final AABB body;
 
-  public final EventHandler onContainsEvent;
-  public final EventHandler onNotContainsEvent;
+  public final EventHandler<ObjectEventArgs> onContainsEvent;
+  public final EventHandler<ObjectEventArgs> onNotContainsEvent;
 
   public InvisibleRectangle(float x, float y, float w, float h) {
     body = new AABB(x, y, w, h, 0, 0);
 
-    onContainsEvent = new EventHandler();
-    onNotContainsEvent = new EventHandler();
+    onContainsEvent = new EventHandler<ObjectEventArgs>();
+    onNotContainsEvent = new EventHandler<ObjectEventArgs>();
   }
 
   @Override
