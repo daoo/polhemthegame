@@ -20,6 +20,7 @@ import components.interfaces.ICompUpdate;
 import components.physics.AABB;
 import components.triggers.actions.IAction;
 
+import entities.groups.Entities;
 import entities.interfaces.IEntity;
 import game.World;
 
@@ -125,5 +126,11 @@ public class Entity implements IEntity {
   @Override
   public boolean isAlive() {
     return true;
+  }
+
+  @Override
+  public Entities getType() {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

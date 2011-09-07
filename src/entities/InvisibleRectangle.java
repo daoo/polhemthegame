@@ -82,4 +82,9 @@ public class InvisibleRectangle implements IEntity {
   public void clearActions() {
     // Do nothing
   }
+
+  @Override
+  public Entities getType() {
+    return Entities.GENERAL;
+  }
 }
