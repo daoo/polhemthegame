@@ -4,23 +4,26 @@
 
 package game.components.triggers.actions;
 
+import game.components.graphics.animations.RunTo;
 import game.components.interfaces.ICompAnim;
-import game.entities.Animated;
+import game.entities.Entity;
 import game.world.World;
 import math.time.GameTime;
 
 public class SpawnRunToEndAnim implements IAction {
-  private final Animated animated;
+  private final ICompAnim anim;
+  private final Entity animated;
 
   public SpawnRunToEndAnim(final float x, final float y,
                         final float width, final float height,
                         final ICompAnim anim) {
-    animated = new Animated(x, y, width, height, anim);
+    this.anim = anim;
+    animated = new Entity(x, y, width, height, 0, 0);
   }
 
   @Override
   public void execute(final GameTime time, final World world) {
-    animated.stop();
+    anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
     world.add(animated);
   }
 }
