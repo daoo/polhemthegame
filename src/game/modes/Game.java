@@ -90,13 +90,13 @@ public class Game implements IMode {
           nextLevel();
         } catch (final DataException e) {
           e.printStackTrace();
-          System.exit(0);
+          System.exit(1);
         } catch (final ParserException e) {
           e.printStackTrace();
-          System.exit(0);
+          System.exit(1);
         } catch (final IOException e) {
           e.printStackTrace();
-          System.exit(0);
+          System.exit(1);
         }
       } else {
         level.update(time);
