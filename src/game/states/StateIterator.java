@@ -6,12 +6,12 @@ package game.states;
 
 import java.util.Iterator;
 
-public class StateIterator implements Iterator<IState> {
-  private final Iterator<IState> internal;
-  private IState current;
+public class StateIterator implements Iterator<IRoundState> {
+  private final Iterator<IRoundState> internal;
+  private IRoundState current;
   private boolean finished;
 
-  public StateIterator(Iterable<IState> iterable) {
+  public StateIterator(Iterable<IRoundState> iterable) {
     internal = iterable.iterator();
 
     current = null;
@@ -24,7 +24,7 @@ public class StateIterator implements Iterator<IState> {
   }
 
   @Override
-  public IState next() {
+  public IRoundState next() {
     if (!finished)
       current = internal.next();
 
@@ -36,7 +36,7 @@ public class StateIterator implements Iterator<IState> {
     internal.remove();
   }
 
-  public IState getCurrent() {
+  public IRoundState getCurrent() {
     return current;
   }
 
@@ -44,7 +44,7 @@ public class StateIterator implements Iterator<IState> {
    * Stops the iterator from iterating and points it at state.
    * @param state
    */
-  public void endNowWith(final IState state) {
+  public void endNowWith(final IRoundState state) {
     current = state;
     finished = true;
   }

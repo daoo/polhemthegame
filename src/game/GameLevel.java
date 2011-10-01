@@ -10,7 +10,7 @@ import game.factories.Factory;
 import game.states.BossState;
 import game.states.CreepsState;
 import game.states.DoubleState;
-import game.states.IState;
+import game.states.IRoundState;
 import game.states.StateIterator;
 import game.states.TransitionState;
 import game.world.World;
@@ -56,7 +56,7 @@ public class GameLevel {
   private final Rectangle         availible;
 
   private final DoubleState       gameOverState;
-  private final ArrayList<IState> states;
+  private final ArrayList<IRoundState> states;
   private final StateIterator     current;
 
   public GameLevel(final LevelData level, final Players players,
@@ -80,7 +80,7 @@ public class GameLevel {
     players.reposition(availible);
 
     // Setup level and it's states
-    this.states        = new ArrayList<IState>();
+    this.states        = new ArrayList<IRoundState>();
     this.gameOverState = gameOverState;
 
     for (final String state : level.states) {
@@ -130,7 +130,7 @@ public class GameLevel {
       }
 
       if (!players.isAlive() && !current.isFinished()) {
-        final IState oldState = current.getCurrent();
+        final IRoundState oldState = current.getCurrent();
 
         current.endNowWith(gameOverState);
         gameOverState.start(oldState);

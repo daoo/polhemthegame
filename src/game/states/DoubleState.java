@@ -14,11 +14,11 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 
-public class DoubleState implements IState {
-  private final IState fgState;
-  private IState       bgState;
+public class DoubleState implements IRoundState {
+  private final IRoundState fgState;
+  private IRoundState       bgState;
 
-  public DoubleState(final IState fgState) {
+  public DoubleState(final IRoundState fgState) {
     this.fgState = fgState;
     this.bgState = null;
   }
@@ -55,7 +55,7 @@ public class DoubleState implements IState {
     return fgState.isFinished();
   }
 
-  public void start(final IState state) {
+  public void start(final IRoundState state) {
     this.bgState = state;
   }
 }

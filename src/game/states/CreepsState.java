@@ -27,7 +27,7 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-public class CreepsState implements IState {
+public class CreepsState implements IRoundState {
   private final ArrayList<IAction> actions;
   private final ArrayList<Creep>   toBeSpawned, spawned;
 

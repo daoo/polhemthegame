@@ -21,7 +21,7 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-public class BossState implements IState {
+public class BossState implements IRoundState {
   private final Boss boss;
   private boolean    finished;
 

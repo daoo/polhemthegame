@@ -16,7 +16,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 
-public class TransitionState implements IState {
+public class TransitionState implements IRoundState {
   private final float x, y;
   private final Image img;
   private final float duration;

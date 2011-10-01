@@ -10,7 +10,7 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 
-public interface IState extends IActionProducer {
+public interface IRoundState extends IActionProducer {
   public void update(final GameTime time);
 
   public void render(final Graphics g);

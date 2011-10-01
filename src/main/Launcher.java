@@ -13,15 +13,13 @@ import math.Random;
 import math.Rectangle;
 
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-
-import ui.StateMenu;
-import ui.credits.StateCredits;
 
 
-public class Launcher extends StateBasedGame {
+public class Launcher extends BasicGame {
   public static final String NAME    = "PolhemTheGame";
   public static final String VERSION = "1.0";
 
@@ -37,16 +35,6 @@ public class Launcher extends StateBasedGame {
 
   public Launcher(final boolean skipMenu) {
     super(NAME + " - " + VERSION);
-
-    addState(new StateMenu(MAINMENU));
-    addState(new StateGame(GAMEPLAY));
-    addState(new StateCredits(CREDITS));
-
-    if (skipMenu) {
-      enterState(GAMEPLAY);
-    } else {
-      enterState(MAINMENU);
-    }
   }
 
   public static void main(final String[] args) {
@@ -79,10 +67,17 @@ public class Launcher extends StateBasedGame {
   }
 
   @Override
-  public void initStatesList(final GameContainer gameContainer)
-    throws SlickException {
-    getState(MAINMENU).init(gameContainer, this);
-    getState(GAMEPLAY).init(gameContainer, this);
-    getState(CREDITS).init(gameContainer, this);
+  public void render(GameContainer container, Graphics g) throws SlickException {
+
+  }
+
+  @Override
+  public void init(GameContainer container) throws SlickException {
+
+  }
+
+  @Override
+  public void update(GameContainer container, int delta) throws SlickException {
+
   }
 }
