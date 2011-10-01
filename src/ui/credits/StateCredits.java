@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.parser.ParserException;
-import main.App;
+import main.Launcher;
 import main.Locator;
 
 import org.newdawn.slick.GameContainer;
@@ -57,12 +57,12 @@ public class StateCredits extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     gc.setClearEachFrame(true);
-    gc.setTargetFrameRate(App.MAX_FPS);
+    gc.setTargetFrameRate(Launcher.MAX_FPS);
 
     speed = DEFAULT_Y_SPEED;
     pos_y = gc.getHeight();
 
-    float tmp_x = App.WIDTH / 2.0f;
+    float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = 0;
 
     credits.clear();
@@ -143,7 +143,7 @@ public class StateCredits extends BasicGameState {
     }
 
     if (menu) {
-      sb.enterState(App.MAINMENU);
+      sb.enterState(Launcher.MAINMENU);
     }
 
     final float dt = delta / 1000.0f;

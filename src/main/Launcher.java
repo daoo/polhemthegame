@@ -21,7 +21,7 @@ import ui.StateMenu;
 import ui.credits.StateCredits;
 
 
-public class App extends StateBasedGame {
+public class Launcher extends StateBasedGame {
   public static final String NAME    = "PolhemTheGame";
   public static final String VERSION = "1.0";
 
@@ -35,7 +35,7 @@ public class App extends StateBasedGame {
   public static final int       MAX_FPS    = 100;
   public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-  public App(final boolean skipMenu) {
+  public Launcher(final boolean skipMenu) {
     super(NAME + " - " + VERSION);
 
     addState(new StateMenu(MAINMENU));
@@ -61,7 +61,7 @@ public class App extends StateBasedGame {
         }
       }
 
-      final AppGameContainer app = new AppGameContainer(new App(skipMenu));
+      final AppGameContainer app = new AppGameContainer(new Launcher(skipMenu));
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();

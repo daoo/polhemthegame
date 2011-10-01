@@ -59,8 +59,8 @@ public class StateGame extends BasicGameState {
           new GsonParser(CampaignData.class));
 
       final Game game = new Game(campaign, 0, HUD.HEIGHT,
-                                 App.WIDTH,
-                                 App.HEIGHT - (2 * HUD.HEIGHT));
+                                 Launcher.WIDTH,
+                                 Launcher.HEIGHT - (2 * HUD.HEIGHT));
       mode = game;
       //mode = new Debugger(game);
 
@@ -93,7 +93,7 @@ public class StateGame extends BasicGameState {
     }
 
     if (mode.isFinished()) {
-      sb.enterState(App.CREDITS);
+      sb.enterState(Launcher.CREDITS);
     }
     else {
       mode.update((delta / 1000.0f) * timescale );

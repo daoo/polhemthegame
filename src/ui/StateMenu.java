@@ -9,7 +9,7 @@ import game.CacheTool;
 import java.io.IOException;
 
 import loader.parser.ParserException;
-import main.App;
+import main.Launcher;
 import main.Locator;
 
 import org.newdawn.slick.GameContainer;
@@ -39,7 +39,7 @@ public class StateMenu extends BasicGameState {
 
     @Override
     public void fire() {
-      sb.enterState(App.GAMEPLAY);
+      sb.enterState(Launcher.GAMEPLAY);
     }
   }
 
@@ -76,7 +76,7 @@ public class StateMenu extends BasicGameState {
   public void enter(final GameContainer gc, final StateBasedGame sb)
     throws SlickException {
     gc.setClearEachFrame(true);
-    gc.setTargetFrameRate(App.MAX_FPS);
+    gc.setTargetFrameRate(Launcher.MAX_FPS);
 
     try {
       background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
