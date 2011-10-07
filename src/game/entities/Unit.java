@@ -67,11 +67,6 @@ public class Unit extends Entity implements IDamagable, IWalking {
   }
 
   @Override
-  public void kill() {
-    life.kill();
-  }
-
-  @Override
   public AABB getBody() {
     return body;
   }
@@ -96,7 +91,7 @@ public class Unit extends Entity implements IDamagable, IWalking {
 
   @Override
   public void sendMessage(ComponentMessages message) {
-    if (message == ComponentMessages.KILLED) {
+    if (message == ComponentMessages.KILL) {
       clearComponents();
       actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
                                         death.getTileWidth(), death.getTileHeight(),
