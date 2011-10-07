@@ -8,12 +8,12 @@ package ui.menu;
 import java.io.IOException;
 
 import loader.parser.ParserException;
-import ui.IUiEvent;
+import ui.IUIEvent;
 
 public class MenuButton extends MenuItem {
-  public final IUiEvent onClick;
+  public final IUIEvent onClick;
 
-  public MenuButton(final String name, final int x, final int y, final IUiEvent e)
+  public MenuButton(final String name, final int x, final int y, final IUIEvent e)
     throws IOException, ParserException {
     super(name, x, y);
 

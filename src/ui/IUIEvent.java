@@ -4,6 +4,6 @@
 
 package ui;
 
-public interface IUiEvent {
+public interface IUIEvent {
   public void fire();
 }

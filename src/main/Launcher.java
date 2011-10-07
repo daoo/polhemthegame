@@ -23,17 +23,15 @@ public class Launcher extends BasicGame {
   public static final String NAME    = "PolhemTheGame";
   public static final String VERSION = "1.0";
 
-  public static final int       MAINMENU   = 0;
-  public static final int       CREDITS    = 1;
-  public static final int       GAMEPLAY   = 2;
-
   public static final int       WIDTH      = 1024;
   public static final int       HEIGHT     = 768;
   public static final boolean   FULLSCREEN = false;
   public static final int       MAX_FPS    = 100;
   public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-  public Launcher(final boolean skipMenu) {
+  private GameStateManager stateGame;
+
+  public Launcher() {
     super(NAME + " - " + VERSION);
   }
 
@@ -42,42 +40,42 @@ public class Launcher extends BasicGame {
       Locator.registerCache(new Cache(new Enviroment().appDir));
       Locator.registerRandom(new Random());
 
-      boolean skipMenu = false;
-      for (String s : args) {
-        if (s.equals("-s")) {
-          skipMenu = true;
-        }
-      }
-
-      final AppGameContainer app = new AppGameContainer(new Launcher(skipMenu));
+      final AppGameContainer app = new AppGameContainer(new Launcher());
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();
-    } catch (final FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (final SlickException e) {
-      e.printStackTrace();
+    } catch (final FileNotFoundException ex) {
+      ex.printStackTrace();
+    } catch (final SlickException ex) {
+      ex.printStackTrace();
     } finally {
       try {
         Locator.getCache().close();
-      } catch (final CacheException e) {
-        e.printStackTrace();
+      } catch (final CacheException ex) {
+        ex.printStackTrace();
       }
     }
   }
 
   @Override
-  public void render(GameContainer container, Graphics g) throws SlickException {
+  public void init(GameContainer container) throws SlickException {
+    container.setTargetFrameRate(60);
 
+    stateGame = new GameStateManager();
+    stateGame.enterMainMenu();
   }
 
   @Override
-  public void init(GameContainer container) throws SlickException {
-
+  public void render(GameContainer container, Graphics g) throws SlickException {
+    stateGame.getCurrentState().render(g);
   }
 
   @Override
   public void update(GameContainer container, int delta) throws SlickException {
-
+    if (stateGame.shouldExit()) {
+      container.exit();
+    } else {
+      stateGame.getCurrentState().update(stateGame, delta);
+    }
   }
 }
