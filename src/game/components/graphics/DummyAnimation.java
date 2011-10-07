@@ -19,12 +19,12 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     // Do nothing
   }
 
   @Override
-  public void render(Graphics g) {
+  public void render(final Graphics g) {
     // Do nothing
   }
 
@@ -34,7 +34,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(IAnimator animator) {
+  public void setAnimator(final IAnimator animator) {
     // Do nothing
   }
 
@@ -64,7 +64,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     // Do nothing
   }
 }

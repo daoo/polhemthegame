@@ -104,7 +104,7 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     // Do nothing
   }
 }

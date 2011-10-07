@@ -10,10 +10,10 @@ import loader.parser.ParserException;
 
 public class MenuItemDisabled extends MenuItem {
 
-  public MenuItemDisabled(String name, int x, int y)
+  public MenuItemDisabled(final String name, final int x, final int y)
     throws IOException, ParserException {
     super(name, x, y);
-   
+
     setState(MENU_ITEM_STATE.DISABLED);
   }
 }

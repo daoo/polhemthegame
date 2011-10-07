@@ -104,7 +104,7 @@ public class SimpleControl implements ICompUpdate {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     // Do nothing
   }
 }

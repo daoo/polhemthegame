@@ -31,12 +31,12 @@ public class World {
   public void update(final GameTime time) {
     // Do projectile collisions first, I think it leads to more accurate collisions
     for (final IObject e1 : entities.iterate(Entities.PROJECTILE)) {
-      Projectile p = (Projectile) e1;
+      final Projectile p = (Projectile) e1;
       if (p.canCollide()) {
         // Check for collisions with units
         final AABB a = p.getBody();
         for (final IObject e2 : entities.iterate(Groups.UNITS)) {
-          Unit u = (Unit) e2;
+          final Unit u = (Unit) e2;
           if (CollisionHelper.SweepCollisionTest(a, u.getBody(), time.getFrameLength())) {
             // FIXME: If the projectile can hit multiple targets and is sufficently slow,
             //        it might hit the same target multiple times.
@@ -53,7 +53,7 @@ public class World {
     }
 
     // Update
-    for (IObject e : entities.iterateAll()) {
+    for (final IObject e : entities.iterateAll()) {
       e.update(time, this);
     }
 

@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.parser.ParserException;
+import main.GameStateManager;
 import main.IGameState;
 import main.Launcher;
 import main.Locator;
-import main.GameStateManager;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
@@ -47,7 +47,7 @@ public class StateCredits implements IGameState {
     speed = DEFAULT_Y_SPEED;
     pos_y = Launcher.HEIGHT;
 
-    float tmp_x = Launcher.WIDTH / 2.0f;
+    final float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = 0;
 
     credits = new ArrayList<ImageWithLocation>(Credits.CreditsText.length);
@@ -56,9 +56,9 @@ public class StateCredits implements IGameState {
         ImageWithLocation img;
 
         if (s.startsWith("img:")) {
-          Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
-          float x = tmp_x - a.getWidth() / 2.0f;
-          float y = tmp_y - a.getHeight() / 2.0f;
+          final Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
+          final float x = tmp_x - a.getWidth() / 2.0f;
+          final float y = tmp_y - a.getHeight() / 2.0f;
           img = new ImageWithLocation(x, y, a);
         } else if (s.startsWith("big:")) {
           img = lineFromString(tmp_x, tmp_y, s.substring(4), font_large);

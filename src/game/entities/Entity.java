@@ -101,8 +101,8 @@ public class Entity implements IEntity {
     return body;
   }
 
-  public void sendMessage(ComponentMessages message) {
-    for (IComp comp : all) {
+  public void sendMessage(final ComponentMessages message) {
+    for (final IComp comp : all) {
       comp.reciveMessage(message);
     }
   }

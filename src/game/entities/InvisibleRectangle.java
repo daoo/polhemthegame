@@ -27,7 +27,7 @@ public class InvisibleRectangle implements IEntity {
   public final EventHandler<ObjectEventArgs> onContainsEvent;
   public final EventHandler<ObjectEventArgs> onNotContainsEvent;
 
-  public InvisibleRectangle(float x, float y, float w, float h) {
+  public InvisibleRectangle(final float x, final float y, final float w, final float h) {
     body = new AABB(x, y, w, h, 0, 0);
 
     onContainsEvent = new EventHandler<ObjectEventArgs>();
@@ -47,17 +47,17 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void render(Graphics g) {
+  public void render(final Graphics g) {
     // Do nothing
   }
 
   @Override
-  public void setPosition(Vector2 v) {
+  public void setPosition(final Vector2 v) {
     body.setPosition(v);
   }
 
   @Override
-  public void setVelocity(Vector2 v) {
+  public void setVelocity(final Vector2 v) {
     body.addVelocity(v);
   }
 

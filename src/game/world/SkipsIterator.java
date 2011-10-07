@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class SkipsIterator implements Iterator<IObject> {
   private final Iterator<IObject> internal;
-  private Entities[] keys;
+  private final Entities[] keys;
 
   private IObject next;
 

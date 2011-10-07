@@ -48,7 +48,7 @@ public class InfoBar implements ICompRender {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     // Do nothing
   }
 }

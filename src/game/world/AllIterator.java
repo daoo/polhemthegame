@@ -11,7 +11,7 @@ import java.util.Iterator;
 public class AllIterator implements Iterator<IObject> {
   private final Iterator<IObject> internal;
 
-  public AllIterator(Iterable<IObject> list) {
+  public AllIterator(final Iterable<IObject> list) {
     internal = list.iterator();
   }
 

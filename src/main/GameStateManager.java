@@ -29,10 +29,10 @@ public class GameStateManager {
   public void enterMainMenu() {
     try {
       currentState = new MenuState(this);
-    } catch (ParserException e) {
+    } catch (final ParserException e) {
       e.printStackTrace();
       quit();
-    } catch (IOException e) {
+    } catch (final IOException e) {
       e.printStackTrace();
       quit();
     }

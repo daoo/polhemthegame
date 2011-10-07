@@ -23,7 +23,7 @@ import org.newdawn.slick.Graphics;
 
 public class BossState implements IRoundState {
   private final Boss boss;
-  private boolean    finished;
+  private final boolean    finished;
 
   public BossState(final Rectangle rect, final BossStateData sd)
     throws ParserException, DataException, IOException {

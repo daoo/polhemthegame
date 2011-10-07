@@ -11,7 +11,7 @@ public class StateIterator implements Iterator<IRoundState> {
   private IRoundState current;
   private boolean finished;
 
-  public StateIterator(Iterable<IRoundState> iterable) {
+  public StateIterator(final Iterable<IRoundState> iterable) {
     internal = iterable.iterator();
 
     current = null;

@@ -17,7 +17,7 @@ public class Life implements IComp {
   private final float maxHP;
   private float hp;
 
-  public Life(final Entity owner, float maxHP) {
+  public Life(final Entity owner, final float maxHP) {
     this.owner = owner;
 
     this.alive = true;

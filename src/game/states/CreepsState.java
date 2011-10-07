@@ -31,11 +31,11 @@ public class CreepsState implements IRoundState {
   private final ArrayList<IAction> actions;
   private final ArrayList<Creep>   toBeSpawned, spawned;
 
-  private float getCreepX(Rectangle rect, final int width) {
+  private float getCreepX(final Rectangle rect, final int width) {
     return rect.getX2() + width;
   }
 
-  private float getCreepY(Rectangle rect, final int height) {
+  private float getCreepY(final Rectangle rect, final int height) {
     return Locator.getRandom().nextFloat(0.0f, rect.getY2() - height);
   }
 

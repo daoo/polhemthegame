@@ -35,7 +35,7 @@ public class AABB extends Rectangle {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
     sb.append("min: ");
     sb.append(min.toString());
     sb.append(", max: ");

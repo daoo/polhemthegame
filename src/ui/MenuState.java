@@ -9,9 +9,9 @@ import game.CacheTool;
 import java.io.IOException;
 
 import loader.parser.ParserException;
+import main.GameStateManager;
 import main.IGameState;
 import main.Locator;
-import main.GameStateManager;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
@@ -47,7 +47,7 @@ public class MenuState implements IGameState {
   }
 
   @Override
-  public void update(final GameStateManager stateGame, int delta) {
+  public void update(final GameStateManager stateGame, final int delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {

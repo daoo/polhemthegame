@@ -66,7 +66,7 @@ public class Inventory implements IComp {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     // Do nothing
   }
 }

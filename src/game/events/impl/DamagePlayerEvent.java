@@ -13,7 +13,7 @@ import game.events.IEvent;
 public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(final IObject sender, final ObjectEventArgs args) {
-    float dmg = ((Creep)args.getObject()).getDamage();
+    final float dmg = ((Creep)args.getObject()).getDamage();
 
     for (final IObject e : args.getWorld().get(Entities.PLAYER)) {
       ((Player) e).damage(dmg);

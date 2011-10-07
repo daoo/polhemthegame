@@ -114,7 +114,7 @@ public abstract class Weapon implements IHoldable {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
+  public void reciveMessage(final ComponentMessages message) {
     if (message == ComponentMessages.KILL) {
       toggleOff();
     }

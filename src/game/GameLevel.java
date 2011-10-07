@@ -87,7 +87,7 @@ public class GameLevel {
       final StateData sd = level.findState(state);
 
       if (sd.type.equals("text")) {
-        TextStateData data = (TextStateData) sd;
+        final TextStateData data = (TextStateData) sd;
         states.add(new TransitionState(
           CacheTool.getImage(Locator.getCache(), data.text),
           data.duration, availible));
@@ -123,7 +123,7 @@ public class GameLevel {
       world.update(time);
 
       if (current.getCurrent().hasActions()) {
-        for (IAction action : current.getCurrent().getActions()) {
+        for (final IAction action : current.getCurrent().getActions()) {
           action.execute(time, world);
         }
         current.getCurrent().clearActions();

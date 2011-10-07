@@ -28,7 +28,7 @@ public class ExplodingProjectile extends Projectile {
 
     this.explosion = explosion;
   }
-  
+
   @Override
   public void sendMessage(final ComponentMessages message) {
     super.sendMessage(message);

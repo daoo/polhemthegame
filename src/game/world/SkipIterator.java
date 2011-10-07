@@ -15,7 +15,7 @@ public class SkipIterator implements Iterator<IObject> {
 
   private IObject next;
 
-  public SkipIterator(Iterable<IObject> object, Entities entities) {
+  public SkipIterator(final Iterable<IObject> object, final Entities entities) {
     internal = object.iterator();
     this.entities = entities;
   }

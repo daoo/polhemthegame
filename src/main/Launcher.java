@@ -58,7 +58,7 @@ public class Launcher extends BasicGame {
   }
 
   @Override
-  public void init(GameContainer container) throws SlickException {
+  public void init(final GameContainer container) throws SlickException {
     container.setTargetFrameRate(60);
 
     stateGame = new GameStateManager();
@@ -66,12 +66,12 @@ public class Launcher extends BasicGame {
   }
 
   @Override
-  public void render(GameContainer container, Graphics g) throws SlickException {
+  public void render(final GameContainer container, final Graphics g) throws SlickException {
     stateGame.getCurrentState().render(g);
   }
 
   @Override
-  public void update(GameContainer container, int delta) throws SlickException {
+  public void update(final GameContainer container, final int delta) throws SlickException {
     if (stateGame.shouldExit()) {
       container.exit();
     } else {
