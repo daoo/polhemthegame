@@ -4,6 +4,7 @@
 
 package game.entities.projectiles;
 
+import game.components.ComponentMessages;
 import game.components.basic.Life;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.ICompAnim;
@@ -57,10 +58,10 @@ public class Projectile extends Entity implements IDamagable {
     super.update(time, world);
 
     if ((duration != -1) && ((time.getElapsed() - startTime) > duration)) {
-      kill();
+    	sendMessage(ComponentMessages.KILL);
     }
     if ((range != -1) && (body.getMin().distance(startPos) > range)) {
-      kill();
+      sendMessage(ComponentMessages.KILL);
     }
   }
 
@@ -75,11 +76,6 @@ public class Projectile extends Entity implements IDamagable {
   @Override
   public void damage(final float value) {
     life.damage(value);
-  }
-
-  @Override
-  public void kill() {
-    life.kill();
   }
 
   @Override

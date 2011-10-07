@@ -22,14 +22,12 @@ public class Life implements IComp {
 
     this.alive = true;
 
-    this.hp = maxHP;
+    this.hp    = maxHP;
     this.maxHP = maxHP;
   }
 
   public void kill() {
-    hp = 0;
-    alive = false;
-    owner.sendMessage(ComponentMessages.KILLED);
+    owner.sendMessage(ComponentMessages.KILL);
   }
 
   public void damage(final float dmg) {
@@ -40,8 +38,11 @@ public class Life implements IComp {
   }
 
   @Override
-  public void reciveMessage(ComponentMessages message) {
-    // Do nothing
+  public void reciveMessage(final ComponentMessages message) {
+    if (message == ComponentMessages.KILL) {
+      hp    = 0;
+      alive = false;
+    }
   }
 
   public boolean isAlive() {

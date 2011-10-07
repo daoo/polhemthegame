@@ -123,7 +123,7 @@ public class BossAI implements ICompUpdate {
 
   @Override
   public void reciveMessage(ComponentMessages message) {
-    if (message == ComponentMessages.KILLED) {
+    if (message == ComponentMessages.KILL) {
       kill();
     }
   }

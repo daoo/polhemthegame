@@ -5,5 +5,5 @@
 package game.components;
 
 public enum ComponentMessages {
-  KILLED
+  KILL
 }

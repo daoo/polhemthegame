@@ -4,6 +4,7 @@
 
 package game.world;
 
+import game.components.ComponentMessages;
 import game.components.physics.AABB;
 import game.entities.Unit;
 import game.entities.groups.Entities;
@@ -43,7 +44,7 @@ public class World {
               p.damage(1);
               u.damage(p.getDamage());
             } else {
-              p.kill();
+              p.sendMessage(ComponentMessages.KILL);
               break;
             }
           }
