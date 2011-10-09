@@ -26,23 +26,42 @@ public class SkipsIterator implements Iterator<IObject> {
 
   @Override
   public boolean hasNext() {
-    while (internal.hasNext()) {
-      next = internal.next();
-      if (Arrays.binarySearch(keys, next.getType()) >= 0) {
-        return true;
-      }
+    if (next == null) {
+      internalNext();
     }
 
-    return false;
+    return next != null;
   }
 
   @Override
   public IObject next() {
-    return null;
+    if (next == null) {
+      internalNext();
+    }
+
+    final IObject tmp = next;
+    // Set next to null to force internalNext on next call
+    next = null;
+
+    return tmp;
   }
 
   @Override
   public void remove() {
     throw new UnsupportedOperationException("Not allowed");
+  }
+
+  private void internalNext() {
+    if (next == null) {
+      while (internal.hasNext()) {
+        next = internal.next();
+        if (Arrays.binarySearch(keys, next.getType()) >= 0) {
+          return;
+        }
+      }
+
+      // Couldn't find a matching IObject
+      next = null;
+    }
   }
 }

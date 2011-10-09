@@ -26,7 +26,7 @@ public class WorldContainer {
   }
 
   public CustomIterable iterate(final Entities key) {
-    return new CustomIterable(new SkipIterator(list, key));
+    return new CustomIterable(new SkipsIterator(list, new Entities[] { key }));
   }
 
   public CustomIterable iterate(final Entities[] keys) {
