@@ -8,9 +8,9 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 
 public class Debugger implements IMode {
-  private final Game game;
-  private final float      framelength;
-  private boolean    F5_down;
+  private final Game  game;
+  private final float framelength;
+  private boolean     F5_down;
 
   public Debugger(final Game game) {
     this.game = game;
