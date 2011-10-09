@@ -6,7 +6,6 @@ package game.entities.interfaces;
 
 import game.components.physics.AABB;
 
-
 public interface IEntity extends IObject {
   public AABB getBody();
 }
