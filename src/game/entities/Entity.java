@@ -28,13 +28,16 @@ public class Entity implements IEntity {
 
   protected final ArrayList<IAction> actions;
 
+  private final Entities type;
+
   private final ArrayList<IComp>       all;
   private final ArrayList<ICompUpdate> updates;
   private final ArrayList<ICompRender> renders;
 
   public Entity(final float x, final float y,
                 final float w, final float h,
-                final float dx, final float dy) {
+                final float dx, final float dy,
+                final Entities type) {
     body = new AABB(x, y, w, h, dx, dy);
 
     actions = new ArrayList<IAction>();
@@ -42,6 +45,8 @@ public class Entity implements IEntity {
     all = new ArrayList<IComp>();
     updates = new ArrayList<ICompUpdate>();
     renders = new ArrayList<ICompRender>();
+
+    this.type = type;
   }
 
   @Override
@@ -129,7 +134,6 @@ public class Entity implements IEntity {
 
   @Override
   public Entities getType() {
-    // TODO Auto-generated method stub
-    return null;
+    return type;
   }
 }

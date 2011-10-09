@@ -5,6 +5,7 @@
 package game.entities;
 
 import game.components.interfaces.ICompAnim;
+import game.entities.groups.Entities;
 
 public class Creep extends Unit {
   private final int moneyGain;
@@ -19,6 +20,7 @@ public class Creep extends Unit {
     super(x, y, width, height,
           (float) Math.cos(ang) * speed,
           (float) Math.sin(ang) * speed,
+          Entities.CREEP,
           maxHP, walk, death);
 
     this.spawnTime = spawnTime;

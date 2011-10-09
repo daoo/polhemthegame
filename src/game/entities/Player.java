@@ -11,6 +11,7 @@ import game.components.holdables.IArmed;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ICompAnim;
 import game.components.triggers.actions.SpawnProjectile;
+import game.entities.groups.Entities;
 import game.entities.projectiles.Projectile;
 import game.entities.projectiles.ProjectileTemplate;
 import game.world.World;
@@ -34,7 +35,7 @@ public class Player extends Unit implements IArmed {
                 final float handOffsetX, final float handOffsetY,
                 final float speed, final int maxHP, final int startingMoney,
                 final ICompAnim walk, final ICompAnim death) {
-    super(x, y, width, height, 0, 0, maxHP, walk, death);
+    super(x, y, width, height, 0, 0, Entities.PLAYER, maxHP, walk, death);
 
     inv       = new Inventory(startingMoney);
     hand      = new Hand(handOffsetX, handOffsetY);

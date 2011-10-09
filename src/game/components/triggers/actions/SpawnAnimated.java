@@ -7,6 +7,7 @@ package game.components.triggers.actions;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.ICompAnim;
 import game.entities.Entity;
+import game.entities.groups.Entities;
 import game.world.World;
 import math.time.GameTime;
 
@@ -18,7 +19,7 @@ public class SpawnAnimated implements IAction {
                        final float width, final float height,
                        final ICompAnim anim) {
     this.anim = anim;
-    animated = new Entity(x, y, width, height, 0, 0);
+    animated = new Entity(x, y, width, height, 0, 0, Entities.ANIMATED);
     animated.add(anim);
   }
 
