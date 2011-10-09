@@ -4,9 +4,9 @@
 
 package game.components.holdables;
 
-import game.components.interfaces.ICompUpRend;
+import game.components.interfaces.IRenderComponent;
 
-public interface IHoldable extends ICompUpRend {
+public interface IHoldable extends IRenderComponent {
   public void toggleOn();
   public void toggleOff();
 

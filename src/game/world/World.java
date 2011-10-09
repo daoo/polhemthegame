@@ -4,12 +4,14 @@
 
 package game.world;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.basic.Life;
 import game.components.physics.AABB;
 import game.entities.Unit;
 import game.entities.groups.EntityType;
 import game.entities.groups.Groups;
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 import game.entities.projectiles.Projectile;
 
 import java.util.LinkedList;
@@ -20,32 +22,32 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class World {
-  private final LinkedList<IObject> toAdd, toRemove;
+  private final LinkedList<IEntity> toAdd, toRemove;
   private final WorldContainer entities;
 
   public World() {
-    toAdd    = new LinkedList<IObject>();
-    toRemove = new LinkedList<IObject>();
+    toAdd    = new LinkedList<IEntity>();
+    toRemove = new LinkedList<IEntity>();
     entities = new WorldContainer();
   }
 
   public void update(final GameTime time) {
     // Do projectile collisions first, I think it leads to more accurate collisions
-    for (final IObject e1 : entities.iterate(EntityType.PROJECTILE)) {
+    for (final IEntity e1 : entities.iterate(EntityType.PROJECTILE)) {
       final Projectile p = (Projectile) e1;
       if (p.canCollide()) {
         // Check for collisions with units
         final AABB a = p.getBody();
-        for (final IObject e2 : entities.iterate(Groups.UNITS)) {
+        for (final IEntity e2 : entities.iterate(Groups.UNITS)) {
           final Unit u = (Unit) e2;
           if (CollisionHelper.SweepCollisionTest(a, u.getBody(), time.getFrameLength())) {
             // FIXME: If the projectile can hit multiple targets and is sufficently slow,
             //        it might hit the same target multiple times.
-            if (p.isAlive()) {
-              p.damage(1);
-              u.damage(p.getDamage());
+            if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
+              p.sendMessage(ComponentMessage.DAMAGE, 1);
+              u.sendMessage(ComponentMessage.DAMAGE, p.getDamage());
             } else {
-              p.sendMessage(ComponentMessages.KILL);
+              p.sendMessage(ComponentMessage.KILL, null);
               break;
             }
           }
@@ -54,7 +56,7 @@ public class World {
     }
 
     // Update
-    for (final IObject e : entities.iterateAll()) {
+    for (final IEntity e : entities.iterateAll()) {
       e.update(time, this);
     }
 
@@ -70,7 +72,7 @@ public class World {
   }
 
   public void render(final Graphics g) {
-    for (final IObject e : entities.iterateAll()) {
+    for (final IEntity e : entities.iterateAll()) {
       e.render(g);
     }
   }
@@ -79,7 +81,7 @@ public class World {
    * Delayed add, happens at the end of a frame.
    * @param obj object to add
    */
-  public void add(final IObject obj) {
+  public void add(final IEntity obj) {
     assert (obj != null);
 
     toAdd.add(obj);
@@ -89,17 +91,17 @@ public class World {
    * Delayed remove, happens at the end of a frame.
    * @param obj object to remove
    */
-  public void remove(final IObject obj) {
+  public void remove(final IEntity obj) {
     assert (obj != null);
 
     toRemove.add(obj);
   }
 
-  public Iterable<IObject> getUnits() {
+  public Iterable<IEntity> getUnits() {
     return entities.iterate(Groups.UNITS);
   }
 
-  public Iterable<IObject> get(final EntityType e) {
+  public Iterable<IEntity> get(final EntityType e) {
     return entities.iterate(e);
   }
 }

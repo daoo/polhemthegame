@@ -4,31 +4,21 @@
 
 package game.entities;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
 import game.components.basic.Life;
-import game.components.graphics.animations.Continuous;
-import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
-import game.components.physics.AABB;
 import game.components.triggers.actions.SpawnRunToEndAnim;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IDamagable;
-import game.entities.interfaces.IWalking;
-import game.world.World;
-import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 
 import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
-public class Unit extends Entity implements IDamagable, IWalking {
-  private final Life life;
-
+public class Unit extends Entity {
   private final InfoBar infoBar;
   private final Bar hpBar;
 
-  private final ICompAnim walk;
   private final ICompAnim death;
 
   public Unit(final float x, final float y,
@@ -38,18 +28,16 @@ public class Unit extends Entity implements IDamagable, IWalking {
               final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, dx, dy, type);
 
-    this.walk = walk;
     this.death = death;
 
-    life = new Life(this, maxHP);
-
-    addCompUpRend(walk);
+    addLogicComponent(new Life(maxHP));
+    addRenderComponent(walk);
 
     infoBar = new InfoBar(width, 2, 0, -6);
     hpBar = new Bar(Color.green, Color.red);
     infoBar.add(hpBar);
 
-    addCompRender(infoBar);
+    addRenderComponent(infoBar);
   }
 
   protected void addBar(final Bar bar) {
@@ -57,42 +45,8 @@ public class Unit extends Entity implements IDamagable, IWalking {
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
-    super.update(time, world);
-    hpBar.setFraction(life.getHPFraction());
-  }
-
-  @Override
-  public boolean isAlive() {
-    return life.isAlive();
-  }
-
-  @Override
-  public AABB getBody() {
-    return body;
-  }
-
-  @Override
-  public void damage(final float damage) {
-    life.damage(damage);
-  }
-
-  @Override
-  public void start() {
-    walk.setAnimator(new Continuous(walk.getTileCount()));
-  }
-
-  @Override
-  public void stop() {
-    if (!walk.getAnimator().isFinished()) {
-      walk.goToFirstFrame();
-      walk.setAnimator(new Idle());
-    }
-  }
-
-  @Override
-  public void sendMessage(final ComponentMessages message) {
-    if (message == ComponentMessages.KILL) {
+  public void sendMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.KILL) {
       clearComponents();
       addAction(new SpawnRunToEndAnim(
         body.getX1(), body.getY1(),
@@ -100,6 +54,6 @@ public class Unit extends Entity implements IDamagable, IWalking {
         death));
     }
 
-    super.sendMessage(message);
+    super.sendMessage(message, args);
   }
 }

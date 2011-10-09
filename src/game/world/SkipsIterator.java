@@ -5,18 +5,18 @@
 package game.world;
 
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class SkipsIterator implements Iterator<IObject> {
-  private final Iterator<IObject> internal;
+public class SkipsIterator implements Iterator<IEntity> {
+  private final Iterator<IEntity> internal;
   private final EntityType[] keys;
 
-  private IObject next;
+  private IEntity next;
 
-  public SkipsIterator(final Iterable<IObject> list, final EntityType[] keys) {
+  public SkipsIterator(final Iterable<IEntity> list, final EntityType[] keys) {
     assert (list != null);
     assert (keys != null);
 
@@ -34,12 +34,12 @@ public class SkipsIterator implements Iterator<IObject> {
   }
 
   @Override
-  public IObject next() {
+  public IEntity next() {
     if (next == null) {
       internalNext();
     }
 
-    final IObject tmp = next;
+    final IEntity tmp = next;
     // Set next to null to force internalNext on next call
     next = null;
 
@@ -60,7 +60,7 @@ public class SkipsIterator implements Iterator<IObject> {
         }
       }
 
-      // Couldn't find a matching IObject
+      // Couldn't find a matching IEntity
       next = null;
     }
   }

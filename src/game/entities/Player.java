@@ -28,7 +28,6 @@ public class Player extends Unit implements IArmed {
   private final Inventory     inv;
   private final Hand          hand;
   private final Bar           weaponBar;
-  private final SimpleControl control;
 
   public Player(final float x, final float y,
                 final float width, final float height,
@@ -40,11 +39,10 @@ public class Player extends Unit implements IArmed {
     inv       = new Inventory(startingMoney);
     hand      = new Hand(handOffsetX, handOffsetY);
     weaponBar = new Bar(Color.blue, new Color(0, 0, 0, 0));
-    control   = new SimpleControl(this, hand, speed);
 
-    addCompUpRend(hand);
+    addRenderComponent(hand);
     addBar(weaponBar);
-    addCompUpdate(control);
+    addLogicComponent(new SimpleControl(speed));
   }
 
   @Override

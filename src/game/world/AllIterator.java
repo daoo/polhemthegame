@@ -4,19 +4,19 @@
 
 package game.world;
 
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 
 import java.util.Iterator;
 
-public class AllIterator implements Iterator<IObject> {
-  private final Iterator<IObject> internal;
+public class AllIterator implements Iterator<IEntity> {
+  private final Iterator<IEntity> internal;
 
-  public AllIterator(final Iterable<IObject> list) {
+  public AllIterator(final Iterable<IEntity> list) {
     internal = list.iterator();
   }
 
   @Override
-  public IObject next() {
+  public IEntity next() {
     return internal.next();
   }
 

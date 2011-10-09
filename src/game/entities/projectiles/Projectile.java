@@ -4,24 +4,21 @@
 
 package game.entities.projectiles;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
 import game.components.basic.Life;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.ICompAnim;
 import game.components.physics.Gravity;
 import game.entities.Entity;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IDamagable;
 import game.world.World;
 import loader.data.json.ProjectilesData.ProjectileData;
 import math.Vector2;
 import math.time.GameTime;
 
-public class Projectile extends Entity implements IDamagable {
+public class Projectile extends Entity {
   private final float   duration, range, damage;
   private final boolean collides;
-
-  private final Life life;
 
   private final Vector2 startPos;
   private final float   startTime;
@@ -42,17 +39,17 @@ public class Projectile extends Entity implements IDamagable {
     range = data.range;
     damage = data.damage;
 
-    life = new Life(this, data.targets);
+    addLogicComponent(new Life(data.targets));
 
     startPos = new Vector2(x, y);
     startTime = time.getElapsed();
 
     if (data.gravity) {
-      addCompUpdate(new Gravity(body, Gravity.FACTOR));
+      addLogicComponent(new Gravity());
     }
 
     renderer.setAnimator(new Continuous(renderer.getTileCount()));
-    addCompUpRend(renderer);
+    addRenderComponent(renderer);
   }
 
   @Override
@@ -60,10 +57,10 @@ public class Projectile extends Entity implements IDamagable {
     super.update(time, world);
 
     if ((duration != -1) && ((time.getElapsed() - startTime) > duration)) {
-    	sendMessage(ComponentMessages.KILL);
+    	sendMessage(ComponentMessage.KILL, null);
     }
     if ((range != -1) && (body.getMin().distance(startPos) > range)) {
-      sendMessage(ComponentMessages.KILL);
+      sendMessage(ComponentMessage.KILL, null);
     }
   }
 
@@ -73,15 +70,5 @@ public class Projectile extends Entity implements IDamagable {
 
   public float getDamage() {
     return damage;
-  }
-
-  @Override
-  public void damage(final float value) {
-    life.damage(value);
-  }
-
-  @Override
-  public boolean isAlive() {
-    return life.isAlive();
   }
 }

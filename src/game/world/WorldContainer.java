@@ -5,16 +5,16 @@
 package game.world;
 
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
 public class WorldContainer {
-  private final LinkedList<IObject> list;
+  private final LinkedList<IEntity> list;
 
   public WorldContainer() {
-    list = new LinkedList<IObject>();
+    list = new LinkedList<IEntity>();
   }
 
   public int size() {
@@ -33,15 +33,15 @@ public class WorldContainer {
     return new CustomIterable(new SkipsIterator(list, keys));
   }
 
-  public void remove(final Collection<IObject> remove) {
+  public void remove(final Collection<IEntity> remove) {
     list.removeAll(remove);
   }
 
-  public void add(final IObject obj) {
+  public void add(final IEntity obj) {
     list.add(obj);
   }
 
-  public void add(final LinkedList<IObject> objs) {
+  public void add(final LinkedList<IEntity> objs) {
     list.addAll(objs);
   }
 }

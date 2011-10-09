@@ -4,6 +4,6 @@
 
 package game.components;
 
-public enum ComponentMessages {
-  KILL
+public enum ComponentMessage {
+  KILL, DAMAGE, START_ANIMATION, STOP_ANIMATION, END_ANIMATION
 }

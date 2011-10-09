@@ -4,6 +4,7 @@
 
 package game.components.triggers.actions;
 
+import game.components.ComponentMessage;
 import game.entities.Creep;
 import game.world.World;
 import math.time.GameTime;
@@ -19,7 +20,7 @@ public class SpawnCreep implements IAction {
 
   @Override
   public void execute(final GameTime time, final World world) {
-    creep.start();
+    creep.sendMessage(ComponentMessage.START_ANIMATION, null);
     world.add(creep);
   }
 }

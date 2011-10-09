@@ -5,6 +5,8 @@
 package game.entities;
 
 import game.CacheTool;
+import game.components.ComponentType;
+import game.components.basic.Life;
 import game.factories.Factory;
 
 import java.io.IOException;
@@ -49,7 +51,7 @@ public class Players implements Iterable<Player> {
 
   public boolean isAlive() {
     for (final Player p : players) {
-      if (p.isAlive()) {
+      if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
         return true;
       }
     }

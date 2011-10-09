@@ -4,31 +4,39 @@
 
 package game.components.physics;
 
-import game.components.ComponentMessages;
-import game.components.interfaces.ICompUpdate;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.ILogicComponent;
+import game.entities.interfaces.IEntity;
 import math.Vector2;
 import math.time.GameTime;
 
-
-public class Gravity implements ICompUpdate {
+public class Gravity implements ILogicComponent {
   public static final float FACTOR = 100.0f;
 
-  private final AABB body;
-  private final float factor;
+  private IEntity owner;
 
-  public Gravity(final AABB body, final float factor) {
-    this.body = body;
-    this.factor = factor;
+  public Gravity() {
   }
 
   @Override
   public void update(final GameTime time) {
-    final float g = time.getFrameLength() * factor;
-    body.addVelocity(new Vector2(0, g));
+    final float g = time.getFrameLength() * FACTOR;
+    owner.getBody().addVelocity(new Vector2(0, g));
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.GRAVITY;
+  }
+
+  @Override
+  public void setOwner(final IEntity owner) {
+    this.owner = owner;
   }
 }

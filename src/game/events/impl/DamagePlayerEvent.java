@@ -4,20 +4,21 @@
 
 package game.events.impl;
 
+import game.components.ComponentMessage;
 import game.entities.Creep;
 import game.entities.Player;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 import game.events.IEvent;
 
 public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
-  public void execute(final IObject sender, final ObjectEventArgs args) {
+  public void execute(final IEntity sender, final ObjectEventArgs args) {
     if (args.getObject().getType() == EntityType.CREEP) {
       final float dmg = ((Creep)args.getObject()).getDamage();
 
-      for (final IObject e : args.getWorld().get(EntityType.PLAYER)) {
-        ((Player) e).damage(dmg);
+      for (final IEntity e : args.getWorld().get(EntityType.PLAYER)) {
+        ((Player) e).sendMessage(ComponentMessage.DAMAGE, dmg);
       }
     }
   }

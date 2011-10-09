@@ -7,11 +7,10 @@ package game.components.interfaces;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.IAnimator;
 
-public interface ICompAnim extends ICompUpRend {
+public interface ICompAnim extends IRenderComponent {
   void goToFirstFrame();
 
-  void setAnimator(final IAnimator animator);
-  IAnimator getAnimator();
+  void setAnimator(IAnimator animator);
 
   int getTileWidth();
   int getTileHeight();

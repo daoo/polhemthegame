@@ -4,11 +4,13 @@
 
 package game.components.ai;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
 import game.components.holdables.Hand;
-import game.components.interfaces.ICompUpdate;
+import game.components.interfaces.ILogicComponent;
 import game.components.physics.AABB;
 import game.entities.Unit;
+import game.entities.interfaces.IEntity;
 
 import java.util.Stack;
 
@@ -18,7 +20,7 @@ import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
 
-public class BossAI implements ICompUpdate {
+public class BossAI implements ILogicComponent {
   private final AABB           body;
   private final Unit          unit;
   private final Hand           hand;
@@ -84,7 +86,7 @@ public class BossAI implements ICompUpdate {
         // We're done here, stop shooting and start walking
         isShooting = false;
 
-        unit.start();
+        unit.sendMessage(ComponentMessage.START_ANIMATION, null);
         targets.push(newTarget());
         headFor(targets.peek());
       }
@@ -98,7 +100,7 @@ public class BossAI implements ICompUpdate {
         targets.pop();
         if (targets.empty()) {
           // No more targets, start shooting
-          unit.stop();
+          unit.sendMessage(ComponentMessage.STOP_ANIMATION, null);
           hand.stopUse();
           isShooting = true;
           shootingStartTime = time.getElapsed();
@@ -110,21 +112,22 @@ public class BossAI implements ICompUpdate {
     }
   }
 
-  private void kill() {
-    isShooting = false;
-    hand.stopUse();
-    unit.stop();
-    targets.clear();
-  }
-
   public void addTarget(final Vector2 target) {
     targets.push(target);
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
-    if (message == ComponentMessages.KILL) {
-      kill();
-    }
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

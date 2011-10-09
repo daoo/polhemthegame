@@ -4,7 +4,7 @@
 
 package game.events;
 
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class EventHandler<T extends IEventArgs> {
     events.add(event);
   }
 
-  public void execute(final IObject sender, final T args) {
+  public void execute(final IEntity sender, final T args) {
     for (final IEvent<T> e : events) {
       e.execute(sender, args);
     }

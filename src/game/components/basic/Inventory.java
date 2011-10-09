@@ -4,16 +4,20 @@
 
 package game.components.basic;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.IComp;
+import game.components.interfaces.ILogicComponent;
+import game.entities.interfaces.IEntity;
 
 import java.util.ArrayList;
+
+import math.time.GameTime;
 
 
 // TODO: Shop
 
-public class Inventory implements IComp {
+public class Inventory implements ILogicComponent {
   protected int                     money;
   protected final ArrayList<Weapon> weapons;
   protected int                     currentWeapon;
@@ -66,7 +70,22 @@ public class Inventory implements IComp {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public void update(GameTime time) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

@@ -4,17 +4,19 @@
 
 package game.components.graphics;
 
-
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
+import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
+import game.entities.interfaces.IEntity;
 import math.time.Clock;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
-
 
 public class RSheet implements ICompAnim {
   private final Clock       clock;
@@ -65,11 +67,6 @@ public class RSheet implements ICompAnim {
     current = Tile.ZERO;
   }
 
-  @Override
-  public void setAnimator(final IAnimator animator) {
-    this.animator = animator;
-  }
-
   public SpriteSheet getSpriteSheet() {
     return sheet;
   }
@@ -94,17 +91,34 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public IAnimator getAnimator() {
-    return animator;
-  }
-
-  @Override
   public Tile getLastTile() {
     return new Tile(size.x - 1, size.y - 1);
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
-    // Do nothing
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.START_ANIMATION) {
+      animator = new Continuous(getTileCount());
+    } else if (message == ComponentMessage.STOP_ANIMATION) {
+      if (!animator.isFinished()) {
+        goToFirstFrame();
+        animator = new Idle();
+      }
+    }
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.GRAPHIC;
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setAnimator(final IAnimator animator) {
+    this.animator = animator;
   }
 }

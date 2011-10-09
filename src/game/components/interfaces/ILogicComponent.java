@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ */
+
+package game.components.interfaces;
+
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.entities.interfaces.IEntity;
+import math.time.GameTime;
+
+public interface ILogicComponent {
+  void update(GameTime time);
+
+  void reciveMessage(ComponentMessage message, Object args);
+
+  ComponentType getComponentType();
+
+  void setOwner(IEntity owner);
+}

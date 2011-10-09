@@ -4,18 +4,18 @@
 
 package game.events.impl;
 
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 import game.world.World;
 
 public class ObjectEventArgs extends EventArgs {
-  private final IObject object;
+  private final IEntity object;
 
-  public ObjectEventArgs(final World world, final IObject object) {
+  public ObjectEventArgs(final World world, final IEntity object) {
     super(world);
     this.object = object;
   }
 
-  public IObject getObject() {
+  public IEntity getObject() {
     return object;
   }
 }

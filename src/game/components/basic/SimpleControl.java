@@ -5,17 +5,17 @@
 package game.components.basic;
 
 
-import game.components.ComponentMessages;
-import game.components.holdables.Hand;
-import game.components.interfaces.ICompUpdate;
-import game.entities.Unit;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.ILogicComponent;
+import game.entities.interfaces.IEntity;
 import math.Vector2;
 import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
-public class SimpleControl implements ICompUpdate {
+public class SimpleControl implements ILogicComponent {
   private static final int KEY_COUNT = 1024;
 
   enum TOGGLED {
@@ -24,17 +24,15 @@ public class SimpleControl implements ICompUpdate {
 
   boolean[] keyStatus;
 
+  private IEntity owner;
+
   private float       upOrDown, rightOrLeft;
-  private final Unit  player;
-  private final Hand  hand;
   private final float speed;
 
-  public SimpleControl(final Unit player, final Hand hand, final float speed) {
-    this.player = player;
-    this.speed = speed;
-    this.hand = hand;
-
+  public SimpleControl(final float speed) {
     keyStatus = new boolean[SimpleControl.KEY_COUNT];
+
+    this.speed = speed;
 
     upOrDown = 0;
     rightOrLeft = 0;
@@ -53,7 +51,7 @@ public class SimpleControl implements ICompUpdate {
 
   @Override
   public void update(final GameTime time) {
-    if (player.isAlive()) {
+    if (((Life)owner.getComponent(ComponentType.HEALTH)).isAlive()) {
       TOGGLED t;
 
       // Walking
@@ -86,25 +84,35 @@ public class SimpleControl implements ICompUpdate {
       }
 
       if ((upOrDown != 0) || (rightOrLeft != 0)) {
-        player.start();
+        owner.sendMessage(ComponentMessage.START_ANIMATION, null);
       } else {
-        player.stop();
+        owner.sendMessage(ComponentMessage.STOP_ANIMATION, null);
       }
 
-      player.getBody().setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
+      owner.getBody().setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
 
       // Shooting
       t = isKeyToggled(Input.KEY_SPACE);
       if (t == TOGGLED.ON) {
-        hand.startUse();
+        owner.startUse();
       } else if (t == TOGGLED.OFF) {
-        hand.stopUse();
+        owner.stopUse();
       }
     }
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setOwner(final IEntity owner) {
+    this.owner = owner;
   }
 }

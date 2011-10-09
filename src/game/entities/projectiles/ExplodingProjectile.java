@@ -4,7 +4,7 @@
 
 package game.entities.projectiles;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
 import game.components.interfaces.ICompAnim;
 import game.components.triggers.actions.AOEDamage;
 import game.components.triggers.actions.SpawnRunToEndAnim;
@@ -30,10 +30,10 @@ public class ExplodingProjectile extends Projectile {
   }
 
   @Override
-  public void sendMessage(final ComponentMessages message) {
-    super.sendMessage(message);
+  public void sendMessage(final ComponentMessage message, final Object args) {
+    super.sendMessage(message, args);
 
-    if (message == ComponentMessages.KILL) {
+    if (message == ComponentMessage.KILL) {
       addAction(new AOEDamage(body.getCenter(), aoeRange, aoeDamage));
       addAction(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
                                       explosion.getTileWidth(),

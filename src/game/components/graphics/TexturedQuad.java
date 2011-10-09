@@ -4,10 +4,11 @@
 
 package game.components.graphics;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
-import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
+import game.entities.interfaces.IEntity;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -57,17 +58,22 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public IAnimator getAnimator() {
-    return new Idle();
-  }
-
-  @Override
   public Tile getLastTile() {
     return Tile.ZERO;
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.GRAPHIC;
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

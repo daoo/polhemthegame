@@ -4,11 +4,10 @@
 
 package game.entities;
 
-import game.components.ComponentMessages;
-import game.components.interfaces.IComp;
-import game.components.interfaces.ICompRender;
-import game.components.interfaces.ICompUpRend;
-import game.components.interfaces.ICompUpdate;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.ILogicComponent;
+import game.components.interfaces.IRenderComponent;
 import game.components.physics.AABB;
 import game.components.triggers.actions.IAction;
 import game.entities.groups.EntityType;
@@ -28,9 +27,8 @@ public class Entity implements IEntity {
 
   private final EntityType type;
 
-  private final ArrayList<IComp>       all;
-  private final ArrayList<ICompUpdate> updates;
-  private final ArrayList<ICompRender> renders;
+  private final ArrayList<ILogicComponent> updates;
+  private final ArrayList<IRenderComponent> renders;
 
   public Entity(final float x, final float y,
                 final float w, final float h,
@@ -40,9 +38,8 @@ public class Entity implements IEntity {
 
     actions = new ArrayList<IAction>();
 
-    all = new ArrayList<IComp>();
-    updates = new ArrayList<ICompUpdate>();
-    renders = new ArrayList<ICompRender>();
+    updates = new ArrayList<ILogicComponent>();
+    renders = new ArrayList<IRenderComponent>();
 
     this.type = type;
   }
@@ -51,7 +48,7 @@ public class Entity implements IEntity {
   public void update(final GameTime time, final World world) {
     body.integrate(time.getFrameLength());
 
-    for (final ICompUpdate comp : updates) {
+    for (final ILogicComponent comp : updates) {
       comp.update(time);
     }
 
@@ -66,26 +63,20 @@ public class Entity implements IEntity {
     g.pushTransform();
     g.translate(body.getX1(), body.getY1());
 
-    for (final ICompRender comp : renders) {
+    for (final IRenderComponent comp : renders) {
       comp.render(g);
     }
 
     g.popTransform();
   }
 
-  public void addCompUpRend(final ICompUpRend comp) {
-    all.add(comp);
-    updates.add(comp);
+  public void addRenderComponent(final IRenderComponent comp) {
+    comp.setOwner(this);
     renders.add(comp);
   }
 
-  public void addCompRender(final ICompRender comp) {
-    all.add(comp);
-    renders.add(comp);
-  }
-
-  public void addCompUpdate(final ICompUpdate comp) {
-    all.add(comp);
+  public void addLogicComponent(final ILogicComponent comp) {
+    comp.setOwner(this);
     updates.add(comp);
   }
 
@@ -99,9 +90,14 @@ public class Entity implements IEntity {
     return body;
   }
 
-  public void sendMessage(final ComponentMessages message) {
-    for (final IComp comp : all) {
-      comp.reciveMessage(message);
+  @Override
+  public void sendMessage(final ComponentMessage message, final Object args) {
+    for (final ILogicComponent comp : updates) {
+      comp.reciveMessage(message, args);
+    }
+
+    for (final IRenderComponent comp : renders) {
+      comp.reciveMessage(message, args);
     }
   }
 
@@ -112,5 +108,10 @@ public class Entity implements IEntity {
 
   protected void addAction(final IAction action) {
     actions.add(action);
+  }
+
+  @Override
+  public ILogicComponent getComponent(ComponentType componentType) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

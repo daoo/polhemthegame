@@ -38,9 +38,7 @@ public class BossState implements IRoundState {
 
   @Override
   public void update(final GameTime time, final World world) {
-    if (!boss.isAlive()) {
-      // TODO: When animiation has finished, we're done here
-    }
+    // TODO
   }
 
   @Override

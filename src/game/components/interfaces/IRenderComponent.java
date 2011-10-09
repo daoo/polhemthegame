@@ -6,6 +6,6 @@ package game.components.interfaces;
 
 import org.newdawn.slick.Graphics;
 
-public interface ICompRender extends IComp {
-  void render(final Graphics g);
+public interface IRenderComponent extends ILogicComponent {
+  void render(Graphics g);
 }

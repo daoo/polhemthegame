@@ -4,10 +4,12 @@
 
 package game.entities;
 
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.ILogicComponent;
 import game.components.physics.AABB;
 import game.entities.groups.EntityType;
 import game.entities.interfaces.IEntity;
-import game.entities.interfaces.IObject;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.world.World;
@@ -30,7 +32,7 @@ public class InvisibleRectangle implements IEntity {
 
   @Override
   public void update(final GameTime time, final World world) {
-    for (final IObject o : world.getUnits()) {
+    for (final IEntity o : world.getUnits()) {
       final Unit u = (Unit) o;
       if (body.isContaining(u.getBody())) {
         onContainsEvent.execute(this, new ObjectEventArgs(world, u));
@@ -53,5 +55,15 @@ public class InvisibleRectangle implements IEntity {
   @Override
   public EntityType getType() {
     return EntityType.GENERAL;
+  }
+
+  @Override
+  public ILogicComponent getComponent(ComponentType componentType) {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void sendMessage(ComponentMessage message, Object args) {
+    // Do nothing, this have no components
   }
 }

@@ -6,15 +6,19 @@ package ui.hud.infobar;
 
 // TODO: A 1px high bar turns weird color-wise from time to time (probably because of aa)
 
-import game.components.ComponentMessages;
-import game.components.interfaces.ICompRender;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.IRenderComponent;
+import game.entities.interfaces.IEntity;
 
 import java.util.ArrayList;
+
+import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
 
-public class InfoBar implements ICompRender {
+public class InfoBar implements IRenderComponent {
   private final float          barWidth, barHeight;
   private final int            offsetX, offsetY;
   private final ArrayList<Bar> bars;
@@ -48,7 +52,17 @@ public class InfoBar implements ICompRender {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

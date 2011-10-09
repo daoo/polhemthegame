@@ -4,16 +4,18 @@
 
 package game.components.holdables;
 
-import game.components.ComponentMessages;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.ICompUpRend;
+import game.components.interfaces.IRenderComponent;
+import game.entities.interfaces.IEntity;
 import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
 
-public class Hand implements ICompUpRend {
+public class Hand implements IRenderComponent {
   private Weapon                   weapon;
   private final Vector2            offset;
 
@@ -66,7 +68,17 @@ public class Hand implements ICompUpRend {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
+
+  @Override
+  public void setOwner(IEntity owner) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 }

@@ -5,6 +5,9 @@
 package game.states;
 
 import game.CacheTool;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.basic.Life;
 import game.entities.Creep;
 import game.factories.Factory;
 import game.world.World;
@@ -71,7 +74,7 @@ public class CreepsState implements IRoundState {
       final ToBeCreep tmp = itc.next();
 
       if (tmp.spawnTime < time.getElapsed()) {
-        tmp.creep.start();
+        tmp.creep.sendMessage(ComponentMessage.START_ANIMATION, null);
         world.add(tmp.creep);
 
         spawned.add(tmp.creep);
@@ -83,7 +86,7 @@ public class CreepsState implements IRoundState {
     while (itr.hasNext()) {
       final Creep c = itr.next();
 
-      if (!c.isAlive()) {
+      if (!((Life) c.getComponent(ComponentType.HEALTH)).isAlive()) {
         itr.remove();
       }
     }

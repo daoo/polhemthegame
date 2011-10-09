@@ -5,29 +5,25 @@
 package game.components.basic;
 
 
-import game.components.ComponentMessages;
-import game.components.interfaces.IComp;
-import game.entities.Entity;
+import game.components.ComponentMessage;
+import game.components.ComponentType;
+import game.components.interfaces.ILogicComponent;
+import game.entities.interfaces.IEntity;
+import math.time.GameTime;
 
-public class Life implements IComp {
-  private final Entity owner;
+public class Life implements ILogicComponent {
+  private IEntity owner;
 
+  private float hp;
   private boolean alive;
 
   private final float maxHP;
-  private float hp;
 
-  public Life(final Entity owner, final float maxHP) {
-    this.owner = owner;
-
+  public Life(final float maxHP) {
     this.alive = true;
 
     this.hp    = maxHP;
     this.maxHP = maxHP;
-  }
-
-  public void kill() {
-    owner.sendMessage(ComponentMessages.KILL);
   }
 
   public void damage(final float dmg) {
@@ -38,8 +34,8 @@ public class Life implements IComp {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessages message) {
-    if (message == ComponentMessages.KILL) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.KILL) {
       hp    = 0;
       alive = false;
     }
@@ -51,5 +47,24 @@ public class Life implements IComp {
 
   public float getHPFraction() {
     return hp / maxHP;
+  }
+
+  private void kill() {
+    owner.sendMessage(ComponentMessage.KILL, null);
+  }
+
+  @Override
+  public void update(GameTime time) {
+    // Do nothing
+  }
+
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.HEALTH;
+  }
+
+  @Override
+  public void setOwner(final IEntity owner) {
+    this.owner = owner;
   }
 }

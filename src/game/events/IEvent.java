@@ -4,8 +4,8 @@
 
 package game.events;
 
-import game.entities.interfaces.IObject;
+import game.entities.interfaces.IEntity;
 
 public interface IEvent<T extends IEventArgs> {
-  void execute(final IObject sender, final T args);
+  void execute(final IEntity sender, final T args);
 }
