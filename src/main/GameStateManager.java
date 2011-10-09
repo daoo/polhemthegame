@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 
+import loader.data.DataException;
 import loader.parser.ParserException;
 import ui.MenuState;
 
@@ -39,6 +40,17 @@ public class GameStateManager {
   }
 
   public void enterSinglePlayer() {
-    // TODO Auto-generated method stub
+    try {
+      currentState = new GameRound();
+    } catch (final ParserException ex) {
+      ex.printStackTrace();
+      quit();
+    } catch (final DataException ex) {
+      ex.printStackTrace();
+      quit();
+    } catch (final IOException ex) {
+      ex.printStackTrace();
+      quit();
+    }
   }
 }
