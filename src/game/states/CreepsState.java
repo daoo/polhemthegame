@@ -10,8 +10,8 @@ import game.factories.Factory;
 import game.world.World;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.CreepsData;
@@ -26,7 +26,18 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class CreepsState implements IRoundState {
-  private final ArrayList<Creep>   toBeSpawned, spawned;
+  private final class ToBeCreep {
+    public final float spawnTime;
+    public final Creep creep;
+
+    public ToBeCreep(final float spawnTime, final Creep creep) {
+      this.spawnTime = spawnTime;
+      this.creep     = creep;
+    }
+  }
+
+  private final LinkedList<ToBeCreep> toBeSpawned;
+  private final LinkedList<Creep> spawned;
 
   private float getCreepX(final Rectangle rect, final int width) {
     return rect.getX2() + width;
@@ -38,31 +49,32 @@ public class CreepsState implements IRoundState {
 
   public CreepsState(final Rectangle rect, final CreepStateData sd)
     throws IOException, ParserException, DataException {
-    spawned = new ArrayList<Creep>(sd.creeps.size());
-    toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
+    spawned = new LinkedList<Creep>();
+    toBeSpawned = new LinkedList<ToBeCreep>();
 
     final CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
     for (final CreepSpawnData spawnData : sd.creeps) {
       final CreepData data = creepsData.getCreep(spawnData.creep);
 
-      toBeSpawned.add(Factory.MakeCreep(getCreepX(rect, data.hitbox.width),
-                                        getCreepY(rect, data.hitbox.height),
-                                        (float) -Math.PI,
-                                        spawnData.spawnTime, data));
+      toBeSpawned.add(new ToBeCreep(
+        spawnData.spawnTime,
+        Factory.MakeCreep(getCreepX(rect, data.hitbox.width),
+                          getCreepY(rect, data.hitbox.height),
+                          (float) -Math.PI, data)));
     }
   }
 
   @Override
   public void update(final GameTime time, final World world) {
-    final Iterator<Creep> itc = toBeSpawned.iterator();
+    final Iterator<ToBeCreep> itc = toBeSpawned.iterator();
     while (itc.hasNext()) {
-      final Creep c = itc.next();
+      final ToBeCreep tmp = itc.next();
 
-      if (c.getSpawnTime() < time.getElapsed()) {
-        c.start();
-        world.add(c);
+      if (tmp.spawnTime < time.getElapsed()) {
+        tmp.creep.start();
+        world.add(tmp.creep);
 
-        spawned.add(c);
+        spawned.add(tmp.creep);
         itc.remove();
       }
     }

@@ -78,14 +78,14 @@ public class Factory {
   }
 
   public static Creep MakeCreep(final float x, final float y, final float ang,
-                                final float spawnTime, final CreepData data)
+                                final CreepData data)
     throws ParserException, DataException, IOException {
     final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     return new Creep(x, y, data.hitbox.width, data.hitbox.height,
                      ang, data.speed, data.moneyGain, data.damage,
-                     data.hitpoints, spawnTime, walk, death);
+                     data.hitpoints, walk, death);
   }
 
   public static Player MakePlayer(final float x, final float y, final PlayerData data)
