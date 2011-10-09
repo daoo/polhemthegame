@@ -4,16 +4,15 @@
 
 package game.states;
 
-import game.components.triggers.actions.IActionProducer;
+import game.world.World;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
+public interface IRoundState  {
+  void update(final GameTime time, final World world);
 
-public interface IRoundState extends IActionProducer {
-  public void update(final GameTime time);
+  void render(final Graphics g);
 
-  public void render(final Graphics g);
-
-  public boolean isFinished();
+  boolean isFinished();
 }

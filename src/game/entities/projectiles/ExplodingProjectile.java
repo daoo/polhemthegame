@@ -34,11 +34,11 @@ public class ExplodingProjectile extends Projectile {
     super.sendMessage(message);
 
     if (message == ComponentMessages.KILL) {
-      actions.add(new AOEDamage(body.getCenter(), aoeRange, aoeDamage));
-      actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                        explosion.getTileWidth(),
-                                        explosion.getTileHeight(),
-                                        explosion));
+      addAction(new AOEDamage(body.getCenter(), aoeRange, aoeDamage));
+      addAction(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                      explosion.getTileWidth(),
+                                      explosion.getTileHeight(),
+                                      explosion));
     }
   }
 }

@@ -5,14 +5,12 @@
 package game.states;
 
 import game.CacheTool;
-import game.components.triggers.actions.IAction;
-import game.components.triggers.actions.SpawnCreep;
 import game.entities.Creep;
 import game.factories.Factory;
+import game.world.World;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import loader.data.DataException;
@@ -28,7 +26,6 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class CreepsState implements IRoundState {
-  private final ArrayList<IAction> actions;
   private final ArrayList<Creep>   toBeSpawned, spawned;
 
   private float getCreepX(final Rectangle rect, final int width) {
@@ -41,8 +38,6 @@ public class CreepsState implements IRoundState {
 
   public CreepsState(final Rectangle rect, final CreepStateData sd)
     throws IOException, ParserException, DataException {
-    actions = new ArrayList<IAction>();
-
     spawned = new ArrayList<Creep>(sd.creeps.size());
     toBeSpawned = new ArrayList<Creep>(sd.creeps.size());
 
@@ -58,13 +53,15 @@ public class CreepsState implements IRoundState {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(final GameTime time, final World world) {
     final Iterator<Creep> itc = toBeSpawned.iterator();
     while (itc.hasNext()) {
       final Creep c = itc.next();
 
       if (c.getSpawnTime() < time.getElapsed()) {
-        actions.add(new SpawnCreep(c));
+        c.start();
+        world.add(c);
+
         spawned.add(c);
         itc.remove();
       }
@@ -88,20 +85,5 @@ public class CreepsState implements IRoundState {
   @Override
   public boolean isFinished() {
     return toBeSpawned.isEmpty() && spawned.isEmpty();
-  }
-
-  @Override
-  public boolean hasActions() {
-    return !actions.isEmpty();
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return actions;
-  }
-
-  @Override
-  public void clearActions() {
-    actions.clear();
   }
 }

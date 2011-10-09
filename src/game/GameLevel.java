@@ -4,7 +4,6 @@
 
 package game;
 
-import game.components.triggers.actions.IAction;
 import game.entities.Players;
 import game.factories.Factory;
 import game.states.BossState;
@@ -118,16 +117,9 @@ public class GameLevel {
     if (current.getCurrent().isFinished()) {
       nextState();
     } else {
-      current.getCurrent().update(time);
+      current.getCurrent().update(time, world);
 
       world.update(time);
-
-      if (current.getCurrent().hasActions()) {
-        for (final IAction action : current.getCurrent().getActions()) {
-          action.execute(time, world);
-        }
-        current.getCurrent().clearActions();
-      }
 
       if (!players.isAlive() && !current.isFinished()) {
         final IRoundState oldState = current.getCurrent();

@@ -94,9 +94,9 @@ public class Unit extends Entity implements IDamagable, IWalking {
   public void sendMessage(final ComponentMessages message) {
     if (message == ComponentMessages.KILL) {
       clearComponents();
-      actions.add(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                        death.getTileWidth(), death.getTileHeight(),
-                                        death));
+      addAction(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                      death.getTileWidth(), death.getTileHeight(),
+                                      death));
     }
 
     super.sendMessage(message);

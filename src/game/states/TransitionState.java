@@ -4,17 +4,12 @@
 
 package game.states;
 
-import game.components.triggers.actions.IAction;
-
-import java.util.Collection;
-import java.util.Collections;
-
+import game.world.World;
 import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-
 
 public class TransitionState implements IRoundState {
   private final float x, y;
@@ -39,27 +34,12 @@ public class TransitionState implements IRoundState {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(final GameTime time, final World world) {
     tSinceStart += time.getFrameLength();
   }
 
   @Override
   public boolean isFinished() {
     return tSinceStart >= duration;
-  }
-
-  @Override
-  public boolean hasActions() {
-    return false;
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void clearActions() {
-    // No actions to clear
   }
 }

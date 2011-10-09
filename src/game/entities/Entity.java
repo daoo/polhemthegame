@@ -16,7 +16,6 @@ import game.entities.interfaces.IEntity;
 import game.world.World;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import math.Vector2;
 import math.time.GameTime;
@@ -26,7 +25,7 @@ import org.newdawn.slick.Graphics;
 public class Entity implements IEntity {
   protected final AABB body;
 
-  protected final ArrayList<IAction> actions;
+  private final ArrayList<IAction> actions;
 
   private final Entities type;
 
@@ -56,6 +55,11 @@ public class Entity implements IEntity {
     for (final ICompUpdate comp : updates) {
       comp.update(time);
     }
+
+    for (final IAction action : actions) {
+      action.execute(time, world);
+    }
+    actions.clear();
   }
 
   @Override
@@ -113,21 +117,6 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public boolean hasActions() {
-    return !actions.isEmpty();
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return actions;
-  }
-
-  @Override
-  public void clearActions() {
-    actions.clear();
-  }
-
-  @Override
   public boolean isAlive() {
     return true;
   }
@@ -135,5 +124,9 @@ public class Entity implements IEntity {
   @Override
   public Entities getType() {
     return type;
+  }
+
+  protected void addAction(final IAction action) {
+    actions.add(action);
   }
 }

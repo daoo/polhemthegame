@@ -4,11 +4,7 @@
 
 package game.states;
 
-import game.components.triggers.actions.IAction;
-
-import java.util.Collection;
-import java.util.Collections;
-
+import game.world.World;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -24,24 +20,9 @@ public class DoubleState implements IRoundState {
   }
 
   @Override
-  public boolean hasActions() {
-    return false;
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void clearActions() {
-    // Do nothing
-  }
-
-  @Override
-  public void update(final GameTime time) {
-    bgState.update(time);
-    fgState.update(time);
+  public void update(final GameTime time, final World world) {
+    bgState.update(time, world);
+    fgState.update(time, world);
   }
 
   @Override

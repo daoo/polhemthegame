@@ -7,14 +7,14 @@ package game.world;
 import game.entities.groups.Entities;
 import game.entities.interfaces.IObject;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class WorldContainer {
-  private final ArrayList<IObject> list;
+  private final LinkedList<IObject> list;
 
   public WorldContainer() {
-    list = new ArrayList<IObject>();
+    list = new LinkedList<IObject>();
   }
 
   public int size() {
@@ -39,5 +39,9 @@ public class WorldContainer {
 
   public void add(final IObject obj) {
     list.add(obj);
+  }
+
+  public void add(final LinkedList<IObject> objs) {
+    list.addAll(objs);
   }
 }

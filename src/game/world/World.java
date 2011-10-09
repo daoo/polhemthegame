@@ -12,7 +12,7 @@ import game.entities.groups.Groups;
 import game.entities.interfaces.IObject;
 import game.entities.projectiles.Projectile;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import math.CollisionHelper;
 import math.time.GameTime;
@@ -20,11 +20,12 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class World {
-  private final ArrayList<IObject> toRemove;
+  private final LinkedList<IObject> toAdd, toRemove;
   private final WorldContainer entities;
 
   public World() {
-    toRemove = new ArrayList<IObject>();
+    toAdd    = new LinkedList<IObject>();
+    toRemove = new LinkedList<IObject>();
     entities = new WorldContainer();
   }
 
@@ -57,7 +58,15 @@ public class World {
       e.update(time, this);
     }
 
-    entities.remove(toRemove);
+    if (!toRemove.isEmpty()) {
+      entities.remove(toRemove);
+      toRemove.clear();
+    }
+
+    if (!toAdd.isEmpty()) {
+      entities.add(toAdd);
+      toAdd.clear();
+    }
   }
 
   public void render(final Graphics g) {
@@ -66,10 +75,24 @@ public class World {
     }
   }
 
+  /**
+   * Delayed add, happens at the end of a frame.
+   * @param obj object to add
+   */
   public void add(final IObject obj) {
     assert (obj != null);
 
-    entities.add(obj);
+    toAdd.add(obj);
+  }
+
+  /**
+   * Delayed remove, happens at the end of a frame.
+   * @param obj object to remove
+   */
+  public void remove(final IObject obj) {
+    assert (obj != null);
+
+    toRemove.add(obj);
   }
 
   public Iterable<IObject> getUnits() {
@@ -78,9 +101,5 @@ public class World {
 
   public Iterable<IObject> get(final Entities e) {
     return entities.iterate(e);
-  }
-
-  public void scheduleForRemoval(final IObject object) {
-    toRemove.add(object);
   }
 }

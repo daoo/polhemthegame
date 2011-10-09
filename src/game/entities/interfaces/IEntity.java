@@ -5,11 +5,10 @@
 package game.entities.interfaces;
 
 import game.components.physics.AABB;
-import game.components.triggers.actions.IActionProducer;
 import math.Vector2;
 
 
-public interface IEntity extends IActionProducer, IObject {
+public interface IEntity extends IObject {
   public void setPosition(final Vector2 v);
   public void setVelocity(final Vector2 v);
 

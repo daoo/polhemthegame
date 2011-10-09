@@ -59,7 +59,7 @@ public class Player extends Unit implements IArmed {
     for (final ProjectileTemplate tmp : w.projectiles) {
       final Vector2 o = body.getMin().add(hand.getOffset().add(w.getMuzzleOffset()));
       final Projectile p = tmp.makeProjectile(o.x, o.y, w.getAngle(), time);
-      actions.add(new SpawnProjectile(p));
+      addAction(new SpawnProjectile(p));
     }
     w.projectiles.clear();
   }

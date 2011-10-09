@@ -5,17 +5,12 @@
 package game.entities;
 
 import game.components.physics.AABB;
-import game.components.triggers.actions.IAction;
 import game.entities.groups.Entities;
 import game.entities.interfaces.IEntity;
 import game.entities.interfaces.IObject;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.world.World;
-
-import java.util.Collection;
-import java.util.Collections;
-
 import math.Vector2;
 import math.time.GameTime;
 
@@ -69,21 +64,6 @@ public class InvisibleRectangle implements IEntity {
   @Override
   public boolean isAlive() {
     return true;
-  }
-
-  @Override
-  public boolean hasActions() {
-    return false;
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void clearActions() {
-    // Do nothing
   }
 
   @Override

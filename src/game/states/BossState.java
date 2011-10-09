@@ -5,12 +5,11 @@
 package game.states;
 
 import game.CacheTool;
-import game.components.triggers.actions.IAction;
 import game.entities.Boss;
 import game.factories.Factory;
+import game.world.World;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import loader.data.DataException;
 import loader.data.json.LevelData.BossStateData;
@@ -38,7 +37,7 @@ public class BossState implements IRoundState {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(final GameTime time, final World world) {
     if (!boss.isAlive()) {
       // TODO: When animiation has finished, we're done here
     }
@@ -47,22 +46,5 @@ public class BossState implements IRoundState {
   @Override
   public boolean isFinished() {
     return finished;
-  }
-
-  @Override
-  public boolean hasActions() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public Collection<IAction> getActions() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public void clearActions() {
-    // TODO Auto-generated method stub
   }
 }

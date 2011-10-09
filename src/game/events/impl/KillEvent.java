@@ -10,6 +10,6 @@ import game.events.IEvent;
 public class KillEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(final IObject sender, final ObjectEventArgs args) {
-    args.getWorld().scheduleForRemoval(args.getObject());
+    args.getWorld().remove(args.getObject());
   }
 }
