@@ -9,5 +9,4 @@ import game.components.physics.AABB;
 
 public interface IEntity extends IObject {
   public AABB getBody();
-  public boolean isAlive();
 }

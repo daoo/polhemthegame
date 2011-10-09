@@ -106,11 +106,6 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public boolean isAlive() {
-    return true;
-  }
-
-  @Override
   public Entities getType() {
     return type;
   }
