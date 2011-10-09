@@ -85,7 +85,7 @@ public class StateCredits implements IGameState {
   }
 
   @Override
-  public void update(final GameStateManager stateGame, final int delta) {
+  public void update(final GameStateManager stateGame, final float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       stateGame.enterMainMenu();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
@@ -94,8 +94,7 @@ public class StateCredits implements IGameState {
       speed += 50;
     }
 
-    final float dt = delta / 1000.0f;
-    pos_y -= speed * dt;
+    pos_y -= speed * delta;
   }
 
   private UnicodeFont getFont(final String name, final int size)

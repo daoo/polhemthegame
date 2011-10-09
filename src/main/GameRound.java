@@ -39,7 +39,7 @@ public class GameRound implements IGameState {
   }
 
   @Override
-  public void update(final GameStateManager stateGame, final int delta) {
+  public void update(final GameStateManager stateGame, final float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else {

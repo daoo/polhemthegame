@@ -5,5 +5,11 @@ import org.newdawn.slick.SlickException;
 
 public interface IGameState {
   void render(final Graphics g) throws SlickException;
-  void update(final GameStateManager stateGame, int delta);
+
+  /**
+   * Logic part of the game loop.
+   * @param stateGame the game state manager
+   * @param delta frame length in seconds
+   */
+  void update(final GameStateManager stateGame, float delta);
 }
