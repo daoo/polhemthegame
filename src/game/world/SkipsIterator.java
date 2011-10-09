@@ -17,6 +17,9 @@ public class SkipsIterator implements Iterator<IObject> {
   private IObject next;
 
   public SkipsIterator(final Iterable<IObject> list, final Entities[] keys) {
+    assert (list != null);
+    assert (keys != null);
+
     internal = list.iterator();
     this.keys = keys;
   }
