@@ -6,17 +6,17 @@ package game.events.impl;
 
 import game.entities.Creep;
 import game.entities.Player;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IObject;
 import game.events.IEvent;
 
 public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(final IObject sender, final ObjectEventArgs args) {
-    if (args.getObject().getType() == Entities.CREEP) {
+    if (args.getObject().getType() == EntityType.CREEP) {
       final float dmg = ((Creep)args.getObject()).getDamage();
 
-      for (final IObject e : args.getWorld().get(Entities.PLAYER)) {
+      for (final IObject e : args.getWorld().get(EntityType.PLAYER)) {
         ((Player) e).damage(dmg);
       }
     }

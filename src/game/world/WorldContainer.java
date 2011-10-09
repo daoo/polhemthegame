@@ -4,7 +4,7 @@
 
 package game.world;
 
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IObject;
 
 import java.util.Collection;
@@ -25,11 +25,11 @@ public class WorldContainer {
     return new CustomIterable(new AllIterator(list));
   }
 
-  public CustomIterable iterate(final Entities key) {
-    return new CustomIterable(new SkipsIterator(list, new Entities[] { key }));
+  public CustomIterable iterate(final EntityType key) {
+    return new CustomIterable(new SkipsIterator(list, new EntityType[] { key }));
   }
 
-  public CustomIterable iterate(final Entities[] keys) {
+  public CustomIterable iterate(final EntityType[] keys) {
     return new CustomIterable(new SkipsIterator(list, keys));
   }
 

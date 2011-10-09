@@ -7,12 +7,12 @@ package game.entities;
 import game.components.holdables.IArmed;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ICompAnim;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 
 public class Boss extends Unit implements IArmed {
 
   public Boss(final float x, final float y, final float width, final float height, final float dx, final float dy, final int maxHP, final ICompAnim walk, final ICompAnim death) {
-    super(x, y, width, height, dx, dy, Entities.BOSS, maxHP, walk, death);
+    super(x, y, width, height, dx, dy, EntityType.BOSS, maxHP, walk, death);
     // TODO Auto-generated constructor stub
   }
 

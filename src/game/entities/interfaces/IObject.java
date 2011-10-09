@@ -4,14 +4,14 @@
 
 package game.entities.interfaces;
 
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.world.World;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
 public interface IObject {
-  Entities getType();
+  EntityType getType();
 
   void update(final GameTime time, final World world);
   void render(final Graphics g);

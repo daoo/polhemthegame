@@ -5,7 +5,7 @@
 package game.entities;
 
 import game.components.physics.AABB;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IEntity;
 import game.entities.interfaces.IObject;
 import game.events.EventHandler;
@@ -51,7 +51,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public Entities getType() {
-    return Entities.GENERAL;
+  public EntityType getType() {
+    return EntityType.GENERAL;
   }
 }

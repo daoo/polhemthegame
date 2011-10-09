@@ -7,7 +7,7 @@ package game.components.triggers.actions;
 import game.components.graphics.animations.RunTo;
 import game.components.interfaces.ICompAnim;
 import game.entities.Entity;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.world.World;
 import math.time.GameTime;
 
@@ -19,7 +19,7 @@ public class SpawnRunToEndAnim implements IAction {
                         final float width, final float height,
                         final ICompAnim anim) {
     this.anim = anim;
-    animated = new Entity(x, y, width, height, 0, 0, Entities.ANIMATED);
+    animated = new Entity(x, y, width, height, 0, 0, EntityType.ANIMATED);
   }
 
   @Override

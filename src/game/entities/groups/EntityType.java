@@ -4,7 +4,7 @@
 
 package game.entities.groups;
 
-public enum Entities {
+public enum EntityType {
   ANIMATED,
   CREEP,
   BOSS,

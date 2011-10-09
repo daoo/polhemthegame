@@ -10,7 +10,7 @@ import game.components.graphics.animations.Continuous;
 import game.components.interfaces.ICompAnim;
 import game.components.physics.Gravity;
 import game.entities.Entity;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IDamagable;
 import game.world.World;
 import loader.data.json.ProjectilesData.ProjectileData;
@@ -32,7 +32,7 @@ public class Projectile extends Entity implements IDamagable {
     super(x, y, data.hitbox.width, data.hitbox.height,
           (float) Math.cos(rot) * data.speed,
           (float) Math.sin(rot) * data.speed,
-          Entities.PROJECTILE);
+          EntityType.PROJECTILE);
 
     assert (renderer != null);
     assert (data != null);

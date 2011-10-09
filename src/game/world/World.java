@@ -7,7 +7,7 @@ package game.world;
 import game.components.ComponentMessages;
 import game.components.physics.AABB;
 import game.entities.Unit;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.groups.Groups;
 import game.entities.interfaces.IObject;
 import game.entities.projectiles.Projectile;
@@ -31,7 +31,7 @@ public class World {
 
   public void update(final GameTime time) {
     // Do projectile collisions first, I think it leads to more accurate collisions
-    for (final IObject e1 : entities.iterate(Entities.PROJECTILE)) {
+    for (final IObject e1 : entities.iterate(EntityType.PROJECTILE)) {
       final Projectile p = (Projectile) e1;
       if (p.canCollide()) {
         // Check for collisions with units
@@ -99,7 +99,7 @@ public class World {
     return entities.iterate(Groups.UNITS);
   }
 
-  public Iterable<IObject> get(final Entities e) {
+  public Iterable<IObject> get(final EntityType e) {
     return entities.iterate(e);
   }
 }

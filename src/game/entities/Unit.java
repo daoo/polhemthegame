@@ -11,7 +11,7 @@ import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.components.physics.AABB;
 import game.components.triggers.actions.SpawnRunToEndAnim;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IDamagable;
 import game.entities.interfaces.IWalking;
 import game.world.World;
@@ -34,7 +34,7 @@ public class Unit extends Entity implements IDamagable, IWalking {
   public Unit(final float x, final float y,
               final float width, final float height,
               final float dx, final float dy,
-              final Entities type, final int maxHP,
+              final EntityType type, final int maxHP,
               final ICompAnim walk, final ICompAnim death) {
     super(x, y, width, height, dx, dy, type);
 

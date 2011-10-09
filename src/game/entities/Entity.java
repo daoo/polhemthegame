@@ -11,7 +11,7 @@ import game.components.interfaces.ICompUpRend;
 import game.components.interfaces.ICompUpdate;
 import game.components.physics.AABB;
 import game.components.triggers.actions.IAction;
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IEntity;
 import game.world.World;
 
@@ -26,7 +26,7 @@ public class Entity implements IEntity {
 
   private final ArrayList<IAction> actions;
 
-  private final Entities type;
+  private final EntityType type;
 
   private final ArrayList<IComp>       all;
   private final ArrayList<ICompUpdate> updates;
@@ -35,7 +35,7 @@ public class Entity implements IEntity {
   public Entity(final float x, final float y,
                 final float w, final float h,
                 final float dx, final float dy,
-                final Entities type) {
+                final EntityType type) {
     body = new AABB(x, y, w, h, dx, dy);
 
     actions = new ArrayList<IAction>();
@@ -106,7 +106,7 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public Entities getType() {
+  public EntityType getType() {
     return type;
   }
 

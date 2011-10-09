@@ -4,7 +4,7 @@
 
 package game.world;
 
-import game.entities.groups.Entities;
+import game.entities.groups.EntityType;
 import game.entities.interfaces.IObject;
 
 import java.util.Arrays;
@@ -12,11 +12,11 @@ import java.util.Iterator;
 
 public class SkipsIterator implements Iterator<IObject> {
   private final Iterator<IObject> internal;
-  private final Entities[] keys;
+  private final EntityType[] keys;
 
   private IObject next;
 
-  public SkipsIterator(final Iterable<IObject> list, final Entities[] keys) {
+  public SkipsIterator(final Iterable<IObject> list, final EntityType[] keys) {
     assert (list != null);
     assert (keys != null);
 
