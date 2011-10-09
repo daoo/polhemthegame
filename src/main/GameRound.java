@@ -21,7 +21,7 @@ import org.newdawn.slick.SlickException;
 import ui.hud.HUD;
 
 public class GameRound implements IGameState {
-  private final IMode   mode;
+  private final IMode mode;
 
   public GameRound() throws ParserException, IOException, DataException {
     final CampaignData campaign = (CampaignData)
