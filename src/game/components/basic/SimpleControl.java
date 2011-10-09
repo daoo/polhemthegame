@@ -91,7 +91,7 @@ public class SimpleControl implements ICompUpdate {
         player.stop();
       }
 
-      player.setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
+      player.getBody().setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
 
       // Shooting
       t = isKeyToggled(Input.KEY_SPACE);

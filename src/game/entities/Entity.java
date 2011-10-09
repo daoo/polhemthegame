@@ -17,7 +17,6 @@ import game.world.World;
 
 import java.util.ArrayList;
 
-import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -93,16 +92,6 @@ public class Entity implements IEntity {
   public void clearComponents() {
     updates.clear();
     renders.clear();
-  }
-
-  @Override
-  public void setPosition(final Vector2 v) {
-    body.setPosition(v);
-  }
-
-  @Override
-  public void setVelocity(final Vector2 v) {
-    body.setVelocity(v);
   }
 
   @Override

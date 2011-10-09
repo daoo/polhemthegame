@@ -11,7 +11,6 @@ import game.entities.interfaces.IObject;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.world.World;
-import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -44,16 +43,6 @@ public class InvisibleRectangle implements IEntity {
   @Override
   public void render(final Graphics g) {
     // Do nothing
-  }
-
-  @Override
-  public void setPosition(final Vector2 v) {
-    body.setPosition(v);
-  }
-
-  @Override
-  public void setVelocity(final Vector2 v) {
-    body.addVelocity(v);
   }
 
   @Override
