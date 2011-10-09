@@ -20,7 +20,7 @@ public class SpawnAnimated implements IAction {
                        final ICompAnim anim) {
     this.anim = anim;
     animated = new Entity(x, y, width, height, 0, 0, EntityType.ANIMATED);
-    animated.add(anim);
+    animated.addCompUpRend(anim);
   }
 
   @Override

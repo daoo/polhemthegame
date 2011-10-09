@@ -43,13 +43,13 @@ public class Unit extends Entity implements IDamagable, IWalking {
 
     life = new Life(this, maxHP);
 
-    add(walk);
+    addCompUpRend(walk);
 
     infoBar = new InfoBar(width, 2, 0, -6);
     hpBar = new Bar(Color.green, Color.red);
     infoBar.add(hpBar);
 
-    add(infoBar);
+    addCompRender(infoBar);
   }
 
   protected void addBar(final Bar bar) {
@@ -94,9 +94,10 @@ public class Unit extends Entity implements IDamagable, IWalking {
   public void sendMessage(final ComponentMessages message) {
     if (message == ComponentMessages.KILL) {
       clearComponents();
-      addAction(new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                      death.getTileWidth(), death.getTileHeight(),
-                                      death));
+      addAction(new SpawnRunToEndAnim(
+        body.getX1(), body.getY1(),
+        death.getTileWidth(), death.getTileHeight(),
+        death));
     }
 
     super.sendMessage(message);

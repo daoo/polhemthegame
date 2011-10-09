@@ -73,18 +73,18 @@ public class Entity implements IEntity {
     g.popTransform();
   }
 
-  public void add(final ICompUpRend comp) {
+  public void addCompUpRend(final ICompUpRend comp) {
     all.add(comp);
     updates.add(comp);
     renders.add(comp);
   }
 
-  public void add(final ICompRender comp) {
+  public void addCompRender(final ICompRender comp) {
     all.add(comp);
     renders.add(comp);
   }
 
-  public void add(final ICompUpdate comp) {
+  public void addCompUpdate(final ICompUpdate comp) {
     all.add(comp);
     updates.add(comp);
   }

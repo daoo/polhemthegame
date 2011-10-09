@@ -48,11 +48,11 @@ public class Projectile extends Entity implements IDamagable {
     startTime = time.getElapsed();
 
     if (data.gravity) {
-      add(new Gravity(body, Gravity.FACTOR));
+      addCompUpdate(new Gravity(body, Gravity.FACTOR));
     }
 
     renderer.setAnimator(new Continuous(renderer.getTileCount()));
-    add(renderer);
+    addCompUpRend(renderer);
   }
 
   @Override

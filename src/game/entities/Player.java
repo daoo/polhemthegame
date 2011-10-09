@@ -42,9 +42,9 @@ public class Player extends Unit implements IArmed {
     weaponBar = new Bar(Color.blue, new Color(0, 0, 0, 0));
     control   = new SimpleControl(this, hand, speed);
 
-    add(hand);
+    addCompUpRend(hand);
     addBar(weaponBar);
-    add(control);
+    addCompUpdate(control);
   }
 
   @Override
