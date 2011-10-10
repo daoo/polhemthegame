@@ -126,6 +126,10 @@ public class Entity implements IEntity {
       comp.update(time);
     }
 
+    for (final IRenderComponent comp : renders) {
+      comp.update(time);
+    }
+
     for (final IAction action : actions) {
       action.execute(time, world);
     }

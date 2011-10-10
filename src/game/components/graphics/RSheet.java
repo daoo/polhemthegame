@@ -19,25 +19,26 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class RSheet implements ICompAnim {
-  private final Clock       clock;
-
   private final SpriteSheet sheet;
-  private final Tile        size;
-  private final int         tw, th;
-  private final int         offsetX, offsetY;
-  private Tile              current;
-  private IAnimator         animator;
+
+  private final Tile size;
+  private final int  offsetX, offsetY;
+  private final int  tw, th;
+
+  private final Clock clock;
+  private IAnimator   animator;
+  private Tile        current;
 
   public RSheet(final float targetFrameRate, final int offsetX,
                 final int offsetY, final SpriteSheet sheet,
                 final IAnimator animator) {
     this.sheet = sheet;
-    clock = new Clock(1.0f / targetFrameRate);
+    clock      = new Clock(1.0f / targetFrameRate);
 
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    // TODO: There should be getters in SpriteSheet
+    // Note: There should be getters in SpriteSheet
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
 
@@ -49,26 +50,8 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void update(final GameTime time) {
-    if (clock.needsSync(time.getElapsed())) {
-      clock.sync(time.getElapsed());
-
-      current = animator.next(current);
-    }
-  }
-
-  @Override
-  public void render(final Graphics g) {
-    g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
-  }
-
-  @Override
-  public void goToFirstFrame() {
-    current = Tile.ZERO;
-  }
-
-  public SpriteSheet getSpriteSheet() {
-    return sheet;
+  public ComponentType getComponentType() {
+    return ComponentType.GRAPHIC;
   }
 
   public Image getCurrentFrame() {
@@ -76,13 +59,12 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public int getTileWidth() {
-    return tw;
+  public Tile getLastTile() {
+    return new Tile(size.x - 1, size.y - 1);
   }
 
-  @Override
-  public int getTileHeight() {
-    return th;
+  public SpriteSheet getSpriteSheet() {
+    return sheet;
   }
 
   @Override
@@ -91,8 +73,18 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public Tile getLastTile() {
-    return new Tile(size.x - 1, size.y - 1);
+  public int getTileHeight() {
+    return th;
+  }
+
+  @Override
+  public int getTileWidth() {
+    return tw;
+  }
+
+  @Override
+  public void goToFirstFrame() {
+    current = Tile.ZERO;
   }
 
   @Override
@@ -108,8 +100,13 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAPHIC;
+  public void render(final Graphics g) {
+    g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
+  }
+
+  @Override
+  public void setAnimator(final IAnimator animator) {
+    this.animator = animator;
   }
 
   @Override
@@ -118,7 +115,11 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(final IAnimator animator) {
-    this.animator = animator;
+  public void update(final GameTime time) {
+    if (clock.needsSync(time.getElapsed())) {
+      clock.sync(time.getElapsed());
+
+      current = animator.next(current);
+    }
   }
 }
