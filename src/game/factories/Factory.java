@@ -83,7 +83,7 @@ public class Factory {
   public static IEntity makeCreep(final float x, final float y, final float ang,
                                   final CreepData data)
     throws ParserException, DataException, IOException {
-    final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     return Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
@@ -95,48 +95,49 @@ public class Factory {
 
   public static IEntity makePlayer(final float x, final float y, final PlayerData data)
     throws ParserException, DataException, IOException {
-    final RSheet walk = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
+
+    final Inventory inv         = new Inventory(data.startMoney);
+    final Hand hand             = new Hand(data.handOffset.x, data.handOffset.y);
+    final SimpleControl control = new SimpleControl(data.speed);
+    final Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
 
     final IEntity e = Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
                                        0, 0, EntityType.PLAYER, data.hitpoints,
                                        walk, death);
 
-    final Inventory inv       = new Inventory(data.startMoney);
-    final Hand hand      = new Hand(data.handOffset.x, data.handOffset.y);
-    final Bar weaponBar = new Bar(hand, Color.blue, new Color(0, 0, 0, 0));
+    final Bar weaponBar   = new Bar(hand, Color.blue, new Color(0, 0, 0, 0));
+    final InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
+    infoBar.add(weaponBar);
 
-    e.addRenderComponent(hand);
-    ((InfoBar)e.getComponent(ComponentType.INFO_BAR)).add(weaponBar);
-    e.addLogicComponent(new SimpleControl(data.speed));
-
-    final Weapon weapon = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
     inv.add(weapon);
     hand.grab(weapon);
 
+    e.addRenderComponent(hand);
+    e.addLogicComponent(control);
+
     return e;
   }
-  
+
   private static IEntity makeUnit(final float x, final float y,
                                   final float width, final float height,
                                   final float dx, final float dy,
                                   final EntityType type, final float maxHP,
-                                  final ICompAnim walk, final ICompAnim death) {
-    final Entity e = new Entity(x, y, width, height, dx, dy, type);
+                                  final ICompAnim walkAnim, final ICompAnim deathAnim) {
+    final Entity e           = new Entity(x, y, width, height, dx, dy, type);
+    final Life life          = new Life(maxHP);
+    final SpawnOnDeath death = new SpawnOnDeath(deathAnim);
+    final InfoBar infoBar    = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
+    final Bar hpBar          = new Bar(life, Color.green, Color.red);
 
-    final Life life = new Life(maxHP);
-    
-    e.addLogicComponent(life);
-    e.addRenderComponent(walk);
-
-    final InfoBar infoBar = new InfoBar(width, 2, 0, -6);
-    final Bar hpBar = new Bar(life, Color.green, Color.red);
     infoBar.add(hpBar);
 
+    e.addLogicComponent(life);
+    e.addLogicComponent(death);
+    e.addRenderComponent(walkAnim);
     e.addRenderComponent(infoBar);
-    
-    e.addLogicComponent(new SpawnOnDeath(death));
-    
+
     return e;
   }
 }

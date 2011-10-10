@@ -17,7 +17,6 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
 public class InfoBar implements IRenderComponent {
   private final float          barWidth, barHeight;
   private final int            offsetX, offsetY;
