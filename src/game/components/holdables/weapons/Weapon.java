@@ -11,7 +11,7 @@ import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import game.entities.projectiles.ProjectileTemplate;
 
 import java.util.ArrayList;

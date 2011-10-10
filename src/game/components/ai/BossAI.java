@@ -9,7 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.AABB;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 
 import java.util.Stack;
 

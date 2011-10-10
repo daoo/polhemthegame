@@ -7,7 +7,7 @@ package game.components.physics;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import math.Vector2;
 import math.time.GameTime;
 

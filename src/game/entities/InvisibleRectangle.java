@@ -11,7 +11,6 @@ import game.components.interfaces.IRenderComponent;
 import game.components.misc.IAction;
 import game.components.physics.AABB;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IEntity;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.world.World;

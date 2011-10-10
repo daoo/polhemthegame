@@ -10,7 +10,7 @@ import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import math.time.Clock;
 import math.time.GameTime;
 

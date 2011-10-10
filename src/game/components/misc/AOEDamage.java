@@ -5,7 +5,7 @@
 package game.components.misc;
 
 import game.components.ComponentMessage;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import game.world.World;
 import math.Vector2;
 import math.time.GameTime;

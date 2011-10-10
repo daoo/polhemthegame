@@ -8,7 +8,7 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
 import game.components.interfaces.ICompAnim;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;

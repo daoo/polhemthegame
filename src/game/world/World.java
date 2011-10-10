@@ -8,9 +8,9 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.basic.Life;
 import game.components.physics.AABB;
+import game.entities.IEntity;
 import game.entities.groups.EntityType;
 import game.entities.groups.Groups;
-import game.entities.interfaces.IEntity;
 import game.entities.projectiles.Projectile;
 
 import java.util.LinkedList;

@@ -4,8 +4,8 @@
 
 package game.world;
 
+import game.entities.IEntity;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IEntity;
 
 import java.util.Collection;
 import java.util.LinkedList;

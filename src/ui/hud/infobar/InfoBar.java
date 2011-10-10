@@ -9,7 +9,7 @@ package ui.hud.infobar;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 
 import java.util.ArrayList;
 

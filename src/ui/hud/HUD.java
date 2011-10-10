@@ -4,7 +4,7 @@
 
 package ui.hud;
 
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;

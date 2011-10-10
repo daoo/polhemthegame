@@ -9,7 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.components.misc.SpawnProjectile;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import game.entities.projectiles.Projectile;
 import game.entities.projectiles.ProjectileTemplate;
 import math.Vector2;

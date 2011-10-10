@@ -5,8 +5,8 @@
 package game.events.impl;
 
 import game.components.ComponentMessage;
+import game.entities.IEntity;
 import game.entities.groups.EntityType;
-import game.entities.interfaces.IEntity;
 import game.events.IEvent;
 
 public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {

@@ -8,7 +8,7 @@ import game.CacheTool;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.basic.Life;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import game.factories.Factory;
 import game.world.World;
 

@@ -4,7 +4,7 @@
 
 package game.events;
 
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 
 import java.util.ArrayList;
 

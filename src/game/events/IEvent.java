@@ -4,7 +4,7 @@
 
 package game.events;
 
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 
 public interface IEvent<T extends IEventArgs> {
   void execute(final IEntity sender, final T args);

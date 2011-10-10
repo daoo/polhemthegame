@@ -6,7 +6,7 @@ package game.components.interfaces;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import math.time.GameTime;
 
 public interface ILogicComponent {

@@ -7,7 +7,6 @@ package game.entities;
 import game.CacheTool;
 import game.components.ComponentType;
 import game.components.basic.Life;
-import game.entities.interfaces.IEntity;
 import game.factories.Factory;
 
 import java.io.IOException;

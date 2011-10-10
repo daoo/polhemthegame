@@ -4,7 +4,7 @@
 
 package game.events.impl;
 
-import game.entities.interfaces.IEntity;
+import game.entities.IEntity;
 import game.events.IEvent;
 
 public class KillEvent implements IEvent<ObjectEventArgs> {
