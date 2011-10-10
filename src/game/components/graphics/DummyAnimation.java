@@ -13,7 +13,6 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-
 public class DummyAnimation implements ICompAnim {
   @Override
   public void update(GameTime time) {
