@@ -60,31 +60,31 @@ public class InvisibleRectangle implements IEntity {
 
   @Override
   public ILogicComponent getComponent(ComponentType componentType) {
-    throw new UnsupportedOperationException("Not implemented");
+    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
   public void sendMessage(ComponentMessage message, Object args) {
-    // Do nothing, this have no components
+    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
   public void addRenderComponent(IRenderComponent comp) {
-    throw new UnsupportedOperationException("Not implemented");
+    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
   public void addLogicComponent(ILogicComponent comp) {
-    throw new UnsupportedOperationException("Not implemented");
+    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
   public void clearComponents() {
-    throw new UnsupportedOperationException("Not implemented");
+    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
   public void addAction(IAction action) {
-    throw new UnsupportedOperationException("Not implemented");
+    throw new UnsupportedOperationException("Not allowed");
   }
 }

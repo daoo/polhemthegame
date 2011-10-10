@@ -15,6 +15,7 @@ import game.entities.interfaces.IEntity;
 import game.world.World;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import math.time.GameTime;
 
@@ -124,6 +125,6 @@ public class Entity implements IEntity {
       }
     }
     
-    throw new UnsupportedOperationException("THIS IS SPARTA!");
+    throw new NoSuchElementException();
   }
 }

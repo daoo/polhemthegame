@@ -16,15 +16,13 @@ import org.newdawn.slick.Graphics;
 
 
 public class DummyAnimation implements ICompAnim {
-  private final IAnimator animator;
-
   @Override
   public void update(GameTime time) {
     // Do nothing
   }
 
   public DummyAnimation() {
-    animator = new Idle();
+    new Idle();
   }
 
   @Override

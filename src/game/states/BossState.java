@@ -4,9 +4,6 @@
 
 package game.states;
 
-import game.CacheTool;
-import game.entities.interfaces.IEntity;
-import game.factories.Factory;
 import game.world.World;
 
 import java.io.IOException;
@@ -14,7 +11,6 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.LevelData.BossStateData;
 import loader.parser.ParserException;
-import main.Locator;
 import math.Rectangle;
 import math.time.GameTime;
 

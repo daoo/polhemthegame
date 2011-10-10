@@ -5,11 +5,13 @@
 package game.components.holdables.weapons;
 
 import game.components.ComponentMessage;
+import game.components.ComponentType;
 import game.components.graphics.RSheet;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
+import game.entities.interfaces.IEntity;
 import game.entities.projectiles.ProjectileTemplate;
 
 import java.util.ArrayList;
@@ -20,27 +22,27 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public abstract class Weapon implements IHoldable {
-  protected final Vector2                    muzzleOffset;
-
-  protected final float                      reloadTime, cooldownTime;
-  protected final int                        magazineSize;
-
-  protected final float                      angle;
-
-  /**
-   * How many rounds there are left in the magazine.
-   */
-  protected int                              rounds;
-
   /**
    * Spawned projectiles, for owner to pass on to world.
    */
   public final ArrayList<ProjectileTemplate> projectiles;
 
+  protected final float                      angle;
   protected final RSheet                     anim;
-  protected final ProjectileTemplate         projTemplate;
 
   protected IWeaponState                     currentState;
+
+  protected final int                        magazineSize;
+
+  protected final Vector2                    muzzleOffset;
+
+  protected final ProjectileTemplate         projTemplate;
+  protected final float                      reloadTime, cooldownTime;
+
+  /**
+   * How many rounds there are left in the magazine.
+   */
+  protected int                              rounds;
 
   public Weapon(final Vector2 muzzleOffset, final float reloadTime,
                 final float cooldownTime, final int magazineSize,
@@ -58,14 +60,17 @@ public abstract class Weapon implements IHoldable {
     projectiles = new ArrayList<ProjectileTemplate>();
   }
 
-  @Override
-  public void update(final GameTime time) {
-    anim.update(time);
+  public float getAngle() {
+    return angle;
   }
 
   @Override
-  public void render(final Graphics g) {
-    anim.render(g);
+  public ComponentType getComponentType() {
+    return ComponentType.WEAPON;
+  }
+
+  public Vector2 getMuzzleOffset() {
+    return muzzleOffset;
   }
 
   @Override
@@ -78,24 +83,26 @@ public abstract class Weapon implements IHoldable {
     }
   }
 
-  public Vector2 getMuzzleOffset() {
-    return muzzleOffset;
+  @Override
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.KILL) {
+      toggleOff();
+    }
   }
 
-  public float getAngle() {
-    return angle;
+  @Override
+  public void render(final Graphics g) {
+    anim.render(g);
+  }
+  
+  @Override
+  public void setOwner(final IEntity owner) {
+    // Do nothing
   }
 
-  protected boolean isIdle() {
-    return currentState == null;
-  }
-
-  protected boolean isReadyToShoot() {
-    return !isEmpty() && isIdle();
-  }
-
-  protected boolean isEmpty() {
-    return (magazineSize != -1) && (rounds <= 0);
+  @Override
+  public void update(final GameTime time) {
+    anim.update(time);
   }
 
   protected void fire(final float elapsed) {
@@ -108,15 +115,20 @@ public abstract class Weapon implements IHoldable {
     currentState = new CoolDownState(elapsed, cooldownTime);
   }
 
+  protected boolean isEmpty() {
+    return (magazineSize != -1) && (rounds <= 0);
+  }
+
+  protected boolean isIdle() {
+    return currentState == null;
+  }
+  
+  protected boolean isReadyToShoot() {
+    return !isEmpty() && isIdle();
+  }
+
   protected void startReload(final GameTime time) {
     currentState = new ReloadingState(time.getElapsed(), reloadTime);
     rounds = magazineSize;
-  }
-
-  @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
-    if (message == ComponentMessage.KILL) {
-      toggleOff();
-    }
   }
 }

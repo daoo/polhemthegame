@@ -4,11 +4,9 @@
 
 package game.components.holdables.weapons;
 
-import game.components.ComponentType;
 import game.components.graphics.RSheet;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.RunTo;
-import game.entities.interfaces.IEntity;
 import game.entities.projectiles.ProjectileTemplate;
 import math.Vector2;
 import math.time.GameTime;
@@ -69,15 +67,5 @@ public class SingleWeapon extends Weapon {
   @Override
   public boolean isInUse() {
     return false;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
   }
 }

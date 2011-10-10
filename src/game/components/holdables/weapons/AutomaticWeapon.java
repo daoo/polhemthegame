@@ -4,12 +4,10 @@
 
 package game.components.holdables.weapons;
 
-import game.components.ComponentType;
 import game.components.graphics.RSheet;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.RunTo;
-import game.entities.interfaces.IEntity;
 import game.entities.projectiles.ProjectileTemplate;
 import math.Vector2;
 import math.time.GameTime;
@@ -29,7 +27,7 @@ public class AutomaticWeapon extends Weapon {
 
   @Override
   public void update(final GameTime time) {
-    anim.update(time);
+    super.update(time);
 
     if (currentState != null) {
       currentState.update(time);
@@ -80,15 +78,5 @@ public class AutomaticWeapon extends Weapon {
     super.startReload(time);
 
     anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
   }
 }
