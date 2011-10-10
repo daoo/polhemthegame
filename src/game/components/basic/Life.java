@@ -4,14 +4,14 @@
 
 package game.components.basic;
 
-
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.interfaces.IEntity;
 import math.time.GameTime;
+import ui.hud.infobar.IProgress;
 
-public class Life implements ILogicComponent {
+public class Life implements ILogicComponent, IProgress {
   private IEntity owner;
 
   private float hp;
@@ -45,10 +45,6 @@ public class Life implements ILogicComponent {
     return alive;
   }
 
-  public float getHPFraction() {
-    return hp / maxHP;
-  }
-
   private void kill() {
     owner.sendMessage(ComponentMessage.KILL, null);
   }
@@ -66,5 +62,10 @@ public class Life implements ILogicComponent {
   @Override
   public void setOwner(final IEntity owner) {
     this.owner = owner;
+  }
+
+  @Override
+  public float getProgress() {
+    return hp / maxHP;
   }
 }

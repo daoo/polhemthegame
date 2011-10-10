@@ -7,6 +7,7 @@ package game.entities;
 import game.CacheTool;
 import game.components.ComponentType;
 import game.components.basic.Life;
+import game.entities.interfaces.IEntity;
 import game.factories.Factory;
 
 import java.io.IOException;
@@ -20,22 +21,22 @@ import main.Locator;
 import math.Rectangle;
 import math.Vector2;
 
-public class Players implements Iterable<Player> {
+public class Players implements Iterable<IEntity> {
   private static final float      STARING_X = 0.1f;
   private final int               count;
-  private final ArrayList<Player> players;
+  private final ArrayList<IEntity> players;
 
   public Players(final int count)
     throws ParserException, DataException, IOException {
     super();
 
-    players = new ArrayList<Player>();
+    players = new ArrayList<IEntity>();
     this.count = count;
 
     final PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
-      players.add(Factory.MakePlayer(0, 0, data.players.get(i)));
+      players.add(Factory.makePlayer(0, 0, data.players.get(i)));
       j = (j + 1) % data.players.size();
     }
   }
@@ -43,14 +44,14 @@ public class Players implements Iterable<Player> {
   public void reposition(final Rectangle rect) {
     final float dy = rect.getHeight() / (count * 2);
     final Vector2 v = new Vector2(rect.getWidth() * Players.STARING_X, dy);
-    for (final Player p : players) {
+    for (final IEntity p : players) {
       p.getBody().setPosition(v);
       v.y += dy;
     }
   }
 
   public boolean isAlive() {
-    for (final Player p : players) {
+    for (final IEntity p : players) {
       if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
         return true;
       }
@@ -60,7 +61,7 @@ public class Players implements Iterable<Player> {
   }
 
   @Override
-  public Iterator<Player> iterator() {
+  public Iterator<IEntity> iterator() {
     return players.iterator();
   }
 }

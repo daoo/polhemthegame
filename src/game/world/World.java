@@ -8,7 +8,6 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.basic.Life;
 import game.components.physics.AABB;
-import game.entities.Unit;
 import game.entities.groups.EntityType;
 import game.entities.groups.Groups;
 import game.entities.interfaces.IEntity;
@@ -39,13 +38,12 @@ public class World {
         // Check for collisions with units
         final AABB a = p.getBody();
         for (final IEntity e2 : entities.iterate(Groups.UNITS)) {
-          final Unit u = (Unit) e2;
-          if (CollisionHelper.SweepCollisionTest(a, u.getBody(), time.getFrameLength())) {
+          if (CollisionHelper.SweepCollisionTest(a, e2.getBody(), time.getFrameLength())) {
             // FIXME: If the projectile can hit multiple targets and is sufficently slow,
             //        it might hit the same target multiple times.
             if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
               p.sendMessage(ComponentMessage.DAMAGE, 1);
-              u.sendMessage(ComponentMessage.DAMAGE, p.getDamage());
+              e2.sendMessage(ComponentMessage.DAMAGE, p.getDamage());
             } else {
               p.sendMessage(ComponentMessage.KILL, null);
               break;

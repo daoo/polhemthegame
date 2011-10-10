@@ -8,16 +8,23 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
+import game.components.misc.SpawnProjectile;
 import game.entities.interfaces.IEntity;
+import game.entities.projectiles.Projectile;
+import game.entities.projectiles.ProjectileTemplate;
 import math.Vector2;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
+import ui.hud.infobar.IProgress;
 
-public class Hand implements IRenderComponent {
-  private Weapon                   weapon;
-  private final Vector2            offset;
+
+public class Hand implements IRenderComponent, IProgress {
+  private final Vector2 offset;
+
+  private IEntity owner;
+  private Weapon weapon;
 
   public Hand(final float handOffsetX, final float handOffsetY) {
     offset = new Vector2(handOffsetX, handOffsetY);
@@ -47,6 +54,14 @@ public class Hand implements IRenderComponent {
   @Override
   public void update(final GameTime time) {
     weapon.update(time);
+    
+    // Find out if there are any projectiles that want to be spawned
+    for (final ProjectileTemplate projTemplate : weapon.projectiles) {
+      final Vector2 o    = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
+      final Projectile p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle(), time);
+      owner.addAction(new SpawnProjectile(p));
+    }
+    weapon.projectiles.clear();
   }
 
   @Override
@@ -59,26 +74,27 @@ public class Hand implements IRenderComponent {
     g.popTransform();
   }
 
-  public Weapon getWeapon() {
-    return weapon;
-  }
-
-  public Vector2 getOffset() {
-    return offset;
+  @Override
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.START_HOLDABLE) {
+      startUse();
+    } else if (message == ComponentMessage.STOP_HOLDABLE) {
+      stopUse();
+    }
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
-    // Do nothing
+  public float getProgress() {
+    return weapon.getProgress();
   }
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.HAND;
   }
 
   @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void setOwner(final IEntity owner) {
+    this.owner = owner;
   }
 }

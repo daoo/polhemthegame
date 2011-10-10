@@ -72,7 +72,7 @@ public class GameLevel {
     availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
 
     background = CacheTool.getImage(Locator.getCache(), level.background);
-    world      = Factory.MakeWorld(availible, players);
+    world      = Factory.makeWorld(availible, players);
 
     // Players
     this.players = players;

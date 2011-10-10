@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import math.time.GameTime;
 
-
 // TODO: Shop
 
 public class Inventory implements ILogicComponent {
@@ -65,10 +64,6 @@ public class Inventory implements ILogicComponent {
     return weapons.get(currentWeapon);
   }
 
-  public int getMoney() {
-    return money;
-  }
-
   @Override
   public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
@@ -76,16 +71,20 @@ public class Inventory implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    throw new UnsupportedOperationException("Not implemented");
+    // Do nothing
+  }
+
+  @Override
+  public void setOwner(final IEntity owner) {
+    // Do nothing
+  }
+  
+  public int getMoney() {
+    return money;
   }
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.INVENTORY;
   }
 }

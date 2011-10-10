@@ -8,7 +8,7 @@ import game.CacheTool;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.basic.Life;
-import game.entities.Creep;
+import game.entities.interfaces.IEntity;
 import game.factories.Factory;
 import game.world.World;
 
@@ -31,16 +31,16 @@ import org.newdawn.slick.Graphics;
 public class CreepsState implements IRoundState {
   private final class ToBeCreep {
     public final float spawnTime;
-    public final Creep creep;
+    public final IEntity creep;
 
-    public ToBeCreep(final float spawnTime, final Creep creep) {
+    public ToBeCreep(final float spawnTime, final IEntity creep) {
       this.spawnTime = spawnTime;
       this.creep     = creep;
     }
   }
 
   private final LinkedList<ToBeCreep> toBeSpawned;
-  private final LinkedList<Creep> spawned;
+  private final LinkedList<IEntity> spawned;
 
   private float getCreepX(final Rectangle rect, final int width) {
     return rect.getX2() + width;
@@ -52,7 +52,7 @@ public class CreepsState implements IRoundState {
 
   public CreepsState(final Rectangle rect, final CreepStateData sd)
     throws IOException, ParserException, DataException {
-    spawned = new LinkedList<Creep>();
+    spawned = new LinkedList<IEntity>();
     toBeSpawned = new LinkedList<ToBeCreep>();
 
     final CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
@@ -61,7 +61,7 @@ public class CreepsState implements IRoundState {
 
       toBeSpawned.add(new ToBeCreep(
         spawnData.spawnTime,
-        Factory.MakeCreep(getCreepX(rect, data.hitbox.width),
+        Factory.makeCreep(getCreepX(rect, data.hitbox.width),
                           getCreepY(rect, data.hitbox.height),
                           (float) -Math.PI, data)));
     }
@@ -82,9 +82,9 @@ public class CreepsState implements IRoundState {
       }
     }
 
-    final Iterator<Creep> itr = spawned.iterator();
+    final Iterator<IEntity> itr = spawned.iterator();
     while (itr.hasNext()) {
-      final Creep c = itr.next();
+      final IEntity c = itr.next();
 
       if (!((Life) c.getComponent(ComponentType.HEALTH)).isAlive()) {
         itr.remove();

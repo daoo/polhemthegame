@@ -38,7 +38,7 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(final IAnimator animator) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     // Do nothing
   }
 
@@ -63,17 +63,17 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
-    // Do nothing
-  }
-
-  @Override
   public ComponentType getComponentType() {
     return ComponentType.GRAPHIC;
   }
 
   @Override
   public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+    // Do nothing
+  }
+
+  @Override
+  public void setAnimator(final IAnimator animator) {
+    // Do nothing
   }
 }

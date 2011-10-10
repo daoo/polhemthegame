@@ -35,6 +35,11 @@ public class InfoBar implements IRenderComponent {
   }
 
   @Override
+  public void update(GameTime time) {
+    // Do nothing
+  }
+
+  @Override
   public void render(final Graphics g) {
     int i = 0;
     for (final Bar b : bars) {
@@ -58,11 +63,11 @@ public class InfoBar implements IRenderComponent {
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.INFO_BAR;
   }
 
   @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void setOwner(final IEntity owner) {
+    // Do nothing
   }
 }

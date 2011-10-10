@@ -94,9 +94,9 @@ public class SimpleControl implements ILogicComponent {
       // Shooting
       t = isKeyToggled(Input.KEY_SPACE);
       if (t == TOGGLED.ON) {
-        owner.startUse();
+        owner.sendMessage(ComponentMessage.START_HOLDABLE, null);
       } else if (t == TOGGLED.OFF) {
-        owner.stopUse();
+        owner.sendMessage(ComponentMessage.STOP_HOLDABLE, null);
       }
     }
   }
@@ -108,7 +108,7 @@ public class SimpleControl implements ILogicComponent {
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.CONTROL;
   }
 
   @Override

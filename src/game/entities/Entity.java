@@ -8,8 +8,8 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
+import game.components.misc.IAction;
 import game.components.physics.AABB;
-import game.components.triggers.actions.IAction;
 import game.entities.groups.EntityType;
 import game.entities.interfaces.IEntity;
 import game.world.World;
@@ -106,12 +106,24 @@ public class Entity implements IEntity {
     return type;
   }
 
-  protected void addAction(final IAction action) {
+  public void addAction(final IAction action) {
     actions.add(action);
   }
 
   @Override
-  public ILogicComponent getComponent(ComponentType componentType) {
-    throw new UnsupportedOperationException("Not implemented");
+  public ILogicComponent getComponent(final ComponentType componentType) {
+    for (final ILogicComponent comp : updates) {
+      if (comp.getComponentType().equals(componentType)) {
+        return comp;
+      }
+    }
+    
+    for (final ILogicComponent comp : renders) {
+      if (comp.getComponentType().equals(componentType)) {
+        return comp;
+      }
+    }
+    
+    throw new UnsupportedOperationException("THIS IS SPARTA!");
   }
 }

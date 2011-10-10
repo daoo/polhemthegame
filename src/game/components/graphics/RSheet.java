@@ -113,8 +113,8 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void setOwner(final IEntity owner) {
+    // Do nothing
   }
 
   @Override

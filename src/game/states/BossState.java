@@ -5,7 +5,7 @@
 package game.states;
 
 import game.CacheTool;
-import game.entities.Boss;
+import game.entities.interfaces.IEntity;
 import game.factories.Factory;
 import game.world.World;
 
@@ -21,13 +21,10 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class BossState implements IRoundState {
-  private final Boss boss;
-  private final boolean    finished;
+  private final boolean finished;
 
   public BossState(final Rectangle rect, final BossStateData sd)
     throws ParserException, DataException, IOException {
-    boss = Factory.MakeBoss(0, 0, CacheTool.getBoss(Locator.getCache(), sd.boss));
-
     finished = true;
   }
 

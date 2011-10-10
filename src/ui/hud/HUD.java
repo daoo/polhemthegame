@@ -4,7 +4,7 @@
 
 package ui.hud;
 
-import game.entities.Player;
+import game.entities.interfaces.IEntity;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
@@ -31,7 +31,7 @@ public class HUD {
 
   private int                 money, kills;
 
-  public HUD(final Player player) throws SlickException {
+  public HUD(final IEntity player) throws SlickException {
     money = -1;
     kills = -1;
 

@@ -6,8 +6,8 @@ package game.entities.projectiles;
 
 import game.components.ComponentMessage;
 import game.components.interfaces.ICompAnim;
-import game.components.triggers.actions.AOEDamage;
-import game.components.triggers.actions.SpawnRunToEndAnim;
+import game.components.misc.AOEDamage;
+import game.components.misc.SpawnRunToEndAnim;
 import loader.data.json.ProjectilesData.ProjectileData;
 import math.time.GameTime;
 

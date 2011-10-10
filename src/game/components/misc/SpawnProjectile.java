@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.triggers.actions;
+package game.components.misc;
 
 import game.entities.projectiles.Projectile;
 import game.world.World;
