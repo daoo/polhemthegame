@@ -6,7 +6,6 @@ package game;
 
 import game.entities.Players;
 import game.factories.Factory;
-import game.states.BossState;
 import game.states.CreepsState;
 import game.states.DoubleState;
 import game.states.IRoundState;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 
 import loader.data.DataException;
 import loader.data.json.LevelData;
-import loader.data.json.LevelData.BossStateData;
 import loader.data.json.LevelData.CreepStateData;
 import loader.data.json.LevelData.StateData;
 import loader.data.json.LevelData.TextStateData;
@@ -93,7 +91,8 @@ public class GameLevel {
       } else if (sd.type.equals("creeps")) {
         states.add(new CreepsState(availible, (CreepStateData) sd));
       } else if (sd.type.equals("boss")) {
-        states.add(new BossState(availible, (BossStateData) sd));
+        throw new UnsupportedOperationException("Not implemented");
+        //states.add(new BossState(availible, (BossStateData) sd));
       }
     }
 

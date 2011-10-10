@@ -26,10 +26,10 @@ public class Entity implements IEntity {
 
   private final ArrayList<IAction> actions;
 
-  private final EntityType type;
-
-  private final ArrayList<ILogicComponent> updates;
   private final ArrayList<IRenderComponent> renders;
+
+  private final EntityType type;
+  private final ArrayList<ILogicComponent> updates;
 
   public Entity(final float x, final float y,
                 final float w, final float h,
@@ -46,17 +46,53 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
-    body.integrate(time.getFrameLength());
+  public void addAction(final IAction action) {
+    actions.add(action);
+  }
 
+  @Override
+  public void addLogicComponent(final ILogicComponent comp) {
+    comp.setOwner(this);
+    updates.add(comp);
+  }
+
+  @Override
+  public void addRenderComponent(final IRenderComponent comp) {
+    comp.setOwner(this);
+    renders.add(comp);
+  }
+
+  @Override
+  public void clearComponents() {
+    updates.clear();
+    renders.clear();
+  }
+
+  @Override
+  public AABB getBody() {
+    return body;
+  }
+
+  @Override
+  public ILogicComponent getComponent(final ComponentType componentType) {
     for (final ILogicComponent comp : updates) {
-      comp.update(time);
+      if (comp.getComponentType().equals(componentType)) {
+        return comp;
+      }
     }
 
-    for (final IAction action : actions) {
-      action.execute(time, world);
+    for (final ILogicComponent comp : renders) {
+      if (comp.getComponentType().equals(componentType)) {
+        return comp;
+      }
     }
-    actions.clear();
+
+    throw new NoSuchElementException();
+  }
+
+  @Override
+  public EntityType getType() {
+    return type;
   }
 
   @Override
@@ -71,26 +107,6 @@ public class Entity implements IEntity {
     g.popTransform();
   }
 
-  public void addRenderComponent(final IRenderComponent comp) {
-    comp.setOwner(this);
-    renders.add(comp);
-  }
-
-  public void addLogicComponent(final ILogicComponent comp) {
-    comp.setOwner(this);
-    updates.add(comp);
-  }
-
-  public void clearComponents() {
-    updates.clear();
-    renders.clear();
-  }
-
-  @Override
-  public AABB getBody() {
-    return body;
-  }
-
   @Override
   public void sendMessage(final ComponentMessage message, final Object args) {
     for (final ILogicComponent comp : updates) {
@@ -103,28 +119,16 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public EntityType getType() {
-    return type;
-  }
+  public void update(final GameTime time, final World world) {
+    body.integrate(time.getFrameLength());
 
-  public void addAction(final IAction action) {
-    actions.add(action);
-  }
-
-  @Override
-  public ILogicComponent getComponent(final ComponentType componentType) {
     for (final ILogicComponent comp : updates) {
-      if (comp.getComponentType().equals(componentType)) {
-        return comp;
-      }
+      comp.update(time);
     }
-    
-    for (final ILogicComponent comp : renders) {
-      if (comp.getComponentType().equals(componentType)) {
-        return comp;
-      }
+
+    for (final IAction action : actions) {
+      action.execute(time, world);
     }
-    
-    throw new NoSuchElementException();
+    actions.clear();
   }
 }

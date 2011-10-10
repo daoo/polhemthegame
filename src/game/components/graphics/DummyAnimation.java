@@ -7,7 +7,6 @@ package game.components.graphics;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
-import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.entities.interfaces.IEntity;
 import math.time.GameTime;
@@ -22,7 +21,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   public DummyAnimation() {
-    new Idle();
+    // Do nothing
   }
 
   @Override
