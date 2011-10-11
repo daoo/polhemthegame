@@ -13,7 +13,7 @@ public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(final IEntity sender, final ObjectEventArgs args) {
     if (args.getObject().getType() == EntityType.CREEP) {
-      final float dmg = 9001; // OVER 9000!
+      final float dmg = 10;
 
       for (final IEntity e : args.getWorld().get(EntityType.PLAYER)) {
         e.sendMessage(ComponentMessage.DAMAGE, dmg);
