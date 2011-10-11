@@ -8,7 +8,9 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ICompAnim;
 import game.components.interfaces.ILogicComponent;
+import game.entities.Entity;
 import game.entities.IEntity;
+import game.entities.groups.EntityType;
 import math.time.GameTime;
 
 public class SpawnOnDeath implements ILogicComponent {
@@ -27,10 +29,12 @@ public class SpawnOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      owner.addAction(new SpawnRunToEndAnim(
-        owner.getBody().getX1(), owner.getBody().getY1(),
-        anim.getTileWidth(), anim.getTileHeight(),
-        anim));
+      final Entity e = new Entity(owner.getBody().getX1(), owner.getBody().getY1(),
+          owner.getBody().getWidth(), owner.getBody().getHeight(),
+          0, 0, EntityType.ANIMATED);
+      e.addRenderComponent(anim);
+
+      owner.addAction(new SpawnWithSend(e, ComponentMessage.END_ANIMATION, null));
       owner.addAction(new RemoveEntity(owner));
     }
   }

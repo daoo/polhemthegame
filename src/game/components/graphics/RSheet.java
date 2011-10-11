@@ -9,6 +9,7 @@ import game.components.ComponentType;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
+import game.components.graphics.animations.RunTo;
 import game.components.interfaces.ICompAnim;
 import game.entities.IEntity;
 import math.time.Clock;
@@ -96,6 +97,8 @@ public class RSheet implements ICompAnim {
         goToFirstFrame();
         animator = new Idle();
       }
+    } else if (message == ComponentMessage.END_ANIMATION) {
+      animator = new RunTo(getTileCount(), getLastTile());
     }
   }
 
