@@ -12,12 +12,12 @@ import math.time.GameTime;
 import ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {
-  private IEntity owner;
-
-  private float hp;
   private boolean alive;
 
+  private float hp;
   private final float maxHP;
+
+  private IEntity owner;
 
   public Life(final float maxHP) {
     this.alive = true;
@@ -26,37 +26,33 @@ public class Life implements ILogicComponent, IProgress {
     this.maxHP = maxHP;
   }
 
-  public void damage(final float dmg) {
-    hp -= dmg;
-    if (hp <= 0) {
-      kill();
-    }
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.HEALTH;
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
-    if (message == ComponentMessage.KILL) {
-      hp    = 0;
-      alive = false;
-    }
+  public float getProgress() {
+    return hp / maxHP;
   }
 
   public boolean isAlive() {
     return alive;
   }
-
-  private void kill() {
-    owner.sendMessage(ComponentMessage.KILL, null);
-  }
-
+  
   @Override
-  public void update(GameTime time) {
-    // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.HEALTH;
+  public void reciveMessage(final ComponentMessage message, final Object args) {
+    if (message == ComponentMessage.KILL) {
+      hp    = 0;
+      alive = false;
+    } else if (message == ComponentMessage.DAMAGE) {
+      // Type hack, the compiler will kill me
+      if (args instanceof Integer) {
+        damage(((Integer) args).floatValue());
+      } else if (args instanceof Float) {
+        damage(((Float) args).floatValue());
+      }
+    }
   }
 
   @Override
@@ -65,7 +61,18 @@ public class Life implements ILogicComponent, IProgress {
   }
 
   @Override
-  public float getProgress() {
-    return hp / maxHP;
+  public void update(final GameTime time) {
+    // Do nothing
+  }
+
+  private void damage(final float dmg) {
+    hp -= dmg;
+    if (hp <= 0) {
+      kill();
+    }
+  }
+
+  private void kill() {
+    owner.sendMessage(ComponentMessage.KILL, null);
   }
 }
