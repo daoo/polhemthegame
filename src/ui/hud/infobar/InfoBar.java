@@ -34,8 +34,10 @@ public class InfoBar implements IRenderComponent {
   }
 
   @Override
-  public void update(GameTime time) {
-    // Do nothing
+  public void update(final GameTime time) {
+    for (final Bar b : bars) {
+      b.update();
+    }
   }
 
   @Override
