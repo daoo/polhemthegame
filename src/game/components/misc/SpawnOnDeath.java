@@ -27,11 +27,11 @@ public class SpawnOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      owner.clearComponents();
       owner.addAction(new SpawnRunToEndAnim(
         owner.getBody().getX1(), owner.getBody().getY1(),
         anim.getTileWidth(), anim.getTileHeight(),
         anim));
+      owner.addAction(new RemoveEntity(owner));
     }
   }
 

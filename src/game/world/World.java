@@ -58,15 +58,11 @@ public class World {
       e.update(time, this);
     }
 
-    if (!toRemove.isEmpty()) {
-      entities.remove(toRemove);
-      toRemove.clear();
-    }
+    entities.remove(toRemove);
+    toRemove.clear();
 
-    if (!toAdd.isEmpty()) {
-      entities.add(toAdd);
-      toAdd.clear();
-    }
+    entities.add(toAdd);
+    toAdd.clear();
   }
 
   public void render(final Graphics g) {
