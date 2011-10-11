@@ -126,7 +126,7 @@ public class BossAI implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(IEntity owner) {
+  public void setOwner(final IEntity owner) {
     throw new UnsupportedOperationException("Not implemented");
   }
 }

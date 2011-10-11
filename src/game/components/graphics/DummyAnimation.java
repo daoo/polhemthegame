@@ -15,7 +15,7 @@ import org.newdawn.slick.Graphics;
 
 public class DummyAnimation implements ICompAnim {
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     // Do nothing
   }
 

@@ -58,22 +58,22 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public ILogicComponent getComponent(ComponentType componentType) {
+  public ILogicComponent getComponent(final ComponentType componentType) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void sendMessage(ComponentMessage message, Object args) {
+  public void sendMessage(final ComponentMessage message, final Object args) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addRenderComponent(IRenderComponent comp) {
+  public void addRenderComponent(final IRenderComponent comp) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addLogicComponent(ILogicComponent comp) {
+  public void addLogicComponent(final ILogicComponent comp) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
@@ -83,7 +83,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addAction(IAction action) {
+  public void addAction(final IAction action) {
     throw new UnsupportedOperationException("Not allowed");
   }
 }

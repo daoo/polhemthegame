@@ -70,7 +70,7 @@ public class Inventory implements ILogicComponent {
   }
 
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     // Do nothing
   }
 
@@ -78,7 +78,7 @@ public class Inventory implements ILogicComponent {
   public void setOwner(final IEntity owner) {
     // Do nothing
   }
-  
+
   public int getMoney() {
     return money;
   }

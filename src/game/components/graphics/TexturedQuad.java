@@ -68,7 +68,7 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void setOwner(IEntity owner) {
+  public void setOwner(final IEntity owner) {
     // Do nothing
   }
 

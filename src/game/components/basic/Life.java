@@ -39,7 +39,7 @@ public class Life implements ILogicComponent, IProgress {
   public boolean isAlive() {
     return alive;
   }
-  
+
   @Override
   public void reciveMessage(final ComponentMessage message, final Object args) {
     if (message == ComponentMessage.KILL) {

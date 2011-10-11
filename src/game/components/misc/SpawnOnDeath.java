@@ -16,18 +16,18 @@ import math.time.GameTime;
 public class SpawnOnDeath implements ILogicComponent {
   private IEntity owner;
   private final ICompAnim anim;
-  
+
   public SpawnOnDeath(final ICompAnim anim) {
     this.anim = anim;
   }
 
   @Override
-  public void update(GameTime time) {
+  public void update(final GameTime time) {
     // Do nothing
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(final ComponentMessage message, final Object args) {
     if (message == ComponentMessage.KILL) {
       final Entity e = new Entity(owner.getBody().getX1(), owner.getBody().getY1(),
           owner.getBody().getWidth(), owner.getBody().getHeight(),

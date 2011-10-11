@@ -94,7 +94,7 @@ public abstract class Weapon implements IHoldable {
   public void render(final Graphics g) {
     anim.render(g);
   }
-  
+
   @Override
   public void setOwner(final IEntity owner) {
     // Do nothing
@@ -122,7 +122,7 @@ public abstract class Weapon implements IHoldable {
   protected boolean isIdle() {
     return currentState == null;
   }
-  
+
   protected boolean isReadyToShoot() {
     return !isEmpty() && isIdle();
   }

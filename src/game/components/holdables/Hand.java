@@ -54,7 +54,7 @@ public class Hand implements IRenderComponent, IProgress {
   @Override
   public void update(final GameTime time) {
     weapon.update(time);
-    
+
     // Find out if there are any projectiles that want to be spawned
     for (final ProjectileTemplate projTemplate : weapon.projectiles) {
       final Vector2 o    = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));

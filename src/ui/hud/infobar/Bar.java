@@ -8,10 +8,10 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class Bar {
-  private Color colorHave;
-  private Color colorLost;
+  private final Color colorHave;
+  private final Color colorLost;
 
-  private IProgress progress;
+  private final IProgress progress;
   private float fraction;
 
   public Bar(final IProgress progress, final Color colorHave, final Color colorLost) {
@@ -25,7 +25,7 @@ public class Bar {
     this.colorHave = colorHave;
     this.colorLost = colorLost;
   }
-  
+
   public void update() {
     fraction = progress.getProgress();
   }
