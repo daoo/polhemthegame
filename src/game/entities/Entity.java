@@ -22,12 +22,11 @@ import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
   protected final AABB body;
+  private final EntityType type;
 
   private final ArrayList<IAction> actions;
 
   private final ArrayList<IRenderComponent> renders;
-
-  private final EntityType type;
   private final ArrayList<ILogicComponent> updates;
 
   public Entity(final float x, final float y,
