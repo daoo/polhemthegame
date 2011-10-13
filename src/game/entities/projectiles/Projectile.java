@@ -57,7 +57,7 @@ public class Projectile extends Entity {
     super.update(time, world);
 
     if ((duration != -1) && ((time.getElapsed() - startTime) > duration)) {
-    	sendMessage(ComponentMessage.KILL, null);
+      sendMessage(ComponentMessage.KILL, null);
     }
     if ((range != -1) && (body.getMin().distance(startPos) > range)) {
       sendMessage(ComponentMessage.KILL, null);
