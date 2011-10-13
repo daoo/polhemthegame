@@ -81,8 +81,7 @@ public class Factory {
   }
 
   public static IEntity makeCreep(final float x, final float y, final float ang,
-                                  final CreepData data)
-    throws ParserException, DataException, IOException {
+      final CreepData data) throws ParserException, DataException, IOException {
     final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
@@ -93,8 +92,10 @@ public class Factory {
                             walk, death);
   }
 
-  public static IEntity makePlayer(final float x, final float y, final PlayerData data)
-    throws ParserException, DataException, IOException {
+  private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+
+  public static IEntity makePlayer(final float x, final float y,
+      final PlayerData data) throws ParserException, DataException, IOException {
     final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
@@ -107,7 +108,7 @@ public class Factory {
                                        0, 0, EntityType.PLAYER, data.hitpoints,
                                        walk, death);
 
-    final Bar weaponBar   = new Bar(hand, Color.blue, new Color(0, 0, 0, 0));
+    final Bar weaponBar   = new Bar(hand, Color.blue, TRANSPARENT);
     final InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
     infoBar.add(weaponBar);
 
@@ -121,10 +122,10 @@ public class Factory {
   }
 
   private static IEntity makeUnit(final float x, final float y,
-                                  final float width, final float height,
-                                  final float dx, final float dy,
-                                  final EntityType type, final float maxHP,
-                                  final ICompAnim walkAnim, final ICompAnim deathAnim) {
+      final float width, final float height,
+      final float dx, final float dy,
+      final EntityType type, final float maxHP,
+      final ICompAnim walkAnim, final ICompAnim deathAnim) {
     final Entity e           = new Entity(x, y, width, height, dx, dy, type);
     final Life life          = new Life(maxHP);
     final SpawnOnDeath death = new SpawnOnDeath(deathAnim);
