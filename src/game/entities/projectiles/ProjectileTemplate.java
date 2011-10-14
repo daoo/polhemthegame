@@ -10,6 +10,7 @@ import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
+import game.entities.IEntity;
 
 import java.io.IOException;
 
@@ -47,7 +48,7 @@ public class ProjectileTemplate {
     }
   }
 
-  public Projectile makeProjectile(final float x, final float y, final float rot,
+  public IEntity makeProjectile(final float x, final float y, final float rot,
                                    final GameTime time) {
     ICompAnim anim = null;
     if (img == null) {

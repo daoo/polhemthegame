@@ -1,4 +1,4 @@
-package game.components.misc;
+package game.actions;
 
 import game.components.ComponentMessage;
 import game.entities.IEntity;

@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.misc;
+package game.actions;
 
 import game.world.World;
 import math.time.GameTime;

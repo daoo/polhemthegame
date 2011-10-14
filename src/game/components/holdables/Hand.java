@@ -4,13 +4,12 @@
 
 package game.components.holdables;
 
+import game.actions.SpawnProjectile;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
-import game.components.misc.SpawnProjectile;
 import game.entities.IEntity;
-import game.entities.projectiles.Projectile;
 import game.entities.projectiles.ProjectileTemplate;
 import math.Vector2;
 import math.time.GameTime;
@@ -57,8 +56,8 @@ public class Hand implements IRenderComponent, IProgress {
 
     // Find out if there are any projectiles that want to be spawned
     for (final ProjectileTemplate projTemplate : weapon.projectiles) {
-      final Vector2 o    = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
-      final Projectile p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle(), time);
+      final Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
+      final IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle(), time);
       owner.addAction(new SpawnProjectile(p));
     }
     weapon.projectiles.clear();

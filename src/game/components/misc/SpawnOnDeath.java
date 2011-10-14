@@ -4,6 +4,8 @@
 
 package game.components.misc;
 
+import game.actions.RemoveEntity;
+import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ICompAnim;

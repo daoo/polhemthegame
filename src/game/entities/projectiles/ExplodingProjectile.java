@@ -4,10 +4,10 @@
 
 package game.entities.projectiles;
 
+import game.actions.AOEDamage;
+import game.actions.SpawnRunToEndAnim;
 import game.components.ComponentMessage;
 import game.components.interfaces.ICompAnim;
-import game.components.misc.AOEDamage;
-import game.components.misc.SpawnRunToEndAnim;
 import loader.data.json.ProjectilesData.ProjectileData;
 import math.time.GameTime;
 
