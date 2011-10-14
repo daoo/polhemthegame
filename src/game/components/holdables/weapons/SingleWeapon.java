@@ -7,7 +7,7 @@ package game.components.holdables.weapons;
 import game.components.graphics.RSheet;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.RunTo;
-import game.entities.projectiles.ProjectileTemplate;
+import game.entities.ProjectileTemplate;
 import math.Vector2;
 import math.time.GameTime;
 

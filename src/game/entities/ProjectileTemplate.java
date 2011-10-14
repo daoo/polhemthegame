@@ -2,15 +2,18 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.entities.projectiles;
+package game.entities;
 
 import game.CacheTool;
+import game.actions.AOEDamage;
+import game.actions.SpawnRunToEndAnim;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
-import game.entities.IEntity;
+import game.components.misc.ActionOnDeath;
+import game.factories.Factory;
 
 import java.io.IOException;
 
@@ -63,15 +66,25 @@ public class ProjectileTemplate {
                         new Idle());
     }
 
-    if (data.aoe == null) {
-      return new Projectile(x, y, rot, data, anim, time);
-    }
-    else {
+
+    final IEntity projectile = Factory.makeProjectile(x, y, rot, anim, data);
+
+    if (data.aoe != null) {
       final RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
                                               data.aoe.explosionSprite.offset.x,
                                               data.aoe.explosionSprite.offset.y,
                                               explosion, new Idle());
-      return new ExplodingProjectile(x, y, rot, data, anim, explosionAnim, time);
+
+      projectile.addLogicComponent(
+        new ActionOnDeath(
+          new AOEDamage(body.getCenter(), data.aoe.radius, data.aoe.damage)));
+      projectile.addLogicComponent(
+        new ActionOnDeath(
+          new SpawnRunToEndAnim(body.getX1(), body.getY1(),
+                                explosionAnim.getTileWidth(), explosionAnim.getTileHeight(),
+                                explosion)));
     }
+
+    return projectile;
   }
 }

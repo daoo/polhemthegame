@@ -12,7 +12,7 @@ import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
 import game.entities.IEntity;
-import game.entities.projectiles.ProjectileTemplate;
+import game.entities.ProjectileTemplate;
 
 import java.util.ArrayList;
 
