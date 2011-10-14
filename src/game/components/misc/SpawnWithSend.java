@@ -17,6 +17,7 @@ public class SpawnWithSend implements IAction {
     this.args    = args;
   }
 
+  @Override
   public void execute(final GameTime time, final World world) {
     entity.sendMessage(message, args);
     world.add(entity);

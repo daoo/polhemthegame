@@ -4,7 +4,6 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import game.entities.projectiles.Projectile;
 import game.world.World;
 import math.CollisionHelper;
 import math.time.GameTime;
