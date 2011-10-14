@@ -6,5 +6,5 @@ package game.components;
 
 public enum ComponentMessage {
   KILL, DAMAGE, START_ANIMATION, STOP_ANIMATION, END_ANIMATION, START_HOLDABLE,
-  STOP_HOLDABLE
+  STOP_HOLDABLE, START_AT
 }
