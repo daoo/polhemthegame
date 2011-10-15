@@ -22,12 +22,14 @@ import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
   protected final AABB body;
-  private final EntityType type;
-
   private final ArrayList<IAction> actions;
 
   private final ArrayList<IRenderComponent> renders;
+
+  private final EntityType type;
+
   private final ArrayList<ILogicComponent> updates;
+  private World world;
 
   public Entity(final float x, final float y,
                 final float w, final float h,
@@ -117,7 +119,12 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
+  public void setWorld(final World world) {
+    this.world = world;
+  }
+
+  @Override
+  public void update(final GameTime time) {
     body.integrate(time.getFrameLength());
 
     for (final ILogicComponent comp : updates) {

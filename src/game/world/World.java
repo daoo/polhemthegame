@@ -27,7 +27,7 @@ public class World {
   public void update(final GameTime time) {
     // Update
     for (final IEntity e : entities.iterateAll()) {
-      e.update(time, this);
+      e.update(time);
     }
 
     entities.remove(toRemove);
@@ -50,6 +50,7 @@ public class World {
   public void add(final IEntity obj) {
     assert (obj != null);
 
+    obj.setWorld(this);
     toAdd.add(obj);
   }
 

@@ -19,10 +19,11 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class InvisibleRectangle implements IEntity {
-  private final AABB body;
-
   public final EventHandler<ObjectEventArgs> onContainsEvent;
   public final EventHandler<ObjectEventArgs> onNotContainsEvent;
+
+  private final AABB body;
+  private World world;
 
   public InvisibleRectangle(final float x, final float y, final float w, final float h) {
     body = new AABB(x, y, w, h, 0, 0);
@@ -32,43 +33,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
-    for (final IEntity e : world.getUnits()) {
-      if (body.isContaining(e.getBody())) {
-        onContainsEvent.execute(this, new ObjectEventArgs(world, e));
-      } else {
-        onNotContainsEvent.execute(this, new ObjectEventArgs(world, e));
-      }
-    }
-  }
-
-  @Override
-  public void render(final Graphics g) {
-    // Do nothing
-  }
-
-  @Override
-  public AABB getBody() {
-    return body;
-  }
-
-  @Override
-  public EntityType getType() {
-    return EntityType.GENERAL;
-  }
-
-  @Override
-  public ILogicComponent getComponent(final ComponentType componentType) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
-  public void sendMessage(final ComponentMessage message, final Object args) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
-  public void addRenderComponent(final IRenderComponent comp) {
+  public void addAction(final IAction action) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
@@ -78,12 +43,53 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
+  public void addRenderComponent(final IRenderComponent comp) {
+    throw new UnsupportedOperationException("Not allowed");
+  }
+
+  @Override
   public void clearComponents() {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addAction(final IAction action) {
+  public AABB getBody() {
+    return body;
+  }
+
+  @Override
+  public ILogicComponent getComponent(final ComponentType componentType) {
     throw new UnsupportedOperationException("Not allowed");
+  }
+
+  @Override
+  public EntityType getType() {
+    return EntityType.GENERAL;
+  }
+
+  @Override
+  public void render(final Graphics g) {
+    // Do nothing
+  }
+
+  @Override
+  public void sendMessage(final ComponentMessage message, final Object args) {
+    throw new UnsupportedOperationException("Not allowed");
+  }
+
+  @Override
+  public void setWorld(final World world) {
+    this.world = world;
+  }
+
+  @Override
+  public void update(final GameTime time) {
+    for (final IEntity e : world.getUnits()) {
+      if (body.isContaining(e.getBody())) {
+        onContainsEvent.execute(this, new ObjectEventArgs(world, e));
+      } else {
+        onNotContainsEvent.execute(this, new ObjectEventArgs(world, e));
+      }
+    }
   }
 }

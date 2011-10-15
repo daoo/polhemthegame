@@ -17,12 +17,14 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public interface IEntity {
+  void setWorld(World world);
+
   AABB getBody();
   EntityType getType();
 
   ILogicComponent getComponent(ComponentType componentType);
 
-  void update(GameTime time, World world);
+  void update(GameTime time);
   void render(Graphics g);
 
   void sendMessage(ComponentMessage message, Object args);
