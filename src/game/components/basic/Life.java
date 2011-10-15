@@ -7,6 +7,7 @@ package game.components.basic;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
+import game.components.misc.Damage;
 import game.entities.IEntity;
 import math.time.GameTime;
 import ui.hud.infobar.IProgress;
@@ -47,10 +48,8 @@ public class Life implements ILogicComponent, IProgress {
       alive = false;
     } else if (message == ComponentMessage.DAMAGE) {
       // Type hack, the compiler will kill me
-      if (args instanceof Integer) {
-        damage(((Integer) args).floatValue());
-      } else if (args instanceof Float) {
-        damage(((Float) args).floatValue());
+      if (args instanceof Damage) {
+        damage(((Damage) args).getAmmount());
       }
     }
   }
