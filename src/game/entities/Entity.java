@@ -63,12 +63,6 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void clearComponents() {
-    updates.clear();
-    renders.clear();
-  }
-
-  @Override
   public AABB getBody() {
     return body;
   }

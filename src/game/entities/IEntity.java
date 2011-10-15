@@ -31,7 +31,6 @@ public interface IEntity {
 
   void addRenderComponent(IRenderComponent comp);
   void addLogicComponent(ILogicComponent comp);
-  void clearComponents();
 
   void addAction(IAction action);
 }

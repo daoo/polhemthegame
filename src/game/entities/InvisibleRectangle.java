@@ -48,11 +48,6 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void clearComponents() {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
   public AABB getBody() {
     return body;
   }
