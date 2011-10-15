@@ -77,7 +77,7 @@ public class ProjectileTemplate {
 
       projectile.addLogicComponent(
         new ActionOnDeath(
-          new AOEDamage(body.getCenter(), data.aoe.radius, data.aoe.damage)));
+          new AOEDamage(projectile.getBody(), data.aoe.radius, data.aoe.damage)));
       projectile.addLogicComponent(
         new ActionOnDeath(
           new SpawnRunToEndAnim(body.getX1(), body.getY1(),
