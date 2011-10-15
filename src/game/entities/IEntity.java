@@ -16,17 +16,45 @@ import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
+/**
+ * An interface for objects that can exist in the world.
+ * More specifically it's an component container.
+ */
 public interface IEntity {
   void setWorld(World world);
 
+  /**
+   * Body getter.
+   * All entities should have a physical size/body.
+   * @return the body for this entity
+   */
   AABB getBody();
+
+  /**
+   * Entity type getter.
+   */
   EntityType getType();
 
+  /**
+   * Returns the component with the specified type.
+   */
   ILogicComponent getComponent(ComponentType componentType);
 
+  /**
+   * Updates logic.
+   * @param time the current game time
+   */
   void update(GameTime time);
+
+  /**
+   * Render the entity.
+   * @param g the graphics context to use
+   */
   void render(Graphics g);
 
+  /**
+   * Sends a message to all components that belong to this entity.
+   */
   void sendMessage(ComponentMessage message, Object args);
 
   void addRenderComponent(IRenderComponent comp);
