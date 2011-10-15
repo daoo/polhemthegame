@@ -8,13 +8,13 @@ import math.Vector2;
 import math.time.GameTime;
 
 public class RangeLimiter implements ILogicComponent {
-  public class TimePos {
+  public static class TimePos {
     public final float time;
     public final Vector2 pos;
 
     public TimePos(final float time, final Vector2 pos) {
       this.time = time;
-      this.pos = pos;
+      this.pos = new Vector2(pos);
     }
   }
 
