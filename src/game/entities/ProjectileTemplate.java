@@ -6,7 +6,7 @@ package game.entities;
 
 import game.CacheTool;
 import game.actions.AOEDamage;
-import game.actions.SpawnRunToEndAnim;
+import game.actions.SpawnDeathAnim;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
@@ -20,7 +20,6 @@ import java.io.IOException;
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
 import main.Locator;
-import math.time.GameTime;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
@@ -51,8 +50,7 @@ public class ProjectileTemplate {
     }
   }
 
-  public IEntity makeProjectile(final float x, final float y, final float rot,
-                                   final GameTime time) {
+  public IEntity makeProjectile(final float x, final float y, final float rot) {
     ICompAnim anim = null;
     if (img == null) {
       anim = new DummyAnimation();
@@ -80,9 +78,10 @@ public class ProjectileTemplate {
           new AOEDamage(projectile.getBody(), data.aoe.radius, data.aoe.damage)));
       projectile.addLogicComponent(
         new ActionOnDeath(
-          new SpawnRunToEndAnim(body.getX1(), body.getY1(),
-                                explosionAnim.getTileWidth(), explosionAnim.getTileHeight(),
-                                explosion)));
+          new SpawnDeathAnim(projectile.getBody(),
+                             explosionAnim.getTileWidth(),
+                             explosionAnim.getTileHeight(),
+                             explosionAnim)));
     }
 
     return projectile;

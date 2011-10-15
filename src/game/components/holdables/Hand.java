@@ -58,7 +58,7 @@ public class Hand implements IRenderComponent, IProgress {
     // Find out if there are any projectiles that want to be spawned
     for (final ProjectileTemplate projTemplate : weapon.projectiles) {
       final Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
-      final IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle(), time);
+      final IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle());
       owner.addAction(
         new SpawnWithSend(p, ComponentMessage.START_AT,
           new RangeLimiter.TimePos(time.getElapsed(), o)));
