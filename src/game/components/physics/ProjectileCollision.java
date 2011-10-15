@@ -13,7 +13,11 @@ public class ProjectileCollision implements ILogicComponent {
   private static final Damage DAMAGE_ONE = new Damage(1);
 
   private IEntity owner;
-  private World world;
+  private World world = null; // TODO
+
+  public ProjectileCollision() {
+    // Do nothing
+  }
 
   @Override
   public void update(final GameTime time) {

@@ -13,6 +13,7 @@ import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.components.misc.ActionOnDeath;
+import game.components.physics.ProjectileCollision;
 import game.factories.Factory;
 
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class ProjectileTemplate {
 
 
     final IEntity projectile = Factory.makeProjectile(x, y, rot, anim, data);
+    projectile.addLogicComponent(new ProjectileCollision());
 
     if (data.aoe != null) {
       final RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,

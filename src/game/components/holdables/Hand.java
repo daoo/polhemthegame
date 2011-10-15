@@ -19,7 +19,6 @@ import org.newdawn.slick.Graphics;
 
 import ui.hud.infobar.IProgress;
 
-
 public class Hand implements IRenderComponent, IProgress {
   private final Vector2 offset;
 
