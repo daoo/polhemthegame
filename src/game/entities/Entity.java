@@ -14,7 +14,6 @@ import game.entities.groups.EntityType;
 import game.world.World;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 import math.time.GameTime;
 
@@ -81,7 +80,7 @@ public class Entity implements IEntity {
       }
     }
 
-    throw new NoSuchElementException();
+    return null;
   }
 
   @Override
