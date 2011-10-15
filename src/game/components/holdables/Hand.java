@@ -4,11 +4,12 @@
 
 package game.components.holdables;
 
-import game.actions.SpawnProjectile;
+import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
+import game.components.misc.RangeLimiter;
 import game.entities.IEntity;
 import game.entities.ProjectileTemplate;
 import math.Vector2;
@@ -58,7 +59,9 @@ public class Hand implements IRenderComponent, IProgress {
     for (final ProjectileTemplate projTemplate : weapon.projectiles) {
       final Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
       final IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle(), time);
-      owner.addAction(new SpawnProjectile(p));
+      owner.addAction(
+        new SpawnWithSend(p, ComponentMessage.START_AT,
+          new RangeLimiter.TimePos(time.getElapsed(), o)));
     }
     weapon.projectiles.clear();
   }
