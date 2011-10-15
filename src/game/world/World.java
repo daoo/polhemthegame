@@ -15,32 +15,13 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class World {
-  private final LinkedList<IEntity> toAdd, toRemove;
   private final WorldContainer entities;
+  private final LinkedList<IEntity> toAdd, toRemove;
 
   public World() {
     toAdd    = new LinkedList<IEntity>();
     toRemove = new LinkedList<IEntity>();
     entities = new WorldContainer();
-  }
-
-  public void update(final GameTime time) {
-    // Update
-    for (final IEntity e : entities.iterateAll()) {
-      e.update(time);
-    }
-
-    entities.remove(toRemove);
-    toRemove.clear();
-
-    entities.add(toAdd);
-    toAdd.clear();
-  }
-
-  public void render(final Graphics g) {
-    for (final IEntity e : entities.iterateAll()) {
-      e.render(g);
-    }
   }
 
   /**
@@ -54,6 +35,14 @@ public class World {
     toAdd.add(obj);
   }
 
+  public Iterable<IEntity> get(final EntityType e) {
+    return entities.iterate(e);
+  }
+
+  public Iterable<IEntity> getUnits() {
+    return entities.iterate(Groups.UNITS);
+  }
+
   /**
    * Delayed remove, happens at the end of a frame.
    * @param obj object to remove
@@ -64,11 +53,22 @@ public class World {
     toRemove.add(obj);
   }
 
-  public Iterable<IEntity> getUnits() {
-    return entities.iterate(Groups.UNITS);
+  public void render(final Graphics g) {
+    for (final IEntity e : entities.iterateAll()) {
+      e.render(g);
+    }
   }
 
-  public Iterable<IEntity> get(final EntityType e) {
-    return entities.iterate(e);
+  public void update(final GameTime time) {
+    // Update
+    for (final IEntity e : entities.iterateAll()) {
+      e.update(time);
+    }
+
+    entities.remove(toRemove);
+    toRemove.clear();
+
+    entities.add(toAdd);
+    toAdd.clear();
   }
 }

@@ -89,6 +89,11 @@ public class Entity implements IEntity {
   }
 
   @Override
+  public World getWorld() {
+    return world;
+  }
+
+  @Override
   public void render(final Graphics g) {
     g.pushTransform();
     g.translate(body.getX1(), body.getY1());

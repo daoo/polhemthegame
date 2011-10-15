@@ -5,7 +5,6 @@ import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.misc.Damage;
 import game.entities.IEntity;
-import game.world.World;
 import math.CollisionHelper;
 import math.time.GameTime;
 
@@ -13,7 +12,6 @@ public class ProjectileCollision implements ILogicComponent {
   private static final Damage DAMAGE_ONE = new Damage(1);
 
   private IEntity owner;
-  private World world = null; // TODO
 
   public ProjectileCollision() {
     // Do nothing
@@ -23,7 +21,7 @@ public class ProjectileCollision implements ILogicComponent {
   public void update(final GameTime time) {
     // Check for collisions with units
     final AABB a = owner.getBody();
-    for (final IEntity e2 : world.getUnits()) {
+    for (final IEntity e2 : owner.getWorld().getUnits()) {
       if (CollisionHelper.SweepCollisionTest(a, e2.getBody(), time.getFrameLength())) {
         // FIXME: If the projectile can hit multiple targets and is sufficently slow,
         //        it might hit the same target multiple times.
@@ -47,5 +45,4 @@ public class ProjectileCollision implements ILogicComponent {
   public void setOwner(final IEntity owner) {
     this.owner = owner;
   }
-
 }

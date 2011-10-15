@@ -63,6 +63,11 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
+  public World getWorld() {
+    return world;
+  }
+
+  @Override
   public void render(final Graphics g) {
     // Do nothing
   }

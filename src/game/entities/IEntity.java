@@ -21,6 +21,7 @@ import org.newdawn.slick.Graphics;
  * More specifically it's an component container.
  */
 public interface IEntity {
+  World getWorld();
   void setWorld(World world);
 
   /**
