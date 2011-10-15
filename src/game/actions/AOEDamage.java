@@ -5,25 +5,36 @@
 package game.actions;
 
 import game.components.ComponentMessage;
+import game.components.misc.Damage;
+import game.components.physics.AABB;
 import game.entities.IEntity;
 import game.world.World;
-import math.Vector2;
 import math.time.GameTime;
 
+/**
+ * Inflict damage in an circle around a position when executed.
+ */
 public class AOEDamage implements IAction {
-  final Vector2 center;
-  final float   range, damage;
+  final AABB body;
+  final float range;
+  final Damage damage;
 
-  public AOEDamage(final Vector2 center, final float range, final float damage) {
-    this.center = center;
+  /**
+   * Constructs a new AOEDamage action.
+   * @param body the body from where ti will become centered
+   * @param range the radius of the area
+   * @param damage the ammount of damage to deal per object in range
+   */
+  public AOEDamage(final AABB body, final float range, final float damage) {
+    this.body = body;
     this.range = range;
-    this.damage = damage;
+    this.damage = new Damage(damage);
   }
 
   @Override
   public void execute(final GameTime time, final World world) {
     for (final IEntity e : world.getUnits()) {
-      if (e.getBody().getCenter().distance(center) < range) {
+      if (e.getBody().getCenter().distance(body.getCenter()) < range) {
         e.sendMessage(ComponentMessage.DAMAGE, damage);
       }
     }
