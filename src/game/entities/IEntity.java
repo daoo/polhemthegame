@@ -9,9 +9,9 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
-import game.components.physics.AABB;
 import game.entities.groups.EntityType;
 import game.world.World;
+import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -29,7 +29,7 @@ public interface IEntity {
    * All entities should have a physical size/body.
    * @return the body for this entity
    */
-  AABB getBody();
+  Rectangle getBody();
 
   /**
    * Entity type getter.

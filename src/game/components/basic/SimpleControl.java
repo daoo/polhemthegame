@@ -8,6 +8,7 @@ package game.components.basic;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
+import game.components.physics.Movement;
 import game.entities.IEntity;
 import math.Vector2;
 import math.time.GameTime;
@@ -25,6 +26,7 @@ public class SimpleControl implements ILogicComponent {
   boolean[] keyStatus;
 
   private IEntity owner;
+  private Movement movement;
 
   private float       upOrDown, rightOrLeft;
   private final float speed;
@@ -88,7 +90,7 @@ public class SimpleControl implements ILogicComponent {
       owner.sendMessage(ComponentMessage.STOP_ANIMATION, null);
     }
 
-    owner.getBody().setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
+    movement.setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
 
     // Shooting
     t = isKeyToggled(Input.KEY_SPACE);
@@ -112,5 +114,6 @@ public class SimpleControl implements ILogicComponent {
   @Override
   public void setOwner(final IEntity owner) {
     this.owner = owner;
+    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }

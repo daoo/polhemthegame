@@ -8,18 +8,27 @@ public class Rectangle {
   protected final Vector2 min, max, center;
   protected final Vector2 size;
 
-  public Rectangle(final float x1, final float y1, final float width, final float height) {
+  public Rectangle(final Rectangle rect) {
+    this.min    = new Vector2(rect.min);
+    this.max    = new Vector2(rect.max);
+    this.center = new Vector2(rect.center);
+    this.size   = new Vector2(rect.size);
+  }
+
+  public Rectangle(final float x1, final float y1,
+                   final float width, final float height) {
     final float x2 = x1 + width;
     final float y2 = y1 + height;
-    min = new Vector2(x1, y1);
-    max = new Vector2(x2, y2);
-    size = new Vector2(width, height);
+
+    min    = new Vector2(x1, y1);
+    max    = new Vector2(x2, y2);
+    size   = new Vector2(width, height);
     center = min.add(size.divide(2.0f));
   }
 
   public Rectangle(final Vector2 upperLeft, final Vector2 bottomRight) {
-    min = new Vector2(upperLeft);
-    max = new Vector2(bottomRight);
+    min  = new Vector2(upperLeft);
+    max  = new Vector2(bottomRight);
     size = new Vector2(bottomRight.x - upperLeft.x,
                        bottomRight.y - upperLeft.x);
     center = min.add(size.divide(2.0f));

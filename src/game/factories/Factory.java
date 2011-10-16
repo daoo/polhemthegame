@@ -14,6 +14,7 @@ import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ICompAnim;
 import game.components.misc.SpawnOnDeath;
+import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
@@ -124,7 +125,8 @@ public class Factory {
       final float dx, final float dy,
       final EntityType type, final float maxHP,
       final ICompAnim walkAnim, final ICompAnim deathAnim) {
-    final Entity e           = new Entity(x, y, width, height, dx, dy, type);
+    final Entity e           = new Entity(x, y, width, height, type);
+    final Movement movement  = new Movement(dx, dy);
     final Life life          = new Life(maxHP);
     final SpawnOnDeath death = new SpawnOnDeath(deathAnim);
     final InfoBar infoBar    = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
@@ -132,6 +134,7 @@ public class Factory {
 
     infoBar.add(hpBar);
 
+    e.addLogicComponent(movement);
     e.addLogicComponent(life);
     e.addLogicComponent(death);
     e.addRenderComponent(walkAnim);

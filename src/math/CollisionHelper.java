@@ -4,11 +4,11 @@
 
 package math;
 
-import game.components.physics.AABB;
-
 public class CollisionHelper {
-  public static boolean SweepCollisionTest(final AABB a, final AABB b, final float dt) {
-    final Vector2 vel = a.getVelocity().multiply(dt);
+  public static boolean SweepCollisionTest(final Rectangle a, final Vector2 av,
+                                           final Rectangle b,
+                                           final float dt) {
+    final Vector2 vel = av.multiply(dt);
     final Vector2 target = a.getMin().add(vel);
 
     final Vector2 sweepDelta = vel.divide(a.getSize().magnitude());
@@ -31,11 +31,11 @@ public class CollisionHelper {
    * edges of the container if it's on the outside.
    *
    * @param entity
-   *          The AABB to restrict
+   *          The Rectangle to restrict
    * @param cont
-   *          The AABB to use as box
+   *          The Rectangle to use as box
    */
-  public static void BlockFromExiting(final AABB entity, final Rectangle cont) {
+  public static void BlockFromExiting(final Rectangle entity, final Rectangle cont) {
     final Vector2 e = entity.getMin();
     if (e.x < cont.getX1()) {
       e.x = cont.getX1();

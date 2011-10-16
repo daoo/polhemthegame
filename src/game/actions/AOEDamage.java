@@ -6,16 +6,16 @@ package game.actions;
 
 import game.components.ComponentMessage;
 import game.components.misc.Damage;
-import game.components.physics.AABB;
 import game.entities.IEntity;
 import game.world.World;
+import math.Rectangle;
 import math.time.GameTime;
 
 /**
  * Inflict damage in an circle around a position when executed.
  */
 public class AOEDamage implements IAction {
-  final AABB body;
+  final Rectangle body;
   final float range;
   final Damage damage;
 
@@ -25,7 +25,7 @@ public class AOEDamage implements IAction {
    * @param range the radius of the area
    * @param damage the ammount of damage to deal per object in range
    */
-  public AOEDamage(final AABB body, final float range, final float damage) {
+  public AOEDamage(final Rectangle body, final float range, final float damage) {
     this.body = body;
     this.range = range;
     this.damage = new Damage(damage);

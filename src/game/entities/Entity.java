@@ -9,18 +9,18 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
-import game.components.physics.AABB;
 import game.entities.groups.EntityType;
 import game.world.World;
 
 import java.util.ArrayList;
 
+import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
-  protected final AABB body;
+  protected final Rectangle body;
   private final ArrayList<IAction> actions;
 
   private final ArrayList<IRenderComponent> renders;
@@ -32,9 +32,8 @@ public class Entity implements IEntity {
 
   public Entity(final float x, final float y,
                 final float w, final float h,
-                final float dx, final float dy,
                 final EntityType type) {
-    body = new AABB(x, y, w, h, dx, dy);
+    body = new Rectangle(x, y, w, h);
 
     actions = new ArrayList<IAction>();
 
@@ -62,7 +61,7 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public AABB getBody() {
+  public Rectangle getBody() {
     return body;
   }
 
@@ -123,8 +122,6 @@ public class Entity implements IEntity {
 
   @Override
   public void update(final GameTime time) {
-    body.integrate(time.getFrameLength());
-
     for (final ILogicComponent comp : updates) {
       comp.update(time);
     }

@@ -17,7 +17,7 @@ public class SpawnAnimated implements IAction {
   public SpawnAnimated(final float x, final float y,
                        final float width, final float height,
                        final ICompAnim anim) {
-    animated = new Entity(x, y, width, height, 0, 0, EntityType.ANIMATED);
+    animated = new Entity(x, y, width, height, EntityType.ANIMATED);
     animated.addRenderComponent(anim);
   }
 

@@ -6,12 +6,15 @@ import game.components.interfaces.ILogicComponent;
 import game.components.misc.Damage;
 import game.entities.IEntity;
 import math.CollisionHelper;
+import math.Rectangle;
 import math.time.GameTime;
 
 public class ProjectileCollision implements ILogicComponent {
   private static final Damage DAMAGE_ONE = new Damage(1);
 
   private IEntity owner;
+  private Damage damage;
+  private Movement movement;
 
   public ProjectileCollision() {
     // Do nothing
@@ -20,13 +23,12 @@ public class ProjectileCollision implements ILogicComponent {
   @Override
   public void update(final GameTime time) {
     // Check for collisions with units
-    final AABB a = owner.getBody();
+    final Rectangle a = owner.getBody();
     for (final IEntity e2 : owner.getWorld().getUnits()) {
-      if (CollisionHelper.SweepCollisionTest(a, e2.getBody(), time.getFrameLength())) {
+      if (CollisionHelper.SweepCollisionTest(a, movement.getVelocity(), e2.getBody(), time.getFrameLength())) {
         // FIXME: If the projectile can hit multiple targets and is sufficently slow,
         //        it might hit the same target multiple times.
-        e2.sendMessage(ComponentMessage.DAMAGE,
-                       owner.getComponent(ComponentType.DAMAGE));
+        e2.sendMessage(ComponentMessage.DAMAGE, damage);
         owner.sendMessage(ComponentMessage.DAMAGE, DAMAGE_ONE);
       }
     }
@@ -45,5 +47,7 @@ public class ProjectileCollision implements ILogicComponent {
   @Override
   public void setOwner(final IEntity owner) {
     this.owner = owner;
+    this.damage = (Damage) owner.getComponent(ComponentType.DAMAGE);
+    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }

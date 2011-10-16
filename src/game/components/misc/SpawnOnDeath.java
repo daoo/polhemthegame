@@ -31,9 +31,11 @@ public class SpawnOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(final ComponentMessage message, final Object args) {
     if (message == ComponentMessage.KILL) {
-      final Entity e = new Entity(owner.getBody().getX1(), owner.getBody().getY1(),
-          owner.getBody().getWidth(), owner.getBody().getHeight(),
-          0, 0, EntityType.ANIMATED);
+      final Entity e = new Entity(owner.getBody().getX1(),
+                                  owner.getBody().getY1(),
+                                  owner.getBody().getWidth(),
+                                  owner.getBody().getHeight(),
+                                  EntityType.ANIMATED);
       e.addRenderComponent(anim);
 
       owner.addAction(new SpawnWithSend(e, ComponentMessage.END_ANIMATION, null));

@@ -8,7 +8,6 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
-import game.components.physics.AABB;
 import game.entities.IEntity;
 
 import java.util.Stack;
@@ -20,7 +19,7 @@ import math.Vector2;
 import math.time.GameTime;
 
 public class BossAI implements ILogicComponent {
-  private final AABB           body;
+  private final Rectangle      body;
   private final IEntity        unit;
   private final Hand           hand;
   private final Rectangle      arenaRect;
@@ -33,7 +32,7 @@ public class BossAI implements ILogicComponent {
   private final Stack<Vector2> targets;
 
   public BossAI(final IEntity unit, final Hand hand,
-                final Rectangle consts, final AABB body, final float speed) {
+                final Rectangle consts, final Rectangle body, final float speed) {
     arenaRect = consts;
     this.hand = hand;
     this.body = body;
@@ -53,10 +52,10 @@ public class BossAI implements ILogicComponent {
     final float timeX = Math.abs(dx / speed);
     final float timeY = Math.abs(dy / speed);
 
-    body.setVelocity(Vector2.ZERO);
+    // FIXME: body.setVelocity(Vector2.ZERO);
     if ((timeX > 0) || (timeY > 0)) {
       final float max = Math.max(timeX, timeY);
-      body.setVelocity(delta.divide(max));
+      // FIXME: body.setVelocity(delta.divide(max));
     }
   }
 

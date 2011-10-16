@@ -16,6 +16,7 @@ import game.components.interfaces.ICompAnim;
 import game.components.misc.ActionOnDeath;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
+import game.components.physics.Movement;
 import game.components.physics.ProjectileCollision;
 import game.entities.groups.EntityType;
 
@@ -67,10 +68,10 @@ public class ProjectileTemplate {
     }
 
     final Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
-          (float) Math.cos(rot) * data.speed,
-          (float) Math.sin(rot) * data.speed,
-          EntityType.PROJECTILE);
+                                EntityType.PROJECTILE);
 
+    e.addLogicComponent(new Movement((float) Math.cos(rot) * data.speed,
+                                     (float) Math.sin(rot) * data.speed));
     e.addLogicComponent(new RangeLimiter(data.duration, data.range));
     e.addLogicComponent(new Life(data.targets));
     e.addLogicComponent(new ProjectileCollision());

@@ -9,11 +9,11 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
-import game.components.physics.AABB;
 import game.entities.groups.EntityType;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.world.World;
+import math.Rectangle;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -22,11 +22,11 @@ public class InvisibleRectangle implements IEntity {
   public final EventHandler<ObjectEventArgs> onContainsEvent;
   public final EventHandler<ObjectEventArgs> onNotContainsEvent;
 
-  private final AABB body;
+  private final Rectangle body;
   private World world;
 
   public InvisibleRectangle(final float x, final float y, final float w, final float h) {
-    body = new AABB(x, y, w, h, 0, 0);
+    body = new Rectangle(x, y, w, h);
 
     onContainsEvent = new EventHandler<ObjectEventArgs>();
     onNotContainsEvent = new EventHandler<ObjectEventArgs>();
@@ -48,7 +48,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public AABB getBody() {
+  public Rectangle getBody() {
     return body;
   }
 
