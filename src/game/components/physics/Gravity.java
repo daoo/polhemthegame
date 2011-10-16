@@ -12,7 +12,7 @@ import math.Vector2;
 import math.time.GameTime;
 
 public class Gravity implements ILogicComponent {
-  public static final float FACTOR = 100.0f;
+  private static final float FACTOR = 100.0f;
 
   private IEntity owner;
 
