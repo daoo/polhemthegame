@@ -7,14 +7,17 @@ package game.entities;
 import game.CacheTool;
 import game.actions.AOEDamage;
 import game.actions.SpawnDeathAnim;
+import game.components.basic.Life;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.components.misc.ActionOnDeath;
+import game.components.misc.RangeLimiter;
+import game.components.physics.Gravity;
 import game.components.physics.ProjectileCollision;
-import game.factories.Factory;
+import game.entities.groups.EntityType;
 
 import java.io.IOException;
 
@@ -24,8 +27,6 @@ import main.Locator;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
-
-
 
 public class ProjectileTemplate {
   private final ProjectileData data;
@@ -65,9 +66,20 @@ public class ProjectileTemplate {
                         new Idle());
     }
 
+    final Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
+          (float) Math.cos(rot) * data.speed,
+          (float) Math.sin(rot) * data.speed,
+          EntityType.PROJECTILE);
 
-    final IEntity projectile = Factory.makeProjectile(x, y, rot, anim, data);
-    projectile.addLogicComponent(new ProjectileCollision());
+    e.addLogicComponent(new RangeLimiter(data.duration, data.range));
+    e.addLogicComponent(new Life(data.targets));
+    e.addLogicComponent(new ProjectileCollision());
+
+    if (data.gravity) {
+      e.addLogicComponent(new Gravity());
+    }
+
+    e.addRenderComponent(anim);
 
     if (data.aoe != null) {
       final RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
@@ -75,17 +87,15 @@ public class ProjectileTemplate {
                                               data.aoe.explosionSprite.offset.y,
                                               explosion, new Idle());
 
-      projectile.addLogicComponent(
-        new ActionOnDeath(
-          new AOEDamage(projectile.getBody(), data.aoe.radius, data.aoe.damage)));
-      projectile.addLogicComponent(
-        new ActionOnDeath(
-          new SpawnDeathAnim(projectile.getBody(),
+      e.addLogicComponent(new ActionOnDeath(
+          new AOEDamage(e.getBody(), data.aoe.radius, data.aoe.damage)));
+      e.addLogicComponent(new ActionOnDeath(
+          new SpawnDeathAnim(e.getBody(),
                              explosionAnim.getTileWidth(),
                              explosionAnim.getTileHeight(),
                              explosionAnim)));
     }
 
-    return projectile;
+    return e;
   }
 }

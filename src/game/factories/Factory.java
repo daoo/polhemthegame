@@ -13,9 +13,7 @@ import game.components.graphics.RSheet;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ICompAnim;
-import game.components.misc.RangeLimiter;
 import game.components.misc.SpawnOnDeath;
-import game.components.physics.Gravity;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
@@ -30,7 +28,6 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.CreepsData.CreepData;
 import loader.data.json.PlayersData.PlayerData;
-import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
@@ -79,25 +76,6 @@ public class Factory {
     }
 
     return w;
-  }
-
-  public static IEntity makeProjectile(final float x, final float y,
-      final float rot, final ICompAnim animation, final ProjectileData data) {
-    final Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
-          (float) Math.cos(rot) * data.speed,
-          (float) Math.sin(rot) * data.speed,
-          EntityType.PROJECTILE);
-
-    e.addLogicComponent(new RangeLimiter(data.duration, data.range));
-    e.addLogicComponent(new Life(data.targets));
-
-    if (data.gravity) {
-      e.addLogicComponent(new Gravity());
-    }
-
-    e.addRenderComponent(animation);
-
-    return e;
   }
 
   public static IEntity makeCreep(final float x, final float y, final float ang,
