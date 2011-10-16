@@ -25,8 +25,9 @@ public class ProjectileCollision implements ILogicComponent {
       if (CollisionHelper.SweepCollisionTest(a, e2.getBody(), time.getFrameLength())) {
         // FIXME: If the projectile can hit multiple targets and is sufficently slow,
         //        it might hit the same target multiple times.
+        e2.sendMessage(ComponentMessage.DAMAGE,
+                       owner.getComponent(ComponentType.DAMAGE));
         owner.sendMessage(ComponentMessage.DAMAGE, DAMAGE_ONE);
-        e2.sendMessage(ComponentMessage.DAMAGE, owner.getComponent(ComponentType.DAMAGE));
       }
     }
   }
