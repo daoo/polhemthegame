@@ -45,6 +45,6 @@ public class Movement implements ILogicComponent {
   @Override
   public void update(final GameTime time) {
     final Vector2 tmp = vel.multiply(time.getFrameLength());
-    //owner.getBody().addPosition(tmp);
+    owner.getBody().addPosition(tmp);
   }
 }
