@@ -5,6 +5,15 @@
 package math;
 
 public class CollisionHelper {
+  /**
+   * Approximate method for determining if one moving and one static rectangle
+   * will intersect within the given time.
+   * @param a the moving rectangle
+   * @param av the velocity of the moving rectangle
+   * @param b the static rectangle
+   * @param dt the time delta
+   * @return true or false based on the test result
+   */
   public static boolean sweepCollisionTest(final Rectangle a, final Vector2 av,
                                            final Rectangle b,
                                            final float dt) {
