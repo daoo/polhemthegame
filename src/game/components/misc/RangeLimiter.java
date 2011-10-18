@@ -14,7 +14,7 @@ public class RangeLimiter implements ILogicComponent {
 
     public TimePos(final float time, final Vector2 pos) {
       this.time = time;
-      this.pos = new Vector2(pos);
+      this.pos  = new Vector2(pos);
     }
   }
 
@@ -32,10 +32,10 @@ public class RangeLimiter implements ILogicComponent {
 
   @Override
   public void update(final GameTime time) {
-    if ((duration != -1) && ((time.getElapsed() - start.time) > duration)) {
+    if ((time.getElapsed() - start.time) > duration) {
       owner.sendMessage(ComponentMessage.KILL, null);
     }
-    if ((range != -1) && (owner.getBody().getMin().distance(start.pos) > range)) {
+    if (owner.getBody().getMin().distance(start.pos) > range) {
       owner.sendMessage(ComponentMessage.KILL, null);
     }
   }

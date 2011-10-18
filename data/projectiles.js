@@ -3,7 +3,7 @@
     , aoe: null
     , collides: true
     , damage: 100
-    , duration: -1
+    , duration: 60
     , gravity: false
     , hitbox: { width: 1, height: 1 }
     , range: 20
@@ -16,10 +16,10 @@
     , aoe: null
     , collides: true
     , damage: 50
-    , duration: -1
+    , duration: 60
     , gravity: false
     , hitbox: { width: 3, height: 2 }
-    , range: -1
+    , range: 10000
     , speed: 500
     , sprite: null
     , targets: 1
@@ -41,7 +41,7 @@
     , duration: 3.5
     , gravity: true
     , hitbox: { width: 4, height: 4 }
-    , range: -1
+    , range: 10000
     , speed: 200
     , sprite: null
     , targets: 1
@@ -51,10 +51,10 @@
     , aoe: null
     , collides: true
     , damage: 25
-    , duration: -1
+    , duration: 60
     , gravity: false
     , hitbox: { width: 3, height: 2 }
-    , range: -1
+    , range: 10000
     , speed: 1000
     , sprite: null
     , targets: 1
@@ -64,7 +64,7 @@
     , aoe: null
     , collides: true
     , damage: 100
-    , duration: -1
+    , duration: 60
     , gravity: false
     , hitbox: { width: 50, height: 50 }
     , range: 250
@@ -84,7 +84,7 @@
     , damage: 1000
     , duration: 2500
     , gravity: false
-    , range: -1
+    , range: 10000
     , speed: 0
     , sprite:
       { animation: "travel"
@@ -98,9 +98,9 @@
     , aoe: null
     , collides: true
     , damage: 5
-    , duration: -1
+    , duration: 60
     , gravity: false
-    , range: -1
+    , range: 10000
     , speed: 250
     , sprite: null
     , targets: 1
@@ -110,9 +110,9 @@
     , aoe: null
     , collides: true
     , damage: 5
-    , duration: -1
+    , duration: 60
     , gravity: false
-    , range: -1
+    , range: 10000
     , speed: 250
     , sprite: null
     , targets: 1
@@ -122,9 +122,9 @@
     , aoe: null
     , collides: true
     , damage: 5
-    , duration: -1
+    , duration: 60
     , gravity: false
-    , range: -1
+    , range: 10000
     , speed: 250
     , sprite: null
     , targets: 1
