@@ -14,6 +14,7 @@ import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.components.misc.ActionOnDeath;
+import game.components.misc.Damage;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
 import game.components.physics.Movement;
@@ -74,6 +75,7 @@ public class ProjectileTemplate {
                                      (float) Math.sin(rot) * data.speed));
     e.addLogicComponent(new RangeLimiter(data.duration, data.range));
     e.addLogicComponent(new Life(data.targets));
+    e.addLogicComponent(new Damage(data.damage));
     e.addLogicComponent(new ProjectileCollision());
 
     if (data.gravity) {
