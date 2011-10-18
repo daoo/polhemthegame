@@ -1,6 +1,6 @@
 package tests;
 
-import game.components.graphics.OutlineNext;
+import game.components.graphics.Outliner;
 import game.components.graphics.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
@@ -48,9 +48,9 @@ public class CollisionTester extends BasicGame {
     world.add(obj1);
 
     final IEntity obj2 = new Entity(100, 440, 200, 200, EntityType.PROJECTILE);
-    obj2.addLogicComponent(new Movement(400, 0));
+    //obj2.addLogicComponent(new Movement(400, 0));
     obj2.addRenderComponent(new SolidQuad(Color.white, 200, 200));
-    obj2.addRenderComponent(new OutlineNext());
+    obj2.addRenderComponent(new Outliner(true));
     world.add(obj2);
   }
 
