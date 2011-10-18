@@ -7,7 +7,7 @@ package math;
 public class Vector2 {
   public static final Vector2 ZERO = new Vector2(0, 0);
 
-  public float                x, y;
+  public float x, y;
 
   private float sq(final float a) {
     return a * a;

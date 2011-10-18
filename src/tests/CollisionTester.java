@@ -2,12 +2,14 @@ package tests;
 
 import game.components.graphics.OutlineNext;
 import game.components.graphics.SolidQuad;
+import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.groups.EntityType;
 import game.world.World;
 import math.time.GameTime;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -46,6 +48,7 @@ public class CollisionTester extends BasicGame {
     world.add(obj1);
 
     final IEntity obj2 = new Entity(100, 440, 200, 200, EntityType.PROJECTILE);
+    obj2.addLogicComponent(new Movement(100, 100));
     obj2.addRenderComponent(new SolidQuad(Color.white, 200, 200));
     obj2.addRenderComponent(new OutlineNext());
     world.add(obj2);
@@ -63,6 +66,10 @@ public class CollisionTester extends BasicGame {
 
   @Override
   public void update(GameContainer container, int delta) throws SlickException {
+    if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+      container.exit();
+    }
+
     final float frameLength = delta / 1000.0f;
     elapsed += frameLength;
     world.update(new GameTime(frameLength, elapsed));
