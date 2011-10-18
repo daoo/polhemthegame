@@ -30,4 +30,13 @@ public class ExMath {
   public static boolean inRange(final float v, final float a, final float b) {
     return (v >= a) && (v <= b);
   }
+
+  public static float clamp(float min, float max, float value) {
+    if (value < min)
+      return min;
+    else if (value > max)
+      return max;
+    else
+      return value;
+  }
 }

@@ -25,7 +25,7 @@ public class ProjectileCollision implements ILogicComponent {
     // Check for collisions with units
     final Rectangle a = owner.getBody();
     for (final IEntity e2 : owner.getWorld().getUnits()) {
-      if (CollisionHelper.SweepCollisionTest(a, movement.getVelocity(), e2.getBody(), time.getFrameLength())) {
+      if (CollisionHelper.sweepCollisionTest(a, movement.getVelocity(), e2.getBody(), time.getFrameLength())) {
         // FIXME: If the projectile can hit multiple targets and is sufficently slow,
         //        it might hit the same target multiple times.
         e2.sendMessage(ComponentMessage.DAMAGE, damage);

@@ -1,10 +1,10 @@
 package game.components.misc;
 
-import math.time.GameTime;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import math.time.GameTime;
 
 public class Damage implements ILogicComponent {
   private final float ammount;

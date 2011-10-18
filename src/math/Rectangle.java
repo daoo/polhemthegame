@@ -60,7 +60,7 @@ public class Rectangle {
    * @return a vector2
    */
   public Vector2 getMin() {
-    return min;
+    return new Vector2(min);
   }
 
   /**
@@ -68,15 +68,15 @@ public class Rectangle {
    * @return a vector2
    */
   public Vector2 getMax() {
-    return max;
+    return new Vector2(max);
   }
 
   public Vector2 getCenter() {
-    return center;
+    return new Vector2(center);
   }
 
   public Vector2 getSize() {
-    return size;
+    return new Vector2(size);
   }
 
   public float getWidth() {

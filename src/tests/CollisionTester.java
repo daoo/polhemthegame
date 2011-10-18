@@ -48,7 +48,7 @@ public class CollisionTester extends BasicGame {
     world.add(obj1);
 
     final IEntity obj2 = new Entity(100, 440, 200, 200, EntityType.PROJECTILE);
-    obj2.addLogicComponent(new Movement(100, 100));
+    obj2.addLogicComponent(new Movement(400, 0));
     obj2.addRenderComponent(new SolidQuad(Color.white, 200, 200));
     obj2.addRenderComponent(new OutlineNext());
     world.add(obj2);
