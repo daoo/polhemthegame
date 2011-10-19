@@ -73,11 +73,13 @@
   , { name: "casio"
     , automatic: false
     , clipSize: -1
+    , muzzleOffset: { x: -100, y: -100 }
     , reloadTime: -1
     , rpm: 12
     , sprite:
       { animation: "fire"
       , framerate: 8
+      , offset: { x: -100, y: -100 }
       , tileSize: { width: 26, height: 37 }
       , sprite: "textures/weapons/casio.png" }
     , projectile: "casio" }
