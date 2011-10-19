@@ -14,6 +14,7 @@ import game.components.interfaces.ICompAnim;
 import game.components.misc.ActionOnDeath;
 import game.components.misc.Inventory;
 import game.components.misc.Life;
+import game.components.misc.MovementConstraint;
 import game.components.misc.SimpleControl;
 import game.components.misc.SpawnOnDeath;
 import game.components.physics.Movement;
@@ -45,11 +46,11 @@ public class Factory {
     /**
      * The layout of rectangles:
      * |-----------------------------|
-     * | bigRect                     |
+     * | rectBig                     |
      * |                             |
      * |                             |
      * |---------|---------|         |
-     * | cKiller |smallRect|         |
+     * |rectCreep|rectWorld|         |
      * |---------|---------|         |
      * |                             |
      * |                             |
@@ -65,8 +66,6 @@ public class Factory {
     rectBig.onNotContainsEvent.add(new KillEvent());
     w.add(rectBig);
 
-    // TODO: Restrict players
-
     final InvisibleRectangle rectCreepKiller =
       new InvisibleRectangle(-rectWorld.getWidth(), 0,
                              rectWorld.getWidth(), rectWorld.getHeight());
@@ -75,6 +74,7 @@ public class Factory {
     w.add(rectCreepKiller);
 
     for (final IEntity p : players) {
+      p.addLogicComponent(new MovementConstraint(rectWorld));
       w.add(p);
     }
 
