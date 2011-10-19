@@ -5,6 +5,7 @@
 package game.factories;
 
 import game.CacheTool;
+import game.actions.RemoveEntity;
 import game.components.ComponentType;
 import game.components.basic.Inventory;
 import game.components.basic.Life;
@@ -13,6 +14,7 @@ import game.components.graphics.RSheet;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ICompAnim;
+import game.components.misc.ActionOnDeath;
 import game.components.misc.SpawnOnDeath;
 import game.components.physics.Movement;
 import game.entities.Entity;
@@ -131,12 +133,14 @@ public class Factory {
     final SpawnOnDeath death = new SpawnOnDeath(deathAnim);
     final InfoBar infoBar    = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
     final Bar hpBar          = new Bar(life, Color.green, Color.red);
+    final ActionOnDeath remove = new ActionOnDeath(new RemoveEntity(e));
 
     infoBar.add(hpBar);
 
     e.addLogicComponent(movement);
     e.addLogicComponent(life);
     e.addLogicComponent(death);
+    e.addLogicComponent(remove);
     e.addRenderComponent(walkAnim);
     e.addRenderComponent(infoBar);
 

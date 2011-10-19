@@ -6,6 +6,7 @@ package game.entities;
 
 import game.CacheTool;
 import game.actions.AOEDamage;
+import game.actions.RemoveEntity;
 import game.actions.SpawnDeathAnim;
 import game.components.basic.Life;
 import game.components.graphics.DummyAnimation;
@@ -77,6 +78,7 @@ public class ProjectileTemplate {
     e.addLogicComponent(new Life(data.targets));
     e.addLogicComponent(new Damage(data.damage));
     e.addLogicComponent(new ProjectileCollision());
+    e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
 
     if (data.gravity) {
       e.addLogicComponent(new Gravity());

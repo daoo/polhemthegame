@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.actions.RemoveEntity;
 import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
@@ -39,7 +38,6 @@ public class SpawnOnDeath implements ILogicComponent {
       e.addRenderComponent(anim);
 
       owner.addAction(new SpawnWithSend(e, ComponentMessage.END_ANIMATION, null));
-      owner.addAction(new RemoveEntity(owner));
     }
   }
 
