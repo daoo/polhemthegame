@@ -45,17 +45,17 @@ public class Factory {
   public static World makeWorld(final Rectangle rectWorld, final Players players) {
     /**
      * The layout of rectangles:
-     * |-----------------------------|
-     * | rectBig                     |
-     * |                             |
-     * |                             |
-     * |---------|---------|         |
-     * |rectCreep|rectWorld|         |
-     * |---------|---------|         |
-     * |                             |
-     * |                             |
-     * |                             |
-     * |-----------------------------|
+     * |---------------------------------|
+     * | rectBig                         |
+     * |                                 |
+     * |                                 |
+     * |-----------|-----------|         |
+     * | rectCreep | rectWorld |         |
+     * |-----------|-----------|         |
+     * |                                 |
+     * |                                 |
+     * |                                 |
+     * |---------------------------------|
      */
 
     final World w = new World();
