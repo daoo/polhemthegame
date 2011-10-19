@@ -2,12 +2,11 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.basic;
+package game.components.misc;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
-import game.components.misc.Damage;
 import game.entities.IEntity;
 import math.time.GameTime;
 import ui.hud.infobar.IProgress;
