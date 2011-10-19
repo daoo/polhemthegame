@@ -10,15 +10,14 @@ public class SpawnWithSend implements IAction {
   private final ComponentMessage message;
   private final Object args;
 
-  public SpawnWithSend(final IEntity entity, final ComponentMessage message,
-                       final Object args) {
+  public SpawnWithSend(IEntity entity, ComponentMessage message, Object args) {
     this.entity  = entity;
     this.message = message;
     this.args    = args;
   }
 
   @Override
-  public void execute(final GameTime time, final World world) {
+  public void execute(GameTime time, World world) {
     entity.sendMessage(message, args);
     world.add(entity);
   }

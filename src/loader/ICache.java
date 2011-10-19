@@ -11,16 +11,15 @@ import loader.parser.IParser;
 import loader.parser.ParserException;
 
 public interface ICache {
+  void close() throws CacheException;
 
-  public void close() throws CacheException;
+  void delete(String id) throws CacheException;
 
-  public void delete(final String id) throws CacheException;
-
-  public IClosable getCold(final String id, final IParser parser)
+  IClosable getCold(String id, IParser parser)
     throws IOException, ParserException;
 
-  public IClosable getWarm(final String id) throws ObjectNotInCacheException;
+  IClosable getWarm(String id) throws ObjectNotInCacheException;
 
-  public int count();
+  int count();
 
 }

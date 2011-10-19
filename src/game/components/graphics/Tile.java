@@ -7,14 +7,14 @@ package game.components.graphics;
 public class Tile {
   public static final Tile ZERO = new Tile(0, 0);
 
-  public final int         x, y;
+  public final int x, y;
 
-  public Tile(final int x, final int y) {
+  public Tile(int x, int y) {
     this.x = x;
     this.y = y;
   }
 
-  public boolean sameAs(final Tile other) {
+  public boolean sameAs(Tile other) {
     return (x == other.x) && (y == other.y);
   }
 }

@@ -40,7 +40,7 @@ public class Game implements IMode {
   private boolean            finished;
   private float              elapsed;
 
-  public Game(final CampaignData data, final int x, final int y, final int w, final int h)
+  public Game(CampaignData data, int x, int y, int w, int h)
     throws IOException, ParserException, DataException {
     finished = false;
     elapsed = 0;
@@ -80,21 +80,21 @@ public class Game implements IMode {
    * @param dt Approximate length of the current frame in seconds.
    */
   @Override
-  public void update(final float dt) {
+  public void update(float dt) {
     if (!finished) {
       elapsed += dt;
-      final GameTime time = new GameTime(dt, elapsed);
+      GameTime time = new GameTime(dt, elapsed);
 
       if (level.isFinished()) {
         try {
           nextLevel();
-        } catch (final DataException e) {
+        } catch (DataException e) {
           e.printStackTrace();
           System.exit(1);
-        } catch (final ParserException e) {
+        } catch (ParserException e) {
           e.printStackTrace();
           System.exit(1);
-        } catch (final IOException e) {
+        } catch (IOException e) {
           e.printStackTrace();
           System.exit(1);
         }
@@ -105,7 +105,7 @@ public class Game implements IMode {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.pushTransform();
     g.translate(arenaRect.getX1(), arenaRect.getY1());
 

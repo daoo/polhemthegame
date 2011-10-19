@@ -47,18 +47,18 @@ public class StateCredits implements IGameState {
     speed = DEFAULT_Y_SPEED;
     pos_y = Launcher.HEIGHT;
 
-    final float tmp_x = Launcher.WIDTH / 2.0f;
+    float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = 0;
 
     credits = new ArrayList<ImageWithLocation>(Credits.CreditsText.length);
-    for (final String s : Credits.CreditsText) {
+    for (String s : Credits.CreditsText) {
       if (!s.isEmpty()) {
         ImageWithLocation img;
 
         if (s.startsWith("img:")) {
-          final Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
-          final float x = tmp_x - a.getWidth() / 2.0f;
-          final float y = tmp_y - a.getHeight() / 2.0f;
+          Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
+          float x = tmp_x - a.getWidth() / 2.0f;
+          float y = tmp_y - a.getHeight() / 2.0f;
           img = new ImageWithLocation(x, y, a);
         } else if (s.startsWith("big:")) {
           img = lineFromString(tmp_x, tmp_y, s.substring(4), font_large);
@@ -75,17 +75,17 @@ public class StateCredits implements IGameState {
   }
 
   @Override
-  public void render(final Graphics g) throws SlickException {
+  public void render(Graphics g) throws SlickException {
     g.pushTransform();
     g.translate(0, pos_y);
 
-    for (final ImageWithLocation l : credits) {
+    for (ImageWithLocation l : credits) {
       l.render(g);
     }
   }
 
   @Override
-  public void update(final GameStateManager stateGame, final float delta) {
+  public void update(GameStateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       stateGame.enterMainMenu();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
@@ -97,12 +97,12 @@ public class StateCredits implements IGameState {
     pos_y -= speed * delta;
   }
 
-  private UnicodeFont getFont(final String name, final int size)
+  private UnicodeFont getFont(String name, int size)
     throws SlickException {
-    final Font font = new Font(name, Font.PLAIN, size);
-    final UnicodeFont ufont = new UnicodeFont(font);
+    Font font = new Font(name, Font.PLAIN, size);
+    UnicodeFont ufont = new UnicodeFont(font);
 
-    final ArrayList<ColorEffect> tmp = (ArrayList<ColorEffect>) ufont.getEffects();
+    ArrayList<ColorEffect> tmp = (ArrayList<ColorEffect>) ufont.getEffects();
     tmp.add(COLOR_WHITE);
 
     ufont.addAsciiGlyphs();
@@ -111,15 +111,13 @@ public class StateCredits implements IGameState {
     return ufont;
   }
 
-  private ImageWithLocation lineFromString(final float x, final float y,
-                                             final String s,
-                                             final UnicodeFont font)
-    throws SlickException {
-    final int width = font.getWidth(s);
-    final int height = font.getHeight(s);
+  private ImageWithLocation lineFromString(float x, float y, String s, UnicodeFont font)
+      throws SlickException {
+    int width = font.getWidth(s);
+    int height = font.getHeight(s);
 
-    final Image img = new Image(width, height);
-    final Graphics g = img.getGraphics();
+    Image img = new Image(width, height);
+    Graphics g = img.getGraphics();
     g.setFont(font);
     g.clear();
     g.setAntiAlias(false);

@@ -16,15 +16,15 @@ import com.google.gson.JsonParseException;
 public class GsonParser implements IParser {
   private final Type typeOf;
 
-  public GsonParser(final Type typeOf) {
+  public GsonParser(Type typeOf) {
     this.typeOf = typeOf;
   }
 
   @Override
-  public IClosable parse(final InputStream br) throws ParserException {
+  public IClosable parse(InputStream br) throws ParserException {
     try {
       return new Gson().fromJson(new InputStreamReader(br), typeOf);
-    } catch (final JsonParseException e) {
+    } catch (JsonParseException e) {
       throw new ParserException(e);
     }
   }

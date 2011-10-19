@@ -10,8 +10,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class ClosableImage extends Image implements IClosable {
-  public ClosableImage(final InputStream is, final String string,
-                       final boolean b) throws SlickException {
+  public ClosableImage(InputStream is, String string, boolean b)
+      throws SlickException {
     super(is, string, b);
   }
 
@@ -19,7 +19,7 @@ public class ClosableImage extends Image implements IClosable {
   public void close() throws DataException {
     try {
       destroy();
-    } catch (final SlickException e) {
+    } catch (SlickException e) {
       throw new DataException(e);
     }
   }

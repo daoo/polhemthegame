@@ -41,20 +41,20 @@ public class LevelData implements IClosable {
   public ArrayList<CreepStateData> creepStates;
   public ArrayList<BossStateData>  bossStates;
 
-  public StateData findState(final String name) throws DataException {
-    for (final StateData s : textStates) {
+  public StateData findState(String name) throws DataException {
+    for (StateData s : textStates) {
       if (s.state.equals(name)) {
         return s;
       }
     }
 
-    for (final StateData s : creepStates) {
+    for (StateData s : creepStates) {
       if (s.state.equals(name)) {
         return s;
       }
     }
 
-    for (final StateData s : bossStates) {
+    for (StateData s : bossStates) {
       if (s.state.equals(name)) {
         return s;
       }

@@ -35,30 +35,30 @@ public class Launcher extends BasicGame {
     super(NAME + " - " + VERSION);
   }
 
-  public static void main(final String[] args) {
+  public static void main(String[] args) {
     try {
       Locator.registerCache(new Cache(new Enviroment().appDir));
       Locator.registerRandom(new Random());
 
-      final AppGameContainer app = new AppGameContainer(new Launcher());
+      AppGameContainer app = new AppGameContainer(new Launcher());
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();
-    } catch (final FileNotFoundException ex) {
+    } catch (FileNotFoundException ex) {
       ex.printStackTrace();
-    } catch (final SlickException ex) {
+    } catch (SlickException ex) {
       ex.printStackTrace();
     } finally {
       try {
         Locator.getCache().close();
-      } catch (final CacheException ex) {
+      } catch (CacheException ex) {
         ex.printStackTrace();
       }
     }
   }
 
   @Override
-  public void init(final GameContainer container) throws SlickException {
+  public void init(GameContainer container) throws SlickException {
     container.setTargetFrameRate(60);
 
     stateGame = new GameStateManager();
@@ -66,12 +66,12 @@ public class Launcher extends BasicGame {
   }
 
   @Override
-  public void render(final GameContainer container, final Graphics g) throws SlickException {
+  public void render(GameContainer container, Graphics g) throws SlickException {
     stateGame.getCurrentState().render(g);
   }
 
   @Override
-  public void update(final GameContainer container, final int delta) throws SlickException {
+  public void update(GameContainer container, int delta) throws SlickException {
     if (stateGame.shouldExit()) {
       container.exit();
     } else {

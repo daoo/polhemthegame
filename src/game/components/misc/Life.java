@@ -19,7 +19,7 @@ public class Life implements ILogicComponent, IProgress {
 
   private IEntity owner;
 
-  public Life(final float maxHP) {
+  public Life(float maxHP) {
     this.alive = true;
 
     this.hp    = maxHP;
@@ -41,7 +41,7 @@ public class Life implements ILogicComponent, IProgress {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
       hp    = 0;
       alive = false;
@@ -54,16 +54,16 @@ public class Life implements ILogicComponent, IProgress {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.owner = owner;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 
-  private void damage(final float dmg) {
+  private void damage(float dmg) {
     hp -= dmg;
     if (hp <= 0) {
       kill();

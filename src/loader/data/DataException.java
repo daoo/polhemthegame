@@ -9,11 +9,11 @@ import loader.CacheException;
 public class DataException extends CacheException {
   private static final long serialVersionUID = 1L;
 
-  public DataException(final Throwable cause) {
+  public DataException(Throwable cause) {
     super(cause);
   }
 
-  public DataException(final String message) {
+  public DataException(String message) {
     super(message);
   }
 }

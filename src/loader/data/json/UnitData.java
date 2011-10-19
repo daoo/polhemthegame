@@ -21,8 +21,8 @@ public class UnitData implements IClosable {
     sprites.clear();
   }
 
-  public SpriteData getSheet(final String animation) throws DataException {
-    for (final SpriteData s : sprites) {
+  public SpriteData getSheet(String animation) throws DataException {
+    for (SpriteData s : sprites) {
       if (s.animation.equals(animation)) {
         return s;
       }

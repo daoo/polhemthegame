@@ -10,14 +10,14 @@ public class ReloadingState implements IWeaponState {
   private final float tEnd, tLength;
   private float tCurrent;
 
-  public ReloadingState(final float timeStart, final float length) {
+  public ReloadingState(float timeStart, float length) {
     tCurrent = timeStart;
     tEnd = timeStart + length;
     tLength = length;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     tCurrent = time.getElapsed();
   }
 

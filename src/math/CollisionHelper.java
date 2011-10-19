@@ -14,15 +14,13 @@ public class CollisionHelper {
    * @param dt the time delta
    * @return true or false based on the test result
    */
-  public static boolean sweepCollisionTest(final Rectangle a, final Vector2 av,
-                                           final Rectangle b,
-                                           final float dt) {
-    final Vector2 vel = av.multiply(dt);
-    final Vector2 target = a.getMin().add(vel);
+  public static boolean sweepCollisionTest(Rectangle a, Vector2 av, Rectangle b, float dt) {
+    Vector2 vel    = av.multiply(dt);
+    Vector2 target = a.getMin().add(vel);
 
-    final Vector2 sweepDelta = vel.divide(a.getSize().magnitude());
-    final int sweeps = (int) (target.distance(a.getMin()) / sweepDelta.magnitude());
-    final Rectangle sweep = new Rectangle(a.getMin(), a.getMax());
+    Vector2 sweepDelta = vel.divide(a.getSize().magnitude());
+    int sweeps         = (int) (target.distance(a.getMin()) / sweepDelta.magnitude());
+    Rectangle sweep    = new Rectangle(a.getMin(), a.getMax());
 
     for (int i = 0; i < sweeps; ++i) {
       if (sweep.isIntersecting(b)) {
@@ -44,8 +42,8 @@ public class CollisionHelper {
    * @param cont
    *          The Rectangle to use as box
    */
-  public static void blockFromExiting(final Rectangle entity, final Rectangle cont) {
-    final Vector2 e = entity.getMin();
+  public static void blockFromExiting(Rectangle entity, Rectangle cont) {
+    Vector2 e = entity.getMin();
     if (e.x < cont.getX1()) {
       e.x = cont.getX1();
     } else if ((e.x + entity.getWidth()) >= cont.getX2()) {

@@ -22,8 +22,7 @@ public class InfoBar implements IRenderComponent {
   private final int            offsetX, offsetY;
   private final ArrayList<Bar> bars;
 
-  public InfoBar(final float width, final float height,
-                 final int offsetX, final int offsetY) {
+  public InfoBar(float width, float height, int offsetX, int offsetY) {
     barWidth = width;
     barHeight = height;
 
@@ -34,22 +33,22 @@ public class InfoBar implements IRenderComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
-    for (final Bar b : bars) {
+  public void update(GameTime time) {
+    for (Bar b : bars) {
       b.update();
     }
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     int i = 0;
-    for (final Bar b : bars) {
+    for (Bar b : bars) {
       b.render(g, offsetX, offsetY + (barHeight * i), barWidth, barHeight);
       ++i;
     }
   }
 
-  public void add(final Bar bar) {
+  public void add(Bar bar) {
     bars.add(bar);
   }
 
@@ -58,7 +57,7 @@ public class InfoBar implements IRenderComponent {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -68,7 +67,7 @@ public class InfoBar implements IRenderComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 }

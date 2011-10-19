@@ -78,7 +78,7 @@ public class Outliner implements IRenderComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 }

@@ -34,10 +34,10 @@ public class GameStateManager {
   public void enterMainMenu() {
     try {
       currentState = new MenuState(this);
-    } catch (final ParserException e) {
+    } catch (ParserException e) {
       e.printStackTrace();
       quit();
-    } catch (final IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       quit();
     }
@@ -46,13 +46,13 @@ public class GameStateManager {
   public void enterSinglePlayer() {
     try {
       currentState = new GameRound();
-    } catch (final ParserException ex) {
+    } catch (ParserException ex) {
       ex.printStackTrace();
       quit();
-    } catch (final DataException ex) {
+    } catch (DataException ex) {
       ex.printStackTrace();
       quit();
-    } catch (final IOException ex) {
+    } catch (IOException ex) {
       ex.printStackTrace();
       quit();
     }

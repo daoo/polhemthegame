@@ -11,7 +11,7 @@ import java.util.Iterator;
 public class AllIterator implements Iterator<IEntity> {
   private final Iterator<IEntity> internal;
 
-  public AllIterator(final Iterable<IEntity> list) {
+  public AllIterator(Iterable<IEntity> list) {
     internal = list.iterator();
   }
 

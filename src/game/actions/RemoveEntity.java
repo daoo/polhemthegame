@@ -6,12 +6,13 @@ import math.time.GameTime;
 
 public class RemoveEntity implements IAction {
   private final IEntity entity;
-  public RemoveEntity(final IEntity entity) {
+
+  public RemoveEntity(IEntity entity) {
     this.entity = entity;
   }
 
   @Override
-  public void execute(final GameTime time, final World world) {
+  public void execute(GameTime time, World world) {
     world.remove(entity);
   }
 }

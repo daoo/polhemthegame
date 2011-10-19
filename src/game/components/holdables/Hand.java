@@ -25,7 +25,7 @@ public class Hand implements IRenderComponent, IProgress {
   private IEntity owner;
   private Weapon weapon;
 
-  public Hand(final float handOffsetX, final float handOffsetY) {
+  public Hand(float handOffsetX, float handOffsetY) {
     offset = new Vector2(handOffsetX, handOffsetY);
 
     weapon = null;
@@ -43,7 +43,7 @@ public class Hand implements IRenderComponent, IProgress {
     }
   }
 
-  public void grab(final Weapon newItem) {
+  public void grab(Weapon newItem) {
     // To grab a new holdable we need to stop using the current one
     stopUse();
 
@@ -51,13 +51,13 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     weapon.update(time);
 
     // Find out if there are any projectiles that want to be spawned
-    for (final ProjectileTemplate projTemplate : weapon.projectiles) {
-      final Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
-      final IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle());
+    for (ProjectileTemplate projTemplate : weapon.projectiles) {
+      Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
+      IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle());
       owner.addAction(
         new SpawnWithSend(p, ComponentMessage.START_AT,
           new RangeLimiter.TimePos(time.getElapsed(), o)));
@@ -66,7 +66,7 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.pushTransform();
     g.translate(offset.x, offset.y);
 
@@ -76,7 +76,7 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.START_HOLDABLE) {
       startUse();
     } else if (message == ComponentMessage.STOP_HOLDABLE) {
@@ -95,7 +95,7 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.owner = owner;
   }
 }

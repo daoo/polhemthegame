@@ -14,17 +14,17 @@ import org.newdawn.slick.SlickException;
 public class SpriteSheetParser implements IParser {
   private final int tw, th;
 
-  public SpriteSheetParser(final int tw, final int th) {
+  public SpriteSheetParser(int tw, int th) {
     this.tw = tw;
     this.th = th;
   }
 
   @Override
-  public IClosable parse(final InputStream is) throws ParserException {
+  public IClosable parse(InputStream is) throws ParserException {
     try {
       // NOTE: ref is set to is.toString() because it seemed as a logic decision
       return new ClosableSpriteSheet(is.toString(), is, tw, th);
-    } catch (final SlickException e) {
+    } catch (SlickException e) {
       throw new ParserException(e);
     }
   }

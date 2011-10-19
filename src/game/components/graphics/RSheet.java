@@ -30,9 +30,8 @@ public class RSheet implements ICompAnim {
   private IAnimator   animator;
   private Tile        current;
 
-  public RSheet(final float targetFrameRate, final int offsetX,
-                final int offsetY, final SpriteSheet sheet,
-                final IAnimator animator) {
+  public RSheet(float targetFrameRate, int offsetX, int offsetY,
+                SpriteSheet sheet, IAnimator animator) {
     this.sheet = sheet;
     clock      = new Clock(1.0f / targetFrameRate);
 
@@ -89,7 +88,7 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.START_ANIMATION) {
       animator = new Continuous(getTileCount());
     } else if (message == ComponentMessage.STOP_ANIMATION) {
@@ -103,22 +102,22 @@ public class RSheet implements ICompAnim {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
   }
 
   @Override
-  public void setAnimator(final IAnimator animator) {
+  public void setAnimator(IAnimator animator) {
     this.animator = animator;
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     if (clock.needsSync(time.getElapsed())) {
       clock.sync(time.getElapsed());
 

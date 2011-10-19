@@ -33,7 +33,6 @@ public abstract class Weapon implements IHoldable {
   protected final int magazineSize;
   protected final Vector2 muzzleOffset;
 
-
   protected final float angle;
   protected final ProjectileTemplate projTemplate;
   /**
@@ -41,10 +40,9 @@ public abstract class Weapon implements IHoldable {
    */
   public final LinkedList<ProjectileTemplate> projectiles;
 
-  public Weapon(final Vector2 muzzleOffset, final float reloadTime,
-                final float cooldownTime, final int magazineSize,
-                final float angle, final RSheet anim,
-                final ProjectileTemplate projTemplate) {
+  public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
+                int magazineSize, float angle, RSheet anim,
+                ProjectileTemplate projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.reloadTime   = reloadTime;
     this.cooldownTime = cooldownTime;
@@ -81,28 +79,28 @@ public abstract class Weapon implements IHoldable {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
       toggleOff();
     }
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     anim.render(g);
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     anim.update(time);
   }
 
-  protected void fire(final float elapsed) {
+  protected void fire(float elapsed) {
     if (magazineSize != -1) {
       rounds -= 1;
     }
@@ -124,7 +122,7 @@ public abstract class Weapon implements IHoldable {
     return !isEmpty() && isIdle();
   }
 
-  protected void startReload(final GameTime time) {
+  protected void startReload(GameTime time) {
     currentState = new ReloadingState(time.getElapsed(), reloadTime);
     rounds = magazineSize;
   }

@@ -18,15 +18,14 @@ public class AutomaticWeapon extends Weapon {
    */
   private boolean inUse;
 
-  public AutomaticWeapon(final Vector2 muzzleOffset, final float reloadTime,
-                         final float cooldownTime, final int magazineSize,
-                         final float angle, final RSheet anim,
-                         final ProjectileTemplate factory) {
+  public AutomaticWeapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
+                         int magazineSize, float angle, RSheet anim,
+                         ProjectileTemplate factory) {
     super(muzzleOffset, reloadTime, cooldownTime, magazineSize, angle, anim, factory);
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     super.update(time);
 
     if (currentState != null) {
@@ -74,7 +73,7 @@ public class AutomaticWeapon extends Weapon {
   }
 
   @Override
-  protected void startReload(final GameTime time) {
+  protected void startReload(GameTime time) {
     super.startReload(time);
 
     anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));

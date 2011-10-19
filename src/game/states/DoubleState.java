@@ -14,19 +14,19 @@ public class DoubleState implements IRoundState {
   private final IRoundState fgState;
   private IRoundState       bgState;
 
-  public DoubleState(final IRoundState fgState) {
+  public DoubleState(IRoundState fgState) {
     this.fgState = fgState;
     this.bgState = null;
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
+  public void update(GameTime time, World world) {
     bgState.update(time, world);
     fgState.update(time, world);
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     bgState.render(g);
     fgState.render(g);
   }
@@ -36,7 +36,7 @@ public class DoubleState implements IRoundState {
     return fgState.isFinished();
   }
 
-  public void start(final IRoundState state) {
+  public void start(IRoundState state) {
     this.bgState = state;
   }
 }

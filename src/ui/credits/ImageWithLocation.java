@@ -8,16 +8,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 public class ImageWithLocation {
-  final float x, y;
-  final Image img;
+  private final float x, y;
+  private final Image img;
 
-  public ImageWithLocation(final float x, final float y, final Image img) {
+  public ImageWithLocation(float x, float y, Image img) {
     this.x = x;
     this.y = y;
     this.img = img;
   }
 
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(img, x, y);
   }
 

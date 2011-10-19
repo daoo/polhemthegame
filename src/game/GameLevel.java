@@ -56,15 +56,13 @@ public class GameLevel {
   private final ArrayList<IRoundState> states;
   private final StateIterator     current;
 
-  public GameLevel(final LevelData level, final Players players,
-                   final float width, final float height,
-                   final DoubleState gameOverState)
-    throws DataException, IOException, ParserException {
+  public GameLevel(LevelData level, Players players, float width, float height,
+      DoubleState gameOverState) throws DataException, IOException, ParserException {
     // World and it's rectangles
-    final float left   = level.constraints[0];
-    final float top    = level.constraints[1];
-    final float bottom = level.constraints[2];
-    final float right  = level.constraints[3];
+    float left   = level.constraints[0];
+    float top    = level.constraints[1];
+    float bottom = level.constraints[2];
+    float right  = level.constraints[3];
 
     rect      = new Rectangle(left , top , width - left - right , height - top - bottom);
     availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
@@ -80,11 +78,11 @@ public class GameLevel {
     this.states        = new ArrayList<IRoundState>();
     this.gameOverState = gameOverState;
 
-    for (final String state : level.states) {
-      final StateData sd = level.findState(state);
+    for (String state : level.states) {
+      StateData sd = level.findState(state);
 
       if (sd.type.equals("text")) {
-        final TextStateData data = (TextStateData) sd;
+        TextStateData data = (TextStateData) sd;
         states.add(new TransitionState(
           CacheTool.getImage(Locator.getCache(), data.text),
           data.duration, availible));
@@ -99,7 +97,7 @@ public class GameLevel {
     current = new StateIterator(states);
   }
 
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(background, 0, 0);
 
     g.pushTransform();
@@ -112,7 +110,7 @@ public class GameLevel {
     g.popTransform();
   }
 
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     if (current.getCurrent().isFinished()) {
       nextState();
     } else {
@@ -121,7 +119,7 @@ public class GameLevel {
       world.update(time);
 
       if (!players.isAlive() && !current.isFinished()) {
-        final IRoundState oldState = current.getCurrent();
+        IRoundState oldState = current.getCurrent();
 
         current.endNowWith(gameOverState);
         gameOverState.start(oldState);

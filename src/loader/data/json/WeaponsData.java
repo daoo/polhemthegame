@@ -28,8 +28,8 @@ public class WeaponsData implements IClosable {
 
   public ArrayList<WeaponData> weapons;
 
-  public WeaponData getWeapon(final String name) throws DataException {
-    for (final WeaponData w : weapons) {
+  public WeaponData getWeapon(String name) throws DataException {
+    for (WeaponData w : weapons) {
       if (w.name.equals(name)) {
         return w;
       }

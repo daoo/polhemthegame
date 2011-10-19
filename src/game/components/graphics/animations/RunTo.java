@@ -10,7 +10,7 @@ public class RunTo implements IAnimator {
   private boolean finished;
   private final Tile size, target;
 
-  public RunTo(final Tile size, final Tile target) {
+  public RunTo(Tile size, Tile target) {
     this.size = size;
     this.target = target;
     finished = false;
@@ -22,7 +22,7 @@ public class RunTo implements IAnimator {
   }
 
   @Override
-  public Tile next(final Tile tile) {
+  public Tile next(Tile tile) {
     if (!finished) {
       int x = tile.x + 1;
       int y = tile.y;
@@ -36,7 +36,7 @@ public class RunTo implements IAnimator {
         }
       }
 
-      final Tile result = new Tile(x, y);
+      Tile result = new Tile(x, y);
       if (target.sameAs(result)) {
         finished = true;
       }

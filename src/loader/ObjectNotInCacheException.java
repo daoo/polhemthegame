@@ -7,7 +7,7 @@ package loader;
 public class ObjectNotInCacheException extends CacheException {
   private static final long serialVersionUID = 1L;
 
-  public ObjectNotInCacheException(final String message) {
+  public ObjectNotInCacheException(String message) {
     super(message);
   }
 }

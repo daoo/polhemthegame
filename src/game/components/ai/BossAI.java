@@ -31,8 +31,8 @@ public class BossAI implements ILogicComponent {
   private final float          speed;
   private final Stack<Vector2> targets;
 
-  public BossAI(final IEntity unit, final Hand hand,
-                final Rectangle consts, final Rectangle body, final float speed) {
+  public BossAI(IEntity unit, Hand hand,
+                Rectangle consts, Rectangle body, float speed) {
     arenaRect = consts;
     this.hand = hand;
     this.body = body;
@@ -44,23 +44,23 @@ public class BossAI implements ILogicComponent {
     targets = new Stack<Vector2>();
   }
 
-  private void headFor(final Vector2 target) {
-    final Vector2 delta = target.subtract(body.getMin());
-    final float dx = target.x - body.getX1();
-    final float dy = target.y - body.getY1();
+  private void headFor(Vector2 target) {
+    Vector2 delta = target.subtract(body.getMin());
+    float dx = target.x - body.getX1();
+    float dy = target.y - body.getY1();
 
-    final float timeX = Math.abs(dx / speed);
-    final float timeY = Math.abs(dy / speed);
+    float timeX = Math.abs(dx / speed);
+    float timeY = Math.abs(dy / speed);
 
     // FIXME: body.setVelocity(Vector2.ZERO);
     if ((timeX > 0) || (timeY > 0)) {
-      final float max = Math.max(timeX, timeY);
+      float max = Math.max(timeX, timeY);
       // FIXME: body.setVelocity(delta.divide(max));
     }
   }
 
   private Vector2 newTarget() {
-    final Vector2 target = new Vector2();
+    Vector2 target = new Vector2();
     target.x = Locator.getRandom().nextFloat(
       body.getX1() - 10,
       body.getX1() + 10);
@@ -78,7 +78,7 @@ public class BossAI implements ILogicComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     if (isShooting) {
       if ((time.getElapsed() - shootingStartTime) >= shootingTargetTime) {
         // We're done here, stop shooting and start walking
@@ -110,12 +110,12 @@ public class BossAI implements ILogicComponent {
     }
   }
 
-  public void addTarget(final Vector2 target) {
+  public void addTarget(Vector2 target) {
     targets.push(target);
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -125,7 +125,7 @@ public class BossAI implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     throw new UnsupportedOperationException("Not implemented");
   }
 }

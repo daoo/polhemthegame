@@ -39,9 +39,9 @@ public class ProjectileCollision implements ILogicComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     if (enableCollisions) {
-      for (final IEntity e : owner.getWorld().getUnits()) {
+      for (IEntity e : owner.getWorld().getUnits()) {
         collisionCheck(owner.getBody(), movement.getVelocity(), e, time.getFrameLength());
       }
     }
@@ -60,7 +60,7 @@ public class ProjectileCollision implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.owner    = owner;
     this.damage   = (Damage) owner.getComponent(ComponentType.DAMAGE);
     this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);

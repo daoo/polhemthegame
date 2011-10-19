@@ -13,11 +13,11 @@ import org.newdawn.slick.SlickException;
 
 public class PNGParser implements IParser {
   @Override
-  public IClosable parse(final InputStream is) throws ParserException {
+  public IClosable parse(InputStream is) throws ParserException {
     try {
       // NOTE: ref is set to is.toString() because it seemed as a logic decision
       return new ClosableImage(is, is.toString(), false);
-    } catch (final SlickException e) {
+    } catch (SlickException e) {
       throw new ParserException(e);
     }
   }

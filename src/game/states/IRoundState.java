@@ -10,9 +10,9 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public interface IRoundState  {
-  void update(final GameTime time, final World world);
+  void update(GameTime time, World world);
 
-  void render(final Graphics g);
+  void render(Graphics g);
 
   boolean isFinished();
 }

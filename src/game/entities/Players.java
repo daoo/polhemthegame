@@ -25,14 +25,14 @@ public class Players implements Iterable<IEntity> {
   private final int               count;
   private final ArrayList<IEntity> players;
 
-  public Players(final int count)
+  public Players(int count)
     throws ParserException, DataException, IOException {
     super();
 
     players = new ArrayList<IEntity>();
     this.count = count;
 
-    final PlayersData data = CacheTool.getPlayers(Locator.getCache());
+    PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
       players.add(Factory.makePlayer(0, 0, data.players.get(i)));
@@ -40,17 +40,17 @@ public class Players implements Iterable<IEntity> {
     }
   }
 
-  public void reposition(final Rectangle rect) {
-    final float dy = rect.getHeight() / (count * 2);
-    final Vector2 v = new Vector2(rect.getWidth() * Players.STARING_X, dy);
-    for (final IEntity p : players) {
+  public void reposition(Rectangle rect) {
+    float dy = rect.getHeight() / (count * 2);
+    Vector2 v = new Vector2(rect.getWidth() * Players.STARING_X, dy);
+    for (IEntity p : players) {
       p.getBody().setPosition(v);
       v.y += dy;
     }
   }
 
   public boolean isAlive() {
-    for (final IEntity p : players) {
+    for (IEntity p : players) {
       if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
         return true;
       }

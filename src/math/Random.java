@@ -17,12 +17,12 @@ public class Random implements IRandom {
   }
 
   @Override
-  public int nextInt(final int max) {
+  public int nextInt(int max) {
     return random.nextInt(max);
   }
 
   @Override
-  public int nextInt(final int min, final int max) {
+  public int nextInt(int min, int max) {
     return min + random.nextInt(max - min);
   }
 
@@ -32,12 +32,12 @@ public class Random implements IRandom {
   }
 
   @Override
-  public float nextFloat(final float max) {
+  public float nextFloat(float max) {
     return random.nextFloat() * max;
   }
 
   @Override
-  public float nextFloat(final float min, final float max) {
+  public float nextFloat(float min, float max) {
     return min + random.nextFloat() * (max - min);
   }
 }

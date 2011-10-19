@@ -8,17 +8,17 @@ public class Rectangle {
   protected final Vector2 min, max, center;
   protected final Vector2 size;
 
-  public Rectangle(final Rectangle rect) {
+  public Rec(Rectangle rect) {
     this.min    = new Vector2(rect.min);
     this.max    = new Vector2(rect.max);
     this.center = new Vector2(rect.center);
     this.size   = new Vector2(rect.size);
   }
 
-  public Rectangle(final float x1, final float y1,
-                   final float width, final float height) {
-    final float x2 = x1 + width;
-    final float y2 = y1 + height;
+  public Rectangle(float x1, float y1,
+                   float width, float height) {
+    float x2 = x1 + width;
+    float y2 = y1 + height;
 
     min    = new Vector2(x1, y1);
     max    = new Vector2(x2, y2);
@@ -26,7 +26,7 @@ public class Rectangle {
     center = min.add(size.divide(2.0f));
   }
 
-  public Rectangle(final Vector2 upperLeft, final Vector2 bottomRight) {
+  public Rectangle(Vector2 upperLeft, Vector2 bottomRight) {
     min  = new Vector2(upperLeft);
     max  = new Vector2(bottomRight);
     size = new Vector2(bottomRight.x - upperLeft.x,
@@ -35,22 +35,22 @@ public class Rectangle {
 
   }
 
-  public boolean isIntersecting(final Rectangle other) {
+  public boolean isIntersecting(Rectangle other) {
     return !((min.x > other.max.x) || (min.y > other.max.y) ||
              (max.x < other.min.x) || (max.y < other.min.y));
   }
 
-  public boolean isContaining(final Rectangle other) {
+  public boolean isContaining(Rectangle other) {
     return ((other.min.x > min.x && other.max.x < max.x) &&
             (other.min.y > min.y && other.max.y < max.y));
   }
 
-  public void setPosition(final Vector2 v) {
+  public void setPosition(Vector2 v) {
     min.set(v);
     max.set(v.add(size));
   }
 
-  public void addPosition(final Vector2 v) {
+  public void addPosition(Vector2 v) {
     min.addSelf(v);
     max.addSelf(v);
   }

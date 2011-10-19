@@ -17,7 +17,7 @@ public class GameCampaign {
   private LevelData              currentLevel;
   private final Iterator<String> iterator;
 
-  public GameCampaign(final CampaignData data) {
+  public GameCampaign(CampaignData data) {
     campaign = data;
 
     iterator = campaign.levels.iterator();

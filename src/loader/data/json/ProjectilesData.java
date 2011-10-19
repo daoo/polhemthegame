@@ -37,8 +37,8 @@ public class ProjectilesData implements IClosable {
 
   public ArrayList<ProjectileData> projectiles;
 
-  public ProjectileData getProjectile(final String name) throws DataException {
-    for (final ProjectileData p : projectiles) {
+  public ProjectileData getProjectile(String name) throws DataException {
+    for (ProjectileData p : projectiles) {
       if (p.name.equals(name)) {
         return p;
       }

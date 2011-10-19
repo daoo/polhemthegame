@@ -15,14 +15,14 @@ public class EventHandler<T extends IEventArgs> {
     events = new ArrayList<IEvent<T>>();
   }
 
-  public void add(final IEvent<T> event) {
+  public void add(IEvent<T> event) {
     assert (event != null);
 
     events.add(event);
   }
 
-  public void execute(final IEntity sender, final T args) {
-    for (final IEvent<T> e : events) {
+  public void execute(IEntity sender, T args) {
+    for (IEvent<T> e : events) {
       e.execute(sender, args);
     }
   }

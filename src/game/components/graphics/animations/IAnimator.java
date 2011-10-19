@@ -7,7 +7,7 @@ package game.components.graphics.animations;
 import game.components.graphics.Tile;
 
 public interface IAnimator {
-  public boolean isFinished();
+  boolean isFinished();
 
-  public Tile next(final Tile tile);
+  Tile next(Tile tile);
 }

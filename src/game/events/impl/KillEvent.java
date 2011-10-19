@@ -9,7 +9,7 @@ import game.events.IEvent;
 
 public class KillEvent implements IEvent<ObjectEventArgs> {
   @Override
-  public void execute(final IEntity sender, final ObjectEventArgs args) {
+  public void execute(IEntity sender, ObjectEventArgs args) {
     args.getWorld().remove(args.getObject());
   }
 }

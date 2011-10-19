@@ -7,7 +7,7 @@ package game.components.holdables.weapons.states;
 import math.time.GameTime;
 
 public interface IWeaponState {
-  public void update(final GameTime time);
-  public boolean isFinished();
-  public float getProgress();
+  void update(GameTime time);
+  boolean isFinished();
+  float getProgress();
 }

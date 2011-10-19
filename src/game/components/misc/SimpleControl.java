@@ -29,7 +29,7 @@ public class SimpleControl implements ILogicComponent {
   private int lastX, lastY;
   private boolean weaponChanged;
 
-  public SimpleControl(final float speed) {
+  public SimpleControl(float speed) {
     this.speed = speed;
 
     this.lastX      = 0;
@@ -38,7 +38,7 @@ public class SimpleControl implements ILogicComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     int x = 0;
     int y = 0;
 
@@ -86,7 +86,7 @@ public class SimpleControl implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -96,7 +96,7 @@ public class SimpleControl implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.owner = owner;
     this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
     this.inventory = (Inventory) owner.getComponent(ComponentType.INVENTORY);

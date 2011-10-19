@@ -12,17 +12,17 @@ public class ActionOnDeath implements ILogicComponent {
 
   private IEntity owner;
 
-  public ActionOnDeath(final IAction action) {
+  public ActionOnDeath(IAction action) {
     this.action = action;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
       owner.addAction(action);
     }
@@ -34,7 +34,7 @@ public class ActionOnDeath implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.owner = owner;
   }
 }

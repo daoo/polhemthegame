@@ -26,7 +26,7 @@ public class MenuState implements IGameState {
   private final Image background;
   private final Menu  menu;
 
-  public MenuState(final GameStateManager manager)
+  public MenuState(GameStateManager manager)
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
@@ -47,7 +47,7 @@ public class MenuState implements IGameState {
   }
 
   @Override
-  public void update(final GameStateManager stateGame, final float delta) {
+  public void update(GameStateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
@@ -60,7 +60,7 @@ public class MenuState implements IGameState {
   }
 
   @Override
-  public void render(final Graphics g) throws SlickException {
+  public void render(Graphics g) throws SlickException {
     g.drawImage(background, 0, 0);
     menu.render(g);
   }

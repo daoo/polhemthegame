@@ -7,21 +7,21 @@ package loader;
 public class CacheException extends Exception {
   private static final long serialVersionUID = 1L;
 
-  private final Throwable   cause;
+  private Throwable cause;
 
-  public CacheException(final Throwable cause) {
+  public CacheException(Throwable cause) {
     super();
 
     this.cause = cause;
   }
 
-  public CacheException(final String message) {
+  public CacheException(String message) {
     super(message);
 
     cause = null;
   }
 
-  public CacheException(final String message, final Throwable cause) {
+  public CacheException(String message, Throwable cause) {
     super(message);
     this.cause = cause;
   }

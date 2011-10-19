@@ -60,12 +60,12 @@ public class Inventory implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 

@@ -14,7 +14,7 @@ public class Bar {
   private final IProgress progress;
   private float fraction;
 
-  public Bar(final IProgress progress, final Color colorHave, final Color colorLost) {
+  public Bar(IProgress progress, Color colorHave, Color colorLost) {
     assert (progress != null);
     assert (colorHave != null);
     assert (colorLost != null);
@@ -30,8 +30,7 @@ public class Bar {
     fraction = progress.getProgress();
   }
 
-  public void render(final Graphics g, final float x, final float y,
-                     final float width, final float height) {
+  public void render(Graphics g, float x, float y, float width, float height) {
     g.setColor(colorHave);
     g.fillRect(x, y, fraction * width, height);
 

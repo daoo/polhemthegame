@@ -42,7 +42,7 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class Factory {
-  public static World makeWorld(final Rectangle rectWorld, final Players players) {
+  public static World makeWorld(Rectangle rectWorld, Players players) {
     /**
      * The layout of rectangles:
      * |---------------------------------|
@@ -58,22 +58,23 @@ public class Factory {
      * |---------------------------------|
      */
 
-    final World w = new World();
+    World w = new World();
 
-    final InvisibleRectangle rectBig =
-      new InvisibleRectangle(-rectWorld.getWidth(), -rectWorld.getHeight(),
-                             3 * rectWorld.getWidth(), 3 * rectWorld.getHeight());
+    InvisibleRectangle rectBig =
+      new InvisibleRectangle(
+        -rectWorld.getWidth(), -rectWorld.getHeight(),
+        3 * rectWorld.getWidth(), 3 * rectWorld.getHeight());
     rectBig.onNotContainsEvent.add(new KillEvent());
     w.add(rectBig);
 
-    final InvisibleRectangle rectCreepKiller =
+    InvisibleRectangle rectCreepKiller =
       new InvisibleRectangle(-rectWorld.getWidth(), 0,
                              rectWorld.getWidth(), rectWorld.getHeight());
     rectCreepKiller.onContainsEvent.add(new KillEvent());
     rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
     w.add(rectCreepKiller);
 
-    for (final IEntity p : players) {
+    for (IEntity p : players) {
       p.addLogicComponent(new MovementConstraint(rectWorld));
       w.add(p);
     }
@@ -81,10 +82,10 @@ public class Factory {
     return w;
   }
 
-  public static IEntity makeCreep(final float x, final float y, final float ang,
-      final CreepData data) throws ParserException, DataException, IOException {
-    final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
-    final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
+  public static IEntity makeCreep(float x, float y, float ang, CreepData data)
+      throws ParserException, DataException, IOException {
+    RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     return Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
                             (float) Math.cos(ang) * data.speed,
@@ -93,29 +94,28 @@ public class Factory {
                             walk, death);
   }
 
-  private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+  private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
-  public static IEntity makePlayer(final float x, final float y,
-      final PlayerData data) throws ParserException, DataException, IOException {
-    final RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
-    final RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
+  public static IEntity makePlayer(float x, float y, PlayerData data)
+      throws ParserException, DataException, IOException {
+    RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    final Inventory inv         = new Inventory(data.startMoney);
-    final Hand hand             = new Hand(data.handOffset.x, data.handOffset.y);
-    final SimpleControl control = new SimpleControl(data.speed);
-    final Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
+    Inventory inv         = new Inventory(data.startMoney);
+    Hand hand             = new Hand(data.handOffset.x, data.handOffset.y);
+    SimpleControl control = new SimpleControl(data.speed);
+    Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
 
-    final IEntity e = Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
+    IEntity e = Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
                                        0, 0, EntityType.PLAYER, data.hitpoints,
                                        walk, death);
 
-    final Bar weaponBar   = new Bar(hand, Color.blue, TRANSPARENT);
-    final InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
+    Bar weaponBar   = new Bar(hand, Color.blue, TRANSPARENT);
+    InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
     infoBar.add(weaponBar);
 
     inv.addWeapon(weapon);
     hand.grab(weapon);
-    inv.addWeapon(CacheTool.getWeapon(Locator.getCache(), "ak47"));
 
     e.addLogicComponent(inv);
     e.addRenderComponent(hand);
@@ -124,18 +124,17 @@ public class Factory {
     return e;
   }
 
-  private static IEntity makeUnit(final float x, final float y,
-      final float width, final float height,
-      final float dx, final float dy,
-      final EntityType type, final float maxHP,
-      final ICompAnim walkAnim, final ICompAnim deathAnim) {
-    final Entity e           = new Entity(x, y, width, height, type);
-    final Movement movement  = new Movement(dx, dy);
-    final Life life          = new Life(maxHP);
-    final SpawnOnDeath death = new SpawnOnDeath(deathAnim);
-    final InfoBar infoBar    = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
-    final Bar hpBar          = new Bar(life, Color.green, Color.red);
-    final ActionOnDeath remove = new ActionOnDeath(new RemoveEntity(e));
+  private static IEntity makeUnit(float x, float y, float width, float height,
+                                  float dx, float dy, EntityType type,
+                                  float maxHP, ICompAnim walkAnim,
+                                  ICompAnim deathAnim) {
+    Entity e             = new Entity(x, y, width, height, type);
+    Movement movement    = new Movement(dx, dy);
+    Life life            = new Life(maxHP);
+    SpawnOnDeath death   = new SpawnOnDeath(deathAnim);
+    InfoBar infoBar      = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
+    Bar hpBar            = new Bar(life, Color.green, Color.red);
+    ActionOnDeath remove = new ActionOnDeath(new RemoveEntity(e));
 
     infoBar.add(hpBar);
 

@@ -20,13 +20,13 @@ public class Gravity implements ILogicComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
-    final float g = time.getFrameLength() * FACTOR;
+  public void update(GameTime time) {
+    float g = time.getFrameLength() * FACTOR;
     movement.addVelocity(new Vector2(0, g));
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -36,7 +36,7 @@ public class Gravity implements ILogicComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }

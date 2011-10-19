@@ -33,7 +33,7 @@ public class CreepsState implements IRoundState {
     public final float spawnTime;
     public final IEntity creep;
 
-    public ToBeCreep(final float spawnTime, final IEntity creep) {
+    public ToBeCreep(float spawnTime, IEntity creep) {
       this.spawnTime = spawnTime;
       this.creep     = creep;
     }
@@ -42,22 +42,22 @@ public class CreepsState implements IRoundState {
   private final LinkedList<ToBeCreep> toBeSpawned;
   private final LinkedList<IEntity> spawned;
 
-  private float getCreepX(final Rectangle rect, final int width) {
+  private float getCreepX(Rectangle rect, int width) {
     return rect.getX2() + width;
   }
 
-  private float getCreepY(final Rectangle rect, final int height) {
+  private float getCreepY(Rectangle rect, int height) {
     return Locator.getRandom().nextFloat(0.0f, rect.getY2() - height);
   }
 
-  public CreepsState(final Rectangle rect, final CreepStateData sd)
+  public CreepsState(Rectangle rect, CreepStateData sd)
     throws IOException, ParserException, DataException {
     spawned = new LinkedList<IEntity>();
     toBeSpawned = new LinkedList<ToBeCreep>();
 
-    final CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
-    for (final CreepSpawnData spawnData : sd.creeps) {
-      final CreepData data = creepsData.getCreep(spawnData.creep);
+    CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
+    for (CreepSpawnData spawnData : sd.creeps) {
+      CreepData data = creepsData.getCreep(spawnData.creep);
 
       toBeSpawned.add(new ToBeCreep(
         spawnData.spawnTime,
@@ -68,10 +68,10 @@ public class CreepsState implements IRoundState {
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
-    final Iterator<ToBeCreep> itc = toBeSpawned.iterator();
+  public void update(GameTime time, World world) {
+    Iterator<ToBeCreep> itc = toBeSpawned.iterator();
     while (itc.hasNext()) {
-      final ToBeCreep tmp = itc.next();
+      ToBeCreep tmp = itc.next();
 
       if (tmp.spawnTime < time.getElapsed()) {
         tmp.creep.sendMessage(ComponentMessage.START_ANIMATION, null);
@@ -82,9 +82,9 @@ public class CreepsState implements IRoundState {
       }
     }
 
-    final Iterator<IEntity> itr = spawned.iterator();
+    Iterator<IEntity> itr = spawned.iterator();
     while (itr.hasNext()) {
-      final IEntity c = itr.next();
+      IEntity c = itr.next();
 
       if (!((Life) c.getComponent(ComponentType.HEALTH)).isAlive()) {
         itr.remove();
@@ -93,7 +93,7 @@ public class CreepsState implements IRoundState {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     // No rendering done by this state
   }
 

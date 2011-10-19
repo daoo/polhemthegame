@@ -16,7 +16,7 @@ public class Idle implements IAnimator {
   }
 
   @Override
-  public Tile next(final Tile tile) {
+  public Tile next(Tile tile) {
     return tile;
   }
 }

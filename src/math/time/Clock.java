@@ -11,7 +11,7 @@ public class Clock {
   private float tStart, tLast, tNext, targetFrameTime;
   private boolean forceSync;
 
-  public Clock(final float targetFrameTime) {
+  public Clock(float targetFrameTime) {
     tStart = 0;
     tLast = 0;
     tNext = 0;
@@ -22,38 +22,38 @@ public class Clock {
   }
 
   public static float getTime() {
-    final double time = (double) Sys.getTime() / (double) Sys.getTimerResolution();
+    double time = (double) Sys.getTime() / (double) Sys.getTimerResolution();
     return (float) time;
   }
 
-  public void start(final float elapsed) {
+  public void start(float elapsed) {
     tStart = elapsed;
     tLast = elapsed;
     tLast = tStart + targetFrameTime;
   }
 
-  public void pause(final float elapsed) {
+  public void pause(float elapsed) {
     tLast = elapsed;
   }
 
-  public void resume(final float elapsed) {
-    final float tNow = elapsed;
+  public void resume(float elapsed) {
+    float tNow = elapsed;
     tStart += tNow - tLast; // Compensate for total runtime calculations
     tLast = tNow;
   }
 
-  public float sync(final float elapsed) {
+  public float sync(float elapsed) {
     forceSync = false;
 
-    final float tNow = elapsed;
-    final float tDelta = tNow - tLast;
+    float tNow = elapsed;
+    float tDelta = tNow - tLast;
     tLast = tNow;
     tNext = tNow + targetFrameTime;
 
     return tDelta;
   }
 
-  public boolean needsSync(final float elapsed) {
+  public boolean needsSync(float elapsed) {
     return forceSync || (targetFrameTime == 0) || (elapsed > tNext);
   }
 
@@ -73,15 +73,15 @@ public class Clock {
     return 0;
   }
 
-  public float getLifetime(final float elapsed) {
+  public float getLifetime(float elapsed) {
     return elapsed - tStart;
   }
 
-  public void setTargetFrameTime(final float ft) {
+  public void setTargetFrameTime(float ft) {
     targetFrameTime = ft;
   }
 
-  public void setTargetFrameRate(final float fr) {
+  public void setTargetFrameRate(float fr) {
     if (fr != 0) {
       targetFrameTime = 1.0f / fr;
     }

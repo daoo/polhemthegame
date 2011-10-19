@@ -10,7 +10,7 @@ import game.world.World;
 public class EventArgs implements IEventArgs {
   private final World world;
 
-  public EventArgs(final World world) {
+  public EventArgs(World world) {
     this.world = world;
   }
 

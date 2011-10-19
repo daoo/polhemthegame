@@ -6,6 +6,6 @@ package game.entities.groups;
 
 public class Groups {
   public static final EntityType[] UNITS = { EntityType.CREEP,
-                                           EntityType.BOSS,
-                                           EntityType.PLAYER };
+                                             EntityType.BOSS,
+                                             EntityType.PLAYER };
 }

@@ -18,8 +18,8 @@ public class BossesData implements IClosable {
 
   public ArrayList<BossData> bosses;
 
-  public BossData getBoss(final String name) throws DataException {
-    for (final BossData d : bosses) {
+  public BossData getBoss(String name) throws DataException {
+    for (BossData d : bosses) {
       if (d.name.equals(name)) {
         return d;
       }

@@ -36,7 +36,7 @@ public class ProjectileTemplate {
   private final Image          img;
   private final SpriteSheet    explosion;
 
-  public ProjectileTemplate(final ProjectileData data)
+  public ProjectileTemplate(ProjectileData data)
     throws IOException, ParserException {
     this.data = data;
 
@@ -55,7 +55,7 @@ public class ProjectileTemplate {
     }
   }
 
-  public IEntity makeProjectile(final float x, final float y, final float rot) {
+  public IEntity makeProjectile(float x, float y, float rot) {
     ICompAnim anim = null;
     if (img == null) {
       anim = new DummyAnimation();
@@ -69,8 +69,8 @@ public class ProjectileTemplate {
                         new Idle());
     }
 
-    final Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
-                                EntityType.PROJECTILE);
+    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
+                          EntityType.PROJECTILE);
 
     e.addLogicComponent(new Movement((float) Math.cos(rot) * data.speed,
                                      (float) Math.sin(rot) * data.speed));
@@ -87,7 +87,7 @@ public class ProjectileTemplate {
     e.addRenderComponent(anim);
 
     if (data.aoe != null) {
-      final RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
+      RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
                                               data.aoe.explosionSprite.offset.x,
                                               data.aoe.explosionSprite.offset.y,
                                               explosion, new Idle());

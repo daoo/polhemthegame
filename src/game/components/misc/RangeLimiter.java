@@ -12,7 +12,7 @@ public class RangeLimiter implements ILogicComponent {
     public final float time;
     public final Vector2 pos;
 
-    public TimePos(final float time, final Vector2 pos) {
+    public TimePos(float time, Vector2 pos) {
       this.time = time;
       this.pos  = new Vector2(pos);
     }
@@ -25,13 +25,13 @@ public class RangeLimiter implements ILogicComponent {
   private final float duration;
   private final float range;
 
-  public RangeLimiter(final float duration, final float range) {
+  public RangeLimiter(float duration, float range) {
     this.duration = duration;
     this.range    = range;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     if ((time.getElapsed() - start.time) > duration) {
       owner.sendMessage(ComponentMessage.KILL, null);
     }

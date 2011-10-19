@@ -17,7 +17,7 @@ public class TransitionState implements IRoundState {
   private final float duration;
   private float       tSinceStart;
 
-  public TransitionState(final Image img, final float duration, final Rectangle rect) {
+  public TransitionState(Image img, float duration, Rectangle rect) {
     this.img = img;
 
     x = (rect.getWidth() / 2.0f) - (img.getWidth() / 2.0f);
@@ -29,12 +29,12 @@ public class TransitionState implements IRoundState {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(img, x, y);
   }
 
   @Override
-  public void update(final GameTime time, final World world) {
+  public void update(GameTime time, World world) {
     tSinceStart += time.getFrameLength();
   }
 

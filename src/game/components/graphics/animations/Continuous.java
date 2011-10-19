@@ -9,7 +9,7 @@ import game.components.graphics.Tile;
 public class Continuous implements IAnimator {
   private final Tile size;
 
-  public Continuous(final Tile size) {
+  public Continuous(Tile size) {
     this.size = size;
   }
 
@@ -19,7 +19,7 @@ public class Continuous implements IAnimator {
   }
 
   @Override
-  public Tile next(final Tile tile) {
+  public Tile next(Tile tile) {
     int x = tile.x + 1;
     int y = tile.y;
 

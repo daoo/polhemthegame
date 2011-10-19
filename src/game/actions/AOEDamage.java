@@ -15,9 +15,9 @@ import math.time.GameTime;
  * Inflict damage in an circle around a position when executed.
  */
 public class AOEDamage implements IAction {
-  final Rectangle body;
-  final float range;
-  final Damage damage;
+  private final Rectangle body;
+  private final float range;
+  private final Damage damage;
 
   /**
    * Constructs a new AOEDamage action.
@@ -25,15 +25,15 @@ public class AOEDamage implements IAction {
    * @param range the radius of the area
    * @param damage the ammount of damage to deal per object in range
    */
-  public AOEDamage(final Rectangle body, final float range, final float damage) {
+  public AOEDamage(Rectangle body, float range, float damage) {
     this.body = body;
     this.range = range;
     this.damage = new Damage(damage);
   }
 
   @Override
-  public void execute(final GameTime time, final World world) {
-    for (final IEntity e : world.getUnits()) {
+  public void execute(GameTime time, World world) {
+    for (IEntity e : world.getUnits()) {
       if (e.getBody().getCenter().distance(body.getCenter()) < range) {
         e.sendMessage(ComponentMessage.DAMAGE, damage);
       }

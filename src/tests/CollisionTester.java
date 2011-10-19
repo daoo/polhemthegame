@@ -28,11 +28,11 @@ public class CollisionTester extends BasicGame {
 
   public static void main(String[] args) {
     try {
-      final AppGameContainer app = new AppGameContainer(new CollisionTester());
+      AppGameContainer app = new AppGameContainer(new CollisionTester());
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();
-    } catch (final SlickException ex) {
+    } catch (SlickException ex) {
       ex.printStackTrace();
     }
   }
@@ -50,7 +50,7 @@ public class CollisionTester extends BasicGame {
   }
 
   private IEntity makeProjectile(int x, int y, int w, int h, int dx, int dy) {
-    final IEntity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
+    IEntity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
 
     obj.addLogicComponent(new Movement(dx, dy));
 

@@ -10,13 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class LineStream extends FileInputStream {
-  public LineStream(final File file) throws FileNotFoundException {
+  public LineStream(File file) throws FileNotFoundException {
     super(file);
   }
 
   public String readLine() throws IOException {
     int b;
-    final StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
     do {
       b = read();
 

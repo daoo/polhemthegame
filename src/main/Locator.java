@@ -11,13 +11,13 @@ public class Locator {
   private static ICache _cache;
   private static IRandom _random;
 
-  public static void registerCache(final ICache cache) {
+  public static void registerCache(ICache cache) {
     assert (cache != null);
 
     _cache = cache;
   }
 
-  public static void registerRandom(final IRandom random) {
+  public static void registerRandom(IRandom random) {
     assert (random != null);
 
     _random = random;

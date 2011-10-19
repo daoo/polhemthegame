@@ -25,7 +25,7 @@ public class InvisibleRectangle implements IEntity {
   private final Rectangle body;
   private World world;
 
-  public InvisibleRectangle(final float x, final float y, final float w, final float h) {
+  public InvisibleRectangle(float x, float y, float w, float h) {
     body = new Rectangle(x, y, w, h);
 
     onContainsEvent = new EventHandler<ObjectEventArgs>();
@@ -33,17 +33,17 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addAction(final IAction action) {
+  public void addAction(IAction action) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addLogicComponent(final ILogicComponent comp) {
+  public void addLogicComponent(ILogicComponent comp) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addRenderComponent(final IRenderComponent comp) {
+  public void addRenderComponent(IRenderComponent comp) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
@@ -53,7 +53,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public ILogicComponent getComponent(final ComponentType componentType) {
+  public ILogicComponent getComponent(ComponentType componentType) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
@@ -68,23 +68,23 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     // Do nothing
   }
 
   @Override
-  public void sendMessage(final ComponentMessage message, final Object args) {
+  public void sendMessage(ComponentMessage message, Object args) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void setWorld(final World world) {
+  public void setWorld(World world) {
     this.world = world;
   }
 
   @Override
-  public void update(final GameTime time) {
-    for (final IEntity e : world.getUnits()) {
+  public void update(GameTime time) {
+    for (IEntity e : world.getUnits()) {
       if (body.isContaining(e.getBody())) {
         onContainsEvent.execute(this, new ObjectEventArgs(world, e));
       } else {

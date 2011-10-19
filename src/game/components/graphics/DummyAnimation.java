@@ -15,7 +15,7 @@ import org.newdawn.slick.Graphics;
 
 public class DummyAnimation implements ICompAnim {
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 
@@ -24,7 +24,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     // Do nothing
   }
 
@@ -34,7 +34,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(final IAnimator animator) {
+  public void setAnimator(IAnimator animator) {
     // Do nothing
   }
 
@@ -59,7 +59,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -69,7 +69,7 @@ public class DummyAnimation implements ICompAnim {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 }

@@ -31,7 +31,7 @@ public class HUD {
 
   private int                 money, kills;
 
-  public HUD(final IEntity player) throws SlickException {
+  public HUD(IEntity player) throws SlickException {
     money = -1;
     kills = -1;
 
@@ -39,10 +39,10 @@ public class HUD {
     gfx_hud = img_hud.getGraphics();
     gfx_hud.setBackground(Color.black);
 
-    final Font font = gfx_hud.getFont();
-    final String maxInt = String.valueOf(Integer.MAX_VALUE);
+    Font font = gfx_hud.getFont();
+    String maxInt = String.valueOf(Integer.MAX_VALUE);
 
-    final int w = Math.max(font.getWidth(MONEY + maxInt),
+    int w = Math.max(font.getWidth(MONEY + maxInt),
                            font.getWidth(KILLS + maxInt));
 
     stats_x = WIDTH - w - PADDING;
@@ -53,16 +53,16 @@ public class HUD {
   }
 
   private void drawHUD() {
-    final int m = -1; // TODO
-    final int k = -1; // TODO
+    int m = -1; // TODO
+    int k = -1; // TODO
     if (m != money || k != kills) {
       gfx_hud.clear();
 
       money = m;
       kills = k;
 
-      final String mStr = MONEY + String.valueOf(money);
-      final String kStr = KILLS + String.valueOf(kills);
+      String mStr = MONEY + String.valueOf(money);
+      String kStr = KILLS + String.valueOf(kills);
 
       gfx_hud.drawString(mStr, stats_x, stats_y);
       gfx_hud.drawString(kStr, stats_x, kills_y);
@@ -71,7 +71,7 @@ public class HUD {
     }
   }
 
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(img_hud, 0, 0);
   }
 

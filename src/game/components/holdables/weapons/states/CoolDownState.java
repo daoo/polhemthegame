@@ -10,7 +10,7 @@ public class CoolDownState implements IWeaponState {
   private final float tStart, tEnd, tLength;
   private float tCurrent;
 
-  public CoolDownState(final float timeStart, final float length) {
+  public CoolDownState(float timeStart, float length) {
     tCurrent = timeStart;
     tStart = timeStart;
     tEnd = timeStart + length;
@@ -18,7 +18,7 @@ public class CoolDownState implements IWeaponState {
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     tCurrent = time.getElapsed();
   }
 

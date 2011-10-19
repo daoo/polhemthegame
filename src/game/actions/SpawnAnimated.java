@@ -14,15 +14,13 @@ import math.time.GameTime;
 public class SpawnAnimated implements IAction {
   private final Entity animated;
 
-  public SpawnAnimated(final float x, final float y,
-                       final float width, final float height,
-                       final ICompAnim anim) {
+  public SpawnAnimated(float x, float y, float width, float height, ICompAnim anim) {
     animated = new Entity(x, y, width, height, EntityType.ANIMATED);
     animated.addRenderComponent(anim);
   }
 
   @Override
-  public void execute(final GameTime time, final World world) {
+  public void execute(GameTime time, World world) {
     animated.sendMessage(ComponentMessage.START_ANIMATION, null);
     world.add(animated);
   }

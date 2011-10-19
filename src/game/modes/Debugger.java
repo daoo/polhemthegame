@@ -12,7 +12,7 @@ public class Debugger implements IMode {
   private final float framelength;
   private boolean     F5_down;
 
-  public Debugger(final Game game) {
+  public Debugger(Game game) {
     this.game = game;
     framelength = 0.1f;
 
@@ -20,7 +20,7 @@ public class Debugger implements IMode {
   }
 
   @Override
-  public void update(final float dt) {
+  public void update(float dt) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
       if (!F5_down) {
         game.update(framelength);
@@ -34,7 +34,7 @@ public class Debugger implements IMode {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     game.render(g);
   }
 

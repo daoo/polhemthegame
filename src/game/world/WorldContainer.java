@@ -25,23 +25,23 @@ public class WorldContainer {
     return new CustomIterable(new AllIterator(list));
   }
 
-  public CustomIterable iterate(final EntityType key) {
+  public CustomIterable iterate(EntityType key) {
     return new CustomIterable(new SkipsIterator(list, new EntityType[] { key }));
   }
 
-  public CustomIterable iterate(final EntityType[] keys) {
+  public CustomIterable iterate(EntityType[] keys) {
     return new CustomIterable(new SkipsIterator(list, keys));
   }
 
-  public void remove(final Collection<IEntity> remove) {
+  public void remove(Collection<IEntity> remove) {
     list.removeAll(remove);
   }
 
-  public void add(final IEntity obj) {
+  public void add(IEntity obj) {
     list.add(obj);
   }
 
-  public void add(final LinkedList<IEntity> objs) {
+  public void add(LinkedList<IEntity> objs) {
     list.addAll(objs);
   }
 }

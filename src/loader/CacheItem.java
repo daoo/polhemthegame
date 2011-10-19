@@ -11,7 +11,7 @@ public class CacheItem {
   private final String    id;
   private final IClosable data;
 
-  public CacheItem(final String id, final IClosable data) {
+  public CacheItem(String id, IClosable data) {
     this.data = data;
     this.id = id;
   }

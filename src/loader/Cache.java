@@ -18,14 +18,14 @@ public class Cache implements ICache {
   private final FileBeacon                 beacon;
   private final HashMap<String, CacheItem> cache;
 
-  private IClosable readAndParse(final String id, final IParser parser)
+  private IClosable readAndParse(String id, IParser parser)
     throws IOException, ParserException {
-    final InputStream is = beacon.getReader(id);
+    InputStream is = beacon.getReader(id);
 
     if (is != null) {
       try {
         return parser.parse(is);
-      } catch (final ParserException e) {
+      } catch (ParserException e) {
         throw new ParserException("Error parsing: " + id, e);
       } finally {
         is.close();
@@ -35,14 +35,14 @@ public class Cache implements ICache {
     throw new ParserException("Error parsing: " + id);
   }
 
-  public Cache(final File rootDir) throws FileNotFoundException {
+  public Cache(File rootDir) throws FileNotFoundException {
     beacon = new FileBeacon(rootDir);
     cache = new HashMap<String, CacheItem>();
   }
 
   @Override
   public void close() throws CacheException {
-    for (final CacheItem cacheItem : cache.values()) {
+    for (CacheItem cacheItem : cache.values()) {
       cacheItem.close();
     }
 
@@ -50,15 +50,15 @@ public class Cache implements ICache {
   }
 
   @Override
-  public void delete(final String id) throws CacheException {
+  public void delete(String id) throws CacheException {
     cache.get(id).close();
     cache.remove(id);
   }
 
   @Override
-  public IClosable getCold(final String id, final IParser parser)
+  public IClosable getCold(String id, IParser parser)
     throws IOException, ParserException {
-    final IClosable data;
+    IClosable data;
     if (cache.containsKey(id)) {
       data = cache.get(id).getData();
     } else {
@@ -70,8 +70,8 @@ public class Cache implements ICache {
   }
 
   @Override
-  public IClosable getWarm(final String id) throws ObjectNotInCacheException {
-    final CacheItem c = cache.get(id);
+  public IClosable getWarm(String id) throws ObjectNotInCacheException {
+    CacheItem c = cache.get(id);
     if (c != null) {
       return c.getData();
     }
@@ -86,8 +86,8 @@ public class Cache implements ICache {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder();
-    for (final CacheItem c : cache.values()) {
+    StringBuilder sb = new StringBuilder();
+    for (CacheItem c : cache.values()) {
       sb.append(c);
     }
 

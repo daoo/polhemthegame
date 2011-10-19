@@ -9,7 +9,7 @@ import math.time.GameTime;
 public class Damage implements ILogicComponent {
   private final float ammount;
 
-  public Damage(final float ammount) {
+  public Damage(float ammount) {
     this.ammount = ammount;
   }
 

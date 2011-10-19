@@ -23,7 +23,7 @@ public class Menu {
     }
   }
 
-  public void add(final MenuItem item) {
+  public void add(MenuItem item) {
     if (items.isEmpty()) {
       current = 0;
       item.setState(MENU_ITEM_STATE.ACTIVE);
@@ -32,8 +32,8 @@ public class Menu {
     items.add(item);
   }
 
-  public void render(final Graphics g) {
-    for (final MenuItem i : items) {
+  public void render(Graphics g) {
+    for (MenuItem i : items) {
       i.render(g);
     }
   }

@@ -14,17 +14,16 @@ import math.time.GameTime;
 public class SingleWeapon extends Weapon {
   private boolean fireNext;
 
-  public SingleWeapon(final Vector2 muzzleOffset, final float reloadTime,
-                      final float cooldownTime, final int magazineSize,
-                      final float angle, final RSheet anim,
-                      final ProjectileTemplate factory) {
+  public SingleWeapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
+                      int magazineSize, float angle, RSheet anim,
+                      ProjectileTemplate factory) {
     super(muzzleOffset, reloadTime, cooldownTime, magazineSize, angle, anim, factory);
 
     fireNext = false;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     super.update(time);
 
     if (currentState != null) {
@@ -45,7 +44,7 @@ public class SingleWeapon extends Weapon {
   }
 
   @Override
-  protected void fire(final float elapsed) {
+  protected void fire(float elapsed) {
     super.fire(elapsed);
 
     anim.goToFirstFrame();

@@ -28,14 +28,14 @@ public class World {
    * Delayed add, happens at the end of a frame.
    * @param obj object to add
    */
-  public void add(final IEntity obj) {
+  public void add(IEntity obj) {
     assert (obj != null);
 
     obj.setWorld(this);
     toAdd.add(obj);
   }
 
-  public Iterable<IEntity> get(final EntityType e) {
+  public Iterable<IEntity> get(EntityType e) {
     return entities.iterate(e);
   }
 
@@ -47,21 +47,21 @@ public class World {
    * Delayed remove, happens at the end of a frame.
    * @param obj object to remove
    */
-  public void remove(final IEntity obj) {
+  public void remove(IEntity obj) {
     assert (obj != null);
 
     toRemove.add(obj);
   }
 
-  public void render(final Graphics g) {
-    for (final IEntity e : entities.iterateAll()) {
+  public void render(Graphics g) {
+    for (IEntity e : entities.iterateAll()) {
       e.render(g);
     }
   }
 
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Update
-    for (final IEntity e : entities.iterateAll()) {
+    for (IEntity e : entities.iterateAll()) {
       e.update(time);
     }
 

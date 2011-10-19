@@ -7,5 +7,5 @@ package game.components.holdables;
 import game.components.holdables.weapons.Weapon;
 
 public interface IArmed {
-  public void giveWeapon(final Weapon weapon);
+  void giveWeapon(Weapon weapon);
 }

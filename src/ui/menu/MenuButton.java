@@ -13,7 +13,7 @@ import ui.IUIEvent;
 public class MenuButton extends MenuItem {
   public final IUIEvent onClick;
 
-  public MenuButton(final String name, final int x, final int y, final IUIEvent e)
+  public MenuButton(String name, int x, int y, IUIEvent e)
     throws IOException, ParserException {
     super(name, x, y);
 

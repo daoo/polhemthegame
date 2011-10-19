@@ -10,7 +10,7 @@ import game.world.World;
 public class ObjectEventArgs extends EventArgs {
   private final IEntity object;
 
-  public ObjectEventArgs(final World world, final IEntity object) {
+  public ObjectEventArgs(World world, IEntity object) {
     super(world);
     this.object = object;
   }

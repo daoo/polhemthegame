@@ -30,9 +30,7 @@ public class Entity implements IEntity {
   private final ArrayList<ILogicComponent> updates;
   private World world;
 
-  public Entity(final float x, final float y,
-                final float w, final float h,
-                final EntityType type) {
+  public Entity(float x, float y, float w, float h, EntityType type) {
     body = new Rectangle(x, y, w, h);
 
     actions = new ArrayList<IAction>();
@@ -44,18 +42,18 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void addAction(final IAction action) {
+  public void addAction(IAction action) {
     actions.add(action);
   }
 
   @Override
-  public void addLogicComponent(final ILogicComponent comp) {
+  public void addLogicComponent(ILogicComponent comp) {
     comp.setOwner(this);
     updates.add(comp);
   }
 
   @Override
-  public void addRenderComponent(final IRenderComponent comp) {
+  public void addRenderComponent(IRenderComponent comp) {
     comp.setOwner(this);
     renders.add(comp);
   }
@@ -66,14 +64,14 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public ILogicComponent getComponent(final ComponentType componentType) {
-    for (final ILogicComponent comp : updates) {
+  public ILogicComponent getComponent(ComponentType componentType) {
+    for (fILogicComponent comp : updates) {
       if (comp.getComponentType().equals(componentType)) {
         return comp;
       }
     }
 
-    for (final ILogicComponent comp : renders) {
+    for (ILogicComponent comp : renders) {
       if (comp.getComponentType().equals(componentType)) {
         return comp;
       }
@@ -93,11 +91,11 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.pushTransform();
     g.translate(body.getX1(), body.getY1());
 
-    for (final IRenderComponent comp : renders) {
+    for (IRenderComponent comp : renders) {
       comp.render(g);
     }
 
@@ -105,32 +103,32 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void sendMessage(final ComponentMessage message, final Object args) {
-    for (final ILogicComponent comp : updates) {
+  public void sendMessage(ComponentMessage message, Object args) {
+    for (ILogicComponent comp : updates) {
       comp.reciveMessage(message, args);
     }
 
-    for (final IRenderComponent comp : renders) {
+    for (IRenderComponent comp : renders) {
       comp.reciveMessage(message, args);
     }
   }
 
   @Override
-  public void setWorld(final World world) {
+  public void setWorld(World world) {
     this.world = world;
   }
 
   @Override
-  public void update(final GameTime time) {
-    for (final ILogicComponent comp : updates) {
+  public void update(GameTime time) {
+    for (ILogicComponent comp : updates) {
       comp.update(time);
     }
 
-    for (final IRenderComponent comp : renders) {
+    for (IRenderComponent comp : renders) {
       comp.update(time);
     }
 
-    for (final IAction action : actions) {
+    for (IAction action : actions) {
       action.execute(time, world);
     }
     actions.clear();

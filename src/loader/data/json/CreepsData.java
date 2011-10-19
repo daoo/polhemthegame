@@ -17,8 +17,8 @@ public class CreepsData implements IClosable {
 
   public ArrayList<CreepData> creeps;
 
-  public CreepData getCreep(final String name) throws DataException {
-    for (final CreepData c : creeps) {
+  public CreepData getCreep(String name) throws DataException {
+    for (CreepData c : creeps) {
       if (c.name.equals(name)) {
         return c;
       }

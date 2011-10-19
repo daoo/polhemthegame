@@ -13,19 +13,19 @@ public class SolidQuad implements IRenderComponent {
   private final Color color;
   private final int width, height;
 
-  public SolidQuad(final Color color, final int width, final int height) {
+  public SolidQuad(Color color, int width, int height) {
     this.color  = color;
     this.width  = width;
     this.height = height;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -35,12 +35,12 @@ public class SolidQuad implements IRenderComponent {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.setColor(color);
     g.fillRect(0, 0, width, height);
   }

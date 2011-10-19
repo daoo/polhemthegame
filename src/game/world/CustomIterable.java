@@ -11,7 +11,7 @@ import java.util.Iterator;
 public class CustomIterable implements Iterable<IEntity> {
   private final Iterator<IEntity> iterator;
 
-  public CustomIterable(final Iterator<IEntity> iterator) {
+  public CustomIterable(Iterator<IEntity> iterator) {
     this.iterator = iterator;
   }
 

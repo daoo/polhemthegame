@@ -8,11 +8,11 @@ public class ExMath {
   public static final float PI      = (float) Math.PI;
   public static final float PI_HALF = ExMath.PI / 2.0f;
 
-  public static float square(final float x) {
+  public static float square(float x) {
     return x * x;
   }
 
-  public static float min(final float a, final float b, final float c, final float d) {
+  public static float min(float a, float b, float c, float d) {
     float min = a;
     if (b < min) {
       min = b;
@@ -27,7 +27,7 @@ public class ExMath {
     return min;
   }
 
-  public static boolean inRange(final float v, final float a, final float b) {
+  public static boolean inRange(float v, float a, float b) {
     return (v >= a) && (v <= b);
   }
 

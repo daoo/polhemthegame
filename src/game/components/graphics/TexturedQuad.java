@@ -18,17 +18,17 @@ import org.newdawn.slick.Image;
 public class TexturedQuad implements ICompAnim {
   private final Image img;
 
-  public TexturedQuad(final Image img) {
+  public TexturedQuad(Image img) {
     this.img = img;
   }
 
   @Override
-  public void update(final GameTime time) {
+  public void update(GameTime time) {
     // Do nothing
   }
 
   @Override
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     g.drawImage(img, 0, 0);
   }
 
@@ -38,7 +38,7 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void reciveMessage(final ComponentMessage message, final Object args) {
+  public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
   }
 
@@ -68,12 +68,12 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void setOwner(final IEntity owner) {
+  public void setOwner(IEntity owner) {
     // Do nothing
   }
 
   @Override
-  public void setAnimator(final IAnimator animator) {
+  public void setAnimator(IAnimator animator) {
     // Do nothing
   }
 }

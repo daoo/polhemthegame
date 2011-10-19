@@ -16,7 +16,7 @@ public class SkipsIterator implements Iterator<IEntity> {
 
   private IEntity next;
 
-  public SkipsIterator(final Iterable<IEntity> list, final EntityType[] keys) {
+  public SkipsIterator(Iterable<IEntity> list, EntityType[] keys) {
     assert (list != null);
     assert (keys != null);
 
@@ -39,7 +39,7 @@ public class SkipsIterator implements Iterator<IEntity> {
       internalNext();
     }
 
-    final IEntity tmp = next;
+    IEntity tmp = next;
     // Set next to null to force internalNext on next call
     next = null;
 

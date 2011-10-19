@@ -11,11 +11,11 @@ import game.events.IEvent;
 
 public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
-  public void execute(final IEntity sender, final ObjectEventArgs args) {
+  public void execute(IEntity sender, ObjectEventArgs args) {
     if (args.getObject().getType() == EntityType.CREEP) {
-      final float dmg = 10;
+      float dmg = 10;
 
-      for (final IEntity e : args.getWorld().get(EntityType.PLAYER)) {
+      for (IEntity e : args.getWorld().get(EntityType.PLAYER)) {
         e.sendMessage(ComponentMessage.DAMAGE, dmg);
       }
     }

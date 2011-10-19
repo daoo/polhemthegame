@@ -9,7 +9,7 @@ public class Vector2 {
 
   public float x, y;
 
-  private float sq(final float a) {
+  private float sq(float a) {
     return a * a;
   }
 
@@ -18,12 +18,12 @@ public class Vector2 {
     y = 0;
   }
 
-  public Vector2(final float x, final float y) {
+  public Vector2(float x, float y) {
     this.x = x;
     this.y = y;
   }
 
-  public Vector2(final Vector2 v) {
+  public Vector2(Vector2 v) {
     x = v.x;
     y = v.y;
   }
@@ -44,73 +44,73 @@ public class Vector2 {
     return (x * x) + (y * y);
   }
 
-  public float dot(final Vector2 v) {
+  public float dot(Vector2 v) {
     return (x * v.x) + (y * v.y);
   }
 
-  public float distance(final Vector2 v) {
+  public float distance(Vector2 v) {
     return (float) Math.sqrt(distanceSquared(v));
   }
 
-  public float distanceSquared(final Vector2 v) {
+  public float distanceSquared(Vector2 v) {
     return sq(v.x - x) + sq(v.y - y);
   }
 
   public void normalizeSelf() {
-    final float mag2 = magnitudeSquared();
+    float mag2 = magnitudeSquared();
     if (mag2 != 0) {
-      final float mag = (float) Math.sqrt(mag2);
+      float mag = (float) Math.sqrt(mag2);
       x /= mag;
       y /= mag;
     }
   }
 
   public Vector2 normalize() {
-    final float mag2 = magnitudeSquared();
+    float mag2 = magnitudeSquared();
     if (mag2 != 0) {
-      final float mag = (float) Math.sqrt(mag2);
+      float mag = (float) Math.sqrt(mag2);
       return new Vector2(x / mag, y / mag);
     }
 
     return new Vector2(x, y);
   }
 
-  public Vector2 add(final Vector2 v) {
+  public Vector2 add(Vector2 v) {
     return new Vector2(x + v.x, y + v.y);
   }
 
-  public Vector2 add(final float x2, final float y2) {
+  public Vector2 add(float x2, float y2) {
     return new Vector2(x + x2, y + y2);
   }
 
-  public void addSelf(final Vector2 v) {
+  public void addSelf(Vector2 v) {
     x += v.x;
     y += v.y;
   }
 
-  public void addSelf(final float x2, final float y2) {
+  public void addSelf(float x2, float y2) {
     x += x2;
     y += y2;
   }
 
-  public Vector2 subtract(final Vector2 v) {
+  public Vector2 subtract(Vector2 v) {
     return new Vector2(x - v.x, y - v.y);
   }
 
-  public Vector2 multiply(final float scalar) {
+  public Vector2 multiply(float scalar) {
     return new Vector2(x * scalar, y * scalar);
   }
 
-  public Vector2 divide(final float scalar) {
+  public Vector2 divide(float scalar) {
     return new Vector2(x / scalar, y / scalar);
   }
 
-  public void set(final float x, final float y) {
+  public void set(float x, float y) {
     this.x = x;
     this.y = y;
   }
 
-  public void set(final Vector2 v) {
+  public void set(Vector2 v) {
     x = v.x;
     y = v.y;
   }

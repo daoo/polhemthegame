@@ -9,9 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class FileBeacon {
-  private final File    fDataDir;
+  private File fDataDir;
 
-  public FileBeacon(final File dir) throws FileNotFoundException {
+  public FileBeacon(File dir) throws FileNotFoundException {
     if (!dir.exists()) {
       throw new FileNotFoundException(dir.getAbsolutePath());
     }
@@ -22,8 +22,8 @@ public class FileBeacon {
     }
   }
 
-  public InputStream getReader(final String id) throws FileNotFoundException {
-    final File f = new File(fDataDir, id);
+  public InputStream getReader(String id) throws FileNotFoundException {
+    File f = new File(fDataDir, id);
     if (f.exists()) {
       // Read file from directory
       return new LineStream(f);

@@ -26,7 +26,7 @@ public class MenuItem {
 
   private MENU_ITEM_STATE    state;
 
-  public MenuItem(final String name, final int x, final int y)
+  public MenuItem(String name, int x, int y)
     throws IOException, ParserException {
     this.x = x;
     this.y = y;
@@ -46,11 +46,11 @@ public class MenuItem {
     state = MENU_ITEM_STATE.NORMAL;
   }
 
-  void render(final Graphics g) {
+  void render(Graphics g) {
     g.drawImage(current, x, y);
   }
 
-  public void setState(final MENU_ITEM_STATE state) {
+  public void setState(MENU_ITEM_STATE state) {
     if (state == MENU_ITEM_STATE.ACTIVE) {
       current = imgActive;
     } else if (state == MENU_ITEM_STATE.DISABLED) {

@@ -24,7 +24,7 @@ public class GameRound implements IGameState {
   private final IMode mode;
 
   public GameRound() throws ParserException, IOException, DataException {
-    final CampaignData campaign = (CampaignData)
+    CampaignData campaign = (CampaignData)
       Locator.getCache().getCold(
         "campaigns/polhem.js",
         new GsonParser(CampaignData.class));
@@ -34,12 +34,12 @@ public class GameRound implements IGameState {
   }
 
   @Override
-  public void render(final Graphics g) throws SlickException {
+  public void render(Graphics g) throws SlickException {
     mode.render(g);
   }
 
   @Override
-  public void update(final GameStateManager stateGame, final float delta) {
+  public void update(GameStateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else {

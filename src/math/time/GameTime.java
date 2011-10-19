@@ -8,7 +8,7 @@ public class GameTime {
   private final float frame;
   private final float elapsed;
 
-  public GameTime(final float frame, final float elapsed) {
+  public GameTime(float frame, float elapsed) {
     this.frame   = frame;
     this.elapsed = elapsed;
   }

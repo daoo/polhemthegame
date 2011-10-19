@@ -10,8 +10,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 public class ClosableSpriteSheet extends SpriteSheet implements IClosable {
-  public ClosableSpriteSheet(final String name, final InputStream ref, final int tw, final int th)
-    throws SlickException {
+  public ClosableSpriteSheet(String name, InputStream ref, int tw, int th)
+      throws SlickException {
     super(name, ref, tw, th);
   }
 
@@ -19,7 +19,7 @@ public class ClosableSpriteSheet extends SpriteSheet implements IClosable {
   public void close() throws DataException {
     try {
       destroy();
-    } catch (final SlickException e) {
+    } catch (SlickException e) {
       throw new DataException(e);
     }
   }

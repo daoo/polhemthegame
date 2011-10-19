@@ -23,7 +23,7 @@ public class Menus {
     return currentMenu;
   }
 
-  public void add(final String name, final Menu menu) {
+  public void add(String name, Menu menu) {
     menus.put(name, menu);
   }
 
@@ -35,11 +35,11 @@ public class Menus {
     currentMenu.down();
   }
 
-  public void render(final Graphics g) {
+  public void render(Graphics g) {
     currentMenu.render(g);
   }
 
-  public void swapTo(final String name) {
+  public void swapTo(String name) {
     if (menus.containsKey(name)) {
       currentName = name;
       currentMenu = menus.get(currentName);
