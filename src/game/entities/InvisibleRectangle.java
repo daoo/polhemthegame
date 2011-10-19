@@ -92,4 +92,9 @@ public class InvisibleRectangle implements IEntity {
       }
     }
   }
+
+  @Override
+  public boolean equals(IEntity other) {
+    return this == other;
+  }
 }

@@ -135,4 +135,9 @@ public class Entity implements IEntity {
     }
     actions.clear();
   }
+
+  @Override
+  public boolean equals(IEntity other) {
+    return this == other;
+  }
 }

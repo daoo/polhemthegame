@@ -21,8 +21,12 @@ import org.newdawn.slick.Graphics;
  * More specifically it's an component container.
  */
 public interface IEntity {
-  World getWorld();
-  void setWorld(World world);
+  void addAction(IAction action);
+
+  void addLogicComponent(ILogicComponent comp);
+  void addRenderComponent(IRenderComponent comp);
+
+  boolean equals(IEntity other);
 
   /**
    * Body getter.
@@ -30,12 +34,6 @@ public interface IEntity {
    * @return the body for this entity
    */
   Rectangle getBody();
-
-  /**
-   * Entity type getter.
-   * @return the type of this entity
-   */
-  EntityType getType();
 
   /**
    * Returns the component with the specified type.
@@ -46,10 +44,12 @@ public interface IEntity {
   ILogicComponent getComponent(ComponentType componentType);
 
   /**
-   * Updates logic.
-   * @param time the current game time
+   * Entity type getter.
+   * @return the type of this entity
    */
-  void update(GameTime time);
+  EntityType getType();
+
+  World getWorld();
 
   /**
    * Render the entity.
@@ -63,9 +63,11 @@ public interface IEntity {
    * @param args pass along some arguments, can be anything
    */
   void sendMessage(ComponentMessage message, Object args);
+  void setWorld(World world);
 
-  void addRenderComponent(IRenderComponent comp);
-  void addLogicComponent(ILogicComponent comp);
-
-  void addAction(IAction action);
+  /**
+   * Updates logic.
+   * @param time the current game time
+   */
+  void update(GameTime time);
 }
