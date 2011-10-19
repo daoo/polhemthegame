@@ -45,11 +45,11 @@ public class Factory {
     /**
      * The layout of rectangles:
      * |-----------------------------|
-     * | rectBig                     |
+     * | bigRect                     |
      * |                             |
      * |                             |
      * |---------|---------|         |
-     * |rectCreep|rectWorld|         |
+     * | cKiller |smallRect|         |
      * |---------|---------|         |
      * |                             |
      * |                             |
