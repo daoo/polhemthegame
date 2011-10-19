@@ -14,7 +14,7 @@ import game.components.holdables.weapons.states.ReloadingState;
 import game.entities.IEntity;
 import game.entities.ProjectileTemplate;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import math.Vector2;
 import math.time.GameTime;
@@ -22,27 +22,24 @@ import math.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public abstract class Weapon implements IHoldable {
-  /**
-   * Spawned projectiles, for owner to pass on to world.
-   */
-  public final ArrayList<ProjectileTemplate> projectiles;
-
-  protected final float                      angle;
-  protected final RSheet                     anim;
-
-  protected IWeaponState                     currentState;
-
-  protected final int                        magazineSize;
-
-  protected final Vector2                    muzzleOffset;
-
-  protected final ProjectileTemplate         projTemplate;
-  protected final float                      reloadTime, cooldownTime;
-
+  protected IWeaponState currentState;
   /**
    * How many rounds there are left in the magazine.
    */
-  protected int                              rounds;
+  protected int rounds;
+
+  protected final RSheet anim;
+  protected final float reloadTime, cooldownTime;
+  protected final int magazineSize;
+  protected final Vector2 muzzleOffset;
+
+
+  protected final float angle;
+  protected final ProjectileTemplate projTemplate;
+  /**
+   * Spawned projectiles, for owner to pass on to world.
+   */
+  public final LinkedList<ProjectileTemplate> projectiles;
 
   public Weapon(final Vector2 muzzleOffset, final float reloadTime,
                 final float cooldownTime, final int magazineSize,
@@ -57,7 +54,7 @@ public abstract class Weapon implements IHoldable {
     this.projTemplate = projTemplate;
 
     rounds      = magazineSize;
-    projectiles = new ArrayList<ProjectileTemplate>();
+    projectiles = new LinkedList<ProjectileTemplate>();
   }
 
   public float getAngle() {

@@ -113,9 +113,11 @@ public class Factory {
     final InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
     infoBar.add(weaponBar);
 
-    inv.add(weapon);
+    inv.addWeapon(weapon);
     hand.grab(weapon);
+    inv.addWeapon(CacheTool.getWeapon(Locator.getCache(), "ak47"));
 
+    e.addLogicComponent(inv);
     e.addRenderComponent(hand);
     e.addLogicComponent(control);
 

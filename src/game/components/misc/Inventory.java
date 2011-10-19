@@ -10,57 +10,52 @@ import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import math.time.GameTime;
 
 // TODO: Shop
 
 public class Inventory implements ILogicComponent {
-  protected int                     money;
-  protected final ArrayList<Weapon> weapons;
-  protected int                     currentWeapon;
+  private int money;
 
-  public Inventory(final int money) {
+  private final LinkedList<Weapon> weapons;
+  private int currentWeapon;
+
+  public Inventory(int money) {
     this.money = money;
-    weapons = new ArrayList<Weapon>();
+    weapons = new LinkedList<Weapon>();
     currentWeapon = 0;
   }
 
-  /***
-   * Takes money from the inventory.
-   * @param v The ammount of money to take
-   * @return True if there is enough money in the inventory, false otherwise.
-   */
-  public boolean takeMoney(final int v) {
-    if (money < v) {
-      return false;
-    }
-
-    money -= v;
-
-    return true;
-  }
-
-  public void addMoney(final int v) {
-    money += v;
-  }
-
-  public void add(final Weapon w) {
+  public void addWeapon(Weapon w) {
     weapons.add(w);
   }
 
-  public boolean contains(final Weapon w) {
+  public void addMoney(int v) {
+    money += v;
+  }
+
+  public boolean contains(Weapon w) {
     return weapons.contains(w);
   }
 
-  public Weapon previousWeapon() {
-    currentWeapon = (currentWeapon - 1) % weapons.size();
-    return weapons.get(currentWeapon);
+  @Override
+  public ComponentType getComponentType() {
+    return ComponentType.INVENTORY;
+  }
+
+  public int getMoney() {
+    return money;
   }
 
   public Weapon nextWeapon() {
     currentWeapon = (currentWeapon + 1) % weapons.size();
+    return weapons.get(currentWeapon);
+  }
+
+  public Weapon previousWeapon() {
+    currentWeapon = (currentWeapon - 1) % weapons.size();
     return weapons.get(currentWeapon);
   }
 
@@ -70,21 +65,27 @@ public class Inventory implements ILogicComponent {
   }
 
   @Override
-  public void update(final GameTime time) {
-    // Do nothing
-  }
-
-  @Override
   public void setOwner(final IEntity owner) {
     // Do nothing
   }
 
-  public int getMoney() {
-    return money;
+  /***
+   * Takes money from the inventory.
+   * @param v The ammount of money to take
+   * @return True if there is enough money in the inventory, false otherwise.
+   */
+  public boolean takeMoney(int v) {
+    if (money < v) {
+      return false;
+    }
+
+    money -= v;
+
+    return true;
   }
 
   @Override
-  public ComponentType getComponentType() {
-    return ComponentType.INVENTORY;
+  public void update(GameTime time) {
+    // Do nothing
   }
 }

@@ -7,6 +7,7 @@ package game.components.misc;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
@@ -17,87 +18,70 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;
 
 public class SimpleControl implements ILogicComponent {
-  private static final int KEY_COUNT = 1024;
-
-  enum TOGGLED {
-    NO, OFF, ON
-  }
-
-  boolean[] keyStatus;
-
   private IEntity owner;
   private Movement movement;
+  private Inventory inventory;
+  private Hand hand;
 
-  private float       upOrDown, rightOrLeft;
   private final float speed;
 
-  public SimpleControl(final float speed) {
-    keyStatus = new boolean[SimpleControl.KEY_COUNT];
+  private boolean holdableOn;
+  private int lastX, lastY;
+  private boolean weaponChanged;
 
+  public SimpleControl(final float speed) {
     this.speed = speed;
 
-    upOrDown = 0;
-    rightOrLeft = 0;
-  }
-
-  private TOGGLED isKeyToggled(final int key) {
-    final boolean keyNewStatus = Keyboard.isKeyDown(key);
-    if (keyStatus[key] != keyNewStatus) {
-      keyStatus[key] = keyNewStatus;
-
-      return keyNewStatus ? TOGGLED.ON : TOGGLED.OFF;
-    }
-
-    return TOGGLED.NO;
+    this.lastX      = 0;
+    this.lastY      = 0;
+    this.holdableOn = false;
   }
 
   @Override
   public void update(final GameTime time) {
-    TOGGLED t;
+    int x = 0;
+    int y = 0;
 
-    // Walking
-    t = isKeyToggled(Input.KEY_W);
-    if (t == TOGGLED.ON) {
-      upOrDown += -1;
-    } else if (t == TOGGLED.OFF) {
-      upOrDown += 1;
+    if (Keyboard.isKeyDown(Keyboard.KEY_A))
+      x += -1;
+    if (Keyboard.isKeyDown(Keyboard.KEY_D))
+      x += 1;
+    if (Keyboard.isKeyDown(Keyboard.KEY_W))
+      y += -1;
+    if (Keyboard.isKeyDown(Keyboard.KEY_S))
+      y += 1;
+
+    if ((x != lastX) || (y != lastY)) {
+      if ((y == 0) && (x == 0)) {
+        owner.sendMessage(ComponentMessage.STOP_ANIMATION, null);
+      } else {
+        owner.sendMessage(ComponentMessage.START_ANIMATION, null);
+      }
+
+      lastX = x;
+      lastY = y;
     }
 
-    t = isKeyToggled(Input.KEY_S);
-    if (t == TOGGLED.ON) {
-      upOrDown += 1;
-    } else if (t == TOGGLED.OFF) {
-      upOrDown += -1;
-    }
-
-    t = isKeyToggled(Input.KEY_A);
-    if (t == TOGGLED.ON) {
-      rightOrLeft += -1;
-    } else if (t == TOGGLED.OFF) {
-      rightOrLeft += 1;
-    }
-
-    t = isKeyToggled(Input.KEY_D);
-    if (t == TOGGLED.ON) {
-      rightOrLeft += 1;
-    } else if (t == TOGGLED.OFF) {
-      rightOrLeft += -1;
-    }
-
-    if ((upOrDown != 0) || (rightOrLeft != 0)) {
-      owner.sendMessage(ComponentMessage.START_ANIMATION, null);
-    } else {
-      owner.sendMessage(ComponentMessage.STOP_ANIMATION, null);
-    }
-
-    movement.setVelocity(new Vector2(rightOrLeft * speed, upOrDown * speed));
+    movement.setVelocity(new Vector2(x * speed, y * speed));
 
     // Shooting
-    t = isKeyToggled(Input.KEY_SPACE);
-    if (t == TOGGLED.ON) {
-      owner.sendMessage(ComponentMessage.START_HOLDABLE, null);
-    } else if (t == TOGGLED.OFF) {
+    if (Keyboard.isKeyDown(Input.KEY_SPACE)) {
+      if (!holdableOn) {
+        owner.sendMessage(ComponentMessage.START_HOLDABLE, null);
+        holdableOn = true;
+      }
+    } else {
       owner.sendMessage(ComponentMessage.STOP_HOLDABLE, null);
+      holdableOn = false;
+    }
+
+    if (Keyboard.isKeyDown(Input.KEY_TAB)) {
+      if (!weaponChanged) {
+        hand.grab(inventory.nextWeapon());
+        weaponChanged = true;
+      }
+    } else {
+      weaponChanged = false;
     }
   }
 
@@ -115,5 +99,7 @@ public class SimpleControl implements ILogicComponent {
   public void setOwner(final IEntity owner) {
     this.owner = owner;
     this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
+    this.inventory = (Inventory) owner.getComponent(ComponentType.INVENTORY);
+    this.hand = (Hand) owner.getComponent(ComponentType.HAND);
   }
 }
