@@ -12,7 +12,7 @@ import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.ActionOnDeath;
 import game.components.misc.Damage;
 import game.components.misc.Life;
@@ -56,7 +56,7 @@ public class ProjectileTemplate {
   }
 
   public IEntity makeProjectile(float x, float y, float rot) {
-    ICompAnim anim = null;
+    IAnimatedComponent anim = null;
     if (img == null) {
       anim = new DummyAnimation();
     } else if (data.texture != null) {

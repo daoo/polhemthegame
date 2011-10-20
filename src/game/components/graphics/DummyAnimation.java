@@ -8,13 +8,13 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.entities.IEntity;
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
-public class DummyAnimation implements ICompAnim {
+public class DummyAnimation implements IAnimatedComponent {
   public DummyAnimation() {
     // Do nothing
   }

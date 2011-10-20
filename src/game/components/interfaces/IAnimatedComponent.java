@@ -7,7 +7,7 @@ package game.components.interfaces;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.IAnimator;
 
-public interface ICompAnim extends IRenderComponent {
+public interface IAnimatedComponent extends IRenderComponent {
   void goToFirstFrame();
 
   void setAnimator(IAnimator animator);

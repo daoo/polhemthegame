@@ -8,7 +8,7 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.entities.IEntity;
 import math.time.GameTime;
 
@@ -16,7 +16,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 
-public class TexturedQuad implements ICompAnim {
+public class TexturedQuad implements IAnimatedComponent {
   private final Image img;
 
   public TexturedQuad(Image img) {

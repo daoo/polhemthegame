@@ -10,7 +10,7 @@ import game.components.ComponentType;
 import game.components.graphics.RSheet;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.ActionOnDeath;
 import game.components.misc.Inventory;
 import game.components.misc.Life;
@@ -126,8 +126,8 @@ public class Factory {
 
   private static IEntity makeUnit(float x, float y, float width, float height,
                                   float dx, float dy, EntityType type,
-                                  float maxHP, ICompAnim walkAnim,
-                                  ICompAnim deathAnim) {
+                                  float maxHP, IAnimatedComponent walkAnim,
+                                  IAnimatedComponent deathAnim) {
     Entity e             = new Entity(x, y, width, height, type);
     Movement movement    = new Movement(dx, dy);
     Life life            = new Life(maxHP);

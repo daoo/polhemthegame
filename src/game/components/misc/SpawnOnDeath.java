@@ -7,7 +7,7 @@ package game.components.misc;
 import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
 import game.entities.IEntity;
@@ -16,9 +16,9 @@ import math.time.GameTime;
 
 public class SpawnOnDeath implements ILogicComponent {
   private IEntity owner;
-  private final ICompAnim anim;
+  private final IAnimatedComponent anim;
 
-  public SpawnOnDeath(ICompAnim anim) {
+  public SpawnOnDeath(IAnimatedComponent anim) {
     this.anim = anim;
   }
 

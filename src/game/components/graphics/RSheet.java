@@ -10,7 +10,7 @@ import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.RunTo;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.entities.IEntity;
 import math.time.Clock;
 import math.time.GameTime;
@@ -19,7 +19,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-public class RSheet implements ICompAnim {
+public class RSheet implements IAnimatedComponent {
   private IAnimator   animator;
 
   private final Clock clock;

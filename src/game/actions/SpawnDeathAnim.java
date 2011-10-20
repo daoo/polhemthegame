@@ -5,7 +5,7 @@
 package game.actions;
 
 import game.components.ComponentMessage;
-import game.components.interfaces.ICompAnim;
+import game.components.interfaces.IAnimatedComponent;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.groups.EntityType;
@@ -16,9 +16,9 @@ import math.time.GameTime;
 public class SpawnDeathAnim implements IAction {
   private final Rectangle body;
   private final float width, height;
-  private final ICompAnim anim;
+  private final IAnimatedComponent anim;
 
-  public SpawnDeathAnim(Rectangle body, float width, float height, ICompAnim anim) {
+  public SpawnDeathAnim(Rectangle body, float width, float height, IAnimatedComponent anim) {
     this.body   = body;
     this.width  = width;
     this.height = height;
