@@ -27,8 +27,7 @@ public class Debugger implements IMode {
       }
 
       F5_down = true;
-    }
-    else {
+    } else {
       F5_down = false;
     }
   }
