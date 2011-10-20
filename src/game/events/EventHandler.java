@@ -6,13 +6,13 @@ package game.events;
 
 import game.entities.IEntity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class EventHandler<T extends IEventArgs> {
-  private final ArrayList<IEvent<T>> events;
+  private final LinkedList<IEvent<T>> events;
 
   public EventHandler() {
-    events = new ArrayList<IEvent<T>>();
+    events = new LinkedList<IEvent<T>>();
   }
 
   public void add(IEvent<T> event) {

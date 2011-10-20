@@ -10,8 +10,8 @@ import game.components.misc.Life;
 import game.factories.Factory;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.PlayersData;
@@ -21,15 +21,15 @@ import math.Rectangle;
 import math.Vector2;
 
 public class Players implements Iterable<IEntity> {
-  private static final float      STARING_X = 0.1f;
-  private final int               count;
-  private final ArrayList<IEntity> players;
+  private static final float STARING_X = 0.1f;
+  private final int count;
+  private final LinkedList<IEntity> players;
 
   public Players(int count)
     throws ParserException, DataException, IOException {
     super();
 
-    players = new ArrayList<IEntity>();
+    players = new LinkedList<IEntity>();
     this.count = count;
 
     PlayersData data = CacheTool.getPlayers(Locator.getCache());

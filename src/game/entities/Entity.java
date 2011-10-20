@@ -12,7 +12,7 @@ import game.components.interfaces.IRenderComponent;
 import game.entities.groups.EntityType;
 import game.world.World;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import math.Rectangle;
 import math.time.GameTime;
@@ -21,22 +21,22 @@ import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
   protected final Rectangle body;
-  private final ArrayList<IAction> actions;
+  private final LinkedList<IAction> actions;
 
-  private final ArrayList<IRenderComponent> renders;
+  private final LinkedList<IRenderComponent> renders;
 
   private final EntityType type;
 
-  private final ArrayList<ILogicComponent> updates;
+  private final LinkedList<ILogicComponent> updates;
   private World world;
 
   public Entity(float x, float y, float w, float h, EntityType type) {
     body = new Rectangle(x, y, w, h);
 
-    actions = new ArrayList<IAction>();
+    actions = new LinkedList<IAction>();
 
-    updates = new ArrayList<ILogicComponent>();
-    renders = new ArrayList<IRenderComponent>();
+    updates = new LinkedList<ILogicComponent>();
+    renders = new LinkedList<IRenderComponent>();
 
     this.type = type;
   }

@@ -14,7 +14,7 @@ import game.states.TransitionState;
 import game.world.World;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.LevelData;
@@ -52,9 +52,9 @@ public class GameLevel {
    */
   private final Rectangle         availible;
 
-  private final DoubleState       gameOverState;
-  private final ArrayList<IRoundState> states;
-  private final StateIterator     current;
+  private final DoubleState gameOverState;
+  private final LinkedList<IRoundState> states;
+  private final StateIterator current;
 
   public GameLevel(LevelData level, Players players, float width, float height,
       DoubleState gameOverState) throws DataException, IOException, ParserException {
@@ -75,7 +75,7 @@ public class GameLevel {
     players.reposition(availible);
 
     // Setup level and it's states
-    this.states        = new ArrayList<IRoundState>();
+    this.states        = new LinkedList<IRoundState>();
     this.gameOverState = gameOverState;
 
     for (String state : level.states) {

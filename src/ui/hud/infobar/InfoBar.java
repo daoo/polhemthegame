@@ -11,16 +11,16 @@ import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
 import game.entities.IEntity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
 public class InfoBar implements IRenderComponent {
-  private final float          barWidth, barHeight;
-  private final int            offsetX, offsetY;
-  private final ArrayList<Bar> bars;
+  private final float barWidth, barHeight;
+  private final int offsetX, offsetY;
+  private final LinkedList<Bar> bars;
 
   public InfoBar(float width, float height, int offsetX, int offsetY) {
     barWidth = width;
@@ -29,7 +29,7 @@ public class InfoBar implements IRenderComponent {
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    bars = new ArrayList<Bar>();
+    bars = new LinkedList<Bar>();
   }
 
   @Override
