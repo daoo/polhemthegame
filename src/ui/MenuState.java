@@ -26,7 +26,7 @@ public class MenuState implements IGameState {
   private final Image background;
   private final Menu  menu;
 
-  public MenuState(GameStateManager manager)
+  public MenuState(final GameStateManager manager)
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 

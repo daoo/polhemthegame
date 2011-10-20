@@ -65,7 +65,7 @@ public class Entity implements IEntity {
 
   @Override
   public ILogicComponent getComponent(ComponentType componentType) {
-    for (fILogicComponent comp : updates) {
+    for (ILogicComponent comp : updates) {
       if (comp.getComponentType().equals(componentType)) {
         return comp;
       }

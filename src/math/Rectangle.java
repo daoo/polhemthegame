@@ -8,15 +8,14 @@ public class Rectangle {
   protected final Vector2 min, max, center;
   protected final Vector2 size;
 
-  public Rec(Rectangle rect) {
+  public Rectangle(Rectangle rect) {
     this.min    = new Vector2(rect.min);
     this.max    = new Vector2(rect.max);
     this.center = new Vector2(rect.center);
     this.size   = new Vector2(rect.size);
   }
 
-  public Rectangle(float x1, float y1,
-                   float width, float height) {
+  public Rectangle(float x1, float y1, float width, float height) {
     float x2 = x1 + width;
     float y2 = y1 + height;
 

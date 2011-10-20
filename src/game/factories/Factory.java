@@ -107,8 +107,8 @@ public class Factory {
     Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
 
     IEntity e = Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
-                                       0, 0, EntityType.PLAYER, data.hitpoints,
-                                       walk, death);
+                                 0, 0, EntityType.PLAYER, data.hitpoints,
+                                 walk, death);
 
     Bar weaponBar   = new Bar(hand, Color.blue, TRANSPARENT);
     InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
