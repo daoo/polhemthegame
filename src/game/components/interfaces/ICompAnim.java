@@ -11,6 +11,7 @@ public interface ICompAnim extends IRenderComponent {
   void goToFirstFrame();
 
   void setAnimator(IAnimator animator);
+  IAnimator getAnimator();
 
   int getTileWidth();
   int getTileHeight();

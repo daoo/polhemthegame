@@ -20,15 +20,15 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class RSheet implements ICompAnim {
-  private final SpriteSheet sheet;
-
-  private final Tile size;
-  private final int  offsetX, offsetY;
-  private final int  tw, th;
+  private IAnimator   animator;
 
   private final Clock clock;
-  private IAnimator   animator;
   private Tile        current;
+  private final int  offsetX, offsetY;
+
+  private final SpriteSheet sheet;
+  private final Tile size;
+  private final int  tw, th;
 
   public RSheet(float targetFrameRate, int offsetX, int offsetY,
                 SpriteSheet sheet, IAnimator animator) {
@@ -47,6 +47,11 @@ public class RSheet implements ICompAnim {
     current = Tile.ZERO;
 
     this.animator = animator;
+  }
+
+  @Override
+  public IAnimator getAnimator() {
+    return animator;
   }
 
   @Override

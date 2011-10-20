@@ -7,6 +7,7 @@ package game.components.graphics;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.graphics.animations.IAnimator;
+import game.components.graphics.animations.Idle;
 import game.components.interfaces.ICompAnim;
 import game.entities.IEntity;
 import math.time.GameTime;
@@ -23,13 +24,33 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void update(GameTime time) {
-    // Do nothing
+  public IAnimator getAnimator() {
+    return new Idle();
   }
 
   @Override
-  public void render(Graphics g) {
-    g.drawImage(img, 0, 0);
+  public ComponentType getComponentType() {
+    return ComponentType.GRAPHIC;
+  }
+
+  @Override
+  public Tile getLastTile() {
+    return Tile.ZERO;
+  }
+
+  @Override
+  public Tile getTileCount() {
+    return new Tile(1, 1);
+  }
+
+  @Override
+  public int getTileHeight() {
+    return img.getHeight();
+  }
+
+  @Override
+  public int getTileWidth() {
+    return img.getWidth();
   }
 
   @Override
@@ -43,28 +64,13 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public int getTileWidth() {
-    return img.getWidth();
+  public void render(Graphics g) {
+    g.drawImage(img, 0, 0);
   }
 
   @Override
-  public int getTileHeight() {
-    return img.getHeight();
-  }
-
-  @Override
-  public Tile getTileCount() {
-    return new Tile(1, 1);
-  }
-
-  @Override
-  public Tile getLastTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAPHIC;
+  public void setAnimator(IAnimator animator) {
+    // Do nothing
   }
 
   @Override
@@ -73,7 +79,7 @@ public class TexturedQuad implements ICompAnim {
   }
 
   @Override
-  public void setAnimator(IAnimator animator) {
+  public void update(GameTime time) {
     // Do nothing
   }
 }

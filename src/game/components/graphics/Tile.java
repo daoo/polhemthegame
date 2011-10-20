@@ -6,6 +6,7 @@ package game.components.graphics;
 
 public class Tile {
   public static final Tile ZERO = new Tile(0, 0);
+  public static final Tile ONE = new Tile(1, 1);
 
   public final int x, y;
 
@@ -14,7 +15,7 @@ public class Tile {
     this.y = y;
   }
 
-  public boolean sameAs(Tile other) {
+  public boolean equals(Tile other) {
     return (x == other.x) && (y == other.y);
   }
 }

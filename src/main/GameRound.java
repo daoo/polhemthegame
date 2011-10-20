@@ -4,6 +4,7 @@
 
 package main;
 
+import game.modes.Debugger;
 import game.modes.Game;
 import game.modes.IMode;
 
@@ -21,6 +22,8 @@ import org.newdawn.slick.SlickException;
 import ui.hud.HUD;
 
 public class GameRound implements IGameState {
+  private static final boolean DEBUG = false;
+
   private final IMode mode;
 
   public GameRound() throws ParserException, IOException, DataException {
@@ -29,8 +32,13 @@ public class GameRound implements IGameState {
         "campaigns/polhem.js",
         new GsonParser(CampaignData.class));
 
-    mode = new Game(campaign, 0, HUD.HEIGHT,
-                    Launcher.WIDTH, Launcher.HEIGHT - (2 * HUD.HEIGHT));
+    if (DEBUG) {
+      mode = new Debugger(new Game(campaign, 0, HUD.HEIGHT,
+        Launcher.WIDTH, Launcher.HEIGHT - (2 * HUD.HEIGHT)));
+    } else {
+      mode = new Game(campaign, 0, HUD.HEIGHT,
+        Launcher.WIDTH, Launcher.HEIGHT - (2 * HUD.HEIGHT));
+    }
   }
 
   @Override

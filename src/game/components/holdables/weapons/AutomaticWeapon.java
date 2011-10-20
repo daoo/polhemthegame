@@ -65,7 +65,9 @@ public class AutomaticWeapon extends Weapon {
 
   private void stopShooting() {
     inUse = false;
-    anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+    if (!anim.getAnimator().isFinished()) {
+      anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+    }
   }
 
   private void startShooting() {
