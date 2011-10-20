@@ -7,6 +7,7 @@ package ui;
 import game.CacheTool;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import loader.parser.ParserException;
 import main.GameStateManager;
@@ -20,6 +21,7 @@ import org.newdawn.slick.SlickException;
 
 import ui.menu.Menu;
 import ui.menu.MenuButton;
+import ui.menu.MenuItem;
 import ui.menu.MenuItemDisabled;
 
 public class MenuState implements IGameState {
@@ -30,20 +32,22 @@ public class MenuState implements IGameState {
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
-    menu = new Menu();
+    LinkedList<MenuItem> tmp = new LinkedList<MenuItem>();
 
-    menu.add(new MenuButton("singleplayer", 60, 280, new UIEvent() {
-      @Override public void fire() {
-        manager.enterSinglePlayer();
-      }
-    }));
-    menu.add(new MenuItemDisabled("coop", 60, 380));
-    menu.add(new MenuItemDisabled("options", 60, 480));
-    menu.add(new MenuButton("exit", 60, 580, new UIEvent() {
-      @Override public void fire() {
-        manager.quit();
-      }
-    }));
+    tmp.add(new MenuButton("singleplayer", 60, 280, new UIEvent() {
+        @Override public void fire() {
+          manager.enterSinglePlayer();
+        }
+      }));
+    tmp.add(new MenuItemDisabled("coop", 60, 380));
+    tmp.add(new MenuItemDisabled("options", 60, 480));
+    tmp.add(new MenuButton("exit", 60, 580, new UIEvent() {
+        @Override public void fire() {
+          manager.quit();
+        }
+      }));
+
+    menu = new Menu(tmp);
   }
 
   @Override

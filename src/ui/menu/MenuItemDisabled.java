@@ -14,6 +14,6 @@ public class MenuItemDisabled extends MenuItem {
     throws IOException, ParserException {
     super(name, x, y);
 
-    setState(MENU_ITEM_STATE.DISABLED);
+    setState(MenuItemState.DISABLED);
   }
 }

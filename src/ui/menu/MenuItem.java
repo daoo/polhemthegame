@@ -24,7 +24,7 @@ public class MenuItem {
   private Image              current;
   private final Image        imgNormal, imgActive, imgDisabled;
 
-  private MENU_ITEM_STATE    state;
+  private MenuItemState    state;
 
   public MenuItem(String name, int x, int y)
     throws IOException, ParserException {
@@ -43,26 +43,26 @@ public class MenuItem {
     imgDisabled.setColor(Image.BOTTOM_LEFT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
 
     current = imgNormal;
-    state = MENU_ITEM_STATE.NORMAL;
+    state = MenuItemState.NORMAL;
   }
 
   void render(Graphics g) {
     g.drawImage(current, x, y);
   }
 
-  public void setState(MENU_ITEM_STATE state) {
-    if (state == MENU_ITEM_STATE.ACTIVE) {
+  public void setState(MenuItemState state) {
+    if (state == MenuItemState.ACTIVE) {
       current = imgActive;
-    } else if (state == MENU_ITEM_STATE.DISABLED) {
+    } else if (state == MenuItemState.DISABLED) {
       current = imgDisabled;
-    } else if (state == MENU_ITEM_STATE.NORMAL) {
+    } else if (state == MenuItemState.NORMAL) {
       current = imgNormal;
     }
 
     this.state = state;
   }
 
-  public MENU_ITEM_STATE getState() {
+  public MenuItemState getState() {
     return state;
   }
 }

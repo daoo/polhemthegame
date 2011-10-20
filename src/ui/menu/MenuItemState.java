@@ -4,6 +4,6 @@
 
 package ui.menu;
 
-enum MENU_ITEM_STATE {
+enum MenuItemState {
   NORMAL, ACTIVE, DISABLED
 }

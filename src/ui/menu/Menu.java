@@ -4,32 +4,27 @@
 
 package ui.menu;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 import org.newdawn.slick.Graphics;
 
 public class Menu {
-  private final ArrayList<MenuItem> items;
-  private int                       current;
+  private final LinkedList<MenuItem> items;
+  private ListIterator<MenuItem> iterator;
+  private MenuItem current;
 
-  public Menu() {
-    items = new ArrayList<MenuItem>(0);
-    current = 0;
+  public Menu(Collection<MenuItem> items) {
+    this.items = new LinkedList<MenuItem>(items);
+    this.iterator = this.items.listIterator();
+    this.current = iterator.next();
   }
 
   public void click() {
-    if (items.get(current) instanceof MenuButton) {
-      ((MenuButton) items.get(current)).click();
+    if (current instanceof MenuButton) {
+      ((MenuButton) current).click();
     }
-  }
-
-  public void add(MenuItem item) {
-    if (items.isEmpty()) {
-      current = 0;
-      item.setState(MENU_ITEM_STATE.ACTIVE);
-    }
-
-    items.add(item);
   }
 
   public void render(Graphics g) {
@@ -39,28 +34,30 @@ public class Menu {
   }
 
   public void up() {
-    int i = current - 1;
-    while (i >= 0 && items.get(i).getState() != MENU_ITEM_STATE.NORMAL) {
-      --i;
-    }
+    if (iterator.hasPrevious())
+      current.setState(MenuItemState.NORMAL);
 
-    if (i > -1) {
-      items.get(current).setState(MENU_ITEM_STATE.NORMAL);
-      current = i;
-      items.get(current).setState(MENU_ITEM_STATE.ACTIVE);
+    while (iterator.hasPrevious()) {
+      current = iterator.previous();
+
+      if (current.getState() == MenuItemState.NORMAL) {
+        current.setState(MenuItemState.ACTIVE);
+        break;
+      }
     }
   }
 
   public void down() {
-    int i = current + 1;
-    while (i < items.size() && items.get(i).getState() != MENU_ITEM_STATE.NORMAL) {
-      ++i;
-    }
+    if (iterator.hasNext())
+      current.setState(MenuItemState.NORMAL);
 
-    if (i < items.size()) {
-      items.get(current).setState(MENU_ITEM_STATE.NORMAL);
-      current = i;
-      items.get(current).setState(MENU_ITEM_STATE.ACTIVE);
+    while (iterator.hasNext()) {
+      current = iterator.next();
+
+      if (current.getState() == MenuItemState.NORMAL) {
+        current.setState(MenuItemState.ACTIVE);
+        break;
+      }
     }
   }
 }
