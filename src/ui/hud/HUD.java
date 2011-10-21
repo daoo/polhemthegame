@@ -43,7 +43,7 @@ public class HUD {
     String maxInt = String.valueOf(Integer.MAX_VALUE);
 
     int w = Math.max(font.getWidth(MONEY + maxInt),
-                           font.getWidth(KILLS + maxInt));
+                     font.getWidth(KILLS + maxInt));
 
     stats_x = WIDTH - w - PADDING;
     stats_y = PADDING;
