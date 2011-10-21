@@ -15,6 +15,7 @@ import game.components.graphics.animations.Idle;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.life.ActionOnDeath;
 import game.components.life.Life;
+import game.components.misc.ProjectileDamage;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
 import game.components.physics.Movement;
@@ -22,7 +23,6 @@ import game.components.physics.ProjectileCollision;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
-import game.pods.Damage;
 
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class ProjectileTemplate {
     }
   }
 
-  public IEntity makeProjectile(float x, float y, float rot) {
+  public IEntity makeProjectile(IEntity source, float x, float y, float rot) {
     IAnimatedComponent anim = makeAnimation();
 
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
@@ -68,7 +68,7 @@ public class ProjectileTemplate {
                                      (float) Math.sin(rot) * data.speed));
     e.addLogicComponent(new RangeLimiter(data.duration, data.range));
     e.addLogicComponent(new Life(data.targets));
-    e.addLogicComponent(new Damage(e, data.damage));
+    e.addLogicComponent(new ProjectileDamage(source, data.damage));
     e.addLogicComponent(new ProjectileCollision());
     e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
 

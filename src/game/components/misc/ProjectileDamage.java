@@ -4,28 +4,41 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.pods.Damage;
 import game.time.GameTime;
 
 public class ProjectileDamage implements ILogicComponent {
+  private final Damage damageOther;
+  private final Damage damageSelf;
+
+  private IEntity owner;
+
+  public ProjectileDamage(IEntity source, float damage) {
+    this.damageSelf = new Damage(null, 1);
+    this.damageOther = new Damage(source, damage);
+  }
 
   @Override
   public void update(GameTime time) {
-    throw new UnsupportedOperationException("Not implemented");
+    // Do nothing
   }
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    throw new UnsupportedOperationException("Not implemented");
+    if (message == ComponentMessage.COLLIDED_WITH) {
+      IEntity entity = (IEntity) args;
+      entity.sendMessage(ComponentMessage.DAMAGE, damageOther);
+      owner.sendMessage(ComponentMessage.DAMAGE, damageSelf);
+    }
   }
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.PROJECTILE_DAMAGE;
   }
 
   @Override
   public void setOwner(IEntity owner) {
-    throw new UnsupportedOperationException("Not implemented");
+    this.owner = owner;
   }
-
 }
