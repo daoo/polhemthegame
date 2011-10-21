@@ -4,7 +4,7 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
 import game.entities.IEntity;
-import math.time.GameTime;
+import game.time.GameTime;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

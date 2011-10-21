@@ -10,6 +10,7 @@ import game.GameLevel;
 import game.entities.Players;
 import game.states.DoubleState;
 import game.states.TransitionState;
+import game.time.GameTime;
 
 import java.io.IOException;
 
@@ -18,7 +19,6 @@ import loader.data.json.CampaignData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

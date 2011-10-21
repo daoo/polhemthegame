@@ -1,10 +1,6 @@
-package game.components.life;
+package game.pods;
 
-import game.components.ComponentMessage;
-import game.components.ComponentType;
-import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import math.time.GameTime;
 
 public class Damage {
   public final float ammount;

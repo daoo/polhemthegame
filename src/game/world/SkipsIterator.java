@@ -4,8 +4,8 @@
 
 package game.world;
 
+import game.entities.EntityType;
 import game.entities.IEntity;
-import game.entities.groups.EntityType;
 
 import java.util.Arrays;
 import java.util.Iterator;

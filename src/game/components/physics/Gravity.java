@@ -8,8 +8,8 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.time.GameTime;
 import math.Vector2;
-import math.time.GameTime;
 
 public class Gravity implements ILogicComponent {
   private static final float FACTOR = 100.0f;

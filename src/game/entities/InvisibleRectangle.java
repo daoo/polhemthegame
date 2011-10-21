@@ -9,12 +9,11 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
-import game.entities.groups.EntityType;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
+import game.time.GameTime;
 import game.world.World;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

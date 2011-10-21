@@ -5,13 +5,13 @@ import game.components.graphics.Outliner;
 import game.components.graphics.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
+import game.entities.EntityType;
 import game.entities.IEntity;
-import game.entities.groups.EntityType;
+import game.time.GameTime;
 import game.world.World;
 import math.CollisionHelper;
 import math.Rectangle;
 import math.Vector2;
-import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.AppGameContainer;

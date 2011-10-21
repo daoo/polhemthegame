@@ -9,10 +9,10 @@ import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.time.GameTime;
 
 import java.util.LinkedList;
 
-import math.time.GameTime;
 
 // TODO: Shop
 

@@ -5,34 +5,27 @@ import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.time.GameTime;
-import math.CollisionHelper;
-import math.Rectangle;
 
-public class MovementConstraint implements ILogicComponent {
-  private IEntity owner;
-  private final Rectangle constraints;
-
-  public MovementConstraint(Rectangle constraints) {
-    this.constraints = constraints;
-  }
+public class ProjectileDamage implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    CollisionHelper.blockFromExiting(owner.getBody(), constraints);
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    // Do nothing
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public ComponentType getComponentType() {
-    return ComponentType.MOVEMENT_CONSTRAINTS;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void setOwner(IEntity owner) {
-    this.owner = owner;
+    throw new UnsupportedOperationException("Not implemented");
   }
+
 }

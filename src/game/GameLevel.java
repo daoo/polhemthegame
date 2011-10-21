@@ -11,6 +11,7 @@ import game.states.DoubleState;
 import game.states.IRoundState;
 import game.states.StateIterator;
 import game.states.TransitionState;
+import game.time.GameTime;
 import game.world.World;
 
 import java.io.IOException;
@@ -24,7 +25,6 @@ import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

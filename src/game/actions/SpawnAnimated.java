@@ -7,9 +7,9 @@ package game.actions;
 import game.components.ComponentMessage;
 import game.components.interfaces.IAnimatedComponent;
 import game.entities.Entity;
-import game.entities.groups.EntityType;
+import game.entities.EntityType;
+import game.time.GameTime;
 import game.world.World;
-import math.time.GameTime;
 
 public class SpawnAnimated implements IAction {
   private final Entity animated;

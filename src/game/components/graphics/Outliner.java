@@ -5,8 +5,8 @@ import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
+import game.time.GameTime;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

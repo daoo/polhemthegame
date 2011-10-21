@@ -1,8 +1,8 @@
 package game.actions;
 
 import game.entities.IEntity;
+import game.time.GameTime;
 import game.world.World;
-import math.time.GameTime;
 
 public class RemoveEntity implements IAction {
   private final IEntity entity;

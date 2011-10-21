@@ -9,7 +9,7 @@ import game.components.graphics.animations.Idle;
 import game.components.holdables.weapons.AutomaticWeapon;
 import game.components.holdables.weapons.SingleWeapon;
 import game.components.holdables.weapons.Weapon;
-import game.entities.ProjectileTemplate;
+import game.factories.ProjectileTemplate;
 
 import java.io.File;
 import java.io.IOException;

@@ -4,13 +4,13 @@
 
 package game.world;
 
+import game.entities.EntityType;
+import game.entities.Groups;
 import game.entities.IEntity;
-import game.entities.groups.EntityType;
-import game.entities.groups.Groups;
+import game.time.GameTime;
 
 import java.util.LinkedList;
 
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

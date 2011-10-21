@@ -10,9 +10,9 @@ import game.components.ComponentType;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
+import game.entities.EntityType;
 import game.entities.IEntity;
-import game.entities.groups.EntityType;
-import math.time.GameTime;
+import game.time.GameTime;
 
 public class SpawnOnDeath implements ILogicComponent {
   private IEntity owner;

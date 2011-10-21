@@ -4,8 +4,8 @@
 
 package game.actions;
 
+import game.time.GameTime;
 import game.world.World;
-import math.time.GameTime;
 
 public interface IAction {
   void execute(GameTime time, World world);

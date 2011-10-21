@@ -2,8 +2,8 @@ package game.actions;
 
 import game.components.ComponentMessage;
 import game.entities.IEntity;
+import game.time.GameTime;
 import game.world.World;
-import math.time.GameTime;
 
 public class SpawnWithSend implements IAction {
   private final IEntity entity;

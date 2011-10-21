@@ -4,8 +4,8 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.time.GameTime;
 import math.Vector2;
-import math.time.GameTime;
 
 public class RangeLimiter implements ILogicComponent {
   public static class TimePos {

@@ -10,10 +10,10 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
 import game.entities.IEntity;
+import game.time.GameTime;
 
 import java.util.LinkedList;
 
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

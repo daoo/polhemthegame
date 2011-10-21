@@ -9,6 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.time.GameTime;
 
 import java.util.Stack;
 
@@ -16,7 +17,6 @@ import main.Locator;
 import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
-import math.time.GameTime;
 
 public class BossAI implements ILogicComponent {
   private final Rectangle      body;

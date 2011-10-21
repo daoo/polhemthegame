@@ -19,10 +19,10 @@ import game.components.misc.MovementConstraint;
 import game.components.misc.SimpleControl;
 import game.components.physics.Movement;
 import game.entities.Entity;
+import game.entities.EntityType;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
 import game.entities.Players;
-import game.entities.groups.EntityType;
 import game.events.impl.DamagePlayerEvent;
 import game.events.impl.KillEvent;
 import game.world.World;
@@ -110,9 +110,8 @@ public class Factory {
                                  0, 0, EntityType.PLAYER, data.hitpoints,
                                  walk, death);
 
-    Bar weaponBar   = new Bar(hand, Color.blue, TRANSPARENT);
     InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
-    infoBar.add(weaponBar);
+    infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
 
     inv.addWeapon(weapon);
     hand.grab(weapon);
@@ -128,20 +127,17 @@ public class Factory {
                                   float dx, float dy, EntityType type,
                                   float maxHP, IAnimatedComponent walkAnim,
                                   IAnimatedComponent deathAnim) {
-    Entity e             = new Entity(x, y, width, height, type);
-    Movement movement    = new Movement(dx, dy);
-    Life life            = new Life(maxHP);
-    SpawnOnDeath death   = new SpawnOnDeath(deathAnim);
-    InfoBar infoBar      = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
-    Bar hpBar            = new Bar(life, Color.green, Color.red);
-    ActionOnDeath remove = new ActionOnDeath(new RemoveEntity(e));
+    Entity e = new Entity(x, y, width, height, type);
 
-    infoBar.add(hpBar);
+    Life life = new Life(maxHP);
 
-    e.addLogicComponent(movement);
+    InfoBar infoBar = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
+    infoBar.add(new Bar(life, Color.green, Color.red));
+
+    e.addLogicComponent(new Movement(dx, dy));
     e.addLogicComponent(life);
-    e.addLogicComponent(death);
-    e.addLogicComponent(remove);
+    e.addLogicComponent(new SpawnOnDeath(deathAnim));
+    e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
     e.addRenderComponent(walkAnim);
     e.addRenderComponent(infoBar);
 

@@ -10,6 +10,7 @@ import game.components.ComponentType;
 import game.components.life.Life;
 import game.entities.IEntity;
 import game.factories.Factory;
+import game.time.GameTime;
 import game.world.World;
 
 import java.io.IOException;
@@ -24,7 +25,6 @@ import loader.data.json.LevelData.CreepStateData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

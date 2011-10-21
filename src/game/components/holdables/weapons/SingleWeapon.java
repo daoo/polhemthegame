@@ -7,9 +7,9 @@ package game.components.holdables.weapons;
 import game.components.graphics.RSheet;
 import game.components.graphics.Tile;
 import game.components.graphics.animations.RunTo;
-import game.entities.ProjectileTemplate;
+import game.factories.ProjectileTemplate;
+import game.time.GameTime;
 import math.Vector2;
-import math.time.GameTime;
 
 public class SingleWeapon extends Weapon {
   private boolean fireNext;

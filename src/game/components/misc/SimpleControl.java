@@ -11,8 +11,8 @@ import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
+import game.time.GameTime;
 import math.Vector2;
-import math.time.GameTime;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Input;

@@ -5,11 +5,11 @@
 package game.actions;
 
 import game.components.ComponentMessage;
-import game.components.life.Damage;
 import game.entities.IEntity;
+import game.pods.Damage;
+import game.time.GameTime;
 import game.world.World;
 import math.Rectangle;
-import math.time.GameTime;
 
 /**
  * Inflict damage in an circle around a position when executed.

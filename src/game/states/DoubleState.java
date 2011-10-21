@@ -4,8 +4,8 @@
 
 package game.states;
 
+import game.time.GameTime;
 import game.world.World;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

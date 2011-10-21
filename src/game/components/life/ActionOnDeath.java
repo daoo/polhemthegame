@@ -5,7 +5,7 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import math.time.GameTime;
+import game.time.GameTime;
 
 public class ActionOnDeath implements ILogicComponent {
   private final IAction action;

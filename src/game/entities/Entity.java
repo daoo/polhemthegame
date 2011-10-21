@@ -9,13 +9,12 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
-import game.entities.groups.EntityType;
+import game.time.GameTime;
 import game.world.World;
 
 import java.util.LinkedList;
 
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 

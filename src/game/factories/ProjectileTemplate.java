@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.entities;
+package game.factories;
 
 import game.CacheTool;
 import game.actions.AOEDamage;
@@ -14,13 +14,15 @@ import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.life.ActionOnDeath;
-import game.components.life.Damage;
 import game.components.life.Life;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
 import game.components.physics.Movement;
 import game.components.physics.ProjectileCollision;
-import game.entities.groups.EntityType;
+import game.entities.Entity;
+import game.entities.EntityType;
+import game.entities.IEntity;
+import game.pods.Damage;
 
 import java.io.IOException;
 

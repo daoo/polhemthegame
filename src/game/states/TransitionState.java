@@ -4,9 +4,9 @@
 
 package game.states;
 
+import game.time.GameTime;
 import game.world.World;
 import math.Rectangle;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

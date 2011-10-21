@@ -8,7 +8,8 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import math.time.GameTime;
+import game.pods.Damage;
+import game.time.GameTime;
 import ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {

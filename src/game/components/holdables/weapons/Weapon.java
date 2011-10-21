@@ -12,12 +12,12 @@ import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
 import game.entities.IEntity;
-import game.entities.ProjectileTemplate;
+import game.factories.ProjectileTemplate;
+import game.time.GameTime;
 
 import java.util.LinkedList;
 
 import math.Vector2;
-import math.time.GameTime;
 
 import org.newdawn.slick.Graphics;
 
