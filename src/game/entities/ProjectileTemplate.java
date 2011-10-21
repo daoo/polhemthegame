@@ -57,18 +57,7 @@ public class ProjectileTemplate {
   }
 
   public IEntity makeProjectile(float x, float y, float rot) {
-    IAnimatedComponent anim = null;
-    if (img == null) {
-      anim = new DummyAnimation();
-    } else if (data.texture != null) {
-      anim = new TexturedQuad(img);
-    } else if (data.sprite != null) {
-      anim = new RSheet(data.sprite.framerate,
-                        data.sprite.offset.x,
-                        data.sprite.offset.y,
-                        (SpriteSheet) img,
-                        new Idle());
-    }
+    IAnimatedComponent anim = makeAnimation();
 
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
                           EntityType.PROJECTILE);
@@ -103,5 +92,19 @@ public class ProjectileTemplate {
     }
 
     return e;
+  }
+
+  private IAnimatedComponent makeAnimation() {
+    if (data.texture != null) {
+      return new TexturedQuad(img);
+    } else if (data.sprite != null) {
+      return new RSheet(data.sprite.framerate,
+                        data.sprite.offset.x,
+                        data.sprite.offset.y,
+                        (SpriteSheet) img,
+                        new Idle());
+    }
+
+    return new DummyAnimation();
   }
 }
