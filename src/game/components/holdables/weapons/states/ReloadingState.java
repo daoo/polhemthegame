@@ -18,7 +18,7 @@ public class ReloadingState implements IWeaponState {
 
   @Override
   public void update(GameTime time) {
-    tCurrent = time.getElapsed();
+    tCurrent = time.elapsed;
   }
 
   @Override

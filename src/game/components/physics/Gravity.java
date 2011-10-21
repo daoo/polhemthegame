@@ -21,7 +21,7 @@ public class Gravity implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    float g = time.getFrameLength() * FACTOR;
+    float g = time.frame * FACTOR;
     movement.addVelocity(new Vector2(0, g));
   }
 

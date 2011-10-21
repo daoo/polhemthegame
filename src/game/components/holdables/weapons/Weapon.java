@@ -123,7 +123,7 @@ public abstract class Weapon implements IHoldable {
   }
 
   protected void startReload(GameTime time) {
-    currentState = new ReloadingState(time.getElapsed(), reloadTime);
+    currentState = new ReloadingState(time.elapsed, reloadTime);
     rounds = magazineSize;
   }
 }

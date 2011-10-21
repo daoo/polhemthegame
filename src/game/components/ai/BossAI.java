@@ -80,7 +80,7 @@ public class BossAI implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if (isShooting) {
-      if ((time.getElapsed() - shootingStartTime) >= shootingTargetTime) {
+      if ((time.elapsed - shootingStartTime) >= shootingTargetTime) {
         // We're done here, stop shooting and start walking
         isShooting = false;
 
@@ -101,7 +101,7 @@ public class BossAI implements ILogicComponent {
           unit.sendMessage(ComponentMessage.STOP_ANIMATION, null);
           hand.stopUse();
           isShooting = true;
-          shootingStartTime = time.getElapsed();
+          shootingStartTime = time.elapsed;
           shootingTargetTime = Locator.getRandom().nextFloat(1.0f, 5.0f);
         } else {
           headFor(targets.peek());

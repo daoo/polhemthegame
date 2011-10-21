@@ -73,7 +73,7 @@ public class CreepsState implements IRoundState {
     while (itc.hasNext()) {
       ToBeCreep tmp = itc.next();
 
-      if (tmp.spawnTime < time.getElapsed()) {
+      if (tmp.spawnTime < time.elapsed) {
         tmp.creep.sendMessage(ComponentMessage.START_ANIMATION, null);
         world.add(tmp.creep);
 

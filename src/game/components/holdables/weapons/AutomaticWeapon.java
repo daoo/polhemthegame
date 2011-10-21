@@ -43,7 +43,7 @@ public class AutomaticWeapon extends Weapon {
       if (isEmpty()) {
         startReload(time);
       } else if (isInUse() && isReadyToShoot()) {
-        fire(time.getElapsed());
+        fire(time.elapsed);
       }
     }
   }

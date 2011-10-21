@@ -32,7 +32,7 @@ public class RangeLimiter implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if ((time.getElapsed() - start.time) > duration) {
+    if ((time.elapsed - start.time) > duration) {
       owner.sendMessage(ComponentMessage.KILL, null);
     }
     if (owner.getBody().getMin().distance(start.pos) > range) {
