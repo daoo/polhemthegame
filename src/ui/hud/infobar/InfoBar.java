@@ -4,70 +4,49 @@
 
 package ui.hud.infobar;
 
-// TODO: A 1px high bar turns weird color-wise from time to time (probably because of aa)
-
-import game.components.ComponentMessage;
-import game.components.ComponentType;
-import game.components.interfaces.IRenderComponent;
 import game.entities.IEntity;
-import game.time.GameTime;
 
 import java.util.LinkedList;
 
-
 import org.newdawn.slick.Graphics;
 
-public class InfoBar implements IRenderComponent {
+public class InfoBar {
+  private final IEntity entity;
   private final float barWidth, barHeight;
   private final int offsetX, offsetY;
   private final LinkedList<Bar> bars;
 
-  public InfoBar(float width, float height, int offsetX, int offsetY) {
-    barWidth = width;
-    barHeight = height;
-
+  public InfoBar(IEntity entity, float width, float height, int offsetX, int offsetY) {
+    this.entity  = entity;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
+    barWidth  = width;
+    barHeight = height;
+
     bars = new LinkedList<Bar>();
-  }
-
-  @Override
-  public void update(GameTime time) {
-    for (Bar b : bars) {
-      b.update();
-    }
-  }
-
-  @Override
-  public void render(Graphics g) {
-    int i = 0;
-    for (Bar b : bars) {
-      b.render(g, offsetX, offsetY + (barHeight * i), barWidth, barHeight);
-      ++i;
-    }
   }
 
   public void add(Bar bar) {
     bars.add(bar);
   }
 
-  public float getWidth() {
-    return barWidth;
+  public void update() {
+    for (Bar b : bars) {
+      b.update();
+    }
   }
 
-  @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    // Do nothing
-  }
+  public void render(Graphics g) {
+    g.pushTransform();
+    g.translate(entity.getBody().getX1(), entity.getBody().getY1());
 
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.INFO_BAR;
-  }
+    int i = 0;
+    for (Bar b : bars) {
+      b.render(g, offsetX, offsetY + (barHeight * i), barWidth, barHeight);
+      ++i;
+    }
 
-  @Override
-  public void setOwner(IEntity owner) {
-    // Do nothing
+    g.popTransform();
   }
 }

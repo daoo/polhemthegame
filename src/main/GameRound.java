@@ -19,7 +19,7 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import ui.hud.HUD;
+import ui.hud.ShopUI;
 
 public class GameRound implements IGameState {
   private static final boolean DEBUG = false;
@@ -33,11 +33,11 @@ public class GameRound implements IGameState {
         new GsonParser(CampaignData.class));
 
     if (DEBUG) {
-      mode = new Debugger(new Game(campaign, 0, HUD.HEIGHT,
-        Launcher.WIDTH, Launcher.HEIGHT - (2 * HUD.HEIGHT)));
+      mode = new Debugger(new Game(campaign, 0, ShopUI.HEIGHT,
+        Launcher.WIDTH, Launcher.HEIGHT - (2 * ShopUI.HEIGHT)));
     } else {
-      mode = new Game(campaign, 0, HUD.HEIGHT,
-        Launcher.WIDTH, Launcher.HEIGHT - (2 * HUD.HEIGHT));
+      mode = new Game(campaign, 0, ShopUI.HEIGHT,
+        Launcher.WIDTH, Launcher.HEIGHT - (2 * ShopUI.HEIGHT));
     }
   }
 

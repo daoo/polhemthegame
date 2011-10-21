@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 
 // TODO: Hud drawing
 
-public class HUD {
+public class ShopUI {
   public static final int HEIGHT = 75;
   public static final int WIDTH  = 1024;
 
@@ -31,7 +31,7 @@ public class HUD {
 
   private int money, kills;
 
-  public HUD(IEntity player) throws SlickException {
+  public ShopUI(IEntity player) throws SlickException {
     money = -1;
     kills = -1;
 
