@@ -123,8 +123,8 @@ public class RSheet implements IAnimatedComponent {
 
   @Override
   public void update(GameTime time) {
-    if (clock.needsSync(time.getElapsed())) {
-      clock.sync(time.getElapsed());
+    if (clock.needsSync(time.elapsed)) {
+      clock.sync(time.elapsed);
 
       current = animator.next(current);
     }

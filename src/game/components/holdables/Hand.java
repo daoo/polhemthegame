@@ -60,7 +60,7 @@ public class Hand implements IRenderComponent, IProgress {
       IEntity p = projTemplate.makeProjectile(o.x, o.y, weapon.getAngle());
       owner.addAction(
         new SpawnWithSend(p, ComponentMessage.START_AT,
-          new RangeLimiter.TimePos(time.getElapsed(), o)));
+          new RangeLimiter.TimePos(time.elapsed, o)));
     }
     weapon.projectiles.clear();
   }

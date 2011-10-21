@@ -37,7 +37,7 @@ public class SingleWeapon extends Weapon {
       if (isEmpty()) {
         startReload(time);
       } else if (fireNext) {
-        fire(time.getElapsed());
+        fire(time.elapsed);
         fireNext = false;
       }
     }

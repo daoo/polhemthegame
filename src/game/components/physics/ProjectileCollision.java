@@ -42,7 +42,7 @@ public class ProjectileCollision implements ILogicComponent {
   public void update(GameTime time) {
     if (enableCollisions) {
       for (IEntity e : owner.getWorld().getUnits()) {
-        collisionCheck(owner.getBody(), movement.getVelocity(), e, time.getFrameLength());
+        collisionCheck(owner.getBody(), movement.getVelocity(), e, time.frame);
       }
     }
   }

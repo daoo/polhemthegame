@@ -35,7 +35,7 @@ public class TransitionState implements IRoundState {
 
   @Override
   public void update(GameTime time, World world) {
-    tSinceStart += time.getFrameLength();
+    tSinceStart += time.frame;
   }
 
   @Override
