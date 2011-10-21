@@ -15,21 +15,21 @@ import org.newdawn.slick.SlickException;
 // TODO: Hud drawing
 
 public class HUD {
-  public static final int     HEIGHT  = 75;
-  public static final int     WIDTH   = 1024;
+  public static final int HEIGHT = 75;
+  public static final int WIDTH  = 1024;
 
-  private static final int    PADDING = 5;
+  private static final int PADDING = 5;
 
-  private static final String MONEY   = "Money: ";
-  private static final String KILLS   = "Kills: ";
+  private static final String MONEY = "Money: ";
+  private static final String KILLS = "Kills: ";
 
-  private final Image         img_hud;
-  private final Graphics      gfx_hud;
+  private final Image img_hud;
+  private final Graphics gfx_hud;
 
-  private final int           stats_x, stats_y;
-  private final int           kills_y;
+  private final int stats_x, stats_y;
+  private final int kills_y;
 
-  private int                 money, kills;
+  private int money, kills;
 
   public HUD(IEntity player) throws SlickException {
     money = -1;

@@ -49,7 +49,8 @@ public class ProjectileTemplate {
     }
 
     if (data.aoe != null) {
-      explosion = CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
+      explosion = CacheTool.getSpriteSheet(Locator.getCache(),
+                                           data.aoe.explosionSprite);
     } else {
       explosion = null;
     }
@@ -88,9 +89,9 @@ public class ProjectileTemplate {
 
     if (data.aoe != null) {
       RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
-                                              data.aoe.explosionSprite.offset.x,
-                                              data.aoe.explosionSprite.offset.y,
-                                              explosion, new Idle());
+                                        data.aoe.explosionSprite.offset.x,
+                                        data.aoe.explosionSprite.offset.y,
+                                        explosion, new Idle());
 
       e.addLogicComponent(new ActionOnDeath(
           new AOEDamage(e.getBody(), data.aoe.radius, data.aoe.damage)));
