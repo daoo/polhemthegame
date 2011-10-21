@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.misc;
+package game.components.life;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
@@ -48,7 +48,7 @@ public class Life implements ILogicComponent, IProgress {
     } else if (message == ComponentMessage.DAMAGE) {
       // Type hack, the compiler will kill me
       if (args instanceof Damage) {
-        damage(((Damage) args).getAmmount());
+        damage(((Damage) args).ammount);
       }
     }
   }

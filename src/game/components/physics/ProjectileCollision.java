@@ -1,25 +1,22 @@
 package game.components.physics;
 
-import java.util.LinkedList;
-
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
-import game.components.misc.Damage;
 import game.entities.IEntity;
+
+import java.util.LinkedList;
+
 import math.CollisionHelper;
 import math.Rectangle;
 import math.Vector2;
 import math.time.GameTime;
 
 public class ProjectileCollision implements ILogicComponent {
-  private static final Damage DAMAGE_ONE = new Damage(1);
-
   private boolean enableCollisions;
   private final LinkedList<IEntity> collidedWith;
 
   private IEntity owner;
-  private Damage damage;
   private Movement movement;
 
   public ProjectileCollision() {
@@ -30,8 +27,7 @@ public class ProjectileCollision implements ILogicComponent {
   private void collisionCheck(Rectangle a, Vector2 m, IEntity b, float dt) {
     if (!collidedWith.contains(b)) {
       if (CollisionHelper.sweepCollisionTest(a, m, b.getBody(), dt)) {
-        b.sendMessage(ComponentMessage.DAMAGE, damage);
-        owner.sendMessage(ComponentMessage.DAMAGE, DAMAGE_ONE);
+        owner.sendMessage(ComponentMessage.COLLIDED_WITH, b);
 
         collidedWith.add(b);
       }
@@ -62,7 +58,6 @@ public class ProjectileCollision implements ILogicComponent {
   @Override
   public void setOwner(IEntity owner) {
     this.owner    = owner;
-    this.damage   = (Damage) owner.getComponent(ComponentType.DAMAGE);
     this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }

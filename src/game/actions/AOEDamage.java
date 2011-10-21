@@ -5,7 +5,7 @@
 package game.actions;
 
 import game.components.ComponentMessage;
-import game.components.misc.Damage;
+import game.components.life.Damage;
 import game.entities.IEntity;
 import game.world.World;
 import math.Rectangle;
@@ -21,14 +21,15 @@ public class AOEDamage implements IAction {
 
   /**
    * Constructs a new AOEDamage action.
-   * @param body the body from where ti will become centered
+   * @param source the source of the damage
+   * @param body the body from where the circle will be centered
    * @param range the radius of the area
    * @param damage the ammount of damage to deal per object in range
    */
-  public AOEDamage(Rectangle body, float range, float damage) {
+  public AOEDamage(IEntity source, Rectangle body, float range, float damage) {
     this.body = body;
     this.range = range;
-    this.damage = new Damage(damage);
+    this.damage = new Damage(source, damage);
   }
 
   @Override

@@ -7,7 +7,7 @@ package game.states;
 import game.CacheTool;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
-import game.components.misc.Life;
+import game.components.life.Life;
 import game.entities.IEntity;
 import game.factories.Factory;
 import game.world.World;

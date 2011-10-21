@@ -1,20 +1,19 @@
-package game.components.misc;
+package game.components.life;
 
+import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import math.time.GameTime;
 
-public class Damage implements ILogicComponent {
-  private final float ammount;
+public class ActionOnDeath implements ILogicComponent {
+  private final IAction action;
 
-  public Damage(float ammount) {
-    this.ammount = ammount;
-  }
+  private IEntity owner;
 
-  public float getAmmount() {
-    return ammount;
+  public ActionOnDeath(IAction action) {
+    this.action = action;
   }
 
   @Override
@@ -24,16 +23,18 @@ public class Damage implements ILogicComponent {
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    // Do nothing
+    if (message == ComponentMessage.KILL) {
+      owner.addAction(action);
+    }
   }
 
   @Override
   public ComponentType getComponentType() {
-    return ComponentType.DAMAGE;
+    return ComponentType.ACTION_ON_DEATH;
   }
 
   @Override
   public void setOwner(IEntity owner) {
-    // Do nothing
+    this.owner = owner;
   }
 }

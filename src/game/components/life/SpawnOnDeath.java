@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.misc;
+package game.components.life;
 
 import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;

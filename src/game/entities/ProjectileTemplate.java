@@ -13,9 +13,9 @@ import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.IAnimatedComponent;
-import game.components.misc.ActionOnDeath;
-import game.components.misc.Damage;
-import game.components.misc.Life;
+import game.components.life.ActionOnDeath;
+import game.components.life.Damage;
+import game.components.life.Life;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
 import game.components.physics.Movement;
@@ -66,7 +66,7 @@ public class ProjectileTemplate {
                                      (float) Math.sin(rot) * data.speed));
     e.addLogicComponent(new RangeLimiter(data.duration, data.range));
     e.addLogicComponent(new Life(data.targets));
-    e.addLogicComponent(new Damage(data.damage));
+    e.addLogicComponent(new Damage(e, data.damage));
     e.addLogicComponent(new ProjectileCollision());
     e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
 
@@ -83,7 +83,7 @@ public class ProjectileTemplate {
                                         explosion, new Idle());
 
       e.addLogicComponent(new ActionOnDeath(
-          new AOEDamage(e.getBody(), data.aoe.radius, data.aoe.damage)));
+          new AOEDamage(e, e.getBody(), data.aoe.radius, data.aoe.damage)));
       e.addLogicComponent(new ActionOnDeath(
           new SpawnDeathAnim(e.getBody(),
                              explosionAnim.getTileWidth(),
