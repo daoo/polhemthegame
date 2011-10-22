@@ -10,7 +10,9 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
-public class InfoBar {
+import ui.IUIElement;
+
+public class InfoBar implements IUIElement {
   private final IEntity entity;
   private final float barWidth, barHeight;
   private final int offsetX, offsetY;
@@ -31,12 +33,14 @@ public class InfoBar {
     bars.add(bar);
   }
 
+  @Override
   public void update() {
     for (Bar b : bars) {
       b.update();
     }
   }
 
+  @Override
   public void render(Graphics g) {
     g.pushTransform();
     g.translate(entity.getBody().getX1(), entity.getBody().getY1());

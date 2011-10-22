@@ -110,8 +110,8 @@ public class Factory {
                                  0, 0, EntityType.PLAYER, data.hitpoints,
                                  walk, death);
 
-    InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
-    infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
+    //InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
+    //infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
 
     inv.addWeapon(weapon);
     hand.grab(weapon);
@@ -131,7 +131,7 @@ public class Factory {
 
     Life life = new Life(maxHP);
 
-    InfoBar infoBar = new InfoBar(width, 2, 0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e, width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
 
     e.addLogicComponent(new Movement(dx, dy));
@@ -139,7 +139,7 @@ public class Factory {
     e.addLogicComponent(new SpawnOnDeath(deathAnim));
     e.addLogicComponent(new ActionsOnDeath(new RemoveEntity(e)));
     e.addRenderComponent(walkAnim);
-    e.addRenderComponent(infoBar);
+    //e.addRenderComponent(infoBar);
 
     return e;
   }
