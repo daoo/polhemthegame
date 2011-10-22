@@ -11,7 +11,7 @@ import game.components.graphics.RSheet;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IAnimatedComponent;
-import game.components.life.ActionOnDeath;
+import game.components.life.ActionsOnDeath;
 import game.components.life.Life;
 import game.components.life.SpawnOnDeath;
 import game.components.misc.Inventory;
@@ -137,7 +137,7 @@ public class Factory {
     e.addLogicComponent(new Movement(dx, dy));
     e.addLogicComponent(life);
     e.addLogicComponent(new SpawnOnDeath(deathAnim));
-    e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
+    e.addLogicComponent(new ActionsOnDeath(new RemoveEntity(e)));
     e.addRenderComponent(walkAnim);
     e.addRenderComponent(infoBar);
 

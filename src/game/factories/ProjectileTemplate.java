@@ -13,7 +13,7 @@ import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.IAnimatedComponent;
-import game.components.life.ActionOnDeath;
+import game.components.life.ActionsOnDeath;
 import game.components.life.Life;
 import game.components.misc.ProjectileDamage;
 import game.components.misc.RangeLimiter;
@@ -64,17 +64,20 @@ public class ProjectileTemplate {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
                           EntityType.PROJECTILE);
 
+    e.addLogicComponent(new Life(data.targets));
+    e.addLogicComponent(new RangeLimiter(data.duration, data.range));
     e.addLogicComponent(new Movement((float) Math.cos(rot) * data.speed,
                                      (float) Math.sin(rot) * data.speed));
-    e.addLogicComponent(new RangeLimiter(data.duration, data.range));
-    e.addLogicComponent(new Life(data.targets));
-    e.addLogicComponent(new ProjectileDamage(source, data.damage));
-    e.addLogicComponent(new ProjectileCollision());
-    e.addLogicComponent(new ActionOnDeath(new RemoveEntity(e)));
-
     if (data.gravity) {
       e.addLogicComponent(new Gravity());
     }
+
+    e.addLogicComponent(new ProjectileDamage(source, data.damage));
+    e.addLogicComponent(new ProjectileCollision());
+
+    ActionsOnDeath actions = new ActionsOnDeath();
+    actions.add(new RemoveEntity(e));
+    e.addLogicComponent(actions);
 
     e.addRenderComponent(anim);
 
@@ -84,13 +87,11 @@ public class ProjectileTemplate {
                                         data.aoe.explosionSprite.offset.y,
                                         explosion, new Idle());
 
-      e.addLogicComponent(new ActionOnDeath(
-          new AOEDamage(e, e.getBody(), data.aoe.radius, data.aoe.damage)));
-      e.addLogicComponent(new ActionOnDeath(
-          new SpawnDeathAnim(e.getBody(),
-                             explosionAnim.getTileWidth(),
-                             explosionAnim.getTileHeight(),
-                             explosionAnim)));
+      actions.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
+      actions.add(new SpawnDeathAnim(e.getBody(),
+                                     explosionAnim.getTileWidth(),
+                                     explosionAnim.getTileHeight(),
+                                     explosionAnim));
     }
 
     return e;

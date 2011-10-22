@@ -7,13 +7,24 @@ import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.time.GameTime;
 
-public class ActionOnDeath implements ILogicComponent {
-  private final IAction action;
+import java.util.LinkedList;
+
+public class ActionsOnDeath implements ILogicComponent {
+  private final LinkedList<IAction> actions;
 
   private IEntity owner;
 
-  public ActionOnDeath(IAction action) {
-    this.action = action;
+  public ActionsOnDeath() {
+    actions = new LinkedList<IAction>();
+  }
+
+  public ActionsOnDeath(IAction action) {
+    this();
+    actions.add(action);
+  }
+
+  public void add(IAction action) {
+    actions.add(action);
   }
 
   @Override
@@ -24,7 +35,7 @@ public class ActionOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      owner.addAction(action);
+      owner.addActions(actions);
     }
   }
 

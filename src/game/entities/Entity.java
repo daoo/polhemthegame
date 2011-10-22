@@ -12,6 +12,7 @@ import game.components.interfaces.IRenderComponent;
 import game.time.GameTime;
 import game.world.World;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 import math.Rectangle;
@@ -43,6 +44,11 @@ public class Entity implements IEntity {
   @Override
   public void addAction(IAction action) {
     actions.add(action);
+  }
+
+  @Override
+  public void addActions(Collection<IAction> collection) {
+    actions.addAll(collection);
   }
 
   @Override

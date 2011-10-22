@@ -4,6 +4,8 @@
 
 package game.entities;
 
+import java.util.Collection;
+
 import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
@@ -33,6 +35,11 @@ public class InvisibleRectangle implements IEntity {
 
   @Override
   public void addAction(IAction action) {
+    throw new UnsupportedOperationException("Not allowed");
+  }
+
+  @Override
+  public void addActions(Collection<IAction> actions) {
     throw new UnsupportedOperationException("Not allowed");
   }
 

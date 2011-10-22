@@ -11,6 +11,9 @@ import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.time.GameTime;
 import game.world.World;
+
+import java.util.Collection;
+
 import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
@@ -21,6 +24,7 @@ import org.newdawn.slick.Graphics;
  */
 public interface IEntity {
   void addAction(IAction action);
+  void addActions(Collection<IAction> actions);
 
   void addLogicComponent(ILogicComponent comp);
   void addRenderComponent(IRenderComponent comp);
@@ -55,13 +59,13 @@ public interface IEntity {
    * @param g the graphics context to use
    */
   void render(Graphics g);
-
   /**
    * Sends a message to all components that belong to this entity.
    * @param message the message to send
    * @param args pass along some arguments, can be anything
    */
   void sendMessage(ComponentMessage message, Object args);
+
   void setWorld(World world);
 
   /**
