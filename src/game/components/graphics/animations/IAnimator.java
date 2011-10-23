@@ -4,7 +4,6 @@
 
 package game.components.graphics.animations;
 
-import game.components.graphics.Tile;
 
 public interface IAnimator {
   boolean isFinished();

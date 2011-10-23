@@ -4,8 +4,8 @@
 
 package game.components.interfaces;
 
-import game.components.graphics.Tile;
 import game.components.graphics.animations.IAnimator;
+import game.components.graphics.animations.Tile;
 
 public interface IAnimatedComponent extends IRenderComponent {
   void goToFirstFrame();

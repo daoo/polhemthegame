@@ -22,8 +22,11 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
+import ui.hud.UI;
 
 public class Game implements IMode {
+  private final UI ui;
+
   private GameLevel          level;
   private final GameCampaign campaign;
 
@@ -42,6 +45,9 @@ public class Game implements IMode {
 
   public Game(CampaignData data, int x, int y, int w, int h)
     throws IOException, ParserException, DataException {
+    ui = new UI();
+    Locator.registerUI(ui);
+
     finished = false;
     elapsed = 0;
 
@@ -100,6 +106,7 @@ public class Game implements IMode {
         }
       } else {
         level.update(time);
+        ui.update();
       }
     }
   }
@@ -110,6 +117,7 @@ public class Game implements IMode {
     g.translate(arenaRect.getX1(), arenaRect.getY1());
 
     level.render(g);
+    ui.render(g);
 
     g.popTransform();
   }

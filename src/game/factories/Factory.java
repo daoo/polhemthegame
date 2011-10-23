@@ -6,8 +6,9 @@ package game.factories;
 
 import game.CacheTool;
 import game.actions.RemoveEntity;
-import game.components.ComponentType;
 import game.components.graphics.RSheet;
+import game.components.graphics.debug.LineToOrigin;
+import game.components.graphics.debug.Outliner;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IAnimatedComponent;
@@ -87,11 +88,21 @@ public class Factory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    return Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
-                            (float) Math.cos(ang) * data.speed,
-                            (float) Math.sin(ang) * data.speed,
-                            EntityType.CREEP, data.hitpoints,
-                            walk, death);
+    Entity e  = new Entity(x, y, data.hitbox.width, data.hitbox.height, EntityType.CREEP);
+    Life life = new Life(data.hitpoints);
+
+    e.addLogicComponent(new Movement((float) Math.cos(ang) * data.speed,
+                                     (float) Math.sin(ang) * data.speed));
+    e.addLogicComponent(life);
+    e.addLogicComponent(new SpawnOnDeath(death));
+    e.addLogicComponent(new ActionsOnDeath(new RemoveEntity(e)));
+    e.addRenderComponent(walk);
+
+    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
+    infoBar.add(new Bar(life, Color.green, Color.red));
+    Locator.getUI().addElement(infoBar);
+
+    return e;
   }
 
   private static Color TRANSPARENT = new Color(0, 0, 0, 0);
@@ -101,17 +112,19 @@ public class Factory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
+    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height, EntityType.PLAYER);
+
+    Life life             = new Life(data.hitpoints);
     Inventory inv         = new Inventory(data.startMoney);
     Hand hand             = new Hand(data.handOffset.x, data.handOffset.y);
     SimpleControl control = new SimpleControl(data.speed);
     Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
 
-    IEntity e = Factory.makeUnit(x, y, data.hitbox.width, data.hitbox.height,
-                                 0, 0, EntityType.PLAYER, data.hitpoints,
-                                 walk, death);
-
-    //InfoBar infoBar = (InfoBar) e.getComponent(ComponentType.INFO_BAR);
-    //infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
+    e.addLogicComponent(new Movement(0, 0));
+    e.addLogicComponent(life);
+    e.addLogicComponent(new SpawnOnDeath(death));
+    e.addLogicComponent(new ActionsOnDeath(new RemoveEntity(e)));
+    e.addRenderComponent(walk);
 
     inv.addWeapon(weapon);
     hand.grab(weapon);
@@ -120,26 +133,13 @@ public class Factory {
     e.addRenderComponent(hand);
     e.addLogicComponent(control);
 
-    return e;
-  }
-
-  private static IEntity makeUnit(float x, float y, float width, float height,
-                                  float dx, float dy, EntityType type,
-                                  float maxHP, IAnimatedComponent walkAnim,
-                                  IAnimatedComponent deathAnim) {
-    Entity e = new Entity(x, y, width, height, type);
-
-    Life life = new Life(maxHP);
-
-    InfoBar infoBar = new InfoBar(e, width, 2, 0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
+    infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
+    Locator.getUI().addElement(infoBar);
 
-    e.addLogicComponent(new Movement(dx, dy));
-    e.addLogicComponent(life);
-    e.addLogicComponent(new SpawnOnDeath(deathAnim));
-    e.addLogicComponent(new ActionsOnDeath(new RemoveEntity(e)));
-    e.addRenderComponent(walkAnim);
-    //e.addRenderComponent(infoBar);
+    e.addRenderComponent(new Outliner(true, true));
+    e.addRenderComponent(new LineToOrigin());
 
     return e;
   }

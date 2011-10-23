@@ -5,8 +5,8 @@
 package tests;
 
 import game.components.ComponentType;
-import game.components.graphics.Outliner;
-import game.components.graphics.SolidQuad;
+import game.components.graphics.debug.Outliner;
+import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;

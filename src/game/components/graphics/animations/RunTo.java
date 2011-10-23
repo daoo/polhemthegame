@@ -4,7 +4,6 @@
 
 package game.components.graphics.animations;
 
-import game.components.graphics.Tile;
 
 public class RunTo implements IAnimator {
   private boolean finished;
