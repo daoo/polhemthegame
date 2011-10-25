@@ -5,15 +5,12 @@
 package game.factories;
 
 import game.CacheTool;
-import game.actions.AOEDamage;
-import game.actions.RemoveEntity;
-import game.actions.SpawnDeathAnim;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Idle;
 import game.components.interfaces.IAnimatedComponent;
-import game.components.life.ActionsOnDeath;
+import game.components.life.EffectsOnDeath;
 import game.components.life.Life;
 import game.components.misc.ProjectileDamage;
 import game.components.misc.RangeLimiter;
@@ -23,6 +20,9 @@ import game.components.physics.ProjectileCollision;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
+import game.triggers.effects.AOEDamage;
+import game.triggers.effects.RemoveEntity;
+import game.triggers.effects.SpawnDeathAnim;
 
 import java.io.IOException;
 
@@ -75,9 +75,9 @@ public class ProjectileTemplate {
     e.addLogicComponent(new ProjectileDamage(source, data.damage));
     e.addLogicComponent(new ProjectileCollision());
 
-    ActionsOnDeath actions = new ActionsOnDeath();
-    actions.add(new RemoveEntity(e));
-    e.addLogicComponent(actions);
+    EffectsOnDeath effects = new EffectsOnDeath();
+    effects.add(new RemoveEntity(e));
+    e.addLogicComponent(effects);
 
     e.addRenderComponent(anim);
 
@@ -87,8 +87,8 @@ public class ProjectileTemplate {
                                         data.aoe.explosionSprite.offset.y,
                                         explosion, new Idle());
 
-      actions.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
-      actions.add(new SpawnDeathAnim(e.getBody(),
+      effects.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
+      effects.add(new SpawnDeathAnim(e.getBody(),
                                      explosionAnim.getTileWidth(),
                                      explosionAnim.getTileHeight(),
                                      explosionAnim));

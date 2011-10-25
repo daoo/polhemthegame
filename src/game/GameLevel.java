@@ -1,27 +1,16 @@
-/*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
- */
-
 package game;
 
 import game.entities.Players;
-import game.factories.Factory;
-import game.states.CreepsState;
-import game.states.DoubleState;
-import game.states.IRoundState;
-import game.states.StateIterator;
-import game.states.TransitionState;
+import game.factories.WorldFactory;
 import game.time.GameTime;
+import game.triggers.Trigger;
+import game.triggers.condition.AnyPlayerDeadCondition;
 import game.world.World;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.LevelData;
-import loader.data.json.LevelData.CreepStateData;
-import loader.data.json.LevelData.StateData;
-import loader.data.json.LevelData.TextStateData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
@@ -32,33 +21,26 @@ import org.newdawn.slick.Image;
 public class GameLevel {
   /**
    * The world, rendering is happening relative to what's actually availible.
-   * I.e. all constraints, HUD stuff etc have been accounted for. Adding something at
-   * (0, 0) would make it appear in the top left of the area units are allowed to
-   * move around in.
+   * I.e. all constraints, HUD stuff have been accounted for. Adding something at
+   * (0, 0) would make it appear in the top left, just below the HUD.
    */
-  private final World             world;
-  private final Image             background;
-  private final Players           players;
+  private final World   world;
+  private final Image   background;
 
   /**
    * The area availible for the current level.
-   * E.g. with constraints for the active level. Relative to the visible background.
+   * I.e. with constraints for the active level. Relative to the visible background.
    */
-  private final Rectangle         rect;
+  private final Rectangle rect;
 
   /**
    * The area actually used.
    * Has the same size as rect but top left will always be (0, 0).
    */
-  private final Rectangle         availible;
+  private final Rectangle availible;
 
-  private final DoubleState gameOverState;
-  private final LinkedList<IRoundState> states;
-  private final StateIterator current;
-
-  public GameLevel(LevelData level, Players players, float width, float height,
-      DoubleState gameOverState) throws DataException, IOException, ParserException {
-    // World and it's rectangles
+  public GameLevel(LevelData level, Players players, float width, float height)
+      throws DataException, IOException, ParserException {
     float left   = level.constraints[0];
     float top    = level.constraints[1];
     float bottom = level.constraints[2];
@@ -68,33 +50,16 @@ public class GameLevel {
     availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
 
     background = CacheTool.getImage(Locator.getCache(), level.background);
-    world      = Factory.makeWorld(availible, players);
 
-    // Players
-    this.players = players;
-    players.reposition(availible);
+    world = WorldFactory.makeWorld(availible, players);
 
-    // Setup level and it's states
-    this.states        = new LinkedList<IRoundState>();
-    this.gameOverState = gameOverState;
-
-    for (String state : level.states) {
-      StateData sd = level.findState(state);
-
-      if (sd.type.equals("text")) {
-        TextStateData data = (TextStateData) sd;
-        states.add(new TransitionState(
-          CacheTool.getImage(Locator.getCache(), data.text),
-          data.duration, availible));
-      } else if (sd.type.equals("creeps")) {
-        states.add(new CreepsState(availible, (CreepStateData) sd));
-      } else if (sd.type.equals("boss")) {
-        throw new UnsupportedOperationException("Not implemented");
-        //states.add(new BossState(availible, (BossStateData) sd));
-      }
+    if (level.creeps != null) {
+      WorldFactory.makeCreepTriggers(level.creeps, availible, world);
     }
 
-    current = new StateIterator(states);
+    Trigger gameOver = new Trigger(false);
+    gameOver.addCondition(new AnyPlayerDeadCondition());
+    // TODO: gameOver.addEffect(new GameOverEffect);
   }
 
   public void render(Graphics g) {
@@ -105,40 +70,14 @@ public class GameLevel {
 
     world.render(g);
 
-    current.getCurrent().render(g);
-
     g.popTransform();
   }
 
   public void update(GameTime time) {
-    if (current.getCurrent().isFinished()) {
-      nextState();
-    } else {
-      current.getCurrent().update(time, world);
-
-      world.update(time);
-
-      if (!players.isAlive() && !current.isFinished()) {
-        IRoundState oldState = current.getCurrent();
-
-        current.endNowWith(gameOverState);
-        gameOverState.start(oldState);
-      }
-    }
-  }
-
-  public void start() {
-    nextState();
+    world.update(time);
   }
 
   public boolean isFinished() {
-    return current.isFinished()
-        || (current.getCurrent().isFinished() && !current.hasNext());
-  }
-
-  private void nextState() {
-    if (current.hasNext()) {
-      current.next();
-    }
+    return false; // TODO
   }
 }

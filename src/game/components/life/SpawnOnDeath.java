@@ -4,7 +4,6 @@
 
 package game.components.life;
 
-import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IAnimatedComponent;
@@ -13,6 +12,7 @@ import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.effects.SpawnWithSend;
 
 public class SpawnOnDeath implements ILogicComponent {
   private IEntity owner;

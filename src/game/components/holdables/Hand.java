@@ -4,7 +4,6 @@
 
 package game.components.holdables;
 
-import game.actions.SpawnWithSend;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
@@ -13,6 +12,7 @@ import game.components.misc.RangeLimiter;
 import game.entities.IEntity;
 import game.factories.ProjectileTemplate;
 import game.time.GameTime;
+import game.triggers.effects.SpawnWithSend;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;

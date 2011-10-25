@@ -13,7 +13,7 @@ public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(IEntity sender, ObjectEventArgs args) {
     if (args.getObject().getType() == EntityType.CREEP) {
-      float dmg = 10;
+      float dmg = 10; // FIXME: Magic number
 
       for (IEntity e : args.getWorld().get(EntityType.PLAYER)) {
         e.sendMessage(ComponentMessage.DAMAGE, dmg);

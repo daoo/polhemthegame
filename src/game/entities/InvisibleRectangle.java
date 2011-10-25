@@ -6,7 +6,6 @@ package game.entities;
 
 import java.util.Collection;
 
-import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
@@ -14,6 +13,7 @@ import game.components.interfaces.IRenderComponent;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 import math.Rectangle;
 
@@ -34,12 +34,12 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addAction(IAction action) {
+  public void addAction(IEffect effect) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addActions(Collection<IAction> actions) {
+  public void addActions(Collection<IEffect> effects) {
     throw new UnsupportedOperationException("Not allowed");
   }
 

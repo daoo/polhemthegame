@@ -7,7 +7,7 @@ package game.entities;
 import game.CacheTool;
 import game.components.ComponentType;
 import game.components.life.Life;
-import game.factories.Factory;
+import game.factories.EntityFactory;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -35,7 +35,7 @@ public class Players implements Iterable<IEntity> {
     PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
-      players.add(Factory.makePlayer(0, 0, data.players.get(i)));
+      players.add(EntityFactory.makePlayer(0, 0, data.players.get(i)));
       j = (j + 1) % data.players.size();
     }
   }

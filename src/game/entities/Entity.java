@@ -4,12 +4,12 @@
 
 package game.entities;
 
-import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 
 import java.util.Collection;
@@ -21,7 +21,7 @@ import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
   protected final Rectangle body;
-  private final LinkedList<IAction> actions;
+  private final LinkedList<IEffect> effects;
 
   private final LinkedList<IRenderComponent> renders;
 
@@ -33,7 +33,7 @@ public class Entity implements IEntity {
   public Entity(float x, float y, float w, float h, EntityType type) {
     body = new Rectangle(x, y, w, h);
 
-    actions = new LinkedList<IAction>();
+    effects = new LinkedList<IEffect>();
 
     updates = new LinkedList<ILogicComponent>();
     renders = new LinkedList<IRenderComponent>();
@@ -42,13 +42,13 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void addAction(IAction action) {
-    actions.add(action);
+  public void addAction(IEffect effect) {
+    effects.add(effect);
   }
 
   @Override
-  public void addActions(Collection<IAction> collection) {
-    actions.addAll(collection);
+  public void addActions(Collection<IEffect> collection) {
+    effects.addAll(collection);
   }
 
   @Override
@@ -133,10 +133,10 @@ public class Entity implements IEntity {
       comp.update(time);
     }
 
-    for (IAction action : actions) {
-      action.execute(time, world);
+    for (IEffect effect : effects) {
+      effect.execute(time, world);
     }
-    actions.clear();
+    effects.clear();
   }
 
   @Override

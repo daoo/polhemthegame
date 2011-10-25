@@ -1,11 +1,12 @@
-package game.actions;
+package game.triggers.effects;
 
 import ui.IUIElement;
 import main.Locator;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 
-public class RemoveUIElement implements IAction {
+public class RemoveUIElement implements IEffect {
   private final IUIElement element;
 
   public RemoveUIElement(IUIElement element) {

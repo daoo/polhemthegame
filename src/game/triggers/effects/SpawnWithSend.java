@@ -2,14 +2,15 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.actions;
+package game.triggers.effects;
 
 import game.components.ComponentMessage;
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 
-public class SpawnWithSend implements IAction {
+public class SpawnWithSend implements IEffect {
   private final IEntity entity;
   private final ComponentMessage message;
   private final Object args;

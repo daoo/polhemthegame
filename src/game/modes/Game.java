@@ -4,12 +4,9 @@
 
 package game.modes;
 
-import game.CacheTool;
 import game.GameCampaign;
 import game.GameLevel;
 import game.entities.Players;
-import game.states.DoubleState;
-import game.states.TransitionState;
 import game.time.GameTime;
 
 import java.io.IOException;
@@ -29,8 +26,6 @@ public class Game implements IMode {
 
   private GameLevel          level;
   private final GameCampaign campaign;
-
-  private final DoubleState  gameOverState;
 
   private final Players      players;
 
@@ -56,11 +51,6 @@ public class Game implements IMode {
 
     players = new Players(1);
 
-    gameOverState = new DoubleState(
-      new TransitionState(
-        CacheTool.getImage(Locator.getCache(), "textures/text/gameover.png"),
-        2.5f, arenaRect));
-
     nextLevel();
   }
 
@@ -70,10 +60,7 @@ public class Game implements IMode {
     if (players.isAlive() && campaign.hasMoreLevels()) {
       campaign.nextLevel();
       level = new GameLevel(campaign.getCurrentLevel(), players,
-                            arenaRect.getWidth(), arenaRect.getHeight(),
-                            gameOverState);
-
-      level.start();
+                            arenaRect.getWidth(), arenaRect.getHeight());
     } else {
       finished = true;
     }

@@ -4,12 +4,12 @@
 
 package game.entities;
 
-import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 
 import java.util.Collection;
@@ -23,8 +23,8 @@ import org.newdawn.slick.Graphics;
  * More specifically it's an component container.
  */
 public interface IEntity {
-  void addAction(IAction action);
-  void addActions(Collection<IAction> actions);
+  void addAction(IEffect effect);
+  void addActions(Collection<IEffect> effects);
 
   void addLogicComponent(ILogicComponent comp);
   void addRenderComponent(IRenderComponent comp);

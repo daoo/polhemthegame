@@ -4,31 +4,31 @@
 
 package game.components.life;
 
-import game.actions.IAction;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.IEffect;
 
 import java.util.LinkedList;
 
-public class ActionsOnDeath implements ILogicComponent {
-  private final LinkedList<IAction> actions;
+public class EffectsOnDeath implements ILogicComponent {
+  private final LinkedList<IEffect> effects;
 
   private IEntity owner;
 
-  public ActionsOnDeath() {
-    actions = new LinkedList<IAction>();
+  public EffectsOnDeath() {
+    effects = new LinkedList<IEffect>();
   }
 
-  public ActionsOnDeath(IAction action) {
+  public EffectsOnDeath(IEffect effect) {
     this();
-    actions.add(action);
+    effects.add(effect);
   }
 
-  public void add(IAction action) {
-    actions.add(action);
+  public void add(IEffect effect) {
+    effects.add(effect);
   }
 
   @Override
@@ -39,7 +39,7 @@ public class ActionsOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      owner.addActions(actions);
+      owner.addActions(effects);
     }
   }
 

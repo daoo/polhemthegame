@@ -2,13 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.actions;
+package game.triggers.effects;
 
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 
-public class RemoveEntity implements IAction {
+public class RemoveEntity implements IEffect {
   private final IEntity entity;
 
   public RemoveEntity(IEntity entity) {

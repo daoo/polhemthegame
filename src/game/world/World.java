@@ -8,9 +8,10 @@ import game.entities.EntityType;
 import game.entities.Groups;
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.ITrigger;
+import game.triggers.Trigger;
 
 import java.util.LinkedList;
-
 
 import org.newdawn.slick.Graphics;
 
@@ -18,10 +19,13 @@ public class World {
   private final WorldContainer entities;
   private final LinkedList<IEntity> toAdd, toRemove;
 
+  private final LinkedList<ITrigger> triggers;
+
   public World() {
     toAdd    = new LinkedList<IEntity>();
     toRemove = new LinkedList<IEntity>();
     entities = new WorldContainer();
+    triggers = new LinkedList<ITrigger>();
   }
 
   /**
@@ -70,5 +74,10 @@ public class World {
 
     entities.add(toAdd);
     toAdd.clear();
+  }
+
+  public void addTrigger(Trigger trigger) {
+    trigger.setWorld(this);
+    triggers.add(trigger);
   }
 }

@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.actions;
+package game.triggers.effects;
 
 import game.components.ComponentMessage;
 import game.components.interfaces.IAnimatedComponent;
@@ -10,10 +10,11 @@ import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
 import game.time.GameTime;
+import game.triggers.IEffect;
 import game.world.World;
 import math.Rectangle;
 
-public class SpawnDeathAnim implements IAction {
+public class SpawnDeathAnim implements IEffect {
   private final Rectangle body;
   private final float width, height;
   private final IAnimatedComponent anim;
