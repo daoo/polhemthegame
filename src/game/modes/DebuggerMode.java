@@ -7,6 +7,8 @@ package game.modes;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 
+import states.StateManager;
+
 public class DebuggerMode implements IMode {
   private final GameMode game;
   private final float framelength;
@@ -20,10 +22,10 @@ public class DebuggerMode implements IMode {
   }
 
   @Override
-  public void update(float dt) {
+  public void update(StateManager stateManager, float dt) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F5)) {
       if (!F5_down) {
-        game.update(framelength);
+        game.update(stateManager, framelength);
       }
 
       F5_down = true;

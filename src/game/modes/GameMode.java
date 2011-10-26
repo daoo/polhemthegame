@@ -76,8 +76,7 @@ public class GameMode implements IMode {
         arenaRect.getHeight()
       );
     } else {
-      // TODO: Credits
-      // stateManager.enterCredits();
+      stateManager.enterCredits();
     }
   }
 
@@ -88,19 +87,16 @@ public class GameMode implements IMode {
    * @param dt Approximate length of the current frame in seconds.
    */
   @Override
-  public void update(float dt) {
+  public void update(StateManager stateManager, float dt) {
     if (level.isFinished()) {
       try {
-        nextLevel();
+        nextLevel(stateManager);
       } catch (DataException ex) {
-        ex.printStackTrace();
-        System.exit(1);
+        stateManager.handleException(ex);
       } catch (ParserException ex) {
-        ex.printStackTrace();
-        System.exit(1);
+        stateManager.handleException(ex);
       } catch (IOException ex) {
-        ex.printStackTrace();
-        System.exit(1);
+        stateManager.handleException(ex);
       }
     } else {
       elapsed += dt;

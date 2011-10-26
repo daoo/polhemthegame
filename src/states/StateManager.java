@@ -9,6 +9,8 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.parser.ParserException;
 
+import org.newdawn.slick.SlickException;
+
 public class StateManager {
   private boolean exit;
 
@@ -30,15 +32,18 @@ public class StateManager {
     exit = true;
   }
 
+  public void handleException(Exception ex) {
+    ex.printStackTrace();
+    quit();
+  }
+
   public void enterMainMenu() {
     try {
       currentState = new MenuState(this);
-    } catch (ParserException e) {
-      e.printStackTrace();
-      quit();
-    } catch (IOException e) {
-      e.printStackTrace();
-      quit();
+    } catch (ParserException ex) {
+      handleException(ex);
+    } catch (IOException ex) {
+      handleException(ex);
     }
   }
 
@@ -46,14 +51,23 @@ public class StateManager {
     try {
       currentState = new GameState();
     } catch (ParserException ex) {
-      ex.printStackTrace();
-      quit();
+      handleException(ex);
     } catch (DataException ex) {
-      ex.printStackTrace();
-      quit();
+      handleException(ex);
     } catch (IOException ex) {
-      ex.printStackTrace();
-      quit();
+      handleException(ex);
+    }
+  }
+
+  public void enterCredits() {
+    try {
+      currentState = new StateCredits();
+    } catch (ParserException ex) {
+      handleException(ex);
+    } catch (SlickException ex) {
+      handleException(ex);
+    } catch (IOException ex) {
+      handleException(ex);
     }
   }
 }

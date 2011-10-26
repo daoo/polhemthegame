@@ -46,11 +46,11 @@ public class GameState implements IState {
   }
 
   @Override
-  public void update(StateManager stateGame, float delta) {
+  public void update(StateManager stateManager, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
-      stateGame.quit();
+      stateManager.quit();
     } else {
-      mode.update(delta);
+      mode.update(stateManager, delta);
     }
   }
 }
