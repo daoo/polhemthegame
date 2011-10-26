@@ -51,9 +51,9 @@ public class CollisionHelper {
     }
 
     if (e.y < cont.getY1()) {
-      e.y = 0;
+      e.y = cont.getY1();
     } else if ((e.y + entity.getHeight()) >= cont.getY2()) {
-      e.y = cont.getHeight() - entity.getHeight();
+      e.y = cont.getY2() - entity.getHeight();
     }
 
     entity.setPosition(e);
