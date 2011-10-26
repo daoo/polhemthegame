@@ -18,6 +18,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import states.StateManager;
+
 
 public class Launcher extends BasicGame {
   public static final String NAME    = "PolhemTheGame";

@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package main;
+package states;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;

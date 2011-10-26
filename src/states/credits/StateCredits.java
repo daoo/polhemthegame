@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package ui.credits;
+package states.credits;
 
 import game.CacheTool;
 
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import loader.parser.ParserException;
-import main.StateManager;
-import main.IState;
 import main.Launcher;
 import main.Locator;
 
@@ -23,6 +21,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
+
+import states.IState;
+import states.StateManager;
 
 public class StateCredits implements IState {
   private static final int FONT_SIZE_SMALL = 24;

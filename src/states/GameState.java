@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package main;
+package states;
 
 import game.modes.DebuggerMode;
 import game.modes.GameMode;
@@ -14,6 +14,8 @@ import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.GsonParser;
 import loader.parser.ParserException;
+import main.Launcher;
+import main.Locator;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
@@ -25,10 +27,10 @@ public class GameState implements IState {
   private final IMode mode;
 
   public GameState() throws ParserException, IOException, DataException {
-    CampaignData campaign = (CampaignData)
-      Locator.getCache().getCold(
-        "campaigns/polhem.js",
-        new GsonParser(CampaignData.class));
+    CampaignData campaign = (CampaignData) Locator.getCache().getCold(
+      "campaigns/polhem.js",
+      new GsonParser(CampaignData.class)
+    );
 
     GameMode game = new GameMode(campaign, Launcher.WIDTH, Launcher.HEIGHT);
     if (DEBUG) {

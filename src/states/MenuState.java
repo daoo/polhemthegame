@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package ui;
+package states;
 
 import game.CacheTool;
 
@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import loader.parser.ParserException;
-import main.StateManager;
-import main.IState;
 import main.Locator;
 
 import org.lwjgl.input.Keyboard;
@@ -19,6 +17,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ui.UIEvent;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItem;

@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package ui.credits;
+package states.credits;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
