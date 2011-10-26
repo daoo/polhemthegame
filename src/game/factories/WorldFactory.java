@@ -5,6 +5,7 @@
 package game.factories;
 
 import game.CacheTool;
+import game.components.ComponentMessage;
 import game.components.misc.MovementConstraint;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
@@ -82,9 +83,15 @@ public class WorldFactory {
       IEntity creep = EntityFactory.makeCreep(
         getCreepX(rectWorld, creepData.hitbox.width),
         getCreepY(rectWorld, creepData.hitbox.height),
-        (float) -Math.PI, creepData);
+        (float) -Math.PI,
+        creepData
+      );
 
-      t.addEffect(new SpawnWithSend(creep, null, null));
+      t.addEffect(
+        new SpawnWithSend(
+          creep, ComponentMessage.START_ANIMATION, null
+        )
+      );
 
       world.addTrigger(t);
     }
