@@ -29,7 +29,7 @@ public class Launcher extends BasicGame {
   public static final int       MAX_FPS    = 100;
   public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-  private GameStateManager stateGame;
+  private StateManager stateGame;
 
   public Launcher() {
     super(NAME + " - " + VERSION);
@@ -61,7 +61,7 @@ public class Launcher extends BasicGame {
   public void init(GameContainer container) throws SlickException {
     container.setTargetFrameRate(60);
 
-    stateGame = new GameStateManager();
+    stateGame = new StateManager();
     stateGame.enterMainMenu();
   }
 

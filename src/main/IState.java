@@ -7,7 +7,7 @@ package main;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public interface IGameState {
+public interface IState {
   void render(Graphics g) throws SlickException;
 
   /**
@@ -15,5 +15,5 @@ public interface IGameState {
    * @param stateGame the game state manager
    * @param delta frame length in seconds
    */
-  void update(GameStateManager stateGame, float delta);
+  void update(StateManager stateGame, float delta);
 }

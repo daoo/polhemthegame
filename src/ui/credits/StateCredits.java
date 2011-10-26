@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import loader.parser.ParserException;
-import main.GameStateManager;
-import main.IGameState;
+import main.StateManager;
+import main.IState;
 import main.Launcher;
 import main.Locator;
 
@@ -24,7 +24,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
-public class StateCredits implements IGameState {
+public class StateCredits implements IState {
   private static final int FONT_SIZE_SMALL = 24;
   private static final int FONT_SIZE_BIG = 30;
 
@@ -86,7 +86,7 @@ public class StateCredits implements IGameState {
   }
 
   @Override
-  public void update(GameStateManager stateGame, float delta) {
+  public void update(StateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       stateGame.enterMainMenu();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {

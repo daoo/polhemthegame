@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import loader.parser.ParserException;
-import main.GameStateManager;
-import main.IGameState;
+import main.StateManager;
+import main.IState;
 import main.Locator;
 
 import org.lwjgl.input.Keyboard;
@@ -24,11 +24,11 @@ import ui.menu.MenuButton;
 import ui.menu.MenuItem;
 import ui.menu.MenuItemDisabled;
 
-public class MenuState implements IGameState {
+public class MenuState implements IState {
   private final Image background;
   private final Menu  menu;
 
-  public MenuState(final GameStateManager manager)
+  public MenuState(final StateManager manager)
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
@@ -51,7 +51,7 @@ public class MenuState implements IGameState {
   }
 
   @Override
-  public void update(GameStateManager stateGame, float delta) {
+  public void update(StateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {

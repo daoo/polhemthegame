@@ -19,12 +19,12 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public class GamePlay implements IGameState {
+public class GameState implements IState {
   private static final boolean DEBUG = false;
 
   private final IMode mode;
 
-  public GamePlay() throws ParserException, IOException, DataException {
+  public GameState() throws ParserException, IOException, DataException {
     CampaignData campaign = (CampaignData)
       Locator.getCache().getCold(
         "campaigns/polhem.js",
@@ -44,7 +44,7 @@ public class GamePlay implements IGameState {
   }
 
   @Override
-  public void update(GameStateManager stateGame, float delta) {
+  public void update(StateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else {

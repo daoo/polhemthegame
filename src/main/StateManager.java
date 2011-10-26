@@ -10,16 +10,16 @@ import loader.data.DataException;
 import loader.parser.ParserException;
 import ui.MenuState;
 
-public class GameStateManager {
+public class StateManager {
   private boolean exit;
 
-  private IGameState currentState;
+  private IState currentState;
 
-  public GameStateManager() {
+  public StateManager() {
     exit = false;
   }
 
-  public IGameState getCurrentState() {
+  public IState getCurrentState() {
     return currentState;
   }
 
@@ -45,7 +45,7 @@ public class GameStateManager {
 
   public void enterSinglePlayer() {
     try {
-      currentState = new GamePlay();
+      currentState = new GameState();
     } catch (ParserException ex) {
       ex.printStackTrace();
       quit();
