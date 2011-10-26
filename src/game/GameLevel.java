@@ -8,6 +8,7 @@ import game.entities.Players;
 import game.factories.WorldFactory;
 import game.time.GameTime;
 import game.triggers.Trigger;
+import game.triggers.condition.AllCreepsDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
 import game.world.World;
 
@@ -28,60 +29,61 @@ public class GameLevel {
    * I.e. all constraints, HUD stuff have been accounted for. Adding something at
    * (0, 0) would make it appear in the top left, just below the HUD.
    */
-  private final World   world;
-  private final Image   background;
+  private final World world;
+  private final Image background;
 
   /**
    * The area availible for the current level.
-   * I.e. with constraints for the active level. Relative to the visible background.
+   * I.e. with constraints for the active level, relative to the visible
+   * background.
    */
   private final Rectangle rect;
 
-  /**
-   * The area actually used.
-   * Has the same size as rect but top left will always be (0, 0).
-   */
-  private final Rectangle availible;
-
   public GameLevel(LevelData level, Players players, float width, float height)
       throws DataException, IOException, ParserException {
+    background = CacheTool.getImage(Locator.getCache(), level.background);
+
     float left   = level.constraints[0];
     float top    = level.constraints[1];
     float bottom = level.constraints[2];
     float right  = level.constraints[3];
 
-    rect      = new Rectangle(left , top , width - left - right , height - top - bottom);
-    availible = new Rectangle(0    , 0   , rect.getWidth()      , rect.getHeight());
+    rect  = new Rectangle(left, top, width - left - right, height - top - bottom);
+    world = WorldFactory.makeWorld(rect, players);
 
-    background = CacheTool.getImage(Locator.getCache(), level.background);
-
-    world = WorldFactory.makeWorld(availible, players);
-
+    // Setup creep triggers
     if (level.creeps != null) {
-      WorldFactory.makeCreepTriggers(level.creeps, availible, world);
+      WorldFactory.makeCreepTriggers(level.creeps, rect, world);
+    }
+
+    // Setup eventual boss triggers
+    Trigger levelComplete = new Trigger(false);
+    // TODO: levelComplete.addEffect(new LevelCompleteEffect());
+    world.addTrigger(levelComplete);
+    if (level.boss != null) {
+      Trigger spawnBoss = new Trigger(false);
+      spawnBoss.addCondition(new AllCreepsDeadCondition());
+      // TODO: spawnBoss.addEffect(new SpawnBossEffect());
+      world.addTrigger(spawnBoss);
+
+      // TODO: levelComplete.addCondition(new EntityDeadCondition(boss));
+    } else {
+      levelComplete.addCondition(new AllCreepsDeadCondition());
     }
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyPlayerDeadCondition());
-    // TODO: gameOver.addEffect(new GameOverEffect);
+    // TODO: gameOver.addEffect(new GameOverEffect());
+    world.addTrigger(gameOver);
   }
 
   public void render(Graphics g) {
     g.drawImage(background, 0, 0);
 
-    g.pushTransform();
-    g.translate(rect.getX1(), rect.getY1());
-
     world.render(g);
-
-    g.popTransform();
   }
 
   public void update(GameTime time) {
     world.update(time);
-  }
-
-  public boolean isFinished() {
-    return false; // TODO
   }
 }

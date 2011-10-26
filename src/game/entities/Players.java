@@ -35,17 +35,29 @@ public class Players implements Iterable<IEntity> {
     PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
-      players.add(EntityFactory.makePlayer(0, 0, data.players.get(i)));
+      players.add(EntityFactory.makePlayer(data.players.get(i)));
       j = (j + 1) % data.players.size();
     }
   }
 
+  /**
+   * Reposition players in the rectangle.
+   * Places the players evenly spaced on the y axis with 10% of the width
+   * as margin on the left side of the players.
+   * @param rect the rectangle to align the players inside
+   */
   public void reposition(Rectangle rect) {
+    float dx = 0;
     float dy = rect.getHeight() / (count * 2);
-    Vector2 v = new Vector2(rect.getWidth() * Players.STARING_X, dy);
+
+    float x = rect.getX1() + rect.getWidth() * Players.STARING_X;
+    float y = rect.getY1() + dy;
+
     for (IEntity p : players) {
-      p.getBody().setPosition(v);
-      v.y += dy;
+      p.getBody().setPosition(new Vector2(x, y - p.getBody().getHeight() / 2.0f));
+
+      x += dx;
+      y += dy;
     }
   }
 

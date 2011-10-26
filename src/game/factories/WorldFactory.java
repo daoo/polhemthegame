@@ -45,10 +45,10 @@ public class WorldFactory {
 
     World w = new World();
 
-    InvisibleRectangle rectBig =
-      new InvisibleRectangle(
-        -rectWorld.getWidth(), -rectWorld.getHeight(),
-        3 * rectWorld.getWidth(), 3 * rectWorld.getHeight());
+    InvisibleRectangle rectBig = new InvisibleRectangle(
+      -1 * rectWorld.getWidth(), -1 * rectWorld.getHeight(),
+       3 * rectWorld.getWidth(),  3 * rectWorld.getHeight()
+    );
     rectBig.onNotContainsEvent.add(new KillEvent());
     w.add(rectBig);
 
@@ -93,6 +93,6 @@ public class WorldFactory {
   }
 
   private static float getCreepY(Rectangle rect, int height) {
-    return Locator.getRandom().nextFloat(0.0f, rect.getY2() - height);
+    return Locator.getRandom().nextFloat(rect.getY1(), rect.getY2() - height);
   }
 }

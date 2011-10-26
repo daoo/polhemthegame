@@ -9,6 +9,4 @@ import org.newdawn.slick.Graphics;
 public interface IMode {
   void update(float dt);
   void render(Graphics g);
-
-  boolean isFinished();
 }

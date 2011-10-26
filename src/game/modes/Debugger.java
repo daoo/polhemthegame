@@ -36,9 +36,4 @@ public class Debugger implements IMode {
   public void render(Graphics g) {
     game.render(g);
   }
-
-  @Override
-  public boolean isFinished() {
-    return game.isFinished();
-  }
 }

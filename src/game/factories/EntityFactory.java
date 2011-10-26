@@ -59,12 +59,16 @@ public class EntityFactory {
 
   private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
-  public static IEntity makePlayer(float x, float y, PlayerData data)
+  public static IEntity makePlayer(PlayerData data)
       throws ParserException, DataException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height, EntityType.PLAYER);
+    Entity e = new Entity(
+      0, 0,
+      data.hitbox.width, data.hitbox.height,
+      EntityType.PLAYER
+    );
 
     Life life             = new Life(data.hitpoints);
     Inventory inv         = new Inventory(data.startMoney);

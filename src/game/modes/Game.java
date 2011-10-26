@@ -24,10 +24,10 @@ import ui.hud.UI;
 public class Game implements IMode {
   private final UI ui;
 
-  private GameLevel          level;
   private final GameCampaign campaign;
+  private GameLevel level;
 
-  private final Players      players;
+  private final Players players;
 
   /**
    * Describes the entire area availible to the game (non-ui stuff).
@@ -35,7 +35,7 @@ public class Game implements IMode {
    */
   private final Rectangle    arenaRect;
 
-  private boolean            finished;
+  private boolean            levelFinished;
   private float              elapsed;
 
   public Game(CampaignData data, int x, int y, int w, int h)
@@ -43,7 +43,7 @@ public class Game implements IMode {
     ui = new UI();
     Locator.registerUI(ui);
 
-    finished = false;
+    levelFinished = false;
     elapsed = 0;
 
     arenaRect = new Rectangle(x, y, w, h);
@@ -57,12 +57,12 @@ public class Game implements IMode {
   private void nextLevel()
     throws DataException, ParserException, IOException {
 
-    if (players.isAlive() && campaign.hasMoreLevels()) {
+    if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
       level = new GameLevel(campaign.getCurrentLevel(), players,
                             arenaRect.getWidth(), arenaRect.getHeight());
     } else {
-      finished = true;
+      // TODO: Credits
     }
   }
 
@@ -74,21 +74,21 @@ public class Game implements IMode {
    */
   @Override
   public void update(float dt) {
-    if (!finished) {
+    if (!levelFinished) {
       elapsed += dt;
       GameTime time = new GameTime(dt, elapsed);
 
-      if (level.isFinished()) {
+      if (levelFinished) {
         try {
           nextLevel();
-        } catch (DataException e) {
-          e.printStackTrace();
+        } catch (DataException ex) {
+          ex.printStackTrace();
           System.exit(1);
-        } catch (ParserException e) {
-          e.printStackTrace();
+        } catch (ParserException ex) {
+          ex.printStackTrace();
           System.exit(1);
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (IOException ex) {
+          ex.printStackTrace();
           System.exit(1);
         }
       } else {
@@ -109,8 +109,7 @@ public class Game implements IMode {
     g.popTransform();
   }
 
-  @Override
-  public boolean isFinished() {
-    return finished;
+  public void levelFinished() {
+    levelFinished = true;
   }
 }
