@@ -19,8 +19,6 @@ import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import ui.hud.ShopUI;
-
 public class GamePlay implements IGameState {
   private static final boolean DEBUG = false;
 
@@ -32,12 +30,11 @@ public class GamePlay implements IGameState {
         "campaigns/polhem.js",
         new GsonParser(CampaignData.class));
 
+    Game game = new Game(campaign, Launcher.WIDTH, Launcher.HEIGHT);
     if (DEBUG) {
-      mode = new Debugger(new Game(campaign, 0, ShopUI.HEIGHT,
-        Launcher.WIDTH, Launcher.HEIGHT - (2 * ShopUI.HEIGHT)));
+      mode = new Debugger(game);
     } else {
-      mode = new Game(campaign, 0, ShopUI.HEIGHT,
-        Launcher.WIDTH, Launcher.HEIGHT - (2 * ShopUI.HEIGHT));
+      mode = game;
     }
   }
 

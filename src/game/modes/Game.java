@@ -19,6 +19,7 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
+import ui.hud.ShopUI;
 import ui.hud.UI;
 
 public class Game implements IMode {
@@ -38,16 +39,16 @@ public class Game implements IMode {
   private boolean            levelFinished;
   private float              elapsed;
 
-  public Game(CampaignData data, int x, int y, int w, int h)
+  public Game(CampaignData data, int width, int height)
     throws IOException, ParserException, DataException {
     ui = new UI();
     Locator.registerUI(ui);
 
     levelFinished = false;
-    elapsed = 0;
+    elapsed       = 0;
 
-    arenaRect = new Rectangle(x, y, w, h);
-    campaign = new GameCampaign(data);
+    arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
+    campaign  = new GameCampaign(data);
 
     players = new Players(1);
 
