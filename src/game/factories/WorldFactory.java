@@ -52,9 +52,11 @@ public class WorldFactory {
     rectBig.onNotContainsEvent.add(new KillEvent());
     w.add(rectBig);
 
-    InvisibleRectangle rectCreepKiller =
-      new InvisibleRectangle(-rectWorld.getWidth(), 0,
-                             rectWorld.getWidth(), rectWorld.getHeight());
+    InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
+      -rectWorld.getWidth(), 0,
+       rectWorld.getWidth(), rectWorld.getHeight()
+    );
+
     rectCreepKiller.onContainsEvent.add(new KillEvent());
     rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
     w.add(rectCreepKiller);
