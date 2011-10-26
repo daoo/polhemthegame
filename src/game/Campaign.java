@@ -13,14 +13,11 @@ import loader.parser.ParserException;
 import main.Locator;
 
 public class Campaign {
-  private final CampaignData     campaign;
-  private LevelData              currentLevel;
+  private LevelData currentLevel;
   private final Iterator<String> iterator;
 
   public Campaign(CampaignData data) {
-    campaign = data;
-
-    iterator = campaign.levels.iterator();
+    iterator = data.levels.iterator();
   }
 
   public void nextLevel() throws ParserException, IOException {

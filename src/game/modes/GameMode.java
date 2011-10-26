@@ -19,6 +19,7 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
+import states.StateManager;
 import ui.hud.ShopUI;
 import ui.hud.UI;
 
@@ -34,36 +35,49 @@ public class GameMode implements IMode {
    * Describes the entire area availible to the game (non-ui stuff).
    * Relative to the upper left corner of the game window.
    */
-  private final Rectangle    arenaRect;
+  private final Rectangle arenaRect;
 
-  private boolean            levelFinished;
-  private float              elapsed;
+  /**
+   * How much time have elapsed since we started.
+   */
+  private float elapsed;
 
   public GameMode(CampaignData data, int width, int height)
-    throws IOException, ParserException, DataException {
-    ui = new UI();
-    Locator.registerUI(ui);
+      throws IOException, ParserException, DataException {
+    if (data.levels.isEmpty()) {
+      throw new IllegalArgumentException("No levels in campaing");
+    }
 
-    levelFinished = false;
-    elapsed       = 0;
-
+    elapsed   = 0;
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
     campaign  = new Campaign(data);
+    players   = new Players(1); // TODO: Coop
 
-    players = new Players(1);
+    campaign.nextLevel();
+    level = new Level(
+      campaign.getCurrentLevel(),
+      players,
+      arenaRect.getWidth(),
+      arenaRect.getHeight()
+    );
 
-    nextLevel();
+    ui = new UI();
+    Locator.registerUI(ui);
   }
 
-  private void nextLevel()
+  private void nextLevel(StateManager stateManager)
       throws DataException, ParserException, IOException {
-
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
-      level = new Level(campaign.getCurrentLevel(), players,
-                            arenaRect.getWidth(), arenaRect.getHeight());
+      level = new Level(
+        campaign.getCurrentLevel(),
+        players,
+        arenaRect.getWidth(),
+        arenaRect.getHeight()
+      );
     } else {
       // TODO: Credits
+      // stateManager.enterCredits();
     }
   }
 
@@ -75,27 +89,23 @@ public class GameMode implements IMode {
    */
   @Override
   public void update(float dt) {
-    if (!levelFinished) {
-      elapsed += dt;
-      GameTime time = new GameTime(dt, elapsed);
-
-      if (levelFinished) {
-        try {
-          nextLevel();
-        } catch (DataException ex) {
-          ex.printStackTrace();
-          System.exit(1);
-        } catch (ParserException ex) {
-          ex.printStackTrace();
-          System.exit(1);
-        } catch (IOException ex) {
-          ex.printStackTrace();
-          System.exit(1);
-        }
-      } else {
-        level.update(time);
-        ui.update();
+    if (level.isFinished()) {
+      try {
+        nextLevel();
+      } catch (DataException ex) {
+        ex.printStackTrace();
+        System.exit(1);
+      } catch (ParserException ex) {
+        ex.printStackTrace();
+        System.exit(1);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+        System.exit(1);
       }
+    } else {
+      elapsed += dt;
+      level.update(new GameTime(dt, elapsed));
+      ui.update();
     }
   }
 

@@ -10,6 +10,7 @@ import game.time.GameTime;
 import game.triggers.Trigger;
 import game.triggers.condition.AllCreepsDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
+import game.triggers.effects.LevelCompleteEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -38,9 +39,11 @@ public class Level {
    * background.
    */
   private final Rectangle rect;
+  private boolean finished;
 
   public Level(LevelData level, Players players, float width, float height)
       throws DataException, IOException, ParserException {
+    finished   = false;
     background = CacheTool.getImage(Locator.getCache(), level.background);
 
     float left   = level.constraints[0];
@@ -58,7 +61,7 @@ public class Level {
 
     // Setup eventual boss triggers
     Trigger levelComplete = new Trigger(false);
-    // TODO: levelComplete.addEffect(new LevelCompleteEffect());
+    levelComplete.addEffect(new LevelCompleteEffect(this));
     world.addTrigger(levelComplete);
     if (level.boss != null) {
       Trigger spawnBoss = new Trigger(false);
@@ -85,5 +88,13 @@ public class Level {
 
   public void update(GameTime time) {
     world.update(time);
+  }
+
+  public void setFinished() {
+    finished = true;
+  }
+
+  public boolean isFinished() {
+    return finished;
   }
 }
