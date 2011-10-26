@@ -48,6 +48,9 @@ public class GameMode implements IMode {
       throw new IllegalArgumentException("No levels in campaing");
     }
 
+    ui = new UI();
+    Locator.registerUI(ui);
+
     elapsed   = 0;
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
     campaign  = new Campaign(data);
@@ -60,9 +63,6 @@ public class GameMode implements IMode {
       arenaRect.getWidth(),
       arenaRect.getHeight()
     );
-
-    ui = new UI();
-    Locator.registerUI(ui);
   }
 
   private void nextLevel(StateManager stateManager)

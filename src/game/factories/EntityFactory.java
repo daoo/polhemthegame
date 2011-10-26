@@ -6,7 +6,6 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.RSheet;
-import game.components.graphics.debug.LineToOrigin;
 import game.components.graphics.debug.Outliner;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
@@ -96,7 +95,6 @@ public class EntityFactory {
     Locator.getUI().addElement(infoBar);
 
     e.addRenderComponent(new Outliner(true, true));
-    e.addRenderComponent(new LineToOrigin());
 
     return e;
   }

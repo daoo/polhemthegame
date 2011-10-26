@@ -18,6 +18,7 @@ import game.triggers.effects.SpawnWithSend;
 import game.world.World;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.CreepsData;
@@ -71,10 +72,12 @@ public class WorldFactory {
     return w;
   }
 
-  public static void makeCreepTriggers(Iterable<CreepSpawnData> spawnsData,
-                                       Rectangle rectWorld, World world)
+  public static Iterable<IEntity> makeCreepTriggers(Iterable<CreepSpawnData> spawnsData,
+                                                    Rectangle rectWorld, World world)
       throws DataException, ParserException, IOException {
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
+    LinkedList<IEntity> result = new LinkedList<IEntity>();
+
     for (CreepSpawnData spawnData : spawnsData) {
       Trigger t = new Trigger(false);
       t.addCondition(new TimeCondition(spawnData.spawnTime));
@@ -86,6 +89,7 @@ public class WorldFactory {
         (float) -Math.PI,
         creepData
       );
+      result.add(creep);
 
       t.addEffect(
         new SpawnWithSend(
@@ -95,6 +99,8 @@ public class WorldFactory {
 
       world.addTrigger(t);
     }
+
+    return result;
   }
 
   private static float getCreepX(Rectangle rect, int width) {

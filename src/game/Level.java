@@ -4,11 +4,12 @@
 
 package game;
 
+import game.entities.IEntity;
 import game.entities.Players;
 import game.factories.WorldFactory;
 import game.time.GameTime;
 import game.triggers.Trigger;
-import game.triggers.condition.AllCreepsDeadCondition;
+import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
 import game.triggers.effects.LevelCompleteEffect;
 import game.world.World;
@@ -43,6 +44,8 @@ public class Level {
 
   public Level(LevelData level, Players players, float width, float height)
       throws DataException, IOException, ParserException {
+    assert (level.creeps != null);
+
     finished   = false;
     background = CacheTool.getImage(Locator.getCache(), level.background);
 
@@ -55,9 +58,8 @@ public class Level {
     world = WorldFactory.makeWorld(rect, players);
 
     // Setup creep triggers
-    if (level.creeps != null) {
+    Iterable<IEntity> creeps =
       WorldFactory.makeCreepTriggers(level.creeps, rect, world);
-    }
 
     // Setup eventual boss triggers
     Trigger levelComplete = new Trigger(false);
@@ -65,13 +67,13 @@ public class Level {
     world.addTrigger(levelComplete);
     if (level.boss != null) {
       Trigger spawnBoss = new Trigger(false);
-      spawnBoss.addCondition(new AllCreepsDeadCondition());
+      spawnBoss.addCondition(new AllDeadCondition(creeps));
       // TODO: spawnBoss.addEffect(new SpawnBossEffect());
       world.addTrigger(spawnBoss);
 
       // TODO: levelComplete.addCondition(new EntityDeadCondition(boss));
     } else {
-      levelComplete.addCondition(new AllCreepsDeadCondition());
+      levelComplete.addCondition(new AllDeadCondition(creeps));
     }
 
     Trigger gameOver = new Trigger(false);
