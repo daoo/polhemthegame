@@ -41,10 +41,10 @@ public class Trigger implements ITrigger {
     if (runAgain) {
       if (checkConditions(time)) {
         doActions(time);
-      }
 
-      if (!loop) {
-        runAgain = false;
+        if (!loop) {
+          runAgain = false;
+        }
       }
     }
   }

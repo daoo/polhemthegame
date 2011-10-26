@@ -11,6 +11,7 @@ import game.time.GameTime;
 import game.triggers.ITrigger;
 import game.triggers.Trigger;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
@@ -64,11 +65,23 @@ public class World {
   }
 
   public void update(GameTime time) {
-    // Update
+    // Entities
     for (IEntity e : entities.iterateAll()) {
       e.update(time);
     }
 
+    // Triggers
+    Iterator<ITrigger> it = triggers.iterator();
+    while (it.hasNext()) {
+      ITrigger t = it.next();
+      t.update(time);
+
+      if (!t.runAgain()) {
+        it.remove();
+      }
+    }
+
+    // Add and remove
     entities.remove(toRemove);
     toRemove.clear();
 
