@@ -19,6 +19,7 @@ public class Menu {
     this.items = new LinkedList<MenuItem>(items);
     this.iterator = this.items.listIterator();
     this.current = iterator.next();
+    this.current.setState(MenuItemState.ACTIVE);
   }
 
   public void click() {
