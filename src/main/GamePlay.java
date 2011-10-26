@@ -21,12 +21,12 @@ import org.newdawn.slick.SlickException;
 
 import ui.hud.ShopUI;
 
-public class GameRound implements IGameState {
+public class GamePlay implements IGameState {
   private static final boolean DEBUG = false;
 
   private final IMode mode;
 
-  public GameRound() throws ParserException, IOException, DataException {
+  public GamePlay() throws ParserException, IOException, DataException {
     CampaignData campaign = (CampaignData)
       Locator.getCache().getCold(
         "campaigns/polhem.js",

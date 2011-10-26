@@ -45,7 +45,7 @@ public class GameStateManager {
 
   public void enterSinglePlayer() {
     try {
-      currentState = new GameRound();
+      currentState = new GamePlay();
     } catch (ParserException ex) {
       ex.printStackTrace();
       quit();
