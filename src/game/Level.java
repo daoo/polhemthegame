@@ -23,7 +23,7 @@ import math.Rectangle;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-public class GameLevel {
+public class Level {
   /**
    * The world, rendering is happening relative to what's actually availible.
    * I.e. all constraints, HUD stuff have been accounted for. Adding something at
@@ -39,7 +39,7 @@ public class GameLevel {
    */
   private final Rectangle rect;
 
-  public GameLevel(LevelData level, Players players, float width, float height)
+  public Level(LevelData level, Players players, float width, float height)
       throws DataException, IOException, ParserException {
     background = CacheTool.getImage(Locator.getCache(), level.background);
 

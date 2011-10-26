@@ -12,12 +12,12 @@ import loader.data.json.LevelData;
 import loader.parser.ParserException;
 import main.Locator;
 
-public class GameCampaign {
+public class Campaign {
   private final CampaignData     campaign;
   private LevelData              currentLevel;
   private final Iterator<String> iterator;
 
-  public GameCampaign(CampaignData data) {
+  public Campaign(CampaignData data) {
     campaign = data;
 
     iterator = campaign.levels.iterator();

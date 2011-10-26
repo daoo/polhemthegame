@@ -4,8 +4,8 @@
 
 package game.modes;
 
-import game.GameCampaign;
-import game.GameLevel;
+import game.Campaign;
+import game.Level;
 import game.entities.Players;
 import game.time.GameTime;
 
@@ -22,11 +22,11 @@ import org.newdawn.slick.Graphics;
 import ui.hud.ShopUI;
 import ui.hud.UI;
 
-public class Game implements IMode {
+public class GameMode implements IMode {
   private final UI ui;
 
-  private final GameCampaign campaign;
-  private GameLevel level;
+  private final Campaign campaign;
+  private Level level;
 
   private final Players players;
 
@@ -39,7 +39,7 @@ public class Game implements IMode {
   private boolean            levelFinished;
   private float              elapsed;
 
-  public Game(CampaignData data, int width, int height)
+  public GameMode(CampaignData data, int width, int height)
     throws IOException, ParserException, DataException {
     ui = new UI();
     Locator.registerUI(ui);
@@ -48,7 +48,7 @@ public class Game implements IMode {
     elapsed       = 0;
 
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
-    campaign  = new GameCampaign(data);
+    campaign  = new Campaign(data);
 
     players = new Players(1);
 
@@ -56,11 +56,11 @@ public class Game implements IMode {
   }
 
   private void nextLevel()
-    throws DataException, ParserException, IOException {
+      throws DataException, ParserException, IOException {
 
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
-      level = new GameLevel(campaign.getCurrentLevel(), players,
+      level = new Level(campaign.getCurrentLevel(), players,
                             arenaRect.getWidth(), arenaRect.getHeight());
     } else {
       // TODO: Credits
@@ -108,9 +108,5 @@ public class Game implements IMode {
     ui.render(g);
 
     g.popTransform();
-  }
-
-  public void levelFinished() {
-    levelFinished = true;
   }
 }

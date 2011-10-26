@@ -4,8 +4,8 @@
 
 package main;
 
-import game.modes.Debugger;
-import game.modes.Game;
+import game.modes.DebuggerMode;
+import game.modes.GameMode;
 import game.modes.IMode;
 
 import java.io.IOException;
@@ -30,9 +30,9 @@ public class GamePlay implements IGameState {
         "campaigns/polhem.js",
         new GsonParser(CampaignData.class));
 
-    Game game = new Game(campaign, Launcher.WIDTH, Launcher.HEIGHT);
+    GameMode game = new GameMode(campaign, Launcher.WIDTH, Launcher.HEIGHT);
     if (DEBUG) {
-      mode = new Debugger(game);
+      mode = new DebuggerMode(game);
     } else {
       mode = game;
     }
