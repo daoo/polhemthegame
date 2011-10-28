@@ -19,6 +19,7 @@ import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
 import game.triggers.effects.RemoveEntity;
+import game.triggers.effects.RemoveUIElement;
 
 import java.io.IOException;
 
@@ -52,6 +53,7 @@ public class EntityFactory {
     InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
     Locator.getUI().addElement(infoBar);
+    e.addLogicComponent(new EffectsOnDeath(new RemoveUIElement(infoBar)));
 
     return e;
   }
