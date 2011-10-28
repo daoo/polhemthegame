@@ -50,6 +50,7 @@ public class StateManager {
   public void enterSinglePlayer() {
     try {
       currentState = new GameState();
+      currentState.start(this);
     } catch (ParserException ex) {
       handleException(ex);
     } catch (DataException ex) {

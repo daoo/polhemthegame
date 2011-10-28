@@ -1,19 +1,23 @@
+/*
+ * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ */
+
 package game.triggers.effects;
 
-import game.Level;
+import game.modes.GameMode;
 import game.time.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
 public class LevelCompleteEffect implements IEffect {
-  private final Level level;
+  private final GameMode gameMode;
 
-  public LevelCompleteEffect(Level level) {
-    this.level = level;
+  public LevelCompleteEffect(GameMode gameMode) {
+    this.gameMode = gameMode;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    level.setFinished();
+    gameMode.goNextLevel();
   }
 }

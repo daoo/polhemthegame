@@ -38,4 +38,9 @@ public class DebuggerMode implements IMode {
   public void render(Graphics g) {
     game.render(g);
   }
+
+  @Override
+  public void start(StateManager stateManager) {
+    game.start(stateManager);
+  }
 }

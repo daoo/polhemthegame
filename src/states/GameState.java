@@ -41,6 +41,11 @@ public class GameState implements IState {
   }
 
   @Override
+  public void start(StateManager stateManager) {
+    mode.start(stateManager);
+  }
+
+  @Override
   public void render(Graphics g) throws SlickException {
     mode.render(g);
   }

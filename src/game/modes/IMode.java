@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import states.StateManager;
 
 public interface IMode {
+  void start(StateManager stateManager);
   void update(StateManager stateManager, float dt);
   void render(Graphics g);
 }

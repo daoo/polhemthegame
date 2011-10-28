@@ -8,6 +8,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public interface IState {
+  void start(StateManager stateManager);
+
   void render(Graphics g) throws SlickException;
 
   /**

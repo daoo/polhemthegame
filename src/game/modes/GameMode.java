@@ -24,6 +24,9 @@ import ui.hud.ShopUI;
 import ui.hud.UI;
 
 public class GameMode implements IMode {
+  private enum ACTION { NEXT_LEVEL, MAIN_MENU, CREDITS }
+  private ACTION nextAction;
+
   private final UI ui;
 
   private final Campaign campaign;
@@ -43,7 +46,7 @@ public class GameMode implements IMode {
   private float elapsed;
 
   public GameMode(CampaignData data, int width, int height)
-      throws IOException, ParserException, DataException {
+      throws ParserException, DataException, IOException {
     if (data.levels.isEmpty()) {
       throw new IllegalArgumentException("No levels in campaing");
     }
@@ -55,28 +58,26 @@ public class GameMode implements IMode {
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
     campaign  = new Campaign(data);
     players   = new Players(1); // TODO: Coop
-
-    campaign.nextLevel();
-    level = new Level(
-      campaign.getCurrentLevel(),
-      players,
-      arenaRect.getWidth(),
-      arenaRect.getHeight()
-    );
   }
 
-  private void nextLevel(StateManager stateManager)
-      throws DataException, ParserException, IOException {
-    if (campaign.hasMoreLevels()) {
+  @Override
+  public void start(StateManager stateManager) {
+    try {
       campaign.nextLevel();
+
       level = new Level(
+        this,
         campaign.getCurrentLevel(),
         players,
         arenaRect.getWidth(),
         arenaRect.getHeight()
       );
-    } else {
-      stateManager.enterCredits();
+    } catch (ParserException ex) {
+      stateManager.handleException(ex);
+    } catch (IOException ex) {
+      stateManager.handleException(ex);
+    } catch (DataException ex) {
+      stateManager.handleException(ex);
     }
   }
 
@@ -88,9 +89,13 @@ public class GameMode implements IMode {
    */
   @Override
   public void update(StateManager stateManager, float dt) {
-    if (level.isFinished()) {
+    if (nextAction == null) {
+      elapsed += dt;
+      level.update(new GameTime(dt, elapsed));
+      ui.update();
+    } else if (nextAction == ACTION.NEXT_LEVEL) {
       try {
-        nextLevel(stateManager);
+        nextLevel();
       } catch (DataException ex) {
         stateManager.handleException(ex);
       } catch (ParserException ex) {
@@ -98,10 +103,13 @@ public class GameMode implements IMode {
       } catch (IOException ex) {
         stateManager.handleException(ex);
       }
-    } else {
-      elapsed += dt;
-      level.update(new GameTime(dt, elapsed));
-      ui.update();
+      nextAction = null;
+    } else if (nextAction == ACTION.CREDITS) {
+      stateManager.enterCredits();
+      nextAction = null;
+    } else if (nextAction == ACTION.MAIN_MENU) {
+      stateManager.enterMainMenu();
+      nextAction = null;
     }
   }
 
@@ -114,5 +122,33 @@ public class GameMode implements IMode {
     ui.render(g);
 
     g.popTransform();
+  }
+
+  private void nextLevel()
+      throws DataException, ParserException, IOException {
+    if (campaign.hasMoreLevels()) {
+      campaign.nextLevel();
+      level = new Level(
+        this,
+        campaign.getCurrentLevel(),
+        players,
+        arenaRect.getWidth(),
+        arenaRect.getHeight()
+      );
+    } else {
+      goCredits();
+    }
+  }
+
+  public void goMainMenu() {
+    nextAction = ACTION.MAIN_MENU;
+  }
+
+  public void goCredits() {
+    nextAction = ACTION.CREDITS;
+  }
+
+  public void goNextLevel() {
+    nextAction = ACTION.NEXT_LEVEL;
   }
 }

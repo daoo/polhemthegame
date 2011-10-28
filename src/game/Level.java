@@ -7,11 +7,13 @@ package game;
 import game.entities.IEntity;
 import game.entities.Players;
 import game.factories.WorldFactory;
+import game.modes.GameMode;
 import game.time.GameTime;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
 import game.triggers.effects.LevelCompleteEffect;
+import game.triggers.effects.MainMenuEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -26,6 +28,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 public class Level {
+  public enum LEVEL_STATE {
+    RUNNING, FINISHED, GAME_OVER
+  }
+
   /**
    * The world, rendering is happening relative to what's actually availible.
    * I.e. all constraints, HUD stuff have been accounted for. Adding something at
@@ -40,13 +46,11 @@ public class Level {
    * background.
    */
   private final Rectangle rect;
-  private boolean finished;
 
-  public Level(LevelData level, Players players, float width, float height)
+  public Level(GameMode gameMode, LevelData level, Players players, float width, float height)
       throws DataException, IOException, ParserException {
     assert (level.creeps != null);
 
-    finished   = false;
     background = CacheTool.getImage(Locator.getCache(), level.background);
 
     float left   = level.constraints[0];
@@ -61,11 +65,10 @@ public class Level {
     Iterable<IEntity> creeps =
       WorldFactory.makeCreepTriggers(level.creeps, rect, world);
 
-    // Setup eventual boss triggers
     Trigger levelComplete = new Trigger(false);
-    levelComplete.addEffect(new LevelCompleteEffect(this));
-    world.addTrigger(levelComplete);
+    levelComplete.addEffect(new LevelCompleteEffect(gameMode));
     if (level.boss != null) {
+      // Boss trigger
       Trigger spawnBoss = new Trigger(false);
       spawnBoss.addCondition(new AllDeadCondition(creeps));
       // TODO: spawnBoss.addEffect(new SpawnBossEffect());
@@ -75,9 +78,11 @@ public class Level {
     } else {
       levelComplete.addCondition(new AllDeadCondition(creeps));
     }
+    world.addTrigger(levelComplete);
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyPlayerDeadCondition());
+    gameOver.addEffect(new MainMenuEffect(null));
     // TODO: gameOver.addEffect(new GameOverEffect());
     world.addTrigger(gameOver);
   }
@@ -90,13 +95,5 @@ public class Level {
 
   public void update(GameTime time) {
     world.update(time);
-  }
-
-  public void setFinished() {
-    finished = true;
-  }
-
-  public boolean isFinished() {
-    return finished;
   }
 }

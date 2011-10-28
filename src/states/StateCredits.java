@@ -77,6 +77,11 @@ public class StateCredits implements IState {
   }
 
   @Override
+  public void start(StateManager stateManager) {
+    // Do nothing
+  }
+
+  @Override
   public void render(Graphics g) throws SlickException {
     g.pushTransform();
     g.translate(0, pos_y);
