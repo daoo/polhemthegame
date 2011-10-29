@@ -50,7 +50,7 @@ public class WorldContainer {
     list.addFirst(obj);
   }
 
-  public void addFisrtAll(LinkedList<IEntity> objs) {
+  public void addFirstAll(LinkedList<IEntity> objs) {
     Iterator<IEntity> it = objs.descendingIterator();
     while (it.hasNext()) {
       list.addFirst(it.next());

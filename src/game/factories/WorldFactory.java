@@ -52,7 +52,7 @@ public class WorldFactory {
        3 * rectWorld.getWidth(),  3 * rectWorld.getHeight()
     );
     rectBig.onNotContainsEvent.add(new KillEvent());
-    w.add(rectBig);
+    w.addLast(rectBig);
 
     InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
       -rectWorld.getWidth(), 0,
@@ -61,12 +61,12 @@ public class WorldFactory {
 
     rectCreepKiller.onContainsEvent.add(new KillEvent());
     rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
-    w.add(rectCreepKiller);
+    w.addLast(rectCreepKiller);
 
     players.reposition(rectWorld);
     for (IEntity p : players) {
       p.addLogicComponent(new MovementConstraint(rectWorld));
-      w.add(p);
+      w.addLast(p);
     }
 
     return w;

@@ -13,7 +13,6 @@ import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
 import game.triggers.effects.LevelCompleteEffect;
-import game.triggers.effects.MainMenuEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -82,7 +81,7 @@ public class Level {
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyPlayerDeadCondition());
-    gameOver.addEffect(new MainMenuEffect(null));
+    // TODO: gameOver.addEffect(new MainMenuEffect());
     // TODO: gameOver.addEffect(new GameOverEffect());
     world.addTrigger(gameOver);
   }

@@ -33,6 +33,6 @@ public class SpawnAnimationEffect implements IEffect {
     );
     e.addRenderComponent(anim);
     e.sendMessage(ComponentMessage.END_ANIMATION, null);
-    world.add(e);
+    world.addFirst(e);
   }
 }

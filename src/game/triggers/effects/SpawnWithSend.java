@@ -24,6 +24,6 @@ public class SpawnWithSend implements IEffect {
   @Override
   public void execute(GameTime time, World world) {
     entity.sendMessage(message, args);
-    world.add(entity);
+    world.addLast(entity);
   }
 }

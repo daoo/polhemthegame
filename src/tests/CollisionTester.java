@@ -71,10 +71,10 @@ public class CollisionTester extends BasicGame {
     world = new World();
 
     obj1 = makeStaticRectangle(1420, 340, 400, 400);
-    world.add(obj1);
+    world.addLast(obj1);
 
     obj2 = makeProjectile(100, 440, 200, 200, 400, 0);
-    world.add(obj2);
+    world.addLast(obj2);
   }
 
   @Override

@@ -18,26 +18,40 @@ import org.newdawn.slick.Graphics;
 
 public class World {
   private final WorldContainer entities;
-  private final LinkedList<IEntity> toAdd, toRemove;
+  private final LinkedList<IEntity> toAddFirst, toAddLast, toRemove;
 
   private final LinkedList<ITrigger> triggers;
 
   public World() {
-    toAdd    = new LinkedList<IEntity>();
-    toRemove = new LinkedList<IEntity>();
-    entities = new WorldContainer();
-    triggers = new LinkedList<ITrigger>();
+    toAddFirst = new LinkedList<IEntity>();
+    toAddLast  = new LinkedList<IEntity>();
+    toRemove   = new LinkedList<IEntity>();
+    entities   = new WorldContainer();
+    triggers   = new LinkedList<ITrigger>();
   }
 
   /**
-   * Delayed add, happens at the end of a frame.
+   * Delayed add at the beginning of the world container.
+   * Happens at the end of a update iteration.
    * @param obj object to add
    */
-  public void add(IEntity obj) {
+  public void addFirst(IEntity obj) {
     assert (obj != null);
 
     obj.setWorld(this);
-    toAdd.add(obj);
+    toAddFirst.add(obj);
+  }
+
+  /**
+   * Delayed add at the end of the world container.
+   * Happens at the end of a update iteration.
+   * @param obj object to add
+   */
+  public void addLast(IEntity obj) {
+    assert (obj != null);
+
+    obj.setWorld(this);
+    toAddLast.add(obj);
   }
 
   public Iterable<IEntity> get(EntityType e) {
@@ -85,8 +99,11 @@ public class World {
     entities.remove(toRemove);
     toRemove.clear();
 
-    entities.addLastAll(toAdd);
-    toAdd.clear();
+    entities.addLastAll(toAddLast);
+    toAddLast.clear();
+
+    entities.addFirstAll(toAddFirst);
+    toAddFirst.clear();
   }
 
   public void addTrigger(Trigger trigger) {
