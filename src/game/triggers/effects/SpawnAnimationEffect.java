@@ -12,24 +12,25 @@ import game.entities.IEntity;
 import game.time.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
-import math.Rectangle;
 
-public class SpawnDeathAnim implements IEffect {
-  private final Rectangle body;
-  private final float width, height;
+public class SpawnAnimationEffect implements IEffect {
+  private final IEntity owner;
   private final IAnimatedComponent anim;
 
-  public SpawnDeathAnim(Rectangle body, float width, float height, IAnimatedComponent anim) {
-    this.body   = body;
-    this.width  = width;
-    this.height = height;
-    this.anim   = anim;
+  public SpawnAnimationEffect(IEntity entity, IAnimatedComponent anim) {
+    this.owner = entity;
+    this.anim  = anim;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    IEntity e = new Entity(body.getX1(), body.getY1(), width, height,
-                                 EntityType.ANIMATED);
+    Entity e = new Entity(
+      owner.getBody().getX1(),
+      owner.getBody().getY1(),
+      anim.getTileWidth(),
+      anim.getTileHeight(),
+      EntityType.ANIMATED
+    );
     e.addRenderComponent(anim);
     e.sendMessage(ComponentMessage.END_ANIMATION, null);
     world.add(e);

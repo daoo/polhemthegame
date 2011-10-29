@@ -11,7 +11,6 @@ import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.life.EffectsOnDeath;
 import game.components.life.Life;
-import game.components.life.SpawnOnDeath;
 import game.components.misc.Inventory;
 import game.components.misc.SimpleControl;
 import game.components.physics.Movement;
@@ -20,6 +19,7 @@ import game.entities.EntityType;
 import game.entities.IEntity;
 import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.RemoveUIElement;
+import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
 
@@ -40,20 +40,30 @@ public class EntityFactory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e  = new Entity(x, y, data.hitbox.width, data.hitbox.height, EntityType.CREEP);
+    Entity e  = new Entity(
+      x,
+      y,
+      data.hitbox.width,
+      data.hitbox.height,
+      EntityType.CREEP
+    );
+
     Life life = new Life(data.hitpoints);
+    EffectsOnDeath effectsOnDeath = new EffectsOnDeath();
 
     e.addLogicComponent(new Movement((float) Math.cos(ang) * data.speed,
                                      (float) Math.sin(ang) * data.speed));
     e.addLogicComponent(life);
-    e.addLogicComponent(new SpawnOnDeath(death));
-    e.addLogicComponent(new EffectsOnDeath(new RemoveEntity(e)));
     e.addRenderComponent(walk);
 
     InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
     Locator.getUI().addElement(infoBar);
-    e.addLogicComponent(new EffectsOnDeath(new RemoveUIElement(infoBar)));
+
+    effectsOnDeath.add(new SpawnAnimationEffect(e, death));
+    effectsOnDeath.add(new RemoveEntity(e));
+    effectsOnDeath.add(new RemoveUIElement(infoBar));
+    e.addLogicComponent(effectsOnDeath);
 
     return e;
   }
@@ -71,25 +81,26 @@ public class EntityFactory {
       EntityType.PLAYER
     );
 
-    Life life             = new Life(data.hitpoints);
-    Inventory inv         = new Inventory(data.startMoney);
-    Hand hand             = new Hand(data.handOffset.x, data.handOffset.y);
-    SimpleControl control = new SimpleControl(data.speed);
-    Weapon weapon         = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
-
     e.addLogicComponent(new Movement(0, 0));
+    e.addLogicComponent(new SimpleControl(data.speed));
+
+    Life life = new Life(data.hitpoints);
     e.addLogicComponent(life);
-    e.addLogicComponent(new SpawnOnDeath(death));
+
+    Inventory inv = new Inventory(data.startMoney);
+    Weapon weapon = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
+    inv.addWeapon(weapon);
+    e.addLogicComponent(inv);
+
+    Hand hand     = new Hand(data.handOffset.x, data.handOffset.y);
+    hand.grab(weapon);
+    e.addRenderComponent(hand);
+
+    e.addLogicComponent(new EffectsOnDeath(new SpawnAnimationEffect(e, death)));
     // TODO: Do I need this one?
     // e.addLogicComponent(new EffectsOnDeath(new RemoveEntity(e)));
+
     e.addRenderComponent(walk);
-
-    inv.addWeapon(weapon);
-    hand.grab(weapon);
-
-    e.addLogicComponent(inv);
-    e.addRenderComponent(hand);
-    e.addLogicComponent(control);
 
     InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));

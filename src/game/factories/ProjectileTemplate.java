@@ -22,7 +22,7 @@ import game.entities.EntityType;
 import game.entities.IEntity;
 import game.triggers.effects.AOEDamage;
 import game.triggers.effects.RemoveEntity;
-import game.triggers.effects.SpawnDeathAnim;
+import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
 
@@ -88,10 +88,7 @@ public class ProjectileTemplate {
                                         explosion, new Idle());
 
       effects.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
-      effects.add(new SpawnDeathAnim(e.getBody(),
-                                     explosionAnim.getTileWidth(),
-                                     explosionAnim.getTileHeight(),
-                                     explosionAnim));
+      effects.add(new SpawnAnimationEffect(e, explosionAnim));
     }
 
     return e;
