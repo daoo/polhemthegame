@@ -8,6 +8,7 @@ import game.entities.EntityType;
 import game.entities.IEntity;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class WorldContainer {
@@ -37,11 +38,22 @@ public class WorldContainer {
     list.removeAll(remove);
   }
 
-  public void add(IEntity obj) {
-    list.add(obj);
+  public void addLast(IEntity obj) {
+    list.addLast(obj);
   }
 
-  public void add(LinkedList<IEntity> objs) {
+  public void addLastAll(Collection<IEntity> objs) {
     list.addAll(objs);
+  }
+
+  public void addFirst(IEntity obj) {
+    list.addFirst(obj);
+  }
+
+  public void addFisrtAll(LinkedList<IEntity> objs) {
+    Iterator<IEntity> it = objs.descendingIterator();
+    while (it.hasNext()) {
+      list.addFirst(it.next());
+    }
   }
 }

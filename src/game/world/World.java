@@ -85,7 +85,7 @@ public class World {
     entities.remove(toRemove);
     toRemove.clear();
 
-    entities.add(toAdd);
+    entities.addLastAll(toAdd);
     toAdd.clear();
   }
 
