@@ -44,10 +44,10 @@
 
   , { name: "ak47"
     , automatic: true
-    , clipSize: 30
+    , clipSize: -1
     , muzzleOffset: { x: 11, y: -4 }
     , reloadTime: 1.0
-    , rpm: 400
+    , rpm: 1600
     , sprite:
       { animation: "fire"
       , framerate: 8
