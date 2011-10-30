@@ -27,4 +27,9 @@ public class LevelData implements IClosable {
   public void close() throws DataException {
     // No data needs clean up
   }
+
+  @Override
+  public String toString() {
+    return level;
+  }
 }

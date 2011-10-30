@@ -66,7 +66,7 @@ public class Level {
 
     Trigger levelComplete = new Trigger(false);
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
-    if (level.boss != null) {
+    /*if (level.boss != null) {
       // Boss trigger
       Trigger spawnBoss = new Trigger(false);
       spawnBoss.addCondition(new AllDeadCondition(creeps));
@@ -74,9 +74,9 @@ public class Level {
       world.addTrigger(spawnBoss);
 
       // TODO: levelComplete.addCondition(new EntityDeadCondition(boss));
-    } else {
+    } else {*/
       levelComplete.addCondition(new AllDeadCondition(creeps));
-    }
+    //}
     world.addTrigger(levelComplete);
 
     Trigger gameOver = new Trigger(false);
