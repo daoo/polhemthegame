@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
 package game.modes;
@@ -89,11 +89,11 @@ public class GameMode implements IMode {
    */
   @Override
   public void update(StateManager stateManager, float dt) {
-    if (nextAction == null) {
-      elapsed += dt;
-      level.update(new GameTime(dt, elapsed));
-      ui.update();
-    } else if (nextAction == ACTION.NEXT_LEVEL) {
+    elapsed += dt;
+    level.update(new GameTime(dt, elapsed));
+    ui.update();
+
+    if (nextAction == ACTION.NEXT_LEVEL) {
       try {
         nextLevel();
       } catch (DataException ex) {
@@ -128,6 +128,7 @@ public class GameMode implements IMode {
       throws DataException, ParserException, IOException {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
+      ui.clearElements();
       level = new Level(
         this,
         campaign.getCurrentLevel(),

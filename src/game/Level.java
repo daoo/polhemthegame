@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
 package game;
@@ -12,6 +12,7 @@ import game.time.GameTime;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
+import game.triggers.effects.DelayedActivateTriggerEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.world.World;
 
@@ -66,6 +67,11 @@ public class Level {
 
     Trigger levelComplete = new Trigger(false);
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
+
+    Trigger levelCompleteDelay = new Trigger(false);
+    levelCompleteDelay.addEffect(new DelayedActivateTriggerEffect(5.0f, levelComplete));
+    world.addTrigger(levelCompleteDelay);
+
     /*if (level.boss != null) {
       // Boss trigger
       Trigger spawnBoss = new Trigger(false);
@@ -75,9 +81,8 @@ public class Level {
 
       // TODO: levelComplete.addCondition(new EntityDeadCondition(boss));
     } else {*/
-      levelComplete.addCondition(new AllDeadCondition(creeps));
+      levelCompleteDelay.addCondition(new AllDeadCondition(creeps));
     //}
-    world.addTrigger(levelComplete);
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyPlayerDeadCondition());

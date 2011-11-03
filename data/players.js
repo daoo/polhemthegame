@@ -3,7 +3,7 @@
     , handOffset: { x: 12, y: 15 }
     , hitbox: { width: 18, height: 37 }
     , hitpoints: 100
-    , speed: 100
+    , speed: 200
     , sprites:
       [ { animation: "walk"
         , framerate: 10

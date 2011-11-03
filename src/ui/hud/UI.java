@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
 package ui.hud;
@@ -19,7 +19,7 @@ public class UI implements IUI {
   public UI() {
     elements = new LinkedList<IUIElement>();
     toRemove = new LinkedList<IUIElement>();
-    toAdd = new LinkedList<IUIElement>();
+    toAdd    = new LinkedList<IUIElement>();
   }
 
   @Override
@@ -30,6 +30,11 @@ public class UI implements IUI {
   @Override
   public void removeElement(IUIElement element) {
     toRemove.add(element);
+  }
+
+  @Override
+  public void clearElements() {
+    elements.clear();
   }
 
   @Override

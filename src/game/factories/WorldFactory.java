@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
 package game.factories;
@@ -13,7 +13,7 @@ import game.entities.Players;
 import game.events.impl.DamagePlayerEvent;
 import game.events.impl.KillEvent;
 import game.triggers.Trigger;
-import game.triggers.condition.TimeCondition;
+import game.triggers.condition.TimerCondition;
 import game.triggers.effects.SpawnWithSend;
 import game.world.World;
 
@@ -80,7 +80,7 @@ public class WorldFactory {
 
     for (CreepSpawnData spawnData : spawnsData) {
       Trigger t = new Trigger(false);
-      t.addCondition(new TimeCondition(spawnData.spawnTime));
+      t.addCondition(new TimerCondition(0, spawnData.spawnTime));
 
       CreepData creepData = creepsData.getCreep(spawnData.creep);
       IEntity creep = EntityFactory.makeCreep(

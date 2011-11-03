@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
+ * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
 package game.world;
@@ -9,7 +9,6 @@ import game.entities.Groups;
 import game.entities.IEntity;
 import game.time.GameTime;
 import game.triggers.ITrigger;
-import game.triggers.Trigger;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -20,14 +19,16 @@ public class World {
   private final WorldContainer entities;
   private final LinkedList<IEntity> toAddFirst, toAddLast, toRemove;
 
-  private final LinkedList<ITrigger> triggers;
+  private final LinkedList<ITrigger> triggers, addTriggers;
 
   public World() {
     toAddFirst = new LinkedList<IEntity>();
     toAddLast  = new LinkedList<IEntity>();
     toRemove   = new LinkedList<IEntity>();
     entities   = new WorldContainer();
+    
     triggers   = new LinkedList<ITrigger>();
+    addTriggers = new LinkedList<ITrigger>();
   }
 
   /**
@@ -104,10 +105,13 @@ public class World {
 
     entities.addFirstAll(toAddFirst);
     toAddFirst.clear();
+    
+    triggers.addAll(addTriggers);
+    addTriggers.clear();
   }
 
-  public void addTrigger(Trigger trigger) {
+  public void addTrigger(ITrigger trigger) {
     trigger.setWorld(this);
-    triggers.add(trigger);
+    addTriggers.add(trigger);
   }
 }
