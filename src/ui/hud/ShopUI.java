@@ -8,9 +8,9 @@ import game.entities.IEntity;
 
 import org.newdawn.slick.Graphics;
 
-import ui.IUIElement;
+import ui.IStaticUIElement;
 
-public class ShopUI implements IUIElement {
+public class ShopUI implements IStaticUIElement {
   public static final int HEIGHT = 75;
   public static final int WIDTH  = 1024;
 
@@ -40,10 +40,5 @@ public class ShopUI implements IUIElement {
 
     g.drawString(mStr, stats_x, stats_y);
     g.drawString(kStr, stats_x, kills_y);
-  }
-
-  @Override
-  public void update() {
-    // Do nothing
   }
 }

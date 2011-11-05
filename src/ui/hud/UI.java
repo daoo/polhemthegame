@@ -9,26 +9,26 @@ import java.util.LinkedList;
 import org.newdawn.slick.Graphics;
 
 import ui.IUI;
-import ui.IUIElement;
+import ui.IDynamicUIElement;
 
 public class UI implements IUI {
-  private final LinkedList<IUIElement> elements;
+  private final LinkedList<IDynamicUIElement> elements;
 
-  private final LinkedList<IUIElement> toRemove, toAdd;
+  private final LinkedList<IDynamicUIElement> toRemove, toAdd;
 
   public UI() {
-    elements = new LinkedList<IUIElement>();
-    toRemove = new LinkedList<IUIElement>();
-    toAdd    = new LinkedList<IUIElement>();
+    elements = new LinkedList<IDynamicUIElement>();
+    toRemove = new LinkedList<IDynamicUIElement>();
+    toAdd    = new LinkedList<IDynamicUIElement>();
   }
 
   @Override
-  public void addElement(IUIElement element) {
+  public void addElement(IDynamicUIElement element) {
     toAdd.add(element);
   }
 
   @Override
-  public void removeElement(IUIElement element) {
+  public void removeElement(IDynamicUIElement element) {
     toRemove.add(element);
   }
 
@@ -39,7 +39,7 @@ public class UI implements IUI {
 
   @Override
   public void update() {
-    for (IUIElement e : elements) {
+    for (IDynamicUIElement e : elements) {
       e.update();
     }
 
@@ -52,7 +52,7 @@ public class UI implements IUI {
 
   @Override
   public void render(Graphics g) {
-    for (IUIElement e : elements) {
+    for (IDynamicUIElement e : elements) {
       e.render(g);
     }
   }

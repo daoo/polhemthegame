@@ -4,12 +4,13 @@
 
 package game.events.impl;
 
+import game.components.ComponentMessage;
 import game.entities.IEntity;
 import game.events.IEvent;
 
-public class KillEvent implements IEvent<ObjectEventArgs> {
+public class RemoveEvent implements IEvent<ObjectEventArgs> {
   @Override
   public void execute(IEntity sender, ObjectEventArgs args) {
-    args.getWorld().remove(args.getObject());
+    args.getObject().remove();
   }
 }

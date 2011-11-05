@@ -34,12 +34,12 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addAction(IEffect effect) {
+  public void addEffect(IEffect effect) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
-  public void addActions(Collection<IEffect> effects) {
+  public void addEffects(Collection<IEffect> effects) {
     throw new UnsupportedOperationException("Not allowed");
   }
 
@@ -102,5 +102,15 @@ public class InvisibleRectangle implements IEntity {
   @Override
   public boolean equals(IEntity other) {
     return this == other;
+  }
+
+  @Override
+  public boolean isActive() {
+    return true;
+  }
+
+  @Override
+  public void remove() {
+    throw new UnsupportedOperationException("Not allowed");
   }
 }

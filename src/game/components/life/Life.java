@@ -46,6 +46,7 @@ public class Life implements ILogicComponent, IProgress {
     if (message == ComponentMessage.KILL) {
       hp    = 0;
       alive = false;
+      owner.remove();
     } else if (message == ComponentMessage.DAMAGE) {
       // Type hack, the compiler will kill me
       if (args instanceof Damage) {

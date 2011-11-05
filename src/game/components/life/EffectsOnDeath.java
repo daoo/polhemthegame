@@ -39,7 +39,7 @@ public class EffectsOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      owner.addActions(effects);
+      owner.addEffects(effects);
     }
   }
 

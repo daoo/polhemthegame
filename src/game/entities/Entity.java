@@ -20,34 +20,34 @@ import math.Rectangle;
 import org.newdawn.slick.Graphics;
 
 public class Entity implements IEntity {
-  protected final Rectangle body;
-  private final LinkedList<IEffect> effects;
-
-  private final LinkedList<IRenderComponent> renders;
-
+  private final Rectangle body;
   private final EntityType type;
+  private World world;  
+  private boolean active;
 
+  private final LinkedList<IEffect> effects;
   private final LinkedList<ILogicComponent> updates;
-  private World world;
+  private final LinkedList<IRenderComponent> renders;
 
   public Entity(float x, float y, float w, float h, EntityType type) {
     body = new Rectangle(x, y, w, h);
+    active = true;
+
+    this.type = type;
 
     effects = new LinkedList<IEffect>();
 
     updates = new LinkedList<ILogicComponent>();
     renders = new LinkedList<IRenderComponent>();
-
-    this.type = type;
   }
 
   @Override
-  public void addAction(IEffect effect) {
+  public void addEffect(IEffect effect) {
     effects.add(effect);
   }
 
   @Override
-  public void addActions(Collection<IEffect> collection) {
+  public void addEffects(Collection<IEffect> collection) {
     effects.addAll(collection);
   }
 
@@ -142,5 +142,15 @@ public class Entity implements IEntity {
   @Override
   public boolean equals(IEntity other) {
     return this == other;
+  }
+
+  @Override
+  public boolean isActive() {
+    return active;
+  }
+
+  @Override
+  public void remove() {
+    active = false;
   }
 }

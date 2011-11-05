@@ -58,7 +58,7 @@ public class Hand implements IRenderComponent, IProgress {
     for (ProjectileTemplate projTemplate : weapon.projectiles) {
       Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
-      owner.addAction(
+      owner.addEffect(
         new SpawnWithSend(p, ComponentMessage.START_AT,
           new RangeLimiter.TimePos(time.elapsed, o)));
     }

@@ -17,8 +17,6 @@ import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
-import game.triggers.effects.RemoveEntity;
-import game.triggers.effects.RemoveUIElement;
 import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
@@ -61,8 +59,6 @@ public class EntityFactory {
     Locator.getUI().addElement(infoBar);
 
     effectsOnDeath.add(new SpawnAnimationEffect(e, death));
-    effectsOnDeath.add(new RemoveEntity(e));
-    effectsOnDeath.add(new RemoveUIElement(infoBar));
     e.addLogicComponent(effectsOnDeath);
 
     return e;
@@ -97,12 +93,12 @@ public class EntityFactory {
     e.addRenderComponent(hand);
 
     e.addLogicComponent(new EffectsOnDeath(new SpawnAnimationEffect(e, death)));
-    // TODO: Do I need this one?
-    // e.addLogicComponent(new EffectsOnDeath(new RemoveEntity(e)));
 
     e.addRenderComponent(walk);
 
-    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2,     // TODO: Do I need this one?
+        // e.addLogicComponent(new EffectsOnDeath(new RemoveEntity(e)));
+0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addElement(infoBar);

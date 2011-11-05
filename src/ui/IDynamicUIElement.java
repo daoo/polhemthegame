@@ -6,7 +6,9 @@ package ui;
 
 import org.newdawn.slick.Graphics;
 
-public interface IUIElement {
+public interface IDynamicUIElement {
   void update();
   void render(Graphics g);
+  
+  boolean isActive();
 }

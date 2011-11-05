@@ -11,7 +11,7 @@ import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
 import game.entities.Players;
 import game.events.impl.DamagePlayerEvent;
-import game.events.impl.KillEvent;
+import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
 import game.triggers.condition.TimerCondition;
 import game.triggers.effects.SpawnWithSend;
@@ -51,7 +51,7 @@ public class WorldFactory {
       -1 * rectWorld.getWidth(), -1 * rectWorld.getHeight(),
        3 * rectWorld.getWidth(),  3 * rectWorld.getHeight()
     );
-    rectBig.onNotContainsEvent.add(new KillEvent());
+    rectBig.onNotContainsEvent.add(new RemoveEvent());
     w.addLast(rectBig);
 
     InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
@@ -59,7 +59,7 @@ public class WorldFactory {
        rectWorld.getWidth(), rectWorld.getHeight()
     );
 
-    rectCreepKiller.onContainsEvent.add(new KillEvent());
+    rectCreepKiller.onContainsEvent.add(new RemoveEvent());
     rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
     w.addLast(rectCreepKiller);
 

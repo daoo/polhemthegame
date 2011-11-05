@@ -10,9 +10,9 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
-import ui.IUIElement;
+import ui.IDynamicUIElement;
 
-public class InfoBar implements IUIElement {
+public class InfoBar implements IDynamicUIElement {
   private final IEntity entity;
   private final float barWidth, barHeight;
   private final int offsetX, offsetY;
@@ -52,5 +52,10 @@ public class InfoBar implements IUIElement {
     }
 
     g.popTransform();
+  }
+
+  @Override
+  public boolean isActive() {
+    return entity.isActive();
   }
 }

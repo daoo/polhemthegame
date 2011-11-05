@@ -27,6 +27,6 @@ public class AllIterator implements Iterator<IEntity> {
 
   @Override
   public void remove() {
-    throw new UnsupportedOperationException("Not allowed");
+    internal.remove();
   }
 }

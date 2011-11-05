@@ -23,20 +23,11 @@ import org.newdawn.slick.Graphics;
  * More specifically it's an component container.
  */
 public interface IEntity {
-  void addAction(IEffect effect);
-  void addActions(Collection<IEffect> effects);
+  void addEffect(IEffect effect);
+  void addEffects(Collection<IEffect> effects);
 
   void addLogicComponent(ILogicComponent comp);
   void addRenderComponent(IRenderComponent comp);
-
-  boolean equals(IEntity other);
-
-  /**
-   * Body getter.
-   * All entities should have a physical size/body.
-   * @return the body for this entity
-   */
-  Rectangle getBody();
 
   /**
    * Returns the component with the specified type.
@@ -47,18 +38,21 @@ public interface IEntity {
   ILogicComponent getComponent(ComponentType componentType);
 
   /**
+   * Body getter.
+   * All entities should have a physical size/body.
+   * @return the body for this entity
+   */
+  Rectangle getBody();
+
+  /**
    * Entity type getter.
    * @return the type of this entity
    */
   EntityType getType();
 
   World getWorld();
+  void setWorld(World world);
 
-  /**
-   * Render the entity.
-   * @param g the graphics context to use
-   */
-  void render(Graphics g);
   /**
    * Sends a message to all components that belong to this entity.
    * @param message the message to send
@@ -66,11 +60,20 @@ public interface IEntity {
    */
   void sendMessage(ComponentMessage message, Object args);
 
-  void setWorld(World world);
+  /**
+   * Render the entity.
+   * @param g the graphics context to use
+   */
+  void render(Graphics g);
 
   /**
    * Updates logic.
    * @param time the current game time
    */
   void update(GameTime time);
+
+  boolean equals(IEntity other);
+
+  boolean isActive();
+  void remove();
 }

@@ -7,8 +7,8 @@ package ui;
 import org.newdawn.slick.Graphics;
 
 public interface IUI {
-  void addElement(IUIElement element);
-  void removeElement(IUIElement element);
+  void addElement(IDynamicUIElement element);
+  void removeElement(IDynamicUIElement element);
   void clearElements();
 
   void update();

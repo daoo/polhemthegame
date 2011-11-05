@@ -17,14 +17,13 @@ import org.newdawn.slick.Graphics;
 
 public class World {
   private final WorldContainer entities;
-  private final LinkedList<IEntity> toAddFirst, toAddLast, toRemove;
+  private final LinkedList<IEntity> toAddFirst, toAddLast;
 
   private final LinkedList<ITrigger> triggers, addTriggers;
 
   public World() {
     toAddFirst = new LinkedList<IEntity>();
     toAddLast  = new LinkedList<IEntity>();
-    toRemove   = new LinkedList<IEntity>();
     entities   = new WorldContainer();
     
     triggers   = new LinkedList<ITrigger>();
@@ -63,16 +62,6 @@ public class World {
     return entities.iterate(Groups.UNITS);
   }
 
-  /**
-   * Delayed remove, happens at the end of a frame.
-   * @param obj object to remove
-   */
-  public void remove(IEntity obj) {
-    assert (obj != null);
-
-    toRemove.add(obj);
-  }
-
   public void render(Graphics g) {
     for (IEntity e : entities.iterateAll()) {
       e.render(g);
@@ -86,19 +75,21 @@ public class World {
     }
 
     // Triggers
-    Iterator<ITrigger> it = triggers.iterator();
-    while (it.hasNext()) {
-      ITrigger t = it.next();
+    Iterator<ITrigger> itt = triggers.iterator();
+    while (itt.hasNext()) {
+      ITrigger t = itt.next();
       t.update(time);
 
       if (!t.runAgain()) {
-        it.remove();
+        itt.remove();
       }
     }
 
-    // Add and remove
-    entities.remove(toRemove);
-    toRemove.clear();
+    Iterator<IEntity> itr = entities.iterateAll().iterator();
+    while (itr.hasNext()) {
+      if (!itr.next().isActive())
+        itr.remove();
+    }
 
     entities.addLastAll(toAddLast);
     toAddLast.clear();

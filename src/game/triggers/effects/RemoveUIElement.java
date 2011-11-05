@@ -4,16 +4,16 @@
 
 package game.triggers.effects;
 
-import ui.IUIElement;
+import ui.IDynamicUIElement;
 import main.Locator;
 import game.time.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
 public class RemoveUIElement implements IEffect {
-  private final IUIElement element;
+  private final IDynamicUIElement element;
 
-  public RemoveUIElement(IUIElement element) {
+  public RemoveUIElement(IDynamicUIElement element) {
     this.element = element;
   }
 

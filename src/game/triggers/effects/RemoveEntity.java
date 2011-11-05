@@ -18,6 +18,6 @@ public class RemoveEntity implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    world.remove(entity);
+    entity.remove();
   }
 }
