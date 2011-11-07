@@ -23,9 +23,6 @@ import org.newdawn.slick.Graphics;
  * More specifically it's an component container.
  */
 public interface IEntity {
-  void addEffect(IEffect effect);
-  void addEffects(Collection<IEffect> effects);
-
   void addLogicComponent(ILogicComponent comp);
   void addRenderComponent(IRenderComponent comp);
 

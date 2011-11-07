@@ -9,6 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.components.misc.RangeLimiter;
+import game.entities.Entity;
 import game.entities.IEntity;
 import game.factories.ProjectileTemplate;
 import game.time.GameTime;
@@ -22,7 +23,7 @@ import ui.hud.infobar.IProgress;
 public class Hand implements IRenderComponent, IProgress {
   private final Vector2 offset;
 
-  private IEntity owner;
+  private Entity owner;
   private Weapon weapon;
 
   public Hand(float handOffsetX, float handOffsetY) {
@@ -96,6 +97,6 @@ public class Hand implements IRenderComponent, IProgress {
 
   @Override
   public void setOwner(IEntity owner) {
-    this.owner = owner;
+    this.owner = (Entity) owner;
   }
 }

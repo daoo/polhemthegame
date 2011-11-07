@@ -39,15 +39,13 @@ public class EntityFactory {
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     Entity e  = new Entity(
-      x,
-      y,
+      x, y,
       data.hitbox.width,
       data.hitbox.height,
       EntityType.CREEP
     );
 
     Life life = new Life(data.hitpoints);
-    EffectsOnDeath effectsOnDeath = new EffectsOnDeath();
 
     e.addLogicComponent(new Movement((float) Math.cos(ang) * data.speed,
                                      (float) Math.sin(ang) * data.speed));
@@ -58,6 +56,7 @@ public class EntityFactory {
     infoBar.add(new Bar(life, Color.green, Color.red));
     Locator.getUI().addElement(infoBar);
 
+    EffectsOnDeath effectsOnDeath = new EffectsOnDeath();
     effectsOnDeath.add(new SpawnAnimationEffect(e, death));
     e.addLogicComponent(effectsOnDeath);
 
@@ -96,9 +95,7 @@ public class EntityFactory {
 
     e.addRenderComponent(walk);
 
-    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2,     // TODO: Do I need this one?
-        // e.addLogicComponent(new EffectsOnDeath(new RemoveEntity(e)));
-0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addElement(infoBar);

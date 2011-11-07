@@ -34,16 +34,6 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addEffect(IEffect effect) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
-  public void addEffects(Collection<IEffect> effects) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
   public void addLogicComponent(ILogicComponent comp) {
     throw new UnsupportedOperationException("Not allowed");
   }

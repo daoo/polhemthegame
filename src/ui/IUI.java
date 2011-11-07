@@ -8,7 +8,6 @@ import org.newdawn.slick.Graphics;
 
 public interface IUI {
   void addElement(IDynamicUIElement element);
-  void removeElement(IDynamicUIElement element);
   void clearElements();
 
   void update();

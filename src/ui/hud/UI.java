@@ -4,21 +4,21 @@
 
 package ui.hud;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
-import ui.IUI;
 import ui.IDynamicUIElement;
+import ui.IUI;
 
 public class UI implements IUI {
   private final LinkedList<IDynamicUIElement> elements;
 
-  private final LinkedList<IDynamicUIElement> toRemove, toAdd;
+  private final LinkedList<IDynamicUIElement> toAdd;
 
   public UI() {
     elements = new LinkedList<IDynamicUIElement>();
-    toRemove = new LinkedList<IDynamicUIElement>();
     toAdd    = new LinkedList<IDynamicUIElement>();
   }
 
@@ -28,23 +28,21 @@ public class UI implements IUI {
   }
 
   @Override
-  public void removeElement(IDynamicUIElement element) {
-    toRemove.add(element);
-  }
-
-  @Override
   public void clearElements() {
     elements.clear();
   }
 
   @Override
   public void update() {
-    for (IDynamicUIElement e : elements) {
-      e.update();
+    Iterator<IDynamicUIElement> it = elements.iterator();
+    while (it.hasNext()) {
+      IDynamicUIElement e = it.next();
+      if (e.isActive()) {
+        e.update();
+      } else {
+        it.remove();
+      }
     }
-
-    elements.removeAll(toRemove);
-    toRemove.clear();
 
     elements.addAll(toAdd);
     toAdd.clear();

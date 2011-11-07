@@ -87,8 +87,9 @@ public class World {
 
     Iterator<IEntity> itr = entities.iterateAll().iterator();
     while (itr.hasNext()) {
-      if (!itr.next().isActive())
+      if (!itr.next().isActive()) {
         itr.remove();
+      }
     }
 
     entities.addLastAll(toAddLast);

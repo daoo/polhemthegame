@@ -41,12 +41,10 @@ public class Entity implements IEntity {
     renders = new LinkedList<IRenderComponent>();
   }
 
-  @Override
   public void addEffect(IEffect effect) {
     effects.add(effect);
   }
 
-  @Override
   public void addEffects(Collection<IEffect> collection) {
     effects.addAll(collection);
   }
@@ -146,7 +144,7 @@ public class Entity implements IEntity {
 
   @Override
   public boolean isActive() {
-    return active;
+    return active || (!effects.isEmpty());
   }
 
   @Override
