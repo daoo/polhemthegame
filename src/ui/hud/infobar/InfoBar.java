@@ -18,13 +18,13 @@ public class InfoBar implements IDynamicUIElement {
   private final int offsetX, offsetY;
   private final LinkedList<Bar> bars;
 
-  public InfoBar(IEntity entity, float width, float height, int offsetX, int offsetY) {
+  public InfoBar(IEntity entity, float barWidth, float barHeight, int offsetX, int offsetY) {
     this.entity  = entity;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    barWidth  = width;
-    barHeight = height;
+    this.barWidth  = barWidth;
+    this.barHeight = barHeight;
 
     bars = new LinkedList<Bar>();
   }
@@ -45,10 +45,10 @@ public class InfoBar implements IDynamicUIElement {
     g.pushTransform();
     g.translate(entity.getBody().getX1(), entity.getBody().getY1());
 
-    int i = 0;
+    int y = offsetY;
     for (Bar b : bars) {
-      b.render(g, offsetX, offsetY + (barHeight * i), barWidth, barHeight);
-      ++i;
+      b.render(g, offsetX, y, barWidth, barHeight);
+      y += barHeight;
     }
 
     g.popTransform();
