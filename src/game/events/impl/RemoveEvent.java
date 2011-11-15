@@ -4,7 +4,6 @@
 
 package game.events.impl;
 
-import game.components.ComponentMessage;
 import game.entities.IEntity;
 import game.events.IEvent;
 

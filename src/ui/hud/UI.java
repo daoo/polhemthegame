@@ -10,16 +10,23 @@ import java.util.LinkedList;
 import org.newdawn.slick.Graphics;
 
 import ui.IDynamicUIElement;
+import ui.IStaticUIElement;
 import ui.IUI;
 
 public class UI implements IUI {
+  private final LinkedList<IStaticUIElement> statics;
   private final LinkedList<IDynamicUIElement> elements;
 
   private final LinkedList<IDynamicUIElement> toAdd;
 
   public UI() {
     elements = new LinkedList<IDynamicUIElement>();
+    statics  = new LinkedList<IStaticUIElement>();
     toAdd    = new LinkedList<IDynamicUIElement>();
+  }
+
+  public void addStatic(IStaticUIElement element) {
+    statics.add(element);
   }
 
   @Override
