@@ -9,11 +9,7 @@ import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.time.GameTime;
-import game.triggers.IEffect;
 import game.world.World;
-
-import java.util.Collection;
-
 import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
