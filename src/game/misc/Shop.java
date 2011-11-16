@@ -60,7 +60,7 @@ public class Shop {
 
   public Weapon buyNext(Wallet wallet) {
     if (next == null)
-      return;
+      return null;
 
     if (wallet.takeMoney(next.price)) {
       next.bought = true;

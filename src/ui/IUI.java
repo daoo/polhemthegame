@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 
 public interface IUI {
   void addDynamic(IDynamicUIElement element);
+  void addStatic(IStaticUIElement element);
 
   void update();
   void renderDynamics(Graphics g);

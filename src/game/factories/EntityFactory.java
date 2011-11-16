@@ -17,6 +17,7 @@ import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
+import game.misc.Shop;
 import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ import main.Locator;
 
 import org.newdawn.slick.Color;
 
+import ui.hud.ShopUI;
 import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
@@ -76,8 +78,10 @@ public class EntityFactory {
       EntityType.PLAYER
     );
 
+    Shop shop = new Shop(CacheTool.getShop(Locator.getCache()));
+
     e.addLogicComponent(new Movement(0, 0));
-    e.addLogicComponent(new PlayerControl(data.speed));
+    e.addLogicComponent(new PlayerControl(data.speed, shop));
 
     Life life = new Life(data.hitpoints);
     e.addLogicComponent(life);
@@ -99,6 +103,8 @@ public class EntityFactory {
     infoBar.add(new Bar(life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addDynamic(infoBar);
+
+    Locator.getUI().addStatic(new ShopUI(0, 0, e, shop));
 
     e.addRenderComponent(new Outliner(true, true));
 

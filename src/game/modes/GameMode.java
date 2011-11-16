@@ -58,8 +58,6 @@ public class GameMode implements IMode {
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
     campaign  = new Campaign(data);
     players   = new Players(1); // TODO: Coop
-
-    ui.addStatic(new ShopUI(0, 0, players.iterator().next()));
   }
 
   @Override
