@@ -11,11 +11,11 @@ import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
+import game.pods.Binds;
 import game.time.GameTime;
 import math.Vector2;
 
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Input;
 
 public class SimpleControl implements ILogicComponent {
   private IEntity owner;
@@ -29,8 +29,12 @@ public class SimpleControl implements ILogicComponent {
   private int lastX, lastY;
   private boolean weaponChanged;
 
+  private final Binds binds;
+
   public SimpleControl(float speed) {
     this.speed = speed;
+
+    binds = new Binds();
 
     this.lastX      = 0;
     this.lastY      = 0;
@@ -42,13 +46,13 @@ public class SimpleControl implements ILogicComponent {
     int x = 0;
     int y = 0;
 
-    if (Keyboard.isKeyDown(Keyboard.KEY_A))
+    if (Keyboard.isKeyDown(binds.walkLeft))
       x += -1;
-    if (Keyboard.isKeyDown(Keyboard.KEY_D))
+    if (Keyboard.isKeyDown(binds.walkRight))
       x += 1;
-    if (Keyboard.isKeyDown(Keyboard.KEY_W))
+    if (Keyboard.isKeyDown(binds.walkUp))
       y += -1;
-    if (Keyboard.isKeyDown(Keyboard.KEY_S))
+    if (Keyboard.isKeyDown(binds.walkDown))
       y += 1;
 
     if ((x != lastX) || (y != lastY)) {
@@ -65,7 +69,7 @@ public class SimpleControl implements ILogicComponent {
     movement.setVelocity(new Vector2(x * speed, y * speed));
 
     // Shooting
-    if (Keyboard.isKeyDown(Input.KEY_SPACE)) {
+    if (Keyboard.isKeyDown(binds.fire)) {
       if (!holdableOn) {
         owner.sendMessage(ComponentMessage.START_HOLDABLE, null);
         holdableOn = true;
@@ -75,7 +79,8 @@ public class SimpleControl implements ILogicComponent {
       holdableOn = false;
     }
 
-    if (Keyboard.isKeyDown(Input.KEY_TAB)) {
+    // Weapon changing
+    if (Keyboard.isKeyDown(binds.nextWeapon)) {
       if (!weaponChanged) {
         hand.grab(inventory.nextWeapon());
         weaponChanged = true;
