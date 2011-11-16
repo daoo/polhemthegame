@@ -2,7 +2,7 @@
  * Copyright (c) 2010-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.misc;
+package game.misc;
 
 import game.components.holdables.weapons.Weapon;
 
@@ -24,33 +24,56 @@ public class Shop {
 
     public ShopItem(int price, Image icon, WeaponData weapon) {
       this.bought = false;
-      this.price = price;
-      this.icon = icon;
+      this.price  = price;
+      this.icon   = icon;
       this.weapon = weapon;
     }
   }
 
   private final LinkedList<ShopItem> items;
   private final Iterator<ShopItem> buyer;
+  private ShopItem next;
 
   public Shop(ShopData shop) {
     items = new LinkedList<Shop.ShopItem>();
 
     for (ShopData.ShopItemData item : shop.items) {
-      ShopItem tmp = new ShopItem(0, null, null);
+      ShopItem tmp = new ShopItem(item.price, null, null);
       items.add(tmp);
     }
 
-    buyer = items.listIterator();
+    buyer = items.iterator();
+    next  = buyer.next();
   }
 
   public void render(Graphics g, int spacing) {
+    int x = spacing;
+    for (ShopItem item : items) {
+      g.drawRect(x, spacing, 100, 100);
+      x += spacing;
+    }
   }
 
-  public boolean canAffordNext(int money) {
-    buyer.
+  public boolean canAffordNext(Wallet wallet) {
+    return next != null && wallet.getMoney() >= next.price;
   }
 
-  public Weapon buyNext(int money) {
+  public Weapon buyNext(Wallet wallet) {
+    if (next == null)
+      return;
+
+    if (wallet.takeMoney(next.price)) {
+      next.bought = true;
+      if (buyer.hasNext()) {
+        next = buyer.next();
+      } else {
+        next = null;
+      }
+
+      // TODO: Create weapon
+      return null;
+    }
+
+    return null;
   }
 }

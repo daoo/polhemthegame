@@ -4,35 +4,37 @@
 
 package game.components.misc;
 
-
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
+import game.misc.Shop;
 import game.pods.Binds;
 import game.time.GameTime;
+
 import math.Vector2;
 
 import org.lwjgl.input.Keyboard;
 
-public class SimpleControl implements ILogicComponent {
+public class PlayerControl implements ILogicComponent {
   private IEntity owner;
   private Movement movement;
   private Inventory inventory;
+  private Shop shop;
   private Hand hand;
 
   private final float speed;
 
-  private boolean holdableOn;
   private int lastX, lastY;
-  private boolean weaponChanged;
+  private boolean holdableOn, weaponChanged, buying;
 
   private final Binds binds;
 
-  public SimpleControl(float speed) {
+  public PlayerControl(float speed, Shop shop) {
     this.speed = speed;
+    this.shop  = shop;
 
     binds = new Binds();
 
@@ -88,6 +90,18 @@ public class SimpleControl implements ILogicComponent {
     } else {
       weaponChanged = false;
     }
+
+    if (Keyboard.isKeyDown(binds.buy)) {
+      if (!buying) {
+        if (shop.canAffordNext(inventory.getWallet())) {
+          shop.buyNext(inventory.getWallet());
+        }
+
+        buying = true;
+      }
+    } else {
+      buying = false;
+    }
   }
 
   @Override
@@ -102,9 +116,9 @@ public class SimpleControl implements ILogicComponent {
 
   @Override
   public void setOwner(IEntity owner) {
-    this.owner = owner;
-    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
+    this.owner     = owner;
+    this.movement  = (Movement) owner.getComponent(ComponentType.MOVEMENT);
     this.inventory = (Inventory) owner.getComponent(ComponentType.INVENTORY);
-    this.hand = (Hand) owner.getComponent(ComponentType.HAND);
+    this.hand      = (Hand) owner.getComponent(ComponentType.HAND);
   }
 }

@@ -5,7 +5,7 @@ import org.lwjgl.input.Keyboard;
 public class Binds {
   public final int walkUp, walkDown, walkLeft, walkRight;
 
-  public final int fire, nextWeapon;
+  public final int fire, nextWeapon, buy;
 
   public Binds() {
     walkUp = Keyboard.KEY_W;
@@ -15,5 +15,6 @@ public class Binds {
 
     fire = Keyboard.KEY_SPACE;
     nextWeapon = Keyboard.KEY_TAB;
+    buy = Keyboard.KEY_1;
   }
 }

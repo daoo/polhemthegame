@@ -8,6 +8,7 @@ import game.components.ComponentType;
 import game.components.misc.Inventory;
 import game.entities.IEntity;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import ui.IStaticUIElement;
@@ -44,7 +45,10 @@ public class ShopUI implements IStaticUIElement {
     g.pushTransform();
     g.translate(x, y);
 
-    g.fillRect(0, 0, WIDTH, HEIGHT);
+    g.setColor(Color.white);
+    g.drawRect(0, 0, WIDTH, HEIGHT);
+
+    inventory.getShop().render(g);
 
     String mStr = MONEY + String.valueOf(inventory.getMoney());
     String kStr = KILLS + String.valueOf(0);

@@ -9,6 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
+import game.misc.Wallet;
 import game.time.GameTime;
 
 import java.util.LinkedList;
@@ -16,23 +17,19 @@ import java.util.LinkedList;
 // TODO: Shop
 
 public class Inventory implements ILogicComponent {
-  private int money;
+  private final Wallet wallet;
 
   private final LinkedList<Weapon> weapons;
   private int currentWeapon;
 
   public Inventory(int money) {
-    this.money = money;
+    wallet = new Wallet(money);
     weapons = new LinkedList<Weapon>();
     currentWeapon = 0;
   }
 
   public void addWeapon(Weapon w) {
     weapons.add(w);
-  }
-
-  public void addMoney(int v) {
-    money += v;
   }
 
   public boolean contains(Weapon w) {
@@ -42,10 +39,6 @@ public class Inventory implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.INVENTORY;
-  }
-
-  public int getMoney() {
-    return money;
   }
 
   public Weapon nextWeapon() {
@@ -68,19 +61,8 @@ public class Inventory implements ILogicComponent {
     // Do nothing
   }
 
-  /***
-   * Takes money from the inventory.
-   * @param v the ammount of money to take
-   * @return true if there is enough money in the inventory, false otherwise.
-   */
-  public boolean takeMoney(int v) {
-    if (money < v) {
-      return false;
-    }
-
-    money -= v;
-
-    return true;
+  public Wallet getWallet() {
+    return wallet;
   }
 
   @Override

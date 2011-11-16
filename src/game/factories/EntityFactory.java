@@ -12,7 +12,7 @@ import game.components.holdables.weapons.Weapon;
 import game.components.life.EffectsOnDeath;
 import game.components.life.Life;
 import game.components.misc.Inventory;
-import game.components.misc.SimpleControl;
+import game.components.misc.PlayerControl;
 import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;
@@ -77,7 +77,7 @@ public class EntityFactory {
     );
 
     e.addLogicComponent(new Movement(0, 0));
-    e.addLogicComponent(new SimpleControl(data.speed));
+    e.addLogicComponent(new PlayerControl(data.speed));
 
     Life life = new Life(data.hitpoints);
     e.addLogicComponent(life);
