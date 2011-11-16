@@ -7,9 +7,9 @@ package ui;
 import org.newdawn.slick.Graphics;
 
 public interface IUI {
-  void addElement(IDynamicUIElement element);
-  void clearElements();
+  void addDynamic(IDynamicUIElement element);
 
   void update();
-  void render(Graphics g);
+  void renderDynamics(Graphics g);
+  void renderStatics(Graphics g);
 }

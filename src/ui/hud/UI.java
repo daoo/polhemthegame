@@ -15,12 +15,12 @@ import ui.IUI;
 
 public class UI implements IUI {
   private final LinkedList<IStaticUIElement> statics;
-  private final LinkedList<IDynamicUIElement> elements;
+  private final LinkedList<IDynamicUIElement> dynamics;
 
   private final LinkedList<IDynamicUIElement> toAdd;
 
   public UI() {
-    elements = new LinkedList<IDynamicUIElement>();
+    dynamics = new LinkedList<IDynamicUIElement>();
     statics  = new LinkedList<IStaticUIElement>();
     toAdd    = new LinkedList<IDynamicUIElement>();
   }
@@ -30,18 +30,13 @@ public class UI implements IUI {
   }
 
   @Override
-  public void addElement(IDynamicUIElement element) {
+  public void addDynamic(IDynamicUIElement element) {
     toAdd.add(element);
   }
 
   @Override
-  public void clearElements() {
-    elements.clear();
-  }
-
-  @Override
   public void update() {
-    Iterator<IDynamicUIElement> it = elements.iterator();
+    Iterator<IDynamicUIElement> it = dynamics.iterator();
     while (it.hasNext()) {
       IDynamicUIElement e = it.next();
       if (e.isActive()) {
@@ -51,13 +46,20 @@ public class UI implements IUI {
       }
     }
 
-    elements.addAll(toAdd);
+    dynamics.addAll(toAdd);
     toAdd.clear();
   }
 
   @Override
-  public void render(Graphics g) {
-    for (IDynamicUIElement e : elements) {
+  public void renderDynamics(Graphics g) {
+    for (IDynamicUIElement e : dynamics) {
+      e.render(g);
+    }
+  }
+
+  @Override
+  public void renderStatics(Graphics g) {
+      for (IStaticUIElement e : statics) {
       e.render(g);
     }
   }

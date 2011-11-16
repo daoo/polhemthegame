@@ -54,7 +54,7 @@ public class EntityFactory {
 
     InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
-    Locator.getUI().addElement(infoBar);
+    Locator.getUI().addDynamic(infoBar);
 
     EffectsOnDeath effectsOnDeath = new EffectsOnDeath();
     effectsOnDeath.add(new SpawnAnimationEffect(e, death));
@@ -98,7 +98,7 @@ public class EntityFactory {
     InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
     infoBar.add(new Bar(life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
-    Locator.getUI().addElement(infoBar);
+    Locator.getUI().addDynamic(infoBar);
 
     e.addRenderComponent(new Outliner(true, true));
 

@@ -4,7 +4,7 @@
 
 package loader.data.json;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.IClosable;
@@ -16,7 +16,7 @@ public class ShopData implements IClosable {
     public String icon;
   }
 
-  public ArrayList<ShopItemData> items;
+  public LinkedList<ShopItemData> items;
 
   @Override
   public void close() throws DataException {

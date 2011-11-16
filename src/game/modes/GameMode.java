@@ -58,6 +58,8 @@ public class GameMode implements IMode {
     arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
     campaign  = new Campaign(data);
     players   = new Players(1); // TODO: Coop
+
+    ui.addStatic(new ShopUI(0, 0, players.iterator().next()));
   }
 
   @Override
@@ -119,16 +121,17 @@ public class GameMode implements IMode {
     g.translate(arenaRect.getX1(), arenaRect.getY1());
 
     level.render(g);
-    ui.render(g);
+    ui.renderDynamics(g);
 
     g.popTransform();
+
+    ui.renderStatics(g);
   }
 
   private void nextLevel()
       throws DataException, ParserException, IOException {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
-      ui.clearElements();
       level = new Level(
         this,
         campaign.getCurrentLevel(),

@@ -13,7 +13,6 @@ import game.time.GameTime;
 
 import java.util.LinkedList;
 
-
 // TODO: Shop
 
 public class Inventory implements ILogicComponent {
