@@ -71,8 +71,8 @@ public class Inventory implements ILogicComponent {
 
   /***
    * Takes money from the inventory.
-   * @param v The ammount of money to take
-   * @return True if there is enough money in the inventory, false otherwise.
+   * @param v the ammount of money to take
+   * @return true if there is enough money in the inventory, false otherwise.
    */
   public boolean takeMoney(int v) {
     if (money < v) {
