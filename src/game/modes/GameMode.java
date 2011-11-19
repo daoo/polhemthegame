@@ -48,7 +48,7 @@ public class GameMode implements IMode {
   public GameMode(CampaignData data, int width, int height)
       throws ParserException, DataException, IOException {
     if (data.levels.isEmpty()) {
-      throw new IllegalArgumentException("No levels in campaing");
+      throw new IllegalArgumentException("No levels in campaign");
     }
 
     ui = new UI();
@@ -72,11 +72,7 @@ public class GameMode implements IMode {
         arenaRect.getWidth(),
         arenaRect.getHeight()
       );
-    } catch (ParserException ex) {
-      stateManager.handleException(ex);
-    } catch (IOException ex) {
-      stateManager.handleException(ex);
-    } catch (DataException ex) {
+    } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
     }
   }
@@ -96,11 +92,7 @@ public class GameMode implements IMode {
     if (nextAction == ACTION.NEXT_LEVEL) {
       try {
         nextLevel();
-      } catch (DataException ex) {
-        stateManager.handleException(ex);
-      } catch (ParserException ex) {
-        stateManager.handleException(ex);
-      } catch (IOException ex) {
+      } catch (DataException | ParserException | IOException ex) {
         stateManager.handleException(ex);
       }
       nextAction = null;
