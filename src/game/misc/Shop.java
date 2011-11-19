@@ -4,14 +4,19 @@
 
 package game.misc;
 
+import game.CacheTool;
 import game.components.holdables.weapons.Weapon;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 import loader.data.json.ShopData;
 import loader.data.json.WeaponsData.WeaponData;
+import loader.parser.ParserException;
+import main.Locator;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -34,11 +39,12 @@ public class Shop {
   private final Iterator<ShopItem> buyer;
   private ShopItem next;
 
-  public Shop(ShopData shop) {
+  public Shop(ShopData shop) throws ParserException, IOException {
     items = new LinkedList<Shop.ShopItem>();
 
     for (ShopData.ShopItemData item : shop.items) {
-      ShopItem tmp = new ShopItem(item.price, null, null);
+      Image icon = CacheTool.getImage(Locator.getCache(), item.icon);
+      ShopItem tmp = new ShopItem(item.price, icon, null);
       items.add(tmp);
     }
 
@@ -49,8 +55,12 @@ public class Shop {
   public void render(Graphics g, int spacing) {
     int x = spacing;
     for (ShopItem item : items) {
-      g.drawRect(x, spacing, 100, 100);
-      x += spacing;
+      if (item.bought)
+        g.drawImage(item.icon, x, spacing);
+      else
+        g.drawImage(item.icon, x, spacing, Color.gray);
+
+      x += spacing + item.icon.getWidth();
     }
   }
 
