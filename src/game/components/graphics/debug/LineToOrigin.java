@@ -14,7 +14,11 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class LineToOrigin implements IRenderComponent {
-  private IEntity owner;
+  private final IEntity owner;
+
+  public LineToOrigin(IEntity owner) {
+    this.owner = owner;
+  }
 
   @Override
   public void update(GameTime time) {
@@ -29,11 +33,6 @@ public class LineToOrigin implements IRenderComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.LINE_TO_ORIGIN;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 
   @Override

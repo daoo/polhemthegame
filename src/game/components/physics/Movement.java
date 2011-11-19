@@ -12,10 +12,11 @@ import game.time.GameTime;
 import math.Vector2;
 
 public class Movement implements ILogicComponent {
-  private IEntity owner;
+  private final IEntity owner;
   private final Vector2 vel;
 
-  public Movement(float dx, float dy) {
+  public Movement(IEntity owner, float dx, float dy) {
+    this.owner = owner;
     vel = new Vector2(dx, dy);
   }
 
@@ -35,11 +36,6 @@ public class Movement implements ILogicComponent {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 
   public void setVelocity(Vector2 v) {

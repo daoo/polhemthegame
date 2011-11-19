@@ -8,32 +8,27 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
-import game.entities.IEntity;
 import game.misc.Wallet;
 import game.time.GameTime;
 
-import java.util.LinkedList;
-
-// TODO: Shop
+import java.util.ArrayList;
 
 public class Inventory implements ILogicComponent {
   private final Wallet wallet;
 
-  private final LinkedList<Weapon> weapons;
+  private final ArrayList<Weapon> weapons;
   private int currentWeapon;
 
   public Inventory(int money) {
     wallet = new Wallet(money);
-    weapons = new LinkedList<Weapon>();
+    weapons = new ArrayList<>();
     currentWeapon = 0;
   }
 
   public void addWeapon(Weapon w) {
-    weapons.add(w);
-  }
+    assert w != null;
 
-  public boolean contains(Weapon w) {
-    return weapons.contains(w);
+    weapons.add(w);
   }
 
   @Override
@@ -53,11 +48,6 @@ public class Inventory implements ILogicComponent {
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    // Do nothing
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
     // Do nothing
   }
 

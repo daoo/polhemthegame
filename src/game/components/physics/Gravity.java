@@ -14,9 +14,10 @@ import math.Vector2;
 public class Gravity implements ILogicComponent {
   private static final float FACTOR = 100.0f;
 
-  private Movement movement;
+  private final Movement movement;
 
-  public Gravity() {
+  public Gravity(Movement movement) {
+    this.movement = movement;
   }
 
   @Override
@@ -33,10 +34,5 @@ public class Gravity implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.GRAVITY;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }

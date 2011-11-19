@@ -6,6 +6,7 @@ package game.misc;
 
 import game.CacheTool;
 import game.components.holdables.weapons.Weapon;
+import game.factories.MiscFactory;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -13,7 +14,6 @@ import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.ShopData;
-import loader.data.json.WeaponsData.WeaponData;
 import loader.parser.ParserException;
 import main.Locator;
 
@@ -26,9 +26,9 @@ public class Shop {
     public boolean bought;
     public final int price;
     public final Image icon;
-    public final WeaponData weapon;
+    public final Weapon weapon;
 
-    public ShopItem(int price, Image icon, WeaponData weapon) {
+    public ShopItem(int price, Image icon, Weapon weapon) {
       this.bought = false;
       this.price  = price;
       this.icon   = icon;
@@ -37,7 +37,7 @@ public class Shop {
   }
 
   private final LinkedList<ShopItem> items;
-  private final Iterator<ShopItem> buyer;
+  private final Iterator<ShopItem> it;
   private ShopItem next;
 
   public Shop(ShopData shop) throws ParserException, IOException, DataException {
@@ -45,13 +45,15 @@ public class Shop {
 
     for (ShopData.ShopItemData item : shop.items) {
       Image icon = CacheTool.getImage(Locator.getCache(), item.icon);
-      WeaponData weapon = CacheTool.getWeaponData(Locator.getCache(), item.weapon);
+      Weapon weapon = MiscFactory.makeWeapon(
+        CacheTool.getWeaponData(Locator.getCache(), item.weapon));
+
       ShopItem tmp = new ShopItem(item.price, icon, weapon);
       items.add(tmp);
     }
 
-    buyer = items.iterator();
-    next  = buyer.next();
+    it   = items.iterator();
+    next = it.next();
   }
 
   public void render(Graphics g, int spacing) {
@@ -76,14 +78,15 @@ public class Shop {
 
     if (wallet.takeMoney(next.price)) {
       next.bought = true;
-      if (buyer.hasNext()) {
-        next = buyer.next();
+      Weapon tmp = next.weapon;
+
+      if (it.hasNext()) {
+        next = it.next();
       } else {
         next = null;
       }
 
-      // TODO: Create weapon
-      return null;
+      return tmp;
     }
 
     return null;

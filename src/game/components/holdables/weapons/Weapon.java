@@ -11,7 +11,6 @@ import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
-import game.entities.IEntity;
 import game.factories.ProjectileTemplate;
 import game.time.GameTime;
 
@@ -88,11 +87,6 @@ public abstract class Weapon implements IHoldable {
   @Override
   public void render(Graphics g) {
     anim.render(g);
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    // Do nothing
   }
 
   @Override

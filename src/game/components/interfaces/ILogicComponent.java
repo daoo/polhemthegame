@@ -6,7 +6,6 @@ package game.components.interfaces;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
-import game.entities.IEntity;
 import game.time.GameTime;
 
 public interface ILogicComponent {
@@ -15,6 +14,4 @@ public interface ILogicComponent {
   void reciveMessage(ComponentMessage message, Object args);
 
   ComponentType getComponentType();
-
-  void setOwner(IEntity owner);
 }

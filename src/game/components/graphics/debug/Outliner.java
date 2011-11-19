@@ -20,13 +20,16 @@ public class Outliner implements IRenderComponent {
   private static final Color SECOND = Color.green;
   private static final Color THIRD  = Color.blue;
 
-  private IEntity owner;
-  private Movement movement;
+  private final IEntity owner;
+  private final Movement movement;
 
   private final boolean outlineNext;
   private final boolean linesToNext;
 
-  public Outliner(boolean outlineNext, boolean lineToNext) {
+  public Outliner(IEntity owner, Movement movement, boolean outlineNext, boolean lineToNext) {
+    this.owner    = owner;
+    this.movement = movement;
+
     this.outlineNext = outlineNext;
     this.linesToNext = lineToNext;
   }
@@ -73,12 +76,6 @@ public class Outliner implements IRenderComponent {
       }
     }
     g.setColor(tmp);
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
-    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 
   @Override

@@ -12,7 +12,6 @@ import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
-import game.entities.IEntity;
 import game.time.Clock;
 import game.time.GameTime;
 
@@ -115,11 +114,6 @@ public class RSheet implements IAnimatedComponent {
   @Override
   public void setAnimator(IAnimator animator) {
     this.animator = animator;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    // Do nothing
   }
 
   @Override

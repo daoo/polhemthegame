@@ -64,18 +64,22 @@ public class ProjectileTemplate {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
                           EntityType.PROJECTILE);
 
-    e.addLogicComponent(new Life(data.targets));
-    e.addLogicComponent(new RangeLimiter(data.duration, data.range));
-    e.addLogicComponent(new Movement((float) Math.cos(rot) * data.speed,
-                                     (float) Math.sin(rot) * data.speed));
+    Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
+                                   (float) Math.sin(rot) * data.speed);
+    Life life          = new Life(e, data.targets);
+    RangeLimiter range = new RangeLimiter(e, data.duration, data.range);
+
+    e.addLogicComponent(life);
+    e.addLogicComponent(range);
+    e.addLogicComponent(mov);
     if (data.gravity) {
-      e.addLogicComponent(new Gravity());
+      e.addLogicComponent(new Gravity(mov));
     }
 
-    e.addLogicComponent(new ProjectileDamage(source, data.damage));
-    e.addLogicComponent(new ProjectileCollision());
+    e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+    e.addLogicComponent(new ProjectileCollision(e, mov));
 
-    EffectsOnDeath effects = new EffectsOnDeath();
+    EffectsOnDeath effects = new EffectsOnDeath(e);
     effects.add(new RemoveEntity(e));
     e.addLogicComponent(effects);
 

@@ -22,14 +22,16 @@ public class RangeLimiter implements ILogicComponent {
     }
   }
 
-  private IEntity owner;
+  private final IEntity owner;
 
   private TimePos start;
 
   private final float duration;
   private final float range;
 
-  public RangeLimiter(float duration, float range) {
+  public RangeLimiter(IEntity owner, float duration, float range) {
+    this.owner = owner;
+
     this.duration = duration;
     this.range    = range;
   }
@@ -54,10 +56,5 @@ public class RangeLimiter implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.RANGE_LIMITER;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 }

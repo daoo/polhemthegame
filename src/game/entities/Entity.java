@@ -22,7 +22,7 @@ import org.newdawn.slick.Graphics;
 public class Entity implements IEntity {
   private final Rectangle body;
   private final EntityType type;
-  private World world;  
+  private World world;
   private boolean active;
 
   private final LinkedList<IEffect> effects;
@@ -51,13 +51,11 @@ public class Entity implements IEntity {
 
   @Override
   public void addLogicComponent(ILogicComponent comp) {
-    comp.setOwner(this);
     updates.add(comp);
   }
 
   @Override
   public void addRenderComponent(IRenderComponent comp) {
-    comp.setOwner(this);
     renders.add(comp);
   }
 

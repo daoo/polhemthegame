@@ -56,10 +56,11 @@ public class CollisionTester extends BasicGame {
   private IEntity makeProjectile(int x, int y, int w, int h, int dx, int dy) {
     IEntity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
 
-    obj.addLogicComponent(new Movement(dx, dy));
+    Movement mov = new Movement(obj, dx, dy);
 
+    obj.addLogicComponent(mov);
     obj.addRenderComponent(new SolidQuad(Color.white, w, h));
-    obj.addRenderComponent(new Outliner(true, true));
+    obj.addRenderComponent(new Outliner(obj, mov, true, true));
 
     return obj;
   }

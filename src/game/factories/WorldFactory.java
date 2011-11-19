@@ -65,7 +65,7 @@ public class WorldFactory {
 
     players.reposition(rectWorld);
     for (IEntity p : players) {
-      p.addLogicComponent(new MovementConstraint(rectWorld));
+      p.addLogicComponent(new MovementConstraint(p, rectWorld));
       w.addLast(p);
     }
 

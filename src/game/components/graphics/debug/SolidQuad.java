@@ -7,7 +7,6 @@ package game.components.graphics.debug;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
-import game.entities.IEntity;
 import game.time.GameTime;
 
 import org.newdawn.slick.Color;
@@ -36,11 +35,6 @@ public class SolidQuad implements IRenderComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.GRAPHIC;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    // Do nothing
   }
 
   @Override

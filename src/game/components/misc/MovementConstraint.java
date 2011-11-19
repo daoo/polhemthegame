@@ -13,10 +13,11 @@ import math.CollisionHelper;
 import math.Rectangle;
 
 public class MovementConstraint implements ILogicComponent {
-  private IEntity owner;
+  private final IEntity owner;
   private final Rectangle constraints;
 
-  public MovementConstraint(Rectangle constraints) {
+  public MovementConstraint(IEntity owner, Rectangle constraints) {
+    this.owner       = owner;
     this.constraints = constraints;
   }
 
@@ -33,10 +34,5 @@ public class MovementConstraint implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.MOVEMENT_CONSTRAINTS;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 }

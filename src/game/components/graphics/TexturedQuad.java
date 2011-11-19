@@ -10,7 +10,6 @@ import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
-import game.entities.IEntity;
 import game.time.GameTime;
 
 import org.newdawn.slick.Graphics;
@@ -71,11 +70,6 @@ public class TexturedQuad implements IAnimatedComponent {
 
   @Override
   public void setAnimator(IAnimator animator) {
-    // Do nothing
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
     // Do nothing
   }
 

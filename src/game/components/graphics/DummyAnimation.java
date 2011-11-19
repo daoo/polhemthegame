@@ -71,11 +71,6 @@ public class DummyAnimation implements IAnimatedComponent {
   }
 
   @Override
-  public void setOwner(IEntity owner) {
-    // Do nothing
-  }
-
-  @Override
   public void update(GameTime time) {
     // Do nothing
   }

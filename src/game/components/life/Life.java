@@ -18,11 +18,11 @@ public class Life implements ILogicComponent, IProgress {
   private float hp;
   private final float maxHP;
 
-  private IEntity owner;
+  private final IEntity owner;
 
-  public Life(float maxHP) {
+  public Life(IEntity owner, float maxHP) {
+    this.owner = owner;
     this.alive = true;
-
     this.hp    = maxHP;
     this.maxHP = maxHP;
   }
@@ -53,11 +53,6 @@ public class Life implements ILogicComponent, IProgress {
         damage(((Damage) args).ammount);
       }
     }
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 
   @Override

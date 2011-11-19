@@ -23,10 +23,12 @@ import ui.hud.infobar.IProgress;
 public class Hand implements IRenderComponent, IProgress {
   private final Vector2 offset;
 
-  private Entity owner;
+  private final Entity owner;
   private Weapon weapon;
 
-  public Hand(float handOffsetX, float handOffsetY) {
+  public Hand(Entity owner, float handOffsetX, float handOffsetY) {
+    this.owner = owner;
+
     offset = new Vector2(handOffsetX, handOffsetY);
 
     weapon = null;
@@ -45,6 +47,8 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   public void grab(Weapon newItem) {
+    assert newItem != null;
+
     // To grab a new holdable we need to stop using the current one
     stopUse();
 
@@ -93,10 +97,5 @@ public class Hand implements IRenderComponent, IProgress {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.HAND;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = (Entity) owner;
   }
 }

@@ -8,7 +8,6 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.time.GameTime;
 import game.triggers.IEffect;
 
@@ -17,14 +16,16 @@ import java.util.LinkedList;
 public class EffectsOnDeath implements ILogicComponent {
   private final LinkedList<IEffect> effects;
 
-  private Entity owner;
+  private final Entity owner;
 
-  public EffectsOnDeath() {
+  public EffectsOnDeath(Entity owner) {
+    this.owner = owner;
+
     effects = new LinkedList<IEffect>();
   }
 
-  public EffectsOnDeath(IEffect effect) {
-    this();
+  public EffectsOnDeath(Entity owner, IEffect effect) {
+    this(owner);
     effects.add(effect);
   }
 
@@ -47,10 +48,5 @@ public class EffectsOnDeath implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.ACTION_ON_DEATH;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = (Entity) owner;
   }
 }

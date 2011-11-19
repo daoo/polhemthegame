@@ -15,9 +15,11 @@ public class ProjectileDamage implements ILogicComponent {
   private final Damage damageOther;
   private final Damage damageSelf;
 
-  private IEntity owner;
+  private final IEntity owner;
 
-  public ProjectileDamage(IEntity source, float damage) {
+  public ProjectileDamage(IEntity owner, IEntity source, float damage) {
+    this.owner = owner;
+
     this.damageSelf = new Damage(null, 1);
     this.damageOther = new Damage(source, damage);
   }
@@ -39,10 +41,5 @@ public class ProjectileDamage implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.PROJECTILE_DAMAGE;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner = owner;
   }
 }

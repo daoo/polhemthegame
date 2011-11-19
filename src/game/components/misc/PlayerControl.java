@@ -7,34 +7,39 @@ package game.components.misc;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.Hand;
+import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
 import game.misc.Shop;
 import game.pods.Binds;
 import game.time.GameTime;
-
 import math.Vector2;
 
 import org.lwjgl.input.Keyboard;
 
 public class PlayerControl implements ILogicComponent {
-  private IEntity owner;
-  private Movement movement;
-  private Inventory inventory;
-  private Shop shop;
-  private Hand hand;
+  private final IEntity owner;
+  private final Movement movement;
+  private final Inventory inventory;
+  private final Shop shop;
+  private final Hand hand;
+
+  private final Binds binds;
 
   private final float speed;
 
   private int lastX, lastY;
   private boolean holdableOn, weaponChanged, buying;
 
-  private final Binds binds;
+  public PlayerControl(IEntity owner, Movement movement, Inventory inventory, Shop shop, Hand hand, float speed) {
+    this.owner     = owner;
+    this.movement  = movement;
+    this.inventory = inventory;
+    this.hand      = hand;
+    this.shop      = shop;
 
-  public PlayerControl(float speed, Shop shop) {
     this.speed = speed;
-    this.shop  = shop;
 
     binds = new Binds();
 
@@ -94,7 +99,10 @@ public class PlayerControl implements ILogicComponent {
     if (Keyboard.isKeyDown(binds.buy)) {
       if (!buying) {
         if (shop.canAffordNext(inventory.getWallet())) {
-          shop.buyNext(inventory.getWallet());
+          Weapon weapon = shop.buyNext(inventory.getWallet());
+          if (weapon != null) {
+            inventory.addWeapon(weapon);
+          }
         }
 
         buying = true;
@@ -112,13 +120,5 @@ public class PlayerControl implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.CONTROL;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner     = owner;
-    this.movement  = (Movement) owner.getComponent(ComponentType.MOVEMENT);
-    this.inventory = (Inventory) owner.getComponent(ComponentType.INVENTORY);
-    this.hand      = (Hand) owner.getComponent(ComponentType.HAND);
   }
 }

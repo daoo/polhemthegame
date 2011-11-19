@@ -20,12 +20,15 @@ public class ProjectileCollision implements ILogicComponent {
   private boolean enableCollisions;
   private final LinkedList<IEntity> collidedWith;
 
-  private IEntity owner;
-  private Movement movement;
+  private final IEntity owner;
+  private final Movement movement;
 
-  public ProjectileCollision() {
+  public ProjectileCollision(IEntity owner, Movement movement) {
+    this.owner    = owner;
+    this.movement = movement;
+
     enableCollisions = true;
-    collidedWith = new LinkedList<IEntity>();
+    collidedWith     = new LinkedList<IEntity>();
   }
 
   private void collisionCheck(Rectangle a, Vector2 m, IEntity b, float dt) {
@@ -57,11 +60,5 @@ public class ProjectileCollision implements ILogicComponent {
   @Override
   public ComponentType getComponentType() {
     return ComponentType.COLLISION;
-  }
-
-  @Override
-  public void setOwner(IEntity owner) {
-    this.owner    = owner;
-    this.movement = (Movement) owner.getComponent(ComponentType.MOVEMENT);
   }
 }
