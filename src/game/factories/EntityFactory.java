@@ -30,7 +30,7 @@ import main.Locator;
 
 import org.newdawn.slick.Color;
 
-import ui.hud.ShopUI;
+import ui.hud.PlayerUI;
 import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
@@ -104,7 +104,7 @@ public class EntityFactory {
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addDynamic(infoBar);
 
-    Locator.getUI().addStatic(new ShopUI(0, 0, e, shop));
+    Locator.getUI().addStatic(new PlayerUI(0, 0, e, shop));
 
     e.addRenderComponent(new Outliner(true, true));
 

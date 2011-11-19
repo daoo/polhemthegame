@@ -14,7 +14,7 @@ import org.newdawn.slick.Graphics;
 
 import ui.IStaticUIElement;
 
-public class ShopUI implements IStaticUIElement {
+public class PlayerUI implements IStaticUIElement {
   public static final int HEIGHT = 75;
   public static final int WIDTH  = 1024;
 
@@ -31,7 +31,7 @@ public class ShopUI implements IStaticUIElement {
   private final Inventory inventory;
   private final Shop shop;
 
-  public ShopUI(int x, int y, IEntity player, Shop shop) {
+  public PlayerUI(int x, int y, IEntity player, Shop shop) {
     this.x = x;
     this.y = y;
 

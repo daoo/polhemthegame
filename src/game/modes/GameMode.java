@@ -20,7 +20,7 @@ import math.Rectangle;
 import org.newdawn.slick.Graphics;
 
 import states.StateManager;
-import ui.hud.ShopUI;
+import ui.hud.PlayerUI;
 import ui.hud.UI;
 
 public class GameMode implements IMode {
@@ -55,7 +55,7 @@ public class GameMode implements IMode {
     Locator.registerUI(ui);
 
     elapsed   = 0;
-    arenaRect = new Rectangle(0, ShopUI.HEIGHT, width, height - ShopUI.HEIGHT * 2);
+    arenaRect = new Rectangle(0, PlayerUI.HEIGHT, width, height - PlayerUI.HEIGHT * 2);
     campaign  = new Campaign(data);
     players   = new Players(1); // TODO: Coop
   }
