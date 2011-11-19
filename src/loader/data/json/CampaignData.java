@@ -4,17 +4,16 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.data.DataException;
-import loader.data.IClosable;
-
-public class CampaignData implements IClosable {
+public class CampaignData implements Closeable {
   public String            name;
   public ArrayList<String> levels;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // Do nothing
   }
 }

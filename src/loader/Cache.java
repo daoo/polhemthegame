@@ -4,44 +4,40 @@
 
 package loader;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-import loader.data.IClosable;
 import loader.parser.IParser;
 import loader.parser.ParserException;
 
 public class Cache implements ICache {
-  private final FileBeacon                 beacon;
+  private final FileBeacon beacon;
   private final HashMap<String, CacheItem> cache;
 
-  private IClosable readAndParse(String id, IParser parser)
+  private Closeable readAndParse(String id, IParser parser)
     throws IOException, ParserException {
-    InputStream is = beacon.getReader(id);
 
-    if (is != null) {
-      try {
-        return parser.parse(is);
-      } catch (ParserException e) {
-        throw new ParserException("Error parsing: " + id, e);
-      } finally {
-        is.close();
-      }
+    Closeable result = null;
+    try (InputStream is = beacon.getReader(id)) {
+      result = parser.parse(is);
+    } catch (ParserException ex) {
+      throw new ParserException("Error parsing: " + id, ex);
     }
 
-    throw new ParserException("Error parsing: " + id);
+    return result;
   }
 
   public Cache(File rootDir) throws FileNotFoundException {
     beacon = new FileBeacon(rootDir);
-    cache = new HashMap<String, CacheItem>();
+    cache = new HashMap<>();
   }
 
   @Override
-  public void close() throws CacheException {
+  public void close() throws IOException {
     for (CacheItem cacheItem : cache.values()) {
       cacheItem.close();
     }
@@ -50,15 +46,15 @@ public class Cache implements ICache {
   }
 
   @Override
-  public void delete(String id) throws CacheException {
+  public void delete(String id) throws IOException {
     cache.get(id).close();
     cache.remove(id);
   }
 
   @Override
-  public IClosable getCold(String id, IParser parser)
+  public Closeable getCold(String id, IParser parser)
     throws IOException, ParserException {
-    IClosable data;
+    Closeable data;
     if (cache.containsKey(id)) {
       data = cache.get(id).getData();
     } else {
@@ -70,7 +66,7 @@ public class Cache implements ICache {
   }
 
   @Override
-  public IClosable getWarm(String id) throws ObjectNotInCacheException {
+  public Closeable getWarm(String id) throws ObjectNotInCacheException {
     CacheItem c = cache.get(id);
     if (c != null) {
       return c.getData();

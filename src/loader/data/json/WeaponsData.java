@@ -4,12 +4,13 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.data.DataException;
-import loader.data.IClosable;
 
-public class WeaponsData implements IClosable {
+public class WeaponsData implements Closeable {
   public class WeaponData {
     public String     name;
 
@@ -39,7 +40,7 @@ public class WeaponsData implements IClosable {
   }
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // No data needs clean up
   }
 }

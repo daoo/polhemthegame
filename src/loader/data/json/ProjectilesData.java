@@ -4,12 +4,13 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.data.DataException;
-import loader.data.IClosable;
 
-public class ProjectilesData implements IClosable {
+public class ProjectilesData implements Closeable {
   public class ProjectileData {
     public class AOE {
       public float      radius;
@@ -48,7 +49,7 @@ public class ProjectilesData implements IClosable {
   }
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // Do nothing
   }
 }

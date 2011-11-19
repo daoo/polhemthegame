@@ -4,11 +4,9 @@
 
 package main;
 
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import loader.Cache;
-import loader.CacheException;
 import math.Random;
 import math.Rectangle;
 
@@ -38,24 +36,16 @@ public class Launcher extends BasicGame {
   }
 
   public static void main(String[] args) {
-    try {
-      Locator.registerCache(new Cache(new Enviroment().appDir));
+    try (Cache cache = new Cache(new Enviroment().appDir)) {
+      Locator.registerCache(cache);
       Locator.registerRandom(new Random());
 
       AppGameContainer app = new AppGameContainer(new Launcher());
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();
-    } catch (FileNotFoundException ex) {
+    } catch (SlickException | IOException ex) {
       ex.printStackTrace();
-    } catch (SlickException ex) {
-      ex.printStackTrace();
-    } finally {
-      try {
-        Locator.getCache().close();
-      } catch (CacheException ex) {
-        ex.printStackTrace();
-      }
     }
   }
 

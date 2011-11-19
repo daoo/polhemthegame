@@ -4,21 +4,19 @@
 
 package loader;
 
+import java.io.Closeable;
 import java.io.IOException;
 
-import loader.data.IClosable;
 import loader.parser.IParser;
 import loader.parser.ParserException;
 
-public interface ICache {
-  void close() throws CacheException;
+public interface ICache extends Closeable {
+  void delete(String id) throws IOException;
 
-  void delete(String id) throws CacheException;
-
-  IClosable getCold(String id, IParser parser)
+  Closeable getCold(String id, IParser parser)
     throws IOException, ParserException;
 
-  IClosable getWarm(String id) throws ObjectNotInCacheException;
+  Closeable getWarm(String id) throws ObjectNotInCacheException;
 
   int count();
 

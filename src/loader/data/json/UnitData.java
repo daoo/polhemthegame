@@ -4,12 +4,13 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.data.DataException;
-import loader.data.IClosable;
 
-public class UnitData implements IClosable {
+public class UnitData implements Closeable {
   public String                name;
   public Size                  hitbox;
   public ArrayList<SpriteData> sprites;
@@ -17,7 +18,7 @@ public class UnitData implements IClosable {
   public int                   hitpoints;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     sprites.clear();
   }
 

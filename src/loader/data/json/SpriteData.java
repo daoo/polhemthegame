@@ -4,10 +4,10 @@
 
 package loader.data.json;
 
-import loader.data.DataException;
-import loader.data.IClosable;
+import java.io.Closeable;
+import java.io.IOException;
 
-public class SpriteData implements IClosable {
+public class SpriteData implements Closeable {
   public String animation;
   public String sprite;
   public Size   tileSize;
@@ -15,7 +15,7 @@ public class SpriteData implements IClosable {
   public Offset offset;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // No data needs clean up
   }
 }

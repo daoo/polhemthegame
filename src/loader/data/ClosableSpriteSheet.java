@@ -4,23 +4,25 @@
 
 package loader.data;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
-public class ClosableSpriteSheet extends SpriteSheet implements IClosable {
+public class ClosableSpriteSheet extends SpriteSheet implements Closeable {
   public ClosableSpriteSheet(String name, InputStream ref, int tw, int th)
       throws SlickException {
     super(name, ref, tw, th);
   }
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     try {
       destroy();
     } catch (SlickException e) {
-      throw new DataException(e);
+      throw new IOException(e);
     }
   }
 }

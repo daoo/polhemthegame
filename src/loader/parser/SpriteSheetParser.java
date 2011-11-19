@@ -4,10 +4,10 @@
 
 package loader.parser;
 
+import java.io.Closeable;
 import java.io.InputStream;
 
 import loader.data.ClosableSpriteSheet;
-import loader.data.IClosable;
 
 import org.newdawn.slick.SlickException;
 
@@ -20,13 +20,12 @@ public class SpriteSheetParser implements IParser {
   }
 
   @Override
-  public IClosable parse(InputStream is) throws ParserException {
+  public Closeable parse(InputStream is) throws ParserException {
     try {
       // NOTE: ref is set to is.toString() because it seemed as a logic decision
       return new ClosableSpriteSheet(is.toString(), is, tw, th);
-    } catch (SlickException e) {
-      throw new ParserException(e);
+    } catch (SlickException ex) {
+      throw new ParserException(ex);
     }
   }
-
 }

@@ -4,12 +4,11 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.data.DataException;
-import loader.data.IClosable;
-
-public class LevelData implements IClosable {
+public class LevelData implements Closeable {
   public class CreepSpawnData {
     public String creep;
     public float  spawnTime;
@@ -24,7 +23,7 @@ public class LevelData implements IClosable {
   public ArrayList<CreepSpawnData> creeps;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // No data needs clean up
   }
 

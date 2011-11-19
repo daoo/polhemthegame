@@ -4,23 +4,23 @@
 
 package loader;
 
-import loader.data.DataException;
-import loader.data.IClosable;
+import java.io.Closeable;
+import java.io.IOException;
 
-public class CacheItem {
+class CacheItem {
   private final String    id;
-  private final IClosable data;
+  private final Closeable data;
 
-  public CacheItem(String id, IClosable data) {
+  public CacheItem(String id, Closeable data) {
     this.data = data;
     this.id = id;
   }
 
-  public IClosable getData() {
+  public Closeable getData() {
     return data;
   }
 
-  public void close() throws DataException {
+  public void close() throws IOException {
     data.close();
   }
 

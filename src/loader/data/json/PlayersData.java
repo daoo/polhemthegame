@@ -4,13 +4,12 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.data.DataException;
-import loader.data.IClosable;
-
-public class PlayersData implements IClosable {
-  public class PlayerData extends UnitData implements IClosable {
+public class PlayersData implements Closeable {
+  public class PlayerData extends UnitData implements Closeable {
     public int    startMoney;
     public String startWeapon;
     public Offset handOffset;
@@ -19,7 +18,7 @@ public class PlayersData implements IClosable {
   public ArrayList<PlayerData> players;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // No data needs clean up
   }
 }

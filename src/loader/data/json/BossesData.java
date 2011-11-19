@@ -4,13 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.data.DataException;
-import loader.data.IClosable;
 
-public class BossesData implements IClosable {
-  public class BossData extends UnitData implements IClosable {
+public class BossesData implements Closeable {
+  public class BossData extends UnitData implements Closeable {
     public int    locationX;
     public String weapon;
     public float  fireLength;
@@ -29,7 +30,7 @@ public class BossesData implements IClosable {
   }
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // Do nothing
   }
 }

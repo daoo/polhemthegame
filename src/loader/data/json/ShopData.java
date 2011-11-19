@@ -4,12 +4,11 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.LinkedList;
 
-import loader.data.DataException;
-import loader.data.IClosable;
-
-public class ShopData implements IClosable {
+public class ShopData implements Closeable {
   public class ShopItemData {
     public String weapon;
     public int    price;
@@ -19,7 +18,7 @@ public class ShopData implements IClosable {
   public LinkedList<ShopItemData> items;
 
   @Override
-  public void close() throws DataException {
+  public void close() throws IOException {
     // No data needs clean up
   }
 }
