@@ -87,7 +87,9 @@ public class EntityFactory {
     e.addLogicComponent(life);
 
     Inventory inv = new Inventory(data.startMoney);
-    Weapon weapon = CacheTool.getWeapon(Locator.getCache(), data.startWeapon);
+    Weapon weapon = MiscFactory.makeWeapon(
+      CacheTool.getWeaponData(Locator.getCache(), data.startWeapon));
+
     inv.addWeapon(weapon);
     e.addLogicComponent(inv);
 

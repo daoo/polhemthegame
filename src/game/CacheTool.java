@@ -6,10 +6,6 @@ package game;
 
 import game.components.graphics.RSheet;
 import game.components.graphics.animations.Idle;
-import game.components.holdables.weapons.AutomaticWeapon;
-import game.components.holdables.weapons.SingleWeapon;
-import game.components.holdables.weapons.Weapon;
-import game.factories.ProjectileTemplate;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +27,6 @@ import loader.parser.GsonParser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
 import loader.parser.SpriteSheetParser;
-import math.Vector2;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
@@ -83,36 +78,13 @@ public class CacheTool {
     );
   }
 
-  public static Weapon getWeapon(ICache cache, String name)
-    throws DataException, ParserException, IOException {
-    WeaponsData weapons = (WeaponsData) cache.getCold(FILE_WEAPONS, new GsonParser(WeaponsData.class));
-    WeaponData weapon   = weapons.getWeapon(name);
-
-    Vector2 m        = new Vector2(weapon.muzzleOffset.x, weapon.muzzleOffset.y);
-    ProjectileData p = CacheTool.getProjectile(cache, weapon.projectile);
-    RSheet anim      = CacheTool.getRSheet(cache, weapon.sprite);
-    if (weapon.automatic) {
-      return new AutomaticWeapon(
-        m,
-        weapon.reloadTime,
-        60.0f / weapon.rpm,
-        weapon.clipSize,
-        weapon.launchAngle,
-        anim,
-        new ProjectileTemplate(p)
-      );
-    }
-    else {
-      return new SingleWeapon(
-        m,
-        weapon.reloadTime,
-        60.0f / weapon.rpm,
-        weapon.clipSize,
-        weapon.launchAngle,
-        anim,
-        new ProjectileTemplate(p)
-      );
-    }
+  public static WeaponData getWeaponData(ICache cache, String name)
+      throws ParserException, IOException, DataException {
+    WeaponsData weapons = (WeaponsData) cache.getCold(
+      FILE_WEAPONS,
+      new GsonParser(WeaponsData.class)
+    );
+    return weapons.getWeapon(name);
   }
 
   public static ProjectileData getProjectile(ICache cache, String projectile)

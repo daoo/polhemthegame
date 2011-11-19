@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import loader.data.DataException;
 import loader.data.json.ShopData;
 import loader.data.json.WeaponsData.WeaponData;
 import loader.parser.ParserException;
@@ -39,12 +40,13 @@ public class Shop {
   private final Iterator<ShopItem> buyer;
   private ShopItem next;
 
-  public Shop(ShopData shop) throws ParserException, IOException {
+  public Shop(ShopData shop) throws ParserException, IOException, DataException {
     items = new LinkedList<Shop.ShopItem>();
 
     for (ShopData.ShopItemData item : shop.items) {
       Image icon = CacheTool.getImage(Locator.getCache(), item.icon);
-      ShopItem tmp = new ShopItem(item.price, icon, null);
+      WeaponData weapon = CacheTool.getWeaponData(Locator.getCache(), item.weapon);
+      ShopItem tmp = new ShopItem(item.price, icon, weapon);
       items.add(tmp);
     }
 
