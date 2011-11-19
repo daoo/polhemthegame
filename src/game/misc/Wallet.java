@@ -18,7 +18,7 @@ public class Wallet {
   public boolean takeMoney(int value) {
     assert value >= 0;
 
-    if (value >= money) {
+    if (money >= value) {
       money -= value;
       return true;
     } else {
