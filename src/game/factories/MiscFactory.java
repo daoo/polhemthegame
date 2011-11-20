@@ -1,12 +1,13 @@
 package game.factories;
 
-import java.io.IOException;
-
 import game.CacheTool;
 import game.components.graphics.RSheet;
 import game.components.holdables.weapons.AutomaticWeapon;
 import game.components.holdables.weapons.SingleWeapon;
 import game.components.holdables.weapons.Weapon;
+
+import java.io.IOException;
+
 import loader.data.DataException;
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.data.json.WeaponsData.WeaponData;
