@@ -17,7 +17,6 @@ import loader.data.json.ShopData;
 import loader.parser.ParserException;
 import main.Locator;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
@@ -25,14 +24,15 @@ public class Shop {
   private class ShopItem {
     public boolean bought;
     public final int price;
-    public final Image icon;
+    public final Image icon, iconGray;
     public final Weapon weapon;
 
-    public ShopItem(int price, Image icon, Weapon weapon) {
-      this.bought = false;
-      this.price  = price;
-      this.icon   = icon;
-      this.weapon = weapon;
+    public ShopItem(int price, Image icon, Image iconGray, Weapon weapon) {
+      this.bought   = false;
+      this.price    = price;
+      this.icon     = icon;
+      this.iconGray = iconGray;
+      this.weapon   = weapon;
     }
   }
 
@@ -44,11 +44,12 @@ public class Shop {
     items = new LinkedList<Shop.ShopItem>();
 
     for (ShopData.ShopItemData item : shop.items) {
-      Image icon = CacheTool.getImage(Locator.getCache(), item.icon);
-      Weapon weapon = MiscFactory.makeWeapon(
+      Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);
+      Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
+      Weapon weapon  = MiscFactory.makeWeapon(
         CacheTool.getWeaponData(Locator.getCache(), item.weapon));
 
-      ShopItem tmp = new ShopItem(item.price, icon, weapon);
+      ShopItem tmp = new ShopItem(item.price, icon, iconGray, weapon);
       items.add(tmp);
     }
 
@@ -62,7 +63,7 @@ public class Shop {
       if (item.bought)
         g.drawImage(item.icon, x, spacing);
       else
-        g.drawImage(item.icon, x, spacing, Color.gray);
+        g.drawImage(item.iconGray, x, spacing);
 
       x += spacing + item.icon.getWidth();
     }

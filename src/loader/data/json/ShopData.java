@@ -13,6 +13,7 @@ public class ShopData implements Closeable {
     public String weapon;
     public int    price;
     public String icon;
+    public String iconGray;
   }
 
   public LinkedList<ShopItemData> items;
