@@ -18,7 +18,7 @@ public class PlayerUI implements IStaticUIElement {
   public static final int HEIGHT = 75;
   public static final int WIDTH  = 1024;
 
-  private static final int PADDING = 5;
+  private static final int PADDING = 10;
 
   private static final String MONEY = "Money: ";
   private static final String KILLS = "Kills: ";
