@@ -16,9 +16,11 @@ public class ProjectileDamage implements ILogicComponent {
   private final Damage damageSelf;
 
   private final IEntity owner;
+  private final IEntity source;
 
   public ProjectileDamage(IEntity owner, IEntity source, float damage) {
     this.owner = owner;
+    this.source = source;
 
     this.damageSelf = new Damage(null, 1);
     this.damageOther = new Damage(source, damage);
@@ -35,6 +37,7 @@ public class ProjectileDamage implements ILogicComponent {
       IEntity entity = (IEntity) args;
       entity.sendMessage(ComponentMessage.DAMAGE, damageOther);
       owner.sendMessage(ComponentMessage.DAMAGE, damageSelf);
+      source.sendMessage(ComponentMessage.DAMAGED, damageOther);
     }
   }
 

@@ -48,10 +48,8 @@ public class Life implements ILogicComponent, IProgress {
       alive = false;
       owner.remove();
     } else if (message == ComponentMessage.DAMAGE) {
-      // Type hack, the compiler will kill me
-      if (args instanceof Damage) {
-        damage(((Damage) args).ammount);
-      }
+      Damage data = (Damage) args;
+      damage(data.ammount);
     }
   }
 

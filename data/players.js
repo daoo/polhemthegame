@@ -16,7 +16,7 @@
         , sprite: "textures/players/blue-death.png"
         , tileSize: { width: 50, height: 38 } } ]
     , startWeapon: "ak47"
-    , startMoney: 100 }
+    , startMoney: 100000 }
 
   , { name: "Red"
     , handOffset: { width: 12, height: 15 }
