@@ -16,7 +16,7 @@ public class Menu {
   private MenuItem current;
 
   public Menu(Collection<MenuItem> items) {
-    this.items = new LinkedList<MenuItem>(items);
+    this.items = new LinkedList<>(items);
     this.iterator = this.items.listIterator();
     this.current = iterator.next();
     this.current.setState(MenuItemState.ACTIVE);

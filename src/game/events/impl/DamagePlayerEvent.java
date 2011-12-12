@@ -16,7 +16,7 @@ public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
       float dmg = 10; // FIXME: Magic number
 
       for (IEntity e : args.getWorld().get(EntityType.PLAYER)) {
-        e.sendMessage(ComponentMessage.DAMAGE, dmg);
+        e.sendMessage(ComponentMessage.DAMAGE, Float.valueOf(dmg));
       }
     }
   }

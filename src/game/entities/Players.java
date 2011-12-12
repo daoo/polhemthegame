@@ -29,7 +29,7 @@ public class Players implements Iterable<IEntity> {
     throws ParserException, DataException, IOException {
     super();
 
-    players = new LinkedList<IEntity>();
+    players = new LinkedList<>();
     this.count = count;
 
     PlayersData data = CacheTool.getPlayers(Locator.getCache());

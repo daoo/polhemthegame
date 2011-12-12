@@ -8,7 +8,6 @@ import game.CacheTool;
 
 import java.awt.Font;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import loader.parser.ParserException;
@@ -52,7 +51,7 @@ public class StateCredits implements IState {
     float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = 0;
 
-    credits = new LinkedList<ImageWithLocation>();
+    credits = new LinkedList<>();
     for (String s : Credits.CreditsText) {
       if (!s.isEmpty()) {
         ImageWithLocation img;
@@ -104,13 +103,13 @@ public class StateCredits implements IState {
     pos_y -= speed * delta;
   }
 
+  @SuppressWarnings("unchecked")
   private UnicodeFont getFont(String name, int size)
     throws SlickException {
     Font font = new Font(name, Font.PLAIN, size);
     UnicodeFont ufont = new UnicodeFont(font);
 
-    ArrayList<ColorEffect> tmp = (ArrayList<ColorEffect>) ufont.getEffects();
-    tmp.add(COLOR_WHITE);
+    ufont.getEffects().add(COLOR_WHITE);
 
     ufont.addAsciiGlyphs();
     ufont.loadGlyphs();

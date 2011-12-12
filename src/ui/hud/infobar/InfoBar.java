@@ -26,7 +26,7 @@ public class InfoBar implements IDynamicUIElement {
     this.barWidth  = barWidth;
     this.barHeight = barHeight;
 
-    bars = new LinkedList<Bar>();
+    bars = new LinkedList<>();
   }
 
   public void add(Bar bar) {

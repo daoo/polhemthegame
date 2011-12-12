@@ -22,8 +22,8 @@ public class Trigger implements ITrigger {
     this.loop = loop;
     runAgain = true;
 
-    conditions = new LinkedList<ICondition>();
-    effects = new LinkedList<IEffect>();
+    conditions = new LinkedList<>();
+    effects = new LinkedList<>();
   }
 
   @Override

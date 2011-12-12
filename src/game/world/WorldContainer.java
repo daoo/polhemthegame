@@ -15,7 +15,7 @@ public class WorldContainer {
   private final LinkedList<IEntity> list;
 
   public WorldContainer() {
-    list = new LinkedList<IEntity>();
+    list = new LinkedList<>();
   }
 
   public int size() {

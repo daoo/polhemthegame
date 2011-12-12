@@ -16,6 +16,7 @@ class NewTriggerEffect implements IEffect {
     this.trigger = trigger;
   }
 
+  @Override
   public void execute(GameTime time, World world) {
     world.addTrigger(trigger);
   }

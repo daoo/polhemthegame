@@ -26,8 +26,8 @@ public class InvisibleRectangle implements IEntity {
   public InvisibleRectangle(float x, float y, float w, float h) {
     body = new Rectangle(x, y, w, h);
 
-    onContainsEvent = new EventHandler<ObjectEventArgs>();
-    onNotContainsEvent = new EventHandler<ObjectEventArgs>();
+    onContainsEvent    = new EventHandler<>();
+    onNotContainsEvent = new EventHandler<>();
   }
 
   @Override

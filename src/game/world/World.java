@@ -22,12 +22,12 @@ public class World {
   private final LinkedList<ITrigger> triggers, addTriggers;
 
   public World() {
-    toAddFirst = new LinkedList<IEntity>();
-    toAddLast  = new LinkedList<IEntity>();
+    toAddFirst = new LinkedList<>();
+    toAddLast  = new LinkedList<>();
     entities   = new WorldContainer();
-    
-    triggers   = new LinkedList<ITrigger>();
-    addTriggers = new LinkedList<ITrigger>();
+
+    triggers    = new LinkedList<>();
+    addTriggers = new LinkedList<>();
   }
 
   /**
@@ -97,7 +97,7 @@ public class World {
 
     entities.addFirstAll(toAddFirst);
     toAddFirst.clear();
-    
+
     triggers.addAll(addTriggers);
     addTriggers.clear();
   }

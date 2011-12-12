@@ -35,10 +35,10 @@ public class Entity implements IEntity {
 
     this.type = type;
 
-    effects = new LinkedList<IEffect>();
+    effects = new LinkedList<>();
 
-    updates = new LinkedList<ILogicComponent>();
-    renders = new LinkedList<IRenderComponent>();
+    updates = new LinkedList<>();
+    renders = new LinkedList<>();
   }
 
   public void addEffect(IEffect effect) {

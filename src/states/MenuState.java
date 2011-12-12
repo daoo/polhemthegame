@@ -31,7 +31,7 @@ public class MenuState implements IState {
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
-    LinkedList<MenuItem> tmp = new LinkedList<MenuItem>();
+    LinkedList<MenuItem> tmp = new LinkedList<>();
 
     tmp.add(new MenuButton("singleplayer", 60, 280, new UIEvent() {
         @Override public void fire() {

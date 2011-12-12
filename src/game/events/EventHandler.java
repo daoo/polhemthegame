@@ -12,7 +12,7 @@ public class EventHandler<T extends IEventArgs> {
   private final LinkedList<IEvent<T>> events;
 
   public EventHandler() {
-    events = new LinkedList<IEvent<T>>();
+    events = new LinkedList<>();
   }
 
   public void add(IEvent<T> event) {

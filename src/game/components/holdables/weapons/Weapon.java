@@ -51,7 +51,7 @@ public abstract class Weapon implements IHoldable {
     this.projTemplate = projTemplate;
 
     rounds      = magazineSize;
-    projectiles = new LinkedList<ProjectileTemplate>();
+    projectiles = new LinkedList<>();
   }
 
   public float getAngle() {

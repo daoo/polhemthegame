@@ -76,7 +76,7 @@ public class WorldFactory {
                                                     Rectangle rectWorld, World world)
       throws DataException, ParserException, IOException {
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
-    LinkedList<IEntity> result = new LinkedList<IEntity>();
+    LinkedList<IEntity> result = new LinkedList<>();
 
     for (CreepSpawnData spawnData : spawnsData) {
       Trigger t = new Trigger(false);

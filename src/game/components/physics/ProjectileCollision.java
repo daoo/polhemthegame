@@ -28,7 +28,7 @@ public class ProjectileCollision implements ILogicComponent {
     this.movement = movement;
 
     enableCollisions = true;
-    collidedWith     = new LinkedList<IEntity>();
+    collidedWith     = new LinkedList<>();
   }
 
   private void collisionCheck(Rectangle a, Vector2 m, IEntity b, float dt) {

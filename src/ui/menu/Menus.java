@@ -14,7 +14,7 @@ public class Menus {
   private String                      currentName;
 
   public Menus() {
-    menus = new HashMap<String, Menu>(0);
+    menus       = new HashMap<>();
     currentMenu = null;
     currentName = "";
   }
@@ -40,9 +40,10 @@ public class Menus {
   }
 
   public void swapTo(String name) {
-    if (menus.containsKey(name)) {
+    Menu menu = menus.get(currentName);
+    if (menu != null) {
       currentName = name;
-      currentMenu = menus.get(currentName);
+      currentMenu = menu;
     }
   }
 }

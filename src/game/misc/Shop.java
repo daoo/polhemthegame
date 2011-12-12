@@ -41,7 +41,7 @@ public class Shop {
   private ShopItem next;
 
   public Shop(ShopData shop) throws ParserException, IOException, DataException {
-    items = new LinkedList<Shop.ShopItem>();
+    items = new LinkedList<>();
 
     for (ShopData.ShopItemData item : shop.items) {
       Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);

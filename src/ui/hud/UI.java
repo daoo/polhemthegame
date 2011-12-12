@@ -20,11 +20,12 @@ public class UI implements IUI {
   private final LinkedList<IDynamicUIElement> toAdd;
 
   public UI() {
-    dynamics = new LinkedList<IDynamicUIElement>();
-    statics  = new LinkedList<IStaticUIElement>();
-    toAdd    = new LinkedList<IDynamicUIElement>();
+    dynamics = new LinkedList<>();
+    statics  = new LinkedList<>();
+    toAdd    = new LinkedList<>();
   }
 
+  @Override
   public void addStatic(IStaticUIElement element) {
     statics.add(element);
   }

@@ -41,7 +41,7 @@ public class BossAI implements ILogicComponent {
 
     isShooting = false;
 
-    targets = new Stack<Vector2>();
+    targets = new Stack<>();
   }
 
   private void headFor(Vector2 target) {
