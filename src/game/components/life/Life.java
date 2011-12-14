@@ -48,8 +48,7 @@ public class Life implements ILogicComponent, IProgress {
       alive = false;
       owner.remove();
     } else if (message == ComponentMessage.DAMAGE) {
-      Damage data = (Damage) args;
-      damage(data.ammount);
+      damage((Damage) args);
     }
   }
 
@@ -58,14 +57,18 @@ public class Life implements ILogicComponent, IProgress {
     // Do nothing
   }
 
-  private void damage(float dmg) {
-    hp -= dmg;
+  private void damage(Damage dmg) {
+    hp -= dmg.ammount;
     if (hp <= 0) {
-      kill();
+      kill(dmg.source);
     }
   }
 
-  private void kill() {
+  private void kill(IEntity killer) {
     owner.sendMessage(ComponentMessage.KILL, null);
+
+    if (killer != null) {
+      killer.sendMessage(ComponentMessage.KILLED_ENTITY, owner);
+    }
   }
 }

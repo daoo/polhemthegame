@@ -9,18 +9,29 @@ import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.misc.Wallet;
+import game.pods.Damage;
 import game.time.GameTime;
 
 import java.util.ArrayList;
 
 public class Inventory implements ILogicComponent {
+  // Money
   private final Wallet wallet;
 
+  // Stats
+  private float damageDealt;
+  private int kills;
+
+  // Weapons
   private final ArrayList<Weapon> weapons;
   private int currentWeapon;
 
   public Inventory(int money) {
     wallet = new Wallet(money);
+
+    damageDealt = 0;
+    kills = 0;
+
     weapons = new ArrayList<>();
     currentWeapon = 0;
   }
@@ -48,7 +59,12 @@ public class Inventory implements ILogicComponent {
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    // Do nothing
+    if (message == ComponentMessage.DEALT_DAMAGE) {
+      Damage dmg = (Damage) args;
+      damageDealt += dmg.ammount;
+    } else if (message == ComponentMessage.KILLED_ENTITY) {
+      ++kills;
+    }
   }
 
   public Wallet getWallet() {

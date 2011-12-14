@@ -37,7 +37,7 @@ public class ProjectileDamage implements ILogicComponent {
       IEntity entity = (IEntity) args;
       entity.sendMessage(ComponentMessage.DAMAGE, damageOther);
       owner.sendMessage(ComponentMessage.DAMAGE, damageSelf);
-      source.sendMessage(ComponentMessage.DAMAGED, damageOther);
+      source.sendMessage(ComponentMessage.DEALT_DAMAGE, damageOther);
     }
   }
 
