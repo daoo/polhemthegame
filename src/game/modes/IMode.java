@@ -10,6 +10,10 @@ import states.StateManager;
 
 public interface IMode {
   void start(StateManager stateManager);
+
+  /**
+   * @param dt time in seconds
+   */
   void update(StateManager stateManager, float dt);
   void render(Graphics g);
 }
