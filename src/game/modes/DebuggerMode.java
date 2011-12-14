@@ -11,13 +11,20 @@ import states.StateManager;
 
 public class DebuggerMode implements IMode {
   private final GameMode game;
+
   private final float framelength;
-  private boolean F5_down;
+
+  private boolean drawDebugInfo;
+
+  private boolean F1_down, F5_down;
 
   public DebuggerMode(GameMode game) {
     this.game = game;
     framelength = 0.1f;
 
+    drawDebugInfo = true;
+
+    F1_down = false;
     F5_down = false;
   }
 
@@ -31,6 +38,16 @@ public class DebuggerMode implements IMode {
       F5_down = true;
     } else {
       F5_down = false;
+    }
+
+    if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+      if (!F1_down) {
+        drawDebugInfo = !drawDebugInfo;
+
+        F1_down = true;
+      }
+    } else {
+      F1_down = false;
     }
   }
 

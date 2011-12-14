@@ -22,7 +22,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 public class GameState implements IState {
-  private static final boolean DEBUG = false;
+  private static final boolean DEBUG = true;
 
   private final IMode mode;
 
