@@ -19,7 +19,7 @@ public class DebuggerMode implements IMode {
   private DebugGraph debugGraph;
 
   private boolean paused;
-  private boolean F1_down, F5_down;
+  private boolean F5_down;
 
   public DebuggerMode(GameMode game) {
     this.game = game;
@@ -30,7 +30,6 @@ public class DebuggerMode implements IMode {
     drawDebugInfo = true;
     debugGraph = new DebugGraph(500, 100);
 
-    F1_down = false;
     F5_down = false;
   }
 
@@ -52,16 +51,6 @@ public class DebuggerMode implements IMode {
       debugGraph.startUpdateMeasure();
       game.update(stateManager, dt);
       debugGraph.stopUpdateMeasure();
-    }
-
-    if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-      if (!F1_down) {
-        drawDebugInfo = !drawDebugInfo;
-
-        F1_down = true;
-      }
-    } else {
-      F1_down = false;
     }
   }
 
