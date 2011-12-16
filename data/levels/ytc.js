@@ -1,6 +1,4 @@
 { level: "YTC"
-, constraints: [ 0, 100, 0, 0 ]
-, background: "textures/levels/polhem.png"
 , loading: "textures/text/ytc.png"
 , preBossImage: "textures/text/donteventrytogetbackin.png"
 , completed: "textures/text/levelcomplete.png"
