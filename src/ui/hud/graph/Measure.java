@@ -10,6 +10,10 @@ public class Measure {
 
   private boolean finished;
 
+  /**
+   * Construct a new measure with the specified interval.
+   * @param timeDelta the time difference between total measures, in nanoseconds
+   */
   public Measure(long timeDelta) {
     this.timeDelta = timeDelta;
 
@@ -39,9 +43,9 @@ public class Measure {
 
   public void reset() {
     firstMeasure = 0;
-    lastMeasure = 0;
+    lastMeasure  = 0;
 
-    total = 0;
+    total    = 0;
     measures = 0;
 
     finished = false;

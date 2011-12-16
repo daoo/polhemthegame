@@ -28,7 +28,7 @@ public class DebuggerMode implements IMode {
     paused = false;
 
     drawDebugInfo = true;
-    debugGraph = new DebugGraph(200, 100);
+    debugGraph = new DebugGraph(500, 100);
 
     F1_down = false;
     F5_down = false;
@@ -67,10 +67,12 @@ public class DebuggerMode implements IMode {
 
   @Override
   public void render(Graphics g) {
+    debugGraph.startRenderMeasure();
     game.render(g);
+    debugGraph.stopRenderMeasure();
 
     if (drawDebugInfo) {
-      debugGraph.render(g, 0, 200);
+      debugGraph.render(g, 0, 80);
     }
   }
 

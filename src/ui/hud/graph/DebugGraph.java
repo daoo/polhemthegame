@@ -1,19 +1,24 @@
 package ui.hud.graph;
 
+import main.Launcher;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class DebugGraph {
   /**
-   * Time difference between debug info measures in milliseconds.
+   * Time difference between debug info measures in nanoseconds.
    */
-  private static final long MEASURE_TIME_DELTA = 100;
+  private static final long MEASURE_TIME_DELTA = 10000000;
+
+  private static final long NANO_PER_MILLI = 1000000;
+
+  private static final double MILLISECONDS_PER_FRAME = 5;
 
   private int width, height;
 
+  private final Measure updateMeasure, renderMeasure;
   private final GraphData updateData, renderData;
-
-  private long updateStartTime;
 
   public DebugGraph(int width, int height) {
     this.width = width;
@@ -21,36 +26,70 @@ public class DebugGraph {
 
     updateData = new GraphData(width);
     renderData = new GraphData(width);
+
+    updateMeasure = new Measure(MEASURE_TIME_DELTA);
+    renderMeasure = new Measure(MEASURE_TIME_DELTA);
   }
 
   public void render(Graphics g, int x, int y) {
     g.pushTransform();
     g.translate(x, y);
 
-    float updateAvg = updateData.getAverage();
+    // Render render
+    g.setColor(new Color(0, 0, 255, 200));
 
-    g.setColor(new Color(0, 255, 0, 200));
+    int rpx = 0;
+    for (Double data : renderData) {
+      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
+      int pixelHeight = (int) (dataHeight * height);
 
-    int px = 0;
-    for (Float data : updateData) {
-      float dataHeight = data.floatValue() / updateAvg;
-      float pixelHeight = dataHeight * height;
+      g.drawLine(rpx, height - pixelHeight, rpx, height);
 
-      g.drawLine(px, height, px, -pixelHeight);
-
-      ++px;
+      ++rpx;
     }
 
+    // Render update
+    g.setColor(new Color(0, 255, 0, 200));
+
+    int upx = 0;
+    for (Double data : updateData) {
+      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
+      int pixelHeight = (int) (dataHeight * height);
+
+      g.drawLine(upx, height - pixelHeight, upx, height);
+
+      ++upx;
+    }
+
+    g.setColor(Color.white);
+    g.drawRect(0, 0, width, height);
     g.popTransform();
   }
 
+  public void startRenderMeasure() {
+    renderMeasure.startMeasure();
+  }
+
+  public void stopRenderMeasure() {
+    renderMeasure.stopMeasure();
+    if (renderMeasure.isFinished()) {
+      renderData.addDataPoint(
+        renderMeasure.getAverage() / (double) NANO_PER_MILLI);
+      renderMeasure.reset();
+    }
+  }
+
   public void startUpdateMeasure() {
-    updateStartTime = System.nanoTime();
+    updateMeasure.startMeasure();
   }
 
   public void stopUpdateMeasure() {
-    long delta = System.nanoTime() - updateStartTime;
+    updateMeasure.stopMeasure();
 
-    updateData.addDataPoint(delta / 10000000.0f); // milliseconds
+    if (updateMeasure.isFinished()) {
+      updateData.addDataPoint(
+        updateMeasure.getAverage() / (double) NANO_PER_MILLI); // milliseconds
+      updateMeasure.reset();
+    }
   }
 }

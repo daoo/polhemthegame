@@ -26,7 +26,7 @@ public class Launcher extends BasicGame {
   public static final int       WIDTH      = 1024;
   public static final int       HEIGHT     = 768;
   public static final boolean   FULLSCREEN = false;
-  public static final int       MAX_FPS    = 100;
+  public static final int       MAX_FPS    = 60;
   public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
   private StateManager stateGame;
@@ -51,7 +51,7 @@ public class Launcher extends BasicGame {
 
   @Override
   public void init(GameContainer container) throws SlickException {
-    container.setTargetFrameRate(60);
+    container.setTargetFrameRate(MAX_FPS);
 
     stateGame = new StateManager();
     stateGame.enterMainMenu();

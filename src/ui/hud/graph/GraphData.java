@@ -3,34 +3,34 @@ package ui.hud.graph;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GraphData implements Iterable<Float> {
+public class GraphData implements Iterable<Double> {
   private final int dataCount;
 
-  private LinkedList<Float> data;
+  private LinkedList<Double> data;
 
-  private float average;
+  private double average;
 
   public GraphData(int dataCount) {
     this.dataCount = dataCount;
     data = new LinkedList<>();
   }
 
-  public void addDataPoint(float dataPoint) {
+  public void addDataPoint(double dataPoint) {
     if (data.size() >= dataCount) {
       data.removeFirst();
     }
 
-    data.add(Float.valueOf(dataPoint));
+    data.add(Double.valueOf(dataPoint));
 
-    average = (average + dataPoint) / 2.0f;
+    average = (average + dataPoint) / 2.0;
   }
 
-  public float getAverage() {
+  public double getAverage() {
     return average;
   }
 
   @Override
-  public Iterator<Float> iterator() {
+  public Iterator<Double> iterator() {
     return data.iterator();
   }
 }
