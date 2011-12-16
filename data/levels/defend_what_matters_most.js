@@ -1,6 +1,4 @@
 { level: "Defend What Matters Most!"
-, constraints: [ 0, 100, 0, 0 ]
-, background: "textures/levels/polhem.png"
 , loading: "textures/text/defendwhatmattersmost.png"
 , completed: "textures/text/levelcomplete.png"
 , preBossImage: "textures/text/whosentanetsend.png"

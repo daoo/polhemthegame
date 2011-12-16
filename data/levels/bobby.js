@@ -1,6 +1,4 @@
 { level: "Bobby"
-, constraints: [ 0, 100, 0, 0 ]
-, background: "textures/levels/polhem.png"
 , states: [ "beginning", "creeps", "boss transition", "boss", "finished" ]
 , textStates:
   [ { state: "beginning"

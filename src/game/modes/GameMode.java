@@ -4,6 +4,7 @@
 
 package game.modes;
 
+import game.CacheTool;
 import game.Campaign;
 import game.Level;
 import game.entities.Players;
@@ -18,6 +19,7 @@ import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import states.StateManager;
 import ui.hud.PlayerUI;
@@ -30,6 +32,7 @@ public class GameMode implements IMode {
   private final UI ui;
 
   private final Campaign campaign;
+  private final Image background;
   private Level level;
 
   private final Players players;
@@ -41,11 +44,16 @@ public class GameMode implements IMode {
   private final Rectangle arenaRect;
 
   /**
+   * The rectangle area availible for the world. Relative to the arenaRect.
+   */
+  private final Rectangle worldRect;
+
+  /**
    * How much time have elapsed since we started.
    */
   private float elapsed;
 
-  public GameMode(CampaignData data, int width, int height)
+  public GameMode(CampaignData data, int windowWidth, int windowHeight)
       throws ParserException, DataException, IOException {
     if (data.levels.isEmpty()) {
       throw new IllegalArgumentException("No levels in campaign");
@@ -54,10 +62,26 @@ public class GameMode implements IMode {
     ui = new UI();
     Locator.registerUI(ui);
 
-    elapsed   = 0;
-    arenaRect = new Rectangle(0, PlayerUI.HEIGHT, width, height - PlayerUI.HEIGHT * 2);
-    campaign  = new Campaign(data);
-    players   = new Players(1); // TODO: Coop
+    campaign = new Campaign(data);
+    background = CacheTool.getImage(Locator.getCache(), data.background);
+
+    int arenaWidth = windowWidth;
+    int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
+    arenaRect = new Rectangle(0, PlayerUI.HEIGHT, arenaWidth, arenaHeight);
+
+    float left   = data.constraints[0];
+    float top    = data.constraints[1];
+    float bottom = data.constraints[2];
+    float right  = data.constraints[3];
+
+    worldRect = new Rectangle(
+      left, top,
+      arenaWidth - left - right,
+      arenaHeight - top - bottom
+    );
+
+    elapsed = 0;
+    players = new Players(1); // TODO: Coop
   }
 
   @Override
@@ -69,8 +93,7 @@ public class GameMode implements IMode {
         this,
         campaign.getCurrentLevel(),
         players,
-        arenaRect.getWidth(),
-        arenaRect.getHeight()
+        worldRect
       );
     } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
@@ -110,6 +133,7 @@ public class GameMode implements IMode {
     g.pushTransform();
     g.translate(arenaRect.getX1(), arenaRect.getY1());
 
+    g.drawImage(background, 0, 0);
     level.render(g);
     ui.renderDynamics(g);
 
@@ -126,8 +150,7 @@ public class GameMode implements IMode {
         this,
         campaign.getCurrentLevel(),
         players,
-        arenaRect.getWidth(),
-        arenaRect.getHeight()
+        worldRect
       );
     } else {
       goCredits();

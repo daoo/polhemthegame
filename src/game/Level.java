@@ -21,11 +21,9 @@ import java.io.IOException;
 import loader.data.DataException;
 import loader.data.json.LevelData;
 import loader.parser.ParserException;
-import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class Level {
   public enum LEVEL_STATE {
@@ -38,27 +36,12 @@ public class Level {
    * (0, 0) would make it appear in the top left, just below the HUD.
    */
   private final World world;
-  private final Image background;
 
-  /**
-   * The area availible for the current level.
-   * I.e. with constraints for the active level, relative to the visible
-   * background.
-   */
-  private final Rectangle rect;
-
-  public Level(GameMode gameMode, LevelData level, Players players, float width, float height)
+  public Level(GameMode gameMode, LevelData level, Players players, Rectangle rect)
       throws DataException, IOException, ParserException {
+    assert (level != null);
     assert (level.creeps != null);
 
-    background = CacheTool.getImage(Locator.getCache(), level.background);
-
-    float left   = level.constraints[0];
-    float top    = level.constraints[1];
-    float bottom = level.constraints[2];
-    float right  = level.constraints[3];
-
-    rect  = new Rectangle(left, top, width - left - right, height - top - bottom);
     world = WorldFactory.makeWorld(rect, players);
 
     // Setup creep triggers
@@ -92,8 +75,6 @@ public class Level {
   }
 
   public void render(Graphics g) {
-    g.drawImage(background, 0, 0);
-
     world.render(g);
   }
 

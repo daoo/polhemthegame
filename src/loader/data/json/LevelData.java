@@ -15,8 +15,6 @@ public class LevelData implements Closeable {
   }
 
   public String level;
-  public int[]  constraints;
-  public String background;
   public String loading, completed, preBossImage;
 
   public String                    boss;

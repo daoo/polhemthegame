@@ -12,6 +12,9 @@ public class CampaignData implements Closeable {
   public String            name;
   public ArrayList<String> levels;
 
+  public int[]  constraints;
+  public String background;
+
   @Override
   public void close() throws IOException {
     // Do nothing

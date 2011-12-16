@@ -1,6 +1,4 @@
 { level: "Test"
-, constraints: [ 0, 100, 0, 0 ]
-, background: "textures/levels/polhem.png"
 , loading: null
 , completed: null
 , preBossImage: null
