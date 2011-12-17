@@ -104,7 +104,6 @@ public class EntityFactory {
 
     e.addRenderComponent(hand);
     e.addRenderComponent(walk);
-    e.addRenderComponent(new Outliner(e, mov, true, true));
 
     e.addLogicComponent(control);
 
