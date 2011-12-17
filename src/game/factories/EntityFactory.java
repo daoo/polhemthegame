@@ -114,7 +114,7 @@ public class EntityFactory {
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addDynamic(infoBar);
 
-    Locator.getUI().addStatic(new PlayerUI(0, 0, e, shop));
+    Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
 
     return e;
   }

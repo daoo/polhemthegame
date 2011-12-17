@@ -4,9 +4,7 @@
 
 package ui.hud;
 
-import game.components.ComponentType;
 import game.components.misc.Inventory;
-import game.entities.IEntity;
 import game.misc.Shop;
 
 import org.newdawn.slick.Color;
@@ -31,12 +29,12 @@ public class PlayerUI implements IStaticUIElement {
   private final Inventory inventory;
   private final Shop shop;
 
-  public PlayerUI(int x, int y, IEntity player, Shop shop) {
+  public PlayerUI(int x, int y, Shop shop, Inventory inv) {
     this.x = x;
     this.y = y;
 
     this.shop = shop;
-    inventory = (Inventory) player.getComponent(ComponentType.INVENTORY);
+    this.inventory = inv;
 
     stats_x = WIDTH - 100 - PADDING;
     stats_y = PADDING;
@@ -54,7 +52,7 @@ public class PlayerUI implements IStaticUIElement {
     shop.render(g, PADDING);
 
     String mStr = MONEY + String.valueOf(inventory.getWallet().getMoney());
-    String kStr = KILLS + String.valueOf(0);
+    String kStr = KILLS + String.valueOf(inventory.getKills());
 
     g.drawString(mStr, stats_x, stats_y);
     g.drawString(kStr, stats_x, kills_y);

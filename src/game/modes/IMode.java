@@ -12,6 +12,8 @@ public interface IMode {
   void start(StateManager stateManager);
 
   /**
+   * Update frame.
+   * @param stateManager the state manager for current state
    * @param dt time in seconds
    */
   void update(StateManager stateManager, float dt);

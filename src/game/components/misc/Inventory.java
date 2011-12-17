@@ -47,6 +47,14 @@ public class Inventory implements ILogicComponent {
     return ComponentType.INVENTORY;
   }
 
+  public int getKills() {
+    return kills;
+  }
+
+  public Wallet getWallet() {
+    return wallet;
+  }
+
   public Weapon nextWeapon() {
     currentWeapon = (currentWeapon + 1) % weapons.size();
     return weapons.get(currentWeapon);
@@ -65,10 +73,6 @@ public class Inventory implements ILogicComponent {
     } else if (message == ComponentMessage.KILLED_ENTITY) {
       ++kills;
     }
-  }
-
-  public Wallet getWallet() {
-    return wallet;
   }
 
   @Override
