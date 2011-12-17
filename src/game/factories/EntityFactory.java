@@ -6,7 +6,6 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.RSheet;
-import game.components.graphics.debug.Outliner;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.life.EffectsOnDeath;
