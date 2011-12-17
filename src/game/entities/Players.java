@@ -5,8 +5,6 @@
 package game.entities;
 
 import game.CacheTool;
-import game.components.ComponentType;
-import game.components.life.Life;
 import game.factories.EntityFactory;
 
 import java.io.IOException;
@@ -25,7 +23,7 @@ public class Players implements Iterable<IEntity> {
   private final int count;
   private final LinkedList<IEntity> players;
 
-  public Players(int count)
+  public Players(int count, Rectangle rect)
     throws ParserException, DataException, IOException {
     super();
 
@@ -35,7 +33,7 @@ public class Players implements Iterable<IEntity> {
     PlayersData data = CacheTool.getPlayers(Locator.getCache());
     int j = 0;
     for (int i = 0; i < count; i++) {
-      players.add(EntityFactory.makePlayer(data.players.get(i)));
+      players.add(EntityFactory.makePlayer(data.players.get(i), rect));
       j = (j + 1) % data.players.size();
     }
   }
@@ -59,16 +57,6 @@ public class Players implements Iterable<IEntity> {
       x += dx;
       y += dy;
     }
-  }
-
-  public boolean isAlive() {
-    for (IEntity p : players) {
-      if (((Life) p.getComponent(ComponentType.HEALTH)).isAlive()) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   @Override

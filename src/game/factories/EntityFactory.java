@@ -12,6 +12,7 @@ import game.components.holdables.weapons.Weapon;
 import game.components.life.EffectsOnDeath;
 import game.components.life.Life;
 import game.components.misc.Inventory;
+import game.components.misc.MovementConstraint;
 import game.components.misc.PlayerControl;
 import game.components.physics.Movement;
 import game.entities.Entity;
@@ -27,6 +28,7 @@ import loader.data.json.CreepsData.CreepData;
 import loader.data.json.PlayersData.PlayerData;
 import loader.parser.ParserException;
 import main.Locator;
+import math.Rectangle;
 
 import org.newdawn.slick.Color;
 
@@ -40,7 +42,7 @@ public class EntityFactory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e  = new Entity(
+    Entity e = new Entity(
       x, y,
       data.hitbox.width,
       data.hitbox.height,
@@ -67,7 +69,7 @@ public class EntityFactory {
 
   private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
-  public static IEntity makePlayer(PlayerData data)
+  public static IEntity makePlayer(PlayerData data, Rectangle rect)
       throws ParserException, DataException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
@@ -79,10 +81,11 @@ public class EntityFactory {
     );
 
     // Create componenets
-    Movement mov = new Movement(e, 0, 0);
-    Life life    = new Life(e, data.hitpoints);
-    Hand hand    = new Hand(e, data.handOffset.x, data.handOffset.y);
-    Shop shop    = new Shop(CacheTool.getShop(Locator.getCache()));
+    Movement mov               = new Movement(e, 0, 0);
+    MovementConstraint movCons = new MovementConstraint(e, rect);
+    Life life                  = new Life(e, data.hitpoints);
+    Hand hand                  = new Hand(e, data.handOffset.x, data.handOffset.y);
+    Shop shop                  = new Shop(CacheTool.getShop(Locator.getCache()));
 
     Inventory inv = new Inventory(data.startMoney);
     Weapon weapon = MiscFactory.makeWeapon(
@@ -94,6 +97,7 @@ public class EntityFactory {
 
     // Add components
     e.addLogicComponent(mov);
+    e.addLogicComponent(movCons);
     e.addLogicComponent(life);
     e.addLogicComponent(inv);
     e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death)));

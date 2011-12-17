@@ -1,7 +1,5 @@
 package ui.hud.graph;
 
-import main.Launcher;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 

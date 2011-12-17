@@ -6,9 +6,10 @@ package game.modes;
 
 import game.CacheTool;
 import game.Campaign;
-import game.Level;
 import game.entities.Players;
+import game.factories.WorldFactory;
 import game.time.GameTime;
+import game.world.World;
 
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class GameMode implements IMode {
 
   private final Campaign campaign;
   private final Image background;
-  private Level level;
+  private World world;
 
   private final Players players;
 
@@ -81,7 +82,7 @@ public class GameMode implements IMode {
     );
 
     elapsed = 0;
-    players = new Players(1); // TODO: Coop
+    players = new Players(1, worldRect); // TODO: Coop
   }
 
   @Override
@@ -89,11 +90,11 @@ public class GameMode implements IMode {
     try {
       campaign.nextLevel();
 
-      level = new Level(
+      world = WorldFactory.makeLevel(
         this,
-        campaign.getCurrentLevel(),
         players,
-        worldRect
+        worldRect,
+        campaign.getCurrentLevel()
       );
     } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
@@ -109,7 +110,7 @@ public class GameMode implements IMode {
   @Override
   public void update(StateManager stateManager, float dt) {
     elapsed += dt;
-    level.update(new GameTime(dt, elapsed));
+    world.update(new GameTime(dt, elapsed));
     ui.update();
 
     if (nextAction == ACTION.NEXT_LEVEL) {
@@ -134,7 +135,7 @@ public class GameMode implements IMode {
     g.translate(arenaRect.getX1(), arenaRect.getY1());
 
     g.drawImage(background, 0, 0);
-    level.render(g);
+    world.render(g);
     ui.renderDynamics(g);
 
     g.popTransform();
@@ -146,11 +147,12 @@ public class GameMode implements IMode {
       throws DataException, ParserException, IOException {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
-      level = new Level(
+
+      world = WorldFactory.makeLevel(
         this,
-        campaign.getCurrentLevel(),
         players,
-        worldRect
+        worldRect,
+        campaign.getCurrentLevel()
       );
     } else {
       goCredits();
