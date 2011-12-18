@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import loader.Cache;
 import math.Random;
-import math.Rectangle;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
