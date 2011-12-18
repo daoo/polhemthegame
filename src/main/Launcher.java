@@ -27,7 +27,6 @@ public class Launcher extends BasicGame {
   public static final int       HEIGHT     = 768;
   public static final boolean   FULLSCREEN = false;
   public static final int       MAX_FPS    = 60;
-  public static final Rectangle RECT       = new Rectangle(0, 0, WIDTH, HEIGHT);
 
   private StateManager stateGame;
 
