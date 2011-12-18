@@ -40,9 +40,7 @@ public class StateManager {
   public void enterMainMenu() {
     try {
       currentState = new MenuState(this);
-    } catch (ParserException ex) {
-      handleException(ex);
-    } catch (IOException ex) {
+    } catch (ParserException | IOException ex) {
       handleException(ex);
     }
   }
@@ -51,11 +49,7 @@ public class StateManager {
     try {
       currentState = new GameState();
       currentState.start(this);
-    } catch (ParserException ex) {
-      handleException(ex);
-    } catch (DataException ex) {
-      handleException(ex);
-    } catch (IOException ex) {
+    } catch (ParserException | DataException | IOException ex) {
       handleException(ex);
     }
   }
@@ -63,11 +57,7 @@ public class StateManager {
   public void enterCredits() {
     try {
       currentState = new StateCredits();
-    } catch (ParserException ex) {
-      handleException(ex);
-    } catch (SlickException ex) {
-      handleException(ex);
-    } catch (IOException ex) {
+    } catch (ParserException | SlickException | IOException ex) {
       handleException(ex);
     }
   }
