@@ -7,7 +7,6 @@ package game.world;
 import game.entities.EntityType;
 import game.entities.IEntity;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class SkipsIterator implements Iterator<IEntity> {
@@ -55,8 +54,13 @@ public class SkipsIterator implements Iterator<IEntity> {
     if (next == null) {
       while (internal.hasNext()) {
         next = internal.next();
-        if (Arrays.binarySearch(keys, next.getType()) >= 0) {
-          return;
+
+        // We only use very small arrays here, binary search would probably be
+        // slower because of larger constant.
+        for (int i = 0; i < keys.length; ++i) {
+          if (keys[i] == next.getType()) {
+            return;
+          }
         }
       }
 

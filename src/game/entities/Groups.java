@@ -4,7 +4,6 @@
 
 package game.entities;
 
-
 public class Groups {
   public static final EntityType[] UNITS = { EntityType.CREEP,
                                              EntityType.BOSS,
