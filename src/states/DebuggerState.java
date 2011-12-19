@@ -2,20 +2,24 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.modes;
+package states;
 
 import main.Key;
+import main.Launcher;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 
-import states.StateManager;
 import ui.hud.graph.DebugGraph;
 
-public class DebuggerMode implements IMode {
-  private final GameMode game;
+/**
+ * Wrapper state which renders some extra debugging information.
+ */
+public class DebuggerState implements IState {
+  private final IState game;
 
-  private final float framelength;
+  private static final float FRAME_LENGTH = 0.1f;
 
   private boolean drawDebugInfo;
   private DebugGraph debugGraph;
@@ -24,17 +28,26 @@ public class DebuggerMode implements IMode {
 
   private final Key keyF1, keyF5;
 
-  public DebuggerMode(GameMode game) {
+  public DebuggerState(IState game) {
     keyF1 = new Key(Keyboard.KEY_F1);
     keyF5 = new Key(Keyboard.KEY_F5);
 
     this.game = game;
 
-    framelength = 0.1f;
     paused = false;
 
     drawDebugInfo = true;
-    debugGraph = new DebugGraph(500, 100);
+    debugGraph = new DebugGraph(Launcher.WIDTH, 100);
+  }
+
+  @Override
+  public void start(StateManager stateManager) {
+    game.start(stateManager);
+  }
+
+  @Override
+  public void end(StateManager stateManager) {
+    game.end(stateManager);
   }
 
   @Override
@@ -43,7 +56,7 @@ public class DebuggerMode implements IMode {
       keyF5.update();
       if (keyF5.wasPressed()) {
         debugGraph.startUpdateMeasure();
-        game.update(stateManager, framelength);
+        game.update(stateManager, FRAME_LENGTH);
         debugGraph.stopUpdateMeasure();
       }
     } else {
@@ -59,7 +72,7 @@ public class DebuggerMode implements IMode {
   }
 
   @Override
-  public void render(Graphics g) {
+  public void render(Graphics g) throws SlickException {
     debugGraph.startRenderMeasure();
     game.render(g);
     debugGraph.stopRenderMeasure();
@@ -67,10 +80,5 @@ public class DebuggerMode implements IMode {
     if (drawDebugInfo) {
       debugGraph.render(g, 0, 80);
     }
-  }
-
-  @Override
-  public void start(StateManager stateManager) {
-    game.start(stateManager);
   }
 }

@@ -55,6 +55,11 @@ public class MenuState implements IState {
   }
 
   @Override
+  public void end(StateManager stateManager) {
+    // Do nothing
+  }
+
+  @Override
   public void update(StateManager stateGame, float delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();

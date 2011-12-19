@@ -4,15 +4,15 @@
 
 package game.triggers.effects;
 
-import game.modes.GameMode;
+import states.GameState;
 import game.time.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
 public class LevelCompleteEffect implements IEffect {
-  private final GameMode gameMode;
+  private final GameState gameMode;
 
-  public LevelCompleteEffect(GameMode gameMode) {
+  public LevelCompleteEffect(GameState gameMode) {
     this.gameMode = gameMode;
   }
 

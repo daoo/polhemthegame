@@ -11,7 +11,6 @@ import game.entities.InvisibleRectangle;
 import game.entities.Players;
 import game.events.impl.DamagePlayerEvent;
 import game.events.impl.RemoveEvent;
-import game.modes.GameMode;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
@@ -24,6 +23,8 @@ import game.world.World;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import states.GameState;
 
 import loader.data.DataException;
 import loader.data.json.CreepsData;
@@ -122,7 +123,7 @@ public class WorldFactory {
     }
   }
 
-  private static void addLevelTriggers(World world, GameMode gameMode,
+  private static void addLevelTriggers(World world, GameState gameMode,
       List<IEntity> creeps, Players players) {
     Trigger levelComplete = new Trigger(false);
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
@@ -150,7 +151,7 @@ public class WorldFactory {
     world.addTrigger(gameOver);
   }
 
-  public static World makeLevel(GameMode gameMode, Players players,
+  public static World makeLevel(GameState gameMode, Players players,
       Rectangle rect, LevelData level)
       throws DataException, ParserException, IOException {
 

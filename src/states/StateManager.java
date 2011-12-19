@@ -4,10 +4,15 @@
 
 package states;
 
+
 import java.io.IOException;
 
 import loader.data.DataException;
+import loader.data.json.CampaignData;
+import loader.parser.GsonParser;
 import loader.parser.ParserException;
+import main.Launcher;
+import main.Locator;
 
 import org.newdawn.slick.SlickException;
 
@@ -39,7 +44,7 @@ public class StateManager {
 
   public void enterMainMenu() {
     try {
-      currentState = new MenuState(this);
+      switchToState(new MenuState(this));
     } catch (ParserException | IOException ex) {
       handleException(ex);
     }
@@ -47,18 +52,30 @@ public class StateManager {
 
   public void enterSinglePlayer() {
     try {
-      currentState = new GameState();
-      currentState.start(this);
-    } catch (ParserException | DataException | IOException ex) {
+      CampaignData campaign = (CampaignData) Locator.getCache().getCold(
+        "campaigns/polhem.js",
+        new GsonParser(CampaignData.class)
+      );
+
+      switchToState(new GameState(campaign, Launcher.WIDTH, Launcher.HEIGHT));
+    } catch (ParserException | DataException | IOException | SlickException ex) {
       handleException(ex);
     }
   }
 
   public void enterCredits() {
     try {
-      currentState = new StateCredits();
+      switchToState(new StateCredits());
     } catch (ParserException | SlickException | IOException ex) {
       handleException(ex);
     }
+  }
+
+  private void switchToState(IState newState) {
+    if (currentState != null)
+      currentState.end(this);
+
+    currentState = newState;
+    currentState.start(this);
   }
 }

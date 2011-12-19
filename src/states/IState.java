@@ -9,6 +9,7 @@ import org.newdawn.slick.SlickException;
 
 public interface IState {
   void start(StateManager stateManager);
+  void end(StateManager stateManager);
 
   void render(Graphics g) throws SlickException;
 
