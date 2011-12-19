@@ -17,7 +17,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import ui.UIEvent;
+import ui.IUIEvent;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItem;
@@ -33,18 +33,18 @@ public class MenuState implements IState {
 
     LinkedList<MenuItem> tmp = new LinkedList<>();
 
-    tmp.add(new MenuButton("singleplayer", 60, 280, new UIEvent() {
-        @Override public void fire() {
-          manager.enterSinglePlayer();
-        }
-      }));
+    tmp.add(new MenuButton("singleplayer", 60, 280, new IUIEvent() {
+      @Override public void fire() {
+        manager.enterSinglePlayer();
+      }
+    }));
     tmp.add(new MenuItemDisabled("coop", 60, 380));
     tmp.add(new MenuItemDisabled("options", 60, 480));
-    tmp.add(new MenuButton("exit", 60, 580, new UIEvent() {
-        @Override public void fire() {
-          manager.quit();
-        }
-      }));
+    tmp.add(new MenuButton("exit", 60, 580, new IUIEvent() {
+      @Override public void fire() {
+        manager.quit();
+      }
+    }));
 
     menu = new Menu(tmp);
   }
