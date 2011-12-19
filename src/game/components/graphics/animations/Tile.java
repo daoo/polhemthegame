@@ -6,7 +6,6 @@ package game.components.graphics.animations;
 
 public class Tile {
   public static final Tile ZERO = new Tile(0, 0);
-  public static final Tile ONE = new Tile(1, 1);
 
   public final int x, y;
 

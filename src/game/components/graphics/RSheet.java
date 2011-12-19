@@ -9,7 +9,6 @@ import game.components.ComponentType;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
-import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.time.Clock;
@@ -101,8 +100,6 @@ public class RSheet implements IAnimatedComponent {
         goToFirstFrame();
         animator = new Idle();
       }
-    } else if (message == ComponentMessage.END_ANIMATION) {
-      animator = new RunTo(getTileCount(), getLastTile());
     }
   }
 
@@ -118,7 +115,7 @@ public class RSheet implements IAnimatedComponent {
 
   @Override
   public void update(GameTime time) {
-    if (clock.needsSync(time.elapsed)) {
+    if (!animator.isFinished() && clock.needsSync(time.elapsed)) {
       clock.sync(time.elapsed);
 
       current = animator.next(current);

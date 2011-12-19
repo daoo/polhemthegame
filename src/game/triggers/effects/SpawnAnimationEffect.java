@@ -4,7 +4,7 @@
 
 package game.triggers.effects;
 
-import game.components.ComponentMessage;
+import game.components.graphics.animations.RunTo;
 import game.components.interfaces.IAnimatedComponent;
 import game.entities.Entity;
 import game.entities.EntityType;
@@ -13,6 +13,9 @@ import game.time.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
+/**
+ * Spawn an run-to-last animation at the top left of another entity.
+ */
 public class SpawnAnimationEffect implements IEffect {
   private final IEntity owner;
   private final IAnimatedComponent anim;
@@ -32,7 +35,7 @@ public class SpawnAnimationEffect implements IEffect {
       EntityType.ANIMATED
     );
     e.addRenderComponent(anim);
-    e.sendMessage(ComponentMessage.END_ANIMATION, null);
+    anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
     world.addFirst(e);
   }
 }
