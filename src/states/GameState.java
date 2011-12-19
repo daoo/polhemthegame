@@ -104,12 +104,7 @@ public class GameState implements IState {
 
   @Override
   public void end(StateManager stateManager) {
-    try {
-      statics.destroy();
-    } catch (SlickException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    // Do nothing
   }
 
   /**

@@ -57,7 +57,8 @@ public class StateManager {
         new GsonParser(CampaignData.class)
       );
 
-      switchToState(new GameState(campaign, Launcher.WIDTH, Launcher.HEIGHT));
+      GameState state = new GameState(campaign, Launcher.WIDTH, Launcher.HEIGHT);
+      switchToState(new DebuggerState(state));
     } catch (ParserException | DataException | IOException | SlickException ex) {
       handleException(ex);
     }
