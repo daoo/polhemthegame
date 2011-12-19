@@ -79,7 +79,7 @@ public class DebugGraph {
       double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
       int pixelHeight = (int) (dataHeight * height);
 
-      g.fillRect(px, height - pixelHeight, 1, pixelHeight);
+      g.drawLine(px, height - pixelHeight, px, height);
 
       ++px;
     }
