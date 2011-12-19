@@ -35,29 +35,11 @@ public class DebugGraph {
 
     // Render render
     g.setColor(new Color(0, 0, 255, 200));
-
-    int rpx = 0;
-    for (Double data : renderData) {
-      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
-      int pixelHeight = (int) (dataHeight * height);
-
-      g.drawLine(rpx, height - pixelHeight, rpx, height);
-
-      ++rpx;
-    }
+    drawData(renderData, g);
 
     // Render update
     g.setColor(new Color(0, 255, 0, 200));
-
-    int upx = 0;
-    for (Double data : updateData) {
-      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
-      int pixelHeight = (int) (dataHeight * height);
-
-      g.drawLine(upx, height - pixelHeight, upx, height);
-
-      ++upx;
-    }
+    drawData(updateData, g);
 
     g.setColor(Color.white);
     g.drawRect(0, 0, width, height);
@@ -88,6 +70,18 @@ public class DebugGraph {
       updateData.addDataPoint(
         updateMeasure.getAverage() / (double) NANO_PER_MILLI); // milliseconds
       updateMeasure.reset();
+    }
+  }
+
+  private void drawData(GraphData graphData, Graphics g) {
+    int px = 0;
+    for (Double data : graphData) {
+      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
+      int pixelHeight = (int) (dataHeight * height);
+
+      g.fillRect(px, height - pixelHeight, 1, pixelHeight);
+
+      ++px;
     }
   }
 }
