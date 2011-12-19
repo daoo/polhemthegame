@@ -4,7 +4,7 @@
 
 package game.triggers;
 
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.world.World;
 
 public interface ICondition {

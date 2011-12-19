@@ -5,10 +5,10 @@
 package game.triggers.condition;
 
 import game.components.ComponentType;
-import game.components.life.Life;
+import game.components.misc.Life;
 import game.entities.IEntity;
 import game.entities.Players;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 

@@ -9,7 +9,7 @@ import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.Damage;
-import game.time.GameTime;
+import game.pods.GameTime;
 
 public class ProjectileDamage implements ILogicComponent {
   private final Damage damageOther;

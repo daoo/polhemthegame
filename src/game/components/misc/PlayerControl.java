@@ -13,7 +13,7 @@ import game.components.physics.Movement;
 import game.entities.IEntity;
 import game.misc.Shop;
 import game.pods.Binds;
-import game.time.GameTime;
+import game.pods.GameTime;
 import main.Key;
 import math.Vector2;
 

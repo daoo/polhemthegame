@@ -11,8 +11,8 @@ import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
-import game.time.Clock;
-import game.time.GameTime;
+import game.misc.Clock;
+import game.pods.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

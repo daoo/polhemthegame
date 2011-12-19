@@ -4,7 +4,7 @@
 
 package game.triggers.condition;
 
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 

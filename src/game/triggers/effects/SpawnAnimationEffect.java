@@ -9,7 +9,7 @@ import game.components.interfaces.IAnimatedComponent;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
@@ -34,8 +34,12 @@ public class SpawnAnimationEffect implements IEffect {
       anim.getTileHeight(),
       EntityType.ANIMATED
     );
-    e.addRenderComponent(anim);
+
     anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
+    e.addRenderComponent(anim);
+
+    e.addLogicComponent(null);
+
     world.addFirst(e);
   }
 }

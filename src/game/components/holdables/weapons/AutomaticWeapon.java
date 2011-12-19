@@ -9,7 +9,7 @@ import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.factories.ProjectileTemplate;
-import game.time.GameTime;
+import game.pods.GameTime;
 import math.Vector2;
 
 public class AutomaticWeapon extends Weapon {

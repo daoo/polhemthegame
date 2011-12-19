@@ -2,14 +2,14 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.life;
+package game.components.misc;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.Damage;
-import game.time.GameTime;
+import game.pods.GameTime;
 import ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {

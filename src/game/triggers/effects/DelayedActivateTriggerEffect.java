@@ -4,7 +4,7 @@
 
 package game.triggers.effects;
 
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.triggers.ITrigger;
 import game.triggers.Trigger;

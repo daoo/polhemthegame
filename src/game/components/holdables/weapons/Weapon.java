@@ -12,7 +12,7 @@ import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
 import game.factories.ProjectileTemplate;
-import game.time.GameTime;
+import game.pods.GameTime;
 
 import java.util.LinkedList;
 

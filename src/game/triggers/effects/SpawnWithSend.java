@@ -6,7 +6,7 @@ package game.triggers.effects;
 
 import game.components.ComponentMessage;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 

@@ -7,7 +7,7 @@ package game.components.physics;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
-import game.time.GameTime;
+import game.pods.GameTime;
 import math.Vector2;
 
 public class Gravity implements ILogicComponent {

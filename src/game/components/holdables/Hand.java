@@ -12,7 +12,7 @@ import game.components.misc.RangeLimiter;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.factories.ProjectileTemplate;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.effects.SpawnWithSend;
 import math.Vector2;
 

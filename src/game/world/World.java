@@ -7,7 +7,7 @@ package game.world;
 import game.entities.EntityType;
 import game.entities.Groups;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.ITrigger;
 
 import java.util.Iterator;

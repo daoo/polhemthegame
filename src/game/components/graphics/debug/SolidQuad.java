@@ -7,7 +7,7 @@ package game.components.graphics.debug;
 import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
-import game.time.GameTime;
+import game.pods.GameTime;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

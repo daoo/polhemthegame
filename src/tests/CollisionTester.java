@@ -11,7 +11,7 @@ import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.world.World;
 import math.CollisionHelper;
 import math.Rectangle;

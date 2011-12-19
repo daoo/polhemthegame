@@ -9,7 +9,7 @@ import game.components.ComponentType;
 import game.components.interfaces.IRenderComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 import math.Rectangle;
 
 import org.newdawn.slick.Color;

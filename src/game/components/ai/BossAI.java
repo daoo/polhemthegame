@@ -9,7 +9,7 @@ import game.components.ComponentType;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import game.time.GameTime;
+import game.pods.GameTime;
 
 import java.util.Stack;
 

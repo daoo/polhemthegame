@@ -5,7 +5,7 @@
 package game.triggers.effects;
 
 import states.GameState;
-import game.time.GameTime;
+import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
