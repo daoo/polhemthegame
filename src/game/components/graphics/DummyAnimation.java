@@ -15,18 +15,25 @@ import game.time.GameTime;
 import org.newdawn.slick.Graphics;
 
 public class DummyAnimation implements IAnimatedComponent {
+  private static final IAnimator ANIMATOR = new Idle();
+
   public DummyAnimation() {
     // Do nothing
   }
 
   @Override
   public IAnimator getAnimator() {
-    return new Idle();
+    return ANIMATOR;
   }
 
   @Override
   public ComponentType getComponentType() {
     return ComponentType.GRAPHIC;
+  }
+
+  @Override
+  public Tile getCurrentTile() {
+    return Tile.ZERO;
   }
 
   @Override

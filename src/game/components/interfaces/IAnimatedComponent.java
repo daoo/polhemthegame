@@ -18,4 +18,5 @@ public interface IAnimatedComponent extends IRenderComponent {
 
   Tile getTileCount();
   Tile getLastTile();
+  Tile getCurrentTile();
 }

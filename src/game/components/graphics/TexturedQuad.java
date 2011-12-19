@@ -10,13 +10,16 @@ import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
-import game.time.GameTime;
+import game.pods.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 
 public class TexturedQuad implements IAnimatedComponent {
+  private final static Tile TILE_SIZE     = new Tile(1, 1);
+  private final static IAnimator ANIMATOR = new Idle();
+
   private final Image img;
 
   public TexturedQuad(Image img) {
@@ -25,12 +28,17 @@ public class TexturedQuad implements IAnimatedComponent {
 
   @Override
   public IAnimator getAnimator() {
-    return new Idle();
+    return ANIMATOR;
   }
 
   @Override
   public ComponentType getComponentType() {
     return ComponentType.GRAPHIC;
+  }
+
+  @Override
+  public Tile getCurrentTile() {
+    return Tile.ZERO;
   }
 
   @Override
@@ -40,7 +48,7 @@ public class TexturedQuad implements IAnimatedComponent {
 
   @Override
   public Tile getTileCount() {
-    return new Tile(1, 1);
+    return TILE_SIZE;
   }
 
   @Override

@@ -62,6 +62,10 @@ public class RSheet implements IAnimatedComponent {
     return sheet.getSubImage(current.x, current.y);
   }
 
+  public Tile getCurrentTile() {
+    return current;
+  }
+
   @Override
   public Tile getLastTile() {
     return new Tile(size.x - 1, size.y - 1);
