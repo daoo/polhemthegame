@@ -20,11 +20,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class RSheet implements IAnimatedComponent {
-  private IAnimator   animator;
+  private IAnimator animator;
 
   private final Clock clock;
-  private Tile        current;
-  private final int  offsetX, offsetY;
+  private Tile current;
+  private final int offsetX, offsetY;
 
   private final SpriteSheet sheet;
   private final Tile size;
