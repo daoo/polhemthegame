@@ -50,6 +50,10 @@ public class Trigger implements ITrigger {
   }
 
   private boolean checkConditions(GameTime time) {
+    if (conditions.isEmpty()) {
+      return false;
+    }
+
     for (ICondition condition : conditions) {
       if (!condition.evaluate(time, world)) {
         return false;
