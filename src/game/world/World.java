@@ -63,14 +63,14 @@ public class World {
   }
 
   public void render(Graphics g) {
-    for (IEntity e : entities.iterateAll()) {
+    for (IEntity e : entities) {
       e.render(g);
     }
   }
 
   public void update(GameTime time) {
     // Entities
-    for (IEntity e : entities.iterateAll()) {
+    for (IEntity e : entities) {
       e.update(time);
     }
 
@@ -85,7 +85,7 @@ public class World {
       }
     }
 
-    Iterator<IEntity> itr = entities.iterateAll().iterator();
+    Iterator<IEntity> itr = entities.iterator();
     while (itr.hasNext()) {
       if (!itr.next().isActive()) {
         itr.remove();
@@ -105,5 +105,22 @@ public class World {
   public void addTrigger(ITrigger trigger) {
     trigger.setWorld(this);
     addTriggers.add(trigger);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+
+    builder.append("=== Entities ===\n");
+    builder.append("Count: ");
+    builder.append(entities.size());
+    builder.append("\nInfo:");
+    for (IEntity entity : entities) {
+      builder.append("  ");
+      builder.append(entity.toString());
+      builder.append("\n");
+    }
+
+    return builder.toString();
   }
 }
