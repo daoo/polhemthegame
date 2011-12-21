@@ -6,40 +6,47 @@ package game.triggers.effects;
 
 import game.components.graphics.animations.RunTo;
 import game.components.interfaces.IAnimatedComponent;
+import game.components.misc.AfterAnimation;
 import game.entities.Entity;
 import game.entities.EntityType;
-import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
+
+import org.newdawn.slick.Graphics;
 
 /**
  * Spawn an run-to-last animation at the top left of another entity.
  */
 public class SpawnAnimationEffect implements IEffect {
-  private final IEntity owner;
+  private final Entity owner, spawnee;
   private final IAnimatedComponent anim;
 
-  public SpawnAnimationEffect(IEntity entity, IAnimatedComponent anim) {
+  public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim, Graphics graphics) {
     this.owner = entity;
-    this.anim  = anim;
-  }
+    this.anim = anim;
 
-  @Override
-  public void execute(GameTime time, World world) {
-    Entity e = new Entity(
+    spawnee = new Entity(
       owner.getBody().getX1(),
       owner.getBody().getY1(),
       anim.getTileWidth(),
       anim.getTileHeight(),
       EntityType.ANIMATED
     );
+    spawnee.addRenderComponent(anim);
+
+    spawnee.addLogicComponent(
+      new AfterAnimation(owner, anim, anim.getLastTile(),
+        new RenderCurrent(anim, graphics)));
+
+  }
+
+  @Override
+  public void execute(GameTime time, World world) {
+    spawnee.getBody().setPosition(owner.getBody().getMin());
 
     anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
-    e.addRenderComponent(anim);
 
-    e.addLogicComponent(null);
-
-    world.addFirst(e);
+    world.addFirst(spawnee);
   }
 }

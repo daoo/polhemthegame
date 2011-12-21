@@ -18,6 +18,7 @@ import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
 import game.misc.Shop;
+import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
@@ -60,7 +61,8 @@ public class EntityFactory {
     Locator.getUI().addDynamic(infoBar);
 
     EffectsOnDeath effectsOnDeath = new EffectsOnDeath(e);
-    effectsOnDeath.add(new SpawnAnimationEffect(e, death));
+    effectsOnDeath.add(new SpawnAnimationEffect(e, death, null));
+    effectsOnDeath.add(new RemoveEntity(e));
     e.addLogicComponent(effectsOnDeath);
 
     return e;
@@ -99,7 +101,7 @@ public class EntityFactory {
     e.addLogicComponent(movCons);
     e.addLogicComponent(life);
     e.addLogicComponent(inv);
-    e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death)));
+    e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death, null)));
 
     e.addRenderComponent(hand);
     e.addRenderComponent(walk);

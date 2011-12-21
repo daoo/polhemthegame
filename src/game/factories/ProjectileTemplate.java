@@ -92,7 +92,7 @@ public class ProjectileTemplate {
                                         explosion, new Idle());
 
       effects.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
-      effects.add(new SpawnAnimationEffect(e, explosionAnim));
+      effects.add(new SpawnAnimationEffect(e, explosionAnim, null));
     }
 
     return e;
