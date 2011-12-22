@@ -4,10 +4,10 @@
 
 package game.triggers.effects;
 
-import states.GameState;
 import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
+import states.GameState;
 
 public class LevelCompleteEffect implements IEffect {
   private final GameState gameMode;
