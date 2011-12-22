@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.misc;
+package game.components.physics;
 
 import game.components.ComponentMessage;
 import game.components.ComponentType;
