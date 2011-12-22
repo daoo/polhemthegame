@@ -26,20 +26,14 @@ public class SpawnAnimationEffect implements IEffect {
     this.owner = entity;
     this.anim  = anim;
 
-    spawnee = new Entity(
-      owner.getBody().getX1(),
-      owner.getBody().getY1(),
-      anim.getTileWidth(),
-      anim.getTileHeight(),
-      EntityType.ANIMATED
-    );
+    spawnee = new Entity(0, 0, anim.getTileWidth(), anim.getTileHeight(),
+      EntityType.ANIMATED);
     spawnee.addRenderComponent(anim);
 
-    AfterAnimation comp = new AfterAnimation(owner, anim, anim.getLastTile());
+    AfterAnimation comp = new AfterAnimation(spawnee, anim, anim.getLastTile());
     comp.add(new RenderCurrent(anim, graphics));
     comp.add(new RemoveEntity(spawnee));
     spawnee.addLogicComponent(comp);
-
   }
 
   @Override
