@@ -183,7 +183,7 @@ public class GameState implements IState {
 
   @Override
   public String debugString() {
-    return String.format("GameState time: %f", elapsed);
+    return "GameState, time " + String.valueOf(elapsed);
   }
 
   @Override

@@ -6,11 +6,16 @@ import util.Node;
 
 public class DebugHelper {
   public static Node<String> listToNode(String title, List<? extends Object> lst) {
-    Node<String> logic = new Node<>(String.format("%s (%d)", title, lst.size()));
+    Node<String> node = new Node<>(String.format("%s (%d)", title, lst.size()));
+
     for (Object obj : lst) {
-      logic.nodes.add(new Node<>(obj.toString()));
+      if (obj instanceof IDebuggable) {
+        node.nodes.add(((IDebuggable) obj).debugTree());
+      } else {
+        node.nodes.add(new Node<>(obj.toString()));
+      }
     }
 
-    return logic;
+    return node;
   }
 }

@@ -9,6 +9,10 @@ import game.world.World;
 
 import java.util.LinkedList;
 
+import debug.DebugHelper;
+
+import util.Node;
+
 /**
  * A trigger that can be looped. More specifically a set of effects that can be
  * executed when some conditions are met.
@@ -125,5 +129,20 @@ public class Trigger implements ITrigger {
     assert effect != null;
 
     effects.add(effect);
+  }
+
+  @Override
+  public String debugString() {
+    return String.format("Trigger, loop %b, runAgain %b", loop, runAgain);
+  }
+
+  @Override
+  public Node<String> debugTree() {
+    Node<String> parent = new Node<>(debugString());
+
+    parent.nodes.add(DebugHelper.listToNode("Conditions", conditions));
+    parent.nodes.add(DebugHelper.listToNode("Effects", effects));
+
+    return parent;
   }
 }

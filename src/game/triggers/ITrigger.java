@@ -4,10 +4,11 @@
 
 package game.triggers;
 
+import debug.IDebuggable;
 import game.pods.GameTime;
 import game.world.World;
 
-public interface ITrigger {
+public interface ITrigger extends IDebuggable {
   void addCondition(ICondition condition);
   void addEffect(IEffect effect);
 
