@@ -38,6 +38,8 @@ public class GameState implements IState {
 
   private final Players players;
 
+  private final WorldFactory worldFactory;
+
   /**
    * Describes the entire area availible to the game (non-ui stuff).
    * Relative to the upper left corner of the game window.
@@ -84,6 +86,8 @@ public class GameState implements IState {
 
     elapsed = 0;
     players = new Players(1, worldRect); // TODO: Coop
+
+    worldFactory = new WorldFactory(worldRect, players);
   }
 
   @Override
@@ -91,12 +95,7 @@ public class GameState implements IState {
     try {
       campaign.nextLevel();
 
-      world = WorldFactory.makeLevel(
-        this,
-        players,
-        worldRect,
-        campaign.getCurrentLevel()
-      );
+      world = worldFactory.makeLevel(this, campaign.getCurrentLevel());
     } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
     }
@@ -155,12 +154,7 @@ public class GameState implements IState {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
 
-      world = WorldFactory.makeLevel(
-        this,
-        players,
-        worldRect,
-        campaign.getCurrentLevel()
-      );
+      world = worldFactory.makeLevel(this, campaign.getCurrentLevel());
     } else {
       goCredits();
     }

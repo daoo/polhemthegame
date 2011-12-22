@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import states.GameState;
-
 import loader.data.DataException;
 import loader.data.json.CreepsData;
 import loader.data.json.CreepsData.CreepData;
@@ -34,17 +32,26 @@ import loader.data.json.LevelData.CreepSpawnData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
+import states.GameState;
 
 public class WorldFactory {
+  private final Rectangle rect;
+  private final Players players;
+
+  private World world;
+
+  public WorldFactory(Rectangle rect, Players players) {
+    this.rect = rect;
+    this.players = players;
+  }
+
   /**
    * Adds two basic rectangles to the world. Big rect, the rectangle that kills
    * anything that goes to far away from the visible area (to save memory). The
    * creep killer rect, kills creeps and deals damage to the players when the
    * creeps have reached their goal.
-   * @param world the world to add the rectangles
-   * @param rectWorld the rectangle to use as world boundaries
    */
-  private static void addRectangles(World world, Rectangle rectWorld) {
+  private void addRectangles() {
     /**
      * The layout of rectangles:
      * |---------------------------------|
@@ -61,13 +68,13 @@ public class WorldFactory {
      */
 
     InvisibleRectangle rectBig = new InvisibleRectangle(
-      -1 * rectWorld.getWidth(), -1 * rectWorld.getHeight(),
-       3 * rectWorld.getWidth(),  3 * rectWorld.getHeight()
+      -1 * rect.getWidth(), -1 * rect.getHeight(),
+       3 * rect.getWidth(),  3 * rect.getHeight()
     );
 
     InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
-      -rectWorld.getWidth(), 0,
-       rectWorld.getWidth(), rectWorld.getHeight()
+      -rect.getWidth(), 0,
+       rect.getWidth(), rect.getHeight()
     );
 
     rectBig.onNotContainsEvent.add(new RemoveEvent());
@@ -86,8 +93,7 @@ public class WorldFactory {
    * @param spawnsData the data used for creating the creeps
    * @return a list of the creeps that will be spawned
    */
-  private static List<IEntity> addCreepTriggers(World world,
-      Rectangle rect, List<CreepSpawnData> spawnsData)
+  private List<IEntity> addCreepTriggers(List<CreepSpawnData> spawnsData)
       throws DataException, ParserException, IOException {
     assert spawnsData != null;
 
@@ -116,15 +122,14 @@ public class WorldFactory {
     return result;
   }
 
-  private static void addPlayers(World world, Rectangle rect, Players players) {
+  private void addPlayers() {
     players.reposition(rect);
     for (IEntity p : players) {
       world.addLast(p);
     }
   }
 
-  private static void addLevelTriggers(World world, GameState gameMode,
-      List<IEntity> creeps, Players players) {
+  private void addLevelTriggers(GameState gameMode, List<IEntity> creeps) {
     Trigger levelComplete = new Trigger(false);
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
 
@@ -151,19 +156,17 @@ public class WorldFactory {
     world.addTrigger(gameOver);
   }
 
-  public static World makeLevel(GameState gameMode, Players players,
-      Rectangle rect, LevelData level)
+  public World makeLevel(GameState gameMode, LevelData level)
       throws DataException, ParserException, IOException {
 
-    World world = new World();
+    world = new World();
 
-    WorldFactory.addRectangles(world, rect);
-    WorldFactory.addPlayers(world, rect, players);
+    addRectangles();
+    addPlayers();
 
-    List<IEntity> creeps =
-      WorldFactory.addCreepTriggers(world, rect, level.creeps);
+    List<IEntity> creeps = addCreepTriggers(level.creeps);
 
-    WorldFactory.addLevelTriggers(world, gameMode, creeps, players);
+    addLevelTriggers(gameMode, creeps);
 
     return world;
   }
