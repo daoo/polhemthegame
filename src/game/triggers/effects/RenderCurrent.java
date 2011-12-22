@@ -19,6 +19,6 @@ public class RenderCurrent implements IEffect {
   @Override
   public void execute(GameTime time, World world) {
     // FIXME: Not correctly translated
-    anim.render(graphics);
+    //anim.render(graphics);
   }
 }

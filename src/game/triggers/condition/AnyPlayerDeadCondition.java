@@ -7,15 +7,16 @@ package game.triggers.condition;
 import game.components.ComponentType;
 import game.components.misc.Life;
 import game.entities.IEntity;
-import game.entities.Players;
 import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 
-public class AnyPlayerDeadCondition implements ICondition {
-  private final Players players;
+import java.util.List;
 
-  public AnyPlayerDeadCondition(Players players) {
+public class AnyPlayerDeadCondition implements ICondition {
+  private final List<IEntity> players;
+
+  public AnyPlayerDeadCondition(List<IEntity> players) {
     this.players = players;
   }
 

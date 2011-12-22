@@ -25,19 +25,39 @@ import java.io.IOException;
 
 import loader.data.DataException;
 import loader.data.json.CreepsData.CreepData;
+import loader.data.json.PlayersData;
 import loader.data.json.PlayersData.PlayerData;
+import loader.data.json.ShopData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 
 import ui.hud.PlayerUI;
 import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
-  public static IEntity makeCreep(float x, float y, float ang, CreepData data)
+  private final Rectangle rect;
+  private final Graphics statics;
+
+  private final WeaponFactory weaponFactory;
+  private final ShopData shopData;
+  private final PlayersData playersData;
+
+  public EntityFactory(Rectangle rect, Graphics statics)
+      throws ParserException, IOException {
+    this.rect = rect;
+    this.statics = statics;
+
+    weaponFactory = new WeaponFactory();
+    shopData      = CacheTool.getShop(Locator.getCache());
+    playersData   = CacheTool.getPlayers(Locator.getCache());
+  }
+
+  public IEntity makeCreep(float x, float y, float ang, CreepData data)
       throws ParserException, DataException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
@@ -61,7 +81,7 @@ public class EntityFactory {
     Locator.getUI().addDynamic(infoBar);
 
     EffectsOnDeath effectsOnDeath = new EffectsOnDeath(e);
-    effectsOnDeath.add(new SpawnAnimationEffect(e, death, null));
+    effectsOnDeath.add(new SpawnAnimationEffect(e, death, statics));
     effectsOnDeath.add(new RemoveEntity(e));
     e.addLogicComponent(effectsOnDeath);
 
@@ -70,8 +90,10 @@ public class EntityFactory {
 
   private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
-  public static IEntity makePlayer(PlayerData data, Rectangle rect)
+  public IEntity makePlayer(int index)
       throws ParserException, DataException, IOException {
+    PlayerData data = playersData.players.get(index);
+
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
@@ -86,11 +108,10 @@ public class EntityFactory {
     MovementConstraint movCons = new MovementConstraint(e, rect);
     Life life                  = new Life(e, data.hitpoints);
     Hand hand                  = new Hand(e, data.handOffset.x, data.handOffset.y);
-    Shop shop                  = new Shop(CacheTool.getShop(Locator.getCache()));
+    Shop shop                  = new Shop(shopData, weaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
-    Weapon weapon = MiscFactory.makeWeapon(
-      CacheTool.getWeaponData(Locator.getCache(), data.startWeapon));
+    Weapon weapon = weaponFactory.makeWeapon(data.startWeapon);
     inv.addWeapon(weapon);
     hand.grab(weapon);
 
@@ -101,7 +122,7 @@ public class EntityFactory {
     e.addLogicComponent(movCons);
     e.addLogicComponent(life);
     e.addLogicComponent(inv);
-    e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death, null)));
+    e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death, statics)));
 
     e.addRenderComponent(hand);
     e.addRenderComponent(walk);

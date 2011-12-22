@@ -6,7 +6,7 @@ package game.misc;
 
 import game.CacheTool;
 import game.components.holdables.weapons.Weapon;
-import game.factories.MiscFactory;
+import game.factories.WeaponFactory;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -40,14 +40,13 @@ public class Shop {
   private final Iterator<ShopItem> it;
   private ShopItem next;
 
-  public Shop(ShopData shop) throws ParserException, IOException, DataException {
+  public Shop(ShopData shop, WeaponFactory factory) throws ParserException, IOException, DataException {
     items = new LinkedList<>();
 
     for (ShopData.ShopItemData item : shop.items) {
       Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);
       Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
-      Weapon weapon  = MiscFactory.makeWeapon(
-        CacheTool.getWeaponData(Locator.getCache(), item.weapon));
+      Weapon weapon  = factory.makeWeapon(item.weapon);
 
       ShopItem tmp = new ShopItem(item.price, icon, iconGray, weapon);
       items.add(tmp);

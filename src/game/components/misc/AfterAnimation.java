@@ -18,8 +18,8 @@ public class AfterAnimation implements ILogicComponent {
   private final IEffect effect;
 
   public AfterAnimation(Entity owner, IAnimatedComponent anim, Tile target, IEffect effect) {
-    this.owner = owner;
-    this.anim = anim;
+    this.owner  = owner;
+    this.anim   = anim;
     this.target = target;
     this.effect = effect;
   }
@@ -27,7 +27,7 @@ public class AfterAnimation implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if (anim.getCurrentTile().equals(target)) {
-      owner.addEffect(effect);
+      owner.addEffects(effects);
       owner.remove();
     }
   }

@@ -6,12 +6,15 @@ package states;
 
 import game.CacheTool;
 import game.Campaign;
+import game.entities.IEntity;
 import game.entities.Players;
+import game.factories.EntityFactory;
 import game.factories.WorldFactory;
 import game.pods.GameTime;
 import game.world.World;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.CampaignData;
@@ -36,7 +39,7 @@ public class GameState implements IState {
   private final Image background, statics;
   private World world;
 
-  private final Players players;
+  private final LinkedList<IEntity> players;
 
   private final WorldFactory worldFactory;
 
@@ -85,9 +88,14 @@ public class GameState implements IState {
     );
 
     elapsed = 0;
-    players = new Players(1, worldRect); // TODO: Coop
 
-    worldFactory = new WorldFactory(worldRect, players);
+    EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
+    players = new LinkedList<>();
+    players.add(entityFactory.makePlayer(0));
+
+    worldFactory = new WorldFactory(entityFactory, worldRect, players);
+
+    Players.reposition(players, worldRect);
   }
 
   @Override

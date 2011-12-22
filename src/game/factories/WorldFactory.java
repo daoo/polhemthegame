@@ -8,7 +8,6 @@ import game.CacheTool;
 import game.components.ComponentMessage;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
-import game.entities.Players;
 import game.events.impl.DamagePlayerEvent;
 import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
@@ -36,11 +35,15 @@ import states.GameState;
 
 public class WorldFactory {
   private final Rectangle rect;
-  private final Players players;
+  private final List<IEntity> players;
+
+  private EntityFactory entityFactory;
 
   private World world;
 
-  public WorldFactory(Rectangle rect, Players players) {
+  public WorldFactory(EntityFactory entityFactory, Rectangle rect,
+      List<IEntity> players) {
+    this.entityFactory = entityFactory;
     this.rect = rect;
     this.players = players;
   }
@@ -105,7 +108,7 @@ public class WorldFactory {
       t.addCondition(new TimerCondition(0, spawnData.spawnTime));
 
       CreepData creepData = creepsData.getCreep(spawnData.creep);
-      IEntity creep = EntityFactory.makeCreep(
+      IEntity creep = entityFactory.makeCreep(
         rect.getX2() + creepData.hitbox.width,
         Locator.getRandom().nextFloat(rect.getY1(), rect.getY2() - creepData.hitbox.height),
         (float) -Math.PI,
@@ -123,7 +126,6 @@ public class WorldFactory {
   }
 
   private void addPlayers() {
-    players.reposition(rect);
     for (IEntity p : players) {
       world.addLast(p);
     }
