@@ -11,6 +11,10 @@ import game.triggers.Trigger;
 import game.triggers.condition.TimerCondition;
 import game.world.World;
 
+/**
+ * Adds a new trigger with a delay condition to the world.
+ * The delay condition starts counting when this effect is executed.
+ */
 public class DelayedActivateTriggerEffect implements IEffect {
   private final float delay;
   private final ITrigger trigger;

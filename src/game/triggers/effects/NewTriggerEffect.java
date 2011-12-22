@@ -9,6 +9,9 @@ import game.triggers.IEffect;
 import game.triggers.ITrigger;
 import game.world.World;
 
+/**
+ * Adds a new trigger to the world when this effect is executed.
+ */
 class NewTriggerEffect implements IEffect {
   private final ITrigger trigger;
 
