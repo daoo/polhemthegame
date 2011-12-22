@@ -45,10 +45,13 @@ public class WorldContainer implements Iterable<IEntity> {
    * @return an iterable over entities with the specific type
    */
   public Iterable<IEntity> iterate(final EntityType key) {
+    final Iterator<IEntity> it =
+      new SkipsIterator(list.iterator(), new EntityType[] { key });
+
     return new Iterable<IEntity>() {
       @Override
       public Iterator<IEntity> iterator() {
-        return new SkipsIterator(list.iterator(), new EntityType[] { key });
+        return it;
       }
     };
   }
@@ -59,10 +62,12 @@ public class WorldContainer implements Iterable<IEntity> {
    * @return an iterable over entities with the specified type
    */
   public Iterable<IEntity> iterate(final EntityType[] keys) {
+    final Iterator<IEntity> it = new SkipsIterator(list.iterator(), keys);
+
     return new Iterable<IEntity>() {
       @Override
       public Iterator<IEntity> iterator() {
-        return new SkipsIterator(list.iterator(), keys);
+        return it;
       }
     };
   }
