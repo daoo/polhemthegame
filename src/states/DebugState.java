@@ -12,11 +12,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import ui.hud.graph.DebugGraph;
+import util.Node;
+import util.Tree;
 
 /**
  * Wrapper state which renders some extra debugging information.
  */
-public class DebuggerState implements IState {
+public class DebugState implements IState {
   private final IState game;
 
   private static final float FRAME_LENGTH = 0.1f;
@@ -26,11 +28,13 @@ public class DebuggerState implements IState {
 
   private boolean paused;
 
-  private final Key keyF1, keyF5;
+  private final Key keyF1, keyF2, keyF5, keyF6;
 
-  public DebuggerState(IState game) {
+  public DebugState(IState game) {
     keyF1 = new Key(Keyboard.KEY_F1);
+    keyF2 = new Key(Keyboard.KEY_F2);
     keyF5 = new Key(Keyboard.KEY_F5);
+    keyF6 = new Key(Keyboard.KEY_F6);
 
     this.game = game;
 
@@ -55,19 +59,35 @@ public class DebuggerState implements IState {
     if (paused) {
       keyF5.update();
       if (keyF5.wasPressed()) {
-        debugGraph.startUpdateMeasure();
-        game.update(stateManager, FRAME_LENGTH);
-        debugGraph.stopUpdateMeasure();
+        paused = false;
+      } else {
+        keyF6.update();
+        if (keyF6.wasPressed()) {
+          debugGraph.startUpdateMeasure();
+          game.update(stateManager, FRAME_LENGTH);
+          debugGraph.stopUpdateMeasure();
+        }
       }
     } else {
-      debugGraph.startUpdateMeasure();
-      game.update(stateManager, dt);
-      debugGraph.stopUpdateMeasure();
+      keyF5.update();
+      if (keyF5.wasPressed()) {
+        paused = true;
+      } else {
+        debugGraph.startUpdateMeasure();
+        game.update(stateManager, dt);
+        debugGraph.stopUpdateMeasure();
+      }
     }
 
     keyF1.update();
     if (keyF1.wasPressed()) {
       drawDebugInfo = !drawDebugInfo;
+    }
+
+    keyF2.update();
+    if (keyF2.wasPressed()) {
+      Tree<Object> tree = new Tree<>(game.debugInfo());
+      System.out.println(tree.toString());
     }
   }
 
@@ -80,5 +100,13 @@ public class DebuggerState implements IState {
     if (drawDebugInfo) {
       debugGraph.render(g, 0, 80);
     }
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+    Node<Object> parent = new Node<Object>("DebugState");
+    parent.nodes.add(game.debugInfo());
+
+    return parent;
   }
 }

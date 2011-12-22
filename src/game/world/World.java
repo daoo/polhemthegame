@@ -15,6 +15,9 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
+import util.DebugHelper;
+import util.Node;
+
 public class World {
   private final WorldContainer entities;
   private final LinkedList<IEntity> toAddFirst, toAddLast;
@@ -109,18 +112,20 @@ public class World {
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
+    return "World";
+  }
 
-    builder.append("=== Entities ===\n");
-    builder.append("Count: ");
-    builder.append(entities.size());
-    builder.append("\nInfo:");
-    for (IEntity entity : entities) {
-      builder.append("  ");
-      builder.append(entity.toString());
-      builder.append("\n");
+  public Node<Object> debugInfo() {
+    Node<Object> parent = new Node<Object>(this);
+
+    Node<Object> ents = new Node<Object>("Entities (" + entities.size() + ")");
+    for (IEntity e : entities) {
+      ents.nodes.add(e.debugInfo());
     }
+    parent.nodes.add(ents);
 
-    return builder.toString();
+    parent.nodes.add(DebugHelper.listToNode("Triggers", triggers));
+
+    return parent;
   }
 }

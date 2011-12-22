@@ -58,7 +58,7 @@ public class StateManager {
       );
 
       GameState state = new GameState(campaign, Launcher.WIDTH, Launcher.HEIGHT);
-      switchToState(new DebuggerState(state));
+      switchToState(new DebugState(state));
     } catch (ParserException | DataException | IOException | SlickException ex) {
       handleException(ex);
     }

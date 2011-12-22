@@ -19,6 +19,9 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
+import util.DebugHelper;
+import util.Node;
+
 public class Entity implements IEntity {
   private final Rectangle body;
   private final EntityType type;
@@ -136,11 +139,6 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public boolean equals(IEntity other) {
-    return this == other;
-  }
-
-  @Override
   public boolean isActive() {
     return active || (!effects.isEmpty());
   }
@@ -148,5 +146,23 @@ public class Entity implements IEntity {
   @Override
   public void remove() {
     active = false;
+  }
+
+  @Override
+  public String toString() {
+    return "Entity - " + type.toString();
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+    Node<Object> parent = new Node<Object>(this);
+
+    parent.nodes.add(new Node<Object>("Body = " + body.toString()));
+
+    parent.nodes.add(DebugHelper.listToNode("Logic components", updates));
+    parent.nodes.add(DebugHelper.listToNode("Render components", renders));
+    parent.nodes.add(DebugHelper.listToNode("Effects", effects));
+
+    return parent;
   }
 }

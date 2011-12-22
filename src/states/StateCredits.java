@@ -23,6 +23,7 @@ import org.newdawn.slick.font.effects.ColorEffect;
 
 import states.credits.Credits;
 import states.credits.ImageWithLocation;
+import util.Node;
 
 public class StateCredits implements IState {
   private static final int FONT_SIZE_SMALL = 24;
@@ -136,5 +137,10 @@ public class StateCredits implements IState {
     g.flush();
 
     return new ImageWithLocation(x - (width / 2.0f), y - (height / 2.0f), img);
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+    return new Node<Object>("StateCredits");
   }
 }

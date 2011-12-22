@@ -28,6 +28,7 @@ import org.newdawn.slick.SlickException;
 
 import ui.hud.PlayerUI;
 import ui.hud.UI;
+import util.Node;
 
 public class GameState implements IState {
   private enum ACTION { NEXT_LEVEL, MAIN_MENU, CREDITS }
@@ -178,5 +179,13 @@ public class GameState implements IState {
 
   public void goNextLevel() {
     nextAction = ACTION.NEXT_LEVEL;
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+    Node<Object> parent = new Node<Object>("GameState");
+    parent.nodes.add(world.debugInfo());
+
+    return parent;
   }
 }

@@ -16,6 +16,8 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
+import util.Node;
+
 public class InvisibleRectangle implements IEntity {
   public final EventHandler<ObjectEventArgs> onContainsEvent;
   public final EventHandler<ObjectEventArgs> onNotContainsEvent;
@@ -87,11 +89,6 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public boolean equals(IEntity other) {
-    return this == other;
-  }
-
-  @Override
   public boolean isActive() {
     return true;
   }
@@ -99,5 +96,20 @@ public class InvisibleRectangle implements IEntity {
   @Override
   public void remove() {
     throw new UnsupportedOperationException("Not allowed");
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getName();
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+
+    Node<Object> parent = new Node<Object>(this);
+
+    parent.nodes.add(new Node<Object>("Body = " + body.toString()));
+
+    return parent;
   }
 }

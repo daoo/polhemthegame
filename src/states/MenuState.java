@@ -22,6 +22,7 @@ import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItem;
 import ui.menu.MenuItemDisabled;
+import util.Node;
 
 public class MenuState implements IState {
   private final Image background;
@@ -76,5 +77,10 @@ public class MenuState implements IState {
   public void render(Graphics g) throws SlickException {
     g.drawImage(background, 0, 0);
     menu.render(g);
+  }
+
+  @Override
+  public Node<Object> debugInfo() {
+    return new Node<Object>("MenuState");
   }
 }
