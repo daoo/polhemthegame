@@ -140,7 +140,12 @@ public class StateCredits implements IState {
   }
 
   @Override
-  public Node<Object> debugInfo() {
-    return new Node<Object>("StateCredits");
+  public String debugString() {
+    return "StateCredits";
+  }
+
+  @Override
+  public Node<String> debugTree() {
+    return new Node<>(debugString());
   }
 }

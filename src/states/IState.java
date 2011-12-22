@@ -7,9 +7,9 @@ package states;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import util.Node;
+import debug.IDebuggable;
 
-public interface IState {
+public interface IState extends IDebuggable {
   void start(StateManager stateManager);
   void end(StateManager stateManager);
 
@@ -21,10 +21,4 @@ public interface IState {
    * @param delta frame length in seconds
    */
   void update(StateManager stateGame, float delta);
-
-  /**
-   * Returns a string containing information about the current game state.
-   * @return a string with debugging information
-   */
-  public Node<Object> debugInfo();
 }

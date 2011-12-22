@@ -80,7 +80,12 @@ public class MenuState implements IState {
   }
 
   @Override
-  public Node<Object> debugInfo() {
-    return new Node<Object>("MenuState");
+  public String debugString() {
+    return "MenuState";
+  }
+
+  @Override
+  public Node<String> debugTree() {
+    return new Node<>(debugString());
   }
 }

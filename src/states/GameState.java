@@ -182,9 +182,14 @@ public class GameState implements IState {
   }
 
   @Override
-  public Node<Object> debugInfo() {
-    Node<Object> parent = new Node<Object>("GameState");
-    parent.nodes.add(world.debugInfo());
+  public String debugString() {
+    return String.format("GameState time: %f", elapsed);
+  }
+
+  @Override
+  public Node<String> debugTree() {
+    Node<String> parent = new Node<>(debugString());
+    parent.nodes.add(world.debugTree());
 
     return parent;
   }

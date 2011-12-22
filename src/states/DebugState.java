@@ -86,7 +86,7 @@ public class DebugState implements IState {
 
     keyF2.update();
     if (keyF2.wasPressed()) {
-      Tree<Object> tree = new Tree<>(game.debugInfo());
+      Tree<String> tree = new Tree<>(game.debugTree());
       System.out.println(tree.toString());
     }
   }
@@ -103,9 +103,14 @@ public class DebugState implements IState {
   }
 
   @Override
-  public Node<Object> debugInfo() {
-    Node<Object> parent = new Node<Object>("DebugState");
-    parent.nodes.add(game.debugInfo());
+  public String debugString() {
+    return "DebugState";
+  }
+
+  @Override
+  public Node<String> debugTree() {
+    Node<String> parent = new Node<>(debugString());
+    parent.nodes.add(game.debugTree());
 
     return parent;
   }

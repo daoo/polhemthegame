@@ -101,4 +101,10 @@ public class Rectangle {
   public float getY2() {
     return max.y;
   }
+
+  @Override
+  public String toString() {
+    return String.format("(%f, %f, %f, %f) %dx%d",
+        min.x, min.y, max.x, max.y, (int) size.x, (int) size.y);
+  }
 }

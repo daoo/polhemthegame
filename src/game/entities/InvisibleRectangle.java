@@ -99,16 +99,16 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public String toString() {
-    return getClass().getName();
+  public String debugString() {
+    return "InvisibleRectangle";
   }
 
   @Override
-  public Node<Object> debugInfo() {
+  public Node<String> debugTree() {
 
-    Node<Object> parent = new Node<Object>(this);
+    Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(new Node<Object>("Body = " + body.toString()));
+    parent.nodes.add(new Node<>("Body = " + body.toString()));
 
     return parent;
   }

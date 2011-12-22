@@ -19,7 +19,8 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-import util.DebugHelper;
+import debug.DebugHelper;
+
 import util.Node;
 
 public class Entity implements IEntity {
@@ -149,15 +150,15 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public String toString() {
+  public String debugString() {
     return "Entity - " + type.toString();
   }
 
   @Override
-  public Node<Object> debugInfo() {
-    Node<Object> parent = new Node<Object>(this);
+  public Node<String> debugTree() {
+    Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(new Node<Object>("Body = " + body.toString()));
+    parent.nodes.add(new Node<>("Body = " + body.toString()));
 
     parent.nodes.add(DebugHelper.listToNode("Logic components", updates));
     parent.nodes.add(DebugHelper.listToNode("Render components", renders));

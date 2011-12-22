@@ -14,13 +14,13 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-import util.Node;
+import debug.IDebuggable;
 
 /**
  * An interface for objects that can exist in the world.
  * More specifically it's an component container.
  */
-public interface IEntity {
+public interface IEntity extends IDebuggable {
   void addLogicComponent(ILogicComponent comp);
   void addRenderComponent(IRenderComponent comp);
 
@@ -69,6 +69,4 @@ public interface IEntity {
 
   boolean isActive();
   void remove();
-
-  Node<Object> debugInfo();
 }

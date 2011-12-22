@@ -15,10 +15,12 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
-import util.DebugHelper;
+import debug.DebugHelper;
+import debug.IDebuggable;
+
 import util.Node;
 
-public class World {
+public class World implements IDebuggable {
   private final WorldContainer entities;
   private final LinkedList<IEntity> toAddFirst, toAddLast;
 
@@ -111,16 +113,17 @@ public class World {
   }
 
   @Override
-  public String toString() {
+  public String debugString() {
     return "World";
   }
 
-  public Node<Object> debugInfo() {
-    Node<Object> parent = new Node<Object>(this);
+  @Override
+  public Node<String> debugTree() {
+    Node<String> parent = new Node<>(debugString());
 
-    Node<Object> ents = new Node<Object>("Entities (" + entities.size() + ")");
+    Node<String> ents = new Node<>("Entities (" + entities.size() + ")");
     for (IEntity e : entities) {
-      ents.nodes.add(e.debugInfo());
+      ents.nodes.add(e.debugTree());
     }
     parent.nodes.add(ents);
 
