@@ -8,27 +8,35 @@ import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
 import game.pods.GameTime;
 import game.triggers.IEffect;
+
+import java.util.LinkedList;
+
 /**
- * Execute an effect
+ * Execute an effect when the animation have reached a specific tile.
  */
 public class AfterAnimation implements ILogicComponent {
   private final Entity owner;
   private final IAnimatedComponent anim;
   private final Tile target;
-  private final IEffect effect;
 
-  public AfterAnimation(Entity owner, IAnimatedComponent anim, Tile target, IEffect effect) {
+  private final LinkedList<IEffect> effects;
+
+  public AfterAnimation(Entity owner, IAnimatedComponent anim, Tile target) {
     this.owner  = owner;
     this.anim   = anim;
     this.target = target;
-    this.effect = effect;
+
+    effects = new LinkedList<>();
+  }
+
+  public void add(IEffect effect) {
+    effects.add(effect);
   }
 
   @Override
   public void update(GameTime time) {
     if (anim.getCurrentTile().equals(target)) {
       owner.addEffects(effects);
-      owner.remove();
     }
   }
 

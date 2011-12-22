@@ -12,7 +12,7 @@ public class RenderCurrent implements IEffect {
   private final Graphics graphics;
 
   public RenderCurrent(IAnimatedComponent anim, Graphics graphics) {
-    this.anim = anim;
+    this.anim     = anim;
     this.graphics = graphics;
   }
 

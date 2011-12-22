@@ -24,7 +24,7 @@ public class SpawnAnimationEffect implements IEffect {
 
   public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim, Graphics graphics) {
     this.owner = entity;
-    this.anim = anim;
+    this.anim  = anim;
 
     spawnee = new Entity(
       owner.getBody().getX1(),
@@ -35,9 +35,10 @@ public class SpawnAnimationEffect implements IEffect {
     );
     spawnee.addRenderComponent(anim);
 
-    spawnee.addLogicComponent(
-      new AfterAnimation(owner, anim, anim.getLastTile(),
-        new RenderCurrent(anim, graphics)));
+    AfterAnimation comp = new AfterAnimation(owner, anim, anim.getLastTile());
+    comp.add(new RenderCurrent(anim, graphics));
+    comp.add(new RemoveEntity(spawnee));
+    spawnee.addLogicComponent(comp);
 
   }
 
