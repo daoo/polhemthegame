@@ -62,6 +62,7 @@ public class RSheet implements IAnimatedComponent {
     return sheet.getSubImage(current.x, current.y);
   }
 
+  @Override
   public Tile getCurrentTile() {
     return current;
   }
