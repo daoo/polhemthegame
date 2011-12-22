@@ -31,7 +31,7 @@ public class SpawnAnimationEffect implements IEffect {
     spawnee.addRenderComponent(anim);
 
     AfterAnimation comp = new AfterAnimation(spawnee, anim, anim.getLastTile());
-    comp.add(new RenderCurrent(anim, graphics));
+    comp.add(new RenderCurrent(entity.getBody(), anim, graphics));
     comp.add(new RemoveEntity(spawnee));
     spawnee.addLogicComponent(comp);
   }
