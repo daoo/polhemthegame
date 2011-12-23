@@ -18,6 +18,14 @@ public class InfoBar implements IDynamicUIElement {
   private final int offsetX, offsetY;
   private final LinkedList<Bar> bars;
 
+  /**
+   * Creates a new InfoBar.
+   * @param entity the entity this info bar is attached to
+   * @param barWidth the width of each individual bar
+   * @param barHeight the height of each individual bar
+   * @param offsetX translation on the x axis before rendering
+   * @param offsetY translation on the y axis before rendering
+   */
   public InfoBar(IEntity entity, float barWidth, float barHeight, int offsetX, int offsetY) {
     this.entity  = entity;
     this.offsetX = offsetX;

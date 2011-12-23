@@ -40,6 +40,10 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
+  private static final int BAR_HEIGHT   = 2;
+  private static final int BAR_OFFSET_X = 0;
+  private static final int BAR_OFFSET_Y = -6;
+
   private final Rectangle rect;
   private final Graphics statics;
 
@@ -76,7 +80,8 @@ public class EntityFactory {
     e.addLogicComponent(life);
     e.addRenderComponent(walk);
 
-    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e,
+      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
     infoBar.add(new Bar(life, Color.green, Color.red));
     Locator.getUI().addDynamic(infoBar);
 
@@ -130,7 +135,8 @@ public class EntityFactory {
     e.addLogicComponent(control);
 
     // UI stuff
-    InfoBar infoBar = new InfoBar(e, data.hitbox.width, 2, 0, -6); // FIXME: Magic Numbers
+    InfoBar infoBar = new InfoBar(e,
+      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
     infoBar.add(new Bar(life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addDynamic(infoBar);
