@@ -17,18 +17,18 @@ import game.world.World;
  */
 public class DelayedActivateTriggerEffect implements IEffect {
   private final float delay;
-  private final ITrigger trigger;
+  private final ITrigger delayed;
 
   public DelayedActivateTriggerEffect(float delay, ITrigger trigger) {
-    this.delay   = delay;
-    this.trigger = trigger;
+    this.delay = delay;
+
+    delayed = new Trigger(false);
+    delayed.addEffect(new NewTriggerEffect(trigger));
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    Trigger delayed = new Trigger(false);
     delayed.addCondition(new TimerCondition(time.elapsed, delay));
-    delayed.addEffect(new NewTriggerEffect(trigger));
     world.addTrigger(delayed);
   }
 }

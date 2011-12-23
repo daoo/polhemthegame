@@ -12,6 +12,7 @@ import game.events.impl.DamagePlayerEvent;
 import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
+import game.triggers.condition.AlwaysTrueCondition;
 import game.triggers.condition.AnyPlayerDeadCondition;
 import game.triggers.condition.TimerCondition;
 import game.triggers.effects.DelayedActivateTriggerEffect;
@@ -133,23 +134,13 @@ public class WorldFactory {
 
   private void addLevelTriggers(GameState gameMode, List<IEntity> creeps) {
     Trigger levelComplete = new Trigger(false);
+    levelComplete.addCondition(new AlwaysTrueCondition());
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
 
     Trigger levelCompleteDelay = new Trigger(false);
     levelCompleteDelay.addEffect(new DelayedActivateTriggerEffect(5.0f, levelComplete));
+    levelCompleteDelay.addCondition(new AllDeadCondition(creeps));
     world.addTrigger(levelCompleteDelay);
-
-    /*if (level.boss != null) {
-      // Boss trigger
-      Trigger spawnBoss = new Trigger(false);
-      spawnBoss.addCondition(new AllDeadCondition(creeps));
-      // TODO: spawnBoss.addEffect(new SpawnBossEffect());
-      world.addTrigger(spawnBoss);
-
-      // TODO: levelComplete.addCondition(new EntityDeadCondition(boss));
-    } else {*/
-      levelCompleteDelay.addCondition(new AllDeadCondition(creeps));
-    //}
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyPlayerDeadCondition(players));
