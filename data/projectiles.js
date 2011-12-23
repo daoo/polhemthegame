@@ -84,11 +84,13 @@
     , damage: 1000
     , duration: 2500
     , gravity: false
+    , hitbox: { width: 680, height: 10 }
     , range: 10000
     , speed: 0
     , sprite:
       { animation: "travel"
       , framerate: 8
+      , offset: { x: 0, y: 0 }
       , tileSize: { width: 680, height: 10 }
       , sprite: "textures/projectiles/casio.png" }
     , targets: -1
