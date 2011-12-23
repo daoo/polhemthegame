@@ -8,7 +8,7 @@ import game.CacheTool;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.RSheet;
 import game.components.graphics.TexturedQuad;
-import game.components.graphics.animations.Idle;
+import game.components.graphics.animations.Continuous;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
@@ -35,8 +35,8 @@ import org.newdawn.slick.SpriteSheet;
 
 public class ProjectileFactory {
   private final ProjectileData data;
-  private final Image          img;
-  private final SpriteSheet    explosion;
+  private final Image img;
+  private final SpriteSheet sprite, explosion;
 
   public ProjectileFactory(ProjectileData data)
       throws IOException, ParserException {
@@ -46,10 +46,13 @@ public class ProjectileFactory {
 
     if (data.texture != null) {
       img = CacheTool.getImage(Locator.getCache(), data.texture);
+      sprite = null;
     } else if (data.sprite != null) {
-      img = CacheTool.getSpriteSheet(Locator.getCache(), data.sprite);
+      img = null;
+      sprite = CacheTool.getSpriteSheet(Locator.getCache(), data.sprite);
     } else {
       img = null;
+      sprite = null;
     }
 
     if (data.aoe != null) {
@@ -68,7 +71,7 @@ public class ProjectileFactory {
 
     Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
                                    (float) Math.sin(rot) * data.speed);
-    Life life          = new Life(e, data.targets);
+    Life life = new Life(e, data.targets);
     RangeLimiter range = new RangeLimiter(e, data.duration, data.range);
 
     e.addLogicComponent(life);
@@ -78,8 +81,10 @@ public class ProjectileFactory {
       e.addLogicComponent(new Gravity(mov));
     }
 
-    e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
-    e.addLogicComponent(new ProjectileCollision(e, mov));
+    if (data.collides) {
+      e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+      e.addLogicComponent(new ProjectileCollision(e, mov));
+    }
 
     EffectsOnDeath effects = new EffectsOnDeath(e);
     effects.add(new RemoveEntity(e));
@@ -91,7 +96,7 @@ public class ProjectileFactory {
       RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
                                         data.aoe.explosionSprite.offset.x,
                                         data.aoe.explosionSprite.offset.y,
-                                        explosion, new Idle());
+                                        explosion);
 
       effects.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
       effects.add(new SpawnAnimationEffect(e, explosionAnim, null));
@@ -104,13 +109,16 @@ public class ProjectileFactory {
     if (data.texture != null) {
       return new TexturedQuad(img);
     } else if (data.sprite != null) {
-      return new RSheet(data.sprite.framerate,
-                        data.sprite.offset.x,
-                        data.sprite.offset.y,
-                        (SpriteSheet) img,
-                        new Idle());
+      RSheet sheet = new RSheet(
+        data.sprite.framerate,
+        data.sprite.offset.x,
+        data.sprite.offset.y,
+        sprite
+      );
+      sheet.setAnimator(new Continuous(sheet.getTileCount()));
+      return sheet;
+    } else {
+      return new DummyAnimation();
     }
-
-    return new DummyAnimation();
   }
 }

@@ -19,6 +19,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class RSheet implements IAnimatedComponent {
+  private static final IAnimator IDLE = new Idle();
+
   private IAnimator animator;
 
   private final Clock clock;
@@ -29,10 +31,8 @@ public class RSheet implements IAnimatedComponent {
   private final Tile size;
   private final int  tw, th;
 
-  public RSheet(float targetFrameRate, int offsetX, int offsetY,
-                SpriteSheet sheet, IAnimator animator) {
+  public RSheet(float targetFrameRate, int offsetX, int offsetY, SpriteSheet sheet) {
     this.sheet = sheet;
-    clock      = new Clock(1.0f / targetFrameRate);
 
     this.offsetX = offsetX;
     this.offsetY = offsetY;
@@ -40,12 +40,12 @@ public class RSheet implements IAnimatedComponent {
     // Note: There should be getters in SpriteSheet
     tw = sheet.getSubImage(0, 0).getWidth();
     th = sheet.getSubImage(0, 0).getHeight();
-
     size = new Tile(sheet.getHorizontalCount(), sheet.getVerticalCount());
 
     current = Tile.ZERO;
+    animator = IDLE;
 
-    this.animator = animator;
+    clock = new Clock(1.0f / targetFrameRate);
   }
 
   @Override

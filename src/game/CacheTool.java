@@ -5,7 +5,6 @@
 package game;
 
 import game.components.graphics.RSheet;
-import game.components.graphics.animations.Idle;
 
 import java.io.File;
 import java.io.IOException;
@@ -118,8 +117,7 @@ public class CacheTool {
       sprite.framerate,
       sprite.offset.x,
       sprite.offset.y,
-      sheet,
-      new Idle()
+      sheet
     );
   }
 
