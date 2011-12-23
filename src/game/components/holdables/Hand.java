@@ -11,7 +11,7 @@ import game.components.interfaces.IRenderComponent;
 import game.components.misc.RangeLimiter;
 import game.entities.Entity;
 import game.entities.IEntity;
-import game.factories.ProjectileTemplate;
+import game.factories.ProjectileFactory;
 import game.pods.GameTime;
 import game.triggers.effects.SpawnWithSend;
 import math.Vector2;
@@ -60,7 +60,7 @@ public class Hand implements IRenderComponent, IProgress {
     weapon.update(time);
 
     // Find out if there are any projectiles that want to be spawned
-    for (ProjectileTemplate projTemplate : weapon.projectiles) {
+    for (ProjectileFactory projTemplate : weapon.projectiles) {
       Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
       owner.addEffect(

@@ -11,7 +11,7 @@ import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
-import game.factories.ProjectileTemplate;
+import game.factories.ProjectileFactory;
 import game.pods.GameTime;
 
 import java.util.LinkedList;
@@ -33,15 +33,15 @@ public abstract class Weapon implements IHoldable {
   protected final Vector2 muzzleOffset;
 
   protected final float angle;
-  protected final ProjectileTemplate projTemplate;
+  protected final ProjectileFactory projTemplate;
   /**
    * Spawned projectiles, for owner to pass on to world.
    */
-  public final LinkedList<ProjectileTemplate> projectiles;
+  public final LinkedList<ProjectileFactory> projectiles;
 
   public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
                 int magazineSize, float angle, RSheet anim,
-                ProjectileTemplate projTemplate) {
+                ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.reloadTime   = reloadTime;
     this.cooldownTime = cooldownTime;

@@ -42,7 +42,7 @@ public class WeaponFactory {
         data.clipSize,
         data.launchAngle,
         anim,
-        new ProjectileTemplate(projectileData)
+        new ProjectileFactory(projectileData)
       );
     }
     else {
@@ -53,7 +53,7 @@ public class WeaponFactory {
         data.clipSize,
         data.launchAngle,
         anim,
-        new ProjectileTemplate(projectileData)
+        new ProjectileFactory(projectileData)
       );
     }
   }

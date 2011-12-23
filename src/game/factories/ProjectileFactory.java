@@ -33,13 +33,15 @@ import main.Locator;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
-public class ProjectileTemplate {
+public class ProjectileFactory {
   private final ProjectileData data;
   private final Image          img;
   private final SpriteSheet    explosion;
 
-  public ProjectileTemplate(ProjectileData data)
-    throws IOException, ParserException {
+  public ProjectileFactory(ProjectileData data)
+      throws IOException, ParserException {
+    assert data != null;
+
     this.data = data;
 
     if (data.texture != null) {
