@@ -82,7 +82,7 @@
     , aoe: null
     , collides: true
     , damage: 1000
-    , duration: 25
+    , duration: 2
     , gravity: false
     , hitbox: { width: 680, height: 10 }
     , range: 0

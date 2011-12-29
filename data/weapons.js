@@ -73,9 +73,9 @@
   , { name: "casio"
     , automatic: false
     , clipSize: -1
-    , muzzleOffset: { x: 7, y: -3 }
+    , muzzleOffset: { x: 10, y: -3 }
     , reloadTime: -1
-    , rpm: 12
+    , rpm: 60
     , sprite:
       { animation: "fire"
       , framerate: 8
