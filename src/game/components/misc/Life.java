@@ -44,9 +44,7 @@ public class Life implements ILogicComponent, IProgress {
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
     if (message == ComponentMessage.KILL) {
-      hp    = 0;
-      alive = false;
-      owner.remove();
+      kill(null);
     } else if (message == ComponentMessage.DAMAGE) {
       damage((Damage) args);
     }
@@ -57,18 +55,39 @@ public class Life implements ILogicComponent, IProgress {
     // Do nothing
   }
 
+  /**
+   * Deal some damage to this. Also kills if the hp goes to zero or less using
+   * the supplied damage source as killer.
+   * @param dmg information about the damage
+   */
   private void damage(Damage dmg) {
-    hp -= dmg.ammount;
-    if (hp <= 0) {
-      kill(dmg.source);
+    if (alive) {
+      hp -= dmg.ammount;
+      if (hp <= 0) {
+        kill(dmg.source);
+      }
     }
   }
 
+  /**
+   * Kills the entity that owns this component.
+   * Sends a KILLED_ENTITY message to the killer. If killer is null, no message
+   * is sent but the owner is still killed. Nothing happens if we have been
+   * killed before.
+   * @param killer the killer to whom the KILLED_ENTITY message is sent, can be
+   *        null.
+   */
   private void kill(IEntity killer) {
-    owner.sendMessage(ComponentMessage.KILL, null);
+    if (alive) {
+      hp    = 0;
+      alive = false;
+      owner.remove();
 
-    if (killer != null) {
-      killer.sendMessage(ComponentMessage.KILLED_ENTITY, owner);
+      owner.sendMessage(ComponentMessage.KILL, null);
+
+      if (killer != null) {
+        killer.sendMessage(ComponentMessage.KILLED_ENTITY, owner);
+      }
     }
   }
 }
