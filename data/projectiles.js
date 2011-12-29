@@ -19,7 +19,7 @@
     , duration: 60
     , gravity: false
     , hitbox: { width: 3, height: 2 }
-    , range: 10000
+    , range: 2000
     , speed: 500
     , sprite: null
     , targets: 1
@@ -41,7 +41,7 @@
     , duration: 3.5
     , gravity: true
     , hitbox: { width: 4, height: 4 }
-    , range: 10000
+    , range: 2000
     , speed: 200
     , sprite: null
     , targets: 1
@@ -54,7 +54,7 @@
     , duration: 60
     , gravity: false
     , hitbox: { width: 3, height: 2 }
-    , range: 10000
+    , range: 2000
     , speed: 1000
     , sprite: null
     , targets: 1
@@ -102,7 +102,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
-    , range: 10000
+    , range: 2000
     , speed: 250
     , sprite: null
     , targets: 1
@@ -114,7 +114,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
-    , range: 10000
+    , range: 2000
     , speed: 250
     , sprite: null
     , targets: 1
@@ -126,7 +126,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
-    , range: 10000
+    , range: 2000
     , speed: 250
     , sprite: null
     , targets: 1
