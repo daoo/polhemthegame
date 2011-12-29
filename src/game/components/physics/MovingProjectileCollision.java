@@ -66,6 +66,6 @@ public class MovingProjectileCollision implements ILogicComponent {
 
   @Override
   public ComponentType getComponentType() {
-    return ComponentType.COLLISION;
+    return ComponentType.MOVING_COLLISION;
   }
 }

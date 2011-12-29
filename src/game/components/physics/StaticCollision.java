@@ -31,12 +31,13 @@ public class StaticCollision implements ILogicComponent {
 
   @Override
   public void reciveMessage(ComponentMessage message, Object args) {
-    throw new UnsupportedOperationException("Not implemented");
+    if (message == ComponentMessage.KILL) {
+      enableCollisions = false;
+    }
   }
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.STATIC_COLLISION;
   }
-
 }
