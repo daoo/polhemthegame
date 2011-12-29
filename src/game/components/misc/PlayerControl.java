@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
@@ -69,9 +69,9 @@ public class PlayerControl implements ILogicComponent {
 
     if ((x != lastX) || (y != lastY)) {
       if ((y == 0) && (x == 0)) {
-        owner.sendMessage(ComponentMessage.STOP_ANIMATION, null);
+        owner.sendMessage(Message.STOP_ANIMATION, null);
       } else {
-        owner.sendMessage(ComponentMessage.START_ANIMATION, null);
+        owner.sendMessage(Message.START_ANIMATION, null);
       }
 
       lastX = x;
@@ -83,9 +83,9 @@ public class PlayerControl implements ILogicComponent {
     // Shooting
     keyHoldable.update();
     if (keyHoldable.wasPressed()) {
-      owner.sendMessage(ComponentMessage.START_HOLDABLE, null);
+      owner.sendMessage(Message.START_HOLDABLE, null);
     } else if (keyHoldable.wasReleased()) {
-      owner.sendMessage(ComponentMessage.STOP_HOLDABLE, null);
+      owner.sendMessage(Message.STOP_HOLDABLE, null);
     }
 
     // Weapon changing
@@ -106,7 +106,7 @@ public class PlayerControl implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 

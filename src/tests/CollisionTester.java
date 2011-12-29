@@ -10,7 +10,6 @@ import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
 import game.entities.EntityType;
-import game.entities.IEntity;
 import game.pods.GameTime;
 import game.world.World;
 import math.CollisionHelper;
@@ -44,17 +43,17 @@ public class CollisionTester extends BasicGame {
   private float elapsed;
 
   private final World world;
-  private final IEntity obj1, obj2;
+  private final Entity obj1, obj2;
 
-  private IEntity makeStaticRectangle(int x, int y, int w, int h) {
-    IEntity obj = new Entity(x, y, w, h, EntityType.CREEP);
+  private Entity makeStaticRectangle(int x, int y, int w, int h) {
+    Entity obj = new Entity(x, y, w, h, EntityType.CREEP);
     obj.addRenderComponent(new SolidQuad(Color.white, w, h));
 
     return obj;
   }
 
-  private IEntity makeProjectile(int x, int y, int w, int h, int dx, int dy) {
-    IEntity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
+  private Entity makeProjectile(int x, int y, int w, int h, int dx, int dy) {
+    Entity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
 
     Movement mov = new Movement(obj, dx, dy);
 

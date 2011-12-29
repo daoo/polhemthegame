@@ -4,8 +4,8 @@
 
 package game.components.graphics;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
@@ -62,7 +62,7 @@ public class DummyAnimation implements IAnimatedComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 

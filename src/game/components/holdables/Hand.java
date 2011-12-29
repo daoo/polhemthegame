@@ -4,8 +4,8 @@
 
 package game.components.holdables;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
@@ -64,7 +64,7 @@ public class Hand implements IRenderComponent, IProgress {
       Vector2 o = owner.getBody().getMin().add(offset.add(weapon.getMuzzleOffset()));
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
       owner.addEffect(
-        new SpawnWithSend(p, ComponentMessage.START_AT,
+        new SpawnWithSend(p, Message.START_AT,
           new TimePos(time.elapsed, o)));
     }
     weapon.projectiles.clear();
@@ -81,10 +81,10 @@ public class Hand implements IRenderComponent, IProgress {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.START_HOLDABLE) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.START_HOLDABLE) {
       startUse();
-    } else if (message == ComponentMessage.STOP_HOLDABLE) {
+    } else if (message == Message.STOP_HOLDABLE) {
       stopUse();
     }
   }

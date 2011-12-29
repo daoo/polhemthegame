@@ -1,7 +1,7 @@
 package game.components.physics;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
@@ -22,16 +22,16 @@ public class StaticCollision implements ILogicComponent {
     if (enableCollisions) {
       for (IEntity e : owner.getWorld().getUnits()) {
         if (owner.getBody().isIntersecting(e.getBody())) {
-          owner.sendMessage(ComponentMessage.COLLIDED_WITH, e);
-          e.sendMessage(ComponentMessage.COLLIDED_WITH, owner);
+          owner.sendMessage(Message.COLLIDED_WITH, e);
+          e.sendMessage(Message.COLLIDED_WITH, owner);
         }
       }
     }
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.KILL) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.KILL) {
       enableCollisions = false;
     }
   }

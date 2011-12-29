@@ -5,7 +5,8 @@
 package game.factories;
 
 import game.CacheTool;
-import game.components.ComponentMessage;
+import game.components.Message;
+import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
 import game.events.impl.DamagePlayerEvent;
@@ -13,7 +14,7 @@ import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
 import game.triggers.condition.AlwaysTrueCondition;
-import game.triggers.condition.AnyPlayerDeadCondition;
+import game.triggers.condition.AnyDeadCondition;
 import game.triggers.condition.TimerCondition;
 import game.triggers.effects.DelayedActivateTriggerEffect;
 import game.triggers.effects.LevelCompleteEffect;
@@ -36,14 +37,14 @@ import states.GameState;
 
 public class WorldFactory {
   private final Rectangle rect;
-  private final List<IEntity> players;
+  private final List<Entity> players;
 
   private EntityFactory entityFactory;
 
   private World world;
 
   public WorldFactory(EntityFactory entityFactory, Rectangle rect,
-      List<IEntity> players) {
+      List<Entity> players) {
     this.entityFactory = entityFactory;
     this.rect = rect;
     this.players = players;
@@ -97,19 +98,19 @@ public class WorldFactory {
    * @param spawnsData the data used for creating the creeps
    * @return a list of the creeps that will be spawned
    */
-  private List<IEntity> addCreepTriggers(List<CreepSpawnData> spawnsData)
+  private List<Entity> addCreepTriggers(List<CreepSpawnData> spawnsData)
       throws DataException, ParserException, IOException {
     assert spawnsData != null;
 
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
-    LinkedList<IEntity> result = new LinkedList<>();
+    LinkedList<Entity> result = new LinkedList<>();
 
     for (CreepSpawnData spawnData : spawnsData) {
       Trigger t = new Trigger(false);
       t.addCondition(new TimerCondition(0, spawnData.spawnTime));
 
       CreepData creepData = creepsData.getCreep(spawnData.creep);
-      IEntity creep = entityFactory.makeCreep(
+      Entity creep = entityFactory.makeCreep(
         rect.getX2() + creepData.hitbox.width,
         Locator.getRandom().nextFloat(rect.getY1(), rect.getY2() - creepData.hitbox.height),
         (float) -Math.PI,
@@ -118,7 +119,7 @@ public class WorldFactory {
       result.add(creep);
 
       t.addEffect(
-        new SpawnWithSend(creep, ComponentMessage.START_ANIMATION, null));
+        new SpawnWithSend(creep, Message.START_ANIMATION, null));
 
       world.addTrigger(t);
     }
@@ -132,7 +133,7 @@ public class WorldFactory {
     }
   }
 
-  private void addLevelTriggers(GameState gameMode, List<IEntity> creeps) {
+  private void addLevelTriggers(GameState gameMode, List<Entity> creeps) {
     Trigger levelComplete = new Trigger(false);
     levelComplete.addCondition(new AlwaysTrueCondition());
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
@@ -143,7 +144,7 @@ public class WorldFactory {
     world.addTrigger(levelCompleteDelay);
 
     Trigger gameOver = new Trigger(false);
-    gameOver.addCondition(new AnyPlayerDeadCondition(players));
+    gameOver.addCondition(new AnyDeadCondition(players));
     // TODO: gameOver.addEffect(new MainMenuEffect());
     // TODO: gameOver.addEffect(new GameOverEffect());
     world.addTrigger(gameOver);
@@ -157,7 +158,7 @@ public class WorldFactory {
     addRectangles();
     addPlayers();
 
-    List<IEntity> creeps = addCreepTriggers(level.creeps);
+    List<Entity> creeps = addCreepTriggers(level.creeps);
 
     addLevelTriggers(gameMode, creeps);
 

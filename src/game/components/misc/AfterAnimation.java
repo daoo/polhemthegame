@@ -1,7 +1,7 @@
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.interfaces.ILogicComponent;
@@ -41,7 +41,7 @@ public class AfterAnimation implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 

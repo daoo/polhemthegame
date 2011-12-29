@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.Damage;
@@ -32,12 +32,12 @@ public class ProjectileDamage implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.COLLIDED_WITH) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.COLLIDED_WITH) {
       IEntity entity = (IEntity) args;
-      entity.sendMessage(ComponentMessage.DAMAGE, damageOther);
-      owner.sendMessage(ComponentMessage.DAMAGE, damageSelf);
-      source.sendMessage(ComponentMessage.DEALT_DAMAGE, damageOther);
+      entity.sendMessage(Message.DAMAGE, damageOther);
+      owner.sendMessage(Message.DAMAGE, damageSelf);
+      source.sendMessage(Message.DEALT_DAMAGE, damageOther);
     }
   }
 

@@ -6,7 +6,7 @@ package states;
 
 import game.CacheTool;
 import game.Campaign;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.entities.Players;
 import game.factories.EntityFactory;
 import game.factories.WorldFactory;
@@ -40,7 +40,7 @@ public class GameState implements IState {
   private final Image background, statics;
   private World world;
 
-  private final LinkedList<IEntity> players;
+  private final LinkedList<Entity> players;
 
   private final WorldFactory worldFactory;
 

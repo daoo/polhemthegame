@@ -4,10 +4,7 @@
 
 package game.entities;
 
-import game.components.ComponentMessage;
-import game.components.ComponentType;
-import game.components.interfaces.ILogicComponent;
-import game.components.interfaces.IRenderComponent;
+import game.components.Message;
 import game.pods.GameTime;
 import game.world.World;
 import math.Rectangle;
@@ -18,20 +15,9 @@ import debug.IDebuggable;
 
 /**
  * An interface for objects that can exist in the world.
- * More specifically it's an component container.
+ * Specifies what a entity is/has.
  */
 public interface IEntity extends IDebuggable {
-  void addLogicComponent(ILogicComponent comp);
-  void addRenderComponent(IRenderComponent comp);
-
-  /**
-   * Returns the component with the specified type.
-   * @param componentType the component type to search for
-   * @return a component matching the specified type, or null if there is no
-   *         such component
-   */
-  ILogicComponent getComponent(ComponentType componentType);
-
   /**
    * Body getter.
    * All entities should have a physical size/body.
@@ -53,7 +39,7 @@ public interface IEntity extends IDebuggable {
    * @param message the message to send
    * @param args pass along some arguments, can be anything
    */
-  void sendMessage(ComponentMessage message, Object args);
+  void sendMessage(Message message, Object args);
 
   /**
    * Render the entity.

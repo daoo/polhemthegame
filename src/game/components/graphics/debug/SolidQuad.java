@@ -4,8 +4,8 @@
 
 package game.components.graphics.debug;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.pods.GameTime;
 
@@ -28,7 +28,7 @@ public class SolidQuad implements IRenderComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 

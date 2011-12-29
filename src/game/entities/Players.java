@@ -19,7 +19,7 @@ public class Players {
    * @param players the players to reposition
    * @param rect the rectangle to use for alignment
    */
-  public static void reposition(List<IEntity> players, Rectangle rect) {
+  public static void reposition(List<? extends IEntity> players, Rectangle rect) {
     float dx = 0;
     float dy = rect.getHeight() / (players.size() * 2);
 

@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.misc.Wallet;
@@ -66,11 +66,11 @@ public class Inventory implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.DEALT_DAMAGE) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.DEALT_DAMAGE) {
       Damage dmg = (Damage) args;
       damageDealt += dmg.ammount;
-    } else if (message == ComponentMessage.KILLED_ENTITY) {
+    } else if (message == Message.KILLED_ENTITY) {
       ++kills;
     }
   }

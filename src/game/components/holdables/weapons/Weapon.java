@@ -4,8 +4,8 @@
 
 package game.components.holdables.weapons;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.graphics.RSheet;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
@@ -78,8 +78,8 @@ public abstract class Weapon implements IHoldable {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.KILL) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.KILL) {
       toggleOff();
     }
   }

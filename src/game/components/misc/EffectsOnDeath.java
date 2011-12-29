@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
 import game.pods.GameTime;
@@ -39,8 +39,8 @@ public class EffectsOnDeath implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.KILL) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.KILL) {
       owner.addEffects(effects);
     }
   }

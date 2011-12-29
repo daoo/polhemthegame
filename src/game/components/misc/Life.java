@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.Damage;
@@ -42,10 +42,10 @@ public class Life implements ILogicComponent, IProgress {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.KILL) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.KILL) {
       kill(null);
-    } else if (message == ComponentMessage.DAMAGE) {
+    } else if (message == Message.DAMAGE) {
       damage((Damage) args);
     }
   }
@@ -83,10 +83,10 @@ public class Life implements ILogicComponent, IProgress {
       alive = false;
       owner.remove();
 
-      owner.sendMessage(ComponentMessage.KILL, null);
+      owner.sendMessage(Message.KILL, null);
 
       if (killer != null) {
-        killer.sendMessage(ComponentMessage.KILLED_ENTITY, owner);
+        killer.sendMessage(Message.KILLED_ENTITY, owner);
       }
     }
   }

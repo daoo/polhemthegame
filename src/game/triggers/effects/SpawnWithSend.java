@@ -4,7 +4,7 @@
 
 package game.triggers.effects;
 
-import game.components.ComponentMessage;
+import game.components.Message;
 import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.IEffect;
@@ -12,10 +12,10 @@ import game.world.World;
 
 public class SpawnWithSend implements IEffect {
   private final IEntity entity;
-  private final ComponentMessage message;
+  private final Message message;
   private final Object args;
 
-  public SpawnWithSend(IEntity entity, ComponentMessage message, Object args) {
+  public SpawnWithSend(IEntity entity, Message message, Object args) {
     this.entity  = entity;
     this.message = message;
     this.args    = args;

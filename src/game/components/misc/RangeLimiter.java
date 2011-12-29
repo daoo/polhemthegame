@@ -4,8 +4,8 @@
 
 package game.components.misc;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
@@ -29,16 +29,16 @@ public class RangeLimiter implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if ((time.elapsed - start.time) > duration) {
-      owner.sendMessage(ComponentMessage.KILL, null);
+      owner.sendMessage(Message.KILL, null);
     }
     if (owner.getBody().getMin().distance(start.pos) > range) {
-      owner.sendMessage(ComponentMessage.KILL, null);
+      owner.sendMessage(Message.KILL, null);
     }
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.START_AT) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.START_AT) {
       start = (TimePos) args;
     }
   }

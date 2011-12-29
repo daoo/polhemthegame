@@ -4,7 +4,7 @@
 
 package game.components;
 
-public enum ComponentMessage {
+public enum Message {
   // Damage control
   KILL, DAMAGE,
 

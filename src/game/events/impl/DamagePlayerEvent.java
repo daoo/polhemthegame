@@ -4,7 +4,7 @@
 
 package game.events.impl;
 
-import game.components.ComponentMessage;
+import game.components.Message;
 import game.entities.EntityType;
 import game.entities.IEntity;
 import game.events.IEvent;
@@ -23,7 +23,7 @@ public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
       Damage damage = new Damage(args.getObject(), hpLoss);
 
       for (IEntity e : args.getWorld().get(EntityType.PLAYER)) {
-        e.sendMessage(ComponentMessage.DAMAGE, damage);
+        e.sendMessage(Message.DAMAGE, damage);
       }
     }
   }

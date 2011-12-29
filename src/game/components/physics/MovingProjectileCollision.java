@@ -4,8 +4,8 @@
 
 package game.components.physics;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
@@ -41,8 +41,8 @@ public class MovingProjectileCollision implements ILogicComponent {
       Vector2 m = movement.getVelocity();
 
       if (CollisionHelper.sweepCollisionTest(a, m, b.getBody(), dt)) {
-        owner.sendMessage(ComponentMessage.COLLIDED_WITH, b);
-        b.sendMessage(ComponentMessage.COLLIDED_WITH, owner);
+        owner.sendMessage(Message.COLLIDED_WITH, b);
+        b.sendMessage(Message.COLLIDED_WITH, owner);
         collidedWith.add(b);
       }
     }
@@ -58,8 +58,8 @@ public class MovingProjectileCollision implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.KILL) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.KILL) {
       enableCollisions = false;
     }
   }

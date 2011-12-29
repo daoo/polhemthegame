@@ -4,10 +4,7 @@
 
 package game.entities;
 
-import game.components.ComponentMessage;
-import game.components.ComponentType;
-import game.components.interfaces.ILogicComponent;
-import game.components.interfaces.IRenderComponent;
+import game.components.Message;
 import game.events.EventHandler;
 import game.events.impl.ObjectEventArgs;
 import game.pods.GameTime;
@@ -33,23 +30,8 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void addLogicComponent(ILogicComponent comp) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
-  public void addRenderComponent(IRenderComponent comp) {
-    throw new UnsupportedOperationException("Not allowed");
-  }
-
-  @Override
   public Rectangle getBody() {
     return body;
-  }
-
-  @Override
-  public ILogicComponent getComponent(ComponentType componentType) {
-    throw new UnsupportedOperationException("Not allowed");
   }
 
   @Override
@@ -68,7 +50,7 @@ public class InvisibleRectangle implements IEntity {
   }
 
   @Override
-  public void sendMessage(ComponentMessage message, Object args) {
+  public void sendMessage(Message message, Object args) {
     throw new UnsupportedOperationException("Not allowed");
   }
 

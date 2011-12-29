@@ -4,8 +4,8 @@
 
 package game.components.ai;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -84,7 +84,7 @@ public class BossAI implements ILogicComponent {
         // We're done here, stop shooting and start walking
         isShooting = false;
 
-        unit.sendMessage(ComponentMessage.START_ANIMATION, null);
+        unit.sendMessage(Message.START_ANIMATION, null);
         targets.push(newTarget());
         headFor(targets.peek());
       }
@@ -98,7 +98,7 @@ public class BossAI implements ILogicComponent {
         targets.pop();
         if (targets.empty()) {
           // No more targets, start shooting
-          unit.sendMessage(ComponentMessage.STOP_ANIMATION, null);
+          unit.sendMessage(Message.STOP_ANIMATION, null);
           hand.stopUse();
           isShooting = true;
           shootingStartTime = time.elapsed;
@@ -115,7 +115,7 @@ public class BossAI implements ILogicComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
+  public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 

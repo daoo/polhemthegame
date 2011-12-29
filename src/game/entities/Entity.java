@@ -4,8 +4,8 @@
 
 package game.entities;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.pods.GameTime;
@@ -52,12 +52,10 @@ public class Entity implements IEntity {
     effects.addAll(collection);
   }
 
-  @Override
   public void addLogicComponent(ILogicComponent comp) {
     updates.add(comp);
   }
 
-  @Override
   public void addRenderComponent(IRenderComponent comp) {
     renders.add(comp);
   }
@@ -67,7 +65,6 @@ public class Entity implements IEntity {
     return body;
   }
 
-  @Override
   public ILogicComponent getComponent(ComponentType componentType) {
     for (ILogicComponent comp : updates) {
       if (comp.getComponentType().equals(componentType)) {
@@ -107,7 +104,7 @@ public class Entity implements IEntity {
   }
 
   @Override
-  public void sendMessage(ComponentMessage message, Object args) {
+  public void sendMessage(Message message, Object args) {
     for (ILogicComponent comp : updates) {
       comp.reciveMessage(message, args);
     }

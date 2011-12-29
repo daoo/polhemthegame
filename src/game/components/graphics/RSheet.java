@@ -4,8 +4,8 @@
 
 package game.components.graphics;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
@@ -97,10 +97,10 @@ public class RSheet implements IAnimatedComponent {
   }
 
   @Override
-  public void reciveMessage(ComponentMessage message, Object args) {
-    if (message == ComponentMessage.START_ANIMATION) {
+  public void reciveMessage(Message message, Object args) {
+    if (message == Message.START_ANIMATION) {
       animator = new Continuous(getTileCount());
-    } else if (message == ComponentMessage.STOP_ANIMATION) {
+    } else if (message == Message.STOP_ANIMATION) {
       if (!animator.isFinished()) {
         goToFirstFrame();
         animator = new Idle();

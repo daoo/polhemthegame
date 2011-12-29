@@ -16,7 +16,6 @@ import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.entities.Entity;
 import game.entities.EntityType;
-import game.entities.IEntity;
 import game.misc.Shop;
 import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
@@ -61,7 +60,7 @@ public class EntityFactory {
     playersData   = CacheTool.getPlayers(Locator.getCache());
   }
 
-  public IEntity makeCreep(float x, float y, float ang, CreepData data)
+  public Entity makeCreep(float x, float y, float ang, CreepData data)
       throws ParserException, DataException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
@@ -95,7 +94,7 @@ public class EntityFactory {
 
   private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
-  public IEntity makePlayer(int index)
+  public Entity makePlayer(int index)
       throws ParserException, DataException, IOException {
     PlayerData data = playersData.players.get(index);
 

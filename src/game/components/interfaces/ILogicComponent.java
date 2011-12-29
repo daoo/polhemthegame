@@ -4,14 +4,14 @@
 
 package game.components.interfaces;
 
-import game.components.ComponentMessage;
 import game.components.ComponentType;
+import game.components.Message;
 import game.pods.GameTime;
 
 public interface ILogicComponent {
   void update(GameTime time);
 
-  void reciveMessage(ComponentMessage message, Object args);
+  void reciveMessage(Message message, Object args);
 
   ComponentType getComponentType();
 }
