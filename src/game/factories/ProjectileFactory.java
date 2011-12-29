@@ -16,7 +16,8 @@ import game.components.misc.ProjectileDamage;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
 import game.components.physics.Movement;
-import game.components.physics.ProjectileCollision;
+import game.components.physics.MovingProjectileCollision;
+import game.components.physics.StaticCollision;
 import game.entities.Entity;
 import game.entities.EntityType;
 import game.entities.IEntity;
@@ -69,21 +70,29 @@ public class ProjectileFactory {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
                           EntityType.PROJECTILE);
 
-    Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
-                                   (float) Math.sin(rot) * data.speed);
     Life life = new Life(e, data.targets);
+
     RangeLimiter range = new RangeLimiter(e, data.duration, data.range);
 
     e.addLogicComponent(life);
     e.addLogicComponent(range);
-    e.addLogicComponent(mov);
-    if (data.gravity) {
-      e.addLogicComponent(new Gravity(mov));
-    }
 
-    if (data.collides) {
-      e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
-      e.addLogicComponent(new ProjectileCollision(e, mov));
+    // If these conditions are met, the
+    if (data.speed != 0 || data.gravity) {
+      Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
+                                     (float) Math.sin(rot) * data.speed);
+      e.addLogicComponent(mov);
+      e.addLogicComponent(new Gravity(mov));
+
+      if (data.collides) {
+        e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+        e.addLogicComponent(new MovingProjectileCollision(e, mov));
+      }
+    } else {
+      if (data.collides) {
+        e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+        e.addLogicComponent(new StaticCollision(e));
+      }
     }
 
     EffectsOnDeath effects = new EffectsOnDeath(e);

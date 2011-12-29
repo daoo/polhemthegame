@@ -16,14 +16,14 @@ import math.CollisionHelper;
 import math.Rectangle;
 import math.Vector2;
 
-public class ProjectileCollision implements ILogicComponent {
+public class MovingProjectileCollision implements ILogicComponent {
   private boolean enableCollisions;
   private final LinkedList<IEntity> collidedWith;
 
   private final IEntity owner;
   private final Movement movement;
 
-  public ProjectileCollision(IEntity owner, Movement movement) {
+  public MovingProjectileCollision(IEntity owner, Movement movement) {
     this.owner    = owner;
     this.movement = movement;
 
@@ -31,11 +31,18 @@ public class ProjectileCollision implements ILogicComponent {
     collidedWith     = new LinkedList<>();
   }
 
-  private void collisionCheck(Rectangle a, Vector2 m, IEntity b, float dt) {
+  /**
+   * Performs collision check and response between the owner and a different
+   * entity.
+   */
+  private void collisionCheck(IEntity b, float dt) {
     if (!collidedWith.contains(b)) {
+      Rectangle a = owner.getBody();
+      Vector2 m = movement.getVelocity();
+
       if (CollisionHelper.sweepCollisionTest(a, m, b.getBody(), dt)) {
         owner.sendMessage(ComponentMessage.COLLIDED_WITH, b);
-
+        b.sendMessage(ComponentMessage.COLLIDED_WITH, owner);
         collidedWith.add(b);
       }
     }
@@ -45,7 +52,7 @@ public class ProjectileCollision implements ILogicComponent {
   public void update(GameTime time) {
     if (enableCollisions) {
       for (IEntity e : owner.getWorld().getUnits()) {
-        collisionCheck(owner.getBody(), movement.getVelocity(), e, time.frame);
+        collisionCheck(e, time.frame);
       }
     }
   }
