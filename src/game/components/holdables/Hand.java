@@ -8,11 +8,11 @@ import game.components.ComponentMessage;
 import game.components.ComponentType;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
-import game.components.misc.RangeLimiter;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.factories.ProjectileFactory;
 import game.pods.GameTime;
+import game.pods.TimePos;
 import game.triggers.effects.SpawnWithSend;
 import math.Vector2;
 
@@ -65,7 +65,7 @@ public class Hand implements IRenderComponent, IProgress {
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
       owner.addEffect(
         new SpawnWithSend(p, ComponentMessage.START_AT,
-          new RangeLimiter.TimePos(time.elapsed, o)));
+          new TimePos(time.elapsed, o)));
     }
     weapon.projectiles.clear();
   }

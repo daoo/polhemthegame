@@ -9,19 +9,9 @@ import game.components.ComponentType;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
-import math.Vector2;
+import game.pods.TimePos;
 
 public class RangeLimiter implements ILogicComponent {
-  public static class TimePos {
-    public final float time;
-    public final Vector2 pos;
-
-    public TimePos(float time, Vector2 pos) {
-      this.time = time;
-      this.pos  = new Vector2(pos);
-    }
-  }
-
   private final IEntity owner;
 
   private TimePos start;
