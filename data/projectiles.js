@@ -82,10 +82,10 @@
     , aoe: null
     , collides: true
     , damage: 1000
-    , duration: 2500
+    , duration: 25
     , gravity: false
     , hitbox: { width: 680, height: 10 }
-    , range: 10000
+    , range: 0
     , speed: 0
     , sprite:
       { animation: "travel"
@@ -93,7 +93,7 @@
       , offset: { x: 0, y: 0 }
       , tileSize: { width: 680, height: 10 }
       , sprite: "textures/projectiles/casio.png" }
-    , targets: -1
+    , targets: 1000
     , texture: null }
 
   , { name: "mouse"
