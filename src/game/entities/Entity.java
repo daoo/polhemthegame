@@ -19,9 +19,8 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-import debug.DebugHelper;
-
 import util.Node;
+import debug.DebugHelper;
 
 public class Entity implements IEntity {
   private final Rectangle body;

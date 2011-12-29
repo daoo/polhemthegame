@@ -15,10 +15,9 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 
+import util.Node;
 import debug.DebugHelper;
 import debug.IDebuggable;
-
-import util.Node;
 
 public class World implements IDebuggable {
   private final WorldContainer entities;

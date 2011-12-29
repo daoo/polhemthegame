@@ -9,9 +9,8 @@ import game.world.World;
 
 import java.util.LinkedList;
 
-import debug.DebugHelper;
-
 import util.Node;
+import debug.DebugHelper;
 
 /**
  * A trigger that can be looped. More specifically a set of effects that can be

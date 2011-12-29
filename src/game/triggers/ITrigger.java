@@ -4,9 +4,9 @@
 
 package game.triggers;
 
-import debug.IDebuggable;
 import game.pods.GameTime;
 import game.world.World;
+import debug.IDebuggable;
 
 public interface ITrigger extends IDebuggable {
   void addCondition(ICondition condition);
