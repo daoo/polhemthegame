@@ -35,7 +35,7 @@ public class AfterAnimation implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if (anim.getCurrentTile().equals(target)) {
+    if (anim.getCurrentTile().isEqual(target)) {
       owner.addEffects(effects);
     }
   }
