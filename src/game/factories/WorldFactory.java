@@ -51,10 +51,10 @@ public class WorldFactory {
   }
 
   /**
-   * Adds two basic rectangles to the world. Big rect, the rectangle that kills
-   * anything that goes to far away from the visible area (to save memory). The
-   * creep killer rect, kills creeps and deals damage to the players when the
-   * creeps have reached their goal.
+   * Adds two basic rectangles to the world. rectBig, the rectangle that kills
+   * anything that goes to far away from the visible area (to save memory).
+   * rectCreep kills creeps and deals damage to the players when the creeps have
+   * reached their goal.
    */
   private void addRectangles() {
     /**
@@ -127,12 +127,6 @@ public class WorldFactory {
     return result;
   }
 
-  private void addPlayers() {
-    for (IEntity p : players) {
-      world.addLast(p);
-    }
-  }
-
   private void addLevelTriggers(GameState gameMode, List<Entity> creeps) {
     Trigger levelComplete = new Trigger(false);
     levelComplete.addCondition(new AlwaysTrueCondition());
@@ -156,7 +150,10 @@ public class WorldFactory {
     world = new World();
 
     addRectangles();
-    addPlayers();
+
+    for (IEntity p : players) {
+      world.addLast(p);
+    }
 
     List<Entity> creeps = addCreepTriggers(level.creeps);
 
