@@ -9,7 +9,7 @@ import game.components.Message;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
-import game.events.impl.DamagePlayerEvent;
+import game.events.impl.DamageEntitiesEvent;
 import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
 import game.triggers.condition.AllDeadCondition;
@@ -36,6 +36,8 @@ import math.Rectangle;
 import states.GameState;
 
 public class WorldFactory {
+  private static final int PLAYER_DAMAGE = 10;
+
   private final Rectangle rect;
   private final List<Entity> players;
 
@@ -84,7 +86,7 @@ public class WorldFactory {
 
     rectBig.onNotContainsEvent.add(new RemoveEvent());
     rectCreepKiller.onContainsEvent.add(new RemoveEvent());
-    rectCreepKiller.onContainsEvent.add(new DamagePlayerEvent());
+    rectCreepKiller.onContainsEvent.add(new DamageEntitiesEvent(players, PLAYER_DAMAGE));
 
     world.addLast(rectBig);
     world.addLast(rectCreepKiller);

@@ -10,11 +10,15 @@ import game.entities.IEntity;
 import game.events.IEvent;
 import game.pods.Damage;
 
-public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
-  private final float hpLoss;
+import java.util.List;
 
-  public DamagePlayerEvent() {
-    hpLoss = 10; // FIXME: Magic number
+public class DamageEntitiesEvent implements IEvent<ObjectEventArgs> {
+  private final float hpLoss;
+  private final List<? extends IEntity> entities;
+
+  public DamageEntitiesEvent(List<? extends IEntity> entities, float damage) {
+    hpLoss = damage;
+    this.entities = entities;
   }
 
   @Override
@@ -22,7 +26,7 @@ public class DamagePlayerEvent implements IEvent<ObjectEventArgs> {
     if (args.getObject().getType() == EntityType.CREEP) {
       Damage damage = new Damage(args.getObject(), hpLoss);
 
-      for (IEntity e : args.getWorld().get(EntityType.PLAYER)) {
+      for (IEntity e : entities) {
         e.sendMessage(Message.DAMAGE, damage);
       }
     }
