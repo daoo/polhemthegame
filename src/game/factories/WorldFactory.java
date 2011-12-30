@@ -18,6 +18,7 @@ import game.triggers.condition.AnyDeadCondition;
 import game.triggers.condition.TimerCondition;
 import game.triggers.effects.DelayedActivateTriggerEffect;
 import game.triggers.effects.LevelCompleteEffect;
+import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SpawnWithSend;
 import game.world.World;
 
@@ -34,9 +35,13 @@ import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
 import states.GameState;
+import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;
+
+  private final GameState gameMode;
+  private final StateManager stateManager;
 
   private final Rectangle rect;
   private final List<Entity> players;
@@ -45,8 +50,11 @@ public class WorldFactory {
 
   private World world;
 
-  public WorldFactory(EntityFactory entityFactory, Rectangle rect,
-      List<Entity> players) {
+  public WorldFactory(GameState gameMode, StateManager stateManager,
+                      EntityFactory entityFactory, Rectangle rect,
+                      List<Entity> players) {
+    this.gameMode = gameMode;
+    this.stateManager = stateManager;
     this.entityFactory = entityFactory;
     this.rect = rect;
     this.players = players;
@@ -129,7 +137,7 @@ public class WorldFactory {
     return result;
   }
 
-  private void addLevelTriggers(GameState gameMode, List<Entity> creeps) {
+  private void addLevelTriggers(List<Entity> creeps) {
     Trigger levelComplete = new Trigger(false);
     levelComplete.addCondition(new AlwaysTrueCondition());
     levelComplete.addEffect(new LevelCompleteEffect(gameMode));
@@ -141,12 +149,12 @@ public class WorldFactory {
 
     Trigger gameOver = new Trigger(false);
     gameOver.addCondition(new AnyDeadCondition(players));
-    // TODO: gameOver.addEffect(new MainMenuEffect());
+    gameOver.addEffect(new MainMenuEffect(stateManager));
     // TODO: gameOver.addEffect(new GameOverEffect());
     world.addTrigger(gameOver);
   }
 
-  public World makeLevel(GameState gameMode, LevelData level)
+  public World makeLevel(LevelData level)
       throws DataException, ParserException, IOException {
 
     world = new World();
@@ -159,7 +167,7 @@ public class WorldFactory {
 
     List<Entity> creeps = addCreepTriggers(level.creeps);
 
-    addLevelTriggers(gameMode, creeps);
+    addLevelTriggers(creeps);
 
     return world;
   }

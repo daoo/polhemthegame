@@ -53,7 +53,8 @@ public class GameState implements IState {
    */
   private float elapsed;
 
-  public GameState(CampaignData data, int windowWidth, int windowHeight)
+  public GameState(StateManager stateManager, CampaignData data,
+                   int windowWidth, int windowHeight)
       throws ParserException, DataException, IOException, SlickException {
     if (data.levels.isEmpty()) {
       throw new IllegalArgumentException("No levels in campaign");
@@ -89,7 +90,7 @@ public class GameState implements IState {
 
     Players.reposition(players, worldRect);
 
-    worldFactory = new WorldFactory(entityFactory, worldRect, players);
+    worldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
   }
 
   @Override
@@ -97,7 +98,7 @@ public class GameState implements IState {
     try {
       campaign.nextLevel();
 
-      world = worldFactory.makeLevel(this, campaign.getCurrentLevel());
+      world = worldFactory.makeLevel(campaign.getCurrentLevel());
     } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
     }
@@ -156,7 +157,7 @@ public class GameState implements IState {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
 
-      world = worldFactory.makeLevel(this, campaign.getCurrentLevel());
+      world = worldFactory.makeLevel(campaign.getCurrentLevel());
     } else {
       goCredits();
     }
