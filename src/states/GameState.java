@@ -40,8 +40,6 @@ public class GameState implements IState {
   private final Image background, statics;
   private World world;
 
-  private final LinkedList<Entity> players;
-
   private final WorldFactory worldFactory;
 
   /**
@@ -71,17 +69,17 @@ public class GameState implements IState {
 
     int arenaWidth = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
-    arenaRect = new Rectangle(0, PlayerUI.HEIGHT, arenaWidth, arenaHeight);
-
-    campaign = new Campaign(data);
-    background = CacheTool.getImage(Locator.getCache(), data.background);
-    statics = new Image(arenaWidth, arenaHeight);
 
     float left   = data.constraints[0];
     float top    = data.constraints[1];
     float bottom = data.constraints[2];
     float right  = data.constraints[3];
 
+    campaign = new Campaign(data);
+    background = CacheTool.getImage(Locator.getCache(), data.background);
+    statics = new Image(arenaWidth, arenaHeight);
+
+    arenaRect = new Rectangle(0, PlayerUI.HEIGHT, arenaWidth, arenaHeight);
     worldRect = new Rectangle(
       left, top,
       arenaWidth - left - right,
@@ -91,7 +89,7 @@ public class GameState implements IState {
     elapsed = 0;
 
     EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
-    players = new LinkedList<>();
+    LinkedList<Entity> players = new LinkedList<>();
     players.add(entityFactory.makePlayer(0));
 
     worldFactory = new WorldFactory(entityFactory, worldRect, players);
