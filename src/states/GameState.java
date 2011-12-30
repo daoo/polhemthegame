@@ -43,15 +43,10 @@ public class GameState implements IState {
   private final WorldFactory worldFactory;
 
   /**
-   * Describes the entire area availible to the game (non-ui stuff).
+   * Describes the entire area available to the game (non-UI stuff).
    * Relative to the upper left corner of the game window.
    */
   private final Rectangle arenaRect;
-
-  /**
-   * The rectangle area availible for the world. Relative to the arenaRect.
-   */
-  private final Rectangle worldRect;
 
   /**
    * How much time have elapsed since we started.
@@ -80,7 +75,7 @@ public class GameState implements IState {
     statics = new Image(arenaWidth, arenaHeight);
 
     arenaRect = new Rectangle(0, PlayerUI.HEIGHT, arenaWidth, arenaHeight);
-    worldRect = new Rectangle(
+    Rectangle worldRect = new Rectangle(
       left, top,
       arenaWidth - left - right,
       arenaHeight - top - bottom
@@ -92,9 +87,9 @@ public class GameState implements IState {
     LinkedList<Entity> players = new LinkedList<>();
     players.add(entityFactory.makePlayer(0));
 
-    worldFactory = new WorldFactory(entityFactory, worldRect, players);
-
     Players.reposition(players, worldRect);
+
+    worldFactory = new WorldFactory(entityFactory, worldRect, players);
   }
 
   @Override
