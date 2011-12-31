@@ -36,7 +36,7 @@ public class RunTo implements IAnimator {
       }
 
       Tile result = new Tile(x, y);
-      if (target.equals(result)) {
+      if (target.isEqual(result)) {
         finished = true;
       }
 

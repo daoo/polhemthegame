@@ -14,7 +14,7 @@ public class Tile {
     this.y = y;
   }
 
-  public boolean equals(Tile other) {
+  public boolean isEqual(Tile other) {
     return (x == other.x) && (y == other.y);
   }
 }
