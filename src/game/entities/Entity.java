@@ -155,6 +155,7 @@ public class Entity implements IEntity {
     Node<String> parent = new Node<>(debugString());
 
     parent.nodes.add(new Node<>("Body = " + body.toString()));
+    parent.nodes.add(new Node<>("Active = " + Boolean.toString(active)));
 
     parent.nodes.add(DebugHelper.listToNode("Logic components", updates));
     parent.nodes.add(DebugHelper.listToNode("Render components", renders));
