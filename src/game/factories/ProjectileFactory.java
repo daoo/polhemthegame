@@ -77,20 +77,24 @@ public class ProjectileFactory {
     e.addLogicComponent(life);
     e.addLogicComponent(range);
 
-    // If these conditions are met, the
+    e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+
+    // If these conditions are met, the projectile is moving
     if (data.speed != 0 || data.gravity) {
       Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
                                      (float) Math.sin(rot) * data.speed);
       e.addLogicComponent(mov);
-      e.addLogicComponent(new Gravity(mov));
+
+      if (data.gravity) {
+        e.addLogicComponent(new Gravity(mov));
+      }
 
       if (data.collides) {
-        e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
         e.addLogicComponent(new MovingProjectileCollision(e, mov));
       }
     } else {
+      // Not moving, static collisions
       if (data.collides) {
-        e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
         e.addLogicComponent(new StaticCollision(e));
       }
     }
