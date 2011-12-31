@@ -25,7 +25,7 @@ public class AOEDamage implements IEffect {
    * @param source the source of the damage
    * @param body the body from where the circle will be centered
    * @param range the radius of the area
-   * @param damage the ammount of damage to deal per object in range
+   * @param damage the amount of damage to deal per object in range
    */
   public AOEDamage(IEntity source, Rectangle body, float range, float damage) {
     this.body = body;

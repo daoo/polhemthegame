@@ -12,6 +12,7 @@ import game.entities.EntityType;
 import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
+import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
@@ -19,26 +20,27 @@ import org.newdawn.slick.Graphics;
  * Spawn an run-to-last animation at the top left of another entity.
  */
 public class SpawnAnimationEffect implements IEffect {
-  private final Entity owner, spawnee;
+  private final Entity spawnee;
+  private final Rectangle rect;
   private final IAnimatedComponent anim;
 
   public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim, Graphics graphics) {
-    this.owner = entity;
-    this.anim  = anim;
+    this.rect = entity.getBody();
+    this.anim = anim;
 
     spawnee = new Entity(0, 0, anim.getTileWidth(), anim.getTileHeight(),
       EntityType.ANIMATED);
     spawnee.addRenderComponent(anim);
 
     AfterAnimation comp = new AfterAnimation(spawnee, anim, anim.getLastTile());
-    comp.add(new RenderCurrent(entity.getBody(), anim, graphics));
+    comp.add(new RenderCurrent(rect, anim, graphics));
     comp.add(new RemoveEntity(spawnee));
     spawnee.addLogicComponent(comp);
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    spawnee.getBody().setPosition(owner.getBody().getMin());
+    spawnee.getBody().setPosition(rect.getMin());
 
     anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
 
