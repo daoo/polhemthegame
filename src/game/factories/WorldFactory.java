@@ -12,9 +12,9 @@ import game.entities.InvisibleRectangle;
 import game.events.impl.DamageEntitiesEvent;
 import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
-import game.triggers.condition.AllDeadCondition;
+import game.triggers.condition.AllUnactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
-import game.triggers.condition.AnyDeadCondition;
+import game.triggers.condition.AnyUnactiveCondition;
 import game.triggers.condition.TimerCondition;
 import game.triggers.effects.DelayedActivateTriggerEffect;
 import game.triggers.effects.LevelCompleteEffect;
@@ -144,11 +144,11 @@ public class WorldFactory {
 
     Trigger levelCompleteDelay = new Trigger(false);
     levelCompleteDelay.addEffect(new DelayedActivateTriggerEffect(5.0f, levelComplete));
-    levelCompleteDelay.addCondition(new AllDeadCondition(creeps));
+    levelCompleteDelay.addCondition(new AllUnactiveCondition(creeps));
     world.addTrigger(levelCompleteDelay);
 
     Trigger gameOver = new Trigger(false);
-    gameOver.addCondition(new AnyDeadCondition(players));
+    gameOver.addCondition(new AnyUnactiveCondition(players));
     gameOver.addEffect(new MainMenuEffect(stateManager));
     // TODO: gameOver.addEffect(new GameOverEffect());
     world.addTrigger(gameOver);

@@ -44,7 +44,12 @@ public class Life implements ILogicComponent, IProgress {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.KILL) {
-      kill(null);
+      IEntity sender = null;
+      if (args instanceof IEntity) {
+        sender = (IEntity) args;
+      }
+
+      kill(sender);
     } else if (message == Message.DAMAGE) {
       damage((Damage) args);
     }

@@ -4,25 +4,22 @@
 
 package game.triggers.condition;
 
-import game.components.ComponentType;
-import game.components.misc.Life;
 import game.entities.Entity;
 import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 
-public class AllDeadCondition implements ICondition {
+public class AllUnactiveCondition implements ICondition {
   private final Iterable<Entity> entities;
 
-  public AllDeadCondition(Iterable<Entity> entities) {
+  public AllUnactiveCondition(Iterable<Entity> entities) {
     this.entities = entities;
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
-    for (Entity e : entities) {
-      Life life = (Life) e.getComponent(ComponentType.HEALTH);
-      if (life.isAlive()) {
+    for (Entity entity : entities) {
+      if (entity.isActive()) {
         return false;
       }
     }
