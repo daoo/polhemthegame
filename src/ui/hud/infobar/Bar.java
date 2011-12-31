@@ -31,10 +31,12 @@ public class Bar {
   }
 
   public void render(Graphics g, float x, float y, float width, float height) {
+    float middle = fraction * width;
+
     g.setColor(colorHave);
-    g.fillRect(x, y, fraction * width, height);
+    g.fillRect(x, y, middle, height);
 
     g.setColor(colorLost);
-    g.fillRect(x + (fraction * width), y, (1.0f - fraction) * width, height);
+    g.fillRect(x + middle, y, width - middle, height);
   }
 }
