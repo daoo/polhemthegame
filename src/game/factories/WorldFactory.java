@@ -11,6 +11,8 @@ import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
 import game.events.impl.DamageEntitiesEvent;
 import game.events.impl.RemoveEvent;
+import game.triggers.ICondition;
+import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
@@ -39,6 +41,7 @@ import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;
+  private static final float TRIGGER_DELAY = 5.0f;
 
   private final GameState gameMode;
   private final StateManager stateManager;
@@ -137,21 +140,29 @@ public class WorldFactory {
     return result;
   }
 
+  private Trigger makeDelayedTrigger(float delay, ICondition condition, IEffect effect) {
+    Trigger finalTrigger = new Trigger(false);
+    finalTrigger.addCondition(new AlwaysTrueCondition());
+    finalTrigger.addEffect(effect);
+
+    Trigger delayedTrigger = new Trigger(false);
+    delayedTrigger.addCondition(condition);
+    delayedTrigger.addEffect(
+      new DelayedActivateTriggerEffect(delay, finalTrigger));
+
+    return delayedTrigger;
+  }
+
   private void addLevelTriggers(List<Entity> creeps) {
-    Trigger levelComplete = new Trigger(false);
-    levelComplete.addCondition(new AlwaysTrueCondition());
-    levelComplete.addEffect(new LevelCompleteEffect(gameMode));
+    world.addTrigger(makeDelayedTrigger(
+      TRIGGER_DELAY,
+      new AllInactiveCondition(creeps),
+      new LevelCompleteEffect(gameMode)));
 
-    Trigger levelCompleteDelay = new Trigger(false);
-    levelCompleteDelay.addEffect(new DelayedActivateTriggerEffect(5.0f, levelComplete));
-    levelCompleteDelay.addCondition(new AllInactiveCondition(creeps));
-    world.addTrigger(levelCompleteDelay);
-
-    Trigger gameOver = new Trigger(false);
-    gameOver.addCondition(new AnyInactiveCondition(players));
-    gameOver.addEffect(new MainMenuEffect(stateManager));
-    // TODO: gameOver.addEffect(new GameOverEffect());
-    world.addTrigger(gameOver);
+    world.addTrigger(makeDelayedTrigger(
+      TRIGGER_DELAY,
+      new AnyInactiveCondition(players),
+      new MainMenuEffect(stateManager)));
   }
 
   public World makeLevel(LevelData level)
