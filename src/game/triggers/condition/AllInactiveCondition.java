@@ -9,23 +9,21 @@ import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 
-import java.util.List;
+public class AllInactiveCondition implements ICondition {
+  private final Iterable<Entity> entities;
 
-public class AnyUnactiveCondition implements ICondition {
-  private final List<Entity> entities;
-
-  public AnyUnactiveCondition(List<Entity> entities) {
+  public AllInactiveCondition(Iterable<Entity> entities) {
     this.entities = entities;
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
     for (Entity entity : entities) {
-      if (!entity.isActive()) {
-        return true;
+      if (entity.isActive()) {
+        return false;
       }
     }
 
-    return false;
+    return true;
   }
 }
