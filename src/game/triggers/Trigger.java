@@ -39,7 +39,7 @@ public class Trigger implements ITrigger {
 
   /**
    * Sets the world in which the conditions should be evaluated and the effects
-   * exectued.
+   * executed.
    * @param world the world to use, can not be null
    */
   @Override
