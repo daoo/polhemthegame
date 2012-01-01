@@ -8,33 +8,62 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import ui.IDynamicUIElement;
 import ui.IStaticUIElement;
 import ui.IUI;
 
+/**
+ * Simple UI implementation.
+ */
 public class UI implements IUI {
   private final LinkedList<IStaticUIElement> statics;
   private final LinkedList<IDynamicUIElement> dynamics;
 
   private final LinkedList<IDynamicUIElement> toAdd;
 
-  public UI() {
+  private final int width, height;
+
+  private int imgX, imgY;
+  private Image foreground;
+
+  public UI(int width, int height) {
+    this.width  = width;
+    this.height = height;
+
     dynamics = new LinkedList<>();
     statics  = new LinkedList<>();
     toAdd    = new LinkedList<>();
+
+    foreground = null;
   }
 
+  /**
+   * Add a static UI element.
+   * @param element the element to add, can not be null
+   */
   @Override
   public void addStatic(IStaticUIElement element) {
+    assert element != null;
+
     statics.add(element);
   }
 
+  /**
+   * Add a dynamic UI element.
+   * @param element the element to add, can not be null
+   */
   @Override
   public void addDynamic(IDynamicUIElement element) {
+    assert element != null;
+
     toAdd.add(element);
   }
 
+  /**
+   * Updates dynamic elements. Also removes inactive elements.
+   */
   @Override
   public void update() {
     Iterator<IDynamicUIElement> it = dynamics.iterator();
@@ -51,6 +80,11 @@ public class UI implements IUI {
     toAdd.clear();
   }
 
+  /**
+   * Render dynamics. For example the info bars, these should be relative to the
+   * level.
+   * @param g the graphics context to use
+   */
   @Override
   public void renderDynamics(Graphics g) {
     for (IDynamicUIElement e : dynamics) {
@@ -58,10 +92,34 @@ public class UI implements IUI {
     }
   }
 
+  /**
+   * Render statics. For example shop menu, these should be relative to the
+   * window instead of the level.
+   * @param g the rendering context to use
+   */
   @Override
   public void renderStatics(Graphics g) {
-      for (IStaticUIElement e : statics) {
+    for (IStaticUIElement e : statics) {
       e.render(g);
+    }
+
+    if (foreground != null) {
+      g.drawImage(foreground, imgX, imgY);
+    }
+  }
+
+  /**
+   * Sets an image that is rendered in center of the the foreground. That is
+   * above everything else. If image is null the foreground will be cleared.
+   * @param image the image to render, if null no image will be rendered.
+   */
+  @Override
+  public void setForegroundImage(Image image) {
+    foreground = image;
+
+    if (image != null) {
+      imgX = width / 2 - image.getWidth() / 2;
+      imgY = height / 2 - image.getHeight() / 2;
     }
   }
 }

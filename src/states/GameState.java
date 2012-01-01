@@ -60,7 +60,7 @@ public class GameState implements IState {
       throw new IllegalArgumentException("No levels in campaign");
     }
 
-    ui = new UI();
+    ui = new UI(windowWidth, windowHeight);
     Locator.registerUI(ui);
 
     int arenaWidth = windowWidth;
