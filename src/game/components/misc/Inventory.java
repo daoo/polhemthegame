@@ -18,7 +18,7 @@ public class Inventory implements ILogicComponent {
   // Money
   private final Wallet wallet;
 
-  // Stats
+  // Statistics
   private float damageDealt;
   private int kills;
 
