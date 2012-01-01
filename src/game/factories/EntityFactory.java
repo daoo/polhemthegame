@@ -107,7 +107,7 @@ public class EntityFactory {
       EntityType.PLAYER
     );
 
-    // Create componenets
+    // Create components
     Movement mov               = new Movement(e, 0, 0);
     MovementConstraint movCons = new MovementConstraint(e, rect);
     Life life                  = new Life(e, data.hitpoints);

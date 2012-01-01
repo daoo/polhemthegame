@@ -52,10 +52,10 @@ public class BossAI implements ILogicComponent {
     float timeX = Math.abs(dx / speed);
     float timeY = Math.abs(dy / speed);
 
-    // FIXME: body.setVelocity(Vector2.ZERO);
+    // body.setVelocity(Vector2.ZERO);
     if ((timeX > 0) || (timeY > 0)) {
       float max = Math.max(timeX, timeY);
-      // FIXME: body.setVelocity(delta.divide(max));
+      // body.setVelocity(delta.divide(max));
     }
   }
 
