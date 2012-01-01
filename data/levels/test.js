@@ -1,6 +1,6 @@
 { level: "Test"
-, loading: null
-, completed: null
+, loading: "textures/text/gameover.png"
+, completed: "textures/text/levelcomplete.png"
 , preBossImage: null
 , boss: null
 , creeps:

@@ -38,12 +38,17 @@ import loader.data.json.LevelData.CreepSpawnData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
+
+import org.newdawn.slick.Image;
+
 import states.GameState;
 import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;
   private static final float TRIGGER_DELAY = 5.0f;
+
+  private static final String GAME_OVER_IMAGE = "textures/text/gameover.png";
 
   private final GameState gameMode;
   private final StateManager stateManager;
@@ -158,17 +163,21 @@ public class WorldFactory {
     return delayedTrigger;
   }
 
-  private void addLevelTriggers(List<Entity> creeps) {
+  private void addLevelTriggers(LevelData level, List<Entity> creeps)
+      throws ParserException, IOException {
+    Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
+    Image imgGameOver = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
+
     world.addTrigger(makeDelayedTrigger(
       TRIGGER_DELAY,
       new AllInactiveCondition(creeps),
-      Arrays.asList(new SetForegroundEffect(Locator.getUI(), null)),
+      Arrays.asList(new SetForegroundEffect(Locator.getUI(), imgLevelComplete)),
       Arrays.asList(new LevelCompleteEffect(gameMode))));
 
     world.addTrigger(makeDelayedTrigger(
       TRIGGER_DELAY,
       new AnyInactiveCondition(players),
-      Arrays.asList(new SetForegroundEffect(Locator.getUI(), null)),
+      Arrays.asList(new SetForegroundEffect(Locator.getUI(), imgGameOver)),
       Arrays.asList(new MainMenuEffect(stateManager))));
   }
 
@@ -185,7 +194,7 @@ public class WorldFactory {
 
     List<Entity> creeps = addCreepTriggers(level.creeps);
 
-    addLevelTriggers(creeps);
+    addLevelTriggers(level, creeps);
 
     return world;
   }

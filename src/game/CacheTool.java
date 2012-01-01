@@ -34,6 +34,7 @@ public class CacheTool {
   public static final String EXT_JS = ".js";
 
   public static final String DIR_LEVELS       = "levels";
+
   public static final String FILE_BOSSES      = "bosses.js";
   public static final String FILE_CREEPS      = "creeps.js";
   public static final String FILE_PLAYERS     = "players.js";
