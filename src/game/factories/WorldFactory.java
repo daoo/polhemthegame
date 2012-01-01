@@ -21,10 +21,12 @@ import game.triggers.condition.TimerCondition;
 import game.triggers.effects.DelayedActivateTriggerEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
+import game.triggers.effects.SetForegroundEffect;
 import game.triggers.effects.SpawnWithSend;
 import game.world.World;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -140,13 +142,16 @@ public class WorldFactory {
     return result;
   }
 
-  private Trigger makeDelayedTrigger(float delay, ICondition condition, IEffect effect) {
+  private Trigger makeDelayedTrigger(float delay, ICondition condition,
+                                     List<? extends IEffect> preEffects,
+                                     List<? extends IEffect> postEffects) {
     Trigger finalTrigger = new Trigger(false);
     finalTrigger.addCondition(new AlwaysTrueCondition());
-    finalTrigger.addEffect(effect);
+    finalTrigger.addAllEffects(postEffects);
 
     Trigger delayedTrigger = new Trigger(false);
     delayedTrigger.addCondition(condition);
+    delayedTrigger.addAllEffects(preEffects);
     delayedTrigger.addEffect(
       new DelayedActivateTriggerEffect(delay, finalTrigger));
 
@@ -157,12 +162,14 @@ public class WorldFactory {
     world.addTrigger(makeDelayedTrigger(
       TRIGGER_DELAY,
       new AllInactiveCondition(creeps),
-      new LevelCompleteEffect(gameMode)));
+      Arrays.asList(new SetForegroundEffect(Locator.getUI(), null)),
+      Arrays.asList(new LevelCompleteEffect(gameMode))));
 
     world.addTrigger(makeDelayedTrigger(
       TRIGGER_DELAY,
       new AnyInactiveCondition(players),
-      new MainMenuEffect(stateManager)));
+      Arrays.asList(new SetForegroundEffect(Locator.getUI(), null)),
+      Arrays.asList(new MainMenuEffect(stateManager))));
   }
 
   public World makeLevel(LevelData level)

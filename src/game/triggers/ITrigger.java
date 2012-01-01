@@ -4,13 +4,18 @@
 
 package game.triggers;
 
+import java.util.Collection;
+
 import game.pods.GameTime;
 import game.world.World;
 import debug.IDebuggable;
 
 public interface ITrigger extends IDebuggable {
   void addCondition(ICondition condition);
+  void addAllConditions(Collection<? extends ICondition> conditions);
+
   void addEffect(IEffect effect);
+  void addAllEffects(Collection<? extends IEffect> effects);
 
   void update(GameTime time);
 

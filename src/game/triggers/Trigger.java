@@ -7,6 +7,7 @@ package game.triggers;
 import game.pods.GameTime;
 import game.world.World;
 
+import java.util.Collection;
 import java.util.LinkedList;
 
 import util.Node;
@@ -120,6 +121,17 @@ public class Trigger implements ITrigger {
   }
 
   /**
+   * Add a collection of conditions to the trigger.
+   * @param collection the collection to add, can not be null
+   */
+  @Override
+  public void addAllConditions(Collection<? extends ICondition> collection) {
+    assert collection != null;
+
+    this.conditions.addAll(collection);
+  }
+
+  /**
    * Adds an effect to the trigger.
    * @param effect the effect to add, can not be null
    */
@@ -128,6 +140,13 @@ public class Trigger implements ITrigger {
     assert effect != null;
 
     effects.add(effect);
+  }
+
+  @Override
+  public void addAllEffects(Collection<? extends IEffect> collection) {
+    assert collection != null;
+
+    effects.addAll(collection);
   }
 
   @Override
