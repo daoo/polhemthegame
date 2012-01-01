@@ -32,7 +32,7 @@ public class Bar {
     assert colorLost != null;
 
     this.progress = progress;
-    fraction = 1.0f;
+    fraction = progress.getProgress();
 
     this.colorHave = colorHave;
     this.colorLost = colorLost;
