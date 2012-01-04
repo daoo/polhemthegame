@@ -15,10 +15,8 @@ import game.triggers.ICondition;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
-import game.triggers.condition.AlwaysTrueCondition;
 import game.triggers.condition.AnyInactiveCondition;
 import game.triggers.condition.TimerCondition;
-import game.triggers.effects.AddTriggersEffect;
 import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
@@ -162,7 +160,7 @@ public class WorldFactory {
   private void addLevelTriggers(LevelData level, List<Entity> creeps)
       throws ParserException, IOException {
     ICache cache           = Locator.getCache();
-    Image imgLevelStart    = CacheTool.getImage(cache, level.level);
+    Image imgLevelStart    = CacheTool.getImage(cache, level.loading);
     Image imgLevelComplete = CacheTool.getImage(cache, level.completed);
     Image imgGameOver      = CacheTool.getImage(cache, GAME_OVER_IMAGE);
 
