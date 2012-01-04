@@ -8,7 +8,7 @@ import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.triggers.ITrigger;
 import game.triggers.Trigger;
-import game.triggers.condition.TimerCondition;
+import game.triggers.condition.AbsoluteTimerCondition;
 import game.world.World;
 
 import java.util.Arrays;
@@ -21,7 +21,6 @@ import java.util.Collection;
 public class ExecuteWithDelayEffect implements IEffect {
   private final float delay;
   private final ITrigger delayed;
-
 
   public ExecuteWithDelayEffect(float delay, Collection<? extends IEffect> effects) {
     this.delay = delay;
@@ -36,7 +35,7 @@ public class ExecuteWithDelayEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    delayed.addCondition(new TimerCondition(time.elapsed, delay));
+    delayed.addCondition(new AbsoluteTimerCondition(time.elapsed, delay));
     world.addTrigger(delayed);
   }
 }

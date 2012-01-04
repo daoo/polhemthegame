@@ -8,10 +8,10 @@ import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 
-public class TimerCondition implements ICondition {
+public class AbsoluteTimerCondition implements ICondition {
   private final float timeAfter;
 
-  public TimerCondition(float start, float time) {
+  public AbsoluteTimerCondition(float start, float time) {
     timeAfter = start + time;
   }
 
