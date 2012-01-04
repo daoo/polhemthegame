@@ -99,7 +99,7 @@ public class WorldFactory {
     );
 
     InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
-      -rect.getWidth(), 0,
+      -rect.getWidth(), rect.getY1(),
        rect.getWidth(), rect.getHeight()
     );
 
