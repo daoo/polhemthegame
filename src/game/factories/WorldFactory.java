@@ -18,7 +18,8 @@ import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
 import game.triggers.condition.AnyInactiveCondition;
 import game.triggers.condition.TimerCondition;
-import game.triggers.effects.DelayedActivateTriggerEffect;
+import game.triggers.effects.AddTriggersEffect;
+import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
@@ -30,6 +31,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import loader.ICache;
 import loader.data.DataException;
 import loader.data.json.CreepsData;
 import loader.data.json.CreepsData.CreepData;
@@ -63,11 +65,11 @@ public class WorldFactory {
   public WorldFactory(GameState gameMode, StateManager stateManager,
                       EntityFactory entityFactory, Rectangle rect,
                       List<Entity> players) {
-    this.gameMode = gameMode;
-    this.stateManager = stateManager;
+    this.gameMode      = gameMode;
+    this.stateManager  = stateManager;
     this.entityFactory = entityFactory;
-    this.rect = rect;
-    this.players = players;
+    this.rect          = rect;
+    this.players       = players;
   }
 
   /**
@@ -130,18 +132,17 @@ public class WorldFactory {
       t.addCondition(new TimerCondition(0, spawnData.spawnTime));
 
       CreepData creepData = creepsData.getCreep(spawnData.creep);
-      Entity creep = entityFactory.makeCreep(
-        rect.getX2() + creepData.hitbox.width,
-        Locator.getRandom().nextFloat(rect.getY1(), rect.getY2() - creepData.hitbox.height),
-        (float) -Math.PI,
-        creepData
+      float x = rect.getX2() + creepData.hitbox.width;
+      float y = Locator.getRandom().nextFloat(
+        rect.getY1(),
+        rect.getY2() - creepData.hitbox.height
       );
+
+      Entity creep = entityFactory.makeCreep(x, y, (float) -Math.PI, creepData);
+
       result.add(creep);
 
-      t.addEffect(
-        new SpawnWithSend(creep, Message.START_ANIMATION, null));
-
-      world.addTrigger(t);
+      t.addEffect(new SpawnWithSend(creep, Message.START_ANIMATION, null));
     }
 
     return result;
@@ -150,23 +151,20 @@ public class WorldFactory {
   private Trigger makeDelayedTrigger(float delay, ICondition condition,
                                      List<? extends IEffect> preEffects,
                                      List<? extends IEffect> postEffects) {
-    Trigger finalTrigger = new Trigger(false);
-    finalTrigger.addCondition(new AlwaysTrueCondition());
-    finalTrigger.addAllEffects(postEffects);
-
     Trigger delayedTrigger = new Trigger(false);
     delayedTrigger.addCondition(condition);
     delayedTrigger.addAllEffects(preEffects);
-    delayedTrigger.addEffect(
-      new DelayedActivateTriggerEffect(delay, finalTrigger));
+    delayedTrigger.addEffect(new ExecuteWithDelayEffect(delay, postEffects));
 
     return delayedTrigger;
   }
 
   private void addLevelTriggers(LevelData level, List<Entity> creeps)
       throws ParserException, IOException {
-    Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
-    Image imgGameOver = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
+    ICache cache           = Locator.getCache();
+    Image imgLevelStart    = CacheTool.getImage(cache, level.level);
+    Image imgLevelComplete = CacheTool.getImage(cache, level.completed);
+    Image imgGameOver      = CacheTool.getImage(cache, GAME_OVER_IMAGE);
 
     world.addTrigger(makeDelayedTrigger(
       TRIGGER_DELAY,

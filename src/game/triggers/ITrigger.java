@@ -4,10 +4,11 @@
 
 package game.triggers;
 
-import java.util.Collection;
-
 import game.pods.GameTime;
 import game.world.World;
+
+import java.util.Collection;
+
 import debug.IDebuggable;
 
 public interface ITrigger extends IDebuggable {

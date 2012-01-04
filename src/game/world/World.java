@@ -10,6 +10,7 @@ import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.ITrigger;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -107,9 +108,22 @@ public class World implements IDebuggable {
   }
 
   public void addTrigger(ITrigger trigger) {
+    assert trigger != null;
+
     trigger.setWorld(this);
     addTriggers.add(trigger);
   }
+
+  public void addAllTriggers(Collection<? extends ITrigger> collection) {
+    assert collection != null;
+
+    for (ITrigger t : collection) {
+      t.setWorld(this);
+    }
+
+    addTriggers.addAll(collection);
+  }
+
 
   @Override
   public String debugString() {

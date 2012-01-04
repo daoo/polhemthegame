@@ -11,19 +11,27 @@ import game.triggers.Trigger;
 import game.triggers.condition.TimerCondition;
 import game.world.World;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 /**
- * Adds a new trigger with a delay condition to the world.
+ * Execute some triggers with a delay condition to the world.
  * The delay condition starts counting when this effect is executed.
  */
-public class DelayedActivateTriggerEffect implements IEffect {
+public class ExecuteWithDelayEffect implements IEffect {
   private final float delay;
   private final ITrigger delayed;
 
-  public DelayedActivateTriggerEffect(float delay, ITrigger trigger) {
+
+  public ExecuteWithDelayEffect(float delay, Collection<? extends IEffect> effects) {
     this.delay = delay;
 
     delayed = new Trigger(false);
-    delayed.addEffect(new NewTriggerEffect(trigger));
+    delayed.addAllEffects(effects);
+  }
+
+  public ExecuteWithDelayEffect(float delay, IEffect effect) {
+    this(delay, Arrays.asList(effect));
   }
 
   @Override
