@@ -12,7 +12,6 @@ import game.entities.InvisibleRectangle;
 import game.events.impl.DamageEntitiesEvent;
 import game.events.impl.RemoveEvent;
 import game.triggers.Trigger;
-import game.triggers.condition.AbsoluteTimerCondition;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
 import game.triggers.effects.AddTriggersEffect;
