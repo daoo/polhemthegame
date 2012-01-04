@@ -63,7 +63,7 @@ public class GameState implements IState {
     ui = new UI(windowWidth, windowHeight);
     Locator.registerUI(ui);
 
-    int arenaWidth = windowWidth;
+    int arenaWidth  = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
 
     float left   = data.constraints[0];
@@ -71,9 +71,9 @@ public class GameState implements IState {
     float bottom = data.constraints[2];
     float right  = data.constraints[3];
 
-    campaign = new Campaign(data);
+    campaign   = new Campaign(data);
     background = CacheTool.getImage(Locator.getCache(), data.background);
-    statics = new Image(arenaWidth, arenaHeight);
+    statics    = new Image(arenaWidth, arenaHeight);
 
     arenaRect = new Rectangle(0, PlayerUI.HEIGHT, arenaWidth, arenaHeight);
     Rectangle worldRect = new Rectangle(
@@ -85,7 +85,7 @@ public class GameState implements IState {
     elapsed = 0;
 
     EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
-    LinkedList<Entity> players = new LinkedList<>();
+    LinkedList<Entity> players  = new LinkedList<>();
     players.add(entityFactory.makePlayer(0));
 
     Players.reposition(players, worldRect);
@@ -96,9 +96,7 @@ public class GameState implements IState {
   @Override
   public void start(StateManager stateManager) {
     try {
-      campaign.nextLevel();
-
-      world = worldFactory.makeLevel(campaign.getCurrentLevel());
+      nextLevel();
     } catch (ParserException | IOException | DataException ex) {
       stateManager.handleException(ex);
     }
