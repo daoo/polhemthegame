@@ -112,13 +112,13 @@ public class CollisionTester extends BasicGame {
         body.addPosition(new Vector2(s, 0));
 
       else if (Keyboard.isKeyDown(Keyboard.KEY_W))
-        mov.getVelocity().addSelf(0, -s);
+        mov.addVelocity(0, -s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_S))
-        mov.getVelocity().addSelf(0, s);
+        mov.addVelocity(0, s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_A))
-        mov.getVelocity().addSelf(-s, 0);
+        mov.addVelocity(-s, 0);
       else if (Keyboard.isKeyDown(Keyboard.KEY_D))
-        mov.getVelocity().addSelf(s, 0);
+        mov.addVelocity(s, 0);
     }
 
     float frameLength = delta / 1000.0f;

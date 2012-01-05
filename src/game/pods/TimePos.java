@@ -12,6 +12,6 @@ public class TimePos {
 
   public TimePos(float time, Vector2 pos) {
     this.time = time;
-    this.pos  = new Vector2(pos);
+    this.pos  = pos;
   }
 }

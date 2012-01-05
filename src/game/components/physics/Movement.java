@@ -13,7 +13,7 @@ import math.Vector2;
 
 public class Movement implements ILogicComponent {
   private final IEntity owner;
-  private final Vector2 vel;
+  private Vector2 vel;
 
   public Movement(IEntity owner, float dx, float dy) {
     this.owner = owner;
@@ -21,7 +21,11 @@ public class Movement implements ILogicComponent {
   }
 
   public void addVelocity(Vector2 v) {
-    vel.addSelf(v);
+    vel = Vector2.add(vel, v);
+  }
+
+  public void addVelocity(float x, float y) {
+    vel = Vector2.add(vel, x, y);
   }
 
   @Override
@@ -39,12 +43,12 @@ public class Movement implements ILogicComponent {
   }
 
   public void setVelocity(Vector2 v) {
-    vel.set(v);
+    vel = v;
   }
 
   @Override
   public void update(GameTime time) {
-    Vector2 tmp = vel.multiply(time.frame);
+    Vector2 tmp = Vector2.multiply(vel, time.frame);
     owner.getBody().addPosition(tmp);
   }
 }

@@ -15,12 +15,12 @@ public class CollisionHelper {
    * @return true or false based on the test result
    */
   public static boolean sweepCollisionTest(Rectangle a, Vector2 av, Rectangle b, float dt) {
-    Vector2 vel    = av.multiply(dt);
-    Vector2 target = a.getMin().add(vel);
+    Vector2 vel    = Vector2.multiply(av, dt);
+    Vector2 target = Vector2.add(a.getMin(), vel);
 
-    Vector2 sweepDelta = vel.divide(a.getSize().magnitude());
-    int sweeps         = (int) (target.distance(a.getMin()) / sweepDelta.magnitude());
-    Rectangle sweep    = new Rectangle(a.getMin(), a.getMax());
+    Vector2 sweepDelta = Vector2.divide(vel, a.getSize().magnitude);
+    int sweeps = (int) (target.distance(a.getMin()) / sweepDelta.magnitude);
+    Rectangle sweep = new Rectangle(a.getMin(), a.getMax());
 
     for (int i = 0; i < sweeps; ++i) {
       if (sweep.isIntersecting(b)) {
@@ -36,26 +36,24 @@ public class CollisionHelper {
   /**
    * Stops an Rectangle from exiting an container Rectangle by aligning the
    * entity to the edges of the container if it's on the outside.
-   *
-   * @param entity
-   *          The Rectangle to restrict
-   * @param cont
-   *          The Rectangle to use as box
+   * @param entity the Rectangle to restrict
+   * @param cont the Rectangle to use as box
    */
   public static void blockFromExiting(Rectangle entity, Rectangle cont) {
-    Vector2 e = entity.getMin();
-    if (e.x < cont.getX1()) {
-      e.x = cont.getX1();
-    } else if ((e.x + entity.getWidth()) >= cont.getX2()) {
-      e.x = cont.getWidth() - entity.getWidth();
+    float x = entity.getMin().x;
+    float y = entity.getMin().y;
+    if (x < cont.getX1()) {
+      x = cont.getX1();
+    } else if ((x + entity.getWidth()) >= cont.getX2()) {
+      x = cont.getWidth() - entity.getWidth();
     }
 
-    if (e.y < cont.getY1()) {
-      e.y = cont.getY1();
-    } else if ((e.y + entity.getHeight()) >= cont.getY2()) {
-      e.y = cont.getY2() - entity.getHeight();
+    if (y < cont.getY1()) {
+      y = cont.getY1();
+    } else if ((y + entity.getHeight()) >= cont.getY2()) {
+      y = cont.getY2() - entity.getHeight();
     }
 
-    entity.setPosition(e);
+    entity.setPosition(x, y);
   }
 }

@@ -5,14 +5,14 @@
 package math;
 
 public class Rectangle {
-  protected final Vector2 min, max, center;
-  protected final Vector2 size;
+  private Vector2 min, max, center;
+  private Vector2 size;
 
   public Rectangle(Rectangle rect) {
-    this.min    = new Vector2(rect.min);
-    this.max    = new Vector2(rect.max);
-    this.center = new Vector2(rect.center);
-    this.size   = new Vector2(rect.size);
+    this.min    = rect.min;
+    this.max    = rect.max;
+    this.center = rect.center;
+    this.size   = rect.size;
   }
 
   public Rectangle(float x1, float y1, float width, float height) {
@@ -22,15 +22,15 @@ public class Rectangle {
     min    = new Vector2(x1, y1);
     max    = new Vector2(x2, y2);
     size   = new Vector2(width, height);
-    center = min.add(size.divide(2.0f));
+    center = Vector2.add(min, Vector2.divide(size, 2.0f));
   }
 
   public Rectangle(Vector2 upperLeft, Vector2 bottomRight) {
-    min  = new Vector2(upperLeft);
-    max  = new Vector2(bottomRight);
+    min  = upperLeft;
+    max  = bottomRight;
     size = new Vector2(bottomRight.x - upperLeft.x,
-                       bottomRight.y - upperLeft.x);
-    center = min.add(size.divide(2.0f));
+                          bottomRight.y - upperLeft.x);
+    center = Vector2.add(min, Vector2.divide(size, 2.0f));
 
   }
 
@@ -44,14 +44,19 @@ public class Rectangle {
             (other.min.y > min.y && other.max.y < max.y));
   }
 
+  public void setPosition(float x, float y) {
+    min = new Vector2(x, y);
+    max = Vector2.add(min, size);
+  }
+
   public void setPosition(Vector2 v) {
-    min.set(v);
-    max.set(v.add(size));
+    min = v;
+    max = Vector2.add(v, size);
   }
 
   public void addPosition(Vector2 v) {
-    min.addSelf(v);
-    max.addSelf(v);
+    min = Vector2.add(min, v);
+    max = Vector2.add(max, v);
   }
 
   /**
@@ -59,7 +64,7 @@ public class Rectangle {
    * @return a vector2
    */
   public Vector2 getMin() {
-    return new Vector2(min);
+    return min;
   }
 
   /**
@@ -67,15 +72,15 @@ public class Rectangle {
    * @return a vector2
    */
   public Vector2 getMax() {
-    return new Vector2(max);
+    return max;
   }
 
   public Vector2 getCenter() {
-    return new Vector2(center);
+    return center;
   }
 
   public Vector2 getSize() {
-    return new Vector2(size);
+    return size;
   }
 
   public float getWidth() {

@@ -28,7 +28,7 @@ public class BossAI implements ILogicComponent {
   private float                shootingTargetTime;
   private boolean              isShooting;
 
-  private final float          speed;
+  private final float             speed;
   private final Stack<Vector2> targets;
 
   public BossAI(IEntity unit, Hand hand,
@@ -45,7 +45,7 @@ public class BossAI implements ILogicComponent {
   }
 
   private void headFor(Vector2 target) {
-    Vector2 delta = target.subtract(body.getMin());
+    Vector2 delta = Vector2.subtract(target, body.getMin());
     float dx = target.x - body.getX1();
     float dy = target.y - body.getY1();
 
@@ -60,21 +60,20 @@ public class BossAI implements ILogicComponent {
   }
 
   private Vector2 newTarget() {
-    Vector2 target = new Vector2();
-    target.x = Locator.getRandom().nextFloat(
-      body.getX1() - 10,
-      body.getX1() + 10);
+    float targetX = Locator.getRandom().nextFloat(
+      body.getX1() - 10, body.getX1() + 10);
+    float targetY = 0;
     if (body.getY1() <= (arenaRect.getHeight() / 2)) {
-      target.y = Locator.getRandom().nextFloat(
+      targetY = Locator.getRandom().nextFloat(
         body.getY1() + 50,
         arenaRect.getMax().y - body.getHeight());
     } else {
-      target.y = Locator.getRandom().nextFloat(
+      targetY = Locator.getRandom().nextFloat(
         arenaRect.getMin().y,
         body.getY1() - 50);
     }
 
-    return target;
+    return new Vector2(targetX, targetY);
   }
 
   @Override

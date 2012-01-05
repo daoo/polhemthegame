@@ -34,7 +34,8 @@ public class WeaponFactory {
       throws DataException, ParserException, IOException {
     WeaponData data = weapons.getWeapon(name);
 
-    Vector2 muzzleOffset = new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
+    Vector2 muzzleOffset =
+      new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
     ProjectileData projectileData = projectiles.getProjectile(data.projectile);
     RSheet anim = CacheTool.getRSheet(Locator.getCache(), data.sprite);

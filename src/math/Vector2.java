@@ -4,119 +4,159 @@
 
 package math;
 
+/**
+ * Immutable mathematical 2D vector.
+ */
 public class Vector2 {
-  public static final Vector2 ZERO = new Vector2(0, 0);
+  private Vector2 normalized;
 
-  public float x, y;
+  /**
+   * X and Y components of the vector.
+   */
+  public final float x, y;
 
-  private float sq(float a) {
-    return a * a;
-  }
+  /**
+   * Normalized X and Y components of the vector.
+   */
+  public final float normalX, normalY;
 
-  public Vector2() {
-    x = 0;
-    y = 0;
-  }
+  /**
+   * The magnitude of the vector (also as it's square).
+   */
+  public final float magnitude, magnitudeSquared;
 
+  /**
+   * Construct a new vector from two floats, X and Y.
+   * @param x the X component
+   * @param y the Y component
+   */
   public Vector2(float x, float y) {
     this.x = x;
     this.y = y;
-  }
 
-  public Vector2(Vector2 v) {
-    x = v.x;
-    y = v.y;
-  }
+    this.magnitudeSquared = sq(x) + sq(y);
+    this.magnitude = (float) Math.sqrt(magnitudeSquared);
 
-  public float theta() {
-    if (x != 0) {
-      return (float) Math.atan(y / x);
+    if (magnitude > 0) {
+      normalX = x / magnitude;
+      normalY = y / magnitude;
+    } else {
+      normalX = 0;
+      normalY = 0;
     }
-
-    return (float) (Math.PI / 2.0f);
   }
 
-  public float magnitude() {
-    return (float) Math.sqrt(magnitudeSquared());
-  }
-
-  public float magnitudeSquared() {
-    return (x * x) + (y * y);
-  }
-
+  /**
+   * Calculate the dot product between this vector and another vector.
+   * @param v the second vector
+   * @return the dot product as a float
+   */
   public float dot(Vector2 v) {
     return (x * v.x) + (y * v.y);
   }
 
+  /**
+   * Calculates the "distance" between two vectors. The vectors are regarded
+   * using a shared start point. The distance is then the magnitude of the
+   * vector (a - b).
+   * @param v the second vector
+   * @return the distance as a float, greater than or equal to zero
+   */
   public float distance(Vector2 v) {
     return (float) Math.sqrt(distanceSquared(v));
   }
 
+  /**
+   * Calculates the squared distance between two vectors.
+   * @see #Vector2.distance(Vector2 v)
+   * @param v the second vector
+   * @return the squared distance as a float, greater than or equal to zero
+   */
   public float distanceSquared(Vector2 v) {
     return sq(v.x - x) + sq(v.y - y);
   }
 
-  public void normalizeSelf() {
-    float mag2 = magnitudeSquared();
-    if (mag2 != 0) {
-      float mag = (float) Math.sqrt(mag2);
-      x /= mag;
-      y /= mag;
-    }
-  }
-
+  /**
+   * Return a normalization of this vector.
+   * @return a normalized vector
+   */
   public Vector2 normalize() {
-    float mag2 = magnitudeSquared();
-    if (mag2 != 0) {
-      float mag = (float) Math.sqrt(mag2);
-      return new Vector2(x / mag, y / mag);
+    if (normalized == null) {
+      normalized = new Vector2(normalX, normalY);
     }
 
-    return new Vector2(x, y);
+    return normalized;
   }
 
-  public Vector2 add(Vector2 v) {
-    return new Vector2(x + v.x, y + v.y);
-  }
-
-  public Vector2 add(float x2, float y2) {
-    return new Vector2(x + x2, y + y2);
-  }
-
-  public void addSelf(Vector2 v) {
-    x += v.x;
-    y += v.y;
-  }
-
-  public void addSelf(float x2, float y2) {
-    x += x2;
-    y += y2;
-  }
-
-  public Vector2 subtract(Vector2 v) {
-    return new Vector2(x - v.x, y - v.y);
-  }
-
-  public Vector2 multiply(float scalar) {
-    return new Vector2(x * scalar, y * scalar);
-  }
-
-  public Vector2 divide(float scalar) {
-    return new Vector2(x / scalar, y / scalar);
-  }
-
-  public void set(float x, float y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  public void set(Vector2 v) {
-    x = v.x;
-    y = v.y;
-  }
-
+  /**
+   * Return a string representation of the vector.
+   * Format: "(x, y)"
+   * @return a string
+   */
   @Override
   public String toString() {
     return "(" + x + ", " + y + ")";
+  }
+
+  /**
+   * Square a float.
+   * @param a the float
+   * @return the square (a * a)
+   */
+  private float sq(float a) {
+    return a * a;
+  }
+
+  /**
+   * Add two vectors.
+   * @param a the first vector
+   * @param b the second vector
+   * @return a new vector
+   */
+  public static Vector2 add(Vector2 a, Vector2 b) {
+    return new Vector2(a.x + b.x, a.y + b.y);
+  }
+
+  /**
+   * Add two vectors. Where the second is just X and Y components.
+   * @param a the first vector
+   * @param bx the X component of the second vector
+   * @param by the Y component of the second vector
+   * @return a new vector
+   */
+  public static Vector2 add(Vector2 a, float bx, float by) {
+    return new Vector2(a.x + bx, a.y + by);
+  }
+
+  /**
+   * Subtract a vector from another vector.
+   * The resulting vector is a vector "from b to a".
+   * Note that this operation is not commutative.
+   * @param a the first vector
+   * @param b the second vector
+   * @return a new vector
+   */
+  public static Vector2 subtract(Vector2 a, Vector2 b) {
+    return new Vector2(a.x - b.x, a.y - b.y);
+  }
+
+  /**
+   * Multiply a vector with a scalar.
+   * @param a the vector
+   * @param scalar the scalar
+   * @return a new vector
+   */
+  public static Vector2 multiply(Vector2 a, float scalar) {
+    return new Vector2(a.x * scalar, a.y * scalar);
+  }
+
+  /**
+   * Divide a vector with a scalar.
+   * @param a the vector
+   * @param scalar the scalar
+   * @return a new vector
+   */
+  public static Vector2 divide(Vector2 a, float scalar) {
+    return new Vector2(a.x / scalar, a.y / scalar);
   }
 }
