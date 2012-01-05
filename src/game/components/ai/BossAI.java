@@ -8,55 +8,34 @@ import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
+import game.components.physics.Movement;
 import game.entities.IEntity;
 import game.pods.GameTime;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
 import main.Locator;
-import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
 
 public class BossAI implements ILogicComponent {
-  private final Rectangle      body;
-  private final IEntity        unit;
-  private final Hand           hand;
-  private final Rectangle      arenaRect;
+  private final IEntity entity;
+  private final Rectangle body;
+  private final Movement movement;
+  private final Hand hand;
+  private final Rectangle arenaRect;
 
-  private float                shootingStartTime;
-  private float                shootingTargetTime;
-  private boolean              isShooting;
+  private final float speed;
 
-  private final float             speed;
-  private final Stack<Vector2> targets;
+  private IBossState state;
 
-  public BossAI(IEntity unit, Hand hand,
-                Rectangle consts, Rectangle body, float speed) {
-    arenaRect = consts;
-    this.hand = hand;
-    this.body = body;
-    this.speed = speed;
-    this.unit = unit;
-
-    isShooting = false;
-
-    targets = new Stack<>();
-  }
-
-  private void headFor(Vector2 target) {
-    Vector2 delta = Vector2.subtract(target, body.getMin());
-    float dx = target.x - body.getX1();
-    float dy = target.y - body.getY1();
-
-    float timeX = Math.abs(dx / speed);
-    float timeY = Math.abs(dy / speed);
-
-    // body.setVelocity(Vector2.ZERO);
-    if ((timeX > 0) || (timeY > 0)) {
-      float max = Math.max(timeX, timeY);
-      // body.setVelocity(delta.divide(max));
-    }
+  public BossAI(IEntity entity, Movement movement, Hand hand, Rectangle arenaRect, float speed) {
+    this.entity    = entity;
+    this.hand      = hand;
+    this.movement  = movement;
+    this.body      = entity.getBody();
+    this.arenaRect = arenaRect;
+    this.speed     = speed;
   }
 
   private Vector2 newTarget() {
@@ -78,35 +57,26 @@ public class BossAI implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if (isShooting) {
-      if ((time.elapsed - shootingStartTime) >= shootingTargetTime) {
-        // We're done here, stop shooting and start walking
-        isShooting = false;
+    if (state.isFinished()) {
+      // Go to next state
 
-        unit.sendMessage(Message.START_ANIMATION, null);
-        targets.push(newTarget());
-        headFor(targets.peek());
-      }
-    } else {
-      if (targets.empty()) {
-        // Add more targets
-        targets.push(newTarget());
-        headFor(targets.peek());
-      } else if (ExMath.inRange(Vector2.distance(targets.peek(), body.getMin()), -10, 10)) {
-        // Target reached
-        targets.pop();
-        if (targets.empty()) {
-          // No more targets, start shooting
-          unit.sendMessage(Message.STOP_ANIMATION, null);
-          hand.stopUse();
-          isShooting = true;
-          shootingStartTime = time.elapsed;
-          shootingTargetTime = Locator.getRandom().nextFloat(1.0f, 5.0f);
-        } else {
-          headFor(targets.peek());
+      if (state.getNextState() == BossState.WALKING) {
+        LinkedList<Vector2> targets = new LinkedList<>();
+        // FIXME: Magic numbers
+        for (int i = 0; i < 2; ++i) {
+          targets.add(newTarget());
         }
+
+        state = new Walking(entity, hand, speed, movement, targets);
+      } else if (state.getNextState() == BossState.SHOOTING) {
+        state = new Shooting(entity, hand,
+          Locator.getRandom().nextFloat(1.0f, 5.0f));
       }
+
+      state.start(time);
     }
+
+    state.update(time);
   }
 
   @Override
@@ -116,6 +86,6 @@ public class BossAI implements ILogicComponent {
 
   @Override
   public ComponentType getComponentType() {
-    throw new UnsupportedOperationException("Not implemented");
+    return ComponentType.BOSS_AI;
   }
 }
