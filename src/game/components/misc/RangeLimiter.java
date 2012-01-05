@@ -10,6 +10,7 @@ import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
 import game.pods.TimePos;
+import math.Vector2;
 
 public class RangeLimiter implements ILogicComponent {
   private final IEntity owner;
@@ -31,7 +32,7 @@ public class RangeLimiter implements ILogicComponent {
     if ((time.elapsed - start.time) > duration) {
       owner.sendMessage(Message.KILL, null);
     }
-    if (owner.getBody().getMin().distance(start.pos) > range) {
+    if (Vector2.distance(owner.getBody().getMin(), start.pos) > range) {
       owner.sendMessage(Message.KILL, null);
     }
   }

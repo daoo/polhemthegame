@@ -4,6 +4,8 @@
 
 package math;
 
+// TODO: Remove dead code
+
 public class ExMath {
   public static final float PI      = (float) Math.PI;
   public static final float PI_HALF = ExMath.PI / 2.0f;
@@ -27,7 +29,18 @@ public class ExMath {
     return min;
   }
 
+  /**
+   * Check if a float is with in a range (inclusive).
+   * The interval must be a proper interval, that is a must be strictly smaller
+   * than b.
+   * @param v the float to check
+   * @param a the lower end of the interval
+   * @param b the higher end of the interval
+   * @return true or false
+   */
   public static boolean inRange(float v, float a, float b) {
+    assert a < b;
+
     return (v >= a) && (v <= b);
   }
 

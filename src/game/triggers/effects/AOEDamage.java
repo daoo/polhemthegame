@@ -11,6 +11,7 @@ import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 import math.Rectangle;
+import math.Vector2;
 
 /**
  * Inflict damage in an circle around a position when executed.
@@ -36,7 +37,7 @@ public class AOEDamage implements IEffect {
   @Override
   public void execute(GameTime time, World world) {
     for (IEntity e : world.getUnits()) {
-      if (e.getBody().getCenter().distance(body.getCenter()) < range) {
+      if (Vector2.distance(e.getBody().getCenter(), body.getCenter()) < range) {
         e.sendMessage(Message.DAMAGE, damage);
       }
     }

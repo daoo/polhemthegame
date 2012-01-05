@@ -92,7 +92,7 @@ public class BossAI implements ILogicComponent {
         // Add more targets
         targets.push(newTarget());
         headFor(targets.peek());
-      } else if (ExMath.inRange(targets.peek().distance(body.getMin()), -10, 10)) {
+      } else if (ExMath.inRange(Vector2.distance(targets.peek(), body.getMin()), -10, 10)) {
         // Target reached
         targets.pop();
         if (targets.empty()) {
@@ -107,10 +107,6 @@ public class BossAI implements ILogicComponent {
         }
       }
     }
-  }
-
-  public void addTarget(Vector2 target) {
-    targets.push(target);
   }
 
   @Override

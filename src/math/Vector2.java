@@ -47,36 +47,6 @@ public class Vector2 {
   }
 
   /**
-   * Calculate the dot product between this vector and another vector.
-   * @param v the second vector
-   * @return the dot product as a float
-   */
-  public float dot(Vector2 v) {
-    return (x * v.x) + (y * v.y);
-  }
-
-  /**
-   * Calculates the "distance" between two vectors. The vectors are regarded
-   * using a shared start point. The distance is then the magnitude of the
-   * vector (a - b).
-   * @param v the second vector
-   * @return the distance as a float, greater than or equal to zero
-   */
-  public float distance(Vector2 v) {
-    return (float) Math.sqrt(distanceSquared(v));
-  }
-
-  /**
-   * Calculates the squared distance between two vectors.
-   * @see #Vector2.distance(Vector2 v)
-   * @param v the second vector
-   * @return the squared distance as a float, greater than or equal to zero
-   */
-  public float distanceSquared(Vector2 v) {
-    return sq(v.x - x) + sq(v.y - y);
-  }
-
-  /**
    * Return a normalization of this vector.
    * @return a normalized vector
    */
@@ -103,8 +73,41 @@ public class Vector2 {
    * @param a the float
    * @return the square (a * a)
    */
-  private float sq(float a) {
+  private static float sq(float a) {
     return a * a;
+  }
+
+  /**
+   * Calculate the dot product between two vectors.
+   * @param a the first vector
+   * @param b the second vector
+   * @return the dot product as a float
+   */
+  public static float dot(Vector2 a, Vector2 b) {
+    return (a.x * b.x) + (a.y * b.y);
+  }
+
+  /**
+   * Calculates the "distance" between two vectors. The vectors are regarded
+   * using a shared start point. The distance is then the magnitude of the
+   * vector (a - b).
+   * @param a the first vector
+   * @param b the second vector
+   * @return the distance as a float, greater than or equal to zero
+   */
+  public static float distance(Vector2 a, Vector2 b) {
+    return (float) Math.sqrt(Vector2.distanceSquared(a, b));
+  }
+
+  /**
+   * Calculates the squared distance between two vectors.
+   * @see #Vector2.distance(Vector2 a, Vector2 b)
+   * @param a the first vector
+   * @param b the second vector
+   * @return the squared distance as a float, greater than or equal to zero
+   */
+  public static float distanceSquared(Vector2 a, Vector2 b) {
+    return sq(a.x - b.x) + sq(a.y - b.y);
   }
 
   /**
