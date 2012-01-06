@@ -12,6 +12,8 @@ public class FileBeacon {
   private File fDataDir;
 
   public FileBeacon(File dir) throws FileNotFoundException {
+    assert dir != null;
+
     if (!dir.exists()) {
       throw new FileNotFoundException(dir.getAbsolutePath());
     }
@@ -23,6 +25,8 @@ public class FileBeacon {
   }
 
   public InputStream getReader(String id) throws FileNotFoundException {
+    assert id != null;
+
     File f = new File(fDataDir, id);
     if (f.exists()) {
       // Read file from directory

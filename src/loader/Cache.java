@@ -20,6 +20,8 @@ public class Cache implements ICache {
 
   private Closeable readAndParse(String id, IParser parser)
     throws IOException, ParserException {
+    assert id != null;
+    assert parser != null;
 
     Closeable result = null;
     try (InputStream is = beacon.getReader(id)) {
@@ -32,6 +34,8 @@ public class Cache implements ICache {
   }
 
   public Cache(File rootDir) throws FileNotFoundException {
+    assert rootDir != null;
+
     beacon = new FileBeacon(rootDir);
     cache = new HashMap<>();
   }
@@ -47,6 +51,8 @@ public class Cache implements ICache {
 
   @Override
   public void delete(String id) throws IOException {
+    assert id != null;
+
     cache.get(id).close();
     cache.remove(id);
   }
@@ -54,6 +60,9 @@ public class Cache implements ICache {
   @Override
   public Closeable getCold(String id, IParser parser)
     throws IOException, ParserException {
+    assert id != null;
+    assert parser != null;
+
     Closeable data;
     if (cache.containsKey(id)) {
       data = cache.get(id).getData();
@@ -67,6 +76,8 @@ public class Cache implements ICache {
 
   @Override
   public Closeable getWarm(String id) throws ObjectNotInCacheException {
+    assert id != null;
+
     CacheItem c = cache.get(id);
     if (c != null) {
       return c.getData();

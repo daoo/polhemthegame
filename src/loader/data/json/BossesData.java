@@ -15,6 +15,7 @@ public class BossesData implements Closeable {
     public int    locationX;
     public String weapon;
     public float  fireLength;
+    public Offset handOffset;
   }
 
   public ArrayList<BossData> bosses;
