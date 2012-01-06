@@ -6,11 +6,11 @@ package game.components.holdables.weapons;
 
 import game.components.ComponentType;
 import game.components.Message;
-import game.components.graphics.RSheet;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
 import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
+import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.pods.GameTime;
 
@@ -27,7 +27,7 @@ public abstract class Weapon implements IHoldable {
    */
   protected int rounds;
 
-  protected final RSheet anim;
+  protected final IAnimatedComponent anim;
   protected final float reloadTime, cooldownTime;
   protected final int magazineSize;
   protected final Vector2 muzzleOffset;
@@ -40,7 +40,7 @@ public abstract class Weapon implements IHoldable {
   public final LinkedList<ProjectileFactory> projectiles;
 
   public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
-                int magazineSize, float angle, RSheet anim,
+                int magazineSize, float angle, IAnimatedComponent anim,
                 ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.reloadTime   = reloadTime;

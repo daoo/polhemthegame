@@ -107,6 +107,7 @@
   , { name: "ig"
     , automatic: true
     , clipSize: -1
+    , muzzleOffset: { x: 0, y: 0 }
     , reloadTime: -1
     , rpm: 260
     , sprite: null

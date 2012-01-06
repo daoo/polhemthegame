@@ -5,10 +5,11 @@
 package game.factories;
 
 import game.CacheTool;
-import game.components.graphics.RSheet;
+import game.components.graphics.DummyAnimation;
 import game.components.holdables.weapons.AutomaticWeapon;
 import game.components.holdables.weapons.SingleWeapon;
 import game.components.holdables.weapons.Weapon;
+import game.components.interfaces.IAnimatedComponent;
 
 import java.io.IOException;
 
@@ -38,7 +39,13 @@ public class WeaponFactory {
       new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
     ProjectileData projectileData = projectiles.getProjectile(data.projectile);
-    RSheet anim = CacheTool.getRSheet(Locator.getCache(), data.sprite);
+
+    IAnimatedComponent anim = null;
+    if (data.sprite == null) {
+      anim = new DummyAnimation();
+    } else {
+      anim = CacheTool.getRSheet(Locator.getCache(), data.sprite);
+    }
     if (data.automatic) {
       return new AutomaticWeapon(
         muzzleOffset,

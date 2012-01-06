@@ -1,8 +1,8 @@
 { level: "Test"
-, loading: "textures/text/gameover.png"
+, loading: "textures/text/donteventrytogetbackin.png"
 , completed: "textures/text/levelcomplete.png"
-, preBossImage: null
-, boss: null
+, preBossImage: "textures/text/donteventrytogetbackin.png"
+, boss: "bobby"
 , creeps:
   [ { creep: "ester", spawnTime: 0 }
   , { creep: "bracke", spawnTime: 1 }

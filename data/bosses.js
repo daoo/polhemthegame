@@ -1,6 +1,6 @@
 { bosses:
   [ { name: "bobby"
-    , handOffset: [ 0, 0 ]
+    , handOffset: { x: 0, y: 0 }
     , hitbox: { width: 22, height: 50 }
     , hitpoints: 750
     , speed: 100
@@ -20,7 +20,7 @@
     , fireLength: 2.0 }
 
   , { name: "Stefan"
-    , handOffset: [ 0, 0 ]
+    , handOffset: { x: 0, y: 0 }
     , hitbox: { width: 11, height: 30 }
     , hitBoints: 500
     , speed: 100
@@ -40,6 +40,7 @@
     , fireLength: 2.0 }
 
   , { name: "datateknikern"
+    , handOffset: { x: 0, y: 0 }
     , hitbox: { width: 28, height: 50 }
     , hitpoints: 200
     , speed: 100

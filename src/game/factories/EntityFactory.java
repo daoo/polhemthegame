@@ -5,6 +5,7 @@
 package game.factories;
 
 import game.CacheTool;
+import game.components.ai.BossAI;
 import game.components.graphics.RSheet;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
@@ -23,6 +24,7 @@ import game.triggers.effects.SpawnAnimationEffect;
 import java.io.IOException;
 
 import loader.data.DataException;
+import loader.data.json.BossesData.BossData;
 import loader.data.json.CreepsData.CreepData;
 import loader.data.json.PlayersData;
 import loader.data.json.PlayersData.PlayerData;
@@ -30,6 +32,7 @@ import loader.data.json.ShopData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
+import math.Vector2;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -140,6 +143,42 @@ public class EntityFactory {
     Locator.getUI().addDynamic(infoBar);
 
     Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
+
+    return e;
+  }
+
+  public Entity makeBoss(BossData data)
+      throws DataException, ParserException, IOException {
+    int middleY = (int) (rect.getCenter().y - data.hitbox.height / 2);
+
+    Vector2 initialTarget = new Vector2(
+      rect.getX1() - data.hitbox.width - data.locationX,
+      middleY
+    );
+
+    Entity e = new Entity(
+      rect.getX1(), middleY,
+      data.hitbox.width, data.hitbox.height,
+      EntityType.BOSS
+    );
+
+    Movement mov  = new Movement(e, 0, 0);
+    Life life     = new Life(e, data.hitpoints);
+    Hand hand     = new Hand(e, data.handOffset.x, data.handOffset.y);
+    Weapon weapon = weaponFactory.makeWeapon(data.weapon);
+    BossAI ai     = new BossAI(e, mov, hand, rect, data.speed, initialTarget);
+
+    e.addLogicComponent(life);
+    e.addLogicComponent(mov);
+    e.addLogicComponent(ai);
+    e.addRenderComponent(hand);
+
+    hand.grab(weapon);
+
+    InfoBar infoBar = new InfoBar(e,
+      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
+    infoBar.add(new Bar(life, Color.green, Color.red));
+    Locator.getUI().addDynamic(infoBar);
 
     return e;
   }

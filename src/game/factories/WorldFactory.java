@@ -11,6 +11,7 @@ import game.entities.IEntity;
 import game.entities.InvisibleRectangle;
 import game.events.impl.DamageEntitiesEvent;
 import game.events.impl.RemoveEvent;
+import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
@@ -25,6 +26,7 @@ import game.world.World;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import loader.ICache;
@@ -44,7 +46,7 @@ import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;
-  private static final float TRIGGER_DELAY = 1.0f;
+  private static final float TRIGGER_DELAY = 2.0f;
 
   private static final String GAME_OVER_IMAGE = "textures/text/gameover.png";
 
@@ -173,11 +175,33 @@ public class WorldFactory {
       new AddTriggersEffect(creepsDeadTrigger)
     ));
 
-    creepsDeadTrigger.addAllEffects(Arrays.asList(
+    Collection<? extends IEffect> levelCompleteEffects = Arrays.asList(
       new SetForegroundEffect(Locator.getUI(), imgLevelComplete),
       new ExecuteWithDelayEffect(
         TRIGGER_DELAY, new LevelCompleteEffect(gameMode))
-    ));
+    );
+
+    if (level.boss == null) {
+      // No boss, level complete after all creeps dead
+      creepsDeadTrigger.addAllEffects(levelCompleteEffects);
+    } else {
+      Image imgBoss = CacheTool.getImage(cache, level.preBossImage);
+
+      Entity boss = entityFactory.makeBoss(CacheTool.getBoss(cache, level.boss));
+
+      Trigger bossDeadTrigger = new Trigger(false);
+      bossDeadTrigger.addCondition(new AllInactiveCondition(boss));
+      bossDeadTrigger.addAllEffects(levelCompleteEffects);
+
+      creepsDeadTrigger.addAllEffects(Arrays.asList(
+        new SetForegroundEffect(Locator.getUI(), imgBoss),
+        new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
+          new SetForegroundEffect(Locator.getUI(), null),
+          new SpawnWithSend(boss, null, null),
+          new AddTriggersEffect(bossDeadTrigger)
+        ))
+      ));
+    }
 
     playersDeadTrigger.addAllEffects(Arrays.asList(
       new SetForegroundEffect(Locator.getUI(), imgGameOver),

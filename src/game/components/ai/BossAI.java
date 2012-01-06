@@ -29,13 +29,22 @@ public class BossAI implements ILogicComponent {
 
   private IBossState state;
 
-  public BossAI(IEntity entity, Movement movement, Hand hand, Rectangle arenaRect, float speed) {
+  public BossAI(IEntity entity, Movement movement, Hand hand,
+                Rectangle arenaRect, float speed, Vector2 initialTarget) {
     this.entity    = entity;
     this.hand      = hand;
     this.movement  = movement;
     this.body      = entity.getBody();
     this.arenaRect = arenaRect;
     this.speed     = speed;
+
+    LinkedList<Vector2> targets = new LinkedList<>();
+    targets.add(initialTarget);
+    // FIXME: Magic numbers
+    for (int i = 0; i < 2; ++i) {
+      targets.add(newTarget());
+    }
+    state = new Walking(entity, hand, speed, movement, targets);
   }
 
   private Vector2 newTarget() {
@@ -43,7 +52,7 @@ public class BossAI implements ILogicComponent {
     float targetX = Locator.getRandom().nextFloat(
       body.getX1() - 10, body.getX1() + 10);
     float targetY = 0;
-    if (body.getY1() <= arenaRect.getCenter().y) {
+    if (body.getY1() <= (arenaRect.getCenter().y)) {
       targetY = Locator.getRandom().nextFloat(
         body.getY1() + 50,
         arenaRect.getMax().y - body.getHeight());
