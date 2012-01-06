@@ -7,7 +7,6 @@ package game.entities;
 import java.util.List;
 
 import math.Rectangle;
-import math.Vector2;
 
 public class Players {
   private static final float STARING_X = 0.1f;
@@ -27,7 +26,7 @@ public class Players {
     float y = rect.getY1() + dy;
 
     for (IEntity p : players) {
-      p.getBody().setPosition(new Vector2(x, y - p.getBody().getHeight() / 2.0f));
+      p.getBody().setPosition(x, y - p.getBody().getHeight() / 2.0f);
 
       x += dx;
       y += dy;

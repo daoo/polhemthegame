@@ -39,9 +39,10 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
-  private static final int BAR_HEIGHT   = 2;
-  private static final int BAR_OFFSET_X = 0;
-  private static final int BAR_OFFSET_Y = -6;
+  private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+  private static final int BAR_HEIGHT    = 2;
+  private static final int BAR_OFFSET_X  = 0;
+  private static final int BAR_OFFSET_Y  = -6;
 
   private final Rectangle rect;
   private final Graphics statics;
@@ -91,8 +92,6 @@ public class EntityFactory {
 
     return e;
   }
-
-  private static Color TRANSPARENT = new Color(0, 0, 0, 0);
 
   public Entity makePlayer(int index)
       throws ParserException, DataException, IOException {

@@ -118,8 +118,8 @@ public class UI implements IUI {
     foreground = image;
 
     if (image != null) {
-      imgX = width / 2 - image.getWidth() / 2;
-      imgY = height / 2 - image.getHeight() / 2;
+      imgX = (width - image.getWidth()) / 2;
+      imgY = (height - image.getHeight()) / 2;
     }
   }
 }

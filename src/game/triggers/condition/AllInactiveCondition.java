@@ -4,21 +4,27 @@
 
 package game.triggers.condition;
 
-import game.entities.Entity;
+import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.ICondition;
 import game.world.World;
 
-public class AllInactiveCondition implements ICondition {
-  private final Iterable<Entity> entities;
+import java.util.Arrays;
 
-  public AllInactiveCondition(Iterable<Entity> entities) {
+public class AllInactiveCondition implements ICondition {
+  private final Iterable<? extends IEntity> entities;
+
+  public AllInactiveCondition(Iterable<? extends IEntity> entities) {
     this.entities = entities;
+  }
+
+  public AllInactiveCondition(IEntity entity) {
+    this(Arrays.asList(entity));
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
-    for (Entity entity : entities) {
+    for (IEntity entity : entities) {
       if (entity.isActive()) {
         return false;
       }

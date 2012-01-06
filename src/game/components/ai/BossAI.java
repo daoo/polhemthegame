@@ -39,10 +39,11 @@ public class BossAI implements ILogicComponent {
   }
 
   private Vector2 newTarget() {
+    // FIXME: Magic numbers
     float targetX = Locator.getRandom().nextFloat(
       body.getX1() - 10, body.getX1() + 10);
     float targetY = 0;
-    if (body.getY1() <= (arenaRect.getHeight() / 2)) {
+    if (body.getY1() <= arenaRect.getCenter().y) {
       targetY = Locator.getRandom().nextFloat(
         body.getY1() + 50,
         arenaRect.getMax().y - body.getHeight());

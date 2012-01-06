@@ -103,7 +103,7 @@ public class StateCredits implements IState {
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-      speed += 50;
+      speed += 50; // FIXME: Magic number
     }
 
     pos_y -= speed * delta;

@@ -30,6 +30,6 @@ public class CreepsData implements Closeable {
 
   @Override
   public void close() throws IOException {
-    // No data neededs clean up
+    // No data needs clean up
   }
 }
