@@ -8,7 +8,7 @@ package math;
  * Immutable mathematical 2D vector.
  */
 public class Vector2 {
-  private Vector2 normalized;
+  public static final Vector2 ZERO = new Vector2(0, 0);
 
   /**
    * X and Y components of the vector.
@@ -16,14 +16,14 @@ public class Vector2 {
   public final float x, y;
 
   /**
-   * Normalized X and Y components of the vector.
-   */
-  public final float normalX, normalY;
-
-  /**
    * The magnitude of the vector (also as it's square).
    */
-  public final float magnitude, magnitudeSquared;
+  private float magnitude, magnitudeSquared;
+
+  /**
+   * Normalized version of the vector.
+   */
+  private Vector2 normalized;
 
   /**
    * Construct a new vector from two floats, X and Y.
@@ -34,25 +34,43 @@ public class Vector2 {
     this.x = x;
     this.y = y;
 
-    this.magnitudeSquared = sq(x) + sq(y);
-    this.magnitude = (float) Math.sqrt(magnitudeSquared);
+    this.magnitudeSquared = -1;
+    this.magnitude        = -1;
 
-    if (magnitude > 0) {
-      normalX = x / magnitude;
-      normalY = y / magnitude;
-    } else {
-      normalX = 0;
-      normalY = 0;
-    }
+    this.normalized = null;
+  }
+
+  /**
+   * Return the magnitude of the vector.
+   * @return the magnitude, greater than or equal to zero
+   */
+  public float magnitude() {
+    if (magnitude == -1)
+      magnitude = (float) Math.sqrt(magnitudeSquared());
+
+    return magnitude;
+  }
+
+  /**
+   * Return the squared magnitude of the vector.
+   * @return the squared magnitude, greater than or equal to zero
+   */
+  public float magnitudeSquared() {
+    if (magnitudeSquared == -1)
+      magnitudeSquared = sq(x) + sq(y);
+
+    return magnitudeSquared;
   }
 
   /**
    * Return a normalization of this vector.
+   * If the magnitude is zero
    * @return a normalized vector
+   * @throws ArithmeticException when the magnitude of the vector is zero
    */
   public Vector2 normalize() {
     if (normalized == null) {
-      normalized = new Vector2(normalX, normalY);
+      normalized = new Vector2(x / magnitude, y / magnitude);
     }
 
     return normalized;
