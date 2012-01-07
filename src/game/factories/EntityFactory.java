@@ -47,7 +47,7 @@ public class EntityFactory {
   private static final int BAR_OFFSET_X  = 0;
   private static final int BAR_OFFSET_Y  = -6;
 
-  private final Rectangle rect;
+  private final Rectangle worldRect;
   private final Graphics statics;
 
   private final WeaponFactory weaponFactory;
@@ -56,7 +56,7 @@ public class EntityFactory {
 
   public EntityFactory(Rectangle worldRect, Graphics statics)
       throws ParserException, IOException {
-    this.rect = worldRect;
+    this.worldRect = worldRect;
     this.statics = statics;
 
     Rectangle bigRect = new Rectangle(
@@ -115,7 +115,7 @@ public class EntityFactory {
 
     // Create components
     Movement mov               = new Movement(e, 0, 0);
-    MovementConstraint movCons = new MovementConstraint(e, rect);
+    MovementConstraint movCons = new MovementConstraint(e, worldRect);
     Life life                  = new Life(e, data.hitpoints);
     Hand hand                  = new Hand(e, data.handOffset.x, data.handOffset.y);
     Shop shop                  = new Shop(shopData, weaponFactory);
@@ -153,15 +153,15 @@ public class EntityFactory {
 
   public Entity makeBoss(BossData data)
       throws DataException, ParserException, IOException {
-    int middleY = (int) (rect.getCenter().y - data.hitbox.height / 2);
+    int middleY = (int) (worldRect.getCenter().y - data.hitbox.height / 2);
 
     Vector2 initialTarget = new Vector2(
-      rect.getX1() - data.hitbox.width - data.locationX,
+      worldRect.getX1() - data.hitbox.width - data.locationX,
       middleY
     );
 
     Entity e = new Entity(
-      rect.getX1(), middleY,
+      worldRect.getX1(), middleY,
       data.hitbox.width, data.hitbox.height,
       EntityType.BOSS
     );
@@ -170,7 +170,7 @@ public class EntityFactory {
     Life life     = new Life(e, data.hitpoints);
     Hand hand     = new Hand(e, data.handOffset.x, data.handOffset.y);
     Weapon weapon = weaponFactory.makeWeapon(data.weapon);
-    BossAI ai     = new BossAI(e, mov, hand, rect, data.speed, initialTarget);
+    BossAI ai     = new BossAI(e, mov, hand, worldRect, data.speed, initialTarget);
 
     e.addLogicComponent(life);
     e.addLogicComponent(mov);
