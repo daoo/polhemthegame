@@ -21,7 +21,7 @@ public class OutOfBounds implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if (bounds.isContaining(owner.getBody())) {
+    if (!bounds.isContaining(owner.getBody())) {
       owner.remove();
     }
   }
