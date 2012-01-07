@@ -15,7 +15,7 @@
         , offset: { x: 0, y: 0 }
         , sprite: "textures/bosses/bobby-death.png"
         , tileSize: { width: 200, height: 200 } } ]
-    , locationX: -200
+    , locationX: 200
     , weapon: "ig"
     , fireLength: 2.0 }
 
@@ -35,7 +35,7 @@
         , offset: { x: 0, y: 0 }
         , sprite: "textures/bosses/stefan-death.png"
         , tileSize: { width: 11, height: 30 } } ]
-    , locationX: -100
+    , locationX: 100
     , weapon: "socialism"
     , fireLength: 2.0 }
 
@@ -55,6 +55,6 @@
         , offset: { x: 0, y: 0 }
         , sprite: "textures/bosses/wheelchairguy-death.png"
         , tileSize: { width: 100, height: 100 } } ]
-    , locationX: -100
+    , locationX: 100
     , weapon: "mouse"
     , fireLength: 2.0 } ] }

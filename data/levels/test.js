@@ -7,5 +7,6 @@
   [ { creep: "ester", spawnTime: 0 }
   , { creep: "bracke", spawnTime: 1 }
   , { creep: "ytc", spawnTime: 2 }
+  , { creep: "ytc", spawnTime: 500 }
   , { creep: "gtg", spawnTime: 3 } ] }
 
