@@ -4,7 +4,6 @@
 
 package game.components.ai;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
@@ -92,10 +91,5 @@ public class BossAI implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.BOSS_AI;
   }
 }

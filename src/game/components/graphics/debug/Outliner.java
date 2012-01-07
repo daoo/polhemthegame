@@ -4,7 +4,6 @@
 
 package game.components.graphics.debug;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.components.physics.Movement;
@@ -32,11 +31,6 @@ public class Outliner implements IRenderComponent {
 
     this.outlineNext = outlineNext;
     this.linesToNext = lineToNext;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAPHIC;
   }
 
   @Override

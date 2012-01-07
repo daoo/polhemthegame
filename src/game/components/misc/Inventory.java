@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
@@ -40,11 +39,6 @@ public class Inventory implements ILogicComponent {
     assert w != null;
 
     weapons.add(w);
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.INVENTORY;
   }
 
   public int getKills() {

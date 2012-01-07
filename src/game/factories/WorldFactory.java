@@ -6,16 +6,15 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.Message;
+import game.components.misc.KillCreep;
 import game.entities.Entity;
 import game.entities.IEntity;
-import game.entities.InvisibleRectangle;
-import game.events.impl.DamageEntitiesEvent;
-import game.events.impl.RemoveEvent;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
 import game.triggers.effects.AddTriggersEffect;
+import game.triggers.effects.DamageEntitiesEffect;
 import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
@@ -73,47 +72,6 @@ public class WorldFactory {
     this.players       = players;
   }
 
-  /**
-   * Adds two basic rectangles to the world. rectBig, the rectangle that kills
-   * anything that goes to far away from the visible area (to save memory).
-   * rectCreep kills creeps and deals damage to the players when the creeps have
-   * reached their goal.
-   */
-  private void addRectangles() {
-    /**
-     * The layout of rectangles:
-     * |---------------------------------|
-     * | rectBig                         |
-     * |                                 |
-     * |                                 |
-     * |-----------|-----------|         |
-     * | rectCreep | rectWorld |         |
-     * |-----------|-----------|         |
-     * |                                 |
-     * |                                 |
-     * |                                 |
-     * |---------------------------------|
-     */
-
-    InvisibleRectangle rectBig = new InvisibleRectangle(
-      -1 * rect.getWidth(), -1 * rect.getHeight(),
-       3 * rect.getWidth(),  3 * rect.getHeight()
-    );
-
-    InvisibleRectangle rectCreepKiller = new InvisibleRectangle(
-      -rect.getWidth(), rect.getY1(),
-       rect.getWidth(), rect.getHeight()
-    );
-
-    rectBig.onNotContainsEvent.add(new RemoveEvent());
-    rectCreepKiller.onContainsEvent.add(new RemoveEvent());
-    rectCreepKiller.onContainsEvent.add(
-      new DamageEntitiesEvent(players, PLAYER_DAMAGE));
-
-    world.addLast(rectBig);
-    world.addLast(rectCreepKiller);
-  }
-
   private void setupCreeps(List<CreepSpawnData> spawnsData)
       throws DataException, ParserException, IOException {
     assert spawnsData != null;
@@ -134,6 +92,10 @@ public class WorldFactory {
       Entity creep = entityFactory.makeCreep(x, y, (float) -Math.PI, creepData);
       creeps.add(creep);
 
+      creep.addLogicComponent(
+        new KillCreep(creep, (int) rect.getX1(),
+          new DamageEntitiesEffect(players, PLAYER_DAMAGE)));
+
       // Add trigger
       creepsSpawnTrigger.addEffect(
         new ExecuteWithDelayEffect(spawnData.spawnTime,
@@ -152,8 +114,6 @@ public class WorldFactory {
     Image imgGameOver      = CacheTool.getImage(cache, GAME_OVER_IMAGE);
 
     world = new World();
-
-    addRectangles();
 
     levelStartTrigger  = new Trigger(false);
     creepsSpawnTrigger = new Trigger(false);

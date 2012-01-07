@@ -4,7 +4,6 @@
 
 package game.components.physics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.pods.GameTime;
@@ -28,10 +27,5 @@ public class Gravity implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAVITY;
   }
 }

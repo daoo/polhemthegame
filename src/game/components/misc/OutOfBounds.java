@@ -2,27 +2,28 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.physics;
+package game.components.misc;
 
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.pods.GameTime;
-import math.CollisionHelper;
 import math.Rectangle;
 
-public class MovementConstraint implements ILogicComponent {
+public class OutOfBounds implements ILogicComponent {
   private final IEntity owner;
-  private final Rectangle constraints;
+  private final Rectangle bounds;
 
-  public MovementConstraint(IEntity owner, Rectangle constraints) {
-    this.owner       = owner;
-    this.constraints = constraints;
+  public OutOfBounds(IEntity owner, Rectangle bounds) {
+    this.owner = owner;
+    this.bounds = bounds;
   }
 
   @Override
   public void update(GameTime time) {
-    CollisionHelper.blockFromExiting(owner.getBody(), constraints);
+    if (bounds.isContaining(owner.getBody())) {
+      owner.remove();
+    }
   }
 
   @Override

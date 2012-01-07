@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
@@ -47,10 +46,5 @@ public class AfterAnimation implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.EFFECT_ON_ANIMATION_FRAME;
   }
 }

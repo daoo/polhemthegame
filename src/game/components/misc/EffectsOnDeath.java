@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
@@ -43,10 +42,5 @@ public class EffectsOnDeath implements ILogicComponent {
     if (message == Message.KILL) {
       owner.addEffects(effects);
     }
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.ACTION_ON_DEATH;
   }
 }

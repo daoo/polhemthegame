@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -42,10 +41,5 @@ public class RangeLimiter implements ILogicComponent {
     if (message == Message.START_AT) {
       start = (TimePos) args;
     }
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.RANGE_LIMITER;
   }
 }

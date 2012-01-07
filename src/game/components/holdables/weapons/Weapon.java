@@ -4,7 +4,6 @@
 
 package game.components.holdables.weapons;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.states.CoolDownState;
@@ -56,11 +55,6 @@ public abstract class Weapon implements IHoldable {
 
   public float getAngle() {
     return angle;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.WEAPON;
   }
 
   public Vector2 getMuzzleOffset() {

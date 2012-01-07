@@ -20,13 +20,23 @@ import loader.data.json.WeaponsData;
 import loader.data.json.WeaponsData.WeaponData;
 import loader.parser.ParserException;
 import main.Locator;
+import math.Rectangle;
 import math.Vector2;
 
 public class WeaponFactory {
+  private final Rectangle bounds;
   private final WeaponsData weapons;
   private final ProjectilesData projectiles;
 
-  public WeaponFactory() throws ParserException, IOException {
+  /**
+   * Construct a new weapon factory that can make any weapon.
+   * @param bounds the bounds within projectiles can exists
+   * @throws ParserException when parsing file data fails
+   * @throws IOException when reading files fails
+   */
+  public WeaponFactory(Rectangle bounds) throws ParserException, IOException {
+    this.bounds = bounds;
+
     weapons = CacheTool.getWeapons(Locator.getCache());
     projectiles = CacheTool.getProjectiles(Locator.getCache());
   }
@@ -54,7 +64,7 @@ public class WeaponFactory {
         data.clipSize,
         data.launchAngle,
         anim,
-        new ProjectileFactory(projectileData)
+        new ProjectileFactory(bounds, projectileData)
       );
     }
     else {
@@ -65,7 +75,7 @@ public class WeaponFactory {
         data.clipSize,
         data.launchAngle,
         anim,
-        new ProjectileFactory(projectileData)
+        new ProjectileFactory(bounds, projectileData)
       );
     }
   }

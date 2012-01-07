@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -39,10 +38,5 @@ public class ProjectileDamage implements ILogicComponent {
       owner.sendMessage(Message.DAMAGE, damageSelf);
       source.sendMessage(Message.DEALT_DAMAGE, damageOther);
     }
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.PROJECTILE_DAMAGE;
   }
 }

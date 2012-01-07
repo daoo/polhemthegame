@@ -4,7 +4,6 @@
 
 package game.components.graphics.debug;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.entities.IEntity;
@@ -28,11 +27,6 @@ public class LineToOrigin implements IRenderComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.LINE_TO_ORIGIN;
   }
 
   @Override

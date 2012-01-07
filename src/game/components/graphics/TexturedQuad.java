@@ -4,7 +4,6 @@
 
 package game.components.graphics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
@@ -29,11 +28,6 @@ public class TexturedQuad implements IAnimatedComponent {
   @Override
   public IAnimator getAnimator() {
     return ANIMATOR;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAPHIC;
   }
 
   @Override

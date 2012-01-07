@@ -54,12 +54,16 @@ public class EntityFactory {
   private final ShopData shopData;
   private final PlayersData playersData;
 
-  public EntityFactory(Rectangle rect, Graphics statics)
+  public EntityFactory(Rectangle worldRect, Graphics statics)
       throws ParserException, IOException {
-    this.rect = rect;
+    this.rect = worldRect;
     this.statics = statics;
 
-    weaponFactory = new WeaponFactory();
+    Rectangle bigRect = new Rectangle(
+      -worldRect.getWidth(), -worldRect.getHeight(),
+      3 * worldRect.getWidth(), 3 * worldRect.getHeight());
+
+    weaponFactory = new WeaponFactory(bigRect);
     shopData      = CacheTool.getShop(Locator.getCache());
     playersData   = CacheTool.getPlayers(Locator.getCache());
   }

@@ -4,7 +4,6 @@
 
 package game.components.holdables;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
@@ -97,10 +96,5 @@ public class Hand implements IRenderComponent, IProgress {
   @Override
   public float getProgress() {
     return weapon.getProgress();
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.HAND;
   }
 }

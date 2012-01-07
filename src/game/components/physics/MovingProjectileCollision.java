@@ -4,7 +4,6 @@
 
 package game.components.physics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -62,10 +61,5 @@ public class MovingProjectileCollision implements ILogicComponent {
     if (message == Message.KILL) {
       enableCollisions = false;
     }
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.MOVING_COLLISION;
   }
 }

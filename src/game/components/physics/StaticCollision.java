@@ -4,7 +4,6 @@
 
 package game.components.physics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -38,10 +37,5 @@ public class StaticCollision implements ILogicComponent {
     if (message == Message.KILL) {
       enableCollisions = false;
     }
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.STATIC_COLLISION;
   }
 }

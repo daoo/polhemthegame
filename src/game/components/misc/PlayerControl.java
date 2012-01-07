@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
@@ -108,10 +107,5 @@ public class PlayerControl implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.CONTROL;
   }
 }

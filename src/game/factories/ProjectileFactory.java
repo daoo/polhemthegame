@@ -12,6 +12,7 @@ import game.components.graphics.animations.Continuous;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
+import game.components.misc.OutOfBounds;
 import game.components.misc.ProjectileDamage;
 import game.components.misc.RangeLimiter;
 import game.components.physics.Gravity;
@@ -30,19 +31,30 @@ import java.io.IOException;
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
 import main.Locator;
+import math.Rectangle;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SpriteSheet;
 
 public class ProjectileFactory {
+  private final Rectangle rect;
   private final ProjectileData data;
   private final Image img;
   private final SpriteSheet sprite, explosion;
 
-  public ProjectileFactory(ProjectileData data)
+  /**
+   * Construct a new projectile factory for a given projectile.
+   * @param bounds boundary rectangle, the projectiles should die when leaving
+   *               this area
+   * @param data the projectile data
+   * @throws IOException when fetching images from the drive fails
+   * @throws ParserException when fetching images from the drive fails
+   */
+  public ProjectileFactory(Rectangle bounds, ProjectileData data)
       throws IOException, ParserException {
     assert data != null;
 
+    this.rect = bounds;
     this.data = data;
 
     if (data.texture != null) {
@@ -70,14 +82,16 @@ public class ProjectileFactory {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
                           EntityType.PROJECTILE);
 
-    Life life = new Life(e, data.targets);
-
-    RangeLimiter range = new RangeLimiter(e, data.duration, data.range);
+    Life life               = new Life(e, data.targets);
+    RangeLimiter range      = new RangeLimiter(e, data.duration, data.range);
+    ProjectileDamage damage = new ProjectileDamage(e, source, data.damage);
+    OutOfBounds bounds      = new OutOfBounds(e, rect);
 
     e.addLogicComponent(life);
     e.addLogicComponent(range);
 
-    e.addLogicComponent(new ProjectileDamage(e, source, data.damage));
+    e.addLogicComponent(damage);
+    e.addLogicComponent(bounds);
 
     // If these conditions are met, the projectile is moving
     if (data.speed != 0 || data.gravity) {

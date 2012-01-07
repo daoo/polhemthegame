@@ -4,7 +4,6 @@
 
 package game.components.graphics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
@@ -51,11 +50,6 @@ public class RSheet implements IAnimatedComponent {
   @Override
   public IAnimator getAnimator() {
     return animator;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.GRAPHIC;
   }
 
   public Image getCurrentFrame() {

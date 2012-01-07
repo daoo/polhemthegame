@@ -4,7 +4,6 @@
 
 package tests;
 
-import game.components.ComponentType;
 import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
@@ -29,6 +28,18 @@ public class CollisionTester extends BasicGame {
   private static final int WIDTH          = 1920;
   private static final int HEIGHT         = 1080;
 
+  private static final int RECTANGLE_X = 1420;
+  private static final int RECTANGLE_Y = 340;
+  private static final int RECTANGLE_W = 400;
+  private static final int RECTANGLE_H = 400;
+
+  private static final int PROJECTILE_X  = 100;
+  private static final int PROJECTILE_Y  = 440;
+  private static final int PROJECTILE_W  = 200;
+  private static final int PROJECTILE_H  = 200;
+  private static final int PROJECTILE_DX = 400;
+  private static final int PROJECTILE_DY = 0;
+
   public static void main(String[] args) {
     try {
       AppGameContainer app = new AppGameContainer(new CollisionTester());
@@ -44,25 +55,7 @@ public class CollisionTester extends BasicGame {
 
   private final World world;
   private final Entity obj1, obj2;
-
-  private Entity makeStaticRectangle(int x, int y, int w, int h) {
-    Entity obj = new Entity(x, y, w, h, EntityType.CREEP);
-    obj.addRenderComponent(new SolidQuad(Color.white, w, h));
-
-    return obj;
-  }
-
-  private Entity makeProjectile(int x, int y, int w, int h, int dx, int dy) {
-    Entity obj = new Entity(x, y, w, w, EntityType.PROJECTILE);
-
-    Movement mov = new Movement(obj, dx, dy);
-
-    obj.addLogicComponent(mov);
-    obj.addRenderComponent(new SolidQuad(Color.white, w, h));
-    obj.addRenderComponent(new Outliner(obj, mov, true, true));
-
-    return obj;
-  }
+  private final Movement mov2;
 
   public CollisionTester() {
     super("Collision Tester");
@@ -70,10 +63,19 @@ public class CollisionTester extends BasicGame {
     elapsed = 0;
     world = new World();
 
-    obj1 = makeStaticRectangle(1420, 340, 400, 400);
+    obj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H, EntityType.CREEP);
+    obj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
+
     world.addLast(obj1);
 
-    obj2 = makeProjectile(100, 440, 200, 200, 400, 0);
+    // Make projectile
+    obj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H, EntityType.PROJECTILE);
+    mov2 = new Movement(obj2, PROJECTILE_DX, PROJECTILE_DY);
+
+    obj2.addLogicComponent(mov2);
+    obj2.addRenderComponent(new SolidQuad(Color.white, PROJECTILE_W, PROJECTILE_H));
+    obj2.addRenderComponent(new Outliner(obj2, mov2, true, true));
+
     world.addLast(obj2);
   }
 
@@ -86,8 +88,7 @@ public class CollisionTester extends BasicGame {
   public void render(GameContainer container, Graphics g) throws SlickException {
     world.render(g);
 
-    if (CollisionHelper.sweepCollisionTest(obj2.getBody(),
-         ((Movement)obj2.getComponent(ComponentType.MOVEMENT)).getVelocity(),
+    if (CollisionHelper.sweepCollisionTest(obj2.getBody(), mov2.getVelocity(),
          obj1.getBody(), 1)) {
       g.drawString("COLLISION!", 100, 10);
     }
@@ -99,7 +100,6 @@ public class CollisionTester extends BasicGame {
       container.exit();
     } else {
       Rectangle body = obj2.getBody();
-      Movement mov = (Movement) obj2.getComponent(ComponentType.MOVEMENT);
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP))
@@ -112,13 +112,13 @@ public class CollisionTester extends BasicGame {
         body.addPosition(new Vector2(s, 0));
 
       else if (Keyboard.isKeyDown(Keyboard.KEY_W))
-        mov.addVelocity(0, -s);
+        mov2.addVelocity(0, -s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_S))
-        mov.addVelocity(0, s);
+        mov2.addVelocity(0, s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_A))
-        mov.addVelocity(-s, 0);
+        mov2.addVelocity(-s, 0);
       else if (Keyboard.isKeyDown(Keyboard.KEY_D))
-        mov.addVelocity(s, 0);
+        mov2.addVelocity(s, 0);
     }
 
     float frameLength = delta / 1000.0f;

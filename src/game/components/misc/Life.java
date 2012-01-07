@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -25,11 +24,6 @@ public class Life implements ILogicComponent, IProgress {
     this.alive = true;
     this.hp    = maxHP;
     this.maxHP = maxHP;
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.HEALTH;
   }
 
   @Override

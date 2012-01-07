@@ -4,7 +4,6 @@
 
 package game.components.physics;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
@@ -26,11 +25,6 @@ public class Movement implements ILogicComponent {
 
   public void addVelocity(float x, float y) {
     vel = Vector2.add(vel, x, y);
-  }
-
-  @Override
-  public ComponentType getComponentType() {
-    return ComponentType.MOVEMENT;
   }
 
   public Vector2 getVelocity() {

@@ -4,7 +4,6 @@
 
 package game.entities;
 
-import game.components.ComponentType;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
@@ -63,22 +62,6 @@ public class Entity implements IEntity {
   @Override
   public Rectangle getBody() {
     return body;
-  }
-
-  public ILogicComponent getComponent(ComponentType componentType) {
-    for (ILogicComponent comp : updates) {
-      if (comp.getComponentType().equals(componentType)) {
-        return comp;
-      }
-    }
-
-    for (ILogicComponent comp : renders) {
-      if (comp.getComponentType().equals(componentType)) {
-        return comp;
-      }
-    }
-
-    return null;
   }
 
   @Override
