@@ -68,6 +68,7 @@ public class Hand implements IRenderComponent, IProgress {
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
       owner.addEffect(new SpawnProjectile(p, o));
     }
+
     weapon.projectiles.clear();
   }
 
