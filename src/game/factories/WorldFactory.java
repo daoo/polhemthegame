@@ -59,8 +59,7 @@ public class WorldFactory {
 
   private World world;
 
-  private Trigger levelStartTrigger, creepsSpawnTrigger,
-                  creepsDeadTrigger, playersDeadTrigger;
+  private Trigger creepsSpawnTrigger, creepsDeadTrigger;
 
   public WorldFactory(GameState gameMode, StateManager stateManager,
                       EntityFactory entityFactory, Rectangle rect,
@@ -115,13 +114,13 @@ public class WorldFactory {
 
     world = new World();
 
-    levelStartTrigger  = new Trigger(false);
     creepsSpawnTrigger = new Trigger(false);
     creepsDeadTrigger  = new Trigger(false);
-    playersDeadTrigger = new Trigger(false);
+    Trigger levelStartTrigger  = new Trigger(false);
+    Trigger playersDeadTrigger = new Trigger(false);
 
-    levelStartTrigger.addCondition(new AlwaysTrueCondition());
-    creepsSpawnTrigger.addCondition(new AlwaysTrueCondition());
+    creepsSpawnTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
+    levelStartTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
     playersDeadTrigger.addCondition(new AllInactiveCondition(players));
 
     levelStartTrigger.addAllEffects(Arrays.asList(
