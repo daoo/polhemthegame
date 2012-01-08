@@ -12,14 +12,14 @@ public interface IRandom {
   int nextInt();
 
   /**
-   * Returns a random integer in range 0 to max - 1.
+   * Returns a random integer in range [0, max).
    * @param max the upper limit (exclusive)
    * @return a random integer
    */
   int nextInt(int max);
 
   /**
-   * Returns a random integer in range min to max.
+   * Returns a random integer in range [min, max).
    * @param min the lower limit (inclusive)
    * @param max the upper limit (exclusive)
    * @return a random integer

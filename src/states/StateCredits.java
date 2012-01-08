@@ -30,6 +30,7 @@ public class StateCredits implements IState {
   private static final int FONT_SIZE_BIG = 30;
 
   private static final int DEFAULT_Y_SPEED = 100;
+  private static final int Y_SPEED_DELTA = 50;
   private static final int DEFAULT_SPACING = 5;
   private static final int EMPTY_SPACING = 30;
 
@@ -103,7 +104,7 @@ public class StateCredits implements IState {
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-      speed += 50; // FIXME: Magic number
+      speed += Y_SPEED_DELTA;
     }
 
     pos_y -= speed * delta;

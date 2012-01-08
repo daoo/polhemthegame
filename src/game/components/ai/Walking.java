@@ -17,6 +17,8 @@ import math.Rectangle;
 import math.Vector2;
 
 public class Walking implements IBossState {
+  private static final int DISTANCE_ACCEPTANCE = 10;
+
   private final IEntity entity;
   private final Hand hand;
   private final Rectangle body;
@@ -50,7 +52,9 @@ public class Walking implements IBossState {
   @Override
   public void update(GameTime time) {
     if (!targets.isEmpty()) {
-      if (ExMath.inRange(Vector2.distance(targets.peek(), body.getMin()), -10, 10)) {
+      Vector2 target = targets.peek();
+      if (ExMath.inRange(Vector2.distance(target, body.getMin()),
+                         -DISTANCE_ACCEPTANCE, DISTANCE_ACCEPTANCE)) {
         // Target reached
         if (targets.poll() != null) {
           headFor(targets.peek());

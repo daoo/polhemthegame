@@ -34,8 +34,8 @@ public class ExMath {
    * The interval must be a proper interval, that is a must be strictly smaller
    * than b.
    * @param v the float to check
-   * @param a the lower end of the interval
-   * @param b the higher end of the interval
+   * @param a the lower end of the interval (inclusive)
+   * @param b the higher end of the interval (inclusive)
    * @return true or false
    */
   public static boolean inRange(float v, float a, float b) {
