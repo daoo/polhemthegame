@@ -19,7 +19,7 @@ import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
-import game.triggers.effects.SpawnWithSend;
+import game.triggers.effects.SpawnUnitWithSend;
 import game.world.World;
 
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class WorldFactory {
       // Add trigger
       creepsSpawnTrigger.addEffect(
         new ExecuteWithDelayEffect(spawnData.spawnTime,
-          new SpawnWithSend(creep, Message.START_ANIMATION, null)));
+          new SpawnUnitWithSend(creep, Message.START_ANIMATION, null)));
     }
 
     creepsDeadTrigger.addCondition(new AllInactiveCondition(creeps));
@@ -157,7 +157,7 @@ public class WorldFactory {
         new SetForegroundEffect(Locator.getUI(), imgBoss),
         new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
           new SetForegroundEffect(Locator.getUI(), null),
-          new SpawnWithSend(boss, null, null),
+          new SpawnUnitWithSend(boss, null, null),
           new AddTriggersEffect(bossDeadTrigger)
         ))
       ));
@@ -173,7 +173,7 @@ public class WorldFactory {
     world.addTrigger(playersDeadTrigger);
 
     for (IEntity p : players) {
-      world.addLast(p);
+      world.addUnit(p);
     }
 
     setupCreeps(level.creeps);

@@ -8,7 +8,6 @@ import game.components.graphics.animations.RunTo;
 import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.AfterAnimation;
 import game.entities.Entity;
-import game.entities.EntityType;
 import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
@@ -28,8 +27,7 @@ public class SpawnAnimationEffect implements IEffect {
     this.rect = entity.getBody();
     this.anim = anim;
 
-    spawnee = new Entity(0, 0, anim.getTileWidth(), anim.getTileHeight(),
-      EntityType.ANIMATED);
+    spawnee = new Entity(0, 0, anim.getTileWidth(), anim.getTileHeight());
     spawnee.addRenderComponent(anim);
 
     AfterAnimation comp = new AfterAnimation(spawnee, anim, anim.getLastTile());
@@ -44,6 +42,6 @@ public class SpawnAnimationEffect implements IEffect {
 
     anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
 
-    world.addFirst(spawnee);
+    world.addMisc(spawnee);
   }
 }

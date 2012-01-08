@@ -4,8 +4,6 @@
 
 package game.world;
 
-import game.entities.EntityType;
-import game.entities.Groups;
 import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.ITrigger;
@@ -13,6 +11,7 @@ import game.triggers.ITrigger;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.newdawn.slick.Graphics;
 
@@ -21,64 +20,63 @@ import debug.DebugHelper;
 import debug.IDebuggable;
 
 public class World implements IDebuggable {
-  private final WorldContainer entities;
-  private final LinkedList<IEntity> toAddFirst, toAddLast;
-
-  private final LinkedList<ITrigger> triggers, addTriggers;
+  private final LinkedList<IEntity> misc, units, projectiles;
+  private final LinkedList<IEntity> newMisc, newUnits, newProjectiles;
+  private final LinkedList<ITrigger> triggers, newTriggers;
 
   public World() {
-    toAddFirst = new LinkedList<>();
-    toAddLast  = new LinkedList<>();
-    entities   = new WorldContainer();
+    misc        = new LinkedList<>();
+    units       = new LinkedList<>();
+    projectiles = new LinkedList<>();
+
+    newMisc        = new LinkedList<>();
+    newUnits       = new LinkedList<>();
+    newProjectiles = new LinkedList<>();
 
     triggers    = new LinkedList<>();
-    addTriggers = new LinkedList<>();
+    newTriggers = new LinkedList<>();
   }
 
-  /**
-   * Delayed add at the beginning of the world container.
-   * Happens at the end of a update iteration.
-   * @param obj object to add
-   */
-  public void addFirst(IEntity obj) {
-    assert (obj != null);
+  public void addMisc(IEntity obj) {
+    assert obj != null;
 
     obj.setWorld(this);
-    toAddFirst.add(obj);
+    newMisc.add(obj);
   }
 
-  /**
-   * Delayed add at the end of the world container.
-   * Happens at the end of a update iteration.
-   * @param obj object to add
-   */
-  public void addLast(IEntity obj) {
-    assert (obj != null);
+  public void addUnit(IEntity obj) {
+    assert obj != null;
 
     obj.setWorld(this);
-    toAddLast.add(obj);
+    newUnits.add(obj);
   }
 
-  public Iterable<IEntity> get(EntityType e) {
-    return entities.iterate(e);
+  public void addProjectile(IEntity obj) {
+    assert obj != null;
+
+    obj.setWorld(this);
+    newProjectiles.add(obj);
   }
 
   public Iterable<IEntity> getUnits() {
-    return entities.iterate(Groups.UNITS);
+    return units;
   }
 
   public void render(Graphics g) {
-    for (IEntity e : entities) {
+    for (IEntity e : misc) {
+      e.render(g);
+    }
+
+    for (IEntity e : units) {
+      e.render(g);
+    }
+
+    for (IEntity e : projectiles) {
       e.render(g);
     }
   }
 
   public void update(GameTime time) {
-    // Entities
-    for (IEntity e : entities) {
-      e.update(time);
-    }
-
     // Triggers
     Iterator<ITrigger> itt = triggers.iterator();
     while (itt.hasNext()) {
@@ -90,28 +88,23 @@ public class World implements IDebuggable {
       }
     }
 
-    Iterator<IEntity> itr = entities.iterator();
-    while (itr.hasNext()) {
-      if (!itr.next().isActive()) {
-        itr.remove();
-      }
-    }
+    // Entities
+    processEntities(misc, time);
+    processEntities(units, time);
+    processEntities(projectiles, time);
 
-    entities.addLastAll(toAddLast);
-    toAddLast.clear();
-
-    entities.addFirstAll(toAddFirst);
-    toAddFirst.clear();
-
-    triggers.addAll(addTriggers);
-    addTriggers.clear();
+    // Move new stuff
+    move(newMisc, misc);
+    move(newUnits, units);
+    move(newProjectiles, projectiles);
+    move(newTriggers, triggers);
   }
 
   public void addTrigger(ITrigger trigger) {
     assert trigger != null;
 
     trigger.setWorld(this);
-    addTriggers.add(trigger);
+    newTriggers.add(trigger);
   }
 
   public void addAllTriggers(Collection<? extends ITrigger> collection) {
@@ -121,9 +114,8 @@ public class World implements IDebuggable {
       t.setWorld(this);
     }
 
-    addTriggers.addAll(collection);
+    newTriggers.addAll(collection);
   }
-
 
   @Override
   public String debugString() {
@@ -134,14 +126,27 @@ public class World implements IDebuggable {
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    Node<String> ents = new Node<>("Entities (" + entities.size() + ")");
-    for (IEntity e : entities) {
-      ents.nodes.add(e.debugTree());
-    }
-    parent.nodes.add(ents);
-
+    parent.nodes.add(DebugHelper.listToNode("Misc", misc));
+    parent.nodes.add(DebugHelper.listToNode("Units", units));
+    parent.nodes.add(DebugHelper.listToNode("Projectiles", projectiles));
     parent.nodes.add(DebugHelper.listToNode("Triggers", triggers));
 
     return parent;
+  }
+
+  private void processEntities(Iterable<? extends IEntity> entities, GameTime time) {
+    Iterator<? extends IEntity> itr = entities.iterator();
+    while (itr.hasNext()) {
+      IEntity e = itr.next();
+      e.update(time);
+      if (!e.isActive()) {
+        itr.remove();
+      }
+    }
+  }
+
+  private <T> void move(List<? extends T> from, List<? super T> to) {
+    to.addAll(from);
+    from.clear();
   }
 }

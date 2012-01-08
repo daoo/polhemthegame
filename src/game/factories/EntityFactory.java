@@ -16,7 +16,6 @@ import game.components.misc.PlayerControl;
 import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.entities.Entity;
-import game.entities.EntityType;
 import game.misc.Shop;
 import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
@@ -73,12 +72,7 @@ public class EntityFactory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e = new Entity(
-      x, y,
-      data.hitbox.width,
-      data.hitbox.height,
-      EntityType.CREEP
-    );
+    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life = new Life(e, data.hitpoints);
 
@@ -107,11 +101,7 @@ public class EntityFactory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e = new Entity(
-      0, 0,
-      data.hitbox.width, data.hitbox.height,
-      EntityType.PLAYER
-    );
+    Entity e = new Entity(0, 0, data.hitbox.width, data.hitbox.height);
 
     // Create components
     Movement mov               = new Movement(e, 0, 0);
@@ -132,7 +122,8 @@ public class EntityFactory {
     e.addLogicComponent(movCons);
     e.addLogicComponent(life);
     e.addLogicComponent(inv);
-    e.addLogicComponent(new EffectsOnDeath(e, new SpawnAnimationEffect(e, death, statics)));
+    e.addLogicComponent(new EffectsOnDeath(e,
+      new SpawnAnimationEffect(e, death, statics)));
 
     e.addRenderComponent(hand);
     e.addRenderComponent(walk);
@@ -162,8 +153,7 @@ public class EntityFactory {
 
     Entity e = new Entity(
       worldRect.getX1(), middleY,
-      data.hitbox.width, data.hitbox.height,
-      EntityType.BOSS
+      data.hitbox.width, data.hitbox.height
     );
 
     Movement mov  = new Movement(e, 0, 0);

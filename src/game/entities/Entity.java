@@ -23,7 +23,6 @@ import debug.DebugHelper;
 
 public class Entity implements IEntity {
   private final Rectangle body;
-  private final EntityType type;
   private World world;
   private boolean active;
 
@@ -31,11 +30,9 @@ public class Entity implements IEntity {
   private final LinkedList<ILogicComponent> updates;
   private final LinkedList<IRenderComponent> renders;
 
-  public Entity(float x, float y, float w, float h, EntityType type) {
+  public Entity(float x, float y, float w, float h) {
     body = new Rectangle(x, y, w, h);
     active = true;
-
-    this.type = type;
 
     effects = new LinkedList<>();
 
@@ -62,11 +59,6 @@ public class Entity implements IEntity {
   @Override
   public Rectangle getBody() {
     return body;
-  }
-
-  @Override
-  public EntityType getType() {
-    return type;
   }
 
   @Override
@@ -130,7 +122,7 @@ public class Entity implements IEntity {
 
   @Override
   public String debugString() {
-    return "Entity - " + type.toString();
+    return "Entity";
   }
 
   @Override

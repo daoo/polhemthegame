@@ -20,7 +20,6 @@ import game.components.physics.Movement;
 import game.components.physics.MovingProjectileCollision;
 import game.components.physics.StaticCollision;
 import game.entities.Entity;
-import game.entities.EntityType;
 import game.entities.IEntity;
 import game.triggers.effects.AOEDamage;
 import game.triggers.effects.RemoveEntity;
@@ -79,8 +78,7 @@ public class ProjectileFactory {
   public IEntity makeProjectile(IEntity source, float x, float y, float rot) {
     IAnimatedComponent anim = makeAnimation();
 
-    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height,
-                          EntityType.PROJECTILE);
+    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life               = new Life(e, data.targets);
     RangeLimiter range      = new RangeLimiter(e, data.duration, data.range);

@@ -8,7 +8,6 @@ import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
-import game.entities.EntityType;
 import game.pods.GameTime;
 import game.world.World;
 import math.CollisionHelper;
@@ -63,20 +62,20 @@ public class CollisionTester extends BasicGame {
     elapsed = 0;
     world = new World();
 
-    obj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H, EntityType.CREEP);
+    obj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
     obj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
 
-    world.addLast(obj1);
+    world.addUnit(obj1);
 
     // Make projectile
-    obj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H, EntityType.PROJECTILE);
+    obj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
     mov2 = new Movement(obj2, PROJECTILE_DX, PROJECTILE_DY);
 
     obj2.addLogicComponent(mov2);
     obj2.addRenderComponent(new SolidQuad(Color.white, PROJECTILE_W, PROJECTILE_H));
     obj2.addRenderComponent(new Outliner(obj2, mov2, true, true));
 
-    world.addLast(obj2);
+    world.addProjectile(obj2);
   }
 
   @Override

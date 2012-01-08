@@ -25,12 +25,6 @@ public interface IEntity extends IDebuggable {
    */
   Rectangle getBody();
 
-  /**
-   * Entity type getter.
-   * @return the type of this entity
-   */
-  EntityType getType();
-
   World getWorld();
   void setWorld(World world);
 
