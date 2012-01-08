@@ -21,11 +21,13 @@ import game.components.physics.MovingProjectileCollision;
 import game.components.physics.StaticCollision;
 import game.entities.Entity;
 import game.entities.IEntity;
+import game.triggers.IEffect;
 import game.triggers.effects.AOEDamage;
 import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import loader.data.json.ProjectilesData.ProjectileData;
 import loader.parser.ParserException;
@@ -110,12 +112,10 @@ public class ProjectileFactory {
         e.addLogicComponent(new StaticCollision(e));
       }
     }
-
-    EffectsOnDeath effects = new EffectsOnDeath(e);
-    effects.add(new RemoveEntity(e));
-    e.addLogicComponent(effects);
-
     e.addRenderComponent(anim);
+
+    LinkedList<IEffect> effectsOnDeath = new LinkedList<>();
+    effectsOnDeath.add(new RemoveEntity(e));
 
     if (data.aoe != null) {
       RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
@@ -123,9 +123,12 @@ public class ProjectileFactory {
                                         data.aoe.explosionSprite.offset.y,
                                         explosion);
 
-      effects.add(new AOEDamage(source, e.getBody(), data.aoe.radius, data.aoe.damage));
-      effects.add(new SpawnAnimationEffect(e, explosionAnim, null));
+      effectsOnDeath.add(new AOEDamage(
+        source, e.getBody(), data.aoe.radius, data.aoe.damage));
+      effectsOnDeath.add(new SpawnAnimationEffect(e, explosionAnim, null));
     }
+
+    e.addLogicComponent(new EffectsOnDeath(e, effectsOnDeath));
 
     return e;
   }

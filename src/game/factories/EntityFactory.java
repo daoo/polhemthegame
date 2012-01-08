@@ -22,6 +22,7 @@ import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import loader.data.DataException;
 import loader.data.json.BossesData.BossData;
@@ -74,20 +75,21 @@ public class EntityFactory {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e     = new Entity(x, y, data.hitbox.width, data.hitbox.height);
-    Movement mov = new Movement(e, dx, dy);
-    Life life    = new Life(e, data.hitpoints);
+    Entity entity = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    Movement mov  = new Movement(entity, dx, dy);
+    Life life     = new Life(entity, data.hitpoints);
 
-    e.addLogicComponent(mov);
-    e.addLogicComponent(life);
-    e.addRenderComponent(walk);
+    entity.addLogicComponent(mov);
+    entity.addLogicComponent(life);
+    entity.addRenderComponent(walk);
 
-    EffectsOnDeath effectsOnDeath = new EffectsOnDeath(e);
-    effectsOnDeath.add(new SpawnAnimationEffect(e, death, statics));
-    effectsOnDeath.add(new RemoveEntity(e));
-    e.addLogicComponent(effectsOnDeath);
 
-    return new Unit(e, mov, life);
+    entity.addLogicComponent(new EffectsOnDeath(entity, Arrays.asList(
+      new SpawnAnimationEffect(entity, death, statics),
+      new RemoveEntity(entity)
+    )));
+
+    return new Unit(entity, mov, life);
   }
 
   public Entity makeCreep(float x, float y, float ang, CreepData data)

@@ -10,26 +10,15 @@ import game.entities.Entity;
 import game.pods.GameTime;
 import game.triggers.IEffect;
 
-import java.util.LinkedList;
+import java.util.Collection;
 
 public class EffectsOnDeath implements ILogicComponent {
-  private final LinkedList<IEffect> effects;
-
   private final Entity owner;
+  private final Collection<? extends IEffect> effects;
 
-  public EffectsOnDeath(Entity owner) {
-    this.owner = owner;
-
-    effects = new LinkedList<>();
-  }
-
-  public EffectsOnDeath(Entity owner, IEffect effect) {
-    this(owner);
-    effects.add(effect);
-  }
-
-  public void add(IEffect effect) {
-    effects.add(effect);
+  public EffectsOnDeath(Entity owner, Collection<? extends IEffect> effects) {
+    this.owner   = owner;
+    this.effects = effects;
   }
 
   @Override

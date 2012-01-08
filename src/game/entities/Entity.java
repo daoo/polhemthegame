@@ -44,7 +44,7 @@ public class Entity implements IEntity {
     effects.add(effect);
   }
 
-  public void addEffects(Collection<IEffect> collection) {
+  public void addEffects(Collection<? extends IEffect> collection) {
     effects.addAll(collection);
   }
 
