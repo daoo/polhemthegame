@@ -17,6 +17,7 @@ import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.entities.Entity;
 import game.misc.Shop;
+import game.pods.Unit;
 import game.triggers.effects.RemoveEntity;
 import game.triggers.effects.SpawnAnimationEffect;
 
@@ -28,6 +29,7 @@ import loader.data.json.CreepsData.CreepData;
 import loader.data.json.PlayersData;
 import loader.data.json.PlayersData.PlayerData;
 import loader.data.json.ShopData;
+import loader.data.json.UnitData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
@@ -67,47 +69,51 @@ public class EntityFactory {
     playersData   = CacheTool.getPlayers(Locator.getCache());
   }
 
-  public Entity makeCreep(float x, float y, float ang, CreepData data)
+  private Unit makeUnit(float x, float y, float dx, float dy, UnitData data)
       throws ParserException, DataException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
-    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    Entity e     = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    Movement mov = new Movement(e, dx, dy);
+    Life life    = new Life(e, data.hitpoints);
 
-    Life life = new Life(e, data.hitpoints);
-
-    e.addLogicComponent(new Movement(e, (float) Math.cos(ang) * data.speed,
-                                        (float) Math.sin(ang) * data.speed));
+    e.addLogicComponent(mov);
     e.addLogicComponent(life);
     e.addRenderComponent(walk);
-
-    InfoBar infoBar = new InfoBar(e,
-      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(life, Color.green, Color.red));
-    Locator.getUI().addDynamic(infoBar);
 
     EffectsOnDeath effectsOnDeath = new EffectsOnDeath(e);
     effectsOnDeath.add(new SpawnAnimationEffect(e, death, statics));
     effectsOnDeath.add(new RemoveEntity(e));
     e.addLogicComponent(effectsOnDeath);
 
-    return e;
+    return new Unit(e, mov, life);
+  }
+
+  public Entity makeCreep(float x, float y, float ang, CreepData data)
+      throws ParserException, DataException, IOException {
+    Unit unit = makeUnit(
+      x, y,
+      (float) Math.cos(ang) * data.speed, (float) Math.sin(ang) * data.speed,
+      data);
+
+    InfoBar infoBar = new InfoBar(unit.entity,
+      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
+    infoBar.add(new Bar(unit.life, Color.green, Color.red));
+    Locator.getUI().addDynamic(infoBar);
+
+    return unit.entity;
   }
 
   public Entity makePlayer(int index)
       throws ParserException, DataException, IOException {
     PlayerData data = playersData.players.get(index);
 
-    RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
-    RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
-
-    Entity e = new Entity(0, 0, data.hitbox.width, data.hitbox.height);
+    Unit unit = makeUnit(0, 0, 0, 0, data);
 
     // Create components
-    Movement mov               = new Movement(e, 0, 0);
-    MovementConstraint movCons = new MovementConstraint(e, worldRect);
-    Life life                  = new Life(e, data.hitpoints);
-    Hand hand                  = new Hand(e, data.handOffset.x, data.handOffset.y);
+    MovementConstraint movCons = new MovementConstraint(unit.entity, worldRect);
+    Hand hand                  = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
     Shop shop                  = new Shop(shopData, weaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
@@ -115,31 +121,25 @@ public class EntityFactory {
     inv.addWeapon(weapon);
     hand.grab(weapon);
 
-    PlayerControl control = new PlayerControl(e, mov, inv, shop, hand, data.speed);
+    PlayerControl control = new PlayerControl(unit.entity, unit.movement,
+                                              inv, shop, hand, data.speed);
 
     // Add components
-    e.addLogicComponent(mov);
-    e.addLogicComponent(movCons);
-    e.addLogicComponent(life);
-    e.addLogicComponent(inv);
-    e.addLogicComponent(new EffectsOnDeath(e,
-      new SpawnAnimationEffect(e, death, statics)));
-
-    e.addRenderComponent(hand);
-    e.addRenderComponent(walk);
-
-    e.addLogicComponent(control);
+    unit.entity.addLogicComponent(movCons);
+    unit.entity.addLogicComponent(inv);
+    unit.entity.addRenderComponent(hand);
+    unit.entity.addLogicComponent(control);
 
     // UI stuff
-    InfoBar infoBar = new InfoBar(e,
+    InfoBar infoBar = new InfoBar(unit.entity,
       data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(life, Color.green, Color.red));
+    infoBar.add(new Bar(unit.life, Color.green, Color.red));
     infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
     Locator.getUI().addDynamic(infoBar);
 
     Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
 
-    return e;
+    return unit.entity;
   }
 
   public Entity makeBoss(BossData data)
@@ -151,29 +151,23 @@ public class EntityFactory {
       middleY
     );
 
-    Entity e = new Entity(
-      worldRect.getX1(), middleY,
-      data.hitbox.width, data.hitbox.height
-    );
+    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, data);
 
-    Movement mov  = new Movement(e, 0, 0);
-    Life life     = new Life(e, data.hitpoints);
-    Hand hand     = new Hand(e, data.handOffset.x, data.handOffset.y);
+    Hand hand     = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
     Weapon weapon = weaponFactory.makeWeapon(data.weapon);
-    BossAI ai     = new BossAI(e, mov, hand, worldRect, data.speed, initialTarget);
+    BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
+                               data.speed, initialTarget);
 
-    e.addLogicComponent(life);
-    e.addLogicComponent(mov);
-    e.addLogicComponent(ai);
-    e.addRenderComponent(hand);
+    unit.entity.addLogicComponent(ai);
+    unit.entity.addRenderComponent(hand);
 
     hand.grab(weapon);
 
-    InfoBar infoBar = new InfoBar(e,
+    InfoBar infoBar = new InfoBar(unit.entity,
       data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(life, Color.green, Color.red));
+    infoBar.add(new Bar(unit.life, Color.green, Color.red));
     Locator.getUI().addDynamic(infoBar);
 
-    return e;
+    return unit.entity;
   }
 }
