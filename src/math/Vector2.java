@@ -70,7 +70,8 @@ public class Vector2 {
    */
   public Vector2 normalize() {
     if (normalized == null) {
-      normalized = new Vector2(x / magnitude, y / magnitude);
+      float m = magnitude();
+      normalized = new Vector2(x / m, y / m);
     }
 
     return normalized;
