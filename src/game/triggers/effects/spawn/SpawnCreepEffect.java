@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.triggers.effects;
+package game.triggers.effects.spawn;
 
 import game.components.Message;
 import game.pods.GameTime;

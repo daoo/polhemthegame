@@ -16,7 +16,7 @@ import math.Vector2;
 /**
  * Inflict damage in an circle around a position when executed.
  */
-public class AOEDamage implements IEffect {
+public class AOEDamageEffect implements IEffect {
   private final Rectangle body;
   private final float range;
   private final Damage damage;
@@ -28,7 +28,7 @@ public class AOEDamage implements IEffect {
    * @param range the radius of the area
    * @param damage the amount of damage to deal per object in range
    */
-  public AOEDamage(IEntity source, Rectangle body, float range, float damage) {
+  public AOEDamageEffect(IEntity source, Rectangle body, float range, float damage) {
     this.body = body;
     this.range = range;
     this.damage = new Damage(source, damage);

@@ -11,7 +11,7 @@ import game.entities.Entity;
 import game.entities.IEntity;
 import game.factories.ProjectileFactory;
 import game.pods.GameTime;
-import game.triggers.effects.SpawnProjectile;
+import game.triggers.effects.spawn.SpawnProjectileEffect;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
@@ -66,7 +66,7 @@ public class Hand implements IRenderComponent, IProgress {
       Vector2 o = Vector2.add(owner.getBody().getMin(), m);
 
       IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
-      owner.addEffect(new SpawnProjectile(p, o));
+      owner.addEffect(new SpawnProjectileEffect(p, o));
     }
 
     weapon.projectiles.clear();

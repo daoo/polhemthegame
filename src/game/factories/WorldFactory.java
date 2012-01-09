@@ -19,8 +19,8 @@ import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
-import game.triggers.effects.SpawnCreepEffect;
-import game.triggers.effects.SpawnUnitEffect;
+import game.triggers.effects.spawn.SpawnCreepEffect;
+import game.triggers.effects.spawn.SpawnUnitEffect;
 import game.world.World;
 
 import java.io.IOException;

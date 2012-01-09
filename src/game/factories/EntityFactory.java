@@ -18,8 +18,8 @@ import game.components.physics.MovementConstraint;
 import game.entities.Entity;
 import game.misc.Shop;
 import game.pods.Unit;
-import game.triggers.effects.RemoveEntity;
-import game.triggers.effects.SpawnAnimationEffect;
+import game.triggers.effects.RemoveEntityEffect;
+import game.triggers.effects.spawn.SpawnAnimationEffect;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -85,7 +85,7 @@ public class EntityFactory {
 
     entity.addLogicComponent(new EffectsOnDeath(entity, Arrays.asList(
       new SpawnAnimationEffect(entity, death, statics),
-      new RemoveEntity(entity)
+      new RemoveEntityEffect(entity)
     )));
 
     InfoBar infoBar = new InfoBar(entity,
@@ -131,6 +131,7 @@ public class EntityFactory {
     // FIXME: This should be done when the player is spawned
     Locator.getUI().addDynamic(unit.infoBar);
 
+    // FIXME: Should also be done elsewhere
     Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
 
     return unit;

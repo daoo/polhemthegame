@@ -12,12 +12,12 @@ import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
 
-public class RenderCurrent implements IEffect {
+public class RenderCurrentEffect implements IEffect {
   private final Rectangle rect;
   private final IAnimatedComponent anim;
   private final Graphics graphics;
 
-  public RenderCurrent(Rectangle rect, IAnimatedComponent anim, Graphics graphics) {
+  public RenderCurrentEffect(Rectangle rect, IAnimatedComponent anim, Graphics graphics) {
     this.rect     = rect;
     this.anim     = anim;
     this.graphics = graphics;

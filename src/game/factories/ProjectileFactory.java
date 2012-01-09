@@ -22,9 +22,9 @@ import game.components.physics.StaticCollision;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.triggers.IEffect;
-import game.triggers.effects.AOEDamage;
-import game.triggers.effects.RemoveEntity;
-import game.triggers.effects.SpawnAnimationEffect;
+import game.triggers.effects.AOEDamageEffect;
+import game.triggers.effects.RemoveEntityEffect;
+import game.triggers.effects.spawn.SpawnAnimationEffect;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -115,7 +115,7 @@ public class ProjectileFactory {
     e.addRenderComponent(anim);
 
     LinkedList<IEffect> effectsOnDeath = new LinkedList<>();
-    effectsOnDeath.add(new RemoveEntity(e));
+    effectsOnDeath.add(new RemoveEntityEffect(e));
 
     if (data.aoe != null) {
       RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
@@ -123,7 +123,7 @@ public class ProjectileFactory {
                                         data.aoe.explosionSprite.offset.y,
                                         explosion);
 
-      effectsOnDeath.add(new AOEDamage(
+      effectsOnDeath.add(new AOEDamageEffect(
         source, e.getBody(), data.aoe.radius, data.aoe.damage));
       effectsOnDeath.add(new SpawnAnimationEffect(e, explosionAnim, null));
     }

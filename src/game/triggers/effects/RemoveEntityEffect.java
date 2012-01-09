@@ -9,10 +9,10 @@ import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
-public class RemoveEntity implements IEffect {
+public class RemoveEntityEffect implements IEffect {
   private final IEntity entity;
 
-  public RemoveEntity(IEntity entity) {
+  public RemoveEntityEffect(IEntity entity) {
     this.entity = entity;
   }
 

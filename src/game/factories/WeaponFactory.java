@@ -56,6 +56,7 @@ public class WeaponFactory {
     } else {
       anim = CacheTool.getRSheet(Locator.getCache(), data.sprite);
     }
+
     if (data.automatic) {
       return new AutomaticWeapon(
         muzzleOffset,
@@ -66,8 +67,7 @@ public class WeaponFactory {
         anim,
         new ProjectileFactory(bounds, projectileData)
       );
-    }
-    else {
+    } else {
       return new SingleWeapon(
         muzzleOffset,
         data.reloadTime,
