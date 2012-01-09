@@ -25,7 +25,10 @@ public class SpawnAnimationEffect implements IEffect {
   private final Rectangle rect;
   private final IAnimatedComponent anim;
 
-  public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim, Graphics graphics) {
+  public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim,
+                              Graphics graphics) {
+    assert entity != null && anim != null && graphics != null;
+
     this.rect = entity.getBody();
     this.anim = anim;
 

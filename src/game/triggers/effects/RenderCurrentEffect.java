@@ -17,7 +17,10 @@ public class RenderCurrentEffect implements IEffect {
   private final IAnimatedComponent anim;
   private final Graphics graphics;
 
-  public RenderCurrentEffect(Rectangle rect, IAnimatedComponent anim, Graphics graphics) {
+  public RenderCurrentEffect(Rectangle rect, IAnimatedComponent anim,
+                             Graphics graphics) {
+    assert rect != null && anim != null && graphics != null;
+
     this.rect     = rect;
     this.anim     = anim;
     this.graphics = graphics;
