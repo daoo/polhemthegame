@@ -84,13 +84,16 @@ public class GameState implements IState {
 
     elapsed = 0;
 
-    EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
-    LinkedList<Entity> players  = new LinkedList<>();
-    players.add(entityFactory.makePlayer(0));
+    EntityFactory entityFactory = new EntityFactory(worldRect,
+                                                    statics.getGraphics());
 
+    // TODO: COOP
+    LinkedList<Entity> players = new LinkedList<>();
+    players.add(entityFactory.makePlayer(0).entity);
     Players.reposition(players, worldRect);
 
-    worldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
+    worldFactory = new WorldFactory(this, stateManager, entityFactory,
+                                    worldRect, players);
   }
 
   @Override

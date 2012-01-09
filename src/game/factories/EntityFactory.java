@@ -83,7 +83,6 @@ public class EntityFactory {
     entity.addLogicComponent(life);
     entity.addRenderComponent(walk);
 
-
     entity.addLogicComponent(new EffectsOnDeath(entity, Arrays.asList(
       new SpawnAnimationEffect(entity, death, statics),
       new RemoveEntity(entity)
@@ -96,17 +95,12 @@ public class EntityFactory {
     return new Unit(entity, mov, life, infoBar);
   }
 
-  public Entity makeCreep(float x, float y, CreepData data)
+  public Unit makeCreep(float x, float y, CreepData data)
       throws ParserException, DataException, IOException {
-    Unit unit = makeUnit(x, y, -data.speed, 0, data);
-
-    // FIXME
-    Locator.getUI().addDynamic(unit.infoBar);
-
-    return unit.entity;
+    return makeUnit(x, y, -data.speed, 0, data);
   }
 
-  public Entity makePlayer(int index)
+  public Unit makePlayer(int index)
       throws ParserException, DataException, IOException {
     PlayerData data = playersData.players.get(index);
 
@@ -134,15 +128,15 @@ public class EntityFactory {
     // UI stuff
     unit.infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
 
-    // FIXME
+    // FIXME: This should be done when the player is spawned
     Locator.getUI().addDynamic(unit.infoBar);
 
     Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
 
-    return unit.entity;
+    return unit;
   }
 
-  public Entity makeBoss(BossData data)
+  public Unit makeBoss(BossData data)
       throws DataException, ParserException, IOException {
     int middleY = (int) (worldRect.getCenter().y - data.hitbox.height / 2);
 
@@ -163,9 +157,6 @@ public class EntityFactory {
 
     hand.grab(weapon);
 
-    // FIXME
-    Locator.getUI().addDynamic(unit.infoBar);
-
-    return unit.entity;
+    return unit;
   }
 }

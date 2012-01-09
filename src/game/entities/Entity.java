@@ -80,6 +80,8 @@ public class Entity implements IEntity {
 
   @Override
   public void sendMessage(Message message, Object args) {
+    assert message != null;
+
     for (ILogicComponent comp : updates) {
       comp.reciveMessage(message, args);
     }

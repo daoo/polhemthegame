@@ -5,10 +5,10 @@
 package game.factories;
 
 import game.CacheTool;
-import game.components.Message;
 import game.components.misc.KillCreep;
 import game.entities.Entity;
 import game.entities.IEntity;
+import game.pods.Unit;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
@@ -19,7 +19,8 @@ import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
-import game.triggers.effects.SpawnUnitWithSend;
+import game.triggers.effects.SpawnCreepEffect;
+import game.triggers.effects.SpawnUnitEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -88,18 +89,18 @@ public class WorldFactory {
         rect.getY2() - creepData.hitbox.height
       );
 
-      Entity creep = entityFactory.makeCreep(x, y, creepData);
+      Unit creep = entityFactory.makeCreep(x, y, creepData);
 
-      creep.addLogicComponent(
-        new KillCreep(creep, (int) rect.getX1(),
+      creep.entity.addLogicComponent(
+        new KillCreep(creep.entity, (int) rect.getX1(),
           new DamageEntitiesEffect(players, PLAYER_DAMAGE)));
 
       // Add trigger
       creepsSpawnTrigger.addEffect(
-        new ExecuteWithDelayEffect(spawnData.spawnTime,
-          new SpawnUnitWithSend(creep, Message.START_ANIMATION, null)));
+        new ExecuteWithDelayEffect(
+          spawnData.spawnTime, new SpawnCreepEffect(creep)));
 
-      creeps.add(creep);
+      creeps.add(creep.entity);
     }
 
     creepsDeadTrigger.addCondition(new AllInactiveCondition(creeps));
@@ -147,17 +148,17 @@ public class WorldFactory {
     } else {
       Image imgBoss = CacheTool.getImage(cache, level.preBossImage);
 
-      Entity boss = entityFactory.makeBoss(CacheTool.getBoss(cache, level.boss));
+      Unit boss = entityFactory.makeBoss(CacheTool.getBoss(cache, level.boss));
 
       Trigger bossDeadTrigger = new Trigger(false);
-      bossDeadTrigger.addCondition(new AllInactiveCondition(boss));
+      bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
       bossDeadTrigger.addAllEffects(levelCompleteEffects);
 
       creepsDeadTrigger.addAllEffects(Arrays.asList(
         new SetForegroundEffect(Locator.getUI(), imgBoss),
         new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
           new SetForegroundEffect(Locator.getUI(), null),
-          new SpawnUnitWithSend(boss, null, null),
+          new SpawnUnitEffect(boss),
           new AddTriggersEffect(bossDeadTrigger)
         ))
       ));
