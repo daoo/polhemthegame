@@ -4,24 +4,27 @@
 
 package game.triggers.effects.spawn;
 
+import game.components.Message;
 import game.pods.GameTime;
 import game.pods.Unit;
 import game.triggers.IEffect;
 import game.world.World;
 import main.Locator;
 
-public class SpawnUnitEffect implements IEffect {
+public class SpawnBossEffect implements IEffect {
   private final Unit unit;
 
-  public SpawnUnitEffect(Unit unit) {
-    assert unit != null;
+  public SpawnBossEffect(Unit boss) {
+    assert boss != null;
 
-    this.unit = unit;
+    this.unit = boss;
   }
 
   @Override
   public void execute(GameTime time, World world) {
     world.addUnit(unit.entity);
     Locator.getUI().addDynamic(unit.infoBar);
+
+    unit.entity.sendMessage(Message.START_BOSS, time);
   }
 }

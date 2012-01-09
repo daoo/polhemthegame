@@ -34,16 +34,6 @@ public class Rectangle {
 
   }
 
-  public boolean isIntersecting(Rectangle other) {
-    return !((min.x > other.max.x) || (min.y > other.max.y) ||
-             (max.x < other.min.x) || (max.y < other.min.y));
-  }
-
-  public boolean isContaining(Rectangle other) {
-    return ((other.min.x > min.x && other.max.x < max.x) &&
-            (other.min.y > min.y && other.max.y < max.y));
-  }
-
   public void setPosition(float x, float y) {
     min = new Vector2(x, y);
     max = Vector2.add(min, size);
@@ -111,5 +101,28 @@ public class Rectangle {
   public String toString() {
     return String.format("(%f, %f, %f, %f) %dx%d",
         min.x, min.y, max.x, max.y, (int) size.x, (int) size.y);
+  }
+
+  /**
+   * Check if two rectangles are intersecting.
+   * @param a the first rectangle
+   * @param b the second rectangle
+   * @return true or false depending on if they intersecting or not
+   */
+  public static boolean intersects(Rectangle a, Rectangle b) {
+    return !((a.min.x > b.max.x) || (a.min.y > b.max.y) ||
+             (a.max.x < b.min.x) || (a.max.y < b.min.y));
+  }
+
+  /**
+   * Check if a rectangle (a) contains another rectangle (b). That is, the
+   * entire rectangle is in inside another.
+   * @param a the outer rectangle
+   * @param b the inner rectangle
+   * @return true or false depending on if b is contained by a or not
+   */
+  public static boolean contains(Rectangle a, Rectangle b) {
+    return ((b.min.x > a.min.x && b.max.x < a.max.x) &&
+            (b.min.y > a.min.y && b.max.y < a.max.y));
   }
 }

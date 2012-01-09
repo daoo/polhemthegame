@@ -142,7 +142,7 @@ public class EntityFactory {
     int middleY = (int) (worldRect.getCenter().y - data.hitbox.height / 2);
 
     Vector2 initialTarget = new Vector2(
-      worldRect.getX1() - data.hitbox.width - data.locationX,
+      worldRect.getX2() - data.hitbox.width - data.locationX,
       middleY
     );
 

@@ -23,7 +23,7 @@ public class CollisionHelper {
     Rectangle sweep = new Rectangle(a.getMin(), a.getMax());
 
     for (int i = 0; i < sweeps; ++i) {
-      if (sweep.isIntersecting(b)) {
+      if (Rectangle.intersects(sweep, b)) {
         return true;
       }
 

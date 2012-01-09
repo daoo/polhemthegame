@@ -27,6 +27,10 @@ public class Walking implements IBossState {
   private final Queue<Vector2> targets;
 
   public Walking(IEntity entity, Hand hand, float speed, Movement movement, Queue<Vector2> targets) {
+    if (targets.size() <= 1) {
+      throw new IllegalArgumentException("Can't walk without targets");
+    }
+
     this.entity   = entity;
     this.body     = entity.getBody();
     this.hand     = hand;
@@ -39,6 +43,8 @@ public class Walking implements IBossState {
   public void start(GameTime time) {
     entity.sendMessage(Message.START_ANIMATION, null);
     hand.stopUse();
+
+    headFor(targets.peek());
   }
 
   private void headFor(Vector2 target) {
@@ -56,7 +62,8 @@ public class Walking implements IBossState {
       if (ExMath.inRange(Vector2.distance(target, body.getMin()),
                          -DISTANCE_ACCEPTANCE, DISTANCE_ACCEPTANCE)) {
         // Target reached
-        if (targets.poll() != null) {
+        targets.remove();
+        if (!targets.isEmpty()) {
           headFor(targets.peek());
         }
       }

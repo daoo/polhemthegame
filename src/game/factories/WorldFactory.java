@@ -20,7 +20,7 @@ import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
 import game.triggers.effects.spawn.SpawnCreepEffect;
-import game.triggers.effects.spawn.SpawnUnitEffect;
+import game.triggers.effects.spawn.SpawnBossEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -158,7 +158,7 @@ public class WorldFactory {
         new SetForegroundEffect(Locator.getUI(), imgBoss),
         new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
           new SetForegroundEffect(Locator.getUI(), null),
-          new SpawnUnitEffect(boss),
+          new SpawnBossEffect(boss),
           new AddTriggersEffect(bossDeadTrigger)
         ))
       ));

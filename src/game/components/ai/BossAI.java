@@ -20,11 +20,11 @@ import math.Vector2;
 
 public class BossAI implements ILogicComponent {
   private static final int INITIAL_TARGET_COUNT = 2;
-  private static final int TARGET_MIN_COUNT = 0;
-  private static final int TARGET_MAX_COUNT = 3;
+  private static final int TARGET_MIN_COUNT     = 0;
+  private static final int TARGET_MAX_COUNT     = 3;
 
-  private static final int TARGET_X_DIFFERENCE = 10;
-  private static final int TARGET_Y_DIFFERENCE = 50;
+  private static final int MIN_X_WALK = 10;
+  private static final int MIN_Y_WALK = 50;
 
   private static final float SHOOTING_TIME_MIN = 1.0f;
   private static final float SHOOTING_TIME_MAX = 1.0f;
@@ -34,48 +34,39 @@ public class BossAI implements ILogicComponent {
   private final Movement movement;
   private final Hand hand;
   private final Rectangle movementRect;
-
+  private final Vector2 initialTarget;
   private final float speed;
 
   private IBossState state;
 
   public BossAI(IEntity entity, Movement movement, Hand hand,
                 Rectangle arenaRect, float speed, Vector2 initialTarget) {
-    this.entity   = entity;
-    this.hand     = hand;
-    this.movement = movement;
-    this.body     = entity.getBody();
-    this.speed    = speed;
+    this.entity        = entity;
+    this.hand          = hand;
+    this.movement      = movement;
+    this.body          = entity.getBody();
+    this.speed         = speed;
+    this.initialTarget = initialTarget;
 
     this.movementRect = new Rectangle(arenaRect.getX1(), arenaRect.getY1(),
                                       arenaRect.getX2() - body.getWidth(),
                                       arenaRect.getY2() - body.getHeight());
-
-    LinkedList<Vector2> targets = new LinkedList<>();
-    targets.add(initialTarget);
-    for (int i = 0; i < INITIAL_TARGET_COUNT; ++i) {
-      targets.add(newTarget());
-    }
-
-    state = new Walking(entity, hand, speed, movement, targets);
   }
 
   private Vector2 newTarget() {
     IRandom rnd = Locator.getRandom();
 
     float targetX = rnd.nextFloat(
-      body.getX1() - TARGET_X_DIFFERENCE,
-      body.getX1() + TARGET_X_DIFFERENCE);
+      body.getX1() - MIN_X_WALK,
+      body.getX1() + MIN_X_WALK);
     float targetY = 0;
 
     if (body.getY1() <= movementRect.getCenter().y) {
       // Go to the lower part
-      targetY = rnd.nextFloat(
-        body.getY1() + TARGET_Y_DIFFERENCE, movementRect.getY2());
+      targetY = rnd.nextFloat(body.getY1() + MIN_Y_WALK, movementRect.getY2());
     } else {
       // Go to the upper part
-      targetY = rnd.nextFloat(
-        movementRect.getY1(), body.getY1() - TARGET_Y_DIFFERENCE);
+      targetY = rnd.nextFloat(movementRect.getY1(), body.getY1() - MIN_Y_WALK);
     }
 
     return new Vector2(targetX, targetY);
@@ -83,6 +74,8 @@ public class BossAI implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
+    state.update(time);
+
     if (state.isFinished()) {
       // Go to next state
 
@@ -104,12 +97,21 @@ public class BossAI implements ILogicComponent {
 
       state.start(time);
     }
-
-    state.update(time);
   }
 
   @Override
   public void reciveMessage(Message message, Object args) {
-    // Do nothing
+    if (message == Message.START_BOSS) {
+      GameTime time = (GameTime) args;
+
+      LinkedList<Vector2> targets = new LinkedList<>();
+      targets.add(initialTarget);
+      for (int i = 0; i < INITIAL_TARGET_COUNT; ++i) {
+        targets.add(newTarget());
+      }
+
+      state = new Walking(entity, hand, speed, movement, targets);
+      state.start(time);
+    }
   }
 }
