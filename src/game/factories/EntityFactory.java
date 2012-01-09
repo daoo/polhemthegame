@@ -89,20 +89,19 @@ public class EntityFactory {
       new RemoveEntity(entity)
     )));
 
-    return new Unit(entity, mov, life);
+    InfoBar infoBar = new InfoBar(entity,
+      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
+    infoBar.add(new Bar(life, Color.green, Color.red));
+
+    return new Unit(entity, mov, life, infoBar);
   }
 
-  public Entity makeCreep(float x, float y, float ang, CreepData data)
+  public Entity makeCreep(float x, float y, CreepData data)
       throws ParserException, DataException, IOException {
-    Unit unit = makeUnit(
-      x, y,
-      (float) Math.cos(ang) * data.speed, (float) Math.sin(ang) * data.speed,
-      data);
+    Unit unit = makeUnit(x, y, -data.speed, 0, data);
 
-    InfoBar infoBar = new InfoBar(unit.entity,
-      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(unit.life, Color.green, Color.red));
-    Locator.getUI().addDynamic(infoBar);
+    // FIXME
+    Locator.getUI().addDynamic(unit.infoBar);
 
     return unit.entity;
   }
@@ -133,11 +132,10 @@ public class EntityFactory {
     unit.entity.addLogicComponent(control);
 
     // UI stuff
-    InfoBar infoBar = new InfoBar(unit.entity,
-      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(unit.life, Color.green, Color.red));
-    infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
-    Locator.getUI().addDynamic(infoBar);
+    unit.infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
+
+    // FIXME
+    Locator.getUI().addDynamic(unit.infoBar);
 
     Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
 
@@ -165,10 +163,8 @@ public class EntityFactory {
 
     hand.grab(weapon);
 
-    InfoBar infoBar = new InfoBar(unit.entity,
-      data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X, BAR_OFFSET_Y);
-    infoBar.add(new Bar(unit.life, Color.green, Color.red));
-    Locator.getUI().addDynamic(infoBar);
+    // FIXME
+    Locator.getUI().addDynamic(unit.infoBar);
 
     return unit.entity;
   }

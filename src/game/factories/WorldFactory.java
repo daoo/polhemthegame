@@ -88,8 +88,7 @@ public class WorldFactory {
         rect.getY2() - creepData.hitbox.height
       );
 
-      Entity creep = entityFactory.makeCreep(x, y, (float) -Math.PI, creepData);
-      creeps.add(creep);
+      Entity creep = entityFactory.makeCreep(x, y, creepData);
 
       creep.addLogicComponent(
         new KillCreep(creep, (int) rect.getX1(),
@@ -99,6 +98,8 @@ public class WorldFactory {
       creepsSpawnTrigger.addEffect(
         new ExecuteWithDelayEffect(spawnData.spawnTime,
           new SpawnUnitWithSend(creep, Message.START_ANIMATION, null)));
+
+      creeps.add(creep);
     }
 
     creepsDeadTrigger.addCondition(new AllInactiveCondition(creeps));
