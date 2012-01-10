@@ -49,16 +49,14 @@ public class BossAI implements ILogicComponent {
     this.initialTarget = initialTarget;
 
     this.movementRect = new Rectangle(arenaRect.getX1(), arenaRect.getY1(),
-                                      arenaRect.getX2() - body.getWidth(),
-                                      arenaRect.getY2() - body.getHeight());
+                                      arenaRect.getWidth() - body.getWidth(),
+                                      arenaRect.getHeight() - body.getHeight());
   }
 
-  private Vector2 newTarget() {
+  private Vector2 newRandomTarget() {
     IRandom rnd = Locator.getRandom();
 
-    float targetX = rnd.nextFloat(
-      body.getX1() - MIN_X_WALK,
-      body.getX1() + MIN_X_WALK);
+    float targetX = body.getX1() + rnd.nextFloat(-MIN_X_WALK, MIN_X_WALK);
     float targetY = 0;
 
     if (body.getY1() <= movementRect.getCenter().y) {
@@ -85,7 +83,7 @@ public class BossAI implements ILogicComponent {
         int targetCount = Locator.getRandom().nextInt(
           TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
         for (int i = 0; i < targetCount; ++i) {
-          targets.add(newTarget());
+          targets.add(newRandomTarget());
         }
 
         state = new Walking(entity, hand, speed, movement, targets);
@@ -107,7 +105,7 @@ public class BossAI implements ILogicComponent {
       LinkedList<Vector2> targets = new LinkedList<>();
       targets.add(initialTarget);
       for (int i = 0; i < INITIAL_TARGET_COUNT; ++i) {
-        targets.add(newTarget());
+        targets.add(newRandomTarget());
       }
 
       state = new Walking(entity, hand, speed, movement, targets);
