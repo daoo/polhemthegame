@@ -8,11 +8,8 @@ import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
-import game.pods.GameTime;
-import game.world.World;
 import math.CollisionHelper;
 import math.Rectangle;
-import math.Vector2;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.AppGameContainer;
@@ -50,22 +47,14 @@ public class CollisionTester extends BasicGame {
     }
   }
 
-  private float elapsed;
-
-  private final World world;
   private final Entity obj1, obj2;
   private final Movement mov2;
 
   public CollisionTester() {
     super("Collision Tester");
 
-    elapsed = 0;
-    world = new World();
-
     obj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
     obj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
-
-    world.addUnit(obj1);
 
     // Make projectile
     obj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
@@ -74,8 +63,6 @@ public class CollisionTester extends BasicGame {
     obj2.addLogicComponent(mov2);
     obj2.addRenderComponent(new SolidQuad(Color.white, PROJECTILE_W, PROJECTILE_H));
     obj2.addRenderComponent(new Outliner(obj2, mov2, true, true));
-
-    world.addProjectile(obj2);
   }
 
   @Override
@@ -85,7 +72,8 @@ public class CollisionTester extends BasicGame {
 
   @Override
   public void render(GameContainer container, Graphics g) throws SlickException {
-    world.render(g);
+    obj1.render(g);
+    obj2.render(g);
 
     if (CollisionHelper.sweepCollisionTest(obj2.getBody(), mov2.getVelocity(),
          obj1.getBody(), 1)) {
@@ -102,13 +90,13 @@ public class CollisionTester extends BasicGame {
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP))
-        body.addPosition(new Vector2(0, -s));
+        body.addPosition(0, -s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
-        body.addPosition(new Vector2(0, s));
+        body.addPosition(0, s);
       else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
-        body.addPosition(new Vector2(-s, 0));
+        body.addPosition(-s, 0);
       else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
-        body.addPosition(new Vector2(s, 0));
+        body.addPosition(s, 0);
 
       else if (Keyboard.isKeyDown(Keyboard.KEY_W))
         mov2.addVelocity(0, -s);
@@ -119,9 +107,5 @@ public class CollisionTester extends BasicGame {
       else if (Keyboard.isKeyDown(Keyboard.KEY_D))
         mov2.addVelocity(s, 0);
     }
-
-    float frameLength = delta / 1000.0f;
-    elapsed += frameLength;
-    world.update(new GameTime(frameLength, elapsed));
   }
 }

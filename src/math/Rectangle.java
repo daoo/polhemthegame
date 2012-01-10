@@ -15,12 +15,16 @@ public class Rectangle {
     this.size   = rect.size;
   }
 
+  /**
+   * Construct a new rectangle from a position and a size.
+   * @param x1 x coordinate for top left position
+   * @param y1 y coordinate for top left position
+   * @param width the width of the rectangle
+   * @param height the height of the rectangle
+   */
   public Rectangle(float x1, float y1, float width, float height) {
-    float x2 = x1 + width;
-    float y2 = y1 + height;
-
     min    = new Vector2(x1, y1);
-    max    = new Vector2(x2, y2);
+    max    = new Vector2(x1 + width, y1 + height);
     size   = new Vector2(width, height);
     center = Vector2.add(min, Vector2.divide(size, 2.0f));
   }
@@ -42,6 +46,11 @@ public class Rectangle {
   public void setPosition(Vector2 v) {
     min = v;
     max = Vector2.add(v, size);
+  }
+
+  public void addPosition(float x, float y) {
+    min = Vector2.add(min, x, y);
+    max = Vector2.add(max, x, y);
   }
 
   public void addPosition(Vector2 v) {
