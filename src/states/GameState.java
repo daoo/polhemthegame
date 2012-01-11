@@ -11,6 +11,7 @@ import game.entities.Players;
 import game.factories.EntityFactory;
 import game.factories.WorldFactory;
 import game.pods.GameTime;
+import game.pods.Player;
 import game.world.World;
 
 import java.io.IOException;
@@ -88,8 +89,14 @@ public class GameState implements IState {
                                                     statics.getGraphics());
 
     // TODO: COOP
+    Player player = entityFactory.makePlayer(0);
+    ui.addDynamic(player.infoBar);
+    ui.addStatic(new PlayerUI(0, 0, player.shopUI, player.inventory));
+
+
     LinkedList<Entity> players = new LinkedList<>();
-    players.add(entityFactory.makePlayer(0).entity);
+    players.add(player.entity);
+
     Players.reposition(players, worldRect);
 
     worldFactory = new WorldFactory(this, stateManager, entityFactory,

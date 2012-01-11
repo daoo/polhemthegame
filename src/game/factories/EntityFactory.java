@@ -17,6 +17,7 @@ import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.entities.Entity;
 import game.misc.Shop;
+import game.pods.Player;
 import game.pods.Unit;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
@@ -39,7 +40,6 @@ import math.Vector2;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import ui.hud.PlayerUI;
 import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
@@ -100,7 +100,7 @@ public class EntityFactory {
     return makeUnit(x, y, -data.speed, 0, data);
   }
 
-  public Unit makePlayer(int index)
+  public Player makePlayer(int index)
       throws ParserException, DataException, IOException {
     PlayerData data = playersData.players.get(index);
 
@@ -128,13 +128,7 @@ public class EntityFactory {
     // UI stuff
     unit.infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
 
-    // FIXME: This should be done when the player is spawned
-    Locator.getUI().addDynamic(unit.infoBar);
-
-    // FIXME: Should also be done elsewhere
-    Locator.getUI().addStatic(new PlayerUI(0, 0, shop, inv));
-
-    return unit;
+    return new Player(unit.entity, shop, inv, unit.infoBar);
   }
 
   public Unit makeBoss(BossData data)
