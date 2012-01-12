@@ -23,9 +23,6 @@ public class BossAI implements ILogicComponent {
   private static final int TARGET_MIN_COUNT     = 0;
   private static final int TARGET_MAX_COUNT     = 3;
 
-  private static final int MIN_X_WALK = 10;
-  private static final int MIN_Y_WALK = 50;
-
   private static final float SHOOTING_TIME_MIN = 1.0f;
   private static final float SHOOTING_TIME_MAX = 1.0f;
 
@@ -53,19 +50,15 @@ public class BossAI implements ILogicComponent {
                                       arenaRect.getHeight() - body.getHeight());
   }
 
+  public IBossState getState() {
+    return state;
+  }
+
   private Vector2 newRandomTarget() {
     IRandom rnd = Locator.getRandom();
 
-    float targetX = body.getX1() + rnd.nextFloat(-MIN_X_WALK, MIN_X_WALK);
-    float targetY = 0;
-
-    if (body.getY1() <= movementRect.getCenter().y) {
-      // Go to the lower part
-      targetY = rnd.nextFloat(body.getY1() + MIN_Y_WALK, movementRect.getY2());
-    } else {
-      // Go to the upper part
-      targetY = rnd.nextFloat(movementRect.getY1(), body.getY1() - MIN_Y_WALK);
-    }
+    float targetX = rnd.nextFloat(movementRect.getX1(), movementRect.getX2());
+    float targetY = rnd.nextFloat(movementRect.getY1(), movementRect.getY2());
 
     return new Vector2(targetX, targetY);
   }

@@ -55,7 +55,7 @@ public class Walking implements IBossState {
   @Override
   public void update(GameTime time) {
     if (!targets.isEmpty()) {
-      Vector2 a = Vector2.subtract(body.getMin(), targets.peek());
+      Vector2 a = Vector2.subtract(body.getMin(), getTarget());
       if (Vector2.dot(a, movement.getVelocity()) >= 0) {
         // Target passed
         targets.remove();
@@ -64,6 +64,10 @@ public class Walking implements IBossState {
         }
       }
     }
+  }
+
+  public Vector2 getTarget() {
+    return targets.peek();
   }
 
   @Override
