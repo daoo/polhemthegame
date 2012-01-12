@@ -12,13 +12,10 @@ import game.pods.GameTime;
 
 import java.util.Queue;
 
-import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
 
 public class Walking implements IBossState {
-  private static final int DISTANCE_ACCEPTANCE = 10;
-
   private final IEntity entity;
   private final Hand hand;
   private final Rectangle body;
@@ -58,10 +55,9 @@ public class Walking implements IBossState {
   @Override
   public void update(GameTime time) {
     if (!targets.isEmpty()) {
-      Vector2 target = targets.peek();
-      if (ExMath.inRange(Vector2.distance(target, body.getMin()),
-                         -DISTANCE_ACCEPTANCE, DISTANCE_ACCEPTANCE)) {
-        // Target reached
+      Vector2 a = Vector2.subtract(body.getMin(), targets.peek());
+      if (Vector2.dot(a, movement.getVelocity()) >= 0) {
+        // Target passed
         targets.remove();
         if (!targets.isEmpty()) {
           headFor(targets.peek());
