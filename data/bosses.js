@@ -9,12 +9,12 @@
         , framerate: 8
         , offset: { x: 0, y: 0 }
         , sprite: "textures/bosses/bobby-walk.png"
-        , tileSize: { width: 22, height: 50 } }
+        , tileSize: { width: 22, height: 48 } }
       , { animation: "death"
         , framerate: 8
         , offset: { x: 0, y: 0 }
         , sprite: "textures/bosses/bobby-death.png"
-        , tileSize: { width: 200, height: 200 } } ]
+        , tileSize: { width: 187, height: 100 } } ]
     , locationX: 200
     , weapon: "ig"
     , fireLength: 2.0 }
