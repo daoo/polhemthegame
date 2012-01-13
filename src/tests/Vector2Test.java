@@ -1,7 +1,6 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import math.Random;
 import math.Vector2;
 
@@ -91,6 +90,19 @@ public class Vector2Test {
       assertEquals(
         Vector2.dot(v, u),
         Vector2.dot(u, v),
+        0.1f);
+    }
+  }
+  
+  @Test
+  public final void testDistanceSubtract() {
+    for (int i = 0; i < 100; ++i) {
+      Vector2 v = randomVector2();
+      Vector2 u = randomVector2();
+            
+      assertEquals(
+        Vector2.subtract(v, u).magnitude(),
+        Vector2.distance(u, v),
         0.1f);
     }
   }
