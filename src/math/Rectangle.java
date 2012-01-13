@@ -63,7 +63,7 @@ public class Rectangle {
   public void setPosition(Vector2 v) {
     min    = v;
     max    = Vector2.add(v, size);
-    center = Vector2.add(min, halfSize);
+    center = Vector2.add(v, halfSize);
   }
 
   /**
