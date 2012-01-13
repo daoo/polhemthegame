@@ -12,17 +12,26 @@ public class Random implements IRandom {
   }
 
   @Override
+  public boolean nextBool() {
+    return random.nextBoolean();
+  }
+
+  @Override
   public int nextInt() {
     return random.nextInt();
   }
 
   @Override
   public int nextInt(int max) {
+    assert max > 0;
+
     return random.nextInt(max);
   }
 
   @Override
   public int nextInt(int min, int max) {
+    assert min < max;
+
     return min + random.nextInt(max - min);
   }
 
@@ -33,11 +42,15 @@ public class Random implements IRandom {
 
   @Override
   public float nextFloat(float max) {
+    assert max > 0;
+
     return random.nextFloat() * max;
   }
 
   @Override
   public float nextFloat(float min, float max) {
+    assert min < max;
+
     return min + random.nextFloat() * (max - min);
   }
 }
