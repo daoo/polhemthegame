@@ -43,7 +43,6 @@ public class Vector2Test {
     for (int i = 0; i < 100; ++i) {
       int a = random.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
-      Vector2 u = randomVector2();
       
       assertEquals(
         v.magnitudeSquared(),
