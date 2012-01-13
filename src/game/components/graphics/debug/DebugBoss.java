@@ -44,5 +44,8 @@ public class DebugBoss implements IRenderComponent {
     }
 
     g.draw(new Circle(body.getHalfSize().x, body.getHalfSize().y, BossAI.MIN_WALK));
+
+    Vector2 o = Vector2.subtract(ai.getMovementRect().getMin(), body.getMin());
+    g.drawRect(o.x, o.y, ai.getMovementRect().getWidth(), ai.getMovementRect().getHeight());
   }
 }

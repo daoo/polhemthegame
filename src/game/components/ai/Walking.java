@@ -112,6 +112,8 @@ public class Walking implements IBossState {
    */
   private static Vector2 newRandomTarget(IRandom rnd, Rectangle rect,
                                          Vector2 cPos, float radiusSquared) {
+    assert radiusSquared < ExMath.square(rect.getHeight());
+
     float targetX, targetY;
 
     /* The problem:
@@ -139,27 +141,30 @@ public class Walking implements IBossState {
 
     float tmp = ExMath.square(targetX - cPos.x);
     if (radiusSquared < tmp) {
-      // Circle is not intersecting out x here
+      // Circle is not intersecting our x here
       targetY = rnd.nextFloat(rect.getY1(), rect.getY2());
     } else {
       // Here we have to take the circle into account
       float yRoot = (float) (Math.sqrt(radiusSquared - tmp));
 
-      // Note that portions of the circle could lie outside of the rectangle
       float y1 = cPos.y - yRoot;
       float y2 = cPos.y + yRoot;
 
-      // Make sure we stay inside the rectangle
-      float minY = y1 > rect.getY1() ? y1 : rect.getY1();
-      float maxY = y2 < rect.getY2() ? y2 : rect.getY2();
-
-      // Now we have two intervals
-      if (rnd.nextBool()) {
-        // Upper
-        targetY = rnd.nextFloat(rect.getY1(), minY);
+      // Note that portions of the circle could lie outside of the rectangle.
+      // In that case we have to 
+      if (y1 < rect.getY1()) {
+        targetY = rnd.nextFloat(y2, rect.getY2());
+      } else if (y2 > rect.getY1()) {
+        targetY = rnd.nextFloat(rect.getY1(), y1);
       } else {
-        // Lower
-        targetY = rnd.nextFloat(maxY, rect.getY2());
+        // Now we have two intervals
+        if (rnd.nextBool()) {
+          // Upper
+          targetY = rnd.nextFloat(rect.getY1(), y1);
+        } else {
+          // Lower
+          targetY = rnd.nextFloat(y2, rect.getY2());
+        }
       }
     }
 

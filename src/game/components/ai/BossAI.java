@@ -91,4 +91,8 @@ public class BossAI implements ILogicComponent {
       state.start(time);
     }
   }
+
+  public Rectangle getMovementRect() {
+    return movementRect;
+  }
 }
