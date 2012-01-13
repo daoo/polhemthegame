@@ -147,7 +147,7 @@ public class EntityFactory {
     Hand hand     = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
     Weapon weapon = weaponFactory.makeWeapon(data.weapon);
     BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
-                               data.speed, initialTarget);
+                               data.locationX, data.speed, initialTarget);
 
     unit.entity.addLogicComponent(ai);
     unit.entity.addRenderComponent(hand);

@@ -10,18 +10,18 @@ import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
 import game.pods.GameTime;
-
-import java.util.LinkedList;
-
 import main.Locator;
-import math.IRandom;
+import math.ExMath;
 import math.Rectangle;
 import math.Vector2;
 
 public class BossAI implements ILogicComponent {
-  private static final int INITIAL_TARGET_COUNT = 2;
+  private static final int INITIAL_TARGET_COUNT = 20;
   private static final int TARGET_MIN_COUNT     = 0;
   private static final int TARGET_MAX_COUNT     = 3;
+
+  public static final float MIN_WALK         = 100.0f;
+  public static final float MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
 
   private static final float SHOOTING_TIME_MIN = 1.0f;
   private static final float SHOOTING_TIME_MAX = 1.0f;
@@ -36,8 +36,8 @@ public class BossAI implements ILogicComponent {
 
   private IBossState state;
 
-  public BossAI(IEntity entity, Movement movement, Hand hand,
-                Rectangle arenaRect, float speed, Vector2 initialTarget) {
+  public BossAI(IEntity entity, Movement movement, Hand hand, Rectangle arenaRect,
+                float locationX, float speed, Vector2 initialTarget) {
     this.entity        = entity;
     this.hand          = hand;
     this.movement      = movement;
@@ -45,22 +45,18 @@ public class BossAI implements ILogicComponent {
     this.speed         = speed;
     this.initialTarget = initialTarget;
 
-    this.movementRect = new Rectangle(arenaRect.getX1(), arenaRect.getY1(),
-                                      arenaRect.getWidth() - body.getWidth(),
-                                      arenaRect.getHeight() - body.getHeight());
+    Vector2 halfSize = body.getHalfSize();
+
+    float x1 = arenaRect.getX2() + halfSize.x - locationX;
+    float y1 = arenaRect.getY1() + halfSize.y;
+    float x2 = arenaRect.getX2() - halfSize.x;
+    float y2 = arenaRect.getY2() - halfSize.y;
+
+    this.movementRect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
   }
 
   public IBossState getState() {
     return state;
-  }
-
-  private Vector2 newRandomTarget() {
-    IRandom rnd = Locator.getRandom();
-
-    float targetX = rnd.nextFloat(movementRect.getX1(), movementRect.getX2());
-    float targetY = rnd.nextFloat(movementRect.getY1(), movementRect.getY2());
-
-    return new Vector2(targetX, targetY);
   }
 
   @Override
@@ -71,15 +67,10 @@ public class BossAI implements ILogicComponent {
       // Go to next state
 
       if (state.getNextState() == BossState.WALKING) {
-        LinkedList<Vector2> targets = new LinkedList<>();
-
         int targetCount = Locator.getRandom().nextInt(
           TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-        for (int i = 0; i < targetCount; ++i) {
-          targets.add(newRandomTarget());
-        }
-
-        state = new Walking(entity, hand, speed, movement, targets);
+        state = new Walking(
+          entity, hand, movement, speed, movementRect, targetCount);
       } else if (state.getNextState() == BossState.SHOOTING) {
         float shootingTime = Locator.getRandom().nextFloat(
           SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
@@ -95,13 +86,8 @@ public class BossAI implements ILogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      LinkedList<Vector2> targets = new LinkedList<>();
-      targets.add(initialTarget);
-      for (int i = 0; i < INITIAL_TARGET_COUNT; ++i) {
-        targets.add(newRandomTarget());
-      }
-
-      state = new Walking(entity, hand, speed, movement, targets);
+      state = new Walking(entity, hand, movement, speed, movementRect,
+        INITIAL_TARGET_COUNT, initialTarget);
       state.start(time);
     }
   }

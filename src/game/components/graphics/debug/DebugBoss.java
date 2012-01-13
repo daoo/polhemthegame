@@ -10,6 +10,7 @@ import math.Rectangle;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
 
 public class DebugBoss implements IRenderComponent {
   private final Rectangle body;
@@ -37,9 +38,11 @@ public class DebugBoss implements IRenderComponent {
       Walking walking = (Walking) state;
       Vector2 target = walking.getTarget();
       if (target != null) {
-        Vector2 m = Vector2.subtract(target, body.getMin());
-        g.drawLine(0, 0, m.x, m.y);
+        Vector2 a = Vector2.subtract(target, body.getCenter());
+        g.drawLine(body.getHalfSize().x, body.getHalfSize().y, a.x, a.y);
       }
     }
+
+    g.draw(new Circle(body.getHalfSize().x, body.getHalfSize().y, BossAI.MIN_WALK));
   }
 }
