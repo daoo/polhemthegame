@@ -77,15 +77,25 @@ public class Vector2Test {
         Vector2.dot(Vector2.add(u, v), w),
         Vector2.dot(u, w) + Vector2.dot(v, w),
         0.1f);
+      
       assertEquals(
         Vector2.dot(Vector2.multiply(u, a), v),
         a * Vector2.dot(v, u),
         0.1f);
       
-      // Commutativity
       assertEquals(
         Vector2.dot(v, u),
         Vector2.dot(u, v),
+        0.1f);
+      
+      assertEquals(
+        Vector2.dot(u, u),
+        u.magnitudeSquared(),
+        0.1f);
+      
+      assertEquals(
+        Vector2.dot(u, u.normalize()),
+        u.magnitude(),
         0.1f);
     }
   }
