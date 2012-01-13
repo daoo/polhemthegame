@@ -13,7 +13,7 @@ public class Vector2Test {
   
   private Random random;
   
-  private Vector2 unitRight, unitUp, unitLeft, unitDown;
+  private Vector2 unitRight;
   
   private Vector2 randomVector2() {
     return new Vector2(
@@ -25,9 +25,6 @@ public class Vector2Test {
     random = new Random();
     
     unitRight = new Vector2(1, 0);
-    unitUp    = new Vector2(0, 1);
-    unitLeft  = new Vector2(-1, 0);
-    unitDown  = new Vector2(0, -1);
   }
 
   @After
