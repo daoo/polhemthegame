@@ -1,6 +1,6 @@
 { bosses:
   [ { name: "bobby"
-    , handOffset: { x: 0, y: 0 }
+    , handOffset: { x: 3, y: 21 }
     , hitbox: { width: 22, height: 50 }
     , hitpoints: 750
     , speed: 100

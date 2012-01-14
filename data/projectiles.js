@@ -102,6 +102,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
+    , hitbox: { width: 16, height: 3 }
     , range: 2000
     , speed: 250
     , sprite: null
@@ -114,6 +115,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
+    , hitbox: { width: 40, height: 40 }
     , range: 2000
     , speed: 250
     , sprite: null
@@ -126,6 +128,7 @@
     , damage: 5
     , duration: 60
     , gravity: false
+    , hitbox: { width: 12, height: 8 }
     , range: 2000
     , speed: 250
     , sprite: null
