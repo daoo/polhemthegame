@@ -5,8 +5,8 @@
 package loader;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class FileBeacon {
   private File fDataDir;
@@ -24,13 +24,13 @@ public class FileBeacon {
     }
   }
 
-  public InputStream getReader(String id) throws FileNotFoundException {
+  public FileInputStream getReader(String id) throws FileNotFoundException {
     assert id != null;
 
     File f = new File(fDataDir, id);
     if (f.exists()) {
       // Read file from directory
-      return new LineStream(f);
+      return new FileInputStream(f);
     }
 
     throw new FileNotFoundException(id);
