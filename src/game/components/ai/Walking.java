@@ -4,10 +4,8 @@
 
 package game.components.ai;
 
-import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.physics.Movement;
-import game.entities.IEntity;
 import game.pods.GameTime;
 import main.Locator;
 import math.ExMath;
@@ -19,8 +17,6 @@ public class Walking implements IBossState {
   public static final float MIN_WALK         = 100.0f;
   public static final float MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
 
-  private final IEntity entity;
-  private final Hand hand;
   private final Rectangle body;
   private final float speed;
   private final Movement movement;
@@ -31,19 +27,20 @@ public class Walking implements IBossState {
 
   /**
    * Create a new walk state for boss AI.
-   * @param entity the boss entity
+   * @param body the boss body
    * @param hand the boss hand
    * @param movement the boss movement
    * @param speed the speed of the boss
    * @param movementRect the rectangle which the boss should move within
-   * @param targets the number of targets (positions the boss should walk to)
+   * @param targets the number of targets (positions the boss should walk to),
+   *                greater than zero
    * @param initialTarget the first target the boss should reach
    */
-  public Walking(IEntity entity, Hand hand, Movement movement, float speed,
+  public Walking(Rectangle body, Hand hand, Movement movement, float speed,
       Rectangle movementRect, int targets, Vector2 initialTarget) {
-    this.entity       = entity;
-    this.body         = entity.getBody();
-    this.hand         = hand;
+    assert targets > 0;
+
+    this.body         = body;
     this.speed        = speed;
     this.movement     = movement;
     this.targets      = targets;
@@ -53,7 +50,7 @@ public class Walking implements IBossState {
 
   /**
    * Create a new walk state for boss AI.
-   * Instead of specifying the initial target a random target will be choosen
+   * Instead of specifying the initial target a random target will be chosen
    * instead.
    * @param entity the boss entity
    * @param hand the boss hand
@@ -62,18 +59,15 @@ public class Walking implements IBossState {
    * @param movementRect the rectangle which the boss should move within
    * @param targets the number of targets (positions the boss should walk to)
    */
-  public Walking(IEntity entity, Hand hand, Movement movement, float speed,
+  public Walking(Rectangle body, Hand hand, Movement movement, float speed,
       Rectangle movementRect, int targets) {
-    this(entity, hand, movement, speed, movementRect, targets,
+    this(body, hand, movement, speed, movementRect, targets,
       newRandomTarget(Locator.getRandom(),
-        movementRect, entity.getBody().getCenter(), MIN_WALK_SQUARED));
+        movementRect, body.getCenter(), MIN_WALK_SQUARED));
   }
 
   @Override
   public void start(GameTime time) {
-    entity.sendMessage(Message.START_ANIMATION, null);
-    hand.stopUse();
-
     headFor(target);
   }
 

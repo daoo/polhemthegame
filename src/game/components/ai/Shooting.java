@@ -4,22 +4,15 @@
 
 package game.components.ai;
 
-import game.components.Message;
-import game.components.holdables.Hand;
-import game.entities.IEntity;
 import game.pods.GameTime;
 
 public class Shooting implements IBossState {
-  private final IEntity entity;
-  private final Hand hand;
   private final float length;
 
   private float endTime;
   private boolean finished;
 
-  public Shooting(IEntity entity, Hand hand, float length) {
-    this.entity = entity;
-    this.hand   = hand;
+  public Shooting(float length) {
     this.length = length;
 
     endTime  = 0;
@@ -29,8 +22,6 @@ public class Shooting implements IBossState {
   @Override
   public void start(GameTime time) {
     endTime = time.elapsed + length;
-    entity.sendMessage(Message.STOP_ANIMATION, null);
-    hand.startUse();
   }
 
   @Override
