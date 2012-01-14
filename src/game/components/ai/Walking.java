@@ -29,24 +29,41 @@ public class Walking implements IBossState {
   private Vector2 target;
   private int targets;
 
-  public Walking(IEntity entity, Hand hand, Movement movement,
-      float speed, Rectangle movementRect, int targets, Vector2 initialTarget) {
-    if (targets < 1) {
-      throw new IllegalArgumentException("Can't walk without targets");
-    }
-
-    this.entity   = entity;
-    this.body     = entity.getBody();
-    this.hand     = hand;
-    this.speed    = speed;
-    this.movement = movement;
-    this.targets  = targets;
+  /**
+   * Create a new walk state for boss AI.
+   * @param entity the boss entity
+   * @param hand the boss hand
+   * @param movement the boss movement
+   * @param speed the speed of the boss
+   * @param movementRect the rectangle which the boss should move within
+   * @param targets the number of targets (positions the boss should walk to)
+   * @param initialTarget the first target the boss should reach
+   */
+  public Walking(IEntity entity, Hand hand, Movement movement, float speed,
+      Rectangle movementRect, int targets, Vector2 initialTarget) {
+    this.entity       = entity;
+    this.body         = entity.getBody();
+    this.hand         = hand;
+    this.speed        = speed;
+    this.movement     = movement;
+    this.targets      = targets;
     this.movementRect = movementRect;
-    this.target = initialTarget;
+    this.target       = initialTarget;
   }
 
-  public Walking(IEntity entity, Hand hand, Movement movement,
-                 float speed, Rectangle movementRect, int targets) {
+  /**
+   * Create a new walk state for boss AI.
+   * Instead of specifying the initial target a random target will be choosen
+   * instead.
+   * @param entity the boss entity
+   * @param hand the boss hand
+   * @param movement the boss movement
+   * @param speed the speed of the boss
+   * @param movementRect the rectangle which the boss should move within
+   * @param targets the number of targets (positions the boss should walk to)
+   */
+  public Walking(IEntity entity, Hand hand, Movement movement, float speed,
+      Rectangle movementRect, int targets) {
     this(entity, hand, movement, speed, movementRect, targets,
       newRandomTarget(Locator.getRandom(),
         movementRect, entity.getBody().getCenter(), MIN_WALK_SQUARED));
@@ -151,7 +168,7 @@ public class Walking implements IBossState {
       float y2 = cPos.y + yRoot;
 
       // Note that portions of the circle could lie outside of the rectangle.
-      // In that case we have to 
+      // In that case we have to
       if (y1 < rect.getY1()) {
         targetY = rnd.nextFloat(y2, rect.getY2());
       } else if (y2 > rect.getY1()) {

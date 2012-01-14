@@ -16,7 +16,7 @@ import math.Rectangle;
 import math.Vector2;
 
 public class BossAI implements ILogicComponent {
-  private static final int INITIAL_TARGET_COUNT = 20;
+  private static final int INITIAL_TARGET_COUNT = 2;
   private static final int TARGET_MIN_COUNT     = 0;
   private static final int TARGET_MAX_COUNT     = 3;
 
