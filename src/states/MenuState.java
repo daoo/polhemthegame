@@ -25,6 +25,7 @@ import ui.menu.MenuItemDisabled;
 import util.Node;
 
 public class MenuState implements IState {
+  private static final String CAMPAIGN_FILE = "campaigns/polhem.js";
   private final Image background;
   private final Menu  menu;
 
@@ -36,7 +37,7 @@ public class MenuState implements IState {
 
     tmp.add(new MenuButton("singleplayer", 60, 280, new IUIEvent() {
       @Override public void fire() {
-        manager.enterSinglePlayer();
+        manager.enterSinglePlayer(CAMPAIGN_FILE);
       }
     }));
     tmp.add(new MenuItemDisabled("coop", 60, 380));

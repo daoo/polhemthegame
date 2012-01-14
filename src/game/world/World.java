@@ -134,7 +134,8 @@ public class World implements IDebuggable {
     return parent;
   }
 
-  private void processEntities(Iterable<? extends IEntity> entities, GameTime time) {
+  private static void processEntities(Iterable<? extends IEntity> entities,
+      GameTime time) {
     Iterator<? extends IEntity> itr = entities.iterator();
     while (itr.hasNext()) {
       IEntity e = itr.next();
@@ -145,7 +146,7 @@ public class World implements IDebuggable {
     }
   }
 
-  private <T> void move(List<? extends T> from, List<? super T> to) {
+  private static <T> void move(List<? extends T> from, List<? super T> to) {
     to.addAll(from);
     from.clear();
   }

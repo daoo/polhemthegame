@@ -29,6 +29,7 @@ public class Vector2Test {
 
   @After
   public void tearDown() throws Exception {
+    // Do nothing
   }
 
   @Test

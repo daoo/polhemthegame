@@ -50,14 +50,12 @@ public class StateManager {
     }
   }
 
-  public void enterSinglePlayer() {
+  public void enterSinglePlayer(String campaign) {
     try {
-      CampaignData campaign = (CampaignData) Locator.getCache().getCold(
-        "campaigns/polhem.js",
-        new GsonParser(CampaignData.class)
-      );
+      CampaignData data = (CampaignData) Locator.getCache().getCold(
+        campaign, new GsonParser(CampaignData.class));
 
-      GameState state = new GameState(this, campaign, Launcher.WIDTH, Launcher.HEIGHT);
+      GameState state = new GameState(this, data, Launcher.WIDTH, Launcher.HEIGHT);
       switchToState(new DebugState(state));
     } catch (ParserException | DataException | IOException | SlickException ex) {
       handleException(ex);

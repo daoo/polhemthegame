@@ -111,7 +111,7 @@ public class StateCredits implements IState {
   }
 
   @SuppressWarnings("unchecked")
-  private UnicodeFont getFont(String name, int size)
+  private static UnicodeFont getFont(String name, int size)
     throws SlickException {
     Font font = new Font(name, Font.PLAIN, size);
     UnicodeFont ufont = new UnicodeFont(font);
@@ -124,8 +124,8 @@ public class StateCredits implements IState {
     return ufont;
   }
 
-  private ImageWithLocation lineFromString(float x, float y, String s, UnicodeFont font)
-      throws SlickException {
+  private static ImageWithLocation lineFromString(float x, float y, String s,
+      UnicodeFont font) throws SlickException {
     int width = font.getWidth(s);
     int height = font.getHeight(s);
 

@@ -19,8 +19,8 @@ import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
 import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
-import game.triggers.effects.spawn.SpawnCreepEffect;
 import game.triggers.effects.spawn.SpawnBossEffect;
+import game.triggers.effects.spawn.SpawnCreepEffect;
 import game.world.World;
 
 import java.io.IOException;
@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import loader.ICache;
 import loader.data.DataException;
 import loader.data.json.CreepsData;
 import loader.data.json.CreepsData.CreepData;
@@ -109,10 +108,9 @@ public class WorldFactory {
   public World makeLevel(LevelData level)
       throws DataException, ParserException, IOException {
 
-    ICache cache           = Locator.getCache();
-    Image imgLevelStart    = CacheTool.getImage(cache, level.loading);
-    Image imgLevelComplete = CacheTool.getImage(cache, level.completed);
-    Image imgGameOver      = CacheTool.getImage(cache, GAME_OVER_IMAGE);
+    Image imgLevelStart    = CacheTool.getImage(Locator.getCache(), level.loading);
+    Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
+    Image imgGameOver      = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
 
     world = new World();
 
@@ -146,9 +144,9 @@ public class WorldFactory {
       // No boss, level complete after all creeps dead
       creepsDeadTrigger.addAllEffects(levelCompleteEffects);
     } else {
-      Image imgBoss = CacheTool.getImage(cache, level.preBossImage);
+      Image imgBoss = CacheTool.getImage(Locator.getCache(), level.preBossImage);
 
-      Unit boss = entityFactory.makeBoss(CacheTool.getBoss(cache, level.boss));
+      Unit boss = entityFactory.makeBoss(CacheTool.getBoss(Locator.getCache(), level.boss));
 
       Trigger bossDeadTrigger = new Trigger();
       bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
