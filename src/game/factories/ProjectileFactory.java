@@ -29,7 +29,7 @@ import game.triggers.effects.spawn.SpawnAnimationEffect;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import loader.data.json.ProjectilesData.ProjectileData;
+import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;

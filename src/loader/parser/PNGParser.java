@@ -4,19 +4,19 @@
 
 package loader.parser;
 
-import java.io.Closeable;
 import java.io.InputStream;
 
-import loader.data.ClosableImage;
+import loader.IData;
+import loader.data.DataImage;
 
 import org.newdawn.slick.SlickException;
 
 public class PNGParser implements IParser {
   @Override
-  public Closeable parse(InputStream is) throws ParserException {
+  public IData parse(InputStream is) throws ParserException {
     try {
       // NOTE: ref is set to is.toString() because it seemed as a logic decision
-      return new ClosableImage(is, is.toString(), false);
+      return new DataImage(is, is.toString(), false);
     } catch (SlickException e) {
       throw new ParserException(e);
     }

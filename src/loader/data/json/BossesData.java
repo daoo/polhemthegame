@@ -4,20 +4,14 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import loader.IData;
 import loader.data.DataException;
+import loader.data.json.types.BossData;
 
-public class BossesData implements Closeable {
-  public class BossData extends UnitData implements Closeable {
-    public int    locationX;
-    public String weapon;
-    public float  fireLength;
-    public Offset handOffset;
-  }
-
+public class BossesData implements IData {
   public ArrayList<BossData> bosses;
 
   public BossData getBoss(String name) throws DataException {

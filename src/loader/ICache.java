@@ -28,16 +28,15 @@ public interface ICache extends Closeable {
    * @throws IOException if the data is not found on the disk
    * @throws ParserException if parsing the data fails
    */
-  Closeable getCold(String id, IParser parser)
-    throws IOException, ParserException;
+  IData getCold(String id, IParser parser) throws IOException, ParserException;
 
   /**
    * Retrieve an item from the cache with no potential disk access.
-   * @param id
-   * @return
-   * @throws ObjectNotInCacheException
+   * @param id the id of the item to retrieve
+   * @return the requested data
+   * @throws ObjectNotInCacheException if the data isn't in the cache
    */
-  Closeable getWarm(String id) throws ObjectNotInCacheException;
+  IData getWarm(String id) throws ObjectNotInCacheException;
 
   /**
    * Return the number of items in this cache.

@@ -15,9 +15,9 @@ import java.io.IOException;
 
 import loader.data.DataException;
 import loader.data.json.ProjectilesData;
-import loader.data.json.ProjectilesData.ProjectileData;
 import loader.data.json.WeaponsData;
-import loader.data.json.WeaponsData.WeaponData;
+import loader.data.json.types.ProjectileData;
+import loader.data.json.types.WeaponData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;

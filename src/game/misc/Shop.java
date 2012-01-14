@@ -14,6 +14,7 @@ import java.util.LinkedList;
 
 import loader.data.DataException;
 import loader.data.json.ShopData;
+import loader.data.json.types.ShopItemData;
 import loader.parser.ParserException;
 import main.Locator;
 
@@ -43,7 +44,7 @@ public class Shop {
   public Shop(ShopData shop, WeaponFactory factory) throws ParserException, IOException, DataException {
     items = new LinkedList<>();
 
-    for (ShopData.ShopItemData item : shop.items) {
+    for (ShopItemData item : shop.items) {
       Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);
       Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
       Weapon weapon  = factory.makeWeapon(item.weapon);

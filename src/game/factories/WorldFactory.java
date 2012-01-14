@@ -31,9 +31,9 @@ import java.util.List;
 
 import loader.data.DataException;
 import loader.data.json.CreepsData;
-import loader.data.json.CreepsData.CreepData;
 import loader.data.json.LevelData;
-import loader.data.json.LevelData.CreepSpawnData;
+import loader.data.json.types.CreepData;
+import loader.data.json.types.CreepSpawnData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;

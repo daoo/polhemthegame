@@ -4,20 +4,17 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class LevelData implements Closeable {
-  public class CreepSpawnData {
-    public String creep;
-    public float  spawnTime;
-  }
+import loader.IData;
+import loader.data.json.types.CreepSpawnData;
 
+public class LevelData implements IData {
   public String level;
   public String loading, completed, preBossImage;
 
-  public String                    boss;
+  public String boss;
   public ArrayList<CreepSpawnData> creeps;
 
   @Override

@@ -28,12 +28,12 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import loader.data.DataException;
-import loader.data.json.BossesData.BossData;
-import loader.data.json.CreepsData.CreepData;
 import loader.data.json.PlayersData;
-import loader.data.json.PlayersData.PlayerData;
+import loader.data.json.types.BossData;
+import loader.data.json.types.CreepData;
+import loader.data.json.types.PlayerData;
+import loader.data.json.types.UnitData;
 import loader.data.json.ShopData;
-import loader.data.json.UnitData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;

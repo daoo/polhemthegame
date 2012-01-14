@@ -4,10 +4,11 @@
 
 package loader.parser;
 
-import java.io.Closeable;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+
+import loader.IData;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -20,7 +21,7 @@ public class GsonParser implements IParser {
   }
 
   @Override
-  public Closeable parse(InputStream br) throws ParserException {
+  public IData parse(InputStream br) throws ParserException {
     try {
       return new Gson().fromJson(new InputStreamReader(br), typeOf);
     } catch (JsonParseException e) {

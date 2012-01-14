@@ -4,11 +4,12 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CampaignData implements Closeable {
+import loader.IData;
+
+public class CampaignData implements IData {
   public String            name;
   public ArrayList<String> levels;
 

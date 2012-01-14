@@ -4,7 +4,6 @@
 
 package loader;
 
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +15,7 @@ import loader.parser.ParserException;
 
 public class Cache implements ICache {
   private final FileBeacon beacon;
-  private final HashMap<String, Closeable> cache;
+  private final HashMap<String, IData> cache;
 
   public Cache(File rootDir) throws FileNotFoundException {
     assert rootDir != null;
@@ -27,7 +26,7 @@ public class Cache implements ICache {
 
   @Override
   public void close() throws IOException {
-    for (Closeable cacheItem : cache.values()) {
+    for (IData cacheItem : cache.values()) {
       cacheItem.close();
     }
 
@@ -48,15 +47,13 @@ public class Cache implements ICache {
   }
 
   @Override
-  public Closeable getCold(String id, IParser parser)
+  public IData getCold(String id, IParser parser)
     throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    Closeable data;
-    if (cache.containsKey(id)) {
-      data = cache.get(id);
-    } else {
+    IData data = cache.get(id);
+    if (data == null) {
       data = readAndParse(id, parser);
       cache.put(id, data);
     }
@@ -65,12 +62,12 @@ public class Cache implements ICache {
   }
 
   @Override
-  public Closeable getWarm(String id) throws ObjectNotInCacheException {
+  public IData getWarm(String id) throws ObjectNotInCacheException {
     assert id != null;
 
-    Closeable c = cache.get(id);
-    if (c != null) {
-      return c;
+    IData data = cache.get(id);
+    if (data != null) {
+      return data;
     }
 
     throw new ObjectNotInCacheException(id);
@@ -79,19 +76,19 @@ public class Cache implements ICache {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (Closeable c : cache.values()) {
+    for (IData c : cache.values()) {
       sb.append(c);
     }
 
     return sb.toString();
   }
 
-  private Closeable readAndParse(String id, IParser parser)
+  private IData readAndParse(String id, IParser parser)
       throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    Closeable result = null;
+    IData result = null;
     try (InputStream is = beacon.getReader(id)) {
       result = parser.parse(is);
     } catch (ParserException ex) {

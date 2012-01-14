@@ -4,17 +4,13 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayersData implements Closeable {
-  public class PlayerData extends UnitData implements Closeable {
-    public int    startMoney;
-    public String startWeapon;
-    public Offset handOffset;
-  }
+import loader.IData;
+import loader.data.json.types.PlayerData;
 
+public class PlayersData implements IData {
   public ArrayList<PlayerData> players;
 
   @Override

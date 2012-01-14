@@ -4,15 +4,16 @@
 
 package loader.data;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
+
+import loader.IData;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class ClosableImage extends Image implements Closeable {
-  public ClosableImage(InputStream is, String string, boolean b)
+public class DataImage extends Image implements IData {
+  public DataImage(InputStream is, String string, boolean b)
       throws SlickException {
     super(is, string, b);
   }

@@ -4,18 +4,14 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import loader.IData;
 import loader.data.DataException;
+import loader.data.json.types.CreepData;
 
-public class CreepsData implements Closeable {
-  public class CreepData extends UnitData implements Closeable {
-    public int moneyGain;
-    public int damage;
-  }
-
+public class CreepsData implements IData {
   public ArrayList<CreepData> creeps;
 
   public CreepData getCreep(String name) throws DataException {

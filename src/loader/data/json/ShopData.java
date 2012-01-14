@@ -4,19 +4,14 @@
 
 package loader.data.json;
 
-import java.io.Closeable;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-public class ShopData implements Closeable {
-  public class ShopItemData {
-    public String weapon;
-    public int    price;
-    public String icon;
-    public String iconGray;
-  }
+import loader.IData;
+import loader.data.json.types.ShopItemData;
 
-  public LinkedList<ShopItemData> items;
+public class ShopData implements IData {
+  public ArrayList<ShopItemData> items;
 
   @Override
   public void close() throws IOException {
