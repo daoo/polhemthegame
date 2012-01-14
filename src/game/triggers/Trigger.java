@@ -21,17 +21,14 @@ public class Trigger implements ITrigger {
   private final LinkedList<ICondition> conditions;
   private final LinkedList<IEffect> effects;
 
-  private final boolean loop;
   private boolean runAgain;
 
   private World world;
 
   /**
    * Create a new trigger with no conditions or effects.
-   * @param loop specifies if this triggers should loop
    */
-  public Trigger(boolean loop) {
-    this.loop = loop;
+  public Trigger() {
     runAgain = true;
 
     conditions = new LinkedList<>();
@@ -71,9 +68,7 @@ public class Trigger implements ITrigger {
       if (checkConditions(time)) {
         execute(time);
 
-        if (!loop) {
-          runAgain = false;
-        }
+        runAgain = false;
       }
     }
   }
@@ -151,7 +146,7 @@ public class Trigger implements ITrigger {
 
   @Override
   public String debugString() {
-    return String.format("Trigger, loop %b, runAgain %b", loop, runAgain);
+    return "Trigger, runAgain " + Boolean.toString(runAgain);
   }
 
   @Override

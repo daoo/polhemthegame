@@ -25,7 +25,7 @@ public class ExecuteWithDelayEffect implements IEffect {
   public ExecuteWithDelayEffect(float delay, Collection<? extends IEffect> effects) {
     this.delay = delay;
 
-    delayed = new Trigger(false);
+    delayed = new Trigger();
     delayed.addAllEffects(effects);
   }
 

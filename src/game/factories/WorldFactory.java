@@ -116,10 +116,10 @@ public class WorldFactory {
 
     world = new World();
 
-    creepsSpawnTrigger = new Trigger(false);
-    creepsDeadTrigger  = new Trigger(false);
-    Trigger levelStartTrigger  = new Trigger(false);
-    Trigger playersDeadTrigger = new Trigger(false);
+    creepsSpawnTrigger = new Trigger();
+    creepsDeadTrigger  = new Trigger();
+    Trigger levelStartTrigger  = new Trigger();
+    Trigger playersDeadTrigger = new Trigger();
 
     creepsSpawnTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
     levelStartTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
@@ -150,7 +150,7 @@ public class WorldFactory {
 
       Unit boss = entityFactory.makeBoss(CacheTool.getBoss(cache, level.boss));
 
-      Trigger bossDeadTrigger = new Trigger(false);
+      Trigger bossDeadTrigger = new Trigger();
       bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
       bossDeadTrigger.addAllEffects(levelCompleteEffects);
 
