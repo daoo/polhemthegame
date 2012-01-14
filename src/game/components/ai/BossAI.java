@@ -83,6 +83,9 @@ public class BossAI implements ILogicComponent {
 
       state = new Walking(entity.getBody(), hand, movement, speed, movementRect,
         INITIAL_TARGET_COUNT, initialTarget);
+
+      entity.sendMessage(Message.START_ANIMATION, null);
+
       state.start(time);
     }
   }
