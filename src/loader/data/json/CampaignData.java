@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import loader.IData;
 
 public class CampaignData implements IData {
-  public String            name;
+  public String name;
   public ArrayList<String> levels;
 
-  public int[]  constraints;
+  public int[] constraints;
   public String background;
 
   @Override

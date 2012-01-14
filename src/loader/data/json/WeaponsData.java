@@ -5,23 +5,16 @@
 package loader.data.json;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 import loader.IData;
-import loader.data.DataException;
 import loader.data.json.types.WeaponData;
 
 public class WeaponsData implements IData {
-  public ArrayList<WeaponData> weapons;
+  private Map<String, WeaponData> weapons;
 
-  public WeaponData getWeapon(String name) throws DataException {
-    for (WeaponData w : weapons) {
-      if (w.name.equals(name)) {
-        return w;
-      }
-    }
-
-    throw new DataException("No weapon by the name \"" + name + "\".");
+  public WeaponData getWeapon(String name) {
+    return weapons.get(name);
   }
 
   @Override

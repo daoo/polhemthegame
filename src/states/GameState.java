@@ -17,7 +17,6 @@ import game.world.World;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
 import main.Locator;
@@ -56,7 +55,7 @@ public class GameState implements IState {
 
   public GameState(StateManager stateManager, CampaignData data,
                    int windowWidth, int windowHeight)
-      throws ParserException, DataException, IOException, SlickException {
+      throws ParserException, IOException, SlickException {
     if (data.levels.isEmpty()) {
       throw new IllegalArgumentException("No levels in campaign");
     }
@@ -89,7 +88,7 @@ public class GameState implements IState {
                                                     statics.getGraphics());
 
     // TODO: COOP
-    Player player = entityFactory.makePlayer(0);
+    Player player = entityFactory.makePlayer("blue");
     ui.addDynamic(player.infoBar);
     ui.addStatic(new PlayerUI(0, 0, player.shopUI, player.inventory));
 
@@ -107,7 +106,7 @@ public class GameState implements IState {
   public void start(StateManager stateManager) {
     try {
       nextLevel();
-    } catch (ParserException | IOException | DataException ex) {
+    } catch (ParserException | IOException ex) {
       stateManager.handleException(ex);
     }
   }
@@ -132,7 +131,7 @@ public class GameState implements IState {
     if (nextAction == ACTION.NEXT_LEVEL) {
       try {
         nextLevel();
-      } catch (DataException | ParserException | IOException ex) {
+      } catch (ParserException | IOException ex) {
         stateManager.handleException(ex);
       }
       nextAction = null;
@@ -160,8 +159,7 @@ public class GameState implements IState {
     ui.renderStatics(g);
   }
 
-  private void nextLevel()
-      throws DataException, ParserException, IOException {
+  private void nextLevel() throws ParserException, IOException {
     if (campaign.hasMoreLevels()) {
       campaign.nextLevel();
 

@@ -21,9 +21,4 @@ public class LevelData implements IData {
   public void close() throws IOException {
     // No data needs clean up
   }
-
-  @Override
-  public String toString() {
-    return level;
-  }
 }

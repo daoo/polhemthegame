@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import loader.data.DataException;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
 import loader.data.json.types.CreepData;
@@ -72,7 +71,7 @@ public class WorldFactory {
   }
 
   private void setupCreeps(List<CreepSpawnData> spawnsData)
-      throws DataException, ParserException, IOException {
+      throws ParserException, IOException {
     assert spawnsData != null;
 
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
@@ -106,7 +105,7 @@ public class WorldFactory {
   }
 
   public World makeLevel(LevelData level)
-      throws DataException, ParserException, IOException {
+      throws ParserException, IOException {
 
     Image imgLevelStart    = CacheTool.getImage(Locator.getCache(), level.loading);
     Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);

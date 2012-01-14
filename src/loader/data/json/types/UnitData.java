@@ -4,24 +4,16 @@
 
 package loader.data.json.types;
 
-import java.util.ArrayList;
-
-import loader.data.DataException;
+import java.util.Map;
 
 public class UnitData {
-  public String                name;
-  public Size                  hitbox;
-  public ArrayList<SpriteData> sprites;
-  public int                   speed;
-  public int                   hitpoints;
+  public Size hitbox;
+  public int speed;
+  public int hitpoints;
 
-  public SpriteData getSheet(String animation) throws DataException {
-    for (SpriteData s : sprites) {
-      if (s.animation.equals(animation)) {
-        return s;
-      }
-    }
+  public Map<String, SpriteData> sprites;
 
-    throw new DataException("Sprite " + animation + " not found.");
+  public SpriteData getSheet(String animation) {
+    return sprites.get(animation);
   }
 }

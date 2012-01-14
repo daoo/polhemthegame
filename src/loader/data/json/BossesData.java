@@ -5,23 +5,16 @@
 package loader.data.json;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 import loader.IData;
-import loader.data.DataException;
 import loader.data.json.types.BossData;
 
 public class BossesData implements IData {
-  public ArrayList<BossData> bosses;
+  private Map<String, BossData> bosses;
 
-  public BossData getBoss(String name) throws DataException {
-    for (BossData d : bosses) {
-      if (d.name.equals(name)) {
-        return d;
-      }
-    }
-
-    throw new DataException("No boss by the name \"" + name + "\".");
+  public BossData getBoss(String name) {
+    return bosses.get(name);
   }
 
   @Override

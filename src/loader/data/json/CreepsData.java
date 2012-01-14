@@ -5,23 +5,16 @@
 package loader.data.json;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 import loader.IData;
-import loader.data.DataException;
 import loader.data.json.types.CreepData;
 
 public class CreepsData implements IData {
-  public ArrayList<CreepData> creeps;
+  private Map<String, CreepData> creeps;
 
-  public CreepData getCreep(String name) throws DataException {
-    for (CreepData c : creeps) {
-      if (c.name.equals(name)) {
-        return c;
-      }
-    }
-
-    throw new DataException("No creep by the name \"" + name + "\".");
+  public CreepData getCreep(String name) {
+    return creeps.get(name);
   }
 
   @Override

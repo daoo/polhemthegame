@@ -7,7 +7,6 @@ package states;
 
 import java.io.IOException;
 
-import loader.data.DataException;
 import loader.data.json.CampaignData;
 import loader.parser.GsonParser;
 import loader.parser.ParserException;
@@ -57,7 +56,7 @@ public class StateManager {
 
       GameState state = new GameState(this, data, Launcher.WIDTH, Launcher.HEIGHT);
       switchToState(new DebugState(state));
-    } catch (ParserException | DataException | IOException | SlickException ex) {
+    } catch (ParserException | IOException | SlickException ex) {
       handleException(ex);
     }
   }

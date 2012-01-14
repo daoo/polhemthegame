@@ -27,13 +27,12 @@ import game.triggers.effects.spawn.SpawnAnimationEffect;
 import java.io.IOException;
 import java.util.Arrays;
 
-import loader.data.DataException;
 import loader.data.json.PlayersData;
+import loader.data.json.ShopData;
 import loader.data.json.types.BossData;
 import loader.data.json.types.CreepData;
 import loader.data.json.types.PlayerData;
 import loader.data.json.types.UnitData;
-import loader.data.json.ShopData;
 import loader.parser.ParserException;
 import main.Locator;
 import math.Rectangle;
@@ -73,7 +72,7 @@ public class EntityFactory {
   }
 
   private Unit makeUnit(float x, float y, float dx, float dy, UnitData data)
-      throws ParserException, DataException, IOException {
+      throws ParserException, IOException {
     RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
     RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
@@ -98,13 +97,13 @@ public class EntityFactory {
   }
 
   public Unit makeCreep(float x, float y, CreepData data)
-      throws ParserException, DataException, IOException {
+      throws ParserException, IOException {
     return makeUnit(x, y, -data.speed, 0, data);
   }
 
-  public Player makePlayer(int index)
-      throws ParserException, DataException, IOException {
-    PlayerData data = playersData.players.get(index);
+  public Player makePlayer(String playerName)
+      throws ParserException, IOException {
+    PlayerData data = playersData.getPlayer(playerName);
 
     Unit unit = makeUnit(0, 0, 0, 0, data);
 
@@ -134,7 +133,7 @@ public class EntityFactory {
   }
 
   public Unit makeBoss(BossData data)
-      throws DataException, ParserException, IOException {
+      throws ParserException, IOException {
     int middleY = (int) (worldRect.getCenter().y - data.hitbox.height / 2);
 
     Vector2 initialTarget = new Vector2(

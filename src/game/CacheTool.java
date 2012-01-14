@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 import loader.ICache;
-import loader.data.DataException;
 import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
@@ -43,7 +42,7 @@ public class CacheTool {
   public static final String FILE_SHOP        = "shop.js";
 
   public static BossData getBoss(ICache cache, String boss)
-      throws ParserException, IOException, DataException {
+      throws ParserException, IOException {
     BossesData data = CacheTool.getBosses(cache);
 
     return data.getBoss(boss);
@@ -87,7 +86,7 @@ public class CacheTool {
   }
 
   public static ProjectileData getProjectile(ICache cache, String projectile)
-      throws DataException, ParserException, IOException {
+      throws ParserException, IOException {
     ProjectilesData data = (ProjectilesData) cache.getCold(
       FILE_PROJECTILES,
       new GsonParser(ProjectilesData.class)
@@ -142,7 +141,7 @@ public class CacheTool {
   }
 
   public static WeaponData getWeaponData(ICache cache, String name)
-      throws ParserException, IOException, DataException {
+      throws ParserException, IOException {
     WeaponsData weapons = (WeaponsData) cache.getCold(
       FILE_WEAPONS,
       new GsonParser(WeaponsData.class)

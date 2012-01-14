@@ -5,23 +5,16 @@
 package loader.data.json;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
 
 import loader.IData;
-import loader.data.DataException;
 import loader.data.json.types.ProjectileData;
 
 public class ProjectilesData implements IData {
-  public ArrayList<ProjectileData> projectiles;
+  private Map<String, ProjectileData> projectiles;
 
-  public ProjectileData getProjectile(String name) throws DataException {
-    for (ProjectileData p : projectiles) {
-      if (p.name.equals(name)) {
-        return p;
-      }
-    }
-
-    throw new DataException("No projectile by the name \"" + name + "\".");
+  public ProjectileData getProjectile(String name) {
+    return projectiles.get(name);
   }
 
   @Override

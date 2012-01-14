@@ -13,7 +13,6 @@ import game.components.interfaces.IAnimatedComponent;
 
 import java.io.IOException;
 
-import loader.data.DataException;
 import loader.data.json.ProjectilesData;
 import loader.data.json.WeaponsData;
 import loader.data.json.types.ProjectileData;
@@ -42,7 +41,7 @@ public class WeaponFactory {
   }
 
   public Weapon makeWeapon(String name)
-      throws DataException, ParserException, IOException {
+      throws ParserException, IOException {
     WeaponData data = weapons.getWeapon(name);
 
     Vector2 muzzleOffset =

@@ -3,5 +3,5 @@
 , completed: "textures/text/levelcomplete.png"
 , preBossImage: "textures/text/donteventrytogetbackin.png"
 , boss: "bobby"
-, creeps: [] }
+, creeps: [ { creep: "ester", spawnTime: 0.0 } ] }
 
