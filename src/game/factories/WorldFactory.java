@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
 import loader.data.json.types.CreepData;
@@ -48,6 +49,8 @@ public class WorldFactory {
 
   private static final String GAME_OVER_IMAGE = "textures/text/gameover.png";
 
+  private final BossesData bossesData;
+
   private final GameState gameMode;
   private final StateManager stateManager;
 
@@ -62,12 +65,14 @@ public class WorldFactory {
 
   public WorldFactory(GameState gameMode, StateManager stateManager,
                       EntityFactory entityFactory, Rectangle rect,
-                      List<Entity> players) {
+                      List<Entity> players) throws ParserException, IOException {
     this.gameMode      = gameMode;
     this.stateManager  = stateManager;
     this.entityFactory = entityFactory;
     this.rect          = rect;
     this.players       = players;
+
+    bossesData = CacheTool.getBosses(Locator.getCache());
   }
 
   private void setupCreeps(List<CreepSpawnData> spawnsData)
@@ -145,7 +150,7 @@ public class WorldFactory {
     } else {
       Image imgBoss = CacheTool.getImage(Locator.getCache(), level.preBossImage);
 
-      Unit boss = entityFactory.makeBoss(CacheTool.getBoss(Locator.getCache(), level.boss));
+      Unit boss = entityFactory.makeBoss(bossesData.getBoss(level.boss));
 
       Trigger bossDeadTrigger = new Trigger();
       bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
