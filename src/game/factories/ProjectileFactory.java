@@ -35,7 +35,8 @@ import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SpriteSheet;
+
+import util.SpriteSheet;
 
 public class ProjectileFactory {
   private final Rectangle rect;

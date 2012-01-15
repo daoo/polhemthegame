@@ -15,7 +15,8 @@ import game.pods.GameTime;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SpriteSheet;
+
+import util.SpriteSheet;
 
 public class RSheet implements IAnimatedComponent {
   private static final IAnimator IDLE = new Idle();
@@ -28,7 +29,6 @@ public class RSheet implements IAnimatedComponent {
 
   private final SpriteSheet sheet;
   private final Tile size;
-  private final int  tw, th;
 
   public RSheet(float targetFrameRate, int offsetX, int offsetY, SpriteSheet sheet) {
     this.sheet = sheet;
@@ -36,10 +36,7 @@ public class RSheet implements IAnimatedComponent {
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    // Note: There should be getters in SpriteSheet
-    tw = sheet.getSubImage(0, 0).getWidth();
-    th = sheet.getSubImage(0, 0).getHeight();
-    size = new Tile(sheet.getHorizontalCount(), sheet.getVerticalCount());
+    size = new Tile(sheet.getTileCountX(), sheet.getTileCountY());
 
     current = Tile.ZERO;
     animator = IDLE;
@@ -77,12 +74,12 @@ public class RSheet implements IAnimatedComponent {
 
   @Override
   public int getTileHeight() {
-    return th;
+    return sheet.getTileHeight();
   }
 
   @Override
   public int getTileWidth() {
-    return tw;
+    return sheet.getTileWidth();
   }
 
   @Override

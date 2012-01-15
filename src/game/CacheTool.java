@@ -17,17 +17,14 @@ import loader.data.json.PlayersData;
 import loader.data.json.ProjectilesData;
 import loader.data.json.ShopData;
 import loader.data.json.WeaponsData;
-import loader.data.json.types.BossData;
-import loader.data.json.types.ProjectileData;
 import loader.data.json.types.SpriteData;
-import loader.data.json.types.WeaponData;
 import loader.parser.GsonParser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
-import loader.parser.SpriteSheetParser;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SpriteSheet;
+
+import util.SpriteSheet;
 
 public class CacheTool {
   private static final String EXT_JS = ".js";
@@ -45,8 +42,8 @@ public class CacheTool {
   private static final GsonParser CREEPS_PARSER      = new GsonParser(CreepsData.class);
   private static final GsonParser LEVEL_PARSER       = new GsonParser(LevelData.class);
   private static final GsonParser PLAYERS_PARSER     = new GsonParser(PlayersData.class);
-  private static final GsonParser PROJECTILES_PARSER = new GsonParser(ProjectileData.class);
-  private static final GsonParser WEAPONS_PARSER     = new GsonParser(WeaponData.class);
+  private static final GsonParser PROJECTILES_PARSER = new GsonParser(ProjectilesData.class);
+  private static final GsonParser WEAPONS_PARSER     = new GsonParser(WeaponsData.class);
   private static final GsonParser SHOP_PARSER        = new GsonParser(ShopData.class);
   private static final PNGParser PNG_PARSER          = new PNGParser();
 
@@ -104,12 +101,8 @@ public class CacheTool {
 
   public static SpriteSheet getSpriteSheet(ICache cache, SpriteData sprite)
       throws ParserException, IOException {
-    return (SpriteSheet) cache.getCold(
-      sprite.sprite,
-      new SpriteSheetParser(
-        sprite.tileSize.width,
-        sprite.tileSize.height
-      )
-    );
+    Image img = (Image) cache.getCold(sprite.sprite, PNG_PARSER);
+
+    return new SpriteSheet(img, sprite.tileSize.width, sprite.tileSize.height, sprite.spacing);
   }
 }

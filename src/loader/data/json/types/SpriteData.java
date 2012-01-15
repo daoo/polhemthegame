@@ -9,4 +9,5 @@ public class SpriteData {
   public Size tileSize;
   public int framerate;
   public Offset offset;
+  public int spacing;
 }
