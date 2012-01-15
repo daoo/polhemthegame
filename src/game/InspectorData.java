@@ -8,6 +8,8 @@ import java.util.LinkedList;
 
 public class InspectorData {
   private static final String EMPTY_STRING = "";
+  private static final String NEW_LINE = "\n";
+  private static final String EQUALS = " = ";
 
   private class Entry {
     public final String key;
@@ -20,7 +22,7 @@ public class InspectorData {
 
     @Override
     public String toString() {
-      return key + " = " + value.toString();
+      return key + EQUALS + value.toString();
     }
   }
 
@@ -39,7 +41,7 @@ public class InspectorData {
     for (Entry e : data) {
       builder.append(in);
       builder.append(e.toString());
-      builder.append("\n");
+      builder.append(NEW_LINE);
     }
 
     return builder.toString();
