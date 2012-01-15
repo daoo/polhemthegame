@@ -183,6 +183,7 @@ public class Rectangle {
    * Return a string representation of the rectangle.
    * @return a string
    */
+  @SuppressWarnings("boxing")
   @Override
   public String toString() {
     return String.format("(%f, %f, %f, %f) %dx%d",

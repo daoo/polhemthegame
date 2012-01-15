@@ -10,7 +10,7 @@ import util.Node;
 
 public class DebugHelper {
   public static Node<String> listToNode(String title, List<? extends Object> lst) {
-    Node<String> node = new Node<>(String.format("%s (%d)", title, lst.size()));
+    Node<String> node = new Node<>(title + " (" + lst.size() + ")");
 
     for (Object obj : lst) {
       if (obj instanceof IDebuggable) {
