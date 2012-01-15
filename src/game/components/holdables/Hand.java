@@ -8,7 +8,6 @@ import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.factories.ProjectileFactory;
 import game.pods.GameTime;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
@@ -63,9 +62,9 @@ public class Hand implements IRenderComponent, IProgress {
       Vector2 m = Vector2.add(offset, weapon.getMuzzleOffset());
 
       // Muzzle relative to the world
-      Vector2 o = Vector2.add(owner.getBody().getMin(), m);
+      Vector2 o = Vector2.add(owner.body.getMin(), m);
 
-      IEntity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
+      Entity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
       owner.addEffect(new SpawnProjectileEffect(p, o));
     }
 

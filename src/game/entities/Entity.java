@@ -22,9 +22,10 @@ import util.Node;
 import debug.DebugHelper;
 
 public class Entity implements IEntity {
-  private final Rectangle body;
   private World world;
   private boolean active;
+
+  public final Rectangle body;
 
   private final LinkedList<IEffect> effects;
   private final LinkedList<ILogicComponent> updates;
@@ -54,11 +55,6 @@ public class Entity implements IEntity {
 
   public void addRenderComponent(IRenderComponent comp) {
     renders.add(comp);
-  }
-
-  @Override
-  public Rectangle getBody() {
-    return body;
   }
 
   @Override

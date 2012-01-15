@@ -5,8 +5,8 @@
 package game.factories;
 
 import game.CacheTool;
-import game.components.graphics.DummyAnimation;
 import game.components.graphics.AnimatedSheet;
+import game.components.graphics.DummyAnimation;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.IAnimatedComponent;
@@ -78,7 +78,7 @@ public class ProjectileFactory {
     }
   }
 
-  public IEntity makeProjectile(IEntity source, float x, float y, float rot) {
+  public Entity makeProjectile(IEntity source, float x, float y, float rot) {
     IAnimatedComponent anim = makeAnimation();
 
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
@@ -125,7 +125,7 @@ public class ProjectileFactory {
                                         explosion);
 
       effectsOnDeath.add(new AOEDamageEffect(
-        source, e.getBody(), data.aoe.radius, data.aoe.damage));
+        source, e.body, data.aoe.radius, data.aoe.damage));
       effectsOnDeath.add(new SpawnAnimationEffect(e, explosionAnim, null));
     }
 

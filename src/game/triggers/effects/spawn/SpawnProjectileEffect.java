@@ -5,7 +5,7 @@
 package game.triggers.effects.spawn;
 
 import game.components.Message;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.pods.GameTime;
 import game.pods.TimePos;
 import game.triggers.IEffect;
@@ -13,10 +13,10 @@ import game.world.World;
 import math.Vector2;
 
 public class SpawnProjectileEffect implements IEffect {
-  private final IEntity projectile;
+  private final Entity projectile;
   private final Vector2 start;
 
-  public SpawnProjectileEffect(IEntity projectile, Vector2 start) {
+  public SpawnProjectileEffect(Entity projectile, Vector2 start) {
     assert projectile != null;
 
     this.projectile = projectile;

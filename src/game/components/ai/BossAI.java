@@ -8,7 +8,7 @@ import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.pods.GameTime;
 import main.Locator;
 import math.ExMath;
@@ -26,8 +26,7 @@ public class BossAI implements ILogicComponent {
   private static final float SHOOTING_TIME_MIN = 1.0f;
   private static final float SHOOTING_TIME_MAX = 1.0f;
 
-  private final IEntity entity;
-  private final Rectangle body;
+  private final Entity entity;
   private final Movement movement;
   private final Hand hand;
   private final Rectangle movementRect;
@@ -36,16 +35,15 @@ public class BossAI implements ILogicComponent {
 
   private IBossState state;
 
-  public BossAI(IEntity entity, Movement movement, Hand hand, Rectangle arenaRect,
+  public BossAI(Entity entity, Movement movement, Hand hand, Rectangle arenaRect,
                 float locationX, float speed, Vector2 initialTarget) {
     this.entity        = entity;
     this.hand          = hand;
     this.movement      = movement;
-    this.body          = entity.getBody();
     this.speed         = speed;
     this.initialTarget = initialTarget;
 
-    Vector2 halfSize = body.getHalfSize();
+    Vector2 halfSize = entity.body.getHalfSize();
 
     float x1 = arenaRect.getX2() + halfSize.x - locationX;
     float y1 = arenaRect.getY1() + halfSize.y;
@@ -81,7 +79,7 @@ public class BossAI implements ILogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      state = new Walking(entity.getBody(), hand, movement, speed, movementRect,
+      state = new Walking(entity.body, hand, movement, speed, movementRect,
         INITIAL_TARGET_COUNT, initialTarget);
 
       entity.sendMessage(Message.START_ANIMATION, null);
@@ -103,7 +101,7 @@ public class BossAI implements ILogicComponent {
   private void changeToWalking() {
     int targets = Locator.getRandom().nextInt(
       TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-    state = new Walking(entity.getBody(), hand, movement, speed, movementRect, targets);
+    state = new Walking(entity.body, hand, movement, speed, movementRect, targets);
 
     entity.sendMessage(Message.START_ANIMATION, null);
     hand.stopUse();

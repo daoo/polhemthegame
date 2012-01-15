@@ -4,7 +4,7 @@
 
 package ui.hud.infobar;
 
-import game.entities.IEntity;
+import game.entities.Entity;
 
 import java.util.LinkedList;
 
@@ -17,7 +17,7 @@ import ui.IDynamicUIElement;
  * entity, e.g. remaining health or reload time for the active weapon.
  */
 public class InfoBar implements IDynamicUIElement {
-  private final IEntity entity;
+  private final Entity entity;
   private final int barWidth, barHeight;
   private final int offsetX, offsetY;
   private final LinkedList<Bar> bars;
@@ -30,7 +30,7 @@ public class InfoBar implements IDynamicUIElement {
    * @param offsetX translation on the x axis before rendering
    * @param offsetY translation on the y axis before rendering
    */
-  public InfoBar(IEntity entity, int barWidth, int barHeight, int offsetX, int offsetY) {
+  public InfoBar(Entity entity, int barWidth, int barHeight, int offsetX, int offsetY) {
     this.entity  = entity;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
@@ -68,7 +68,7 @@ public class InfoBar implements IDynamicUIElement {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(entity.getBody().getX1(), entity.getBody().getY1());
+    g.translate(entity.body.getX1(), entity.body.getY1());
 
     int y = offsetY;
     for (Bar b : bars) {

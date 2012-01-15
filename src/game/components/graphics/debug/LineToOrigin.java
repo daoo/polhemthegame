@@ -6,16 +6,16 @@ package game.components.graphics.debug;
 
 import game.components.Message;
 import game.components.interfaces.IRenderComponent;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.pods.GameTime;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class LineToOrigin implements IRenderComponent {
-  private final IEntity owner;
+  private final Entity owner;
 
-  public LineToOrigin(IEntity owner) {
+  public LineToOrigin(Entity owner) {
     this.owner = owner;
   }
 
@@ -32,6 +32,6 @@ public class LineToOrigin implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.setColor(Color.red);
-    g.drawLine(0, 0, -owner.getBody().getX1(), -owner.getBody().getY1());
+    g.drawLine(0, 0, -owner.body.getX1(), -owner.body.getY1());
   }
 }

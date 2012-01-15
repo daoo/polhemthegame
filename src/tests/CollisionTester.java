@@ -75,8 +75,8 @@ public class CollisionTester extends BasicGame {
     obj1.render(g);
     obj2.render(g);
 
-    if (CollisionHelper.sweepCollisionTest(obj2.getBody(), mov2.getVelocity(),
-         obj1.getBody(), 1)) {
+    if (CollisionHelper.sweepCollisionTest(obj2.body, mov2.getVelocity(),
+         obj1.body, 1)) {
       g.drawString("COLLISION!", 100, 10);
     }
   }
@@ -86,7 +86,7 @@ public class CollisionTester extends BasicGame {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       container.exit();
     } else {
-      Rectangle body = obj2.getBody();
+      Rectangle body = obj2.body;
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP))

@@ -4,6 +4,7 @@
 
 package game.world;
 
+import game.entities.Entity;
 import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.ITrigger;
@@ -20,8 +21,10 @@ import debug.DebugHelper;
 import debug.IDebuggable;
 
 public class World implements IDebuggable {
-  private final LinkedList<IEntity> misc, units, projectiles;
-  private final LinkedList<IEntity> newMisc, newUnits, newProjectiles;
+  private final LinkedList<IEntity> misc;
+  private final LinkedList<Entity> units, projectiles;
+  private final LinkedList<IEntity> newMisc;
+  private final LinkedList<Entity> newUnits, newProjectiles;
   private final LinkedList<ITrigger> triggers, newTriggers;
 
   public World() {
@@ -44,21 +47,21 @@ public class World implements IDebuggable {
     newMisc.add(obj);
   }
 
-  public void addUnit(IEntity obj) {
+  public void addUnit(Entity obj) {
     assert obj != null;
 
     obj.setWorld(this);
     newUnits.add(obj);
   }
 
-  public void addProjectile(IEntity obj) {
+  public void addProjectile(Entity obj) {
     assert obj != null;
 
     obj.setWorld(this);
     newProjectiles.add(obj);
   }
 
-  public Iterable<IEntity> getUnits() {
+  public Iterable<Entity> getUnits() {
     return units;
   }
 

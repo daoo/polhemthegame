@@ -6,6 +6,7 @@ package game.components.physics;
 
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
+import game.entities.Entity;
 import game.entities.IEntity;
 import game.pods.GameTime;
 
@@ -19,10 +20,10 @@ public class MovingProjectileCollision implements ILogicComponent {
   private boolean enableCollisions;
   private final LinkedList<IEntity> collidedWith;
 
-  private final IEntity owner;
+  private final Entity owner;
   private final Movement movement;
 
-  public MovingProjectileCollision(IEntity owner, Movement movement) {
+  public MovingProjectileCollision(Entity owner, Movement movement) {
     this.owner    = owner;
     this.movement = movement;
 
@@ -34,12 +35,12 @@ public class MovingProjectileCollision implements ILogicComponent {
    * Performs collision check and response between the owner and a different
    * entity.
    */
-  private void collisionCheck(IEntity b, float dt) {
+  private void collisionCheck(Entity b, float dt) {
     if (!collidedWith.contains(b)) {
-      Rectangle a = owner.getBody();
+      Rectangle a = owner.body;
       Vector2 m = movement.getVelocity();
 
-      if (CollisionHelper.sweepCollisionTest(a, m, b.getBody(), dt)) {
+      if (CollisionHelper.sweepCollisionTest(a, m, b.body, dt)) {
         owner.sendMessage(Message.COLLIDED_WITH, b);
         b.sendMessage(Message.COLLIDED_WITH, owner);
         collidedWith.add(b);
@@ -50,7 +51,7 @@ public class MovingProjectileCollision implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if (enableCollisions) {
-      for (IEntity e : owner.getWorld().getUnits()) {
+      for (Entity e : owner.getWorld().getUnits()) {
         collisionCheck(e, time.frame);
       }
     }

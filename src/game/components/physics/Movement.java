@@ -6,15 +6,15 @@ package game.components.physics;
 
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.pods.GameTime;
 import math.Vector2;
 
 public class Movement implements ILogicComponent {
-  private final IEntity owner;
+  private final Entity owner;
   private Vector2 vel;
 
-  public Movement(IEntity owner, float dx, float dy) {
+  public Movement(Entity owner, float dx, float dy) {
     this.owner = owner;
     vel = new Vector2(dx, dy);
   }
@@ -43,6 +43,6 @@ public class Movement implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     Vector2 tmp = Vector2.multiply(vel, time.frame);
-    owner.getBody().addPosition(tmp);
+    owner.body.addPosition(tmp);
   }
 }

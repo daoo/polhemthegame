@@ -7,7 +7,7 @@ package game.components.graphics.debug;
 import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.components.physics.Movement;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.pods.GameTime;
 import math.Rectangle;
 
@@ -19,13 +19,14 @@ public class Outliner implements IRenderComponent {
   private static final Color SECOND = Color.green;
   private static final Color THIRD  = Color.blue;
 
-  private final IEntity owner;
+  private final Entity owner;
   private final Movement movement;
 
   private final boolean outlineNext;
   private final boolean linesToNext;
 
-  public Outliner(IEntity owner, Movement movement, boolean outlineNext, boolean lineToNext) {
+  public Outliner(Entity owner, Movement movement, boolean outlineNext,
+      boolean lineToNext) {
     this.owner    = owner;
     this.movement = movement;
 
@@ -40,7 +41,7 @@ public class Outliner implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    Rectangle body = owner.getBody();
+    Rectangle body = owner.body;
 
     Color tmp = g.getColor();
     g.setColor(FIRST);

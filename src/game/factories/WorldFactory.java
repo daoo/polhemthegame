@@ -7,7 +7,6 @@ package game.factories;
 import game.CacheTool;
 import game.components.misc.KillCreep;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.pods.Unit;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
@@ -175,7 +174,7 @@ public class WorldFactory {
     world.addTrigger(levelStartTrigger);
     world.addTrigger(playersDeadTrigger);
 
-    for (IEntity p : players) {
+    for (Entity p : players) {
       world.addUnit(p);
     }
 

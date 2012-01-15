@@ -6,12 +6,10 @@ package game.triggers.effects.spawn;
 
 import game.components.graphics.animations.RunTo;
 import game.components.interfaces.IAnimatedComponent;
-import game.components.misc.AfterAnimation;
+import game.entities.Animation;
 import game.entities.Entity;
 import game.pods.GameTime;
 import game.triggers.IEffect;
-import game.triggers.effects.RemoveEntityEffect;
-import game.triggers.effects.RenderCurrentEffect;
 import game.world.World;
 import math.Rectangle;
 
@@ -21,7 +19,7 @@ import org.newdawn.slick.Graphics;
  * Spawn an run-to-last animation at the top left of another entity.
  */
 public class SpawnAnimationEffect implements IEffect {
-  private final Entity spawnee;
+  private final Animation spawnee;
   private final Rectangle rect;
   private final IAnimatedComponent anim;
 
@@ -29,21 +27,15 @@ public class SpawnAnimationEffect implements IEffect {
                               Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 
-    this.rect = entity.getBody();
+    this.rect = entity.body;
     this.anim = anim;
 
-    spawnee = new Entity(0, 0, anim.getTileWidth(), anim.getTileHeight());
-    spawnee.addRenderComponent(anim);
-
-    AfterAnimation comp = new AfterAnimation(spawnee, anim, anim.getLastTile());
-    comp.add(new RenderCurrentEffect(rect, anim, graphics));
-    comp.add(new RemoveEntityEffect(spawnee));
-    spawnee.addLogicComponent(comp);
+    spawnee = new Animation(0, 0, anim, graphics);
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    spawnee.getBody().setPosition(rect.getMin());
+    spawnee.setPosition(rect.getMin());
 
     anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
 

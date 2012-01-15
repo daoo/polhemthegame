@@ -23,7 +23,7 @@ public class KillCreep implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if (owner.getBody().getX2() < limit) {
+    if (owner.body.getX2() < limit) {
       owner.addEffect(effect);
       owner.remove();
     }

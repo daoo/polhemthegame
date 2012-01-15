@@ -5,6 +5,7 @@
 package game.triggers.effects;
 
 import game.components.Message;
+import game.entities.Entity;
 import game.entities.IEntity;
 import game.pods.Damage;
 import game.pods.GameTime;
@@ -36,8 +37,8 @@ public class AOEDamageEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    for (IEntity e : world.getUnits()) {
-      if (Vector2.distance(e.getBody().getCenter(), body.getCenter()) < range) {
+    for (Entity e : world.getUnits()) {
+      if (Vector2.distance(e.body.getCenter(), body.getCenter()) < range) {
         e.sendMessage(Message.DAMAGE, damage);
       }
     }

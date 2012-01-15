@@ -153,7 +153,7 @@ public class EntityFactory {
 
     unit.entity.addRenderComponent(new Outliner(unit.entity, unit.movement,
                                                 true, true));
-    unit.entity.addRenderComponent(new DebugBoss(unit.entity.getBody(), ai));
+    unit.entity.addRenderComponent(new DebugBoss(unit.entity.body, ai));
 
     hand.grab(weapon);
 
