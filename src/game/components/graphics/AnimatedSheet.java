@@ -18,7 +18,7 @@ import org.newdawn.slick.Image;
 
 import util.SpriteSheet;
 
-public class RSheet implements IAnimatedComponent {
+public class AnimatedSheet implements IAnimatedComponent {
   private static final IAnimator IDLE = new Idle();
 
   private IAnimator animator;
@@ -30,7 +30,7 @@ public class RSheet implements IAnimatedComponent {
   private final SpriteSheet sheet;
   private final Tile size;
 
-  public RSheet(float targetFrameRate, int offsetX, int offsetY, SpriteSheet sheet) {
+  public AnimatedSheet(float targetFrameRate, int offsetX, int offsetY, SpriteSheet sheet) {
     this.sheet = sheet;
 
     this.offsetX = offsetX;

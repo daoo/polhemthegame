@@ -6,7 +6,7 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.DummyAnimation;
-import game.components.graphics.RSheet;
+import game.components.graphics.AnimatedSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.IAnimatedComponent;
@@ -119,7 +119,7 @@ public class ProjectileFactory {
     effectsOnDeath.add(new RemoveEntityEffect(e));
 
     if (data.aoe != null) {
-      RSheet explosionAnim = new RSheet(data.aoe.explosionSprite.framerate,
+      AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
                                         data.aoe.explosionSprite.offset.x,
                                         data.aoe.explosionSprite.offset.y,
                                         explosion);
@@ -138,7 +138,7 @@ public class ProjectileFactory {
     if (data.texture != null) {
       return new TexturedQuad(img);
     } else if (data.sprite != null) {
-      RSheet sheet = new RSheet(
+      AnimatedSheet sheet = new AnimatedSheet(
         data.sprite.framerate,
         data.sprite.offset.x,
         data.sprite.offset.y,

@@ -6,7 +6,7 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.ai.BossAI;
-import game.components.graphics.RSheet;
+import game.components.graphics.AnimatedSheet;
 import game.components.graphics.debug.DebugBoss;
 import game.components.graphics.debug.Outliner;
 import game.components.holdables.Hand;
@@ -73,8 +73,8 @@ public class EntityFactory {
 
   private Unit makeUnit(float x, float y, float dx, float dy, UnitData data)
       throws ParserException, IOException {
-    RSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
-    RSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
+    AnimatedSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
+    AnimatedSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
 
     Entity entity = new Entity(x, y, data.hitbox.width, data.hitbox.height);
     Movement mov  = new Movement(entity, dx, dy);

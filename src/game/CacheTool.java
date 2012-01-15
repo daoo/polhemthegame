@@ -4,7 +4,7 @@
 
 package game;
 
-import game.components.graphics.RSheet;
+import game.components.graphics.AnimatedSheet;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,10 +83,10 @@ public class CacheTool {
     return (ProjectilesData) cache.getCold(FILE_PROJECTILES, PROJECTILES_PARSER);
   }
 
-  public static RSheet getRSheet(ICache cache, SpriteData sprite)
+  public static AnimatedSheet getRSheet(ICache cache, SpriteData sprite)
       throws ParserException, IOException {
     SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
-    return new RSheet(
+    return new AnimatedSheet(
       sprite.framerate,
       sprite.offset.x,
       sprite.offset.y,
