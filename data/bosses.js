@@ -12,7 +12,7 @@
         , tileSize: { width: 22, height: 48 } }
       , "death":
         { framerate: 8
-        , offset: { x: 0, y: 0 }
+        , offset: { x: -86, y: -50 }
         , sprite: "textures/bosses/bobby-death.png"
         , tileSize: { width: 187, height: 100 } } }
     , locationX: 200
