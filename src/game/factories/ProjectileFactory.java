@@ -6,10 +6,8 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.DummyAnimation;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
-import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
 import game.components.misc.OutOfBounds;
@@ -79,8 +77,6 @@ public class ProjectileFactory {
   }
 
   public Entity makeProjectile(IEntity source, float x, float y, float rot) {
-    IAnimatedComponent anim = makeAnimation();
-
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life               = new Life(e, data.targets);
@@ -113,7 +109,19 @@ public class ProjectileFactory {
         e.addLogicComponent(new StaticCollision(e));
       }
     }
-    e.addRenderComponent(anim);
+
+    if (data.texture != null) {
+      e.addRenderComponent(new TexturedQuad(img));
+    } else if (data.sprite != null) {
+      AnimatedSheet sheet = new AnimatedSheet(
+        data.sprite.framerate,
+        data.sprite.offset.x,
+        data.sprite.offset.y,
+        sprite
+      );
+      sheet.setAnimator(new Continuous(sheet.getTileCount()));
+      e.addRenderComponent(sheet);
+    }
 
     LinkedList<IEffect> effectsOnDeath = new LinkedList<>();
     effectsOnDeath.add(new RemoveEntityEffect(e));
@@ -132,22 +140,5 @@ public class ProjectileFactory {
     e.addLogicComponent(new EffectsOnDeath(e, effectsOnDeath));
 
     return e;
-  }
-
-  private IAnimatedComponent makeAnimation() {
-    if (data.texture != null) {
-      return new TexturedQuad(img);
-    } else if (data.sprite != null) {
-      AnimatedSheet sheet = new AnimatedSheet(
-        data.sprite.framerate,
-        data.sprite.offset.x,
-        data.sprite.offset.y,
-        sprite
-      );
-      sheet.setAnimator(new Continuous(sheet.getTileCount()));
-      return sheet;
-    } else {
-      return new DummyAnimation();
-    }
   }
 }
