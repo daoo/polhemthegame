@@ -32,4 +32,9 @@ public class EffectsOnDeath implements ILogicComponent {
       owner.addEffects(effects);
     }
   }
+
+  @Override
+  public String toString() {
+    return "EffectsOnDeath - " + effects.size() + " effects";
+  }
 }

@@ -73,4 +73,11 @@ public class Inventory implements ILogicComponent {
   public void update(GameTime time) {
     // Do nothing
   }
+
+  @SuppressWarnings("boxing")
+  @Override
+  public String toString() {
+    return String.format("Inventory - %d money, %d weapons, %d kills, %f damageDealt",
+      wallet.getMoney(), weapons.size(), kills, damageDealt);
+  }
 }

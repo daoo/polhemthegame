@@ -89,4 +89,9 @@ public class Life implements ILogicComponent, IProgress {
       }
     }
   }
+
+  @Override
+  public String toString() {
+    return "Life - " + hp + "/" + maxHP + " (" + getProgress() + ")";
+  }
 }

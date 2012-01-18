@@ -29,4 +29,9 @@ public class MovementConstraint implements ILogicComponent {
   public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
+
+  @Override
+  public String toString() {
+    return "MovementConstraint - rect: " + constraints.toString();
+  }
 }

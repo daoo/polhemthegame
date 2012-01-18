@@ -45,4 +45,9 @@ public class Movement implements ILogicComponent {
     Vector2 tmp = Vector2.multiply(vel, time.frame);
     owner.body.addPosition(tmp);
   }
+
+  @Override
+  public String toString() {
+    return "Movement - " + vel.toString();
+  }
 }

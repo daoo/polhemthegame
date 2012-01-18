@@ -117,4 +117,11 @@ public class AnimatedSheet implements IAnimatedComponent {
       current = animator.next(current);
     }
   }
+
+  @SuppressWarnings("boxing")
+  @Override
+  public String toString() {
+    return String.format("AnimatedSheet - count: %dx%d, size: %dx%d",
+        size.x, size.y, getTileWidth(), getTileHeight());
+  }
 }

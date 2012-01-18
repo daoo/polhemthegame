@@ -21,6 +21,10 @@ public class Hand implements IRenderComponent, IProgress {
   private final Vector2 offset;
 
   private final Entity owner;
+
+  /**
+   * The currently held weapon, null if no weapon is being held.
+   */
   private Weapon weapon;
 
   public Hand(Entity owner, float handOffsetX, float handOffsetY) {
@@ -54,31 +58,35 @@ public class Hand implements IRenderComponent, IProgress {
 
   @Override
   public void update(GameTime time) {
-    weapon.update(time);
+    if (weapon != null) {
+      weapon.update(time);
 
-    // Find out if there are any projectiles that want to be spawned
-    for (ProjectileFactory projTemplate : weapon.projectiles) {
-      // Muzzle relative to player entity
-      Vector2 m = Vector2.add(offset, weapon.getMuzzleOffset());
+      // Find out if there are any projectiles that want to be spawned
+      for (ProjectileFactory projTemplate : weapon.projectiles) {
+        // Muzzle relative to player entity
+        Vector2 m = Vector2.add(offset, weapon.getMuzzleOffset());
 
-      // Muzzle relative to the world
-      Vector2 o = Vector2.add(owner.body.getMin(), m);
+        // Muzzle relative to the world
+        Vector2 o = Vector2.add(owner.body.getMin(), m);
 
-      Entity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
-      owner.addEffect(new SpawnProjectileEffect(p, o));
+        Entity p = projTemplate.makeProjectile(owner, o.x, o.y, weapon.getAngle());
+        owner.addEffect(new SpawnProjectileEffect(p, o));
+      }
+
+      weapon.projectiles.clear();
     }
-
-    weapon.projectiles.clear();
   }
 
   @Override
   public void render(Graphics g) {
-    g.pushTransform();
-    g.translate(offset.x, offset.y);
+    if (weapon != null) {
+      g.pushTransform();
+      g.translate(offset.x, offset.y);
 
-    weapon.render(g);
+      weapon.render(g);
 
-    g.popTransform();
+      g.popTransform();
+    }
   }
 
   @Override
@@ -93,5 +101,14 @@ public class Hand implements IRenderComponent, IProgress {
   @Override
   public float getProgress() {
     return weapon.getProgress();
+  }
+
+  @Override
+  public String toString() {
+    if (weapon != null) {
+      return "Hand - holding " + weapon.toString();
+    } else {
+      return "Hand - not holding anything";
+    }
   }
 }
