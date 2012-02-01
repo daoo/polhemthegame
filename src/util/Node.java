@@ -4,16 +4,16 @@
 
 package util;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Node<T> {
   public final T value;
-  public final LinkedList<Node<T>> nodes;
+  public final ArrayList<Node<T>> nodes;
 
   public Node(T value) {
     this.value = value;
 
-    nodes = new LinkedList<>();
+    nodes = new ArrayList<>();
   }
 
   @Override

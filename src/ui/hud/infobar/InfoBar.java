@@ -6,7 +6,7 @@ package ui.hud.infobar;
 
 import game.entities.Entity;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
@@ -20,7 +20,7 @@ public class InfoBar implements IDynamicUIElement {
   private final Entity entity;
   private final int barWidth, barHeight;
   private final int offsetX, offsetY;
-  private final LinkedList<Bar> bars;
+  private final ArrayList<Bar> bars;
 
   /**
    * Creates a new InfoBar.
@@ -38,7 +38,7 @@ public class InfoBar implements IDynamicUIElement {
     this.barWidth  = barWidth;
     this.barHeight = barHeight;
 
-    bars = new LinkedList<>();
+    bars = new ArrayList<>();
   }
 
   /**

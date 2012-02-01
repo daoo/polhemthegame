@@ -4,19 +4,19 @@
 
 package ui.menu;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.ListIterator;
 
 import org.newdawn.slick.Graphics;
 
 public class Menu {
-  private final LinkedList<MenuItem> items;
+  private final ArrayList<MenuItem> items;
   private ListIterator<MenuItem> iterator;
   private MenuItem current;
 
   public Menu(Collection<MenuItem> items) {
-    this.items    = new LinkedList<>(items);
+    this.items    = new ArrayList<>(items);
     this.iterator = this.items.listIterator();
     this.current  = iterator.next();
     this.current.setState(MenuItemState.ACTIVE);
