@@ -1,38 +1,58 @@
 package util;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Circular overwriting array.
+ * Contains a fixed number of elements. Adding a new element overwrites the
+ * oldest element in the array, like a circular fixed-size buffer.
+ * @param <T>
+ */
 public class CircularOverwriteArray<T> implements Iterable<T> {
   private final T[] data;
 
-  private boolean full;
+  /**
+   * The index of the most recently added item.
+   */
   private int head;
 
+  /**
+   * Create a new circular overwriting array.
+   * @param size the size of the array
+   * @param def the default which the array is initially filled with
+   */
+  @SuppressWarnings("unchecked")
   public CircularOverwriteArray(int size, T def) {
+    if (size <= 0) {
+      throw new IllegalArgumentException("Illegal size");
+    }
+
     data = (T[]) new Object[size];
     head = 0;
 
-    for (int i = 0; i < size; ++i) {
-      data[i] = def;
-    }
-
-    full = false;
+    Arrays.fill(data, def);
   }
 
+  /**
+   * Add an item to the array.
+   * Overwrites next item in the array.
+   * @param item the item to add
+   */
   public void add(T item) {
-    ++head;
-    if (head >= data.length) {
-      head = 0;
-      full = true;
-    }
+    head = (head + 1) % data.length;
 
     data[head] = item;
   }
 
+  /**
+   * An iterator from the oldest element to the newest.
+   * @return an iterator (without remove support)
+   */
   @Override
   public Iterator<T> iterator() {
-    final int start = full ? head + 1 : 0;
+    final int start = (head + 1) % data.length;
     final int length = data.length;
     final T[] dataCopy = data;
 
