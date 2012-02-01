@@ -5,25 +5,19 @@
 package ui.hud.graph;
 
 import java.util.Iterator;
-import java.util.LinkedList;
+
+import util.CircularOverwriteArray;
 
 public class GraphData implements Iterable<Double> {
-  private final int dataCount;
-
-  private LinkedList<Double> data;
+  private CircularOverwriteArray<Double> data;
 
   private double average;
 
   public GraphData(int dataCount) {
-    this.dataCount = dataCount;
-    data = new LinkedList<>();
+    data = new CircularOverwriteArray<>(dataCount, 0.0);
   }
 
   public void addDataPoint(double dataPoint) {
-    if (data.size() >= dataCount) {
-      data.removeFirst();
-    }
-
     data.add(Double.valueOf(dataPoint));
 
     average = (average + dataPoint) / 2.0;
