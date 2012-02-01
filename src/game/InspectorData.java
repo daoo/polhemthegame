@@ -4,7 +4,7 @@
 
 package game;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class InspectorData {
   private static final String EMPTY_STRING = "";
@@ -26,10 +26,10 @@ public class InspectorData {
     }
   }
 
-  private final LinkedList<Entry> data;
+  private final ArrayList<Entry> data;
 
   public InspectorData() {
-    data = new LinkedList<>();
+    data = new ArrayList<>();
   }
 
   public void add(String name, Object obj) {

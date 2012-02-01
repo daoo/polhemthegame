@@ -8,7 +8,7 @@ import game.CacheTool;
 
 import java.awt.Font;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import loader.parser.ParserException;
 import main.Launcher;
@@ -39,7 +39,7 @@ public class StateCredits implements IState {
   private float speed;
   private float pos_y;
 
-  private final LinkedList<ImageWithLocation> credits;
+  private final ArrayList<ImageWithLocation> credits;
 
   private final UnicodeFont font_large, font_small;
 
@@ -53,7 +53,7 @@ public class StateCredits implements IState {
     float tmp_x = Launcher.WIDTH / 2.0f;
     float tmp_y = 0;
 
-    credits = new LinkedList<>();
+    credits = new ArrayList<>();
     for (String s : Credits.CreditsText) {
       if (!s.isEmpty()) {
         ImageWithLocation img;

@@ -7,8 +7,8 @@ package game.triggers;
 import game.pods.GameTime;
 import game.world.World;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import util.Node;
 import debug.DebugHelper;
@@ -18,8 +18,8 @@ import debug.DebugHelper;
  * executed when some conditions are met.
  */
 public class Trigger implements ITrigger {
-  private final LinkedList<ICondition> conditions;
-  private final LinkedList<IEffect> effects;
+  private final ArrayList<ICondition> conditions;
+  private final ArrayList<IEffect> effects;
 
   private boolean runAgain;
 
@@ -31,8 +31,8 @@ public class Trigger implements ITrigger {
   public Trigger() {
     runAgain = true;
 
-    conditions = new LinkedList<>();
-    effects = new LinkedList<>();
+    conditions = new ArrayList<>();
+    effects = new ArrayList<>();
   }
 
   /**

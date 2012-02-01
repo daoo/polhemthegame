@@ -9,9 +9,9 @@ import game.entities.IEntity;
 import game.pods.GameTime;
 import game.triggers.ITrigger;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.Graphics;
@@ -21,23 +21,23 @@ import debug.DebugHelper;
 import debug.IDebuggable;
 
 public class World implements IDebuggable {
-  private final LinkedList<IEntity> misc;
-  private final LinkedList<Entity> units, projectiles;
-  private final LinkedList<IEntity> newMisc;
-  private final LinkedList<Entity> newUnits, newProjectiles;
-  private final LinkedList<ITrigger> triggers, newTriggers;
+  private final ArrayList<IEntity> misc;
+  private final ArrayList<Entity> units, projectiles;
+  private final ArrayList<IEntity> newMisc;
+  private final ArrayList<Entity> newUnits, newProjectiles;
+  private final ArrayList<ITrigger> triggers, newTriggers;
 
   public World() {
-    misc        = new LinkedList<>();
-    units       = new LinkedList<>();
-    projectiles = new LinkedList<>();
+    misc        = new ArrayList<>();
+    units       = new ArrayList<>();
+    projectiles = new ArrayList<>();
 
-    newMisc        = new LinkedList<>();
-    newUnits       = new LinkedList<>();
-    newProjectiles = new LinkedList<>();
+    newMisc        = new ArrayList<>();
+    newUnits       = new ArrayList<>();
+    newProjectiles = new ArrayList<>();
 
-    triggers    = new LinkedList<>();
-    newTriggers = new LinkedList<>();
+    triggers    = new ArrayList<>();
+    newTriggers = new ArrayList<>();
   }
 
   public void addMisc(IEntity obj) {

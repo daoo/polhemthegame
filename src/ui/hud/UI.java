@@ -4,8 +4,8 @@
 
 package ui.hud;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -18,10 +18,10 @@ import ui.IUI;
  * Simple UI implementation.
  */
 public class UI implements IUI {
-  private final LinkedList<IStaticUIElement> statics;
-  private final LinkedList<IDynamicUIElement> dynamics;
+  private final ArrayList<IStaticUIElement> statics;
+  private final ArrayList<IDynamicUIElement> dynamics;
 
-  private final LinkedList<IDynamicUIElement> toAdd;
+  private final ArrayList<IDynamicUIElement> toAdd;
 
   private final int width, height;
 
@@ -32,9 +32,9 @@ public class UI implements IUI {
     this.width  = width;
     this.height = height;
 
-    dynamics = new LinkedList<>();
-    statics  = new LinkedList<>();
-    toAdd    = new LinkedList<>();
+    dynamics = new ArrayList<>();
+    statics  = new ArrayList<>();
+    toAdd    = new ArrayList<>();
 
     foreground = null;
   }

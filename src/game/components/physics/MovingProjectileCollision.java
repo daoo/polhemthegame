@@ -10,7 +10,7 @@ import game.entities.Entity;
 import game.entities.IEntity;
 import game.pods.GameTime;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import math.CollisionHelper;
 import math.Rectangle;
@@ -18,7 +18,7 @@ import math.Vector2;
 
 public class MovingProjectileCollision implements ILogicComponent {
   private boolean enableCollisions;
-  private final LinkedList<IEntity> collidedWith;
+  private final ArrayList<IEntity> collidedWith;
 
   private final Entity owner;
   private final Movement movement;
@@ -28,7 +28,7 @@ public class MovingProjectileCollision implements ILogicComponent {
     this.movement = movement;
 
     enableCollisions = true;
-    collidedWith     = new LinkedList<>();
+    collidedWith     = new ArrayList<>();
   }
 
   /**

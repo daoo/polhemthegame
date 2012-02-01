@@ -7,7 +7,7 @@ package states;
 import game.CacheTool;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import loader.parser.ParserException;
 import main.Locator;
@@ -33,7 +33,7 @@ public class MenuState implements IState {
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
 
-    LinkedList<MenuItem> tmp = new LinkedList<>();
+    ArrayList<MenuItem> tmp = new ArrayList<>();
 
     tmp.add(new MenuButton("singleplayer", 60, 280, new IUIEvent() {
       @Override public void fire() {

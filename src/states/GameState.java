@@ -15,7 +15,7 @@ import game.pods.Player;
 import game.world.World;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
@@ -93,7 +93,7 @@ public class GameState implements IState {
     ui.addStatic(new PlayerUI(0, 0, player.shopUI, player.inventory));
 
 
-    LinkedList<Entity> players = new LinkedList<>();
+    ArrayList<Entity> players = new ArrayList<>();
     players.add(player.entity);
 
     Players.reposition(players, worldRect);

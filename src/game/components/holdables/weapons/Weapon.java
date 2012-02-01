@@ -13,7 +13,7 @@ import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.pods.GameTime;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import math.Vector2;
 
@@ -36,7 +36,7 @@ public abstract class Weapon implements IHoldable {
   /**
    * Spawned projectiles, for owner to pass on to world.
    */
-  public final LinkedList<ProjectileFactory> projectiles;
+  public final ArrayList<ProjectileFactory> projectiles;
 
   public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
                 int magazineSize, float angle, IAnimatedComponent anim,
@@ -50,7 +50,7 @@ public abstract class Weapon implements IHoldable {
     this.projTemplate = projTemplate;
 
     rounds      = magazineSize;
-    projectiles = new LinkedList<>();
+    projectiles = new ArrayList<>();
   }
 
   public float getAngle() {

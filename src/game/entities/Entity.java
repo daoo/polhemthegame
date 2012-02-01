@@ -11,8 +11,8 @@ import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.world.World;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import math.Rectangle;
 
@@ -27,18 +27,18 @@ public class Entity implements IEntity {
 
   public final Rectangle body;
 
-  private final LinkedList<IEffect> effects;
-  private final LinkedList<ILogicComponent> updates;
-  private final LinkedList<IRenderComponent> renders;
+  private final ArrayList<IEffect> effects;
+  private final ArrayList<ILogicComponent> updates;
+  private final ArrayList<IRenderComponent> renders;
 
   public Entity(float x, float y, float w, float h) {
     body = new Rectangle(x, y, w, h);
     active = true;
 
-    effects = new LinkedList<>();
+    effects = new ArrayList<>();
 
-    updates = new LinkedList<>();
-    renders = new LinkedList<>();
+    updates = new ArrayList<>();
+    renders = new ArrayList<>();
   }
 
   public void addEffect(IEffect effect) {

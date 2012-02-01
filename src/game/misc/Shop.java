@@ -9,8 +9,8 @@ import game.components.holdables.weapons.Weapon;
 import game.factories.WeaponFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 import loader.data.json.ShopData;
 import loader.data.json.types.ShopItemData;
@@ -36,13 +36,13 @@ public class Shop {
     }
   }
 
-  private final LinkedList<ShopItem> items;
+  private final ArrayList<ShopItem> items;
   private final Iterator<ShopItem> it;
   private ShopItem next;
 
   public Shop(ShopData shop, WeaponFactory factory)
       throws ParserException, IOException {
-    items = new LinkedList<>();
+    items = new ArrayList<>();
 
     for (ShopItemData item : shop.items) {
       Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);

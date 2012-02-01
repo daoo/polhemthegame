@@ -25,7 +25,7 @@ import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
@@ -123,7 +123,7 @@ public class ProjectileFactory {
       e.addRenderComponent(sheet);
     }
 
-    LinkedList<IEffect> effectsOnDeath = new LinkedList<>();
+    ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
     effectsOnDeath.add(new RemoveEntityEffect(e));
 
     if (data.aoe != null) {
