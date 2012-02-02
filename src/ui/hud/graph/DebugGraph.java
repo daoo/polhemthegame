@@ -7,6 +7,9 @@ package ui.hud.graph;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import util.CircularOverwriteArray;
+
+@SuppressWarnings("boxing")
 public class DebugGraph {
   /**
    * Time difference between debug info measures in nanoseconds.
@@ -20,14 +23,14 @@ public class DebugGraph {
   private int width, height;
 
   private final Measure updateMeasure, renderMeasure;
-  private final GraphData updateData, renderData;
+  private final CircularOverwriteArray<Double> updateData, renderData;
 
   public DebugGraph(int width, int height) {
     this.width = width;
     this.height = height;
 
-    updateData = new GraphData(width);
-    renderData = new GraphData(width);
+    updateData = new CircularOverwriteArray<>(width, 0.0);
+    renderData = new CircularOverwriteArray<>(width, 0.0);
 
     updateMeasure = new Measure(MEASURE_TIME_DELTA);
     renderMeasure = new Measure(MEASURE_TIME_DELTA);
@@ -57,8 +60,7 @@ public class DebugGraph {
   public void stopRenderMeasure() {
     renderMeasure.stopMeasure();
     if (renderMeasure.isFinished()) {
-      renderData.addDataPoint(
-        renderMeasure.getAverage() / (double) NANO_PER_MILLI);
+      renderData.add(renderMeasure.getAverage() / (double) NANO_PER_MILLI);
       renderMeasure.reset();
     }
   }
@@ -71,13 +73,12 @@ public class DebugGraph {
     updateMeasure.stopMeasure();
 
     if (updateMeasure.isFinished()) {
-      updateData.addDataPoint(
-        updateMeasure.getAverage() / (double) NANO_PER_MILLI); // milliseconds
+      updateData.add(updateMeasure.getAverage() / (double) NANO_PER_MILLI);
       updateMeasure.reset();
     }
   }
 
-  private void drawData(GraphData graphData, Graphics g) {
+  private void drawData(Iterable<Double> graphData, Graphics g) {
     int px = 0;
     for (Double data : graphData) {
       double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
