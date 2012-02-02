@@ -121,8 +121,8 @@ public class Walking implements IBossState {
    * @param radiusSquared the circle's radius squared
    * @return a vector specifying a random position
    */
-  private static Vector2 newRandomTarget(IRandom rnd, Rectangle rect,
-                                         Vector2 cPos, float radiusSquared) {
+  public static Vector2 newRandomTarget(IRandom rnd, Rectangle rect,
+      Vector2 cPos, float radiusSquared) {
     assert radiusSquared < ExMath.square(rect.getHeight());
 
     float targetX, targetY;
@@ -158,17 +158,23 @@ public class Walking implements IBossState {
       // Here we have to take the circle into account
       float yRoot = (float) (Math.sqrt(radiusSquared - tmp));
 
-      float y1 = cPos.y - yRoot;
-      float y2 = cPos.y + yRoot;
+      // Top and bottom of the circle
+      int y1 = (int) Math.floor(cPos.y - yRoot);
+      int y2 = (int) Math.ceil(cPos.y + yRoot);
 
       // Note that portions of the circle could lie outside of the rectangle.
-      // In that case we have to
-      if (y1 < rect.getY1()) {
+      if (y2 < rect.getY1() || y1 > rect.getY1()) {
+        // Entire circle is outside of the rectangle
+        targetY = rnd.nextFloat(rect.getY1(), rect.getY2());
+      } else if (y1 < rect.getY1()) {
+        // Top of circle is above the rectangle
         targetY = rnd.nextFloat(y2, rect.getY2());
       } else if (y2 > rect.getY1()) {
+        // Bottom of circle is below the rectangle
         targetY = rnd.nextFloat(rect.getY1(), y1);
       } else {
-        // Now we have two intervals
+        // The part of the circle we're interested in is within the rectangle
+        // We now have two intervals, choose one randomly
         if (rnd.nextBool()) {
           // Upper
           targetY = rnd.nextFloat(rect.getY1(), y1);

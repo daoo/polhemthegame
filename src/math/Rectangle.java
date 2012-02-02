@@ -212,4 +212,15 @@ public class Rectangle {
     return ((b.min.x > a.min.x && b.max.x < a.max.x) &&
             (b.min.y > a.min.y && b.max.y < a.max.y));
   }
+
+  /**
+   * Check if rectangle (a) contains a point (p).
+   * @param a the rectangle
+   * @param p the point (as a vector)
+   * @return true or false depending on if p is inside a or not
+   */
+  public static boolean contains(Rectangle a, Vector2 p) {
+    return ExMath.inRange(p.x, a.min.x, a.max.x) &&
+           ExMath.inRange(p.y, a.min.y, a.max.y);
+  }
 }
