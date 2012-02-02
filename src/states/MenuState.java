@@ -30,7 +30,6 @@ public class MenuState implements IState {
 
   private static final String BUTTON_SINGLE_PLAYER = "singleplayer";
   private static final String BUTTON_COOP = "coop";
-  private static final String BUTTON_OPTIONS = "options";
   private static final String BUTTON_EXIT = "exit";
 
   private final Image background;
@@ -42,14 +41,12 @@ public class MenuState implements IState {
 
     ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
-    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 280, new IUIEvent() {
+    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380, new IUIEvent() {
       @Override public void fire() {
         manager.enterSinglePlayer(CAMPAIGN_FILE);
       }
     }));
-    tmp.add(new MenuItemDisabled(BUTTON_COOP, 60, 380));
-    // TODO: Remove options
-    tmp.add(new MenuItemDisabled(BUTTON_OPTIONS, 60, 480));
+    tmp.add(new MenuItemDisabled(BUTTON_COOP, 60, 480));
     tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, new IUIEvent() {
       @Override public void fire() {
         manager.quit();
