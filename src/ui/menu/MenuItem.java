@@ -18,30 +18,32 @@ import org.newdawn.slick.Image;
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;
 
-  private final int          x, y;
-  private Image              current;
-  private final Image        imgNormal, imgActive, imgDisabled;
+  private final int x, y;
 
-  private MenuItemState    state;
+  private final Image[] stateMap;
 
-  public MenuItem(String name, int x, int y)
-    throws IOException, ParserException {
+  private Image current;
+  private MenuItemState state;
+
+  public MenuItem(String name, int x, int y) throws IOException, ParserException {
     this.x = x;
     this.y = y;
 
-    imgNormal = CacheTool.getImage(Locator.getCache(), "textures/menu/" + name + ".png");
-    imgActive = CacheTool.getImage(Locator.getCache(), "textures/menu/" + name + "m.png");
-    imgDisabled = imgNormal.copy();
+    Image imgNormal   = CacheTool.getImage(Locator.getCache(), getImagePath(name));
+    Image imgActive   = CacheTool.getImage(Locator.getCache(), getImagePath(name + "m"));
+    Image imgDisabled = imgNormal.copy();
 
     // Make disabled gray
     imgDisabled.setAlpha(0.5f);
-    imgDisabled.setColor(Image.TOP_LEFT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
-    imgDisabled.setColor(Image.TOP_RIGHT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
-    imgDisabled.setColor(Image.BOTTOM_RIGHT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
-    imgDisabled.setColor(Image.BOTTOM_LEFT, COLOR_DISABLED.r, COLOR_DISABLED.g, COLOR_DISABLED.b, COLOR_DISABLED.a);
+    setImageColor(imgDisabled, COLOR_DISABLED);
 
+    stateMap = new Image[3];
+    stateMap[MenuItemState.NORMAL.ordinal()]   = imgNormal;
+    stateMap[MenuItemState.ACTIVE.ordinal()]   = imgActive;
+    stateMap[MenuItemState.DISABLED.ordinal()] = imgDisabled;
+
+    state   = MenuItemState.NORMAL;
     current = imgNormal;
-    state = MenuItemState.NORMAL;
   }
 
   void render(Graphics g) {
@@ -49,18 +51,22 @@ public class MenuItem {
   }
 
   public void setState(MenuItemState state) {
-    if (state == MenuItemState.ACTIVE) {
-      current = imgActive;
-    } else if (state == MenuItemState.DISABLED) {
-      current = imgDisabled;
-    } else if (state == MenuItemState.NORMAL) {
-      current = imgNormal;
-    }
-
+    current = stateMap[state.ordinal()];
     this.state = state;
   }
 
   public MenuItemState getState() {
     return state;
+  }
+
+  private static String getImagePath(String name) {
+    return "textures/menu/" + name + ".png";
+  }
+
+  private static void setImageColor(Image img, Color c) {
+    img.setColor(Image.TOP_LEFT, c.r, c.g, c.b, c.a);
+    img.setColor(Image.TOP_RIGHT, c.r, c.g, c.b, c.a);
+    img.setColor(Image.BOTTOM_RIGHT, c.r, c.g, c.b, c.a);
+    img.setColor(Image.BOTTOM_LEFT, c.r, c.g, c.b, c.a);
   }
 }

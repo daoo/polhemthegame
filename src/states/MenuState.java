@@ -26,23 +26,31 @@ import util.Node;
 
 public class MenuState implements IState {
   private static final String CAMPAIGN_FILE = "campaigns/polhem.js";
+  private static final String MENU_BACKGROUND_FILE = "textures/menu/main.png";
+
+  private static final String BUTTON_SINGLE_PLAYER = "singleplayer";
+  private static final String BUTTON_COOP = "coop";
+  private static final String BUTTON_OPTIONS = "options";
+  private static final String BUTTON_EXIT = "exit";
+
   private final Image background;
   private final Menu  menu;
 
   public MenuState(final StateManager manager)
   throws ParserException, IOException {
-    background = CacheTool.getImage(Locator.getCache(), "textures/menu/main.png");
+    background = CacheTool.getImage(Locator.getCache(), MENU_BACKGROUND_FILE);
 
-    ArrayList<MenuItem> tmp = new ArrayList<>();
+    ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
-    tmp.add(new MenuButton("singleplayer", 60, 280, new IUIEvent() {
+    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 280, new IUIEvent() {
       @Override public void fire() {
         manager.enterSinglePlayer(CAMPAIGN_FILE);
       }
     }));
-    tmp.add(new MenuItemDisabled("coop", 60, 380));
-    tmp.add(new MenuItemDisabled("options", 60, 480));
-    tmp.add(new MenuButton("exit", 60, 580, new IUIEvent() {
+    tmp.add(new MenuItemDisabled(BUTTON_COOP, 60, 380));
+    // TODO: Remove options
+    tmp.add(new MenuItemDisabled(BUTTON_OPTIONS, 60, 480));
+    tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, new IUIEvent() {
       @Override public void fire() {
         manager.quit();
       }

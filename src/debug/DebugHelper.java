@@ -4,12 +4,12 @@
 
 package debug;
 
-import java.util.List;
+import java.util.Collection;
 
 import util.Node;
 
 public class DebugHelper {
-  public static Node<String> listToNode(String title, List<? extends Object> lst) {
+  public static Node<String> listToNode(String title, Collection<? extends Object> lst) {
     Node<String> node = new Node<>(title + " (" + lst.size() + ")");
 
     for (Object obj : lst) {
