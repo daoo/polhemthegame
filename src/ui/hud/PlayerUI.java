@@ -16,7 +16,9 @@ public class PlayerUI implements IStaticUIElement {
   public static final int HEIGHT = 75;
   public static final int WIDTH  = 1024;
 
-  private static final int PADDING = 10;
+  private static final int STATS_WIDTH       = 100;
+  private static final int STATS_LINE_HEIGHT = 25;
+  private static final int PADDING           = 10;
 
   private static final String MONEY = "Money: ";
   private static final String KILLS = "Kills: ";
@@ -36,9 +38,9 @@ public class PlayerUI implements IStaticUIElement {
     this.shop = shop;
     this.inventory = inv;
 
-    stats_x = WIDTH - 100 - PADDING;
+    stats_x = WIDTH - STATS_WIDTH - PADDING;
     stats_y = PADDING;
-    kills_y = stats_y + 25 + PADDING;
+    kills_y = stats_y + STATS_LINE_HEIGHT + PADDING;
   }
 
   @Override
