@@ -10,6 +10,10 @@ public class ExMath {
   public static final float PI      = (float) Math.PI;
   public static final float PI_HALF = ExMath.PI / 2.0f;
 
+  public static int square(int x) {
+    return x * x;
+  }
+
   public static float square(float x) {
     return x * x;
   }

@@ -79,8 +79,8 @@ public class Walking implements IBossState {
         --targets;
         // Target passed
         if (targets > 0) {
-          target = newRandomTarget(
-            Locator.getRandom(), movementRect, body.getCenter(), MIN_WALK_SQUARED);
+          target = newRandomTarget(Locator.getRandom(), movementRect,
+              body.getCenter(), MIN_WALK_SQUARED);
           headFor(target);
         }
       }
@@ -108,22 +108,31 @@ public class Walking implements IBossState {
     Vector2 delta     = Vector2.subtract(newTarget, body.getCenter());
     Vector2 direction = delta.normalize();
     Vector2 velocity  = Vector2.multiply(direction, speed);
-
     movement.setVelocity(velocity);
+  }
+
+  public static Vector2 newRandomTarget(IRandom rnd, Rectangle rect, Vector2 cPos, float radius) {
+    return newRandomTarget(rnd,
+        (int) rect.getX1(), (int) rect.getY1(), (int) rect.getX2(), (int) rect.getY2(),
+        (int) cPos.x, (int) cPos.y, (int) radius);
   }
 
   /**
    * Generate a random position that lies within a rectangle but outside of a
    * circle.
    * @param rnd the random generator to use
-   * @param rect the rectangle
-   * @param cPos the circle's position
-   * @param radiusSquared the circle's radius squared
+   * @param rx1 top left x of the rectangle
+   * @param ry1 top left y of the rectangle
+   * @param rx2 bottom right x of the rectangle
+   * @param ry2 bottom right y of the rectangle
+   * @param cx x position of the circle
+   * @param cy y position of the circle
+   * @param cr the squared radius of the circle
    * @return a vector specifying a random position
    */
-  public static Vector2 newRandomTarget(IRandom rnd, Rectangle rect,
-      Vector2 cPos, float radiusSquared) {
-    assert radiusSquared < ExMath.square(rect.getHeight());
+  public static Vector2 newRandomTarget(IRandom rnd, int rx1, int ry1, int rx2, int ry2,
+      int cx, int cy, int cr) {
+    assert cr < ExMath.square(ry2 - ry1);
 
     float targetX, targetY;
 
@@ -140,7 +149,7 @@ public class Walking implements IBossState {
      */
 
     // First, generate a random x value.
-    targetX = rnd.nextFloat(rect.getX1(), rect.getX2());
+    targetX = rnd.nextInt(rx1, rx2);
 
     /* Now use the circle's equation:
      * (x - a)^2 + (y - b)^2 = r^2
@@ -150,37 +159,43 @@ public class Walking implements IBossState {
      * y values lies outside of the circle for this x.
      */
 
-    float tmp = ExMath.square(targetX - cPos.x);
-    if (radiusSquared < tmp) {
+    float tmp = ExMath.square(targetX - cx);
+    if (cr < tmp) {
       // Circle is not intersecting our x here
-      targetY = rnd.nextFloat(rect.getY1(), rect.getY2());
+      targetY = rnd.nextFloat(ry1, ry2);
     } else {
       // Here we have to take the circle into account
-      float yRoot = (float) (Math.sqrt(radiusSquared - tmp));
+      int yRoot = (int) (Math.sqrt(cr - tmp));
 
       // Top and bottom of the circle
-      int y1 = (int) Math.floor(cPos.y - yRoot);
-      int y2 = (int) Math.ceil(cPos.y + yRoot);
+      int y1 = cy - yRoot;
+      int y2 = cy + yRoot + 1; // +1 so that we don't get point in the circle
 
       // Note that portions of the circle could lie outside of the rectangle.
-      if (y2 < rect.getY1() || y1 > rect.getY1()) {
+      if (y2 < ry1 || y1 > ry2) {
         // Entire circle is outside of the rectangle
-        targetY = rnd.nextFloat(rect.getY1(), rect.getY2());
-      } else if (y1 < rect.getY1()) {
+        targetY = rnd.nextInt(ry1, ry2);
+      } else if (y1 < ry1) {
         // Top of circle is above the rectangle
-        targetY = rnd.nextFloat(y2, rect.getY2());
-      } else if (y2 > rect.getY1()) {
+        targetY = rnd.nextInt(y2, ry2);
+      } else if (y2 > ry2) {
         // Bottom of circle is below the rectangle
-        targetY = rnd.nextFloat(rect.getY1(), y1);
+        targetY = rnd.nextInt(ry1, y1);
       } else {
         // The part of the circle we're interested in is within the rectangle
-        // We now have two intervals, choose one randomly
-        if (rnd.nextBool()) {
+        // We now have two intervals, note that the size of the two intervals
+        // differ, we have to be careful so we get an uniform distribution.
+
+        int topSize = y1 - ry1;
+        int bottomSize = ry2 - y2;
+        int totalSize = topSize + bottomSize;
+
+        if (rnd.nextInt(totalSize) < topSize) {
           // Upper
-          targetY = rnd.nextFloat(rect.getY1(), y1);
+          targetY = rnd.nextInt(ry1, y1);
         } else {
           // Lower
-          targetY = rnd.nextFloat(y2, rect.getY2());
+          targetY = rnd.nextInt(y2, ry2);
         }
       }
     }

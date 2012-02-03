@@ -14,25 +14,25 @@ public class BossTest {
   @Test
   public void test() {
     IRandom rnd = new Random();
-    Rectangle rect = randomRect(rnd);
-    Vector2 cPos = new Vector2(rnd.nextInt(2000), rnd.nextInt(2000));
-    float radius = rnd.nextInt(50, 500);
-    float radiusSquared = ExMath.square(radius);
 
-    for (int i = 0; i < 99999; ++i) {
-      Vector2 target = Walking.newRandomTarget(rnd, rect, cPos, radiusSquared);
+    int rx1 = rnd.nextInt(1000);
+    int ry1 = rnd.nextInt(1000);
+    int rx2 = rnd.nextInt(1100, 2000);
+    int ry2 = rnd.nextInt(1100, 2000);
 
-      Assert.assertTrue(String.format("Not within rectangle, rect: %s, target: %s",
-          rect, target),
-          Rectangle.contains(rect, target));
-      Assert.assertTrue(String.format("Not outside of circle, distance: %f",
-          Vector2.distance(target, cPos) - radius),
-          Vector2.distanceSquared(target, cPos) >= radiusSquared);
+    int cx = rnd.nextInt(2000);
+    int cy = rnd.nextInt(2000);
+    int radius = rnd.nextInt(50, 500);
+    int radiusSquared = ExMath.square(radius);
+
+    Rectangle rect = new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1);
+    Vector2 cPos = new Vector2(cx, cy);
+
+    for (int i = 0; i < 9999999; ++i) {
+      Vector2 p = Walking.newRandomTarget(rnd, rx1, ry1, rx2, ry2, cx, cy, radiusSquared);
+
+      Assert.assertTrue(Rectangle.contains(rect, p));
+      Assert.assertTrue(Vector2.distanceSquared(cPos, p) >= radiusSquared);
     }
-  }
-
-  private static Rectangle randomRect(IRandom rnd) {
-    return new Rectangle(rnd.nextInt(1000), rnd.nextInt(1000),
-        rnd.nextInt(100, 1000), rnd.nextInt(100, 1000));
   }
 }
