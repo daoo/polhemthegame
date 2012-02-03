@@ -7,9 +7,9 @@ package ui.hud.graph;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import util.CircularOverwriteArray;
+import util.CircularFloatArray;
+import util.CircularFloatArray.FloatIterator;
 
-@SuppressWarnings("boxing")
 public class DebugGraph {
   /**
    * Time difference between debug info measures in nanoseconds.
@@ -23,14 +23,14 @@ public class DebugGraph {
   private int width, height;
 
   private final Measure updateMeasure, renderMeasure;
-  private final CircularOverwriteArray<Double> updateData, renderData;
+  private final CircularFloatArray updateData, renderData;
 
   public DebugGraph(int width, int height) {
     this.width = width;
     this.height = height;
 
-    updateData = new CircularOverwriteArray<>(width, 0.0);
-    renderData = new CircularOverwriteArray<>(width, 0.0);
+    updateData = new CircularFloatArray(width, 0);
+    renderData = new CircularFloatArray(width, 0);
 
     updateMeasure = new Measure(MEASURE_TIME_DELTA);
     renderMeasure = new Measure(MEASURE_TIME_DELTA);
@@ -60,7 +60,7 @@ public class DebugGraph {
   public void stopRenderMeasure() {
     renderMeasure.stopMeasure();
     if (renderMeasure.isFinished()) {
-      renderData.add(renderMeasure.getAverage() / (double) NANO_PER_MILLI);
+      renderData.add((float) (renderMeasure.getAverage() / (double) NANO_PER_MILLI));
       renderMeasure.reset();
     }
   }
@@ -73,15 +73,17 @@ public class DebugGraph {
     updateMeasure.stopMeasure();
 
     if (updateMeasure.isFinished()) {
-      updateData.add(updateMeasure.getAverage() / (double) NANO_PER_MILLI);
+      updateData.add((float) (updateMeasure.getAverage() / (double) NANO_PER_MILLI));
       updateMeasure.reset();
     }
   }
 
-  private void drawData(Iterable<Double> graphData, Graphics g) {
+  private void drawData(CircularFloatArray graphData, Graphics g) {
     int px = 0;
-    for (Double data : graphData) {
-      double dataHeight = data.doubleValue() / (MILLISECONDS_PER_FRAME);
+    FloatIterator it = graphData.iterator();
+    while (it.hasNext()) {
+      double data = it.next();
+      double dataHeight = data / (MILLISECONDS_PER_FRAME);
       int pixelHeight = (int) (dataHeight * height);
 
       g.drawLine(px, height - pixelHeight, px, height);
