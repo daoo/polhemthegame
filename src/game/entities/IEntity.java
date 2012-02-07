@@ -4,8 +4,8 @@
 
 package game.entities;
 
-import game.components.Message;
 import game.types.GameTime;
+import game.types.Message;
 import game.world.World;
 
 import org.newdawn.slick.Graphics;

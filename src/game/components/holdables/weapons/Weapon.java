@@ -4,7 +4,6 @@
 
 package game.components.holdables.weapons;
 
-import game.components.Message;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.machines.AutomaticMachine;
 import game.components.holdables.weapons.machines.IWeaponMachine;
@@ -12,6 +11,7 @@ import game.components.holdables.weapons.machines.SingleMachine;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
+import game.types.Message;
 import game.types.Orientation;
 import math.Vector2;
 

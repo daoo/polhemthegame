@@ -4,9 +4,9 @@
 
 package game.components.graphics.debug;
 
-import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.types.GameTime;
+import game.types.Message;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;

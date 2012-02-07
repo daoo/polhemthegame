@@ -52,11 +52,15 @@ public class CircularFloatArray {
     return new FloatIterator(data, (head + 1) % data.length);
   }
 
+  /**
+   * Iterator used for iterating a circular float array.
+   * Does not implement Iterator because we can not implement the remove method.
+   */
   public static class FloatIterator {
     private final float[] data;
     private int c, i;
 
-    public FloatIterator(float[] data, int start) {
+    FloatIterator(float[] data, int start) {
       this.data = data;
 
       c = 0;

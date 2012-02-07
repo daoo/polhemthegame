@@ -4,13 +4,13 @@
 
 package game.components.holdables;
 
-import game.components.Message;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
 import game.types.GameTime;
+import game.types.Message;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;

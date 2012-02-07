@@ -4,7 +4,6 @@
 
 package game.components.misc;
 
-import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
@@ -13,6 +12,7 @@ import game.entities.IEntity;
 import game.misc.Shop;
 import game.types.Binds;
 import game.types.GameTime;
+import game.types.Message;
 import main.Key;
 import math.Vector2;
 

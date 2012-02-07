@@ -4,8 +4,8 @@
 
 package game.components.interfaces;
 
-import game.components.Message;
 import game.types.GameTime;
+import game.types.Message;
 
 public interface ILogicComponent {
   void update(GameTime time);

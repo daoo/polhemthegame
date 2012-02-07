@@ -4,10 +4,10 @@
 
 package game.triggers.effects.spawn;
 
-import game.components.Message;
 import game.entities.Entity;
 import game.triggers.IEffect;
 import game.types.GameTime;
+import game.types.Message;
 import game.types.TimePos;
 import game.world.World;
 import math.Vector2;

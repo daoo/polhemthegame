@@ -4,11 +4,11 @@
 
 package game.components.graphics.debug;
 
-import game.components.Message;
 import game.components.interfaces.IRenderComponent;
 import game.components.physics.Movement;
 import game.entities.Entity;
 import game.types.GameTime;
+import game.types.Message;
 import math.Rectangle;
 
 import org.newdawn.slick.Color;

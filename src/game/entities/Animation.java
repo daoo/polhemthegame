@@ -1,8 +1,8 @@
 package game.entities;
 
-import game.components.Message;
 import game.components.interfaces.IAnimatedComponent;
 import game.types.GameTime;
+import game.types.Message;
 import game.world.World;
 import math.Vector2;
 

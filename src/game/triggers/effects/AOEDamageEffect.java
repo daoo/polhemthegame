@@ -4,12 +4,12 @@
 
 package game.triggers.effects;
 
-import game.components.Message;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.triggers.IEffect;
 import game.types.Damage;
 import game.types.GameTime;
+import game.types.Message;
 import game.world.World;
 import math.Rectangle;
 import math.Vector2;

@@ -4,11 +4,11 @@
 
 package game.entities;
 
-import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.components.interfaces.IRenderComponent;
 import game.triggers.IEffect;
 import game.types.GameTime;
+import game.types.Message;
 import game.world.World;
 
 import java.util.ArrayList;

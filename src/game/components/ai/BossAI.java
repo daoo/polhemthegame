@@ -4,12 +4,12 @@
 
 package game.components.ai;
 
-import game.components.Message;
 import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.Entity;
 import game.types.GameTime;
+import game.types.Message;
 import main.Locator;
 import math.ExMath;
 import math.Rectangle;

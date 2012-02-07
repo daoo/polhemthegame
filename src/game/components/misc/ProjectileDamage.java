@@ -4,11 +4,11 @@
 
 package game.components.misc;
 
-import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.types.Damage;
 import game.types.GameTime;
+import game.types.Message;
 
 public class ProjectileDamage implements ILogicComponent {
   private final Damage damageOther;

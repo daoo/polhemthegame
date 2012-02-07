@@ -4,10 +4,10 @@
 
 package game.components.misc;
 
-import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
 import game.types.GameTime;
+import game.types.Message;
 import game.types.TimePos;
 import math.Vector2;
 

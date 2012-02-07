@@ -4,7 +4,6 @@
 
 package game.components.graphics;
 
-import game.components.Message;
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
@@ -12,6 +11,7 @@ import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.misc.Clock;
 import game.types.GameTime;
+import game.types.Message;
 import game.types.Orientation;
 
 import org.newdawn.slick.Graphics;

@@ -4,9 +4,9 @@
 
 package game.components.physics;
 
-import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.types.GameTime;
+import game.types.Message;
 import math.Vector2;
 
 public class Gravity implements ILogicComponent {

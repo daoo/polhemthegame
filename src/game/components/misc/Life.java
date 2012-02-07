@@ -4,11 +4,11 @@
 
 package game.components.misc;
 
-import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
 import game.types.Damage;
 import game.types.GameTime;
+import game.types.Message;
 import ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {
