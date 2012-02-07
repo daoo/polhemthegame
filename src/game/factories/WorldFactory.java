@@ -85,10 +85,10 @@ public class WorldFactory {
     for (CreepSpawnData spawnData : spawnsData) {
       // Make creep
       CreepData creepData = creepsData.getCreep(spawnData.creep);
-      float x = rect.getX2() + creepData.hitbox.width;
+      float x = rect.getX2() + creepData.unit.hitbox.width;
       float y = Locator.getRandom().nextFloat(
         rect.getY1(),
-        rect.getY2() - creepData.hitbox.height
+        rect.getY2() - creepData.unit.hitbox.height
       );
 
       Unit creep = entityFactory.makeCreep(x, y, creepData);

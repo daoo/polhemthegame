@@ -4,7 +4,9 @@
 
 package loader.data.json.types;
 
-public class CreepData extends UnitData {
+public class CreepData {
+  public UnitData unit;
+
   public int moneyGain;
   public int damage;
 }

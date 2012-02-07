@@ -5,7 +5,9 @@
 package loader.data.json.types;
 
 
-public class BossData extends UnitData {
+public class BossData {
+  public UnitData unit;
+
   public int locationX;
   public String weapon;
   public float fireLength;

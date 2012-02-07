@@ -11,9 +11,7 @@ public class UnitData {
   public int speed;
   public int hitpoints;
 
-  public Map<String, SpriteData> sprites;
+  public Orientation orientation;
 
-  public SpriteData getSheet(String animation) {
-    return sprites.get(animation);
-  }
+  public Map<String, SpriteData> sprites;
 }

@@ -2,10 +2,11 @@ package loader.data;
 
 import java.io.IOException;
 
+import loader.IData;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import loader.IData;
 import util.SpriteSheet;
 
 public class DataSpriteSheet extends SpriteSheet implements IData {

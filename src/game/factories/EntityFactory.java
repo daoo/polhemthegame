@@ -73,8 +73,8 @@ public class EntityFactory {
 
   private Unit makeUnit(float x, float y, float dx, float dy, UnitData data)
       throws ParserException, IOException {
-    AnimatedSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.getSheet("walk"));
-    AnimatedSheet death = CacheTool.getRSheet(Locator.getCache(), data.getSheet("death"));
+    AnimatedSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.sprites.get("walk"));
+    AnimatedSheet death = CacheTool.getRSheet(Locator.getCache(), data.sprites.get("death"));
 
     Entity entity = new Entity(x, y, data.hitbox.width, data.hitbox.height);
     Movement mov  = new Movement(entity, dx, dy);
@@ -98,14 +98,14 @@ public class EntityFactory {
 
   public Unit makeCreep(float x, float y, CreepData data)
       throws ParserException, IOException {
-    return makeUnit(x, y, -data.speed, 0, data);
+    return makeUnit(x, y, -data.unit.speed, 0, data.unit);
   }
 
   public Player makePlayer(String playerName)
       throws ParserException, IOException {
     PlayerData data = playersData.getPlayer(playerName);
 
-    Unit unit = makeUnit(0, 0, 0, 0, data);
+    Unit unit = makeUnit(0, 0, 0, 0, data.unit);
 
     // Create components
     MovementConstraint movCons = new MovementConstraint(unit.entity, worldRect);
@@ -118,7 +118,7 @@ public class EntityFactory {
     hand.grab(weapon);
 
     PlayerControl control = new PlayerControl(unit.entity, unit.movement,
-                                              inv, shop, hand, data.speed);
+                                              inv, shop, hand, data.unit.speed);
 
     // Add components
     unit.entity.addLogicComponent(movCons);
@@ -134,19 +134,19 @@ public class EntityFactory {
 
   public Unit makeBoss(BossData data)
       throws ParserException, IOException {
-    int middleY = (int) (worldRect.getCenter().y - data.hitbox.height / 2);
+    int middleY = (int) (worldRect.getCenter().y - data.unit.hitbox.height / 2);
 
     Vector2 initialTarget = new Vector2(
-      worldRect.getX2() + data.hitbox.width - data.locationX,
+      worldRect.getX2() + data.unit.hitbox.width - data.locationX,
       middleY
     );
 
-    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, data);
+    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, data.unit);
 
     Hand hand     = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
     Weapon weapon = weaponFactory.makeWeapon(data.weapon);
     BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
-                               data.locationX, data.speed, initialTarget);
+                               data.locationX, data.unit.speed, initialTarget);
 
     unit.entity.addLogicComponent(ai);
     unit.entity.addRenderComponent(hand);

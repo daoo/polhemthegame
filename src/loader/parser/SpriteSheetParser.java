@@ -2,10 +2,10 @@ package loader.parser;
 
 import java.io.InputStream;
 
-import org.newdawn.slick.Image;
-
 import loader.IData;
 import loader.data.DataSpriteSheet;
+
+import org.newdawn.slick.Image;
 
 public class SpriteSheetParser implements IParser {
   private final int tileWidth;
