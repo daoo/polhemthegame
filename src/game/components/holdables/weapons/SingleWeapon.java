@@ -8,7 +8,7 @@ import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
-import game.pods.GameTime;
+import game.types.GameTime;
 import math.Vector2;
 
 public class SingleWeapon extends Weapon {

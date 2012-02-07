@@ -7,7 +7,7 @@ package game.components.physics;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
-import game.pods.GameTime;
+import game.types.GameTime;
 import math.CollisionHelper;
 import math.Rectangle;
 

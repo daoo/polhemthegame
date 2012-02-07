@@ -7,8 +7,8 @@ package game.components.misc;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
-import game.pods.GameTime;
-import game.pods.TimePos;
+import game.types.GameTime;
+import game.types.TimePos;
 import math.Vector2;
 
 public class RangeLimiter implements ILogicComponent {

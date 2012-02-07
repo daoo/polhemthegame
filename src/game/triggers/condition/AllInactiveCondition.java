@@ -5,8 +5,8 @@
 package game.triggers.condition;
 
 import game.entities.IEntity;
-import game.pods.GameTime;
 import game.triggers.ICondition;
+import game.types.GameTime;
 import game.world.World;
 
 import java.util.Arrays;

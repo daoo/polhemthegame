@@ -9,7 +9,7 @@ import game.components.holdables.Hand;
 import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.Entity;
-import game.pods.GameTime;
+import game.types.GameTime;
 import main.Locator;
 import math.ExMath;
 import math.Rectangle;

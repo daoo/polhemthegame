@@ -6,7 +6,7 @@ package game.components.ai;
 
 import game.components.holdables.Hand;
 import game.components.physics.Movement;
-import game.pods.GameTime;
+import game.types.GameTime;
 import main.Locator;
 import math.ExMath;
 import math.IRandom;

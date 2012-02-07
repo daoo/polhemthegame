@@ -4,8 +4,8 @@
 
 package game.triggers.condition;
 
-import game.pods.GameTime;
 import game.triggers.ICondition;
+import game.types.GameTime;
 import game.world.World;
 
 public class AlwaysTrueCondition implements ICondition {

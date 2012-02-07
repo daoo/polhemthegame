@@ -5,7 +5,7 @@
 package game.entities;
 
 import game.components.Message;
-import game.pods.GameTime;
+import game.types.GameTime;
 import game.world.World;
 
 import org.newdawn.slick.Graphics;

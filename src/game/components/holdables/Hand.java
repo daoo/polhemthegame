@@ -9,8 +9,8 @@ import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
 import game.factories.ProjectileFactory;
-import game.pods.GameTime;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
+import game.types.GameTime;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;

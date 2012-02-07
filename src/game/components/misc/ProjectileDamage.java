@@ -7,8 +7,8 @@ package game.components.misc;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.IEntity;
-import game.pods.Damage;
-import game.pods.GameTime;
+import game.types.Damage;
+import game.types.GameTime;
 
 public class ProjectileDamage implements ILogicComponent {
   private final Damage damageOther;

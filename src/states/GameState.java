@@ -10,8 +10,8 @@ import game.entities.Entity;
 import game.entities.Players;
 import game.factories.EntityFactory;
 import game.factories.WorldFactory;
-import game.pods.GameTime;
-import game.pods.Player;
+import game.types.GameTime;
+import game.types.Player;
 import game.world.World;
 
 import java.io.IOException;

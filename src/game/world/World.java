@@ -6,8 +6,8 @@ package game.world;
 
 import game.entities.Entity;
 import game.entities.IEntity;
-import game.pods.GameTime;
 import game.triggers.ITrigger;
+import game.types.GameTime;
 
 import java.util.ArrayList;
 import java.util.Collection;

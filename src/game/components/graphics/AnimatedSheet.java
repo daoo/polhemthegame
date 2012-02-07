@@ -11,34 +11,60 @@ import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.misc.Clock;
-import game.pods.GameTime;
+import game.types.GameTime;
+import game.types.Orientation;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import util.SpriteSheet;
 
+/**
+ * Component for animating a sprite sheet.
+ */
 public class AnimatedSheet implements IAnimatedComponent {
   private static final IAnimator IDLE = new Idle();
 
-  private IAnimator animator;
-
-  private final Clock clock;
-  private Tile current;
   private final int offsetX, offsetY;
+  private final float rotation;
+  private final boolean flip;
 
   private final SpriteSheet sheet;
+  private final int centerX, centerY;
   private final Tile size;
 
-  public AnimatedSheet(float targetFrameRate, int offsetX, int offsetY, SpriteSheet sheet) {
+  private final Clock clock;
+
+  private IAnimator animator;
+  private Tile current;
+
+  /**
+   * Create a new animated sprite sheet.
+   * @param targetFrameRate the frame rate of the animation, greater than zero
+   * @param offsetX translation before rendering
+   * @param offsetY translation before rendering
+   * @param orientation the orientation of the rendered image, if we want left
+   *        orientation the image will be mirrored along the x-axis.
+   * @param rotation rotation before rendering (degrees)
+   * @param sheet the sprite sheet to animate, not null
+   */
+  public AnimatedSheet(float targetFrameRate, int offsetX, int offsetY,
+      Orientation orientation, float rotation, SpriteSheet sheet) {
+    assert targetFrameRate > 0;
+    assert sheet != null;
+
     this.sheet = sheet;
 
     this.offsetX = offsetX;
     this.offsetY = offsetY;
+    this.flip = orientation == Orientation.LEFT;
+    this.rotation = rotation;
 
     size = new Tile(sheet.getTileCountX(), sheet.getTileCountY());
+    centerX = sheet.getTileWidth() / 2;
+    centerY = sheet.getTileWidth() / 2;
 
-    current = Tile.ZERO;
+    current  = Tile.ZERO;
     animator = IDLE;
 
     clock = new Clock(1.0f / targetFrameRate);
@@ -101,7 +127,19 @@ public class AnimatedSheet implements IAnimatedComponent {
 
   @Override
   public void render(Graphics g) {
+    g.pushTransform();
+    g.rotate(centerX, centerY, rotation);
+    if (flip) {
+      // Be sure to flip around the center
+      g.translate(centerX, 0);
+      g.scale(-1, 1);
+      g.translate(-centerX, 0);
+      // Alternatively, translate by width after flip
+    }
+
     g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
+
+    g.popTransform();
   }
 
   @Override

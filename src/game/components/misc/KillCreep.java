@@ -7,8 +7,8 @@ package game.components.misc;
 import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
-import game.pods.GameTime;
 import game.triggers.IEffect;
+import game.types.GameTime;
 
 public class KillCreep implements ILogicComponent {
   private final Entity owner;

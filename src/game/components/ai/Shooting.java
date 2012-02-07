@@ -4,7 +4,7 @@
 
 package game.components.ai;
 
-import game.pods.GameTime;
+import game.types.GameTime;
 
 public class Shooting implements IBossState {
   private final float length;

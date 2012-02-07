@@ -10,6 +10,7 @@ import game.components.holdables.weapons.AutomaticWeapon;
 import game.components.holdables.weapons.SingleWeapon;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IAnimatedComponent;
+import game.types.Orientation;
 
 import java.io.IOException;
 
@@ -22,6 +23,9 @@ import main.Locator;
 import math.Rectangle;
 import math.Vector2;
 
+/**
+ * Factory for weapons.
+ */
 public class WeaponFactory {
   private final Rectangle bounds;
   private final WeaponsData weapons;
@@ -40,7 +44,15 @@ public class WeaponFactory {
     projectiles = CacheTool.getProjectiles(Locator.getCache());
   }
 
-  public Weapon makeWeapon(String name)
+  /**
+   * Make a new weapon by fetching data from the cache.
+   * @param name the name of the weapon
+   * @param orientation the orientation of the weapon (affects direction of projectiles)
+   * @return a weapon
+   * @throws ParserException if parsing fails
+   * @throws IOException if file IO fails
+   */
+  public Weapon makeWeapon(String name, Orientation orientation)
       throws ParserException, IOException {
     WeaponData data = weapons.getWeapon(name);
 
@@ -53,7 +65,7 @@ public class WeaponFactory {
     if (data.sprite == null) {
       anim = new DummyAnimation();
     } else {
-      anim = CacheTool.getRSheet(Locator.getCache(), data.sprite);
+      anim = CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
     }
 
     if (data.automatic) {

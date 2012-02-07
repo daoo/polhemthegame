@@ -5,6 +5,7 @@
 package game;
 
 import game.components.graphics.AnimatedSheet;
+import game.types.Orientation;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,13 +84,26 @@ public class CacheTool {
     return (ProjectilesData) cache.getCold(FILE_PROJECTILES, PROJECTILES_PARSER);
   }
 
-  public static AnimatedSheet getRSheet(ICache cache, SpriteData sprite)
+  /**
+   * Create a new animated sprite sheet based on some sprite data.
+   * @param cache the cache to use for retrieval
+   * @param orientation the orientation of the sheet (when rendering)
+   * @param angle the rotation of the sheet (when rendering)
+   * @param sprite the sprite data
+   * @return a new animated sprite sheet
+   * @throws ParserException if parsing fails
+   * @throws IOException if IO fails
+   */
+  public static AnimatedSheet getAnimatedSheet(ICache cache,
+      Orientation orientation, float angle, SpriteData sprite)
       throws ParserException, IOException {
     SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
     return new AnimatedSheet(
       sprite.framerate,
       sprite.offset.x,
       sprite.offset.y,
+      orientation,
+      angle,
       sheet
     );
   }

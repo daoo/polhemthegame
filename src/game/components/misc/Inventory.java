@@ -8,8 +8,8 @@ import game.components.Message;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.ILogicComponent;
 import game.misc.Wallet;
-import game.pods.Damage;
-import game.pods.GameTime;
+import game.types.Damage;
+import game.types.GameTime;
 
 import java.util.ArrayList;
 

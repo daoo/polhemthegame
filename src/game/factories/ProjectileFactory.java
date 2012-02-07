@@ -23,6 +23,7 @@ import game.triggers.IEffect;
 import game.triggers.effects.AOEDamageEffect;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
+import game.types.Orientation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -117,6 +118,8 @@ public class ProjectileFactory {
         data.sprite.framerate,
         data.sprite.offset.x,
         data.sprite.offset.y,
+        Orientation.LEFT, // TODO
+        0, // TODO
         sprite
       );
       sheet.setAnimator(new Continuous(sheet.getTileCount()));
@@ -130,6 +133,8 @@ public class ProjectileFactory {
       AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
                                         data.aoe.explosionSprite.offset.x,
                                         data.aoe.explosionSprite.offset.y,
+                                        Orientation.LEFT, // TODO
+                                        0, // TODO
                                         explosion);
 
       effectsOnDeath.add(new AOEDamageEffect(

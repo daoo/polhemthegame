@@ -11,7 +11,5 @@ public class UnitData {
   public int speed;
   public int hitpoints;
 
-  public Orientation orientation;
-
   public Map<String, SpriteData> sprites;
 }

@@ -7,7 +7,6 @@ package game.factories;
 import game.CacheTool;
 import game.components.misc.KillCreep;
 import game.entities.Entity;
-import game.pods.Unit;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
@@ -20,6 +19,7 @@ import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
 import game.triggers.effects.spawn.SpawnBossEffect;
 import game.triggers.effects.spawn.SpawnCreepEffect;
+import game.types.Unit;
 import game.world.World;
 
 import java.io.IOException;

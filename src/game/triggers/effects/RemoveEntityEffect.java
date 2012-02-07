@@ -5,8 +5,8 @@
 package game.triggers.effects;
 
 import game.entities.IEntity;
-import game.pods.GameTime;
 import game.triggers.IEffect;
+import game.types.GameTime;
 import game.world.World;
 
 public class RemoveEntityEffect implements IEffect {

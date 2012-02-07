@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2011 Daniel Oom, see license.txt for more info.
  */
 
-package game.pods;
+package game.types;
 
 import game.components.misc.Life;
 import game.components.physics.Movement;

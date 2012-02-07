@@ -2,7 +2,7 @@ package game.entities;
 
 import game.components.Message;
 import game.components.interfaces.IAnimatedComponent;
-import game.pods.GameTime;
+import game.types.GameTime;
 import game.world.World;
 import math.Vector2;
 

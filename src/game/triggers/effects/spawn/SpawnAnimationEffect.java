@@ -8,8 +8,8 @@ import game.components.graphics.animations.RunTo;
 import game.components.interfaces.IAnimatedComponent;
 import game.entities.Animation;
 import game.entities.Entity;
-import game.pods.GameTime;
 import game.triggers.IEffect;
+import game.types.GameTime;
 import game.world.World;
 import math.Rectangle;
 

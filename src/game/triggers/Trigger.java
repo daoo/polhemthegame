@@ -4,7 +4,7 @@
 
 package game.triggers;
 
-import game.pods.GameTime;
+import game.types.GameTime;
 import game.world.World;
 
 import java.util.ArrayList;

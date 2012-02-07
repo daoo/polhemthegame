@@ -7,6 +7,7 @@ package game.misc;
 import game.CacheTool;
 import game.components.holdables.weapons.Weapon;
 import game.factories.WeaponFactory;
+import game.types.Orientation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,7 +48,9 @@ public class Shop {
     for (ShopItemData item : shop.items) {
       Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);
       Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
-      Weapon weapon  = factory.makeWeapon(item.weapon);
+
+      // These weapons are for players, hence right orientation
+      Weapon weapon  = factory.makeWeapon(item.weapon, Orientation.RIGHT);
 
       ShopItem tmp = new ShopItem(item.price, icon, iconGray, weapon);
       items.add(tmp);

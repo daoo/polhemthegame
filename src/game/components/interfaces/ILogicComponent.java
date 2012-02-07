@@ -5,7 +5,7 @@
 package game.components.interfaces;
 
 import game.components.Message;
-import game.pods.GameTime;
+import game.types.GameTime;
 
 public interface ILogicComponent {
   void update(GameTime time);

@@ -5,9 +5,9 @@
 package game.triggers.effects.spawn;
 
 import game.components.Message;
-import game.pods.GameTime;
-import game.pods.Unit;
 import game.triggers.IEffect;
+import game.types.GameTime;
+import game.types.Unit;
 import game.world.World;
 import main.Locator;
 

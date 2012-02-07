@@ -6,9 +6,9 @@ package game.triggers.effects;
 
 import game.components.Message;
 import game.entities.IEntity;
-import game.pods.Damage;
-import game.pods.GameTime;
 import game.triggers.IEffect;
+import game.types.Damage;
+import game.types.GameTime;
 import game.world.World;
 
 import java.util.Collection;

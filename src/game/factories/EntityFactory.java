@@ -19,10 +19,11 @@ import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.entities.Entity;
 import game.misc.Shop;
-import game.pods.Player;
-import game.pods.Unit;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
+import game.types.Orientation;
+import game.types.Player;
+import game.types.Unit;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -45,6 +46,10 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
+  private static final Orientation PLAYER_ORIENTATION = Orientation.RIGHT;
+  private static final Orientation BOSS_ORIENTATION = Orientation.LEFT;
+  private static final Orientation CREEP_ORIENTATION = Orientation.LEFT;
+
   private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
   private static final int BAR_HEIGHT    = 2;
   private static final int BAR_OFFSET_X  = 0;
@@ -71,10 +76,13 @@ public class EntityFactory {
     playersData   = CacheTool.getPlayers(Locator.getCache());
   }
 
-  private Unit makeUnit(float x, float y, float dx, float dy, UnitData data)
+  private Unit makeUnit(float x, float y, float dx, float dy,
+      Orientation orientation, UnitData data)
       throws ParserException, IOException {
-    AnimatedSheet walk  = CacheTool.getRSheet(Locator.getCache(), data.sprites.get("walk"));
-    AnimatedSheet death = CacheTool.getRSheet(Locator.getCache(), data.sprites.get("death"));
+    AnimatedSheet walk = CacheTool.getAnimatedSheet(
+        Locator.getCache(), orientation, 0, data.sprites.get("walk"));
+    AnimatedSheet death = CacheTool.getAnimatedSheet(
+        Locator.getCache(), orientation, 0, data.sprites.get("death"));
 
     Entity entity = new Entity(x, y, data.hitbox.width, data.hitbox.height);
     Movement mov  = new Movement(entity, dx, dy);
@@ -98,14 +106,14 @@ public class EntityFactory {
 
   public Unit makeCreep(float x, float y, CreepData data)
       throws ParserException, IOException {
-    return makeUnit(x, y, -data.unit.speed, 0, data.unit);
+    return makeUnit(x, y, -data.unit.speed, 0, CREEP_ORIENTATION, data.unit);
   }
 
   public Player makePlayer(String playerName)
       throws ParserException, IOException {
     PlayerData data = playersData.getPlayer(playerName);
 
-    Unit unit = makeUnit(0, 0, 0, 0, data.unit);
+    Unit unit = makeUnit(0, 0, 0, 0, PLAYER_ORIENTATION, data.unit);
 
     // Create components
     MovementConstraint movCons = new MovementConstraint(unit.entity, worldRect);
@@ -113,7 +121,7 @@ public class EntityFactory {
     Shop shop                  = new Shop(shopData, weaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
-    Weapon weapon = weaponFactory.makeWeapon(data.startWeapon);
+    Weapon weapon = weaponFactory.makeWeapon(data.startWeapon, PLAYER_ORIENTATION);
     inv.addWeapon(weapon);
     hand.grab(weapon);
 
@@ -141,10 +149,10 @@ public class EntityFactory {
       middleY
     );
 
-    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, data.unit);
+    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, BOSS_ORIENTATION, data.unit);
 
     Hand hand     = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
-    Weapon weapon = weaponFactory.makeWeapon(data.weapon);
+    Weapon weapon = weaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
     BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
                                data.locationX, data.unit.speed, initialTarget);
 

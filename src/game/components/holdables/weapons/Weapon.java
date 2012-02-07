@@ -11,7 +11,7 @@ import game.components.holdables.weapons.states.IWeaponState;
 import game.components.holdables.weapons.states.ReloadingState;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
-import game.pods.GameTime;
+import game.types.GameTime;
 
 import java.util.ArrayList;
 

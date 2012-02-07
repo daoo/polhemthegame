@@ -9,7 +9,7 @@ import game.components.ai.BossAI;
 import game.components.ai.IBossState;
 import game.components.ai.Walking;
 import game.components.interfaces.IRenderComponent;
-import game.pods.GameTime;
+import game.types.GameTime;
 import math.Rectangle;
 import math.Vector2;
 

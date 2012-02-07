@@ -9,7 +9,7 @@ import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
-import game.pods.GameTime;
+import game.types.GameTime;
 
 import org.newdawn.slick.Graphics;
 

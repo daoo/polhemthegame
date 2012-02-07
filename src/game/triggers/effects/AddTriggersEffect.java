@@ -4,9 +4,9 @@
 
 package game.triggers.effects;
 
-import game.pods.GameTime;
 import game.triggers.IEffect;
 import game.triggers.ITrigger;
+import game.types.GameTime;
 import game.world.World;
 
 import java.util.Arrays;

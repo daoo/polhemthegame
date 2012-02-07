@@ -11,8 +11,8 @@ import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.IEntity;
 import game.misc.Shop;
-import game.pods.Binds;
-import game.pods.GameTime;
+import game.types.Binds;
+import game.types.GameTime;
 import main.Key;
 import math.Vector2;
 

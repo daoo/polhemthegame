@@ -8,7 +8,7 @@ import game.components.Message;
 import game.components.interfaces.ILogicComponent;
 import game.entities.Entity;
 import game.entities.IEntity;
-import game.pods.GameTime;
+import game.types.GameTime;
 
 import java.util.ArrayList;
 

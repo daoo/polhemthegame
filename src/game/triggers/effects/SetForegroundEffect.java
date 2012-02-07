@@ -4,8 +4,8 @@
 
 package game.triggers.effects;
 
-import game.pods.GameTime;
 import game.triggers.IEffect;
+import game.types.GameTime;
 import game.world.World;
 
 import org.newdawn.slick.Image;
