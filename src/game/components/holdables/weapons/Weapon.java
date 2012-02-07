@@ -6,55 +6,54 @@ package game.components.holdables.weapons;
 
 import game.components.Message;
 import game.components.holdables.IHoldable;
-import game.components.holdables.weapons.states.CoolDownState;
-import game.components.holdables.weapons.states.IWeaponState;
-import game.components.holdables.weapons.states.ReloadingState;
+import game.components.holdables.weapons.machines.AutomaticMachine;
+import game.components.holdables.weapons.machines.IWeaponMachine;
+import game.components.holdables.weapons.machines.SingleMachine;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
 import game.types.Orientation;
-
-import java.util.ArrayList;
-
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
 
-public abstract class Weapon implements IHoldable {
-  protected IWeaponState currentState;
-  /**
-   * How many rounds there are left in the magazine.
-   */
-  protected int rounds;
+/**
+ * Weapon that can fire and be held by a hand.
+ */
+public class Weapon implements IHoldable {
+  private final IAnimatedComponent anim;
+  private final Vector2 muzzleOffset;
 
-  protected final IAnimatedComponent anim;
-  protected final float reloadTime, cooldownTime;
-  protected final int magazineSize;
-  protected final Vector2 muzzleOffset;
+  private final Orientation orientation;
+  private final ProjectileFactory projTemplate;
 
-  protected final Orientation orientation;
-  protected final ProjectileFactory projTemplate;
+  private final IWeaponMachine machine;
 
   /**
-   * Spawned projectiles, for owner to pass on to world.
-   * TODO: Since this is really only contains the same reference to a factory
-   * it could be replaced with an int.
+   * Keep track of fired bullets that have not been spawned.
+   * Note that it's possible that we never fire more than one bullet until the
+   * holder have collected them and spawned them in the world.
    */
-  public final ArrayList<ProjectileFactory> projectiles;
+  private final ProjectileQueue queue;
 
-  public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
-                int magazineSize, Orientation orientation,
+  public Weapon(Vector2 muzzleOffset, WeaponMode mode, float reloadLength,
+                float cooldownLength, int magazineSize, Orientation orientation,
                 IAnimatedComponent anim, ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
-    this.reloadTime   = reloadTime;
-    this.cooldownTime = cooldownTime;
-    this.magazineSize = magazineSize;
     this.orientation  = orientation;
     this.anim         = anim;
     this.projTemplate = projTemplate;
 
-    rounds      = magazineSize;
-    projectiles = new ArrayList<>();
+    queue = new ProjectileQueue();
+
+    Magazine magazine = new Magazine(magazineSize);
+    if (mode == WeaponMode.AUTOMATIC) {
+      machine = new AutomaticMachine(reloadLength, cooldownLength,
+          magazine, queue, anim);
+    } else {
+      machine = new SingleMachine(reloadLength, cooldownLength,
+          magazine, queue, anim);
+    }
   }
 
   public Orientation getOrientation() {
@@ -65,21 +64,22 @@ public abstract class Weapon implements IHoldable {
     return muzzleOffset;
   }
 
+  public ProjectileFactory getProjectileFactory() {
+    return projTemplate;
+  }
+
+  public ProjectileQueue getQueue() {
+    return queue;
+  }
+
   @Override
   public float getProgress() {
-    if (currentState != null) {
-      return currentState.getProgress();
-    }
-    else {
-      return (float) rounds / (float) magazineSize;
-    }
+    return machine.getProgress();
   }
 
   @Override
   public void reciveMessage(Message message, Object args) {
-    if (message == Message.KILL) {
-      toggleOff();
-    }
+    // Do nothing
   }
 
   @Override
@@ -90,32 +90,16 @@ public abstract class Weapon implements IHoldable {
   @Override
   public void update(GameTime time) {
     anim.update(time);
+    machine.update(time);
   }
 
-  protected void fire(float elapsed) {
-    if (magazineSize != -1) {
-      rounds -= 1;
-    }
-
-    projectiles.add(projTemplate);
-
-    currentState = new CoolDownState(elapsed, cooldownTime);
+  @Override
+  public void toggleOn() {
+    machine.startFiring();
   }
 
-  protected boolean isEmpty() {
-    return (magazineSize != -1) && (rounds <= 0);
-  }
-
-  protected boolean isIdle() {
-    return currentState == null;
-  }
-
-  protected boolean isReadyToShoot() {
-    return !isEmpty() && isIdle();
-  }
-
-  protected void startReload(GameTime time) {
-    currentState = new ReloadingState(time.elapsed, reloadTime);
-    rounds = magazineSize;
+  @Override
+  public void toggleOff() {
+    machine.stopFiring();
   }
 }

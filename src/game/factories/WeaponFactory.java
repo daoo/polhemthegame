@@ -6,9 +6,8 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.DummyAnimation;
-import game.components.holdables.weapons.AutomaticWeapon;
-import game.components.holdables.weapons.SingleWeapon;
 import game.components.holdables.weapons.Weapon;
+import game.components.holdables.weapons.WeaponMode;
 import game.components.interfaces.IAnimatedComponent;
 import game.types.Orientation;
 
@@ -68,28 +67,16 @@ public class WeaponFactory {
       anim = CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
     }
 
-    if (data.automatic) {
-      return new AutomaticWeapon(
-        muzzleOffset,
-        data.reloadTime,
-        60.0f / data.rpm,
-        data.clipSize,
-        orientation,
-        // FIXME: data.launchAngle,
-        anim,
-        new ProjectileFactory(bounds, projectileData)
-      );
-    } else {
-      return new SingleWeapon(
-        muzzleOffset,
-        data.reloadTime,
-        60.0f / data.rpm,
-        data.clipSize,
-        orientation,
-        // FIXME: data.launchAngle,
-        anim,
-        new ProjectileFactory(bounds, projectileData)
-      );
-    }
+    return new Weapon(
+      muzzleOffset,
+      data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
+      data.reloadTime,
+      60.0f / data.rpm,
+      data.clipSize,
+      orientation,
+      // FIXME: data.launchAngle,
+      anim,
+      new ProjectileFactory(bounds, projectileData)
+    );
   }
 }

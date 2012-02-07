@@ -5,10 +5,10 @@
 package game.components.holdables;
 
 import game.components.Message;
+import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
-import game.factories.ProjectileFactory;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
 import game.types.GameTime;
 import math.Vector2;
@@ -60,9 +60,10 @@ public class Hand implements IRenderComponent, IProgress {
   public void update(GameTime time) {
     if (weapon != null) {
       weapon.update(time);
+      ProjectileQueue queue = weapon.getQueue();
 
       // Find out if there are any projectiles that want to be spawned
-      for (ProjectileFactory projTemplate : weapon.projectiles) {
+      for (int i = 0; i < queue.getWaiting(); ++i) {
         // Muzzle relative to player entity
         Vector2 m = Vector2.add(offset, weapon.getMuzzleOffset());
 
@@ -70,13 +71,13 @@ public class Hand implements IRenderComponent, IProgress {
         Vector2 o = Vector2.add(owner.body.getMin(), m);
 
         // TODO: Spread
-        Entity p = projTemplate.makeProjectile(owner, o.x, o.y,
-            weapon.getOrientation(), 0);
+        Entity p = weapon.getProjectileFactory().makeProjectile(
+            owner, o.x, o.y, weapon.getOrientation(), 0);
 
         owner.addEffect(new SpawnProjectileEffect(p, o));
       }
 
-      weapon.projectiles.clear();
+      queue.clear();
     }
   }
 
