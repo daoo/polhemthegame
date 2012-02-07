@@ -128,16 +128,21 @@ public class AnimatedSheet implements IAnimatedComponent {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.rotate(centerX, centerY, rotation);
     if (flip) {
       // Be sure to flip around the center
       g.translate(centerX, 0);
       g.scale(-1, 1);
       g.translate(-centerX, 0);
       // Alternatively, translate by width after flip
-    }
 
-    g.drawImage(sheet.getSubImage(current.x, current.y), offsetX, offsetY);
+      // Note that when flipped, the x offset should be flipped to
+      g.translate(-offsetX, offsetY);
+    } else {
+      g.translate(offsetX, offsetY);
+    }
+    g.rotate(centerX, centerY, rotation);
+
+    g.drawImage(sheet.getSubImage(current.x, current.y), 0, 0);
 
     g.popTransform();
   }

@@ -12,6 +12,7 @@ import game.components.holdables.weapons.states.ReloadingState;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
+import game.types.Orientation;
 
 import java.util.ArrayList;
 
@@ -31,21 +32,24 @@ public abstract class Weapon implements IHoldable {
   protected final int magazineSize;
   protected final Vector2 muzzleOffset;
 
-  protected final float angle;
+  protected final Orientation orientation;
   protected final ProjectileFactory projTemplate;
+
   /**
    * Spawned projectiles, for owner to pass on to world.
+   * TODO: Since this is really only contains the same reference to a factory
+   * it could be replaced with an int.
    */
   public final ArrayList<ProjectileFactory> projectiles;
 
   public Weapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
-                int magazineSize, float angle, IAnimatedComponent anim,
-                ProjectileFactory projTemplate) {
+                int magazineSize, Orientation orientation,
+                IAnimatedComponent anim, ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.reloadTime   = reloadTime;
     this.cooldownTime = cooldownTime;
     this.magazineSize = magazineSize;
-    this.angle        = angle;
+    this.orientation  = orientation;
     this.anim         = anim;
     this.projTemplate = projTemplate;
 
@@ -53,8 +57,8 @@ public abstract class Weapon implements IHoldable {
     projectiles = new ArrayList<>();
   }
 
-  public float getAngle() {
-    return angle;
+  public Orientation getOrientation() {
+    return orientation;
   }
 
   public Vector2 getMuzzleOffset() {

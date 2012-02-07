@@ -74,7 +74,8 @@ public class WeaponFactory {
         data.reloadTime,
         60.0f / data.rpm,
         data.clipSize,
-        data.launchAngle,
+        orientation,
+        // FIXME: data.launchAngle,
         anim,
         new ProjectileFactory(bounds, projectileData)
       );
@@ -84,7 +85,8 @@ public class WeaponFactory {
         data.reloadTime,
         60.0f / data.rpm,
         data.clipSize,
-        data.launchAngle,
+        orientation,
+        // FIXME: data.launchAngle,
         anim,
         new ProjectileFactory(bounds, projectileData)
       );

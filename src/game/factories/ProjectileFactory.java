@@ -77,7 +77,16 @@ public class ProjectileFactory {
     }
   }
 
-  public Entity makeProjectile(IEntity source, float x, float y, float rot) {
+  /**
+   * Make a new projectile.
+   * @param source the source of the projectile (who fired it), can be null
+   * @param x the x coordinate of where it starts
+   * @param y the y coordinate of where it starts
+   * @param rot rotation in degrees
+   * @return a new projectile
+   */
+  public Entity makeProjectile(IEntity source, float x, float y,
+      Orientation orientation, float rot) {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life               = new Life(e, data.targets);
@@ -93,8 +102,9 @@ public class ProjectileFactory {
 
     // If these conditions are met, the projectile is moving
     if (data.speed != 0 || data.gravity) {
-      Movement mov = new Movement(e, (float) Math.cos(rot) * data.speed,
-                                     (float) Math.sin(rot) * data.speed);
+      float rad = (float) (rot * (Math.PI / 180.0));
+      Movement mov = new Movement(e, (float) Math.cos(rad) * data.speed,
+                                     (float) Math.sin(rad) * data.speed);
       e.addLogicComponent(mov);
 
       if (data.gravity) {
@@ -118,8 +128,7 @@ public class ProjectileFactory {
         data.sprite.framerate,
         data.sprite.offset.x,
         data.sprite.offset.y,
-        Orientation.LEFT, // TODO
-        0, // TODO
+        orientation, rot,
         sprite
       );
       sheet.setAnimator(new Continuous(sheet.getTileCount()));
@@ -133,8 +142,7 @@ public class ProjectileFactory {
       AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
                                         data.aoe.explosionSprite.offset.x,
                                         data.aoe.explosionSprite.offset.y,
-                                        Orientation.LEFT, // TODO
-                                        0, // TODO
+                                        Orientation.RIGHT, 0,
                                         explosion);
 
       effectsOnDeath.add(new AOEDamageEffect(

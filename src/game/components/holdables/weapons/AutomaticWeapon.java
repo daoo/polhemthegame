@@ -10,6 +10,7 @@ import game.components.graphics.animations.Tile;
 import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
+import game.types.Orientation;
 import math.Vector2;
 
 public class AutomaticWeapon extends Weapon {
@@ -19,9 +20,10 @@ public class AutomaticWeapon extends Weapon {
   private boolean inUse;
 
   public AutomaticWeapon(Vector2 muzzleOffset, float reloadTime, float cooldownTime,
-                         int magazineSize, float angle, IAnimatedComponent anim,
-                         ProjectileFactory factory) {
-    super(muzzleOffset, reloadTime, cooldownTime, magazineSize, angle, anim, factory);
+                         int magazineSize, Orientation orientation,
+                         IAnimatedComponent anim, ProjectileFactory factory) {
+    super(muzzleOffset, reloadTime, cooldownTime, magazineSize, orientation,
+        anim, factory);
   }
 
   @Override
