@@ -11,7 +11,7 @@
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/creeps/bracke-walk.png"
-          , tileSize: { width: 40, height: 50 } }
+          , tileSize: { width: 38, height: 47 } }
         , "death":
           { framerate: 8
           , offset: { x: -56, y: -50 }

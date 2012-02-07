@@ -23,7 +23,7 @@
       }
     }
 
-  , "Stefan":
+  , "stefan":
     { fireLength: 2.0
     , handOffset: { x: 0, y: 0 }
     , locationX: 100

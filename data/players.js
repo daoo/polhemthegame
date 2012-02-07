@@ -24,7 +24,7 @@
     }
 
   , "red":
-    { handOffset: { width: 12, height: 15 }
+    { handOffset: { x: 12, y: 15 }
     , startMoney: 100
     , startWeapon: "scalpel"
     , unit:
@@ -39,9 +39,9 @@
           , tileSize: { width: 18, height: 37 } }
         , "death":
           { framerate: 8
-          , offset: { x: 0, y: 0 }
+          , offset: { x: 0, y: -30 }
           , sprite: "textures/players/red-death.png"
-          , tileSize: { width: 60, height: 70 } }
+          , tileSize: { width: 60, height: 67 } }
         }
       }
     }
