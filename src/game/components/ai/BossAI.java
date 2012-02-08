@@ -17,7 +17,7 @@ import math.Vector2;
 
 public class BossAI implements ILogicComponent {
   private static final int INITIAL_TARGET_COUNT = 2;
-  private static final int TARGET_MIN_COUNT     = 0;
+  private static final int TARGET_MIN_COUNT     = 1;
   private static final int TARGET_MAX_COUNT     = 3;
 
   public static final float MIN_WALK         = 100.0f;

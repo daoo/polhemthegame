@@ -55,20 +55,16 @@ public class WeaponFactory {
       throws ParserException, IOException {
     WeaponData data = weapons.getWeapon(name);
 
-    Vector2 muzzleOffset =
-      new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
+    Vector2 muzzle = new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
     ProjectileData projectileData = projectiles.getProjectile(data.projectile);
 
-    IAnimatedComponent anim = null;
-    if (data.sprite == null) {
-      anim = new DummyAnimation();
-    } else {
-      anim = CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
-    }
+    IAnimatedComponent anim = (data.sprite == null)
+      ? new DummyAnimation()
+      : CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
     return new Weapon(
-      muzzleOffset,
+      muzzle,
       data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
       data.reloadTime,
       (int) (60000 / data.rpm),

@@ -69,12 +69,9 @@ public class ProjectileFactory {
       sprite = null;
     }
 
-    if (data.aoe != null) {
-      explosion = CacheTool.getSpriteSheet(Locator.getCache(),
-                                           data.aoe.explosionSprite);
-    } else {
-      explosion = null;
-    }
+    explosion = (data.aoe == null)
+      ? null
+      : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
   }
 
   /**
@@ -103,8 +100,11 @@ public class ProjectileFactory {
     // If these conditions are met, the projectile is moving
     if (data.speed != 0 || data.gravity) {
       float rad = (float) (rot * (Math.PI / 180.0));
-      Movement mov = new Movement(e, (float) Math.cos(rad) * data.speed,
-                                     (float) Math.sin(rad) * data.speed);
+      int dir = orientation == Orientation.RIGHT ? 1 : -1;
+
+      Movement mov = new Movement(e, dir * (float) Math.cos(rad) * data.speed,
+                                           (float) Math.sin(rad) * data.speed);
+
       e.addLogicComponent(mov);
 
       if (data.gravity) {
