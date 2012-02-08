@@ -14,8 +14,8 @@ import math.Rectangle;
 import math.Vector2;
 
 public class Walking implements IBossState {
-  public static final float MIN_WALK         = 100.0f;
-  public static final float MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
+  public static final int MIN_WALK         = 100;
+  public static final int MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
 
   private final Rectangle body;
   private final float speed;
@@ -62,8 +62,11 @@ public class Walking implements IBossState {
   public Walking(Rectangle body, Hand hand, Movement movement, float speed,
       Rectangle movementRect, int targets) {
     this(body, hand, movement, speed, movementRect, targets,
-      newRandomTarget(Locator.getRandom(),
-        movementRect, body.getCenter(), MIN_WALK_SQUARED));
+        newRandomTarget(Locator.getRandom(),
+            (int) movementRect.getX1(), (int) movementRect.getY1(),
+            (int) movementRect.getX2(), (int) movementRect.getY2(),
+            (int) body.getCenter().x, (int) body.getCenter().y,
+            MIN_WALK_SQUARED));
   }
 
   @Override
@@ -79,8 +82,11 @@ public class Walking implements IBossState {
         --targets;
         // Target passed
         if (targets > 0) {
-          target = newRandomTarget(Locator.getRandom(), movementRect,
-              body.getCenter(), MIN_WALK_SQUARED);
+          target = newRandomTarget(Locator.getRandom(),
+              (int) movementRect.getX1(), (int) movementRect.getY1(),
+              (int) movementRect.getX2(), (int) movementRect.getY2(),
+              (int) body.getCenter().x, (int) body.getCenter().y,
+              MIN_WALK_SQUARED);
           headFor(target);
         }
       }
@@ -109,12 +115,6 @@ public class Walking implements IBossState {
     Vector2 direction = delta.normalize();
     Vector2 velocity  = Vector2.multiply(direction, speed);
     movement.setVelocity(velocity);
-  }
-
-  public static Vector2 newRandomTarget(IRandom rnd, Rectangle rect, Vector2 cPos, float radius) {
-    return newRandomTarget(rnd,
-        (int) rect.getX1(), (int) rect.getY1(), (int) rect.getX2(), (int) rect.getY2(),
-        (int) cPos.x, (int) cPos.y, (int) radius);
   }
 
   /**
