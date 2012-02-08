@@ -72,7 +72,7 @@ public class Hand implements IRenderComponent, IProgress {
 
         // TODO: Spread
         Entity p = weapon.getProjectileFactory().makeProjectile(
-            owner, o.x, o.y, weapon.getOrientation(), 0);
+            owner, o.x, o.y);
 
         owner.addEffect(new SpawnProjectileEffect(p, o));
       }

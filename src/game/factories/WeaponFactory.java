@@ -63,6 +63,9 @@ public class WeaponFactory {
       ? new DummyAnimation()
       : CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
+    ProjectileFactory factory = new ProjectileFactory(
+        bounds, data.launchAngle, data.spread, orientation, projectileData);
+
     return new Weapon(
       muzzle,
       data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
@@ -70,9 +73,8 @@ public class WeaponFactory {
       (int) (60000 / data.rpm),
       data.clipSize,
       orientation,
-      // FIXME: data.launchAngle,
       anim,
-      new ProjectileFactory(bounds, projectileData)
+      factory
     );
   }
 }

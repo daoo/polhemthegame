@@ -49,7 +49,7 @@ public class AnimatedSheet implements IAnimatedComponent {
    * @param sheet the sprite sheet to animate, not null
    */
   public AnimatedSheet(float targetFrameRate, int offsetX, int offsetY,
-      Orientation orientation, float rotation, SpriteSheet sheet) {
+      Orientation orientation, int rotation, SpriteSheet sheet) {
     assert targetFrameRate > 0;
     assert sheet != null;
 
@@ -128,6 +128,8 @@ public class AnimatedSheet implements IAnimatedComponent {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
+    g.rotate(centerX, centerY, rotation);
+
     if (flip) {
       // Be sure to flip around the center
       g.translate(centerX, 0);
@@ -140,7 +142,6 @@ public class AnimatedSheet implements IAnimatedComponent {
     } else {
       g.translate(offsetX, offsetY);
     }
-    g.rotate(centerX, centerY, rotation);
 
     g.drawImage(sheet.getSubImage(current.x, current.y), 0, 0);
 

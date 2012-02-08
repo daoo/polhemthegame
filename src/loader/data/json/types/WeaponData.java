@@ -12,7 +12,9 @@ public class WeaponData {
   public int clipSize;
   public float rpm;
   public int reloadTime;
-  public float launchAngle;
+
+  public int spread;
+  public int launchAngle;
 
   public SpriteData sprite;
   public String texture;

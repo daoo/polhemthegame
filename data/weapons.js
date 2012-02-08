@@ -2,9 +2,11 @@
   { "scalpel":
     { automatic: false
     , clipSize: -1
+    , launchAngle: 0
     , muzzleOffset: { x: 4, y: 3 }
     , reloadTime: 0
     , rpm: 120
+    , spread: 0
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: -2 }
@@ -15,9 +17,11 @@
   , "pistol":
     { automatic: false
     , clipSize: 12
+    , launchAngle: 0
     , muzzleOffset: { x: 8, y: 0 }
     , reloadTime: 2000
     , rpm: 120
+    , spread: 0
     , sprite:
       { framerate: 10
       , offset: { x: 0, y: -3 }
@@ -32,6 +36,7 @@
     , muzzleOffset: { x: 3, y: 2 }
     , reloadTime: 0
     , rpm: 20
+    , spread: 0
     , sprite:
       { framerate: 7
       , offset: { x: 0, y: -2 }
@@ -42,9 +47,11 @@
   , "ak47":
     { automatic: true
     , clipSize: -1
+    , launchAngle: 0
     , muzzleOffset: { x: 11, y: -4 }
     , reloadTime: 1000
     , rpm: 1600
+    , spread: 0
     , sprite:
       { framerate: 8
       , offset: { x: -1, y: -5 }
@@ -55,9 +62,11 @@
   , "saltsyra":
     { automatic: true
     , clipSize: -1
+    , launchAngle: 0
     , muzzleOffset: { x: 10, y: -25 }
     , reloadTime: 0
     , rpm: 120
+    , spread: 5
     , sprite:
       { framerate: 8
       , offset: { x: -10, y: -7 }
@@ -68,9 +77,11 @@
   , "casio":
     { automatic: false
     , clipSize: -1
+    , launchAngle: 0
     , muzzleOffset: { x: 10, y: -3 }
     , reloadTime: 0
     , rpm: 60
+    , spread: 0
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: -2 }
@@ -81,8 +92,10 @@
   , "mouse":
     { automatic: true
     , clipSize: -1
+    , launchAngle: 0
     , reloadTime: 0
     , rpm: 260
+    , spread: 20
     , sprite:
       { framerate: 8
       , tileSize: { width: 26, height: 50 }
@@ -92,17 +105,21 @@
   , "socialism":
     { automatic: true
     , clipSize: -1
+    , launchAngle: 0
     , reloadTime: 0
     , rpm: 260
+    , spread: 20
     , sprite: null
     , projectile: "socialism" }
 
   , "ig":
     { automatic: true
     , clipSize: -1
+    , launchAngle: 0
     , muzzleOffset: { x: -20, y: -4 }
     , reloadTime: 0
     , rpm: 260
+    , spread: 20
     , sprite: null
     , projectile: "ig" }
   }

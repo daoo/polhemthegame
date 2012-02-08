@@ -39,6 +39,8 @@ import util.SpriteSheet;
 
 public class ProjectileFactory {
   private final Rectangle rect;
+  private final Orientation orientation;
+  private final int launchAngle, spread;
   private final ProjectileData data;
   private final Image img;
   private final SpriteSheet sprite, explosion;
@@ -51,11 +53,15 @@ public class ProjectileFactory {
    * @throws IOException when fetching images from the drive fails
    * @throws ParserException when fetching images from the drive fails
    */
-  public ProjectileFactory(Rectangle bounds, ProjectileData data)
+  public ProjectileFactory(Rectangle bounds, int launchAngle, int spread,
+      Orientation orientation, ProjectileData data)
       throws IOException, ParserException {
     assert data != null;
 
     this.rect = bounds;
+    this.launchAngle = launchAngle;
+    this.spread = spread;
+    this.orientation = orientation;
     this.data = data;
 
     if (data.texture != null) {
@@ -79,11 +85,9 @@ public class ProjectileFactory {
    * @param source the source of the projectile (who fired it), can be null
    * @param x the x coordinate of where it starts
    * @param y the y coordinate of where it starts
-   * @param rot rotation in degrees
    * @return a new projectile
    */
-  public Entity makeProjectile(IEntity source, float x, float y,
-      Orientation orientation, float rot) {
+  public Entity makeProjectile(IEntity source, float x, float y) {
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life               = new Life(e, data.targets);
@@ -98,12 +102,24 @@ public class ProjectileFactory {
     e.addLogicComponent(bounds);
 
     // If these conditions are met, the projectile is moving
+    int angle = 0;
     if (data.speed != 0 || data.gravity) {
-      float rad = (float) (rot * (Math.PI / 180.0));
-      int dir = orientation == Orientation.RIGHT ? 1 : -1;
+      int s = 0;
+      if (spread > 0) {
+        s = Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+      }
 
-      Movement mov = new Movement(e, dir * (float) Math.cos(rad) * data.speed,
-                                           (float) Math.sin(rad) * data.speed);
+      angle = launchAngle + s;
+      float rad = (float) (angle * (Math.PI / 180.0));
+
+      float dx = (float) Math.cos(rad) * data.speed;
+      float dy = (float) Math.sin(rad) * data.speed;
+
+      if (orientation == Orientation.LEFT) {
+        dx = -dx;
+      }
+
+      Movement mov = new Movement(e, dx, dy);
 
       e.addLogicComponent(mov);
 
@@ -122,13 +138,13 @@ public class ProjectileFactory {
     }
 
     if (data.texture != null) {
-      e.addRenderComponent(new TexturedQuad(img));
+      e.addRenderComponent(new TexturedQuad(img, orientation, angle));
     } else if (data.sprite != null) {
       AnimatedSheet sheet = new AnimatedSheet(
         data.sprite.framerate,
         data.sprite.offset.x,
         data.sprite.offset.y,
-        orientation, rot,
+        orientation, angle,
         sprite
       );
       sheet.setAnimator(new Continuous(sheet.getTileCount()));
