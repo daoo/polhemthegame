@@ -6,8 +6,10 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.AnimatedSheet;
+import game.components.graphics.DummyAnimation;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
+import game.components.interfaces.IAnimatedComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
 import game.components.misc.OutOfBounds;
@@ -27,10 +29,12 @@ import game.types.Orientation;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
 import main.Locator;
+import math.ExMath;
 import math.Rectangle;
 
 import org.newdawn.slick.Image;
@@ -90,29 +94,23 @@ public class ProjectileFactory {
   public Entity makeProjectile(IEntity source, float x, float y) {
     // FIXME: This method is horribly messy
 
-    Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    Entity p = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
-    Life life               = new Life(e, data.targets);
-    RangeLimiter range      = new RangeLimiter(e, data.duration, data.range);
-    ProjectileDamage damage = new ProjectileDamage(e, source, data.damage);
-    OutOfBounds bounds      = new OutOfBounds(e, rect);
+    Life life               = new Life(p, data.targets);
+    RangeLimiter range      = new RangeLimiter(p, data.duration, data.range);
+    ProjectileDamage damage = new ProjectileDamage(p, source, data.damage);
+    OutOfBounds bounds      = new OutOfBounds(p, rect);
 
-    e.addLogicComponent(life);
-    e.addLogicComponent(range);
+    p.addLogicComponent(life);
+    p.addLogicComponent(range);
 
-    e.addLogicComponent(damage);
-    e.addLogicComponent(bounds);
+    p.addLogicComponent(damage);
+    p.addLogicComponent(bounds);
 
     // If these conditions are met, the projectile is moving
-    int angle = 0;
+    int angle = getRotation();
     if (data.speed != 0 || data.gravity) {
-      int s = 0;
-      if (spread > 0) {
-        s = Locator.getRandom().nextInt(-spread, spread) - spread / 2;
-      }
-
-      angle = launchAngle + s;
-      float rad = (float) (angle * (Math.PI / 180.0));
+      float rad = ExMath.degToRad(angle);
 
       float dx = (float) Math.cos(rad) * data.speed;
       float dy = (float) Math.sin(rad) * data.speed;
@@ -121,55 +119,69 @@ public class ProjectileFactory {
         dx = -dx;
       }
 
-      Movement mov = new Movement(e, dx, dy);
+      Movement mov = new Movement(p, dx, dy);
 
-      e.addLogicComponent(mov);
+      p.addLogicComponent(mov);
 
-      if (data.gravity) {
-        e.addLogicComponent(new Gravity(mov));
-      }
+      if (data.gravity)
+        p.addLogicComponent(new Gravity(mov));
 
-      if (data.collides) {
-        e.addLogicComponent(new MovingProjectileCollision(e, mov));
-      }
+      if (data.collides)
+        p.addLogicComponent(new MovingProjectileCollision(p, mov));
     } else {
       // Not moving, static collisions
       if (data.collides) {
-        e.addLogicComponent(new StaticCollision(e));
+        p.addLogicComponent(new StaticCollision(p));
       }
     }
 
-    if (data.texture != null) {
-      e.addRenderComponent(new TexturedQuad(img, orientation, angle));
-    } else if (data.sprite != null) {
-      AnimatedSheet sheet = new AnimatedSheet(
-        data.sprite.framerate,
-        data.sprite.offset.x,
-        data.sprite.offset.y,
-        orientation, angle,
-        sprite
-      );
-      sheet.setAnimator(new Continuous(sheet.getTileCount()));
-      e.addRenderComponent(sheet);
-    }
+    p.addRenderComponent(getAnimation(angle));
 
     ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
-    effectsOnDeath.add(new RemoveEntityEffect(e));
+    effectsOnDeath.add(new RemoveEntityEffect(p));
 
     if (data.aoe != null) {
-      AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
-                                        data.aoe.explosionSprite.offset.x,
-                                        data.aoe.explosionSprite.offset.y,
-                                        Orientation.RIGHT, 0,
-                                        explosion);
-
-      effectsOnDeath.add(new AOEDamageEffect(
-        source, e.body, data.aoe.radius, data.aoe.damage));
-      effectsOnDeath.add(new SpawnAnimationEffect(e, explosionAnim, null));
+      setupExplosion(source, p, effectsOnDeath);
     }
 
-    e.addLogicComponent(new EffectsOnDeath(e, effectsOnDeath));
+    p.addLogicComponent(new EffectsOnDeath(p, effectsOnDeath));
 
-    return e;
+    return p;
+  }
+
+  public int getRotation() {
+    int s = 0;
+    if (spread > 0) {
+      s = Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+    }
+
+    return launchAngle + s;
+  }
+
+  public void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
+    AnimatedSheet explosionAnim = new AnimatedSheet(
+        data.aoe.explosionSprite.framerate,
+        data.aoe.explosionSprite.offset.x, data.aoe.explosionSprite.offset.y,
+        Orientation.RIGHT, 0, explosion);
+
+    effectsOnDeath.add(new AOEDamageEffect(
+      source, p.body, data.aoe.radius, data.aoe.damage));
+    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, null));
+  }
+
+  public IAnimatedComponent getAnimation(int angle) {
+    if (data.texture != null) {
+      return new TexturedQuad(img, orientation, angle);
+    } else if (data.sprite != null) {
+      AnimatedSheet sheet = new AnimatedSheet(data.sprite.framerate,
+        data.sprite.offset.x, data.sprite.offset.y,
+        orientation, angle, sprite);
+      sheet.setAnimator(new Continuous(sheet.getTileCount()));
+
+      return sheet;
+    } else {
+      // Warning: Projectile will be invisible
+      return new DummyAnimation();
+    }
   }
 }

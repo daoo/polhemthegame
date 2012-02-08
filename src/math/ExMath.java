@@ -7,8 +7,9 @@ package math;
 // TODO: Remove dead code
 
 public class ExMath {
-  public static final float PI      = (float) Math.PI;
-  public static final float PI_HALF = ExMath.PI / 2.0f;
+  public static final float PI          = (float) Math.PI;
+  public static final float PI_HALF     = ExMath.PI / 2.0f;
+  public static final float RAD_PER_DEG = ExMath.PI / 180.0f;
 
   public static int square(int x) {
     return x * x;
@@ -55,5 +56,14 @@ public class ExMath {
       return max;
     else
       return value;
+  }
+
+  /**
+   * Convert degrees to radians.
+   * @param deg the degrees as an int
+   * @return the same angle in radians
+   */
+  public static float degToRad(int deg) {
+    return deg * RAD_PER_DEG;
   }
 }
