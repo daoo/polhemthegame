@@ -96,31 +96,17 @@ public class ProjectileFactory {
 
     Entity p = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
-    Life life               = new Life(p, data.targets);
-    RangeLimiter range      = new RangeLimiter(p, data.duration, data.range);
-    ProjectileDamage damage = new ProjectileDamage(p, source, data.damage);
-    OutOfBounds bounds      = new OutOfBounds(p, rect);
+    p.addLogicComponent(new Life(p, data.targets));
+    p.addLogicComponent(new RangeLimiter(p, data.duration, data.range));
 
-    p.addLogicComponent(life);
-    p.addLogicComponent(range);
+    p.addLogicComponent(new ProjectileDamage(p, source, data.damage));
+    p.addLogicComponent(new OutOfBounds(p, rect));
 
-    p.addLogicComponent(damage);
-    p.addLogicComponent(bounds);
+    int angle = getRotation();
 
     // If these conditions are met, the projectile is moving
-    int angle = getRotation();
     if (data.speed != 0 || data.gravity) {
-      float rad = ExMath.degToRad(angle);
-
-      float dx = (float) Math.cos(rad) * data.speed;
-      float dy = (float) Math.sin(rad) * data.speed;
-
-      if (orientation == Orientation.LEFT) {
-        dx = -dx;
-      }
-
-      Movement mov = new Movement(p, dx, dy);
-
+      Movement mov = getMovement(p, angle);
       p.addLogicComponent(mov);
 
       if (data.gravity)
@@ -129,7 +115,6 @@ public class ProjectileFactory {
       if (data.collides)
         p.addLogicComponent(new MovingProjectileCollision(p, mov));
     } else {
-      // Not moving, static collisions
       if (data.collides) {
         p.addLogicComponent(new StaticCollision(p));
       }
@@ -149,16 +134,29 @@ public class ProjectileFactory {
     return p;
   }
 
-  public int getRotation() {
-    int s = 0;
-    if (spread > 0) {
-      s = Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+  private Movement getMovement(Entity p, int angle) {
+    float rad = ExMath.degToRad(angle);
+
+    float dx = (float) Math.cos(rad) * data.speed;
+    float dy = (float) Math.sin(rad) * data.speed;
+
+    if (orientation == Orientation.LEFT) {
+      dx = -dx;
     }
 
-    return launchAngle + s;
+    return new Movement(p, dx, dy);
   }
 
-  public void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
+  private int getRotation() {
+    if (spread > 0) {
+      return launchAngle +
+          Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+    } else {
+      return launchAngle;
+    }
+  }
+
+  private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
     AnimatedSheet explosionAnim = new AnimatedSheet(
         data.aoe.explosionSprite.framerate,
         data.aoe.explosionSprite.offset.x, data.aoe.explosionSprite.offset.y,
@@ -169,7 +167,7 @@ public class ProjectileFactory {
     effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, null));
   }
 
-  public IAnimatedComponent getAnimation(int angle) {
+  private IAnimatedComponent getAnimation(int angle) {
     if (data.texture != null) {
       return new TexturedQuad(img, orientation, angle);
     } else if (data.sprite != null) {
