@@ -46,14 +46,13 @@ public class Weapon implements IHoldable {
 
     queue = new ProjectileQueue();
 
-    Magazine magazine = new Magazine(magazineSize);
-    if (mode == WeaponMode.AUTOMATIC) {
-      machine = new AutomaticMachine(reloadLength, cooldownLength,
-          magazine, queue, anim);
-    } else {
-      machine = new SingleMachine(reloadLength, cooldownLength,
-          magazine, queue, anim);
-    }
+    IMagazine magazine = (magazineSize == -1)
+      ? new InfiniteMagazine()
+      : new Magazine(magazineSize);
+
+    machine = (mode == WeaponMode.AUTOMATIC)
+      ? new AutomaticMachine(reloadLength, cooldownLength, magazine, queue, anim)
+      : new SingleMachine(reloadLength, cooldownLength, magazine, queue, anim);
   }
 
   public Orientation getOrientation() {

@@ -6,7 +6,7 @@ package game.components.holdables.weapons.machines;
 
 import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.Idle;
-import game.components.holdables.weapons.Magazine;
+import game.components.holdables.weapons.IMagazine;
 import game.components.holdables.weapons.OutOfAmmoException;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.components.interfaces.IAnimatedComponent;
@@ -20,7 +20,7 @@ public class AutomaticMachine implements IWeaponMachine {
   enum States { IDLE, RELOAD, COOLDOWN }
 
   private final int reloadLength, cooldownLength;
-  private final Magazine magazine;
+  private final IMagazine magazine;
   private final ProjectileQueue queue;
   private final IAnimatedComponent anim;
 
@@ -30,7 +30,7 @@ public class AutomaticMachine implements IWeaponMachine {
   private WeaponStates state;
 
   public AutomaticMachine(int reloadLength, int cooldownLength,
-      Magazine magazine, ProjectileQueue queue, IAnimatedComponent anim) {
+      IMagazine magazine, ProjectileQueue queue, IAnimatedComponent anim) {
     this.reloadLength = reloadLength;
     this.cooldownLength = cooldownLength;
     this.magazine = magazine;
