@@ -18,7 +18,7 @@ public interface IState extends IDebuggable {
   /**
    * Logic part of the game loop.
    * @param stateGame the game state manager
-   * @param delta frame length in seconds
+   * @param delta frame length in milliseconds
    */
-  void update(StateManager stateGame, float delta);
+  void update(StateManager stateGame, int delta);
 }

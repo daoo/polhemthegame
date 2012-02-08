@@ -36,8 +36,8 @@ public class Weapon implements IHoldable {
    */
   private final ProjectileQueue queue;
 
-  public Weapon(Vector2 muzzleOffset, WeaponMode mode, float reloadLength,
-                float cooldownLength, int magazineSize, Orientation orientation,
+  public Weapon(Vector2 muzzleOffset, WeaponMode mode, int reloadLength,
+                int cooldownLength, int magazineSize, Orientation orientation,
                 IAnimatedComponent anim, ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.orientation  = orientation;

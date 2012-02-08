@@ -7,10 +7,10 @@ package game.types;
 import math.Vector2;
 
 public class TimePos {
-  public final float time;
+  public final long time;
   public final Vector2 pos;
 
-  public TimePos(float time, Vector2 pos) {
+  public TimePos(long time, Vector2 pos) {
     this.time = time;
     this.pos  = pos;
   }

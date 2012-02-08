@@ -19,23 +19,23 @@ import java.util.Collection;
  * The delay condition starts counting when this effect is executed.
  */
 public class ExecuteWithDelayEffect implements IEffect {
-  private final float delay;
+  private final int delay;
   private final ITrigger delayed;
 
-  public ExecuteWithDelayEffect(float delay, Collection<? extends IEffect> effects) {
+  public ExecuteWithDelayEffect(int delay, Collection<? extends IEffect> effects) {
     this.delay = delay;
 
     delayed = new Trigger();
     delayed.addAllEffects(effects);
   }
 
-  public ExecuteWithDelayEffect(float delay, IEffect effect) {
+  public ExecuteWithDelayEffect(int delay, IEffect effect) {
     this(delay, Arrays.asList(effect));
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    delayed.addCondition(new AbsoluteTimerCondition(time.elapsed, delay));
+    delayed.addCondition(new AbsoluteTimerCondition(time.elapsedMilli, delay));
     world.addTrigger(delayed);
   }
 }

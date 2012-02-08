@@ -16,7 +16,7 @@
     { automatic: false
     , clipSize: 12
     , muzzleOffset: { x: 8, y: 0 }
-    , reloadTime: 2.0
+    , reloadTime: 2000
     , rpm: 120
     , sprite:
       { framerate: 10
@@ -30,7 +30,7 @@
     , clipSize: -1
     , launchAngle: -45
     , muzzleOffset: { x: 3, y: 2 }
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 20
     , sprite:
       { framerate: 7
@@ -43,7 +43,7 @@
     { automatic: true
     , clipSize: -1
     , muzzleOffset: { x: 11, y: -4 }
-    , reloadTime: 1.0
+    , reloadTime: 1000
     , rpm: 1600
     , sprite:
       { framerate: 8
@@ -56,7 +56,7 @@
     { automatic: true
     , clipSize: -1
     , muzzleOffset: { x: 10, y: -25 }
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 120
     , sprite:
       { framerate: 8
@@ -69,7 +69,7 @@
     { automatic: false
     , clipSize: -1
     , muzzleOffset: { x: 10, y: -3 }
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 60
     , sprite:
       { framerate: 8
@@ -81,7 +81,7 @@
   , "mouse":
     { automatic: true
     , clipSize: -1
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 260
     , sprite:
       { framerate: 8
@@ -92,7 +92,7 @@
   , "socialism":
     { automatic: true
     , clipSize: -1
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 260
     , sprite: null
     , projectile: "socialism" }
@@ -101,7 +101,7 @@
     { automatic: true
     , clipSize: -1
     , muzzleOffset: { x: -20, y: -4 }
-    , reloadTime: -1
+    , reloadTime: 0
     , rpm: 260
     , sprite: null
     , projectile: "ig" }

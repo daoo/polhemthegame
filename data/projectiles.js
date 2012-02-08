@@ -3,7 +3,7 @@
     { aoe: null
     , collides: true
     , damage: 100
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 1, height: 1 }
     , range: 20
@@ -16,7 +16,7 @@
     { aoe: null
     , collides: true
     , damage: 50
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 3, height: 2 }
     , range: 2000
@@ -37,7 +37,7 @@
         , tileSize: { width: 200, height: 83 } } }
     , collides: false
     , damage: 0
-    , duration: 3.5
+    , duration: 3500
     , gravity: true
     , hitbox: { width: 4, height: 4 }
     , range: 2000
@@ -50,7 +50,7 @@
     { aoe: null
     , collides: true
     , damage: 25
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 3, height: 2 }
     , range: 2000
@@ -63,7 +63,7 @@
     { aoe: null
     , collides: true
     , damage: 100
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 50, height: 50 }
     , range: 250
@@ -80,7 +80,7 @@
     { aoe: null
     , collides: true
     , damage: 1000
-    , duration: 2
+    , duration: 2000
     , gravity: false
     , hitbox: { width: 680, height: 10 }
     , range: 0
@@ -97,7 +97,7 @@
     { aoe: null
     , collides: true
     , damage: 5
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 16, height: 3 }
     , range: 2000
@@ -110,7 +110,7 @@
     { aoe: null
     , collides: true
     , damage: 5
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 40, height: 40 }
     , range: 2000
@@ -123,7 +123,7 @@
     { aoe: null
     , collides: true
     , damage: 5
-    , duration: 60
+    , duration: 60000
     , gravity: false
     , hitbox: { width: 12, height: 8 }
     , range: 2000

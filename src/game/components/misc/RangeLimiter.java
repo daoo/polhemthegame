@@ -16,10 +16,10 @@ public class RangeLimiter implements ILogicComponent {
 
   private TimePos start;
 
-  private final float duration;
-  private final float range;
+  private final int duration;
+  private final int range;
 
-  public RangeLimiter(Entity owner, float duration, float range) {
+  public RangeLimiter(Entity owner, int duration, int range) {
     this.owner = owner;
 
     this.duration = duration;
@@ -28,7 +28,7 @@ public class RangeLimiter implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if ((time.elapsed - start.time) > duration) {
+    if ((time.elapsedMilli - start.time) > duration) {
       owner.sendMessage(Message.KILL, null);
     }
     if (Vector2.distance(owner.body.getMin(), start.pos) > range) {

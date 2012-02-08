@@ -6,15 +6,18 @@ package game.types;
 
 public class GameTime {
   public final float frame;
-  public final float elapsed;
 
-  public GameTime(float frame, float elapsed) {
+  public final int frameMilli;
+  public final long elapsedMilli;
+
+  public GameTime(float frame, int frameMilli, long elapsedMilli) {
     this.frame   = frame;
-    this.elapsed = elapsed;
+    this.frameMilli = frameMilli;
+    this.elapsedMilli = elapsedMilli;
   }
 
   @Override
   public String toString() {
-    return "Elapsed: " + elapsed + ", Delta: " + frame;
+    return "Elapsed: " + elapsedMilli + ", Delta: " + frameMilli;
   }
 }

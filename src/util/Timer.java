@@ -1,13 +1,13 @@
 package util;
 
 import math.ExMath;
-import game.types.GameTime;
 
 /**
  * A simple timer useful for testing if a certain amount of time has passed.
  */
 public class Timer {
-  private final float start, end, length;
+  private final long start, end;
+  private final int length;
 
   private float current;
 
@@ -16,7 +16,7 @@ public class Timer {
    * @param start the start time
    * @param length the length of the time interval, greater than zero
    */
-  public Timer(float start, float length) {
+  public Timer(long start, int length) {
     assert length > 0;
 
     this.start = start;
@@ -26,10 +26,10 @@ public class Timer {
 
   /**
    * Update the state of the time.
-   * @param time the game time
+   * @param time the elapsed game time
    */
-  public void update(GameTime time) {
-    current = time.elapsed;
+  public void update(long elapsed) {
+    current = elapsed;
   }
 
   /**

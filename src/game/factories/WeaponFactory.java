@@ -71,7 +71,7 @@ public class WeaponFactory {
       muzzleOffset,
       data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
       data.reloadTime,
-      60.0f / data.rpm,
+      (int) (60000 / data.rpm),
       data.clipSize,
       orientation,
       // FIXME: data.launchAngle,

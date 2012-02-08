@@ -98,7 +98,7 @@ public class StateCredits implements IState {
   }
 
   @Override
-  public void update(StateManager stateGame, float delta) {
+  public void update(StateManager stateGame, int delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       stateGame.enterMainMenu();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
@@ -107,7 +107,7 @@ public class StateCredits implements IState {
       speed += Y_SPEED_DELTA;
     }
 
-    pos_y -= speed * delta;
+    pos_y -= speed * (delta / 1000.0f);
   }
 
   @SuppressWarnings("unchecked")

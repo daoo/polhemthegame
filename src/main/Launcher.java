@@ -67,7 +67,7 @@ public class Launcher extends BasicGame {
     if (stateGame.shouldExit()) {
       container.exit();
     } else {
-      stateGame.getCurrentState().update(stateGame, delta / 1000.0f);
+      stateGame.getCurrentState().update(stateGame, delta);
     }
   }
 }

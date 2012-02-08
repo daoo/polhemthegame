@@ -67,7 +67,7 @@ public class AnimatedSheet implements IAnimatedComponent {
     current  = Tile.ZERO;
     animator = IDLE;
 
-    clock = new Clock(1.0f / targetFrameRate);
+    clock = new Clock((int) (1000 / targetFrameRate));
   }
 
   @Override
@@ -154,8 +154,8 @@ public class AnimatedSheet implements IAnimatedComponent {
 
   @Override
   public void update(GameTime time) {
-    if (!animator.isFinished() && clock.needsSync(time.elapsed)) {
-      clock.sync(time.elapsed);
+    if (!animator.isFinished() && clock.needsSync(time.elapsedMilli)) {
+      clock.sync(time.elapsedMilli);
 
       current = animator.next(current);
     }

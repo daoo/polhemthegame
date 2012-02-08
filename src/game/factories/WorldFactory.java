@@ -44,7 +44,7 @@ import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;
-  private static final float TRIGGER_DELAY = 2.0f;
+  private static final int TRIGGER_DELAY = 2000;
 
   private static final String GAME_OVER_IMAGE = "textures/text/gameover.png";
 

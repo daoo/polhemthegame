@@ -12,8 +12,8 @@ public class ProjectileData {
   public float damage;
 
   public int targets;
-  public float duration;
-  public float range;
+  public int duration;
+  public int range;
   public float speed;
 
   public SpriteData sprite;

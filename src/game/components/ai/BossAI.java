@@ -23,8 +23,8 @@ public class BossAI implements ILogicComponent {
   public static final float MIN_WALK         = 100.0f;
   public static final float MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
 
-  private static final float SHOOTING_TIME_MIN = 1.0f;
-  private static final float SHOOTING_TIME_MAX = 1.0f;
+  private static final int SHOOTING_TIME_MIN = 1000;
+  private static final int SHOOTING_TIME_MAX = 1500;
 
   private final Entity entity;
   private final Movement movement;
@@ -89,7 +89,7 @@ public class BossAI implements ILogicComponent {
   }
 
   private void changeToShooting() {
-    float shootingTime = Locator.getRandom().nextFloat(
+    int shootingTime = Locator.getRandom().nextInt(
         SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
     state = new Shooting(shootingTime);
 

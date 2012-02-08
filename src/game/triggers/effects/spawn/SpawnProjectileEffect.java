@@ -25,7 +25,7 @@ public class SpawnProjectileEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    TimePos tp = new TimePos(time.elapsed, start);
+    TimePos tp = new TimePos(time.elapsedMilli, start);
     projectile.sendMessage(Message.START_AT, tp);
     world.addProjectile(projectile);
   }

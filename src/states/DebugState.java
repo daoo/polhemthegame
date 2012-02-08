@@ -19,13 +19,15 @@ import util.Tree;
  * Wrapper state which renders some extra debugging information.
  */
 public class DebugState implements IState {
-  private final IState game;
+  /**
+   * Frame step length in milliseconds.
+   */
+  private static final int FRAME_LENGTH = 100;
 
-  private static final float FRAME_LENGTH = 0.1f;
-
+  private final DebugGraph debugGraph;
   private boolean drawDebugInfo;
-  private DebugGraph debugGraph;
 
+  private final IState game;
   private boolean paused;
 
   private final Key keyF1, keyF2, keyF5, keyF6;
@@ -55,7 +57,7 @@ public class DebugState implements IState {
   }
 
   @Override
-  public void update(StateManager stateManager, float dt) {
+  public void update(StateManager stateManager, int dt) {
     if (paused) {
       keyF5.update();
       if (keyF5.wasPressed()) {

@@ -6,6 +6,8 @@ package game.components.ai;
 
 import game.types.GameTime;
 
+// TODO: Clean up
+
 public interface IBossState {
   void start(GameTime time);
 

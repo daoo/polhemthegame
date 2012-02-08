@@ -4,88 +4,39 @@
 
 package game.misc;
 
-import org.lwjgl.Sys;
 
+/**
+ * Simple clock that can help with syncing.
+ */
 public class Clock {
-  // NOTE: All times are in seconds
-  private float tStart, tLast, tNext, targetFrameTime;
-  private boolean forceSync;
+  // NOTE: All times are in milliseconds
+  private long next;
+  private final int targetFrameTime;
 
-  public Clock(float targetFrameTime) {
-    tStart = 0;
-    tLast = 0;
-    tNext = 0;
-
-    forceSync = false;
+  /**
+   * Construct a new clock.
+   * @param targetFrameTime target frame time in milliseconds
+   */
+  public Clock(int targetFrameTime) {
+    next = 0;
 
     this.targetFrameTime = targetFrameTime;
   }
 
-  public static float getTime() {
-    double time = (double) Sys.getTime() / (double) Sys.getTimerResolution();
-    return (float) time;
+  /**
+   * Sync the clock.
+   * @param elapsed the elapsed game time in milliseconds
+   */
+  public void sync(long elapsed) {
+    next = elapsed + targetFrameTime;
   }
 
-  public void start(float elapsed) {
-    tStart = elapsed;
-    tLast = elapsed;
-    tLast = tStart + targetFrameTime;
-  }
-
-  public void pause(float elapsed) {
-    tLast = elapsed;
-  }
-
-  public void resume(float elapsed) {
-    float tNow = elapsed;
-    tStart += tNow - tLast; // Compensate for total runtime calculations
-    tLast = tNow;
-  }
-
-  public float sync(float elapsed) {
-    forceSync = false;
-
-    float tNow = elapsed;
-    float tDelta = tNow - tLast;
-    tLast = tNow;
-    tNext = tNow + targetFrameTime;
-
-    return tDelta;
-  }
-
-  public boolean needsSync(float elapsed) {
-    return forceSync || (targetFrameTime == 0) || (elapsed > tNext);
-  }
-
-  public void forceSync() {
-    forceSync = true;
-  }
-
-  public float getTargetFrameTime() {
-    return targetFrameTime;
-  }
-
-  public float getTargetFrameRate() {
-    if (targetFrameTime != 0) {
-      return 1.0f / targetFrameTime;
-    }
-
-    return 0;
-  }
-
-  public float getLifetime(float elapsed) {
-    return elapsed - tStart;
-  }
-
-  public void setTargetFrameTime(float ft) {
-    targetFrameTime = ft;
-  }
-
-  public void setTargetFrameRate(float fr) {
-    if (fr != 0) {
-      targetFrameTime = 1.0f / fr;
-    }
-
-    targetFrameTime = 0;
+  /**
+   * Check if we need to sync.
+   * @param elapsed the elapsed game time in milliseconds
+   * @return true or false if enough time has passed since last sync
+   */
+  public boolean needsSync(long elapsed) {
+    return (targetFrameTime == 0) || (elapsed > next);
   }
 }

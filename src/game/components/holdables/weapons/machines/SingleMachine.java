@@ -15,7 +15,7 @@ import util.Timer;
 public class SingleMachine implements IWeaponMachine {
   enum States { IDLE, RELOAD, COOLDOWN }
 
-  private final float reloadLength, cooldownLength;
+  private final int reloadLength, cooldownLength;
   private final Magazine magazine;
   private final ProjectileQueue queue;
   private final IAnimatedComponent anim;
@@ -25,7 +25,7 @@ public class SingleMachine implements IWeaponMachine {
   private boolean fire;
   private WeaponStates state;
 
-  public SingleMachine(float reloadLength, float cooldownLength,
+  public SingleMachine(int reloadLength, int cooldownLength,
       Magazine magazine, ProjectileQueue queue, IAnimatedComponent anim) {
     this.reloadLength = reloadLength;
     this.cooldownLength = cooldownLength;
@@ -43,14 +43,14 @@ public class SingleMachine implements IWeaponMachine {
     switch (state) {
       case IDLE:
         if (magazine.isEmpty()) {
-          timer = new Timer(time.elapsed, reloadLength);
+          timer = new Timer(time.elapsedMilli, reloadLength);
           state = WeaponStates.RELOADING;
         } else if (fire) {
           state = WeaponStates.FIRE;
         }
         break;
       case RELOADING:
-        timer.update(time);
+        timer.update(time.elapsedMilli);
 
         if (timer.isFinished()) {
           magazine.reload();
@@ -59,7 +59,7 @@ public class SingleMachine implements IWeaponMachine {
         }
         break;
       case COOLDOWN:
-        timer.update(time);
+        timer.update(time.elapsedMilli);
 
         if (timer.isFinished()) {
           state = WeaponStates.IDLE;
@@ -75,7 +75,7 @@ public class SingleMachine implements IWeaponMachine {
 
           anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
 
-          timer = new Timer(time.elapsed, cooldownLength);
+          timer = new Timer(time.elapsedMilli, cooldownLength);
           state = WeaponStates.COOLDOWN;
 
           queue.queueUp();

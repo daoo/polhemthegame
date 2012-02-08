@@ -51,7 +51,7 @@ public class GameState implements IState {
   /**
    * How much time have elapsed since we started.
    */
-  private float elapsed;
+  private long elapsed;
 
   public GameState(StateManager stateManager, CampaignData data,
                    int windowWidth, int windowHeight)
@@ -120,12 +120,12 @@ public class GameState implements IState {
    * The update iteration of the game loop.
    * Updates entities, switches levels, etc.
    *
-   * @param dt Approximate length of the current frame in seconds.
+   * @param dt Approximate length of the current frame in milliseconds
    */
   @Override
-  public void update(StateManager stateManager, float dt) {
+  public void update(StateManager stateManager, int dt) {
     elapsed += dt;
-    world.update(new GameTime(dt, elapsed));
+    world.update(new GameTime(dt / 1000.0f, dt, elapsed));
     ui.update();
 
     if (nextAction == ACTION.NEXT_LEVEL) {
