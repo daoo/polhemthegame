@@ -64,10 +64,10 @@ public class BossAI implements ILogicComponent {
     if (state.isFinished()) {
       // Go to next state
 
-      if (state.getNextState() == BossState.WALKING) {
-        changeToWalking();
-      } else if (state.getNextState() == BossState.SHOOTING) {
+      if (state.getState() == BossState.WALKING) {
         changeToShooting();
+      } else if (state.getState() == BossState.SHOOTING) {
+        changeToWalking();
       }
 
       state.start(time);

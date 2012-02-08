@@ -37,7 +37,7 @@ public class Shooting implements IBossState {
   }
 
   @Override
-  public BossState getNextState() {
-    return BossState.WALKING;
+  public BossState getState() {
+    return BossState.SHOOTING;
   }
 }

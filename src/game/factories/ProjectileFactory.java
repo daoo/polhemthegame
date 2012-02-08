@@ -88,6 +88,8 @@ public class ProjectileFactory {
    * @return a new projectile
    */
   public Entity makeProjectile(IEntity source, float x, float y) {
+    // FIXME: This method is horribly messy
+
     Entity e = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     Life life               = new Life(e, data.targets);

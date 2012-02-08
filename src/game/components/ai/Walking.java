@@ -103,8 +103,8 @@ public class Walking implements IBossState {
   }
 
   @Override
-  public BossState getNextState() {
-    return BossState.SHOOTING;
+  public BossState getState() {
+    return BossState.WALKING;
   }
 
   private void headFor(Vector2 target) {

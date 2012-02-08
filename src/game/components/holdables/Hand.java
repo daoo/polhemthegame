@@ -70,9 +70,7 @@ public class Hand implements IRenderComponent, IProgress {
         // Muzzle relative to the world
         Vector2 o = Vector2.add(owner.body.getMin(), m);
 
-        // TODO: Spread
-        Entity p = weapon.getProjectileFactory().makeProjectile(
-            owner, o.x, o.y);
+        Entity p = weapon.getProjectileFactory().makeProjectile(owner, o.x, o.y);
 
         owner.addEffect(new SpawnProjectileEffect(p, o));
       }
