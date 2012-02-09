@@ -25,7 +25,6 @@ import game.world.World;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import loader.data.json.BossesData;
@@ -108,9 +107,7 @@ public class WorldFactory {
     creepsDeadTrigger.addCondition(new AllInactiveCondition(creeps));
   }
 
-  public World makeLevel(LevelData level)
-      throws ParserException, IOException {
-
+  public World makeLevel(LevelData level) throws ParserException, IOException {
     Image imgLevelStart    = CacheTool.getImage(Locator.getCache(), level.loading);
     Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
     Image imgGameOver      = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
@@ -137,7 +134,7 @@ public class WorldFactory {
       new AddTriggersEffect(creepsDeadTrigger)
     ));
 
-    Collection<? extends IEffect> levelCompleteEffects = Arrays.asList(
+    List<IEffect> levelCompleteEffects = Arrays.asList(
       new SetForegroundEffect(Locator.getUI(), imgLevelComplete),
       new ExecuteWithDelayEffect(
         TRIGGER_DELAY, new LevelCompleteEffect(gameMode))
@@ -153,23 +150,29 @@ public class WorldFactory {
 
       Trigger bossDeadTrigger = new Trigger();
       bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
-      bossDeadTrigger.addAllEffects(levelCompleteEffects);
+      bossDeadTrigger.addEffect(new ExecuteWithDelayEffect(TRIGGER_DELAY,
+        levelCompleteEffects));
 
-      creepsDeadTrigger.addAllEffects(Arrays.asList(
-        new SetForegroundEffect(Locator.getUI(), imgBoss),
+      creepsDeadTrigger.addEffect(
         new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
-          new SetForegroundEffect(Locator.getUI(), null),
-          new SpawnBossEffect(boss),
-          new AddTriggersEffect(bossDeadTrigger)
+          new SetForegroundEffect(Locator.getUI(), imgBoss),
+          new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
+            new SetForegroundEffect(Locator.getUI(), null),
+            new SpawnBossEffect(boss),
+            new AddTriggersEffect(bossDeadTrigger)
+          ))
         ))
-      ));
+      );
     }
 
-    playersDeadTrigger.addAllEffects(Arrays.asList(
-      new SetForegroundEffect(Locator.getUI(), imgGameOver),
-      new ExecuteWithDelayEffect(
-        TRIGGER_DELAY,  new MainMenuEffect(stateManager))
-    ));
+    playersDeadTrigger.addEffect(new ExecuteWithDelayEffect(
+      TRIGGER_DELAY,
+      Arrays.asList(
+        new SetForegroundEffect(Locator.getUI(), imgGameOver),
+        new ExecuteWithDelayEffect(TRIGGER_DELAY,
+          new MainMenuEffect(stateManager))
+      ))
+    );
 
     world.addTrigger(levelStartTrigger);
     world.addTrigger(playersDeadTrigger);
