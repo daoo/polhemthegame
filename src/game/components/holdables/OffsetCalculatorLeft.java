@@ -9,24 +9,22 @@ import math.Vector2;
 
 public class OffsetCalculatorLeft implements IOffsetCalculator {
   private final Entity entity;
-  private final Vector2 offset;
+  private final Vector2 handOffset;
 
   public OffsetCalculatorLeft(Entity entity, Vector2 handOffset) {
-    this.entity = entity;
-    this.offset = new Vector2(entity.body.getWidth() - handOffset.x, handOffset.y);
+    this.entity     = entity;
+    this.handOffset = handOffset;
   }
 
   @Override
-  public Vector2 getMuzzlePosition(Vector2 muzzleOffset) {
-    Vector2 a = entity.body.getMin();
-    Vector2 b = Vector2.add(a, offset);
-    Vector2 c = Vector2.add(b, -muzzleOffset.x, muzzleOffset.y);
-
-    return c;
+  public Vector2 getMuzzlePosition(int weaponWidth, Vector2 muzzleOffset) {
+    float x = entity.body.getX1() - handOffset.x - weaponWidth + muzzleOffset.x;
+    float y = entity.body.getY1() + handOffset.y + muzzleOffset.y;
+    return new Vector2(x, y);
   }
 
   @Override
   public Vector2 getWeaponOffset(int weaponWidth) {
-    return new Vector2(entity.body.getWidth() - offset.x - weaponWidth, offset.y);
+    return new Vector2(entity.body.getWidth() - handOffset.x - weaponWidth, handOffset.y);
   }
 }
