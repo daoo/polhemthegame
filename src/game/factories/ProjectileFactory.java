@@ -178,7 +178,6 @@ public class ProjectileFactory {
 
       return sheet;
     } else {
-      // Warning: Projectile will be invisible
       return new DummyAnimation();
     }
   }

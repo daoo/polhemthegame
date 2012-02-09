@@ -18,7 +18,7 @@ public class OffsetCalculatorLeft implements IOffsetCalculator {
 
   @Override
   public Vector2 getMuzzlePosition(int weaponWidth, Vector2 muzzleOffset) {
-    float x = entity.body.getX1() - handOffset.x - weaponWidth + muzzleOffset.x;
+    float x = entity.body.getX1() - handOffset.x - muzzleOffset.x;
     float y = entity.body.getY1() + handOffset.y + muzzleOffset.y;
     return new Vector2(x, y);
   }

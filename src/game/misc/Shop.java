@@ -41,7 +41,7 @@ public class Shop {
   private final Iterator<ShopItem> it;
   private ShopItem next;
 
-  public Shop(ShopData shop, WeaponFactory factory)
+  public Shop(ShopData shop, Orientation orientation, WeaponFactory factory)
       throws ParserException, IOException {
     items = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class Shop {
       Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
 
       // These weapons are for players, hence right orientation
-      Weapon weapon  = factory.makeWeapon(item.weapon, Orientation.RIGHT);
+      Weapon weapon  = factory.makeWeapon(item.weapon, orientation);
 
       ShopItem tmp = new ShopItem(item.price, icon, iconGray, weapon);
       items.add(tmp);

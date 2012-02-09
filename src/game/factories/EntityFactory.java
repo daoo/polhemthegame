@@ -117,7 +117,7 @@ public class EntityFactory {
 
     Hand hand = new Hand(unit.entity, PLAYER_ORIENTATION,
         new Vector2(data.handOffset.x, data.handOffset.y));
-    Shop shop = new Shop(shopData, weaponFactory);
+    Shop shop = new Shop(shopData, PLAYER_ORIENTATION, weaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
     Weapon weapon = weaponFactory.makeWeapon(data.startWeapon, PLAYER_ORIENTATION);
@@ -153,8 +153,8 @@ public class EntityFactory {
     Hand hand = new Hand(unit.entity, BOSS_ORIENTATION,
         new Vector2(data.handOffset.x, data.handOffset.y));
     Weapon weapon = weaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
-    BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
-                               data.locationX, data.unit.speed, initialTarget);
+    BossAI ai = new BossAI(unit.entity, unit.movement, hand, worldRect,
+        data.locationX, data.unit.speed, initialTarget);
 
     unit.entity.addLogicComponent(ai);
     unit.entity.addRenderComponent(hand);
