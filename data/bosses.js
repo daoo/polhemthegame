@@ -29,20 +29,20 @@
     , locationX: 100
     , weapon: "socialism"
     , unit:
-      { hitbox: { width: 11, height: 30 }
-      , hitBoints: 500
+      { hitbox: { width: 10, height: 29 }
+      , hitpoints: 500
       , speed: 100
       , sprites:
         { "walk":
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/bosses/stefan-walk.png"
-          , tileSize: { width: 11, height: 30 } }
+          , tileSize: { width: 10, height: 29 } }
         , "death":
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/bosses/stefan-death.png"
-          , tileSize: { width: 11, height: 30 } }
+          , tileSize: { width: 10, height: 29 } }
         }
       }
     }
