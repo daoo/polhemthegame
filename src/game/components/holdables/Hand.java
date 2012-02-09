@@ -8,9 +8,11 @@ import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
 import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
+import game.factories.ProjectileFactory;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
 import game.types.GameTime;
 import game.types.Message;
+import game.types.Orientation;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
@@ -18,19 +20,20 @@ import org.newdawn.slick.Graphics;
 import ui.hud.infobar.IProgress;
 
 public class Hand implements IRenderComponent, IProgress {
-  private final Vector2 offset;
-
   private final Entity owner;
+  private final IOffsetCalculator offsetCalc;
 
   /**
    * The currently held weapon, null if no weapon is being held.
    */
   private Weapon weapon;
 
-  public Hand(Entity owner, float handOffsetX, float handOffsetY) {
+  public Hand(Entity owner, Orientation orientation, Vector2 handOffset) {
     this.owner = owner;
 
-    offset = new Vector2(handOffsetX, handOffsetY);
+    offsetCalc = (orientation == Orientation.RIGHT)
+        ? new OffsetCalculatorRight(owner, handOffset)
+        : new OffsetCalculatorLeft(owner, handOffset);
 
     weapon = null;
   }
@@ -60,19 +63,16 @@ public class Hand implements IRenderComponent, IProgress {
   public void update(GameTime time) {
     if (weapon != null) {
       weapon.update(time);
+
+      Vector2 pos = offsetCalc.getMuzzlePosition(
+          weapon.getMuzzleOffset());
       ProjectileQueue queue = weapon.getQueue();
+      ProjectileFactory factory = weapon.getProjectileFactory();
 
       // Find out if there are any projectiles that want to be spawned
       for (int i = 0; i < queue.getWaiting(); ++i) {
-        // Muzzle relative to player entity
-        Vector2 m = Vector2.add(offset, weapon.getMuzzleOffset());
-
-        // Muzzle relative to the world
-        Vector2 o = Vector2.add(owner.body.getMin(), m);
-
-        Entity p = weapon.getProjectileFactory().makeProjectile(owner, o.x, o.y);
-
-        owner.addEffect(new SpawnProjectileEffect(p, o));
+        Entity entity = factory.makeProjectile(owner, pos.x, pos.y);
+        owner.addEffect(new SpawnProjectileEffect(entity, pos));
       }
 
       queue.clear();
@@ -83,6 +83,8 @@ public class Hand implements IRenderComponent, IProgress {
   public void render(Graphics g) {
     if (weapon != null) {
       g.pushTransform();
+
+      Vector2 offset = offsetCalc.getWeaponOffset(weapon.getWidth());
       g.translate(offset.x, offset.y);
 
       weapon.render(g);

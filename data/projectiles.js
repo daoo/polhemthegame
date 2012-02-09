@@ -112,7 +112,7 @@
     , damage: 5
     , duration: 60000
     , gravity: false
-    , hitbox: { width: 40, height: 40 }
+    , hitbox: { width: 35, height: 36 }
     , range: 2000
     , speed: 250
     , sprite: null

@@ -101,4 +101,12 @@ public class Weapon implements IHoldable {
   public void toggleOff() {
     machine.stopFiring();
   }
+
+  public int getWidth() {
+    return anim.getTileWidth();
+  }
+
+  public int getHeight() {
+    return anim.getTileHeight();
+  }
 }

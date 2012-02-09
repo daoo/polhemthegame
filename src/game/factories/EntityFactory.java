@@ -46,7 +46,7 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
-  private static final Orientation PLAYER_ORIENTATION = Orientation.RIGHT;
+  private static final Orientation PLAYER_ORIENTATION = Orientation.LEFT;
   private static final Orientation BOSS_ORIENTATION = Orientation.LEFT;
   private static final Orientation CREEP_ORIENTATION = Orientation.LEFT;
 
@@ -115,24 +115,23 @@ public class EntityFactory {
 
     Unit unit = makeUnit(0, 0, 0, 0, PLAYER_ORIENTATION, data.unit);
 
-    // Create components
-    MovementConstraint movCons = new MovementConstraint(unit.entity, worldRect);
-    Hand hand                  = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
-    Shop shop                  = new Shop(shopData, weaponFactory);
+    Hand hand = new Hand(unit.entity, PLAYER_ORIENTATION,
+        new Vector2(data.handOffset.x, data.handOffset.y));
+    Shop shop = new Shop(shopData, weaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
     Weapon weapon = weaponFactory.makeWeapon(data.startWeapon, PLAYER_ORIENTATION);
     inv.addWeapon(weapon);
     hand.grab(weapon);
 
-    PlayerControl control = new PlayerControl(unit.entity, unit.movement,
-                                              inv, shop, hand, data.unit.speed);
-
     // Add components
-    unit.entity.addLogicComponent(movCons);
+    unit.entity.addLogicComponent(new MovementConstraint(unit.entity, worldRect));
     unit.entity.addLogicComponent(inv);
     unit.entity.addRenderComponent(hand);
-    unit.entity.addLogicComponent(control);
+    unit.entity.addLogicComponent(new PlayerControl(unit.entity, unit.movement,
+        inv, shop, hand, data.unit.speed));
+
+    unit.entity.addRenderComponent(new Outliner(unit.entity, unit.movement, true, true));
 
     // UI stuff
     unit.infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
@@ -151,7 +150,8 @@ public class EntityFactory {
 
     Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, BOSS_ORIENTATION, data.unit);
 
-    Hand hand     = new Hand(unit.entity, data.handOffset.x, data.handOffset.y);
+    Hand hand = new Hand(unit.entity, BOSS_ORIENTATION,
+        new Vector2(data.handOffset.x, data.handOffset.y));
     Weapon weapon = weaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
     BossAI ai     = new BossAI(unit.entity, unit.movement, hand, worldRect,
                                data.locationX, data.unit.speed, initialTarget);

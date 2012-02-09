@@ -49,7 +49,7 @@
 
   , "datateknikern":
     { fireLength: 2.0
-    , handOffset: { x: 0, y: 0 }
+    , handOffset: { x: 9, y: 14 }
     , locationX: 100
     , weapon: "mouse"
     , unit:
