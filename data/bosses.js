@@ -5,7 +5,7 @@
     , locationX: 200
     , weapon: "ig"
     , unit:
-      { hitbox: { width: 22, height: 50 }
+      { hitbox: { width: 22, height: 48 }
       , hitpoints: 750
       , speed: 100
       , sprites:

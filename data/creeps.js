@@ -3,7 +3,7 @@
     { damage: 10
     , moneyGain: 100
     , unit: 
-      { hitbox: { width: 40, height: 50 }
+      { hitbox: { width: 38, height: 47 }
       , hitpoints: 150
       , speed: 80
       , sprites:
