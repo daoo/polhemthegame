@@ -77,7 +77,7 @@ public class SingleMachine implements IWeaponMachine {
         try {
           magazine.takeOne();
 
-          anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
+          anim.setAnimator(new RunTo(anim.getTileCount(), anim.getFirstTile()));
 
           timer = new Timer(time.elapsedMilli, cooldownLength);
           state = WeaponStates.COOLDOWN;

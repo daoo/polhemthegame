@@ -70,7 +70,7 @@
     , sprite:
       { framerate: 8
       , offset: { x: -10, y: -7 }
-      , tileSize: { width: 22, height: 15 }
+      , tileSize: { width: 20, height: 15 }
       , sprite: "textures/weapons/saltsyra.png" }
     , projectile: "saltsyra" }
 
@@ -93,13 +93,14 @@
     { automatic: true
     , clipSize: -1
     , launchAngle: 0
-    , muzzleOffset: { x: 0, y: 0 }
+    , muzzleOffset: { x: 10, y: -3 }
     , reloadTime: 0
     , rpm: 260
     , spread: 20
     , sprite:
       { framerate: 8
-      , tileSize: { width: 26, height: 50 }
+      , offset: { x: 0, y: 0 }
+      , tileSize: { width: 18, height: 9 }
       , sprite: "textures/weapons/mouse.png" }
     , projectile: "mouse" }
 

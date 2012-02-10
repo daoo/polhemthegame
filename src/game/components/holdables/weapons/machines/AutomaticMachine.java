@@ -70,7 +70,7 @@ public class AutomaticMachine implements IWeaponMachine {
             state = WeaponStates.FIRE;
           } else {
             state = WeaponStates.IDLE;
-            anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
+            anim.setAnimator(new RunTo(anim.getTileCount(), anim.getFirstTile()));
           }
 
           timer = null;

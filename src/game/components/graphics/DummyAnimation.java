@@ -31,6 +31,11 @@ public class DummyAnimation implements IAnimatedComponent {
   }
 
   @Override
+  public Tile getFirstTile() {
+    return Tile.ZERO;
+  }
+
+  @Override
   public Tile getLastTile() {
     return Tile.ZERO;
   }

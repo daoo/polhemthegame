@@ -45,6 +45,11 @@ public class TexturedQuad implements IAnimatedComponent {
   }
 
   @Override
+  public Tile getFirstTile() {
+    return Tile.ZERO;
+  }
+
+  @Override
   public Tile getLastTile() {
     return Tile.ZERO;
   }
