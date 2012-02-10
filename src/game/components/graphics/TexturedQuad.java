@@ -4,10 +4,7 @@
 
 package game.components.graphics;
 
-import game.components.graphics.animations.IAnimator;
-import game.components.graphics.animations.Idle;
-import game.components.graphics.animations.Tile;
-import game.components.interfaces.IAnimatedComponent;
+import game.components.interfaces.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
@@ -15,11 +12,7 @@ import game.types.Orientation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-
-public class TexturedQuad implements IAnimatedComponent {
-  private final static Tile TILE_SIZE     = new Tile(1, 1);
-  private final static IAnimator ANIMATOR = new Idle();
-
+public class TexturedQuad implements IRenderComponent {
   private final int centerX, centerY;
   private final boolean flip;
   private final int angle;
@@ -35,43 +28,13 @@ public class TexturedQuad implements IAnimatedComponent {
   }
 
   @Override
-  public IAnimator getAnimator() {
-    return ANIMATOR;
-  }
-
-  @Override
-  public Tile getCurrentTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getFirstTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getLastTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getTileCount() {
-    return TILE_SIZE;
-  }
-
-  @Override
-  public int getTileHeight() {
-    return img.getHeight();
-  }
-
-  @Override
-  public int getTileWidth() {
+  public int getWidth() {
     return img.getWidth();
   }
 
   @Override
-  public void goToFirstFrame() {
-    // Do nothing
+  public int getHeight() {
+    return img.getHeight();
   }
 
   @Override
@@ -94,11 +57,6 @@ public class TexturedQuad implements IAnimatedComponent {
 
     g.drawImage(img, 0, 0);
     g.popTransform();
-  }
-
-  @Override
-  public void setAnimator(IAnimator animator) {
-    // Do nothing
   }
 
   @Override

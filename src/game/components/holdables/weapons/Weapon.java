@@ -4,11 +4,11 @@
 
 package game.components.holdables.weapons;
 
+import game.components.graphics.AnimatedSheet;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.machines.AutomaticMachine;
 import game.components.holdables.weapons.machines.IWeaponMachine;
 import game.components.holdables.weapons.machines.SingleMachine;
-import game.components.interfaces.IAnimatedComponent;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
 import game.types.Message;
@@ -21,7 +21,7 @@ import org.newdawn.slick.Graphics;
  * Weapon that can fire and be held by a hand.
  */
 public class Weapon implements IHoldable {
-  private final IAnimatedComponent anim;
+  private final AnimatedSheet anim;
   private final Vector2 muzzleOffset;
 
   private final Orientation orientation;
@@ -38,7 +38,7 @@ public class Weapon implements IHoldable {
 
   public Weapon(Vector2 muzzleOffset, WeaponMode mode, int reloadLength,
                 int cooldownLength, int magazineSize, Orientation orientation,
-                IAnimatedComponent anim, ProjectileFactory projTemplate) {
+                AnimatedSheet anim, ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
     this.orientation  = orientation;
     this.anim         = anim;
@@ -102,11 +102,13 @@ public class Weapon implements IHoldable {
     machine.stopFiring();
   }
 
+  @Override
   public int getWidth() {
-    return anim.getTileWidth();
+    return anim.getWidth();
   }
 
+  @Override
   public int getHeight() {
-    return anim.getTileHeight();
+    return anim.getHeight();
   }
 }

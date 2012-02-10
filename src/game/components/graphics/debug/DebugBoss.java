@@ -26,6 +26,16 @@ public class DebugBoss implements IRenderComponent {
   }
 
   @Override
+  public int getWidth() {
+    return (int) body.getWidth();
+  }
+
+  @Override
+  public int getHeight() {
+    return (int) body.getHeight();
+  }
+
+  @Override
   public void update(GameTime time) {
     // Do nothing
   }

@@ -4,7 +4,7 @@
 
 package game.entities;
 
-import game.components.interfaces.IAnimatedComponent;
+import game.components.graphics.AnimatedSheet;
 import game.types.GameTime;
 import game.types.Message;
 import game.world.World;
@@ -15,14 +15,14 @@ import org.newdawn.slick.Graphics;
 import util.Node;
 
 public class Animation implements IEntity {
-  private final IAnimatedComponent anim;
+  private final AnimatedSheet anim;
   private final Graphics graphics;
 
   private boolean active;
   private World world;
   private Vector2 position;
 
-  public Animation(int x, int y, IAnimatedComponent anim, Graphics graphics) {
+  public Animation(int x, int y, AnimatedSheet anim, Graphics graphics) {
     this.position = new Vector2(x, y);
     this.anim     = anim;
     this.graphics = graphics;

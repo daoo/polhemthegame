@@ -8,21 +8,20 @@ import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.Tile;
-import game.components.interfaces.IAnimatedComponent;
+import game.components.interfaces.IRenderComponent;
 import game.misc.Clock;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 import util.SpriteSheet;
 
 /**
  * Component for animating a sprite sheet.
  */
-public class AnimatedSheet implements IAnimatedComponent {
+public class AnimatedSheet implements IRenderComponent {
   private static final IAnimator IDLE = new Idle();
 
   private final int offsetX, offsetY;
@@ -70,26 +69,10 @@ public class AnimatedSheet implements IAnimatedComponent {
     clock = new Clock((int) (1000 / targetFrameRate));
   }
 
-  @Override
-  public IAnimator getAnimator() {
-    return animator;
-  }
-
-  public Image getCurrentFrame() {
-    return sheet.getSubImage(current.x, current.y);
-  }
-
-  @Override
   public Tile getCurrentTile() {
     return current;
   }
 
-  @Override
-  public Tile getFirstTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
   public Tile getLastTile() {
     return new Tile(size.x - 1, size.y - 1);
   }
@@ -98,24 +81,22 @@ public class AnimatedSheet implements IAnimatedComponent {
     return sheet;
   }
 
-  @Override
   public Tile getTileCount() {
     return size;
   }
 
+  public void setAnimator(IAnimator animator) {
+    this.animator = animator;
+  }
+
   @Override
-  public int getTileHeight() {
+  public int getHeight() {
     return sheet.getTileHeight();
   }
 
   @Override
-  public int getTileWidth() {
+  public int getWidth() {
     return sheet.getTileWidth();
-  }
-
-  @Override
-  public void goToFirstFrame() {
-    current = Tile.ZERO;
   }
 
   @Override
@@ -124,7 +105,7 @@ public class AnimatedSheet implements IAnimatedComponent {
       animator = new Continuous(getTileCount());
     } else if (message == Message.STOP_ANIMATION) {
       if (!animator.isFinished()) {
-        goToFirstFrame();
+        current = Tile.ZERO;
         animator = new Idle();
       }
     }
@@ -154,11 +135,6 @@ public class AnimatedSheet implements IAnimatedComponent {
   }
 
   @Override
-  public void setAnimator(IAnimator animator) {
-    this.animator = animator;
-  }
-
-  @Override
   public void update(GameTime time) {
     if (!animator.isFinished() && clock.needsSync(time.elapsedMilli)) {
       clock.sync(time.elapsedMilli);
@@ -171,6 +147,6 @@ public class AnimatedSheet implements IAnimatedComponent {
   @Override
   public String toString() {
     return String.format("AnimatedSheet - count: %dx%d, size: %dx%d",
-        size.x, size.y, getTileWidth(), getTileHeight());
+        size.x, size.y, getWidth(), getHeight());
   }
 }

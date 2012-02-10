@@ -20,6 +20,16 @@ public class LineToOrigin implements IRenderComponent {
   }
 
   @Override
+  public int getWidth() {
+    return (int) owner.body.getX2();
+  }
+
+  @Override
+  public int getHeight() {
+    return (int) owner.body.getY2();
+  }
+
+  @Override
   public void update(GameTime time) {
     // Do nothing
   }

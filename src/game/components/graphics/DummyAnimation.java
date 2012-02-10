@@ -4,60 +4,25 @@
 
 package game.components.graphics;
 
-import game.components.graphics.animations.IAnimator;
-import game.components.graphics.animations.Idle;
-import game.components.graphics.animations.Tile;
-import game.components.interfaces.IAnimatedComponent;
+import game.components.interfaces.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 
 import org.newdawn.slick.Graphics;
 
-public class DummyAnimation implements IAnimatedComponent {
-  private static final IAnimator ANIMATOR = new Idle();
-
+public class DummyAnimation implements IRenderComponent {
   public DummyAnimation() {
     // Do nothing
   }
 
   @Override
-  public IAnimator getAnimator() {
-    return ANIMATOR;
-  }
-
-  @Override
-  public Tile getCurrentTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getFirstTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getLastTile() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public Tile getTileCount() {
-    return Tile.ZERO;
-  }
-
-  @Override
-  public int getTileHeight() {
+  public int getWidth() {
     return 0;
   }
 
   @Override
-  public int getTileWidth() {
+  public int getHeight() {
     return 0;
-  }
-
-  @Override
-  public void goToFirstFrame() {
-    // Do nothing
   }
 
   @Override
@@ -67,11 +32,6 @@ public class DummyAnimation implements IAnimatedComponent {
 
   @Override
   public void render(Graphics g) {
-    // Do nothing
-  }
-
-  @Override
-  public void setAnimator(IAnimator animator) {
     // Do nothing
   }
 

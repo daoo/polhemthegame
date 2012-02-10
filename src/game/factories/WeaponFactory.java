@@ -5,10 +5,9 @@
 package game.factories;
 
 import game.CacheTool;
-import game.components.graphics.DummyAnimation;
+import game.components.graphics.AnimatedSheet;
 import game.components.holdables.weapons.Weapon;
 import game.components.holdables.weapons.WeaponMode;
-import game.components.interfaces.IAnimatedComponent;
 import game.types.Orientation;
 
 import java.io.IOException;
@@ -59,9 +58,8 @@ public class WeaponFactory {
 
     ProjectileData projectileData = projectiles.getProjectile(data.projectile);
 
-    IAnimatedComponent anim = (data.sprite == null)
-      ? new DummyAnimation()
-      : CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
+    AnimatedSheet anim =
+      CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
     ProjectileFactory factory = new ProjectileFactory(
         bounds, data.launchAngle, data.spread, orientation, projectileData);

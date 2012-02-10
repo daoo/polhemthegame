@@ -4,8 +4,8 @@
 
 package game.triggers.effects.spawn;
 
+import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.RunTo;
-import game.components.interfaces.IAnimatedComponent;
 import game.entities.Animation;
 import game.entities.Entity;
 import game.triggers.IEffect;
@@ -21,9 +21,9 @@ import org.newdawn.slick.Graphics;
 public class SpawnAnimationEffect implements IEffect {
   private final Animation spawnee;
   private final Rectangle rect;
-  private final IAnimatedComponent anim;
+  private final AnimatedSheet anim;
 
-  public SpawnAnimationEffect(Entity entity, IAnimatedComponent anim,
+  public SpawnAnimationEffect(Entity entity, AnimatedSheet anim,
                               Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 

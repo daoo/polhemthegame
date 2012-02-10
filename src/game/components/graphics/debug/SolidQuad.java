@@ -22,6 +22,16 @@ public class SolidQuad implements IRenderComponent {
   }
 
   @Override
+  public int getWidth() {
+    return width;
+  }
+
+  @Override
+  public int getHeight() {
+    return height;
+  }
+
+  @Override
   public void update(GameTime time) {
     // Do nothing
   }

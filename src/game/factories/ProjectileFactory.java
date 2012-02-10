@@ -9,7 +9,7 @@ import game.components.graphics.AnimatedSheet;
 import game.components.graphics.DummyAnimation;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
-import game.components.interfaces.IAnimatedComponent;
+import game.components.interfaces.IRenderComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
 import game.components.misc.OutOfBounds;
@@ -120,7 +120,7 @@ public class ProjectileFactory {
       }
     }
 
-    p.addRenderComponent(getAnimation(angle));
+    p.addRenderComponent(getRender(angle));
 
     ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
     effectsOnDeath.add(new RemoveEntityEffect(p));
@@ -167,7 +167,7 @@ public class ProjectileFactory {
     effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, null));
   }
 
-  private IAnimatedComponent getAnimation(int angle) {
+  private IRenderComponent getRender(int angle) {
     if (data.texture != null) {
       return new TexturedQuad(img, orientation, angle);
     } else if (data.sprite != null) {

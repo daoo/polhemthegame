@@ -35,6 +35,16 @@ public class Outliner implements IRenderComponent {
   }
 
   @Override
+  public int getWidth() {
+    return (int) owner.body.getWidth();
+  }
+
+  @Override
+  public int getHeight() {
+    return (int) owner.body.getHeight();
+  }
+
+  @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
   }

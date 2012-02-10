@@ -4,12 +4,13 @@
 
 package game.components.holdables.weapons.machines;
 
+import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.RunTo;
+import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.IMagazine;
 import game.components.holdables.weapons.OutOfAmmoException;
 import game.components.holdables.weapons.ProjectileQueue;
-import game.components.interfaces.IAnimatedComponent;
 import game.types.GameTime;
 import util.Timer;
 
@@ -22,7 +23,7 @@ public class SingleMachine implements IWeaponMachine {
   private final int reloadLength, cooldownLength;
   private final IMagazine magazine;
   private final ProjectileQueue queue;
-  private final IAnimatedComponent anim;
+  private final AnimatedSheet anim;
 
   private Timer timer;
 
@@ -30,7 +31,7 @@ public class SingleMachine implements IWeaponMachine {
   private WeaponStates state;
 
   public SingleMachine(int reloadLength, int cooldownLength,
-      IMagazine magazine, ProjectileQueue queue, IAnimatedComponent anim) {
+      IMagazine magazine, ProjectileQueue queue, AnimatedSheet anim) {
     this.reloadLength = reloadLength;
     this.cooldownLength = cooldownLength;
     this.magazine = magazine;
@@ -77,7 +78,7 @@ public class SingleMachine implements IWeaponMachine {
         try {
           magazine.takeOne();
 
-          anim.setAnimator(new RunTo(anim.getTileCount(), anim.getFirstTile()));
+          anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
 
           timer = new Timer(time.elapsedMilli, cooldownLength);
           state = WeaponStates.COOLDOWN;
