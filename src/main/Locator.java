@@ -54,7 +54,7 @@ public class Locator {
   }
 
   /**
-   * Retrive the cache.
+   * Retrieve the cache.
    * Note that this can return null if no cache have been registered.
    * @return the registered cache
    */
@@ -63,7 +63,7 @@ public class Locator {
   }
 
   /**
-   * Retrive the RNG.
+   * Retrieve the RNG.
    * Note that this can return null if no RNG have been registered.
    * @return the registered RNG
    */
@@ -72,7 +72,7 @@ public class Locator {
   }
 
   /**
-   * Retrive the UI.
+   * Retrieve the UI.
    * Note this can return null if no UI have been registered.
    * @return the registered UI
    */
