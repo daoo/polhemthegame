@@ -9,6 +9,20 @@ public class Rectangle {
   private final Vector2 size, halfSize;
 
   /**
+   * Copy constructor.
+   * @param rect the rectangle to copy from, can not be null
+   */
+  public Rectangle(Rectangle rect) {
+    assert rect != null;
+
+    this.min = rect.min;
+    this.max = rect.max;
+    this.center = rect.center;
+    this.size = rect.size;
+    this.halfSize = rect.halfSize;
+  }
+
+  /**
    * Construct a new rectangle from a position and a size.
    * @param x1 x coordinate for top left position
    * @param y1 y coordinate for top left position
@@ -23,25 +37,6 @@ public class Rectangle {
     max = new Vector2(x1 + width, y1 + height);
 
     size     = new Vector2(width, height);
-    halfSize = Vector2.divide(size, 2.0f);
-
-    center = Vector2.add(min, halfSize);
-  }
-
-  /**
-   * Create a new rectangle from two vectors.
-   * Note that upperLeft must be above and to the left of bottomRight.
-   * @param upperLeft the upper left coordinate of the rectangle
-   * @param bottomRight the bottom right coordinate of the rectangle
-   */
-  public Rectangle(Vector2 upperLeft, Vector2 bottomRight) {
-    assert upperLeft.x < bottomRight.x && upperLeft.y < bottomRight.y;
-
-    min = upperLeft;
-    max = bottomRight;
-
-    size = new Vector2(bottomRight.x - upperLeft.x,
-                       bottomRight.y - upperLeft.x);
     halfSize = Vector2.divide(size, 2.0f);
 
     center = Vector2.add(min, halfSize);
