@@ -48,14 +48,14 @@
     { automatic: true
     , clipSize: -1
     , launchAngle: 0
-    , muzzleOffset: { x: 11, y: -4 }
+    , muzzleOffset: { x: 11, y: -3 }
     , reloadTime: 1000
     , rpm: 1600
     , spread: 0
     , sprite:
-      { framerate: 8
+      { framerate: 25
       , offset: { x: -1, y: -5 }
-      , tileSize: { width: 13, height: 8 }
+      , tileSize: { width: 15, height: 8 }
       , sprite: "textures/weapons/ak47.png" }
     , projectile: "ak47bullet" }
 
