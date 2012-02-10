@@ -47,7 +47,7 @@ import ui.hud.infobar.Bar;
 import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
-  private static final Orientation PLAYER_ORIENTATION = Orientation.LEFT;
+  private static final Orientation PLAYER_ORIENTATION = Orientation.RIGHT;
   private static final Orientation BOSS_ORIENTATION = Orientation.LEFT;
   private static final Orientation CREEP_ORIENTATION = Orientation.LEFT;
 

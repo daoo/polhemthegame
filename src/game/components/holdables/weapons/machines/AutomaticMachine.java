@@ -5,7 +5,7 @@
 package game.components.holdables.weapons.machines;
 
 import game.components.graphics.animations.Continuous;
-import game.components.graphics.animations.Idle;
+import game.components.graphics.animations.RunTo;
 import game.components.holdables.weapons.IMagazine;
 import game.components.holdables.weapons.OutOfAmmoException;
 import game.components.holdables.weapons.ProjectileQueue;
@@ -70,7 +70,7 @@ public class AutomaticMachine implements IWeaponMachine {
             state = WeaponStates.FIRE;
           } else {
             state = WeaponStates.IDLE;
-            anim.setAnimator(new Idle());
+            anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
           }
 
           timer = null;

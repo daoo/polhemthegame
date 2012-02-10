@@ -45,24 +45,25 @@ public class Launcher extends BasicGame {
   public static void main(String[] args) {
     Enviroment env = new Enviroment();
     try (Cache cache = new Cache(env.appDir)) {
-      ConfigData configData = null;
+      Config config = null;
       File configFile = new File(env.appDir, CONFIG_FILE);
       if (configFile.exists()) {
         try (FileReader reader = new FileReader(configFile)) {
-          configData = new Gson().fromJson(reader, ConfigData.class);
+          ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
+
+          config = new Config(
+              new Binds(configData.player1.walkUp, configData.player1.walkDown,
+                        configData.player1.walkLeft, configData.player1.walkRight,
+                        configData.player1.fire, configData.player1.nextWeapon,
+                        configData.player1.buy),
+              new Binds(configData.player2.walkUp, configData.player2.walkDown,
+                        configData.player2.walkLeft, configData.player2.walkRight,
+                        configData.player2.fire, configData.player2.nextWeapon,
+                        configData.player2.buy));
         }
       } else {
-        configData = new ConfigData();
+        config = new Config(new Binds(), new Binds());
       }
-      Config config = new Config(
-          new Binds(configData.player1.walkUp, configData.player1.walkDown,
-                    configData.player1.walkLeft, configData.player1.walkRight,
-                    configData.player1.fire, configData.player1.nextWeapon,
-                    configData.player1.buy),
-          new Binds(configData.player2.walkUp, configData.player2.walkDown,
-                    configData.player2.walkLeft, configData.player2.walkRight,
-                    configData.player2.fire, configData.player2.nextWeapon,
-                    configData.player2.buy));
 
       Locator.registerConfig(config);
       Locator.registerCache(cache);
