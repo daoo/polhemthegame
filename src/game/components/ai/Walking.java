@@ -110,7 +110,7 @@ public class Walking implements IBossState {
   private void headFor(Vector2 target) {
     // Subtract half size so that the center moves towards the target, instead
     // of the upper left.
-    Vector2 newTarget = Vector2.subtract(target, body.getHalfSize());
+    Vector2 newTarget = Vector2.subtract(target, body.getWidth() / 2, body.getHeight() / 2);
     Vector2 delta     = Vector2.subtract(newTarget, body.getCenter());
     Vector2 direction = delta.normalize();
     Vector2 velocity  = Vector2.multiply(direction, speed);

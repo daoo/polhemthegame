@@ -6,7 +6,7 @@ package math;
 
 public class Rectangle {
   private Vector2 min, max, center;
-  private final Vector2 size, halfSize;
+  private final int width, height, halfWidth, halfHeight;
 
   /**
    * Copy constructor.
@@ -15,11 +15,13 @@ public class Rectangle {
   public Rectangle(Rectangle rect) {
     assert rect != null;
 
-    this.min = rect.min;
-    this.max = rect.max;
+    this.min    = rect.min;
+    this.max    = rect.max;
     this.center = rect.center;
-    this.size = rect.size;
-    this.halfSize = rect.halfSize;
+    this.width  = rect.width;
+    this.height = rect.height;
+    this.halfWidth = rect.halfWidth;
+    this.halfHeight = rect.halfHeight;
   }
 
   /**
@@ -29,17 +31,19 @@ public class Rectangle {
    * @param width the width of the rectangle, greater than zero
    * @param height the height of the rectangle, greater than zero
    */
-  public Rectangle(float x1, float y1, float width, float height) {
+  public Rectangle(float x1, float y1, int width, int height) {
     assert width > 0;
     assert height > 0;
 
     min = new Vector2(x1, y1);
     max = new Vector2(x1 + width, y1 + height);
 
-    size     = new Vector2(width, height);
-    halfSize = Vector2.divide(size, 2.0f);
+    this.width      = width;
+    this.height     = height;
+    this.halfWidth  = width / 2;
+    this.halfHeight = height / 2;
 
-    center = Vector2.add(min, halfSize);
+    center = Vector2.add(min, halfWidth, halfHeight);
   }
 
   /**
@@ -57,8 +61,8 @@ public class Rectangle {
    */
   public void setPosition(Vector2 v) {
     min    = v;
-    max    = Vector2.add(v, size);
-    center = Vector2.add(v, halfSize);
+    max    = Vector2.add(v, width, height);
+    center = Vector2.add(v, halfWidth, halfHeight);
   }
 
   /**
@@ -77,7 +81,7 @@ public class Rectangle {
   public void addPosition(float x, float y) {
     min    = Vector2.add(min, x, y);
     max    = Vector2.add(max, x, y);
-    center = Vector2.add(min, halfSize);
+    center = Vector2.add(min, halfWidth, halfHeight);
   }
 
   /**
@@ -105,32 +109,12 @@ public class Rectangle {
   }
 
   /**
-   * Return the size of the rectangle.
-   * Note that the size can not change.
-   * @return the size of the rectangle
-   */
-  public Vector2 getSize() {
-    return size;
-  }
-
-  /**
-   * Return the half size of the rectangle.
-   * That is the offset to the center relative to the upper left corner of the
-   * rectangle. Can also be referred to as the size divided by two.
-   * Note that the size can not change, thus this is also constant.
-   * @return the size divided by two
-   */
-  public Vector2 getHalfSize() {
-    return halfSize;
-  }
-
-  /**
    * Return the width of the rectangle.
    * Note that the width is constant.
    * @return the width of the rectangle, greater than zero
    */
-  public float getWidth() {
-    return size.x;
+  public int getWidth() {
+    return width;
   }
 
   /**
@@ -138,8 +122,8 @@ public class Rectangle {
    * Note that the height is constant.
    * @return the height of the rectangle, greater than zero
    */
-  public float getHeight() {
-    return size.y;
+  public int getHeight() {
+    return height;
   }
 
   /**
@@ -182,7 +166,7 @@ public class Rectangle {
   @Override
   public String toString() {
     return String.format("(%f, %f, %f, %f) %dx%d",
-        min.x, min.y, max.x, max.y, (int) size.x, (int) size.y);
+        min.x, min.y, max.x, max.y, width, height);
   }
 
   /**

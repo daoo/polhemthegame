@@ -43,14 +43,15 @@ public class BossAI implements ILogicComponent {
     this.speed         = speed;
     this.initialTarget = initialTarget;
 
-    Vector2 halfSize = entity.body.getHalfSize();
+    int hw = entity.body.getWidth() / 2;
+    int hh = entity.body.getHeight() / 2;
 
-    float x1 = arenaRect.getX2() + halfSize.x - locationX;
-    float y1 = arenaRect.getY1() + halfSize.y;
-    float x2 = arenaRect.getX2() - halfSize.x;
-    float y2 = arenaRect.getY2() - halfSize.y;
+    float x1 = arenaRect.getX2() + hw - locationX;
+    float y1 = arenaRect.getY1() + hh;
+    float x2 = arenaRect.getX2() - hw;
+    float y2 = arenaRect.getY2() - hh;
 
-    this.movementRect = new Rectangle(x1, y1, x2 - x1, y2 - y1);
+    this.movementRect = new Rectangle(x1, y1, (int) (x2 - x1), (int) (y2 - y1));
   }
 
   public IBossState getState() {

@@ -173,6 +173,18 @@ public class Vector2 {
   }
 
   /**
+   * Subtract a vector from another vector.
+   * The resulting vector is a vector "from b to a".
+   * Note that this operation is not commutative.
+   * @param a the first vector
+   * @param bx the X component of the second vector
+   * @param by the Y component of the second vector
+   * @return a new vector
+   */
+  public static Vector2 subtract(Vector2 a, float bx, float by) {
+    return new Vector2(a.x - bx, by);
+  }
+  /**
    * Multiply a vector with a scalar.
    * @param a the vector
    * @param scalar the scalar

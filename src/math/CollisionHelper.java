@@ -18,7 +18,8 @@ public class CollisionHelper {
     Vector2 vel    = Vector2.multiply(av, dt);
     Vector2 target = Vector2.add(a.getMin(), vel);
 
-    Vector2 sweepDelta = Vector2.divide(vel, a.getSize().magnitude());
+    float sweepLength = (float) Math.sqrt(ExMath.square(a.getWidth()) + ExMath.square(a.getHeight()));
+    Vector2 sweepDelta = Vector2.divide(vel, sweepLength);
     int sweeps = (int) (Vector2.distance(target, a.getMin()) / sweepDelta.magnitude());
     Rectangle sweep = new Rectangle(a);
 

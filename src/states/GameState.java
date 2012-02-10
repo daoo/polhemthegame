@@ -66,10 +66,10 @@ public class GameState implements IState {
     int arenaWidth  = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
 
-    float left   = data.constraints[0];
-    float top    = data.constraints[1];
-    float bottom = data.constraints[2];
-    float right  = data.constraints[3];
+    int left   = data.constraints[0];
+    int top    = data.constraints[1];
+    int bottom = data.constraints[2];
+    int right  = data.constraints[3];
 
     campaign   = new Campaign(data);
     background = CacheTool.getImage(Locator.getCache(), data.background);

@@ -32,7 +32,7 @@ public class Entity implements IEntity {
   private final ArrayList<ILogicComponent> updates;
   private final ArrayList<IRenderComponent> renders;
 
-  public Entity(float x, float y, float w, float h) {
+  public Entity(float x, float y, int w, int h) {
     body = new Rectangle(x, y, w, h);
     active = true;
 
