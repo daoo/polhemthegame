@@ -88,7 +88,7 @@ public class GameState implements IState {
                                                     statics.getGraphics());
 
     // TODO: COOP
-    Player player = entityFactory.makePlayer("blue");
+    Player player = entityFactory.makePlayer("blue", Locator.getConfig().player1);
     ui.addDynamic(player.infoBar);
     ui.addStatic(new PlayerUI(0, 0, player.shopUI, player.inventory));
 

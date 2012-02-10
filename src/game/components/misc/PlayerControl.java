@@ -33,23 +33,22 @@ public class PlayerControl implements ILogicComponent {
 
   private int lastX, lastY;
 
-  public PlayerControl(IEntity owner, Movement movement, Inventory inventory, Shop shop, Hand hand, float speed) {
+  public PlayerControl(IEntity owner, Movement movement, Inventory inventory,
+      Shop shop, Hand hand, float speed, Binds binds) {
     this.owner     = owner;
     this.movement  = movement;
     this.inventory = inventory;
     this.hand      = hand;
     this.shop      = shop;
+    this.speed     = speed;
+    this.binds     = binds;
 
-    this.speed = speed;
-
-    this.lastX      = 0;
-    this.lastY      = 0;
-
-    binds = new Binds();
+    this.lastX = 0;
+    this.lastY = 0;
 
     keyNextWeapon = new Key(binds.nextWeapon);
-    keyBuy = new Key(binds.buy);
-    keyHoldable = new Key(binds.fire);
+    keyBuy        = new Key(binds.buy);
+    keyHoldable   = new Key(binds.fire);
   }
 
   @Override

@@ -16,11 +16,13 @@ public class Locator {
   private static ICache _cache;
   private static IRandom _random;
   private static IUI _ui;
+  private static Config _config;
 
   static {
     _cache  = null;
     _random = null;
     _ui     = null;
+    _config = null;
   }
 
   /**
@@ -54,9 +56,19 @@ public class Locator {
   }
 
   /**
+   * Register a new config.
+   * @param config the config, can not be null
+   */
+  public static void registerConfig(Config config) {
+    assert config != null;
+
+    _config = config;
+  }
+
+  /**
    * Retrieve the cache.
    * Note that this can return null if no cache have been registered.
-   * @return the registered cache
+   * @return the registered cache, or null
    */
   public static ICache getCache() {
     return _cache;
@@ -65,7 +77,7 @@ public class Locator {
   /**
    * Retrieve the RNG.
    * Note that this can return null if no RNG have been registered.
-   * @return the registered RNG
+   * @return the registered RNG, or null
    */
   public static IRandom getRandom() {
     return _random;
@@ -74,9 +86,18 @@ public class Locator {
   /**
    * Retrieve the UI.
    * Note this can return null if no UI have been registered.
-   * @return the registered UI
+   * @return the registered UI, or null
    */
   public static IUI getUI() {
     return _ui;
+  }
+
+  /**
+   * Retrieve the config.
+   * Note that this can return null if no config has been registered.
+   * @return the registered config, or null
+   */
+  public static Config getConfig() {
+    return _config;
   }
 }

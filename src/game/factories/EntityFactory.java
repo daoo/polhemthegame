@@ -21,6 +21,7 @@ import game.entities.Entity;
 import game.misc.Shop;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
+import game.types.Binds;
 import game.types.Orientation;
 import game.types.Player;
 import game.types.Unit;
@@ -109,7 +110,7 @@ public class EntityFactory {
     return makeUnit(x, y, -data.unit.speed, 0, CREEP_ORIENTATION, data.unit);
   }
 
-  public Player makePlayer(String playerName)
+  public Player makePlayer(String playerName, Binds binds)
       throws ParserException, IOException {
     PlayerData data = playersData.getPlayer(playerName);
 
@@ -129,7 +130,7 @@ public class EntityFactory {
     unit.entity.addLogicComponent(inv);
     unit.entity.addRenderComponent(hand);
     unit.entity.addLogicComponent(new PlayerControl(unit.entity, unit.movement,
-        inv, shop, hand, data.unit.speed));
+        inv, shop, hand, data.unit.speed, binds));
 
     unit.entity.addRenderComponent(new Outliner(unit.entity, unit.movement, true, true));
 

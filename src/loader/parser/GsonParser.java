@@ -14,16 +14,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 public class GsonParser implements IParser {
+  private final Gson gson;
   private final Type typeOf;
 
   public GsonParser(Type typeOf) {
+    this.gson = new Gson();
     this.typeOf = typeOf;
   }
 
   @Override
   public IData parse(InputStream br) throws ParserException {
     try {
-      return new Gson().fromJson(new InputStreamReader(br), typeOf);
+      return gson.fromJson(new InputStreamReader(br), typeOf);
     } catch (JsonParseException e) {
       throw new ParserException(e);
     }
