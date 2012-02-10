@@ -53,7 +53,7 @@
     , locationX: 100
     , weapon: "mouse"
     , unit:
-      { hitbox: { width: 28, height: 50 }
+      { hitbox: { width: 28, height: 38 }
       , hitpoints: 200
       , speed: 100
       , sprites:
@@ -61,12 +61,12 @@
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/bosses/wheelchairguy-walk.png"
-          , tileSize: { width: 28, height: 50 } }
+          , tileSize: { width: 28, height: 38 } }
         , "death":
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/bosses/wheelchairguy-death.png"
-          , tileSize: { width: 100, height: 100 } }
+          , tileSize: { width: 88, height: 38 } }
         }
       }
     }
