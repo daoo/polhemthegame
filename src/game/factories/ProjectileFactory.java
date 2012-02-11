@@ -120,7 +120,10 @@ public class ProjectileFactory {
       }
     }
 
-    p.addRenderComponent(getRender(angle));
+    IRenderComponent render = getRender(angle);
+    if (render != null) {
+      p.addRenderComponent(render);
+    }
 
     ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
     effectsOnDeath.add(new RemoveEntityEffect(p));
@@ -178,7 +181,7 @@ public class ProjectileFactory {
 
       return sheet;
     } else {
-      return new DummyAnimation();
+      return null;
     }
   }
 }
