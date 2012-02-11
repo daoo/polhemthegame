@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2009-2012 Daniel Oom, see license.txt for more info.
+ */
+
 package main;
 
 import game.types.Binds;
