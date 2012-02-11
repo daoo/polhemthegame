@@ -113,9 +113,9 @@
     , rpm: 600
     , spread: 20
     , sprite:
-      { framerate: 8
-      , offset: { x: 0, y: 0 }
-      , tileSize: { width: 11, height: 10 }
+      { framerate: 100
+      , offset: { x: 5, y: -18 }
+      , tileSize: { width: 35, height: 36 }
       , sprite: "textures/weapons/socialism.png" }
     , projectile: "socialism" }
 
