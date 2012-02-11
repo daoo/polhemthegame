@@ -45,7 +45,6 @@ public class TexturedQuad implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-
     if (flip) {
       // Be sure to flip around the center
       g.translate(centerX, 0);

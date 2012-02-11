@@ -1,11 +1,11 @@
 { bosses:
   { "bobby":
     { fireLength: 2.0
-    , handOffset: { x: 3, y: 21 }
+    , handOffset: { x: 14, y: 20 }
     , locationX: 200
     , weapon: "ig"
     , unit:
-      { hitbox: { width: 22, height: 48 }
+      { hitbox: { width: 21, height: 48 }
       , hitpoints: 750
       , speed: 100
       , sprites:

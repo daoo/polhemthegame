@@ -123,15 +123,15 @@
     { automatic: true
     , clipSize: -1
     , launchAngle: 0
-    , muzzleOffset: { x: -20, y: -4 }
+    , muzzleOffset: { x: 6, y: -4 }
     , reloadTime: 0
     , rpm: 260
     , spread: 20
     , sprite:
       { framerate: 100
-      , offset: { x: 5, y: -18 }
-      , tileSize: { width: 35, height: 36 }
-      , sprite: "textures/weapons/socialism.png" }
+      , offset: { x: 0, y: 0 }
+      , tileSize: { width: 1, height: 1 }
+      , sprite: "textures/null.png" }
     , projectile: "ig" }
   }
 }
