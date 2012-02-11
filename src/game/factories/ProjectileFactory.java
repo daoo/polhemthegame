@@ -83,6 +83,10 @@ public class ProjectileFactory {
       : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
   }
 
+  public int getWidth() {
+    return data.hitbox.width;
+  }
+
   /**
    * Make a new projectile.
    * @param source the source of the projectile (who fired it), can be null

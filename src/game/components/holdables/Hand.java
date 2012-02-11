@@ -64,14 +64,21 @@ public class Hand implements IRenderComponent, IProgress {
     if (weapon != null) {
       weapon.update(time);
 
+      ProjectileFactory factory = weapon.getProjectileFactory();
+      ProjectileQueue queue = weapon.getQueue();
+
       Vector2 pos = offsetCalc.getMuzzlePosition(weapon.getWidth(),
           weapon.getMuzzleOffset());
-      ProjectileQueue queue = weapon.getQueue();
-      ProjectileFactory factory = weapon.getProjectileFactory();
+
+      float x = pos.x;
+      if (weapon.getOrientation() == Orientation.LEFT) {
+        // Make sure the projectile does not hit the source entity
+        x = x - factory.getWidth();
+      }
 
       // Find out if there are any projectiles that want to be spawned
       for (int i = 0; i < queue.getWaiting(); ++i) {
-        Entity entity = factory.makeProjectile(owner, pos.x, pos.y);
+        Entity entity = factory.makeProjectile(owner, x, pos.y);
         owner.addEffect(new SpawnProjectileEffect(entity, pos));
       }
 
