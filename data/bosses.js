@@ -13,7 +13,7 @@
           { framerate: 8
           , offset: { x: 0, y: 0 }
           , sprite: "textures/bosses/bobby-walk.png"
-          , tileSize: { width: 22, height: 48 } }
+          , tileSize: { width: 21, height: 48 } }
         , "death":
           { framerate: 8
           , offset: { x: -86, y: -50 }

@@ -127,7 +127,11 @@
     , reloadTime: 0
     , rpm: 260
     , spread: 20
-    , sprite: null
+    , sprite:
+      { framerate: 100
+      , offset: { x: 5, y: -18 }
+      , tileSize: { width: 35, height: 36 }
+      , sprite: "textures/weapons/socialism.png" }
     , projectile: "ig" }
   }
 }
