@@ -99,7 +99,7 @@
     , spread: 20
     , sprite:
       { framerate: 8
-      , offset: { x: 0, y: 0 }
+      , offset: { x: -2, y: -4 }
       , tileSize: { width: 18, height: 9 }
       , sprite: "textures/weapons/mouse.png" }
     , projectile: "mouse" }
