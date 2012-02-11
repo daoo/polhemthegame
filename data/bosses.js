@@ -25,7 +25,7 @@
 
   , "stefan":
     { fireLength: 2.0
-    , handOffset: { x: 0, y: 0 }
+    , handOffset: { x: 4, y: 11 }
     , locationX: 100
     , weapon: "socialism"
     , unit:
