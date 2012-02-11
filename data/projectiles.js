@@ -116,7 +116,7 @@
     , range: 2000
     , speed: 250
     , sprite: null
-    , targets: 1
+    , targets: 5
     , texture: "textures/projectiles/socialism.png" }
 
   , "ig":

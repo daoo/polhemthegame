@@ -2,7 +2,7 @@
   { "blue":
     { handOffset: { x: 12, y: 15 }
     , startMoney: 100000
-    , startWeapon: "mouse"
+    , startWeapon: "socialism"
     , unit:
       { hitbox: { width: 18, height: 37 }
       , orientation: LEFT
