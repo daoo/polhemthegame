@@ -72,7 +72,7 @@ public class EntityFactory {
       -worldRect.getWidth(), -worldRect.getHeight(),
       3 * worldRect.getWidth(), 3 * worldRect.getHeight());
 
-    weaponFactory = new WeaponFactory(bigRect);
+    weaponFactory = new WeaponFactory(bigRect, statics);
     shopData      = CacheTool.getShop(Locator.getCache());
     playersData   = CacheTool.getPlayers(Locator.getCache());
   }

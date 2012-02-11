@@ -21,6 +21,8 @@ import main.Locator;
 import math.Rectangle;
 import math.Vector2;
 
+import org.newdawn.slick.Graphics;
+
 /**
  * Factory for weapons.
  */
@@ -28,15 +30,18 @@ public class WeaponFactory {
   private final Rectangle bounds;
   private final WeaponsData weapons;
   private final ProjectilesData projectiles;
+  private final Graphics statics;
 
   /**
    * Construct a new weapon factory that can make any weapon.
    * @param bounds the bounds within projectiles can exists
+   * @param statics graphics context were statics can be drawn
    * @throws ParserException when parsing file data fails
    * @throws IOException when reading files fails
    */
-  public WeaponFactory(Rectangle bounds) throws ParserException, IOException {
+  public WeaponFactory(Rectangle bounds, Graphics statics) throws ParserException, IOException {
     this.bounds = bounds;
+    this.statics = statics;
 
     weapons = CacheTool.getWeapons(Locator.getCache());
     projectiles = CacheTool.getProjectiles(Locator.getCache());
@@ -52,7 +57,7 @@ public class WeaponFactory {
    */
   public Weapon makeWeapon(String name, Orientation orientation)
       throws ParserException, IOException {
-    WeaponData data = weapons.getWeapon(name);
+    WeaponData data = weapons.weapons.get(name);
 
     Vector2 muzzle = new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
@@ -61,8 +66,8 @@ public class WeaponFactory {
     AnimatedSheet anim =
       CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
-    ProjectileFactory factory = new ProjectileFactory(
-        bounds, data.launchAngle, data.spread, orientation, projectileData);
+    ProjectileFactory factory = new ProjectileFactory(bounds, data.launchAngle,
+        data.spread, orientation, projectileData, statics);
 
     return new Weapon(
       muzzle,

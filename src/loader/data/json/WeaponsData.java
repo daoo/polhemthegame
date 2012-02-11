@@ -11,11 +11,7 @@ import loader.IData;
 import loader.data.json.types.WeaponData;
 
 public class WeaponsData implements IData {
-  private Map<String, WeaponData> weapons;
-
-  public WeaponData getWeapon(String name) {
-    return weapons.get(name);
-  }
+  public Map<String, WeaponData> weapons;
 
   @Override
   public void close() throws IOException {

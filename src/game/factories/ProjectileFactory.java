@@ -36,6 +36,7 @@ import main.Locator;
 import math.ExMath;
 import math.Rectangle;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import util.SpriteSheet;
@@ -47,6 +48,7 @@ public class ProjectileFactory {
   private final ProjectileData data;
   private final Image img;
   private final SpriteSheet sprite, explosion;
+  private final Graphics statics;
 
   /**
    * Construct a new projectile factory for a given projectile.
@@ -57,7 +59,7 @@ public class ProjectileFactory {
    * @throws ParserException when fetching images from the drive fails
    */
   public ProjectileFactory(Rectangle bounds, int launchAngle, int spread,
-      Orientation orientation, ProjectileData data)
+      Orientation orientation, ProjectileData data, Graphics statics)
       throws IOException, ParserException {
     assert data != null;
 
@@ -66,6 +68,7 @@ public class ProjectileFactory {
     this.spread = spread;
     this.orientation = orientation;
     this.data = data;
+    this.statics = statics;
 
     if (data.texture != null) {
       img = CacheTool.getImage(Locator.getCache(), data.texture);
@@ -170,7 +173,7 @@ public class ProjectileFactory {
 
     effectsOnDeath.add(new AOEDamageEffect(
       source, p.body, data.aoe.radius, data.aoe.damage));
-    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, null));
+    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, statics));
   }
 
   private IRenderComponent getRender(int angle) {
