@@ -6,7 +6,6 @@ package game.factories;
 
 import game.CacheTool;
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.DummyAnimation;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.Continuous;
 import game.components.interfaces.IRenderComponent;
