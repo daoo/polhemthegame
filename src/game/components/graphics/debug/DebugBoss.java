@@ -47,20 +47,14 @@ public class DebugBoss implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    int hw = body.getWidth() / 2;
-    int hh = body.getHeight() / 2;
-
     IBossState state = ai.getState();
     if (state instanceof Walking) {
       Walking walking = (Walking) state;
-      Vector2 target = walking.getTarget();
-      if (target != null) {
-        Vector2 a = Vector2.subtract(target, body.getCenter());
-        g.drawLine(hw, hh, a.x, a.y);
-      }
+      Vector2 target = Vector2.subtract(walking.getTarget(), body.getMin());
+      g.drawLine(0, 0, target.x, target.y);
     }
 
-    g.draw(new Circle(hw, hh, BossAI.MIN_WALK));
+    g.draw(new Circle(0, 0, BossAI.MIN_WALK));
 
     Vector2 o = Vector2.subtract(ai.getMovementRect().getMin(), body.getMin());
     g.drawRect(o.x, o.y, ai.getMovementRect().getWidth(), ai.getMovementRect().getHeight());

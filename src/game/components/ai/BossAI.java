@@ -43,13 +43,11 @@ public class BossAI implements ILogicComponent {
     this.speed         = speed;
     this.initialTarget = initialTarget;
 
-    int hw = entity.body.getWidth() / 2;
-    int hh = entity.body.getHeight() / 2;
-
-    float x1 = arenaRect.getX2() + hw - locationX;
-    float y1 = arenaRect.getY1() + hh;
-    float x2 = arenaRect.getX2() - hw;
-    float y2 = arenaRect.getY2() - hh;
+    // Setup the area which the TOP LEFT of the boss body may move around in
+    float x1 = arenaRect.getX2() - locationX;
+    float y1 = arenaRect.getY1() + entity.body.getHeight();
+    float x2 = arenaRect.getX2() - (3.0f / 2.0f) * entity.body.getWidth();
+    float y2 = arenaRect.getY2() - entity.body.getHeight();
 
     this.movementRect = new Rectangle(x1, y1, (int) (x2 - x1), (int) (y2 - y1));
   }
@@ -66,9 +64,20 @@ public class BossAI implements ILogicComponent {
       // Go to next state
 
       if (state.getState() == BossState.WALKING) {
-        changeToShooting();
+        int shootingTime = Locator.getRandom().nextInt(
+            SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
+        state = new Shooting(shootingTime);
+
+        movement.setVelocity(Vector2.ZERO);
+        entity.sendMessage(Message.STOP_ANIMATION, null);
+        hand.startUse();
       } else if (state.getState() == BossState.SHOOTING) {
-        changeToWalking();
+        int targets = Locator.getRandom().nextInt(
+            TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
+          state = new Walking(entity.body, hand, movement, speed, movementRect, targets);
+
+          entity.sendMessage(Message.START_ANIMATION, null);
+          hand.stopUse();
       }
 
       state.start(time);
@@ -87,25 +96,6 @@ public class BossAI implements ILogicComponent {
 
       state.start(time);
     }
-  }
-
-  private void changeToShooting() {
-    int shootingTime = Locator.getRandom().nextInt(
-        SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
-    state = new Shooting(shootingTime);
-
-    movement.setVelocity(Vector2.ZERO);
-    entity.sendMessage(Message.STOP_ANIMATION, null);
-    hand.startUse();
-  }
-
-  private void changeToWalking() {
-    int targets = Locator.getRandom().nextInt(
-      TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-    state = new Walking(entity.body, hand, movement, speed, movementRect, targets);
-
-    entity.sendMessage(Message.START_ANIMATION, null);
-    hand.stopUse();
   }
 
   public Rectangle getMovementRect() {

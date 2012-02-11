@@ -39,6 +39,7 @@ public class Walking implements IBossState {
   public Walking(Rectangle body, Hand hand, Movement movement, float speed,
       Rectangle movementRect, int targets, Vector2 initialTarget) {
     assert targets > 0;
+    assert initialTarget != null;
 
     this.body         = body;
     this.speed        = speed;
@@ -77,7 +78,7 @@ public class Walking implements IBossState {
   @Override
   public void update(GameTime time) {
     if (targets > 0) {
-      Vector2 a = Vector2.subtract(body.getCenter(), target);
+      Vector2 a = Vector2.subtract(body.getMin(), target);
       if (Vector2.dot(a, movement.getVelocity()) >= 0) {
         --targets;
         // Target passed
@@ -85,7 +86,7 @@ public class Walking implements IBossState {
           target = newRandomTarget(Locator.getRandom(),
               (int) movementRect.getX1(), (int) movementRect.getY1(),
               (int) movementRect.getX2(), (int) movementRect.getY2(),
-              (int) body.getCenter().x, (int) body.getCenter().y,
+              (int) body.getX1(), (int) body.getY1(),
               MIN_WALK_SQUARED);
           headFor(target);
         }
@@ -108,10 +109,9 @@ public class Walking implements IBossState {
   }
 
   private void headFor(Vector2 target) {
-    // Subtract half size so that the center moves towards the target, instead
-    // of the upper left.
-    Vector2 newTarget = Vector2.subtract(target, body.getWidth() / 2, body.getHeight() / 2);
-    Vector2 delta     = Vector2.subtract(newTarget, body.getCenter());
+    assert Rectangle.contains(movementRect, target);
+
+    Vector2 delta     = Vector2.subtract(target, body.getMin());
     Vector2 direction = delta.normalize();
     Vector2 velocity  = Vector2.multiply(direction, speed);
     movement.setVelocity(velocity);
