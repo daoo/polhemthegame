@@ -39,7 +39,8 @@ public class WeaponFactory {
    * @throws ParserException when parsing file data fails
    * @throws IOException when reading files fails
    */
-  public WeaponFactory(Rectangle bounds, Graphics statics) throws ParserException, IOException {
+  public WeaponFactory(Rectangle bounds, Graphics statics)
+      throws ParserException, IOException {
     this.bounds = bounds;
     this.statics = statics;
 
