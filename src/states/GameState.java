@@ -94,7 +94,7 @@ public class GameState implements IState {
     // TODO: COOP
     Player player = entityFactory.makePlayer("blue", Locator.getConfig().player1);
     ui.addDynamic(player.infoBar);
-    ui.addStatic(new PlayerUI(0, 0, player.shopUI, player.inventory));
+    ui.addStatic(new PlayerUI(0, 0, Launcher.WIDTH, player.shopUI, player.inventory));
 
 
     ArrayList<Entity> players = new ArrayList<>();
