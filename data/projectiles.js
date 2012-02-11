@@ -37,7 +37,7 @@
         , tileSize: { width: 200, height: 83 } } }
     , collides: false
     , damage: 0
-    , duration: 3500
+    , duration: 3000
     , gravity: true
     , hitbox: { width: 4, height: 4 }
     , range: 2000

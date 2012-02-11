@@ -36,7 +36,7 @@
     , muzzleOffset: { x: 3, y: 2 }
     , reloadTime: 0
     , rpm: 20
-    , spread: 0
+    , spread: 5
     , sprite:
       { framerate: 7
       , offset: { x: 0, y: -2 }
