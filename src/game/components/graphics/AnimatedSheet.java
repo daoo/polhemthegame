@@ -122,12 +122,9 @@ public class AnimatedSheet implements IRenderComponent {
       g.scale(-1, 1);
       g.translate(-centerX, 0);
       // Alternatively, translate by width after flip
-
-      // Note that when flipped, the x offset should be flipped to
-      g.translate(-offsetX, offsetY);
-    } else {
-      g.translate(offsetX, offsetY);
     }
+
+    g.translate(offsetX, offsetY);
 
     g.drawImage(sheet.getSubImage(current.x, current.y), 0, 0);
 
