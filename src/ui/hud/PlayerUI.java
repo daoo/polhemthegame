@@ -48,6 +48,9 @@ public class PlayerUI implements IStaticUIElement {
     g.pushTransform();
     g.translate(x, y);
 
+    g.setColor(Color.black);
+    g.fillRect(0, 0, WIDTH, HEIGHT);
+
     g.setColor(Color.white);
     g.drawRect(0, 0, WIDTH, HEIGHT);
 

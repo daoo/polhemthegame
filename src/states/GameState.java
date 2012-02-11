@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
+import main.Launcher;
 import main.Locator;
 import math.Rectangle;
 
@@ -26,6 +27,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ui.hud.BlackBox;
 import ui.hud.PlayerUI;
 import ui.hud.UI;
 import util.Node;
@@ -62,6 +64,8 @@ public class GameState implements IState {
 
     ui = new UI(windowWidth, windowHeight);
     Locator.registerUI(ui);
+    ui.addStatic(new BlackBox(0, 0, Launcher.WIDTH, PlayerUI.HEIGHT));
+    ui.addStatic(new BlackBox(0, Launcher.HEIGHT - PlayerUI.HEIGHT, Launcher.WIDTH, PlayerUI.HEIGHT));
 
     int arenaWidth  = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
