@@ -23,8 +23,8 @@ public class Binds {
     walkLeft   = Keyboard.KEY_A;
     walkRight  = Keyboard.KEY_D;
     fire       = Keyboard.KEY_SPACE;
-    nextWeapon = Keyboard.KEY_TAB;
-    buy        = Keyboard.KEY_1;
+    nextWeapon = Keyboard.KEY_Q;
+    buy        = Keyboard.KEY_E;
   }
 
   /**
