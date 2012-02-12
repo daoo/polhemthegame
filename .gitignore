@@ -1,8 +1,10 @@
 *.log
+*.jar
+*.class
 .classpath
 .project
 .settings/
 bin
 build
-release
-target
+
+!libs/bin
