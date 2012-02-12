@@ -49,12 +49,12 @@ public class StateManager {
     }
   }
 
-  public void enterSinglePlayer(String campaign) {
+  public void enterGame(String campaign, boolean twoPlayer) {
     try {
       CampaignData data = (CampaignData) Locator.getCache().getCold(
         campaign, new GsonParser(CampaignData.class));
 
-      GameState state = new GameState(this, data, Launcher.WIDTH, Launcher.HEIGHT);
+      GameState state = new GameState(this, data, twoPlayer, Launcher.WIDTH, Launcher.HEIGHT);
       switchToState(new DebugState(state));
     } catch (ParserException | IOException | SlickException ex) {
       handleException(ex);

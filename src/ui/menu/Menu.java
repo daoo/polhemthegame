@@ -6,20 +6,21 @@ package ui.menu;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ListIterator;
 
 import org.newdawn.slick.Graphics;
 
 public class Menu {
   private final ArrayList<MenuItem> items;
-  private ListIterator<MenuItem> iterator;
+
+  private int i;
   private MenuItem current;
 
   public Menu(Collection<MenuItem> items) {
-    this.items    = new ArrayList<>(items);
-    this.iterator = this.items.listIterator();
-    this.current  = iterator.next();
-    this.current.setState(MenuItemState.ACTIVE);
+    this.items = new ArrayList<>(items);
+
+    i = 0;
+    current = this.items.get(i);
+    current.setState(MenuItemState.ACTIVE);
   }
 
   public void click() {
@@ -35,29 +36,27 @@ public class Menu {
   }
 
   public void up() {
-    if (iterator.hasPrevious())
+    while (i - 1 >= 0) {
       current.setState(MenuItemState.NORMAL);
-
-    while (iterator.hasPrevious()) {
-      current = iterator.previous();
+      --i;
+      current = items.get(i);
 
       if (current.getState() == MenuItemState.NORMAL) {
         current.setState(MenuItemState.ACTIVE);
-        break;
+        return;
       }
     }
   }
 
   public void down() {
-    if (iterator.hasNext())
+    while (i + 1 < items.size()) {
       current.setState(MenuItemState.NORMAL);
-
-    while (iterator.hasNext()) {
-      current = iterator.next();
+      ++i;
+      current = items.get(i);
 
       if (current.getState() == MenuItemState.NORMAL) {
         current.setState(MenuItemState.ACTIVE);
-        break;
+        return;
       }
     }
   }

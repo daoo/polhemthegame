@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.parser.ParserException;
+import main.Key;
 import main.Locator;
 
 import org.lwjgl.input.Keyboard;
@@ -21,7 +22,6 @@ import ui.IUIEvent;
 import ui.menu.Menu;
 import ui.menu.MenuButton;
 import ui.menu.MenuItem;
-import ui.menu.MenuItemDisabled;
 import util.Node;
 
 public class MenuState implements IState {
@@ -35,6 +35,8 @@ public class MenuState implements IState {
   private final Image background;
   private final Menu  menu;
 
+  private final Key keyUp, keyDown, keyEnter;
+
   public MenuState(final StateManager manager)
   throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), MENU_BACKGROUND_FILE);
@@ -43,10 +45,14 @@ public class MenuState implements IState {
 
     tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380, new IUIEvent() {
       @Override public void fire() {
-        manager.enterSinglePlayer(CAMPAIGN_FILE);
+        manager.enterGame(CAMPAIGN_FILE, false);
       }
     }));
-    tmp.add(new MenuItemDisabled(BUTTON_COOP, 60, 480));
+    tmp.add(new MenuButton(BUTTON_COOP, 60, 480, new IUIEvent() {
+      @Override public void fire() {
+        manager.enterGame(CAMPAIGN_FILE, true);
+      }
+    }));
     tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, new IUIEvent() {
       @Override public void fire() {
         manager.quit();
@@ -54,6 +60,10 @@ public class MenuState implements IState {
     }));
 
     menu = new Menu(tmp);
+
+    keyUp = new Key(Keyboard.KEY_UP);
+    keyDown = new Key(Keyboard.KEY_DOWN);
+    keyEnter = new Key(Keyboard.KEY_RETURN);
   }
 
   @Override
@@ -70,11 +80,20 @@ public class MenuState implements IState {
   public void update(StateManager stateGame, int delta) {
     if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
-    } else if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+    }
+
+    keyUp.update();
+    if (keyUp.wasPressed()) {
       menu.up();
-    } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+    }
+
+    keyDown.update();
+    if (keyDown.wasPressed()) {
       menu.down();
-    } else if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
+    }
+
+    keyEnter.update();
+    if (keyEnter.wasPressed()) {
       menu.click();
     }
   }

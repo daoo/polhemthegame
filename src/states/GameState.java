@@ -55,7 +55,7 @@ public class GameState implements IState {
    */
   private long elapsed;
 
-  public GameState(StateManager stateManager, CampaignData data,
+  public GameState(StateManager stateManager, CampaignData data, boolean twoPlayer,
                    int windowWidth, int windowHeight)
       throws ParserException, IOException, SlickException {
     if (data.levels.isEmpty()) {
@@ -91,14 +91,18 @@ public class GameState implements IState {
     EntityFactory entityFactory = new EntityFactory(worldRect,
                                                     statics.getGraphics());
 
-    // TODO: COOP
-    Player player = entityFactory.makePlayer("blue", Locator.getConfig().player1);
-    ui.addDynamic(player.infoBar);
-    ui.addStatic(new PlayerUI(0, 0, Launcher.WIDTH, player.shopUI, player.inventory));
-
-
     ArrayList<Entity> players = new ArrayList<>();
-    players.add(player.entity);
+    Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
+    ui.addDynamic(player1.infoBar);
+    ui.addStatic(new PlayerUI(0, 0, Launcher.WIDTH, player1.shopUI, player1.inventory));
+    players.add(player1.entity);
+
+    if (twoPlayer) {
+      Player player2 = entityFactory.makePlayer("red", Locator.getConfig().player2);
+      ui.addDynamic(player2.infoBar);
+      ui.addStatic(new PlayerUI(0, 0, Launcher.WIDTH, player1.shopUI, player1.inventory));
+      players.add(player2.entity);
+    }
 
     Players.reposition(players, worldRect);
 
