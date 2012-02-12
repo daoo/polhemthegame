@@ -37,8 +37,8 @@ public class FileBeacon implements Closeable {
       zipFile = null;
     }
 
-    if (!dataDir.exists()) {
-      throw new FileNotFoundException(dataDir.getAbsolutePath());
+    if (zipFile == null && !dataDir.exists()) {
+      throw new FileNotFoundException("Data Not Found");
     }
   }
 
