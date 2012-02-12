@@ -23,6 +23,7 @@ import main.Launcher;
 import main.Locator;
 import math.Rectangle;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -146,7 +147,7 @@ public class GameState implements IState {
     } else if (nextAction == ACTION.CREDITS) {
       stateManager.enterCredits();
       nextAction = null;
-    } else if (nextAction == ACTION.MAIN_MENU) {
+    } else if (nextAction == ACTION.MAIN_MENU || Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       stateManager.enterMainMenu();
       nextAction = null;
     }
