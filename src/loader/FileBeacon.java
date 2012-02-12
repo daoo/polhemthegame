@@ -19,8 +19,7 @@ public class FileBeacon implements Closeable {
   private static final String DATA_DIR = "data/";
   private static final String DATA_ARCHIVE = "data.zip";
 
-  private File dataDir, dataArchive;
-
+  private final File dataDir, dataArchive;
   private final ZipFile zipFile;
 
   public FileBeacon(File dir) throws ZipException, IOException {
