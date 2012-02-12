@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 public class FileBeacon implements Closeable {
@@ -21,7 +20,7 @@ public class FileBeacon implements Closeable {
   private final File dataDir, dataArchive;
   private final ZipFile zipFile;
 
-  public FileBeacon(File dir) throws ZipException, IOException {
+  public FileBeacon(File dir) throws IOException {
     assert dir != null;
 
     if (!dir.exists()) {

@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.zip.ZipException;
 
 import loader.parser.IParser;
 import loader.parser.ParserException;
@@ -17,7 +16,7 @@ public class Cache implements ICache {
   private final FileBeacon beacon;
   private final HashMap<String, IData> cache;
 
-  public Cache(File rootDir) throws ZipException, IOException {
+  public Cache(File rootDir) throws IOException {
     assert rootDir != null;
 
     beacon = new FileBeacon(rootDir);
