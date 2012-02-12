@@ -14,7 +14,7 @@
           , tileSize: { width: 38, height: 47 } }
         , "death":
           { framerate: 8
-          , offset: { x: -56, y: -50 }
+          , offset: { x: 56, y: -50 }
           , sprite: "textures/creeps/bracke-death.png"
           , tileSize: { width: 174, height: 101 } }
         }
@@ -58,7 +58,7 @@
           , tileSize: { width: 112, height: 35 } }
         , "death":
           { framerate: 8
-          , offset: { x: -19, y: -70 }
+          , offset: { x: 19, y: -70 }
           , sprite: "textures/creeps/gtg-death.png"
         , tileSize: { width: 131, height: 105 } }
         }
@@ -80,7 +80,7 @@
           , tileSize: { width: 11, height: 24 } }
         , "death":
           { framerate: 8
-          , offset: { x: -13, y: -3 }
+          , offset: { x: 13, y: -3 }
           , sprite: "textures/creeps/ytc-death.png"
           , tileSize: { width: 42, height: 26 } }
         }
