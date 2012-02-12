@@ -16,7 +16,7 @@ import math.Rectangle;
 import math.Vector2;
 
 public class BossAI implements ILogicComponent {
-  private static final int INITIAL_TARGET_COUNT = 2;
+  private static final int INITIAL_TARGET_COUNT = 1;
   private static final int TARGET_MIN_COUNT     = 1;
   private static final int TARGET_MAX_COUNT     = 3;
 
@@ -36,7 +36,7 @@ public class BossAI implements ILogicComponent {
   private IBossState state;
 
   public BossAI(Entity entity, Movement movement, Hand hand, Rectangle arenaRect,
-                float locationX, float speed, Vector2 initialTarget) {
+      float locationX, float speed, Vector2 initialTarget) {
     this.entity        = entity;
     this.hand          = hand;
     this.movement      = movement;
