@@ -5,10 +5,10 @@
 package loader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.zip.ZipException;
 
 import loader.parser.IParser;
 import loader.parser.ParserException;
@@ -17,7 +17,7 @@ public class Cache implements ICache {
   private final FileBeacon beacon;
   private final HashMap<String, IData> cache;
 
-  public Cache(File rootDir) throws FileNotFoundException {
+  public Cache(File rootDir) throws ZipException, IOException {
     assert rootDir != null;
 
     beacon = new FileBeacon(rootDir);
@@ -26,6 +26,8 @@ public class Cache implements ICache {
 
   @Override
   public void close() throws IOException {
+    beacon.close();
+
     for (IData cacheItem : cache.values()) {
       cacheItem.close();
     }
