@@ -16,7 +16,7 @@
           , tileSize: { width: 18, height: 37 } }
         , "death":
           { framerate: 8
-          , offset: { x: 0, y: 0 }
+          , offset: { x: 0, y: -1 }
           , sprite: "textures/players/blue-death.png"
           , tileSize: { width: 50, height: 38 } }
         }
