@@ -110,7 +110,6 @@ public class StateCredits implements IState {
     pos_y -= speed * (delta / 1000.0f);
   }
 
-  @SuppressWarnings("unchecked")
   private static UnicodeFont getFont(String name, int size)
     throws SlickException {
     Font font = new Font(name, Font.PLAIN, size);
