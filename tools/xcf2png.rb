@@ -7,6 +7,7 @@ SCRIPT="(define (do-convert infile outfile)
   (let* (
       (image (car (gimp-file-load RUN-NONINTERACTIVE infile infile)))
       (layer (car (gimp-image-merge-visible-layers image CLIP-TO-IMAGE))))
+    (gimp-layer-resize-to-image-size layer)
     (gimp-file-save RUN-NONINTERACTIVE image layer outfile outfile)
     (gimp-image-delete image)
   )
