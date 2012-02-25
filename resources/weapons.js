@@ -93,7 +93,7 @@
     { automatic: true
     , clipSize: -1
     , launchAngle: 0
-    , muzzleOffset: { x: 10, y: -3 }
+    , muzzleOffset: { x: 17, y: -3 }
     , reloadTime: 0
     , rpm: 260
     , spread: 20
