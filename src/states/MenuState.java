@@ -78,10 +78,6 @@ public class MenuState implements IState {
 
   @Override
   public void update(StateManager stateGame, int delta) {
-    if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
-      stateGame.quit();
-    }
-
     keyUp.update();
     if (keyUp.wasPressed()) {
       menu.up();

@@ -26,5 +26,4 @@ public class DataImage extends Image implements IData {
       throw new IOException(e);
     }
   }
-
 }

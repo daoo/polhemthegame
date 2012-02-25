@@ -16,11 +16,6 @@ public class Vector2 {
   public final float x, y;
 
   /**
-   * The magnitude of the vector (also as it's square).
-   */
-  private float magnitude, magnitudeSquared;
-
-  /**
    * Normalized version of the vector.
    */
   private Vector2 normalized;
@@ -34,9 +29,6 @@ public class Vector2 {
     this.x = x;
     this.y = y;
 
-    this.magnitudeSquared = -1;
-    this.magnitude        = -1;
-
     this.normalized = null;
   }
 
@@ -45,10 +37,7 @@ public class Vector2 {
    * @return the magnitude, greater than or equal to zero
    */
   public float magnitude() {
-    if (magnitude == -1)
-      magnitude = (float) Math.sqrt(magnitudeSquared());
-
-    return magnitude;
+    return (float) Math.sqrt(magnitudeSquared());
   }
 
   /**
@@ -56,10 +45,7 @@ public class Vector2 {
    * @return the squared magnitude, greater than or equal to zero
    */
   public float magnitudeSquared() {
-    if (magnitudeSquared == -1)
-      magnitudeSquared = sq(x) + sq(y);
-
-    return magnitudeSquared;
+    return sq(x) + sq(y);
   }
 
   /**

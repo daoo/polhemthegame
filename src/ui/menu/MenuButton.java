@@ -4,7 +4,6 @@
 
 package ui.menu;
 
-
 import java.io.IOException;
 
 import loader.parser.ParserException;

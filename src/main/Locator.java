@@ -26,6 +26,16 @@ public class Locator {
   }
 
   /**
+   * Clear all registered services.
+   */
+  public static void close() {
+    _cache  = null;
+    _random = null;
+    _ui     = null;
+    _config = null;
+  }
+
+  /**
    * Register a cache.
    * @param cache the cache, can not be null
    */

@@ -18,8 +18,6 @@ import util.Timer;
  * State machine for a automatic weapon.
  */
 public class AutomaticMachine implements IWeaponMachine {
-  enum States { IDLE, RELOAD, COOLDOWN }
-
   private final int reloadLength, cooldownLength;
   private final IMagazine magazine;
   private final ProjectileQueue queue;

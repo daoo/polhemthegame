@@ -35,20 +35,7 @@ public class Cache implements ICache {
   }
 
   @Override
-  public int count() {
-    return cache.size();
-  }
-
-  @Override
-  public void delete(String id) throws IOException {
-    assert id != null;
-
-    cache.get(id).close();
-    cache.remove(id);
-  }
-
-  @Override
-  public IData getCold(String id, IParser parser)
+  public IData get(String id, IParser parser)
     throws IOException, ParserException {
     assert id != null;
     assert parser != null;
@@ -60,18 +47,6 @@ public class Cache implements ICache {
     }
 
     return data;
-  }
-
-  @Override
-  public IData getWarm(String id) throws ObjectNotInCacheException {
-    assert id != null;
-
-    IData data = cache.get(id);
-    if (data != null) {
-      return data;
-    }
-
-    throw new ObjectNotInCacheException(id);
   }
 
   @Override

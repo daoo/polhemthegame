@@ -50,38 +50,38 @@ public class CacheTool {
 
   public static BossesData getBosses(ICache cache)
       throws ParserException, IOException {
-    return (BossesData) cache.getCold(FILE_BOSSES, BOSSES_PARSER);
+    return (BossesData) cache.get(FILE_BOSSES, BOSSES_PARSER);
   }
 
   public static CreepsData getCreeps(ICache cache)
       throws ParserException, IOException {
-    return (CreepsData) cache.getCold(FILE_CREEPS, CREEPS_PARSER);
+    return (CreepsData) cache.get(FILE_CREEPS, CREEPS_PARSER);
   }
 
   public static Image getImage(ICache cache, String id)
       throws ParserException, IOException {
-    return (Image) cache.getCold(id, PNG_PARSER);
+    return (Image) cache.get(id, PNG_PARSER);
   }
 
   public static LevelData getLevel(ICache cache, String level)
       throws ParserException, IOException {
-    return (LevelData) cache.getCold(
+    return (LevelData) cache.get(
       DIR_LEVELS + File.separator + level + EXT_JS, LEVEL_PARSER);
   }
 
   public static PlayersData getPlayers(ICache cache)
       throws ParserException, IOException {
-    return (PlayersData) cache.getCold(FILE_PLAYERS, PLAYERS_PARSER);
+    return (PlayersData) cache.get(FILE_PLAYERS, PLAYERS_PARSER);
   }
 
   public static WeaponsData getWeapons(ICache cache)
       throws ParserException, IOException {
-    return (WeaponsData) cache.getCold(FILE_WEAPONS, WEAPONS_PARSER);
+    return (WeaponsData) cache.get(FILE_WEAPONS, WEAPONS_PARSER);
   }
 
   public static ProjectilesData getProjectiles(ICache cache)
       throws ParserException, IOException {
-    return (ProjectilesData) cache.getCold(FILE_PROJECTILES, PROJECTILES_PARSER);
+    return (ProjectilesData) cache.get(FILE_PROJECTILES, PROJECTILES_PARSER);
   }
 
   /**
@@ -110,12 +110,12 @@ public class CacheTool {
 
   public static ShopData getShop(ICache cache)
       throws ParserException, IOException {
-    return (ShopData) cache.getCold(FILE_SHOP, SHOP_PARSER);
+    return (ShopData) cache.get(FILE_SHOP, SHOP_PARSER);
   }
 
   public static SpriteSheet getSpriteSheet(ICache cache, SpriteData sprite)
       throws ParserException, IOException {
-    Image img = (Image) cache.getCold(sprite.sprite, PNG_PARSER);
+    Image img = (Image) cache.get(sprite.sprite, PNG_PARSER);
 
     return new SpriteSheet(img, sprite.tileSize.width, sprite.tileSize.height, sprite.spacing);
   }

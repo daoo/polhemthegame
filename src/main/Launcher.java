@@ -73,6 +73,8 @@ public class Launcher extends BasicGame {
 
       app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
       app.start();
+
+      Locator.close();
     } catch (SlickException | IOException ex) {
       ex.printStackTrace();
     }

@@ -19,21 +19,6 @@ public class ExMath {
     return x * x;
   }
 
-  public static float min(float a, float b, float c, float d) {
-    float min = a;
-    if (b < min) {
-      min = b;
-    }
-    if (c < min) {
-      min = c;
-    }
-    if (d < min) {
-      min = d;
-    }
-
-    return min;
-  }
-
   /**
    * Check if an float is with in a range (lower inclusive, upper exclusive).
    * Mathematically a <= v < b. The interval must be a proper interval, that is

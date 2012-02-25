@@ -18,8 +18,6 @@ import util.Timer;
  * State machine for a single-mode weapon.
  */
 public class SingleMachine implements IWeaponMachine {
-  enum States { IDLE, RELOAD, COOLDOWN }
-
   private final int reloadLength, cooldownLength;
   private final IMagazine magazine;
   private final ProjectileQueue queue;
