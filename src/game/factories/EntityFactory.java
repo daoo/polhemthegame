@@ -7,8 +7,6 @@ package game.factories;
 import game.CacheTool;
 import game.components.ai.BossAI;
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.debug.DebugBoss;
-import game.components.graphics.debug.Outliner;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.misc.EffectsOnDeath;
@@ -132,8 +130,6 @@ public class EntityFactory {
     unit.entity.addLogicComponent(new PlayerControl(unit.entity, unit.movement,
         inv, shop, hand, data.unit.speed, binds));
 
-    unit.entity.addRenderComponent(new Outliner(unit.entity, unit.movement, true, true));
-
     // UI stuff
     unit.infoBar.add(new Bar(hand, Color.blue, TRANSPARENT));
 
@@ -159,10 +155,6 @@ public class EntityFactory {
 
     unit.entity.addLogicComponent(ai);
     unit.entity.addRenderComponent(hand);
-
-    unit.entity.addRenderComponent(new Outliner(unit.entity, unit.movement,
-                                                true, true));
-    unit.entity.addRenderComponent(new DebugBoss(unit.entity.body, ai));
 
     hand.grab(weapon);
 
