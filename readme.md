@@ -7,6 +7,7 @@ Polhem the Game is a simple "The Seal Hunter" like game written by me with
 graphics help of a friend.
 
 Written in Java using the following libraries:
+
   * [LWJGL](http://lwjgl.org/)
   * [Google GSON](http://code.google.com/p/google-gson/)
   * [Slick](http://slick.cokeandcode.com/)
@@ -17,7 +18,7 @@ Running
 Should work on Windows and Linux. Maybe Mac too but I've not tested that.
 
 The only requirement is to have Java installed. To launch the game either run
-windows.bat for windows or linux.sh for linux (duh).
+_windows.bat_ for windows or _linux.sh_ for linux (duh).
 
 Building
 ========
