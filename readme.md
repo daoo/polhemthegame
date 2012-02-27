@@ -1,7 +1,7 @@
 Polhem the Game
 ===============
 
-![Screenshot](https://raw.github.com/daoo/polhemthegame/master/resources/players.js)
+![Screenshot](https://raw.github.com/daoo/polhemthegame/master/resources/screenshot1.png)
 
 Polhem the Game is a simple "The Seal Hunter" like game written by me with
 graphics help of a friend.
