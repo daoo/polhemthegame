@@ -128,8 +128,8 @@ public class Hand implements IRenderComponent, IProgress {
   public String toString() {
     if (weapon != null) {
       return "Hand - holding " + weapon.toString();
-    } else {
-      return "Hand - not holding anything";
     }
+
+    return "Hand - not holding anything";
   }
 }

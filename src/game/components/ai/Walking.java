@@ -22,8 +22,8 @@ public class Walking implements IBossState {
   private final Movement movement;
   private final Rectangle movementRect;
 
-  private Vector2 target;
-  private int targets;
+  private Vector2 currentTarget;
+  private int targetsLeft;
 
   /**
    * Create a new walk state for boss AI.
@@ -44,9 +44,9 @@ public class Walking implements IBossState {
     this.body         = body;
     this.speed        = speed;
     this.movement     = movement;
-    this.targets      = targets;
+    this.targetsLeft      = targets;
     this.movementRect = movementRect;
-    this.target       = initialTarget;
+    this.currentTarget       = initialTarget;
   }
 
   /**
@@ -72,35 +72,35 @@ public class Walking implements IBossState {
 
   @Override
   public void start(GameTime time) {
-    headFor(target);
+    headFor(currentTarget);
   }
 
   @Override
   public void update(GameTime time) {
-    if (targets > 0) {
-      Vector2 a = Vector2.subtract(body.getMin(), target);
+    if (targetsLeft > 0) {
+      Vector2 a = Vector2.subtract(body.getMin(), currentTarget);
       if (Vector2.dot(a, movement.getVelocity()) >= 0) {
-        --targets;
+        --targetsLeft;
         // Target passed
-        if (targets > 0) {
-          target = newRandomTarget(Locator.getRandom(),
+        if (targetsLeft > 0) {
+          currentTarget = newRandomTarget(Locator.getRandom(),
               (int) movementRect.getX1(), (int) movementRect.getY1(),
               (int) movementRect.getX2(), (int) movementRect.getY2(),
               (int) body.getX1(), (int) body.getY1(),
               MIN_WALK_SQUARED);
-          headFor(target);
+          headFor(currentTarget);
         }
       }
     }
   }
 
   public Vector2 getTarget() {
-    return target;
+    return currentTarget;
   }
 
   @Override
   public boolean isFinished() {
-    return targets == 0;
+    return targetsLeft == 0;
   }
 
   @Override

@@ -162,12 +162,12 @@ public class ProjectileFactory {
   }
 
   private int getRotation() {
-    if (spread > 0) {
-      return launchAngle +
-          Locator.getRandom().nextInt(-spread, spread) - spread / 2;
-    } else {
+    if (spread == 0) {
       return launchAngle;
     }
+
+    return launchAngle +
+        Locator.getRandom().nextInt(-spread, spread) - spread / 2;
   }
 
   private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {

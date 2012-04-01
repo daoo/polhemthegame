@@ -31,9 +31,9 @@ public class Magazine implements IMagazine {
   public void takeOne() throws OutOfAmmoException {
     if (ammo <= 0) {
       throw new OutOfAmmoException();
-    } else {
-      --ammo;
     }
+
+    --ammo;
   }
 
   @Override

@@ -12,50 +12,50 @@ import org.newdawn.slick.Graphics;
 public class Menu {
   private final ArrayList<MenuItem> items;
 
-  private int i;
-  private MenuItem current;
+  private int currentIndex;
+  private MenuItem currentItem;
 
   public Menu(Collection<MenuItem> items) {
     this.items = new ArrayList<>(items);
 
-    i = 0;
-    current = this.items.get(i);
-    current.setState(MenuItemState.ACTIVE);
+    currentIndex = 0;
+    currentItem = this.items.get(currentIndex);
+    currentItem.setState(MenuItemState.ACTIVE);
   }
 
   public void click() {
-    if (current instanceof MenuButton) {
-      ((MenuButton) current).click();
+    if (currentItem instanceof MenuButton) {
+      ((MenuButton) currentItem).click();
     }
   }
 
   public void render(Graphics g) {
-    for (MenuItem i : items) {
-      i.render(g);
+    for (MenuItem item : items) {
+      item.render(g);
     }
   }
 
   public void up() {
-    while (i - 1 >= 0) {
-      current.setState(MenuItemState.NORMAL);
-      --i;
-      current = items.get(i);
+    while (currentIndex - 1 >= 0) {
+      currentItem.setState(MenuItemState.NORMAL);
+      --currentIndex;
+      currentItem = items.get(currentIndex);
 
-      if (current.getState() == MenuItemState.NORMAL) {
-        current.setState(MenuItemState.ACTIVE);
+      if (currentItem.getState() == MenuItemState.NORMAL) {
+        currentItem.setState(MenuItemState.ACTIVE);
         return;
       }
     }
   }
 
   public void down() {
-    while (i + 1 < items.size()) {
-      current.setState(MenuItemState.NORMAL);
-      ++i;
-      current = items.get(i);
+    while (currentIndex + 1 < items.size()) {
+      currentItem.setState(MenuItemState.NORMAL);
+      ++currentIndex;
+      currentItem = items.get(currentIndex);
 
-      if (current.getState() == MenuItemState.NORMAL) {
-        current.setState(MenuItemState.ACTIVE);
+      if (currentItem.getState() == MenuItemState.NORMAL) {
+        currentItem.setState(MenuItemState.ACTIVE);
         return;
       }
     }

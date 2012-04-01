@@ -22,28 +22,27 @@ public class RunTo implements IAnimator {
 
   @Override
   public Tile next(Tile tile) {
-    if (!finished) {
-      int x = tile.x + 1;
-      int y = tile.y;
-
-      if (x >= size.x) {
-        x = 0;
-        ++y;
-
-        if (y >= size.y) {
-          y = 0;
-        }
-      }
-
-      Tile result = new Tile(x, y);
-      if (target.isEqual(result)) {
-        finished = true;
-      }
-
-      return result;
-    }
-    else {
+    if (finished) {
       return tile;
     }
+
+    int x = tile.x + 1;
+    int y = tile.y;
+
+    if (x >= size.x) {
+      x = 0;
+      ++y;
+
+      if (y >= size.y) {
+        y = 0;
+      }
+    }
+
+    Tile result = new Tile(x, y);
+    if (target.isEqual(result)) {
+      finished = true;
+    }
+
+    return result;
   }
 }

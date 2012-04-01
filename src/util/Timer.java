@@ -51,8 +51,8 @@ public class Timer {
   public float getProgress() {
     if (isFinished()) {
       return 1;
-    } else {
-      return ExMath.clamp(0, 1, (current - start) / length);
     }
+
+    return ExMath.clamp(0, 1, (current - start) / length);
   }
 }

@@ -109,8 +109,8 @@ public class SingleMachine implements IWeaponMachine {
   public float getProgress() {
     if (timer == null) {
       return magazine.getFractionFilled();
-    } else {
-      return timer.getProgress();
     }
+
+    return timer.getProgress();
   }
 }
