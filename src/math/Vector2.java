@@ -63,16 +63,6 @@ public class Vector2 {
     return normalized;
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof Vector2) {
-      Vector2 v = (Vector2) obj;
-      return x == v.x && y == v.y;
-    }
-
-    return false;
-  }
-
   /**
    * Return a string representation of the vector.
    * Format: "(x, y)"
