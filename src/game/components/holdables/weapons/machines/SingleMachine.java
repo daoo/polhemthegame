@@ -90,6 +90,8 @@ public class SingleMachine implements IWeaponMachine {
           state = WeaponStates.IDLE;
         }
         break;
+      default:
+        throw new RuntimeException(String.format("Switch got unexpected case: %s", state.toString()));
     }
   }
 
