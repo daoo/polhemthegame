@@ -138,18 +138,19 @@ public class GameState implements IState {
     ui.update();
 
     if (nextAction == ACTION.NEXT_LEVEL) {
+      nextAction = null;
+
       try {
         nextLevel();
       } catch (ParserException | IOException ex) {
         stateManager.handleException(ex);
       }
-      nextAction = null;
     } else if (nextAction == ACTION.CREDITS) {
+      nextAction = null;
       stateManager.enterCredits();
-      nextAction = null;
     } else if (nextAction == ACTION.MAIN_MENU || Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-      stateManager.enterMainMenu();
       nextAction = null;
+      stateManager.enterMainMenu();
     }
   }
 
