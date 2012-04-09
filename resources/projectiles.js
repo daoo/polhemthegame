@@ -71,8 +71,8 @@
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: 0 }
-      , tileSize: { width: 50, height: 50 }
-      , sprite: "textures/projectiles/saltlauncher.png" }
+      , sprite: "textures/projectiles/saltlauncher.png"
+      , tileSize: { width: 50, height: 50 } }
     , targets: 1
     , texture: null }
 
@@ -88,8 +88,8 @@
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: 0 }
-      , tileSize: { width: 680, height: 10 }
-      , sprite: "textures/projectiles/casio.png" }
+      , sprite: "textures/projectiles/casio.png"
+      , tileSize: { width: 680, height: 10 } }
     , targets: 1000
     , texture: null }
 
