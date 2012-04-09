@@ -58,7 +58,6 @@ public class Entity implements IEntity {
     renders.add(comp);
   }
 
-  @Override
   public World getWorld() {
     return world;
   }
@@ -88,7 +87,6 @@ public class Entity implements IEntity {
     }
   }
 
-  @Override
   public void setWorld(World world) {
     this.world = world;
   }

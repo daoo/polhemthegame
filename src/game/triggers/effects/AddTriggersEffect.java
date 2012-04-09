@@ -5,7 +5,7 @@
 package game.triggers.effects;
 
 import game.triggers.IEffect;
-import game.triggers.ITrigger;
+import game.triggers.Trigger;
 import game.types.GameTime;
 import game.world.World;
 
@@ -16,13 +16,13 @@ import java.util.Collection;
  * Adds a new trigger to the world when this effect is executed.
  */
 public class AddTriggersEffect implements IEffect {
-  private final Collection<? extends ITrigger> triggers;
+  private final Collection<Trigger> triggers;
 
-  public AddTriggersEffect(Collection<? extends ITrigger> triggers) {
+  public AddTriggersEffect(Collection<Trigger> triggers) {
     this.triggers = triggers;
   }
 
-  public AddTriggersEffect(ITrigger trigger) {
+  public AddTriggersEffect(Trigger trigger) {
     this(Arrays.asList(trigger));
   }
 

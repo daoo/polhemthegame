@@ -6,7 +6,6 @@ package game.entities;
 
 import game.types.GameTime;
 import game.types.Message;
-import game.world.World;
 
 import org.newdawn.slick.Graphics;
 
@@ -17,9 +16,6 @@ import debug.IDebuggable;
  * Specifies what a entity is/has.
  */
 public interface IEntity extends IDebuggable {
-  World getWorld();
-  void setWorld(World world);
-
   /**
    * Sends a message to all components that belong to this entity.
    * @param message the message to send

@@ -5,7 +5,6 @@
 package game.triggers.effects;
 
 import game.triggers.IEffect;
-import game.triggers.ITrigger;
 import game.triggers.Trigger;
 import game.triggers.condition.AbsoluteTimerCondition;
 import game.types.GameTime;
@@ -20,7 +19,7 @@ import java.util.Collection;
  */
 public class ExecuteWithDelayEffect implements IEffect {
   private final int delay;
-  private final ITrigger delayed;
+  private final Trigger delayed;
 
   public ExecuteWithDelayEffect(int delay, Collection<? extends IEffect> effects) {
     this.delay = delay;

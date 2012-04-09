@@ -23,13 +23,11 @@ public class CircularFloatArray {
 
   /**
    * Create a new circular overwriting array.
-   * @param size the size of the array
+   * @param size the size of the array, greater than zero
    * @param def the default which the array is initially filled with
    */
   public CircularFloatArray(int size, float def) {
-    if (size <= 0) {
-      throw new IllegalArgumentException("Illegal size");
-    }
+    assert size > 0;
 
     data = new float[size];
     head = 0;

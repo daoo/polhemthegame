@@ -6,7 +6,7 @@ package game.world;
 
 import game.entities.Entity;
 import game.entities.IEntity;
-import game.triggers.ITrigger;
+import game.triggers.Trigger;
 import game.types.GameTime;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class World implements IDebuggable {
   private final ArrayList<Entity> units, projectiles;
   private final ArrayList<IEntity> newMisc;
   private final ArrayList<Entity> newUnits, newProjectiles;
-  private final ArrayList<ITrigger> triggers, newTriggers;
+  private final ArrayList<Trigger> triggers, newTriggers;
 
   public World() {
     misc        = new ArrayList<>();
@@ -43,7 +43,6 @@ public class World implements IDebuggable {
   public void addMisc(IEntity obj) {
     assert obj != null;
 
-    obj.setWorld(this);
     newMisc.add(obj);
   }
 
@@ -81,9 +80,9 @@ public class World implements IDebuggable {
 
   public void update(GameTime time) {
     // Triggers
-    Iterator<ITrigger> itt = triggers.iterator();
+    Iterator<Trigger> itt = triggers.iterator();
     while (itt.hasNext()) {
-      ITrigger t = itt.next();
+      Trigger t = itt.next();
       t.update(time);
 
       if (!t.runAgain()) {
@@ -103,17 +102,17 @@ public class World implements IDebuggable {
     move(newTriggers, triggers);
   }
 
-  public void addTrigger(ITrigger trigger) {
+  public void addTrigger(Trigger trigger) {
     assert trigger != null;
 
     trigger.setWorld(this);
     newTriggers.add(trigger);
   }
 
-  public void addAllTriggers(Collection<? extends ITrigger> collection) {
+  public void addAllTriggers(Collection<Trigger> collection) {
     assert collection != null;
 
-    for (ITrigger t : collection) {
+    for (Trigger t : collection) {
       t.setWorld(this);
     }
 

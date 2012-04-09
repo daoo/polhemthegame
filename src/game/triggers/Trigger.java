@@ -17,7 +17,7 @@ import debug.DebugHelper;
  * A trigger that can be looped. More specifically a set of effects that can be
  * executed when some conditions are met.
  */
-public class Trigger implements ITrigger {
+public class Trigger {
   private final ArrayList<ICondition> conditions;
   private final ArrayList<IEffect> effects;
 
@@ -40,7 +40,6 @@ public class Trigger implements ITrigger {
    * executed.
    * @param world the world to use, can not be null
    */
-  @Override
   public void setWorld(World world) {
     assert world != null;
 
@@ -52,7 +51,6 @@ public class Trigger implements ITrigger {
    * @return true if this is a looping trigger, if it isn't it will return true
    *         or false depending on if the trigger have been executed or not.
    */
-  @Override
   public boolean runAgain() {
     return runAgain;
   }
@@ -62,7 +60,6 @@ public class Trigger implements ITrigger {
    * account.
    * @param time the game time to use for execution and evaluation
    */
-  @Override
   public void update(GameTime time) {
     if (runAgain) {
       if (checkConditions(time)) {
@@ -108,7 +105,6 @@ public class Trigger implements ITrigger {
    * Adds a condition to the trigger.
    * @param condition the condition to add, can not be null
    */
-  @Override
   public void addCondition(ICondition condition) {
     assert condition != null;
 
@@ -116,40 +112,25 @@ public class Trigger implements ITrigger {
   }
 
   /**
-   * Add a collection of conditions to the trigger.
-   * @param collection the collection to add, can not be null
-   */
-  @Override
-  public void addAllConditions(Collection<? extends ICondition> collection) {
-    assert collection != null;
-
-    this.conditions.addAll(collection);
-  }
-
-  /**
    * Adds an effect to the trigger.
    * @param effect the effect to add, can not be null
    */
-  @Override
   public void addEffect(IEffect effect) {
     assert effect != null;
 
     effects.add(effect);
   }
 
-  @Override
   public void addAllEffects(Collection<? extends IEffect> collection) {
     assert collection != null;
 
     effects.addAll(collection);
   }
 
-  @Override
   public String debugString() {
     return "Trigger, runAgain " + Boolean.toString(runAgain);
   }
 
-  @Override
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 

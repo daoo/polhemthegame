@@ -60,7 +60,7 @@ public class GameState implements IState {
                    int windowWidth, int windowHeight)
       throws ParserException, IOException, SlickException {
     if (data.levels.isEmpty()) {
-      throw new IllegalArgumentException("No levels in campaign");
+      throw new IllegalArgumentException("No levels in campaign '" + data.name + "'");
     }
 
     ui = new UI(windowWidth, windowHeight);

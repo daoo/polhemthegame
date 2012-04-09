@@ -15,6 +15,7 @@ import math.Vector2;
 import org.junit.Test;
 
 public class BossTest {
+  @SuppressWarnings("static-method")
   @Test
   public void test() {
     IRandom rnd = new Random();

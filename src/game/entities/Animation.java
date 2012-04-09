@@ -7,7 +7,6 @@ package game.entities;
 import game.components.graphics.AnimatedSheet;
 import game.types.GameTime;
 import game.types.Message;
-import game.world.World;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
@@ -19,7 +18,6 @@ public class Animation implements IEntity {
   private final Graphics graphics;
 
   private boolean active;
-  private World world;
   private Vector2 position;
 
   public Animation(int x, int y, AnimatedSheet anim, Graphics graphics) {
@@ -28,11 +26,6 @@ public class Animation implements IEntity {
     this.graphics = graphics;
 
     active = true;
-  }
-
-  @Override
-  public World getWorld() {
-    return world;
   }
 
   @Override
@@ -62,11 +55,6 @@ public class Animation implements IEntity {
 
   public void setPosition(Vector2 position) {
     this.position = position;
-  }
-
-  @Override
-  public void setWorld(World world) {
-    this.world = world;
   }
 
   @Override

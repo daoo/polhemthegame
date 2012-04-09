@@ -44,46 +44,48 @@ public class Launcher extends BasicGame {
 
   public static void main(String[] args) {
     Enviroment env = new Enviroment();
-    try (Cache cache = new Cache(env.appDir)) {
-      Config config = null;
-      File configFile = new File(env.appDir, CONFIG_FILE);
-      if (configFile.exists()) {
-        try (FileReader reader = new FileReader(configFile)) {
-          ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
+    try {
+      try (Cache cache = new Cache(env.appDir)) {
+        Config config = null;
+        File configFile = new File(env.appDir, CONFIG_FILE);
+        if (configFile.exists()) {
+          try (FileReader reader = new FileReader(configFile)) {
+            ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
 
-          Binds binds1 = new Binds(
-              configData.player1.walkUp, configData.player1.walkDown,
-              configData.player1.walkLeft, configData.player1.walkRight,
-              configData.player1.fire, configData.player1.previousWeapon,
-              configData.player1.nextWeapon, configData.player1.buy,
-              configData.player1.weapon0, configData.player1.weapon1,
-              configData.player1.weapon2, configData.player1.weapon3,
-              configData.player1.weapon4);
-          Binds binds2 = new Binds(
-              configData.player2.walkUp, configData.player2.walkDown,
-              configData.player2.walkLeft, configData.player2.walkRight,
-              configData.player2.fire, configData.player2.previousWeapon,
-              configData.player2.nextWeapon, configData.player2.buy,
-              configData.player2.weapon0, configData.player2.weapon1,
-              configData.player2.weapon2, configData.player2.weapon3,
-              configData.player2.weapon4);
+            Binds binds1 = new Binds(
+                configData.player1.walkUp, configData.player1.walkDown,
+                configData.player1.walkLeft, configData.player1.walkRight,
+                configData.player1.fire, configData.player1.previousWeapon,
+                configData.player1.nextWeapon, configData.player1.buy,
+                configData.player1.weapon0, configData.player1.weapon1,
+                configData.player1.weapon2, configData.player1.weapon3,
+                configData.player1.weapon4);
+            Binds binds2 = new Binds(
+                configData.player2.walkUp, configData.player2.walkDown,
+                configData.player2.walkLeft, configData.player2.walkRight,
+                configData.player2.fire, configData.player2.previousWeapon,
+                configData.player2.nextWeapon, configData.player2.buy,
+                configData.player2.weapon0, configData.player2.weapon1,
+                configData.player2.weapon2, configData.player2.weapon3,
+                configData.player2.weapon4);
 
-          config = new Config(binds1, binds2);
+            config = new Config(binds1, binds2);
+          }
+        } else {
+          config = new Config(new Binds(), new Binds());
         }
-      } else {
-        config = new Config(new Binds(), new Binds());
+
+        Locator.registerConfig(config);
+        Locator.registerCache(cache);
+        Locator.registerRandom(new Random());
+
+        AppGameContainer app = new AppGameContainer(new Launcher());
+
+        app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
+        app.start();
+
+        Locator.close();
       }
-
-      Locator.registerConfig(config);
-      Locator.registerCache(cache);
-      Locator.registerRandom(new Random());
-
-      AppGameContainer app = new AppGameContainer(new Launcher());
-
-      app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
-      app.start();
-
-      Locator.close();
     } catch (SlickException | IOException ex) {
       ex.printStackTrace();
     }
