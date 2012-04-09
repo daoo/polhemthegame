@@ -15,7 +15,7 @@
   , "pistolbullet":
     { aoe: null
     , collides: true
-    , damage: 50
+    , damage: 150
     , duration: 60000
     , gravity: false
     , hitbox: { width: 3, height: 2 }

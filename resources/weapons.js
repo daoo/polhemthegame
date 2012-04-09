@@ -3,7 +3,7 @@
     { automatic: false
     , clipSize: -1
     , launchAngle: 0
-    , muzzleOffset: { x: 4, y: 3 }
+    , muzzleOffset: { x: 7, y: 3 }
     , reloadTime: 0
     , rpm: 120
     , spread: 0
@@ -19,8 +19,8 @@
     , clipSize: 12
     , launchAngle: 0
     , muzzleOffset: { x: 8, y: 0 }
-    , reloadTime: 2000
-    , rpm: 120
+    , reloadTime: 3000
+    , rpm: 100
     , spread: 0
     , sprite:
       { framerate: 10
