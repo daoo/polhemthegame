@@ -5,9 +5,9 @@
 package loader.data.json.types;
 
 public class SpriteData {
-  public String sprite;
-  public Size tileSize;
-  public int framerate;
   public Offset offset;
+  public Size tileSize;
+  public String sprite;
+  public int framerate;
   public int spacing;
 }
