@@ -43,6 +43,15 @@ public class ExMath {
       return value;
   }
 
+  public static int clamp(int min, int max, int value) {
+    if (value < min)
+      return min;
+    else if (value > max)
+      return max;
+    else
+      return value;
+  }
+
   /**
    * Convert degrees to radians.
    * @param deg the degrees as an int

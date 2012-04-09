@@ -27,7 +27,7 @@ public class PlayerControl implements ILogicComponent {
 
   private final Binds binds;
 
-  private final Key keyNextWeapon, keyBuy, keyHoldable;
+  private final Key keyPreviousWeapon, keyNextWeapon, keyBuy, keyHoldable;
 
   private final float speed;
 
@@ -46,9 +46,10 @@ public class PlayerControl implements ILogicComponent {
     this.lastX = 0;
     this.lastY = 0;
 
-    keyNextWeapon = new Key(binds.nextWeapon);
-    keyBuy        = new Key(binds.buy);
-    keyHoldable   = new Key(binds.fire);
+    keyPreviousWeapon = new Key(binds.previousWeapon);
+    keyNextWeapon     = new Key(binds.nextWeapon);
+    keyBuy            = new Key(binds.buy);
+    keyHoldable       = new Key(binds.fire);
   }
 
   @Override
@@ -88,8 +89,21 @@ public class PlayerControl implements ILogicComponent {
 
     // Weapon changing
     keyNextWeapon.update();
+    keyPreviousWeapon.update();
     if (keyNextWeapon.wasPressed()) {
       hand.grab(inventory.nextWeapon());
+    } else if (keyPreviousWeapon.wasPressed()) {
+      hand.grab(inventory.previousWeapon());
+    } else if (Keyboard.isKeyDown(binds.weapon0)) {
+      hand.grab(inventory.getWeapon(0));
+    } else if (Keyboard.isKeyDown(binds.weapon1)) {
+      hand.grab(inventory.getWeapon(1));
+    } else if (Keyboard.isKeyDown(binds.weapon2)) {
+      hand.grab(inventory.getWeapon(2));
+    } else if (Keyboard.isKeyDown(binds.weapon3)) {
+      hand.grab(inventory.getWeapon(3));
+    } else if (Keyboard.isKeyDown(binds.weapon4)) {
+      hand.grab(inventory.getWeapon(4));
     }
 
     keyBuy.update();

@@ -13,6 +13,8 @@ import game.types.Message;
 
 import java.util.ArrayList;
 
+import math.ExMath;
+
 public class Inventory implements ILogicComponent {
   // Money
   private final Wallet wallet;
@@ -50,12 +52,20 @@ public class Inventory implements ILogicComponent {
   }
 
   public Weapon nextWeapon() {
-    currentWeapon = (currentWeapon + 1) % weapons.size();
+    currentWeapon = ExMath.clamp(0, weapons.size() - 1, currentWeapon + 1);
     return weapons.get(currentWeapon);
   }
 
   public Weapon previousWeapon() {
-    currentWeapon = (currentWeapon - 1) % weapons.size();
+    currentWeapon = ExMath.clamp(0, weapons.size() - 1, currentWeapon - 1);
+    return weapons.get(currentWeapon);
+  }
+
+  public Weapon getWeapon(int i) {
+    if (i >= 0 && i < weapons.size()) {
+      currentWeapon = i;
+    }
+
     return weapons.get(currentWeapon);
   }
 

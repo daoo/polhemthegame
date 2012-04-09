@@ -8,7 +8,8 @@ public class ConfigData {
   public PlayerBinds player1, player2;
 
   public static class PlayerBinds {
-    public int walkUp, walkDown, walkLeft, walkRight;
-    public int fire, nextWeapon, buy;
+    public String walkUp, walkDown, walkLeft, walkRight;
+    public String fire, nextWeapon, previousWeapon, buy;
+    public String weapon0, weapon1, weapon2, weapon3, weapon4;
   }
 }
