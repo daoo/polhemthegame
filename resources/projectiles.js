@@ -20,7 +20,7 @@
     , gravity: false
     , hitbox: { width: 3, height: 2 }
     , range: 2000
-    , speed: 500
+    , speed: 2000
     , sprite: null
     , targets: 1
     , texture: "textures/projectiles/bullet.png" }
@@ -62,18 +62,18 @@
   , "saltsyra":
     { aoe: null
     , collides: true
-    , damage: 100
+    , damage: 2
     , duration: 60000
     , gravity: false
     , hitbox: { width: 50, height: 50 }
-    , range: 250
+    , range: 500
     , speed: 250
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: 0 }
       , sprite: "textures/projectiles/saltlauncher.png"
       , tileSize: { width: 50, height: 50 } }
-    , targets: 1
+    , targets: 10
     , texture: null }
 
   , "casio":
