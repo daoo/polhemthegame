@@ -9,7 +9,6 @@ import game.components.graphics.animations.Continuous;
 import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.IMagazine;
-import game.components.holdables.weapons.OutOfAmmoException;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.types.GameTime;
 import util.Timer;
@@ -30,13 +29,13 @@ public class AutomaticMachine implements IWeaponMachine {
 
   public AutomaticMachine(int reloadLength, int cooldownLength,
       IMagazine magazine, ProjectileQueue queue, AnimatedSheet anim) {
-    this.reloadLength = reloadLength;
+    this.reloadLength   = reloadLength;
     this.cooldownLength = cooldownLength;
-    this.magazine = magazine;
-    this.queue = queue;
-    this.anim = anim;
+    this.magazine       = magazine;
+    this.queue          = queue;
+    this.anim           = anim;
 
-    fire = false;
+    fire  = false;
     timer = null;
     state = WeaponStates.IDLE;
   }
@@ -45,10 +44,8 @@ public class AutomaticMachine implements IWeaponMachine {
   public void update(GameTime time) {
     switch (state) {
       case IDLE:
-        if (magazine.isEmpty()) {
-          timer = new Timer(time.elapsedMilli, reloadLength);
-          state = WeaponStates.RELOADING;
-        } else if (fire) {
+        if (fire) {
+          anim.setAnimator(new Continuous(anim.getTileCount()));
           state = WeaponStates.FIRE;
         }
         break;
@@ -57,41 +54,34 @@ public class AutomaticMachine implements IWeaponMachine {
 
         if (timer.isFinished()) {
           magazine.reload();
-          state = WeaponStates.IDLE;
           timer = null;
+          state = WeaponStates.IDLE;
         }
         break;
       case COOLDOWN:
         timer.update(time.elapsedMilli);
 
         if (timer.isFinished()) {
-          if (fire) {
+          if (magazine.isEmpty()) {
+            anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+            timer = new Timer(time.elapsedMilli, reloadLength);
+            state = WeaponStates.RELOADING;
+          } else if (fire) {
+            timer = null;
             state = WeaponStates.FIRE;
           } else {
-            state = WeaponStates.IDLE;
             anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+            timer = null;
+            state = WeaponStates.IDLE;
           }
-
-          timer = null;
         }
         break;
       case FIRE:
-        try {
-          magazine.takeOne();
+        magazine.takeOne();
+        queue.queueUp();
 
-          anim.setAnimator(new Continuous(anim.getTileCount()));
-
-          timer = new Timer(time.elapsedMilli, cooldownLength);
-          state = WeaponStates.COOLDOWN;
-
-          queue.queueUp();
-        } catch (OutOfAmmoException e) {
-          // This should not happen
-          e.printStackTrace();
-
-          // Go back to idle
-          state = WeaponStates.IDLE;
-        }
+        timer = new Timer(time.elapsedMilli, cooldownLength);
+        state = WeaponStates.COOLDOWN;
         break;
        default:
          throw new RuntimeException(String.format("Switch got unexpected case: %s", state.toString()));
