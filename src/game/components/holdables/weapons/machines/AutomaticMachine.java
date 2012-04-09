@@ -5,8 +5,8 @@
 package game.components.holdables.weapons.machines;
 
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.animations.Continuous;
-import game.components.graphics.animations.RunTo;
+import game.components.graphics.animations.ContinuousAnimator;
+import game.components.graphics.animations.RunToAnimator;
 import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.IMagazine;
 import game.components.holdables.weapons.ProjectileQueue;
@@ -45,7 +45,7 @@ public class AutomaticMachine implements IWeaponMachine {
     switch (state) {
       case IDLE:
         if (fire) {
-          anim.setAnimator(new Continuous(anim.getTileCount()));
+          anim.setAnimator(new ContinuousAnimator(anim.getTileCount()));
           state = WeaponStates.FIRE;
         }
         break;
@@ -63,14 +63,14 @@ public class AutomaticMachine implements IWeaponMachine {
 
         if (timer.isFinished()) {
           if (magazine.isEmpty()) {
-            anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+            anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
             timer = new Timer(time.elapsedMilli, reloadLength);
             state = WeaponStates.RELOADING;
           } else if (fire) {
             timer = null;
             state = WeaponStates.FIRE;
           } else {
-            anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+            anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
             timer = null;
             state = WeaponStates.IDLE;
           }

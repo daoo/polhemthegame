@@ -5,8 +5,8 @@
 package game.components.holdables.weapons.machines;
 
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.animations.Idle;
-import game.components.graphics.animations.RunTo;
+import game.components.graphics.animations.IdleAnimator;
+import game.components.graphics.animations.RunToAnimator;
 import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.IMagazine;
 import game.components.holdables.weapons.ProjectileQueue;
@@ -66,7 +66,7 @@ public class SingleMachine implements IWeaponMachine {
 
         if (timer.isFinished()) {
           fire = false;
-          anim.setAnimator(new Idle());
+          anim.setAnimator(new IdleAnimator());
 
           timer = null;
           state = WeaponStates.IDLE;
@@ -76,7 +76,7 @@ public class SingleMachine implements IWeaponMachine {
         magazine.takeOne();
         queue.queueUp();
 
-        anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+        anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
 
         timer = new Timer(time.elapsedMilli, cooldownLength);
         state = WeaponStates.COOLDOWN;

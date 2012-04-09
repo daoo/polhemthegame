@@ -4,9 +4,9 @@
 
 package game.components.graphics;
 
-import game.components.graphics.animations.Continuous;
+import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.IAnimator;
-import game.components.graphics.animations.Idle;
+import game.components.graphics.animations.IdleAnimator;
 import game.components.graphics.animations.Tile;
 import game.components.interfaces.IRenderComponent;
 import game.misc.Clock;
@@ -22,7 +22,7 @@ import util.SpriteSheet;
  * Component for animating a sprite sheet.
  */
 public class AnimatedSheet implements IRenderComponent {
-  private static final IAnimator IDLE = new Idle();
+  private static final IAnimator IDLE = new IdleAnimator();
 
   private final int offsetX, offsetY;
   private final float rotation;
@@ -102,11 +102,11 @@ public class AnimatedSheet implements IRenderComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.START_ANIMATION) {
-      animator = new Continuous(getTileCount());
+      animator = new ContinuousAnimator(getTileCount());
     } else if (message == Message.STOP_ANIMATION) {
       if (!animator.isFinished()) {
         current = Tile.ZERO;
-        animator = new Idle();
+        animator = new IdleAnimator();
       }
     }
   }

@@ -5,7 +5,7 @@
 package game.triggers.effects.spawn;
 
 import game.components.graphics.AnimatedSheet;
-import game.components.graphics.animations.RunTo;
+import game.components.graphics.animations.RunToAnimator;
 import game.entities.Animation;
 import game.entities.Entity;
 import game.triggers.IEffect;
@@ -37,7 +37,7 @@ public class SpawnAnimationEffect implements IEffect {
   public void execute(GameTime time, World world) {
     spawnee.setPosition(rect.getMin());
 
-    anim.setAnimator(new RunTo(anim.getTileCount(), anim.getLastTile()));
+    anim.setAnimator(new RunToAnimator(anim.getTileCount(), anim.getLastTile()));
 
     world.addMisc(spawnee);
   }

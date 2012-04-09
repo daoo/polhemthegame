@@ -5,27 +5,21 @@
 package game.components.graphics.animations;
 
 
-public class RunTo implements IAnimator {
-  private boolean finished;
-  private final Tile size, target;
+public class ContinuousAnimator implements IAnimator {
+  private final Tile size;
 
-  public RunTo(Tile size, Tile target) {
+  public ContinuousAnimator(Tile size) {
+    assert size != null;
     this.size = size;
-    this.target = target;
-    finished = false;
   }
 
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 
   @Override
   public Tile next(Tile tile) {
-    if (finished) {
-      return tile;
-    }
-
     int x = tile.x + 1;
     int y = tile.y;
 
@@ -38,11 +32,6 @@ public class RunTo implements IAnimator {
       }
     }
 
-    Tile result = new Tile(x, y);
-    if (target.isEqual(result)) {
-      finished = true;
-    }
-
-    return result;
+    return new Tile(x, y);
   }
 }

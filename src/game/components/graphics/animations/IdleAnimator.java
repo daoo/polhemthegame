@@ -5,8 +5,8 @@
 package game.components.graphics.animations;
 
 
-public class Idle implements IAnimator {
-  public Idle() {
+public class IdleAnimator implements IAnimator {
+  public IdleAnimator() {
   }
 
   @Override

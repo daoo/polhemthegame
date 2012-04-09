@@ -7,7 +7,7 @@ package game.factories;
 import game.CacheTool;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.TexturedQuad;
-import game.components.graphics.animations.Continuous;
+import game.components.graphics.animations.ContinuousAnimator;
 import game.components.interfaces.IRenderComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
@@ -188,7 +188,7 @@ public class ProjectileFactory {
       AnimatedSheet sheet = new AnimatedSheet(data.sprite.framerate,
         data.sprite.offset.x, data.sprite.offset.y,
         orientation, angle, sprite);
-      sheet.setAnimator(new Continuous(sheet.getTileCount()));
+      sheet.setAnimator(new ContinuousAnimator(sheet.getTileCount()));
 
       return sheet;
     } else {
