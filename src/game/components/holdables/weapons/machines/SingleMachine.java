@@ -9,7 +9,6 @@ import game.components.graphics.animations.Idle;
 import game.components.graphics.animations.RunTo;
 import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.IMagazine;
-import game.components.holdables.weapons.OutOfAmmoException;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.types.GameTime;
 import util.Timer;
@@ -57,38 +56,30 @@ public class SingleMachine implements IWeaponMachine {
 
         if (timer.isFinished()) {
           magazine.reload();
-          state = WeaponStates.IDLE;
+
           timer = null;
+          state = WeaponStates.IDLE;
         }
         break;
       case COOLDOWN:
         timer.update(time.elapsedMilli);
 
         if (timer.isFinished()) {
-          state = WeaponStates.IDLE;
-          anim.setAnimator(new Idle());
           fire = false;
+          anim.setAnimator(new Idle());
 
           timer = null;
+          state = WeaponStates.IDLE;
         }
         break;
       case FIRE:
-        try {
-          magazine.takeOne();
+        magazine.takeOne();
+        queue.queueUp();
 
-          anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
+        anim.setAnimator(new RunTo(anim.getTileCount(), Tile.ZERO));
 
-          timer = new Timer(time.elapsedMilli, cooldownLength);
-          state = WeaponStates.COOLDOWN;
-
-          queue.queueUp();
-        } catch (OutOfAmmoException e) {
-          // This should not happen
-          e.printStackTrace();
-
-          // Go back to idle
-          state = WeaponStates.IDLE;
-        }
+        timer = new Timer(time.elapsedMilli, cooldownLength);
+        state = WeaponStates.COOLDOWN;
         break;
       default:
         throw new RuntimeException(String.format("Switch got unexpected case: %s", state.toString()));
