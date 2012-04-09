@@ -33,12 +33,12 @@ import loader.data.json.LevelData;
 import loader.data.json.types.CreepData;
 import loader.data.json.types.CreepSpawnData;
 import loader.parser.ParserException;
+import main.LevelManager;
 import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Image;
 
-import states.GameState;
 import states.StateManager;
 
 public class WorldFactory {
@@ -49,7 +49,7 @@ public class WorldFactory {
 
   private final BossesData bossesData;
 
-  private final GameState gameMode;
+  private final LevelManager gameMode;
   private final StateManager stateManager;
 
   private final Rectangle rect;
@@ -61,7 +61,7 @@ public class WorldFactory {
 
   private Trigger creepsSpawnTrigger, creepsDeadTrigger;
 
-  public WorldFactory(GameState gameMode, StateManager stateManager,
+  public WorldFactory(LevelManager gameMode, StateManager stateManager,
                       EntityFactory entityFactory, Rectangle rect,
                       List<Entity> players) throws ParserException, IOException {
     this.gameMode      = gameMode;

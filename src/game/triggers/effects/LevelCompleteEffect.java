@@ -7,17 +7,17 @@ package game.triggers.effects;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.world.World;
-import states.GameState;
+import main.LevelManager;
 
 public class LevelCompleteEffect implements IEffect {
-  private final GameState gameMode;
+  private final LevelManager levelManager;
 
-  public LevelCompleteEffect(GameState gameMode) {
-    this.gameMode = gameMode;
+  public LevelCompleteEffect(LevelManager gameMode) {
+    this.levelManager = gameMode;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    gameMode.goNextLevel();
+    levelManager.nextLevel();
   }
 }

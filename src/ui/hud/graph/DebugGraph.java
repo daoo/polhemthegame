@@ -36,10 +36,7 @@ public class DebugGraph {
     renderMeasure = new Measure(MEASURE_TIME_DELTA);
   }
 
-  public void render(Graphics g, int x, int y) {
-    g.pushTransform();
-    g.translate(x, y);
-
+  public void render(Graphics g) {
     // Render render
     g.setColor(new Color(0, 0, 255, 200));
     drawData(renderData, g);
@@ -50,7 +47,6 @@ public class DebugGraph {
 
     g.setColor(Color.white);
     g.drawRect(0, 0, width, height);
-    g.popTransform();
   }
 
   public void startRenderMeasure() {

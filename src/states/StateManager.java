@@ -10,17 +10,19 @@ import java.io.IOException;
 import loader.data.json.CampaignData;
 import loader.parser.GsonParser;
 import loader.parser.ParserException;
-import main.Launcher;
 import main.Locator;
 
 import org.newdawn.slick.SlickException;
 
 public class StateManager {
-  private boolean exit;
+  private final int windowWidth, windowHeight;
 
+  private boolean exit;
   private IState currentState;
 
-  public StateManager() {
+  public StateManager(int windowWidth, int windowHeight) {
+    this.windowWidth = windowWidth;
+    this.windowHeight = windowHeight;
     exit = false;
   }
 
@@ -54,8 +56,8 @@ public class StateManager {
       CampaignData data = (CampaignData) Locator.getCache().get(
         campaign, new GsonParser(CampaignData.class));
 
-      GameState state = new GameState(this, data, twoPlayer, Launcher.WIDTH, Launcher.HEIGHT);
-      switchToState(new DebugState(state));
+      GameState state = new GameState(this, data, twoPlayer, windowWidth, windowHeight);
+      switchToState(new DebugState(windowWidth, windowHeight, state));
     } catch (ParserException | IOException | SlickException ex) {
       handleException(ex);
     }
@@ -63,7 +65,7 @@ public class StateManager {
 
   public void enterCredits() {
     try {
-      switchToState(new StateCredits());
+      switchToState(new StateCredits(windowWidth, windowHeight));
     } catch (ParserException | SlickException | IOException ex) {
       handleException(ex);
     }

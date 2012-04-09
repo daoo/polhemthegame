@@ -5,7 +5,6 @@
 package states;
 
 import main.Key;
-import main.Launcher;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
@@ -19,6 +18,9 @@ import util.Tree;
  * Wrapper state which renders some extra debugging information.
  */
 public class DebugState implements IState {
+  private static final int GRAPH_X = 0;
+  private static final int GRAPH_Y = 80;
+
   /**
    * Frame step length in milliseconds.
    */
@@ -32,7 +34,7 @@ public class DebugState implements IState {
 
   private final Key keyF1, keyF2, keyF5, keyF6;
 
-  public DebugState(IState game) {
+  public DebugState(int width, int height, IState game) {
     keyF1 = new Key(Keyboard.KEY_F1);
     keyF2 = new Key(Keyboard.KEY_F2);
     keyF5 = new Key(Keyboard.KEY_F5);
@@ -43,7 +45,7 @@ public class DebugState implements IState {
     paused = false;
 
     drawDebugInfo = true;
-    debugGraph = new DebugGraph(Launcher.WIDTH, 100);
+    debugGraph = new DebugGraph(width, height);
   }
 
   @Override
@@ -100,7 +102,10 @@ public class DebugState implements IState {
     debugGraph.stopRenderMeasure();
 
     if (drawDebugInfo) {
-      debugGraph.render(g, 0, 80);
+      g.pushTransform();
+      g.translate(GRAPH_X, GRAPH_Y);
+      debugGraph.render(g);
+      g.popTransform();
     }
   }
 

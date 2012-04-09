@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.parser.ParserException;
-import main.Launcher;
 import main.Locator;
 
 import org.lwjgl.input.Keyboard;
@@ -29,7 +28,7 @@ public class StateCredits implements IState {
   private static final int FONT_SIZE_SMALL = 24;
   private static final int FONT_SIZE_BIG = 30;
 
-  private static final int DEFAULT_Y_SPEED = 100;
+  private static final int DEFAULT_Y_SPEED = 50;
   private static final int Y_SPEED_DELTA = 50;
   private static final int DEFAULT_SPACING = 5;
   private static final int EMPTY_SPACING = 30;
@@ -43,14 +42,15 @@ public class StateCredits implements IState {
 
   private final UnicodeFont font_large, font_small;
 
-  public StateCredits() throws SlickException, ParserException, IOException {
+  public StateCredits(int width, int height) throws SlickException,
+      ParserException, IOException {
     font_large = getFont("Verdana", FONT_SIZE_BIG);
     font_small = getFont("Verdana", FONT_SIZE_SMALL);
 
     speed = DEFAULT_Y_SPEED;
-    pos_y = Launcher.HEIGHT;
+    pos_y = height;
 
-    float tmp_x = Launcher.WIDTH / 2.0f;
+    float tmp_x = width / 2.0f;
     float tmp_y = 0;
 
     credits = new ArrayList<>();
