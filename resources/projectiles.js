@@ -71,6 +71,7 @@
     , sprite:
       { framerate: 8
       , offset: { x: 0, y: 0 }
+      , random: true
       , sprite: "textures/projectiles/saltlauncher.png"
       , tileSize: { width: 50, height: 50 } }
     , targets: 10

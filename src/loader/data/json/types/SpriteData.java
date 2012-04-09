@@ -8,6 +8,7 @@ public class SpriteData {
   public Offset offset;
   public Size tileSize;
   public String sprite;
+  public boolean random;
   public int framerate;
   public int spacing;
 }
