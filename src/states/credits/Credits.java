@@ -5,35 +5,35 @@
 package states.credits;
 
 public class Credits {
-  private static final String  daniel      = "Daniel Oom";
-  private static final String  niklas      = "Niklas Johansson";
-  public static final String[] CreditsText = new String[] {
+  private static final String  DANIEL       = "Daniel Oom";
+  private static final String  NIKLAS       = "Niklas Johansson";
+  public static final String[] CREDITS_TEXT = new String[] {
+
       "big:Polhem The Game",
       "big:An Mangoo Entertainment Product",
-      // "img:misc/mangoo",
       "",
       "big:Lead Programmer",
-      daniel,
+      DANIEL,
       "",
       "big:Programmer",
-      niklas,
+      NIKLAS,
       "",
       "big:Lead Designer",
-      niklas,
+      NIKLAS,
       "",
       "big:Designer",
-      daniel,
+      DANIEL,
       "",
       "big:Special Effects",
-      niklas,
+      NIKLAS,
       "",
       "big:Story",
-      niklas,
-      daniel,
+      NIKLAS,
+      DANIEL,
       "",
       "big:Level Design",
-      niklas,
-      daniel,
+      NIKLAS,
+      DANIEL,
       "",
       "big:Special Thanks To",
       "Carl Egeberg",

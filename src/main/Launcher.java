@@ -94,6 +94,7 @@ public class Launcher extends BasicGame {
   @Override
   public void init(GameContainer container) throws SlickException {
     container.setTargetFrameRate(MAX_FPS);
+    container.setVSync(true);
 
     stateGame = new StateManager(WIDTH, HEIGHT);
     stateGame.enterMainMenu();

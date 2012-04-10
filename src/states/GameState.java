@@ -7,9 +7,11 @@ package states;
 import game.types.GameTime;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
+import main.FontHelper;
 import main.Key;
 import main.LevelManager;
 import main.Locator;
@@ -17,7 +19,9 @@ import main.Locator;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
 
 import ui.hud.BlackBox;
 import ui.hud.PlayerUI;
@@ -25,8 +29,12 @@ import ui.hud.UI;
 import util.Node;
 
 public class GameState implements IState {
+  private static final String[] PAUSE_TEXT = { "big:Game Paused", "Press Escape to unpause or Backspace to go to the Main Menu" };
+  private static final int PAUSE_TEXT_SPACING = 10;
+
   private final UI ui;
   private final LevelManager levels;
+  private final Image imgPauseText;
 
   private final Key keyBackspace, keyEscape;
 
@@ -58,6 +66,11 @@ public class GameState implements IState {
 
     levels = new LevelManager(stateManager, twoPlayer, data, windowWidth,
         arenaWidth, arenaHeight);
+
+    HashMap<String, UnicodeFont> fonts = new HashMap<>();
+    fonts.put("big", FontHelper.getFont("Verdana", 30));
+    fonts.put("default", FontHelper.getFont("Verdana", 20));
+    imgPauseText = FontHelper.renderString(fonts, PAUSE_TEXT_SPACING, PAUSE_TEXT);
 
     elapsed = 0;
     paused = false;
@@ -124,6 +137,8 @@ public class GameState implements IState {
     if (paused) {
       g.setColor(new Color(0, 0, 0, 100));
       g.fillRect(0, 0, windowWidth, windowHeight);
+      g.drawImage(imgPauseText, windowWidth / 2 - imgPauseText.getWidth() / 2,
+          windowHeight / 2 - imgPauseText.getHeight() / 2);
     }
   }
 

@@ -57,7 +57,7 @@ public class StateManager {
         campaign, new GsonParser(CampaignData.class));
 
       GameState state = new GameState(this, data, twoPlayer, windowWidth, windowHeight);
-      switchToState(new DebugState(windowWidth, windowHeight, state));
+      switchToState(new DebugState(windowWidth, state));
     } catch (ParserException | IOException | SlickException ex) {
       handleException(ex);
     }
@@ -66,7 +66,7 @@ public class StateManager {
   public void enterCredits() {
     try {
       switchToState(new StateCredits(windowWidth, windowHeight));
-    } catch (ParserException | SlickException | IOException ex) {
+    } catch (SlickException ex) {
       handleException(ex);
     }
   }

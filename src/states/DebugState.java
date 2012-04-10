@@ -34,7 +34,7 @@ public class DebugState implements IState {
 
   private final Key keyF1, keyF2, keyF5, keyF6;
 
-  public DebugState(int width, int height, IState game) {
+  public DebugState(int width, IState game) {
     keyF1 = new Key(Keyboard.KEY_F1);
     keyF2 = new Key(Keyboard.KEY_F2);
     keyF5 = new Key(Keyboard.KEY_F5);
@@ -45,7 +45,7 @@ public class DebugState implements IState {
     paused = false;
 
     drawDebugInfo = true;
-    debugGraph = new DebugGraph(width, height);
+    debugGraph = new DebugGraph(width, 100);
   }
 
   @Override
