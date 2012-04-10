@@ -32,9 +32,9 @@
       , keepEffect: true
       , explosionSprite:
         { framerate: 8
-        , offset: { x: -98, y: -77 }
+        , offset: { x: -142, y: -141 }
         , sprite: "textures/projectiles/acinadehit.png"
-        , tileSize: { width: 200, height: 83 } } }
+        , tileSize: { width: 285, height: 283 } } }
     , collides: false
     , damage: 0
     , duration: 3000
