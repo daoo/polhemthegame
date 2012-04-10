@@ -5,11 +5,11 @@
     , damage: 100
     , duration: 60000
     , gravity: false
-    , hitbox: { width: 1, height: 1 }
-    , range: 20
-    , speed: 250
+    , hitbox: { width: 100, height: 100 }
+    , range: 2000
+    , speed: 500
     , sprite: null
-    , targets: 1
+    , targets: 100
     , texture: null }
 
   , "pistolbullet":
@@ -102,7 +102,7 @@
     , gravity: false
     , hitbox: { width: 16, height: 3 }
     , range: 2000
-    , speed: 250
+    , speed: 400
     , sprite: null
     , targets: 1
     , texture: "textures/projectiles/mouse.png" }
@@ -115,7 +115,7 @@
     , gravity: false
     , hitbox: { width: 35, height: 36 }
     , range: 2000
-    , speed: 250
+    , speed: 500
     , sprite: null
     , targets: 5
     , texture: "textures/projectiles/socialism.png" }
@@ -123,12 +123,12 @@
   , "ig":
     { aoe: null
     , collides: true
-    , damage: 5
+    , damage: 10
     , duration: 60000
     , gravity: false
     , hitbox: { width: 12, height: 8 }
     , range: 2000
-    , speed: 250
+    , speed: 600
     , sprite: null
     , targets: 1
     , texture: "textures/projectiles/ig.png" }

@@ -1,11 +1,11 @@
 { weapons:
   { "scalpel":
-    { automatic: false
+    { automatic: true
     , clipSize: -1
     , launchAngle: 0
     , muzzleOffset: { x: 7, y: 3 }
     , reloadTime: 0
-    , rpm: 120
+    , rpm: 1200
     , spread: 0
     , sprite:
       { framerate: 8
@@ -95,7 +95,7 @@
     , launchAngle: 0
     , muzzleOffset: { x: 17, y: -3 }
     , reloadTime: 0
-    , rpm: 260
+    , rpm: 600
     , spread: 20
     , sprite:
       { framerate: 8
@@ -125,7 +125,7 @@
     , launchAngle: 0
     , muzzleOffset: { x: 6, y: -4 }
     , reloadTime: 0
-    , rpm: 260
+    , rpm: 800
     , spread: 20
     , sprite:
       { framerate: 100
