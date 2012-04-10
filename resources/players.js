@@ -1,13 +1,13 @@
 { players:
   { "blue":
     { handOffset: { x: 12, y: 15 }
-    , startMoney: 100000
+    , startMoney: 0
     , startWeapon: "scalpel"
     , unit:
       { hitbox: { width: 18, height: 37 }
       , orientation: LEFT
       , hitpoints: 100
-      , speed: 200
+      , speed: 125
       , sprites:
         { "walk":
           { framerate: 10
@@ -25,12 +25,12 @@
 
   , "red":
     { handOffset: { x: 12, y: 15 }
-    , startMoney: 100
+    , startMoney: 0
     , startWeapon: "scalpel"
     , unit:
       { hitbox: { width: 18, height: 37 }
       , hitpoints: 100
-      , speed: 100
+      , speed: 125
       , sprites:
         { "walk":
           { framerate: 8

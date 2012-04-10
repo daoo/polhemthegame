@@ -31,11 +31,11 @@
 
   , "acinade":
     { automatic: false
-    , clipSize: -1
+    , clipSize: 5
     , launchAngle: -45
     , muzzleOffset: { x: 3, y: 2 }
-    , reloadTime: 0
-    , rpm: 20
+    , reloadTime: 30000
+    , rpm: 30
     , spread: 5
     , sprite:
       { framerate: 7
@@ -76,11 +76,11 @@
 
   , "casio":
     { automatic: false
-    , clipSize: -1
+    , clipSize: 2
     , launchAngle: 0
     , muzzleOffset: { x: 10, y: -3 }
-    , reloadTime: 0
-    , rpm: 60
+    , reloadTime: 30000
+    , rpm: 30
     , spread: 0
     , sprite:
       { framerate: 8
