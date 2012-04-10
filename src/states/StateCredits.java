@@ -6,11 +6,11 @@ package states;
 
 import game.CacheTool;
 
-import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import loader.parser.ParserException;
+import main.FontHelper;
 import main.Locator;
 
 import org.lwjgl.input.Keyboard;
@@ -18,7 +18,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 
 import states.credits.Credits;
 import states.credits.ImageWithLocation;
@@ -33,8 +32,6 @@ public class StateCredits implements IState {
   private static final int DEFAULT_SPACING = 5;
   private static final int EMPTY_SPACING = 30;
 
-  private static final ColorEffect COLOR_WHITE = new ColorEffect(java.awt.Color.white);
-
   private float speed;
   private float pos_y;
 
@@ -42,35 +39,34 @@ public class StateCredits implements IState {
 
   private final UnicodeFont font_large, font_small;
 
-  public StateCredits(int width, int height) throws SlickException,
+  public StateCredits(int windowWidth, int windowHeight) throws SlickException,
       ParserException, IOException {
-    font_large = getFont("Verdana", FONT_SIZE_BIG);
-    font_small = getFont("Verdana", FONT_SIZE_SMALL);
+    font_large = FontHelper.getFont("Verdana", FONT_SIZE_BIG);
+    font_small = FontHelper.getFont("Verdana", FONT_SIZE_SMALL);
 
     speed = DEFAULT_Y_SPEED;
-    pos_y = height;
+    pos_y = windowHeight;
 
-    float tmp_x = width / 2.0f;
+    float tmp_x = windowWidth / 2.0f;
     float tmp_y = 0;
 
     credits = new ArrayList<>();
     for (String s : Credits.CreditsText) {
       if (!s.isEmpty()) {
-        ImageWithLocation img;
-
+        Image tmp;
         if (s.startsWith("img:")) {
-          Image a = CacheTool.getImage(Locator.getCache(), s.substring(4));
-          float x = tmp_x - a.getWidth() / 2.0f;
-          float y = tmp_y - a.getHeight() / 2.0f;
-          img = new ImageWithLocation(x, y, a);
+          tmp = CacheTool.getImage(Locator.getCache(), s.substring(4));
         } else if (s.startsWith("big:")) {
-          img = lineFromString(tmp_x, tmp_y, s.substring(4), font_large);
+          tmp = FontHelper.renderString(s.substring(4), font_large);
         } else {
-          img = lineFromString(tmp_x, tmp_y, s, font_small);
+          tmp = FontHelper.renderString(s, font_small);
         }
 
-        credits.add(img);
-        tmp_y += img.getHeight() + DEFAULT_SPACING;
+        float x = tmp_x - tmp.getWidth() / 2.0f;
+        float y = tmp_y - tmp.getHeight() / 2.0f;
+
+        credits.add(new ImageWithLocation(x, y, tmp));
+        tmp_y += tmp.getHeight() + DEFAULT_SPACING;
       } else {
         tmp_y += EMPTY_SPACING;
       }
@@ -108,35 +104,6 @@ public class StateCredits implements IState {
     }
 
     pos_y -= speed * (delta / 1000.0f);
-  }
-
-  private static UnicodeFont getFont(String name, int size)
-    throws SlickException {
-    Font font = new Font(name, Font.PLAIN, size);
-    UnicodeFont ufont = new UnicodeFont(font);
-
-    ufont.getEffects().add(COLOR_WHITE);
-
-    ufont.addAsciiGlyphs();
-    ufont.loadGlyphs();
-
-    return ufont;
-  }
-
-  private static ImageWithLocation lineFromString(float x, float y, String s,
-      UnicodeFont font) throws SlickException {
-    int width = font.getWidth(s);
-    int height = font.getHeight(s);
-
-    Image img = new Image(width, height);
-    Graphics g = img.getGraphics();
-    g.setFont(font);
-    g.clear();
-    g.setAntiAlias(false);
-    g.drawString(s, 0, 0);
-    g.flush();
-
-    return new ImageWithLocation(x - (width / 2.0f), y - (height / 2.0f), img);
   }
 
   @Override
