@@ -79,6 +79,6 @@ build:
 		-d $(build_dir) \
 		-classpath $(classpath) \
 		-sourcepath $(source_dir) \
-		$(source_dir)/main/Launcher.java
+		$(source_dir)/game/Launcher.java
 
 .PHONY: build data clean libs launch-scripts
