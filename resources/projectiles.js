@@ -3,7 +3,7 @@
     { aoe: null
     , collides: true
     , damage: 100
-    , duration: 60000
+    , duration: 60
     , gravity: false
     , hitbox: { width: 100, height: 100 }
     , range: 2000
