@@ -4,10 +4,10 @@
 
 package game.components.graphics.debug;
 
+import game.components.IRenderComponent;
 import game.components.ai.BossAI;
 import game.components.ai.IBossState;
 import game.components.ai.Walking;
-import game.components.interfaces.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 import math.Rectangle;

@@ -4,19 +4,20 @@
 
 package game.components.misc;
 
+import game.components.ILogicComponent;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
+import game.config.Binds;
 import game.entities.IEntity;
 import game.misc.Shop;
-import game.types.Binds;
 import game.types.GameTime;
 import game.types.Message;
-import main.Key;
 import math.Vector2;
 
 import org.lwjgl.input.Keyboard;
+
+import util.Key;
 
 public class PlayerControl implements ILogicComponent {
   private final IEntity owner;

@@ -4,10 +4,10 @@
 
 package game.misc;
 
-import game.CacheTool;
 import game.components.holdables.weapons.Weapon;
 import game.factories.WeaponFactory;
 import game.types.Orientation;
+import game.types.Wallet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import java.util.Iterator;
 import loader.data.json.ShopData;
 import loader.data.json.types.ShopItemData;
 import loader.parser.ParserException;
-import main.Locator;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

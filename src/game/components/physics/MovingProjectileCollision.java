@@ -4,7 +4,7 @@
 
 package game.components.physics;
 
-import game.components.interfaces.ILogicComponent;
+import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.types.GameTime;
@@ -12,7 +12,7 @@ import game.types.Message;
 
 import java.util.ArrayList;
 
-import math.CollisionHelper;
+import math.Collisions;
 import math.Rectangle;
 import math.Vector2;
 
@@ -40,7 +40,7 @@ public class MovingProjectileCollision implements ILogicComponent {
       Rectangle a = owner.body;
       Vector2 m = movement.getVelocity();
 
-      if (CollisionHelper.sweepCollisionTest(a, m, b.body, dt)) {
+      if (Collisions.sweepCollisionTest(a, m, b.body, dt)) {
         owner.sendMessage(Message.COLLIDED_WITH, b);
         b.sendMessage(Message.COLLIDED_WITH, owner);
         collidedWith.add(b);

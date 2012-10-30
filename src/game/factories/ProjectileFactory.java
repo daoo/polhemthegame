@@ -4,12 +4,11 @@
 
 package game.factories;
 
-import game.CacheTool;
+import game.components.IRenderComponent;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.RandomAnimator;
-import game.components.interfaces.IRenderComponent;
 import game.components.misc.EffectsOnDeath;
 import game.components.misc.Life;
 import game.components.misc.OutOfBounds;
@@ -21,6 +20,8 @@ import game.components.physics.MovingProjectileCollision;
 import game.components.physics.StaticCollision;
 import game.entities.Entity;
 import game.entities.IEntity;
+import game.misc.CacheTool;
+import game.misc.Locator;
 import game.triggers.IEffect;
 import game.triggers.effects.AOEDamageEffect;
 import game.triggers.effects.RemoveEntityEffect;
@@ -33,8 +34,7 @@ import java.util.List;
 
 import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
-import main.Locator;
-import math.ExMath;
+import math.ExtraMath;
 import math.Rectangle;
 
 import org.newdawn.slick.Graphics;
@@ -104,8 +104,6 @@ public class ProjectileFactory {
    * @return a new projectile
    */
   public Entity makeProjectile(IEntity source, float x, float y) {
-    // FIXME: This method is horribly messy
-
     Entity p = new Entity(x, y, data.hitbox.width, data.hitbox.height);
 
     p.addLogicComponent(new Life(p, data.targets));
@@ -150,7 +148,7 @@ public class ProjectileFactory {
   }
 
   private Movement getMovement(Entity p, int angle) {
-    float rad = ExMath.degToRad(angle);
+    float rad = ExtraMath.degToRad(angle);
 
     float dx = (float) Math.cos(rad) * data.speed;
     float dy = (float) Math.sin(rad) * data.speed;

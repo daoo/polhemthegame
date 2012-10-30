@@ -4,20 +4,20 @@
 
 package game.components.holdables;
 
+import game.components.IRenderComponent;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.IRenderComponent;
 import game.entities.Entity;
 import game.factories.ProjectileFactory;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
+import game.ui.hud.infobar.IProgress;
 import math.Vector2;
 
 import org.newdawn.slick.Graphics;
 
-import ui.hud.infobar.IProgress;
 
 public class Hand implements IRenderComponent, IProgress {
   private final Entity owner;

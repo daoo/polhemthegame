@@ -4,14 +4,14 @@
 
 package game.components.ai;
 
+import game.components.ILogicComponent;
 import game.components.holdables.Hand;
-import game.components.interfaces.ILogicComponent;
 import game.components.physics.Movement;
 import game.entities.Entity;
+import game.misc.Locator;
 import game.types.GameTime;
 import game.types.Message;
-import main.Locator;
-import math.ExMath;
+import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
 
@@ -21,7 +21,7 @@ public class BossAI implements ILogicComponent {
   private static final int TARGET_MAX_COUNT     = 3;
 
   public static final float MIN_WALK         = 100.0f;
-  public static final float MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
+  public static final float MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
   private static final int SHOOTING_TIME_MIN = 1000;
   private static final int SHOOTING_TIME_MAX = 1500;

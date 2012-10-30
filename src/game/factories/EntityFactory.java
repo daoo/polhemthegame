@@ -4,7 +4,6 @@
 
 package game.factories;
 
-import game.CacheTool;
 import game.components.ai.BossAI;
 import game.components.graphics.AnimatedSheet;
 import game.components.holdables.Hand;
@@ -15,14 +14,18 @@ import game.components.misc.Life;
 import game.components.misc.PlayerControl;
 import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
+import game.config.Binds;
 import game.entities.Entity;
+import game.entities.Player;
+import game.entities.Unit;
+import game.misc.CacheTool;
+import game.misc.Locator;
 import game.misc.Shop;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
-import game.types.Binds;
 import game.types.Orientation;
-import game.types.Player;
-import game.types.Unit;
+import game.ui.hud.infobar.Bar;
+import game.ui.hud.infobar.InfoBar;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -34,15 +37,12 @@ import loader.data.json.types.CreepData;
 import loader.data.json.types.PlayerData;
 import loader.data.json.types.UnitData;
 import loader.parser.ParserException;
-import main.Locator;
 import math.Rectangle;
 import math.Vector2;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import ui.hud.infobar.Bar;
-import ui.hud.infobar.InfoBar;
 
 public class EntityFactory {
   private static final Orientation PLAYER_ORIENTATION = Orientation.RIGHT;

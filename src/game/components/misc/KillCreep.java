@@ -4,7 +4,7 @@
 
 package game.components.misc;
 
-import game.components.interfaces.ILogicComponent;
+import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.triggers.IEffect;
 import game.types.GameTime;

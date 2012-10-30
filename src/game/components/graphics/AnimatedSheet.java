@@ -4,18 +4,18 @@
 
 package game.components.graphics;
 
+import game.components.IRenderComponent;
 import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.IAnimator;
 import game.components.graphics.animations.IdleAnimator;
 import game.components.graphics.animations.Tile;
-import game.components.interfaces.IRenderComponent;
-import game.misc.Clock;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
 
 import org.newdawn.slick.Graphics;
 
+import util.Clock;
 import util.SpriteSheet;
 
 /**

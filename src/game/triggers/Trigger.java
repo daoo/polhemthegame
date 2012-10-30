@@ -4,8 +4,8 @@
 
 package game.triggers;
 
+import game.course.World;
 import game.types.GameTime;
-import game.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;

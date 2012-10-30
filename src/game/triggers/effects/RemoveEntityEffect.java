@@ -4,10 +4,10 @@
 
 package game.triggers.effects;
 
+import game.course.World;
 import game.entities.IEntity;
 import game.triggers.IEffect;
 import game.types.GameTime;
-import game.world.World;
 
 public class RemoveEntityEffect implements IEffect {
   private final IEntity entity;

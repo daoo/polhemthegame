@@ -5,8 +5,6 @@
 package tests;
 
 import game.components.ai.Walking;
-import math.IRandom;
-import math.Random;
 import math.Rectangle;
 import math.Vector2;
 
@@ -19,12 +17,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import util.Random;
+
 public class BossWalkingTester extends BasicGame {
   private static final boolean FULLSCREEN = false;
   private static final int WIDTH          = 1920;
   private static final int HEIGHT         = 1080;
 
-  private final IRandom rnd;
+  private final Random rnd;
 
   private final Rectangle rect;
   private final Vector2 circlePosition;

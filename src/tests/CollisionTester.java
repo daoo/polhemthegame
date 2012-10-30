@@ -8,7 +8,7 @@ import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
-import math.CollisionHelper;
+import math.Collisions;
 import math.Rectangle;
 
 import org.lwjgl.input.Keyboard;
@@ -75,7 +75,7 @@ public class CollisionTester extends BasicGame {
     obj1.render(g);
     obj2.render(g);
 
-    if (CollisionHelper.sweepCollisionTest(obj2.body, mov2.getVelocity(),
+    if (Collisions.sweepCollisionTest(obj2.body, mov2.getVelocity(),
          obj1.body, 1)) {
       g.drawString("COLLISION!", 100, 10);
     }

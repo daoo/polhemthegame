@@ -4,12 +4,12 @@
 
 package game.components.misc;
 
-import game.components.interfaces.ILogicComponent;
+import game.components.ILogicComponent;
 import game.entities.IEntity;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
-import ui.hud.infobar.IProgress;
+import game.ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {
   private boolean alive;

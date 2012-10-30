@@ -6,16 +6,16 @@ package game.components.ai;
 
 import game.components.holdables.Hand;
 import game.components.physics.Movement;
+import game.misc.Locator;
 import game.types.GameTime;
-import main.Locator;
-import math.ExMath;
-import math.IRandom;
+import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
+import util.Random;
 
 public class Walking implements IBossState {
   public static final int MIN_WALK         = 100;
-  public static final int MIN_WALK_SQUARED = ExMath.square(MIN_WALK);
+  public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
   private final Rectangle body;
   private final float speed;
@@ -130,9 +130,9 @@ public class Walking implements IBossState {
    * @param cr the squared radius of the circle
    * @return a vector specifying a random position
    */
-  public static Vector2 newRandomTarget(IRandom rnd, int rx1, int ry1, int rx2, int ry2,
+  public static Vector2 newRandomTarget(Random rnd, int rx1, int ry1, int rx2, int ry2,
       int cx, int cy, int cr) {
-    assert cr < ExMath.square(ry2 - ry1);
+    assert cr < ExtraMath.square(ry2 - ry1);
 
     float targetX, targetY;
 
@@ -159,7 +159,7 @@ public class Walking implements IBossState {
      * y values lies outside of the circle for this x.
      */
 
-    float tmp = ExMath.square(targetX - cx);
+    float tmp = ExtraMath.square(targetX - cx);
     if (cr < tmp) {
       // Circle is not intersecting our x here
       targetY = rnd.nextFloat(ry1, ry2);

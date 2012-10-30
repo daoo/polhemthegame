@@ -4,7 +4,7 @@
 
 package game.components.physics;
 
-import game.components.interfaces.ILogicComponent;
+import game.components.ILogicComponent;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;

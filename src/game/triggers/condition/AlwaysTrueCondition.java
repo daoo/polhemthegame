@@ -4,9 +4,9 @@
 
 package game.triggers.condition;
 
+import game.course.World;
 import game.triggers.ICondition;
 import game.types.GameTime;
-import game.world.World;
 
 public class AlwaysTrueCondition implements ICondition {
   public static final AlwaysTrueCondition INSTANCE = new AlwaysTrueCondition();

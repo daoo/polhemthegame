@@ -5,12 +5,13 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import math.Random;
 import math.Vector2;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import util.Random;
 
 public class Vector2Test {
   private static int RANGE = 100;

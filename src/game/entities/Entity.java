@@ -4,12 +4,12 @@
 
 package game.entities;
 
-import game.components.interfaces.ILogicComponent;
-import game.components.interfaces.IRenderComponent;
+import game.components.ILogicComponent;
+import game.components.IRenderComponent;
+import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.types.Message;
-import game.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;

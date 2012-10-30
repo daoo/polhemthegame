@@ -4,9 +4,14 @@
 
 package game.factories;
 
-import game.CacheTool;
 import game.components.misc.KillCreep;
+import game.course.LevelManager;
+import game.course.World;
 import game.entities.Entity;
+import game.entities.Unit;
+import game.misc.CacheTool;
+import game.misc.Locator;
+import game.states.StateManager;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
@@ -19,8 +24,6 @@ import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
 import game.triggers.effects.spawn.SpawnBossEffect;
 import game.triggers.effects.spawn.SpawnCreepEffect;
-import game.types.Unit;
-import game.world.World;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,13 +36,10 @@ import loader.data.json.LevelData;
 import loader.data.json.types.CreepData;
 import loader.data.json.types.CreepSpawnData;
 import loader.parser.ParserException;
-import main.LevelManager;
-import main.Locator;
 import math.Rectangle;
 
 import org.newdawn.slick.Image;
 
-import states.StateManager;
 
 public class WorldFactory {
   private static final int PLAYER_DAMAGE = 10;

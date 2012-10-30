@@ -4,10 +4,10 @@
 
 package game.triggers.condition;
 
+import game.course.World;
 import game.entities.IEntity;
 import game.triggers.ICondition;
 import game.types.GameTime;
-import game.world.World;
 
 import java.util.Arrays;
 

@@ -4,7 +4,7 @@
 
 package util;
 
-import math.ExMath;
+import math.ExtraMath;
 
 /**
  * A simple timer useful for testing if a certain amount of time has passed.
@@ -53,6 +53,6 @@ public class Timer {
       return 1;
     }
 
-    return ExMath.clamp(0, 1, (current - start) / length);
+    return ExtraMath.clamp(0, 1, (current - start) / length);
   }
 }

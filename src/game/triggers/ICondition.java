@@ -4,8 +4,8 @@
 
 package game.triggers;
 
+import game.course.World;
 import game.types.GameTime;
-import game.world.World;
 
 public interface ICondition {
   boolean evaluate(GameTime time, World world);

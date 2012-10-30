@@ -4,10 +4,10 @@
 
 package game.triggers.effects;
 
+import game.course.World;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.types.GameTime;
-import game.world.World;
 
 import java.util.Arrays;
 import java.util.Collection;

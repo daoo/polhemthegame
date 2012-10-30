@@ -4,11 +4,11 @@
 
 package game.components.physics;
 
-import game.components.interfaces.ILogicComponent;
+import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.types.GameTime;
 import game.types.Message;
-import math.CollisionHelper;
+import math.Collisions;
 import math.Rectangle;
 
 public class MovementConstraint implements ILogicComponent {
@@ -22,7 +22,7 @@ public class MovementConstraint implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    CollisionHelper.blockFromExiting(owner.body, constraints);
+    Collisions.blockFromExiting(owner.body, constraints);
   }
 
   @Override

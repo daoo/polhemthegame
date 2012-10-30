@@ -4,10 +4,10 @@
 
 package game.triggers.effects;
 
+import game.course.World;
+import game.states.StateManager;
 import game.triggers.IEffect;
 import game.types.GameTime;
-import game.world.World;
-import states.StateManager;
 
 public class MainMenuEffect implements IEffect {
   private final StateManager stateManager;

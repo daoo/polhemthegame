@@ -4,7 +4,7 @@
 
 package game.components.graphics.debug;
 
-import game.components.interfaces.IRenderComponent;
+import game.components.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 

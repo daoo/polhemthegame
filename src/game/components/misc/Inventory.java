@@ -4,16 +4,16 @@
 
 package game.components.misc;
 
+import game.components.ILogicComponent;
 import game.components.holdables.weapons.Weapon;
-import game.components.interfaces.ILogicComponent;
-import game.misc.Wallet;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
+import game.types.Wallet;
 
 import java.util.ArrayList;
 
-import math.ExMath;
+import math.ExtraMath;
 
 public class Inventory implements ILogicComponent {
   // Money
@@ -52,12 +52,12 @@ public class Inventory implements ILogicComponent {
   }
 
   public Weapon nextWeapon() {
-    currentWeapon = ExMath.clamp(0, weapons.size() - 1, currentWeapon + 1);
+    currentWeapon = ExtraMath.clamp(0, weapons.size() - 1, currentWeapon + 1);
     return weapons.get(currentWeapon);
   }
 
   public Weapon previousWeapon() {
-    currentWeapon = ExMath.clamp(0, weapons.size() - 1, currentWeapon - 1);
+    currentWeapon = ExtraMath.clamp(0, weapons.size() - 1, currentWeapon - 1);
     return weapons.get(currentWeapon);
   }
 

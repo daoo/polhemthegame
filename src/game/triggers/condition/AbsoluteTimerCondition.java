@@ -4,9 +4,9 @@
 
 package game.triggers.condition;
 
+import game.course.World;
 import game.triggers.ICondition;
 import game.types.GameTime;
-import game.world.World;
 
 public class AbsoluteTimerCondition implements ICondition {
   private final long timeAfter;

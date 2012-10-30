@@ -6,19 +6,19 @@ package tests;
 
 import game.components.ai.Walking;
 import junit.framework.Assert;
-import math.ExMath;
-import math.IRandom;
-import math.Random;
+import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
 
 import org.junit.Test;
 
+import util.Random;
+
 public class BossTest {
   @SuppressWarnings("static-method")
   @Test
   public void test() {
-    IRandom rnd = new Random();
+    Random rnd = new Random();
 
     int rx1 = rnd.nextInt(1000);
     int ry1 = rnd.nextInt(1000);
@@ -28,7 +28,7 @@ public class BossTest {
     int cx = rnd.nextInt(2000);
     int cy = rnd.nextInt(2000);
     int radius = rnd.nextInt(50, 500);
-    int radiusSquared = ExMath.square(radius);
+    int radiusSquared = ExtraMath.square(radius);
 
     Rectangle rect = new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1);
     Vector2 cPos = new Vector2(cx, cy);

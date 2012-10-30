@@ -4,12 +4,12 @@
 
 package game.triggers.effects.spawn;
 
+import game.course.World;
+import game.entities.Unit;
+import game.misc.Locator;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.types.Message;
-import game.types.Unit;
-import game.world.World;
-import main.Locator;
 
 public class SpawnBossEffect implements IEffect {
   private final Unit unit;

@@ -4,13 +4,13 @@
 
 package game.triggers.effects;
 
+import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
-import game.world.World;
+import game.ui.IUI;
 
 import org.newdawn.slick.Image;
 
-import ui.IUI;
 
 public class SetForegroundEffect implements IEffect {
   private final IUI ui;

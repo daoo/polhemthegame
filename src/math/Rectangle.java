@@ -199,7 +199,7 @@ public class Rectangle {
    * @return true or false depending on if p is inside a or not
    */
   public static boolean contains(Rectangle a, Vector2 p) {
-    return ExMath.inRange(p.x, a.min.x, a.max.x) &&
-           ExMath.inRange(p.y, a.min.y, a.max.y);
+    return ExtraMath.inRange(p.x, a.min.x, a.max.x) &&
+           ExtraMath.inRange(p.y, a.min.y, a.max.y);
   }
 }
