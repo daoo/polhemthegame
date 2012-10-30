@@ -70,7 +70,7 @@ jar:
 	unzip -o $(gson_jar) -d $(build_dir)
 	unzip -o $(slick_jar) -d $(build_dir)
 	$(RM) -r $(build_dir)/version $(build_dir)/META-INF
-	cd $(build_dir); jar cfe ptg.jar main.Launcher *
+	cd $(build_dir); jar cfe ptg.jar game.Launcher *
 	mv $(build_dir)/ptg.jar $(archive_dir)/
 
 build:
