@@ -6,10 +6,10 @@
     , duration: 60
     , gravity: false
     , hitbox: { width: 100, height: 100 }
-    , range: 2000
+    , range: 20
     , speed: 500
     , sprite: null
-    , targets: 100
+    , targets: 1
     , texture: null }
 
   , "pistolbullet":
