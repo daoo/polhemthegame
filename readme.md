@@ -18,7 +18,7 @@ Running
 Should work on Windows and Linux, maybe Mac too but I've not tested that.
 
 The only requirement is to have Java installed as the libraries are included.
-To launch the game either run _windows.bat_ for windows or _linux.sh_ for linux.
+To launch the game either run _windows.bat_ for windows or _linux.sh_ for Linux.
 
 Building
 ========
@@ -27,7 +27,7 @@ In addition to the libraries you also need JDK version 7. The code uses some
 Java 7 exclusive features.
 
 For building the data zip you need _unzip_ and _gimp_. For zipping and
-generating the archive and building png files from xcf files.
+generating the archive and building PNG files from XCF files.
 
 To build everything you could try running _make all_. It might work, though
 I've not made any effort to make the Makefile cross platform.
