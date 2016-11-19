@@ -13,20 +13,14 @@ import loader.parser.IParser;
 import loader.parser.ParserException;
 
 public class Cache implements ICache {
-  private final FileBeacon beacon;
   private final HashMap<String, IData> cache;
 
-  public Cache(File rootDir) throws IOException {
-    assert rootDir != null;
-
-    beacon = new FileBeacon(rootDir);
+  public Cache() {
     cache = new HashMap<>();
   }
 
   @Override
   public void close() throws IOException {
-    beacon.close();
-
     for (IData cacheItem : cache.values()) {
       cacheItem.close();
     }
@@ -64,8 +58,9 @@ public class Cache implements ICache {
     assert id != null;
     assert parser != null;
 
-    IData result = null;
-    try (InputStream is = beacon.getReader(id)) {
+    final IData result;
+    // FIXME: Prepending the slash here is a hack and should be propagated.
+    try (InputStream is = getClass().getResourceAsStream('/' + id)) {
       result = parser.parse(is);
     } catch (ParserException ex) {
       throw new ParserException("Error parsing: " + id, ex);

@@ -1,10 +1,2 @@
-*.log
-*.jar
-*.class
-.classpath
-.project
-.settings/
-bin
 build
-
-!libs/bin
+.gradle

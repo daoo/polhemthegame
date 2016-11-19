@@ -1,0 +1,81 @@
+group 'com.daoo'
+version '1.0'
+
+project.ext.set('libsDir', "$buildDir/libs")
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+configurations {
+  nativeBundle
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  nativeBundle 'org.lwjgl.lwjgl:lwjgl-platform:2.9.3:natives-linux'
+  nativeBundle 'net.java.jinput:jinput-platform:2.0.6:natives-linux'
+  compile 'org.slick2d:slick2d-core:1.0.2'
+  compile 'com.google.code.gson:gson:2.8.0'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+mainClassName = 'game.Launcher'
+
+run {
+  main 'game.Launcher'
+  systemProperty 'java.library.path', project.libsDir
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'PolhemTheGame',
+               'Implementation-Version': version,
+               'Main-Class': 'game.Launcher'
+  }
+}
+
+task fatJar(type: Jar) {
+  manifest.from jar.manifest
+  classifier = 'all'
+  from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } } {
+    exclude "META-INF/*.SF"
+    exclude "META-INF/*.DSA"
+    exclude "META-INF/*.RSA"
+  }
+  with jar
+}
+
+artifacts {
+    archives fatJar
+}
+
+task extractNativeBundle(type: Sync) {
+  from { configurations.nativeBundle.collect { zipTree(it) } }
+  into file(project.libsDir)
+}
+
+processResources {
+  exclude '**/*.xcf'
+
+  def root = sourceSets.main.resources.srcDirs[0]
+  def tree = fileTree(root) { include '**/*.xcf' }
+  inputs.file(tree)
+  tree.each { input ->
+    def relative = root.toPath().relativize(input.toPath())
+    def output = new File(destinationDir, relative.toString().replace('.xcf', '.png'))
+    outputs.file(output)
+    doLast {
+      exec {
+        output.parentFile.mkdirs()
+        commandLine 'xcf2png', input.path, '-o', output.path
+      }
+    }
+  }
+}
+
+run.dependsOn extractNativeBundle

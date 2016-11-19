@@ -22,7 +22,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import util.Enviroment;
 import util.Random;
 
 import com.google.gson.Gson;
@@ -46,11 +45,11 @@ public class Launcher extends BasicGame {
   }
 
   public static void main(String[] args) {
-    Enviroment env = new Enviroment();
+    File workingDirectory = new File(System.getProperty("user.dir"));
     try {
-      try (Cache cache = new Cache(env.appDir)) {
-        Config config = null;
-        File configFile = new File(env.appDir, CONFIG_FILE);
+      try (Cache cache = new Cache()) {
+        final Config config;
+        File configFile = new File(workingDirectory, CONFIG_FILE);
         if (configFile.exists()) {
           try (FileReader reader = new FileReader(configFile)) {
             ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
