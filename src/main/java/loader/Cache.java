@@ -4,7 +4,7 @@
 
 package loader;
 
-import java.io.File;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import loader.parser.IParser;
 import loader.parser.ParserException;
 
-public class Cache implements ICache {
+public class Cache implements Closeable {
   private final HashMap<String, IData> cache;
 
   public Cache() {
@@ -28,7 +28,16 @@ public class Cache implements ICache {
     cache.clear();
   }
 
-  @Override
+  /**
+   * Retrieve an item from the cache or disk.
+   * If there is no item in the cache, the parser will be used to read if from
+   * the disk.
+   * @param id the id of the item to retrieve
+   * @param parser the parser to use if a disk access is needed
+   * @return the requested data
+   * @throws IOException if the data is not found on the disk
+   * @throws ParserException if parsing the data fails
+   */
   public IData get(String id, IParser parser)
     throws IOException, ParserException {
     assert id != null;

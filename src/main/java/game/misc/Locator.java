@@ -6,7 +6,7 @@ package game.misc;
 
 import game.config.Config;
 import game.ui.IUI;
-import loader.ICache;
+import loader.Cache;
 import util.Random;
 
 /**
@@ -14,7 +14,7 @@ import util.Random;
  * Implementation of the service locator pattern.
  */
 public class Locator {
-  private static ICache _cache;
+  private static Cache _cache;
   private static Random _random;
   private static IUI _ui;
   private static Config _config;
@@ -40,7 +40,7 @@ public class Locator {
    * Register a cache.
    * @param cache the cache, can not be null
    */
-  public static void registerCache(ICache cache) {
+  public static void registerCache(Cache cache) {
     assert cache != null;
 
     _cache = cache;
@@ -81,7 +81,7 @@ public class Locator {
    * Note that this can return null if no cache have been registered.
    * @return the registered cache, or null
    */
-  public static ICache getCache() {
+  public static Cache getCache() {
     return _cache;
   }
 

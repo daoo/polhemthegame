@@ -10,7 +10,7 @@ import game.types.Orientation;
 import java.io.File;
 import java.io.IOException;
 
-import loader.ICache;
+import loader.Cache;
 import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
@@ -48,38 +48,38 @@ public class CacheTool {
   private static final GsonParser SHOP_PARSER        = new GsonParser(ShopData.class);
   private static final PNGParser PNG_PARSER          = new PNGParser();
 
-  public static BossesData getBosses(ICache cache)
+  public static BossesData getBosses(Cache cache)
       throws ParserException, IOException {
     return (BossesData) cache.get(FILE_BOSSES, BOSSES_PARSER);
   }
 
-  public static CreepsData getCreeps(ICache cache)
+  public static CreepsData getCreeps(Cache cache)
       throws ParserException, IOException {
     return (CreepsData) cache.get(FILE_CREEPS, CREEPS_PARSER);
   }
 
-  public static Image getImage(ICache cache, String id)
+  public static Image getImage(Cache cache, String id)
       throws ParserException, IOException {
     return (Image) cache.get(id, PNG_PARSER);
   }
 
-  public static LevelData getLevel(ICache cache, String level)
+  public static LevelData getLevel(Cache cache, String level)
       throws ParserException, IOException {
     return (LevelData) cache.get(
       DIR_LEVELS + File.separator + level + EXT_JS, LEVEL_PARSER);
   }
 
-  public static PlayersData getPlayers(ICache cache)
+  public static PlayersData getPlayers(Cache cache)
       throws ParserException, IOException {
     return (PlayersData) cache.get(FILE_PLAYERS, PLAYERS_PARSER);
   }
 
-  public static WeaponsData getWeapons(ICache cache)
+  public static WeaponsData getWeapons(Cache cache)
       throws ParserException, IOException {
     return (WeaponsData) cache.get(FILE_WEAPONS, WEAPONS_PARSER);
   }
 
-  public static ProjectilesData getProjectiles(ICache cache)
+  public static ProjectilesData getProjectiles(Cache cache)
       throws ParserException, IOException {
     return (ProjectilesData) cache.get(FILE_PROJECTILES, PROJECTILES_PARSER);
   }
@@ -94,7 +94,7 @@ public class CacheTool {
    * @throws ParserException if parsing fails
    * @throws IOException if IO fails
    */
-  public static AnimatedSheet getAnimatedSheet(ICache cache,
+  public static AnimatedSheet getAnimatedSheet(Cache cache,
       Orientation orientation, int angle, SpriteData sprite)
       throws ParserException, IOException {
     SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
@@ -108,12 +108,12 @@ public class CacheTool {
     );
   }
 
-  public static ShopData getShop(ICache cache)
+  public static ShopData getShop(Cache cache)
       throws ParserException, IOException {
     return (ShopData) cache.get(FILE_SHOP, SHOP_PARSER);
   }
 
-  public static SpriteSheet getSpriteSheet(ICache cache, SpriteData sprite)
+  public static SpriteSheet getSpriteSheet(Cache cache, SpriteData sprite)
       throws ParserException, IOException {
     Image img = (Image) cache.get(sprite.sprite, PNG_PARSER);
 
