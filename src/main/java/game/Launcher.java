@@ -26,11 +26,6 @@ import loader.data.json.ConfigData;
 import util.Random;
 
 public class Launcher extends BasicGame {
-  private static final String CONFIG_FILE = "config.js";
-
-  private static final String NAME    = "PolhemTheGame";
-  private static final String VERSION = "2.0";
-
   private static final int WIDTH   = 1024;
   private static final int HEIGHT  = 768;
   private static final int MAX_FPS = 60;
@@ -39,13 +34,13 @@ public class Launcher extends BasicGame {
 
   private StateManager stateGame;
 
-  public Launcher() {
-    super(NAME + " - " + VERSION);
+  private Launcher() {
+    super("PolhemTheGame");
   }
 
   private static Config readConfig() throws IOException {
     File workingDirectory = new File(System.getProperty("user.dir"));
-    File configFile = new File(workingDirectory, CONFIG_FILE);
+    File configFile = new File(workingDirectory, "config.js");
     try (FileReader reader = new FileReader(configFile)) {
       ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
 
