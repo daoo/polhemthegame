@@ -20,6 +20,9 @@ public class DebugGraph {
 
   private static final double MILLISECONDS_PER_FRAME = 5;
 
+  private static final Color BLUE = new Color(0, 0, 255, 200);
+  private static final Color GREEN = new Color(0, 255, 0, 200);
+
   private int width, height;
 
   private final Measure updateMeasure, renderMeasure;
@@ -37,14 +40,10 @@ public class DebugGraph {
   }
 
   public void render(Graphics g) {
-    // Render render
-    g.setColor(new Color(0, 0, 255, 200));
+    g.setColor(BLUE);
     drawData(renderData, g);
-
-    // Render update
-    g.setColor(new Color(0, 255, 0, 200));
+    g.setColor(GREEN);
     drawData(updateData, g);
-
     g.setColor(Color.white);
     g.drawRect(0, 0, width, height);
   }
