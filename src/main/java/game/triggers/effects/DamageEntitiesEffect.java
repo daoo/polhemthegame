@@ -4,14 +4,14 @@
 
 package game.triggers.effects;
 
+import java.util.Collection;
+
 import game.course.World;
 import game.entities.IEntity;
 import game.triggers.IEffect;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
-
-import java.util.Collection;
 
 public class DamageEntitiesEffect implements IEffect {
   private final Collection<? extends IEntity> entities;

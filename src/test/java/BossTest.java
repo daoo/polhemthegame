@@ -4,14 +4,14 @@
 
 package tests;
 
-import game.components.ai.Walking;
 import junit.framework.Assert;
-import math.ExtraMath;
-import math.Rectangle;
-import math.Vector2;
 
 import org.junit.Test;
 
+import game.components.ai.Walking;
+import math.ExtraMath;
+import math.Rectangle;
+import math.Vector2;
 import util.Random;
 
 public class BossTest {

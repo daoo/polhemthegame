@@ -5,12 +5,11 @@
 package game.states;
 
 
-import game.ui.hud.graph.DebugGraph;
-
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import game.ui.hud.graph.DebugGraph;
 import util.Key;
 import util.Node;
 import util.Tree;

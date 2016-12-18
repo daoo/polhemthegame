@@ -4,12 +4,12 @@
 
 package game.triggers.condition;
 
+import java.util.Arrays;
+
 import game.course.World;
 import game.entities.IEntity;
 import game.triggers.ICondition;
 import game.types.GameTime;
-
-import java.util.Arrays;
 
 public class AllInactiveCondition implements ICondition {
   private final Iterable<? extends IEntity> entities;

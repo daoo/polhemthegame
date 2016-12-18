@@ -4,6 +4,8 @@
 
 package game.components.misc;
 
+import org.lwjgl.input.Keyboard;
+
 import game.components.ILogicComponent;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
@@ -14,9 +16,6 @@ import game.misc.Shop;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;
-
-import org.lwjgl.input.Keyboard;
-
 import util.Key;
 
 public class PlayerControl implements ILogicComponent {

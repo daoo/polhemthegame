@@ -4,12 +4,11 @@
 
 package game.course;
 
-import game.misc.CacheTool;
-import game.misc.Locator;
-
 import java.io.IOException;
 import java.util.Iterator;
 
+import game.misc.CacheTool;
+import game.misc.Locator;
 import loader.data.json.CampaignData;
 import loader.data.json.LevelData;
 import loader.parser.ParserException;

@@ -4,21 +4,20 @@
 
 package game.misc;
 
-import game.components.holdables.weapons.Weapon;
-import game.factories.WeaponFactory;
-import game.types.Orientation;
-import game.types.Wallet;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import game.components.holdables.weapons.Weapon;
+import game.factories.WeaponFactory;
+import game.types.Orientation;
+import game.types.Wallet;
 import loader.data.json.ShopData;
 import loader.data.json.types.ShopItemData;
 import loader.parser.ParserException;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class Shop {
   private class ShopItem {

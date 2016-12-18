@@ -4,6 +4,8 @@
 
 package game.components.holdables;
 
+import org.newdawn.slick.Graphics;
+
 import game.components.IRenderComponent;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
@@ -15,8 +17,6 @@ import game.types.Message;
 import game.types.Orientation;
 import game.ui.hud.infobar.IProgress;
 import math.Vector2;
-
-import org.newdawn.slick.Graphics;
 
 
 public class Hand implements IRenderComponent, IProgress {

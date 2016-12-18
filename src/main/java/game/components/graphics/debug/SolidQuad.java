@@ -4,12 +4,12 @@
 
 package game.components.graphics.debug;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+
 import game.components.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 public class SolidQuad implements IRenderComponent {
   private final Color color;

@@ -4,12 +4,13 @@
 
 package game.misc;
 
-import game.components.graphics.AnimatedSheet;
-import game.types.Orientation;
+import org.newdawn.slick.Image;
 
 import java.io.File;
 import java.io.IOException;
 
+import game.components.graphics.AnimatedSheet;
+import game.types.Orientation;
 import loader.Cache;
 import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
@@ -22,9 +23,6 @@ import loader.data.json.types.SpriteData;
 import loader.parser.GsonParser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
-
-import org.newdawn.slick.Image;
-
 import util.SpriteSheet;
 
 public class CacheTool {

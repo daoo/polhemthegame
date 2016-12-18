@@ -4,13 +4,13 @@
 
 package game.components.misc;
 
+import java.util.Collection;
+
 import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.types.Message;
-
-import java.util.Collection;
 
 public class EffectsOnDeath implements ILogicComponent {
   private final Entity owner;

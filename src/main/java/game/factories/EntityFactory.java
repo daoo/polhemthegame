@@ -4,6 +4,12 @@
 
 package game.factories;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+
+import java.io.IOException;
+import java.util.Arrays;
+
 import game.components.ai.BossAI;
 import game.components.graphics.AnimatedSheet;
 import game.components.holdables.Hand;
@@ -26,10 +32,6 @@ import game.triggers.effects.spawn.SpawnAnimationEffect;
 import game.types.Orientation;
 import game.ui.hud.infobar.Bar;
 import game.ui.hud.infobar.InfoBar;
-
-import java.io.IOException;
-import java.util.Arrays;
-
 import loader.data.json.PlayersData;
 import loader.data.json.ShopData;
 import loader.data.json.types.BossData;
@@ -39,9 +41,6 @@ import loader.data.json.types.UnitData;
 import loader.parser.ParserException;
 import math.Rectangle;
 import math.Vector2;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 
 public class EntityFactory {

@@ -4,14 +4,14 @@
 
 package game.triggers.effects;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import game.course.World;
 import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AbsoluteTimerCondition;
 import game.types.GameTime;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 /**
  * Execute some triggers with a delay condition to the world.

@@ -4,16 +4,15 @@
 
 package game.ui.menu;
 
-import game.misc.CacheTool;
-import game.misc.Locator;
-
-import java.io.IOException;
-
-import loader.parser.ParserException;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+
+import java.io.IOException;
+
+import game.misc.CacheTool;
+import game.misc.Locator;
+import loader.parser.ParserException;
 
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;

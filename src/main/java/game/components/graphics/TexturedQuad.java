@@ -4,13 +4,13 @@
 
 package game.components.graphics;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
 import game.components.IRenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class TexturedQuad implements IRenderComponent {
   private final int centerX, centerY;

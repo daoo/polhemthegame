@@ -5,15 +5,14 @@
 package game.states;
 
 
-import game.misc.Locator;
+import org.newdawn.slick.SlickException;
 
 import java.io.IOException;
 
+import game.misc.Locator;
 import loader.data.json.CampaignData;
 import loader.parser.GsonParser;
 import loader.parser.ParserException;
-
-import org.newdawn.slick.SlickException;
 
 public class StateManager {
   private static boolean DEBUG = false;

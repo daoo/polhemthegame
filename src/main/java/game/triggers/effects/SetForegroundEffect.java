@@ -4,12 +4,12 @@
 
 package game.triggers.effects;
 
+import org.newdawn.slick.Image;
+
 import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.ui.hud.UI;
-
-import org.newdawn.slick.Image;
 
 
 public class SetForegroundEffect implements IEffect {

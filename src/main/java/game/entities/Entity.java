@@ -4,23 +4,21 @@
 
 package game.entities;
 
+import org.newdawn.slick.Graphics;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import debug.DebugHelper;
 import game.components.ILogicComponent;
 import game.components.IRenderComponent;
 import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.types.Message;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-
 import math.Rectangle;
-
-import org.newdawn.slick.Graphics;
-
 import util.Node;
-import debug.DebugHelper;
 
 public class Entity implements IEntity {
   private World world;

@@ -4,14 +4,13 @@
 
 package game.triggers;
 
-import game.course.World;
-import game.types.GameTime;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
-import util.Node;
 import debug.DebugHelper;
+import game.course.World;
+import game.types.GameTime;
+import util.Node;
 
 /**
  * A trigger that can be looped. More specifically a set of effects that can be

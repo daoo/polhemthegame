@@ -4,12 +4,12 @@
 
 package game.ui.hud;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+
 import game.components.misc.Inventory;
 import game.misc.Shop;
 import game.ui.IStaticUIElement;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 
 
 public class PlayerUI implements IStaticUIElement {

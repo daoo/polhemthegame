@@ -4,19 +4,6 @@
 
 package game.states;
 
-import game.course.LevelManager;
-import game.misc.Locator;
-import game.types.GameTime;
-import game.ui.hud.BlackBox;
-import game.ui.hud.PlayerUI;
-import game.ui.hud.UI;
-
-import java.io.IOException;
-import java.util.HashMap;
-
-import loader.data.json.CampaignData;
-import loader.parser.ParserException;
-
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -24,6 +11,17 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import game.course.LevelManager;
+import game.misc.Locator;
+import game.types.GameTime;
+import game.ui.hud.BlackBox;
+import game.ui.hud.PlayerUI;
+import game.ui.hud.UI;
+import loader.data.json.CampaignData;
+import loader.parser.ParserException;
 import util.FontHelper;
 import util.Key;
 import util.Node;

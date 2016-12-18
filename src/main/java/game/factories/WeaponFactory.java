@@ -4,15 +4,16 @@
 
 package game.factories;
 
+import org.newdawn.slick.Graphics;
+
+import java.io.IOException;
+
 import game.components.graphics.AnimatedSheet;
 import game.components.holdables.weapons.Weapon;
 import game.components.holdables.weapons.WeaponMode;
 import game.misc.CacheTool;
 import game.misc.Locator;
 import game.types.Orientation;
-
-import java.io.IOException;
-
 import loader.data.json.ProjectilesData;
 import loader.data.json.WeaponsData;
 import loader.data.json.types.ProjectileData;
@@ -20,8 +21,6 @@ import loader.data.json.types.WeaponData;
 import loader.parser.ParserException;
 import math.Rectangle;
 import math.Vector2;
-
-import org.newdawn.slick.Graphics;
 
 /**
  * Factory for weapons.

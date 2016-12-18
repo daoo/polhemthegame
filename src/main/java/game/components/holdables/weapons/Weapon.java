@@ -4,6 +4,8 @@
 
 package game.components.holdables.weapons;
 
+import org.newdawn.slick.Graphics;
+
 import game.components.graphics.AnimatedSheet;
 import game.components.holdables.IHoldable;
 import game.components.holdables.weapons.machines.AutomaticMachine;
@@ -14,8 +16,6 @@ import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
 import math.Vector2;
-
-import org.newdawn.slick.Graphics;
 
 /**
  * Weapon that can fire and be held by a hand.

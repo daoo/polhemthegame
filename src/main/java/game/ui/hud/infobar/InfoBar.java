@@ -4,12 +4,12 @@
 
 package game.ui.hud.infobar;
 
-import game.entities.Entity;
-import game.ui.IDynamicUIElement;
+import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Graphics;
+import game.entities.Entity;
+import game.ui.IDynamicUIElement;
 
 
 /**

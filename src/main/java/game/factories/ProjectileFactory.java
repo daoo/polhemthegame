@@ -4,6 +4,13 @@
 
 package game.factories;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.components.IRenderComponent;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.TexturedQuad;
@@ -27,19 +34,10 @@ import game.triggers.effects.AOEDamageEffect;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
 import game.types.Orientation;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
 import math.ExtraMath;
 import math.Rectangle;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-
 import util.SpriteSheet;
 
 public class ProjectileFactory {

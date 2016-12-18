@@ -4,6 +4,8 @@
 
 package game.triggers.effects.spawn;
 
+import org.newdawn.slick.Graphics;
+
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.RunToAnimator;
 import game.course.World;
@@ -12,8 +14,6 @@ import game.entities.Entity;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import math.Rectangle;
-
-import org.newdawn.slick.Graphics;
 
 /**
  * Spawn an run-to-last animation at the top left of another entity.

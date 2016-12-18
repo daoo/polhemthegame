@@ -4,14 +4,14 @@
 
 package game.ui.hud;
 
-import game.ui.IDynamicUIElement;
-import game.ui.IStaticUIElement;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+import game.ui.IDynamicUIElement;
+import game.ui.IStaticUIElement;
 
 
 /**

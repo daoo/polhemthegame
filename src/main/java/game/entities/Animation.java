@@ -4,13 +4,12 @@
 
 package game.entities;
 
+import org.newdawn.slick.Graphics;
+
 import game.components.graphics.AnimatedSheet;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;
-
-import org.newdawn.slick.Graphics;
-
 import util.Node;
 
 public class Animation implements IEntity {

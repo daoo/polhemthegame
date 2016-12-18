@@ -4,10 +4,10 @@
 
 package game.ui.hud;
 
-import game.ui.IStaticUIElement;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+
+import game.ui.IStaticUIElement;
 
 
 public class BlackBox implements IStaticUIElement {

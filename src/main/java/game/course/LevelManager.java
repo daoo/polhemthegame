@@ -1,5 +1,12 @@
 package game.course;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import game.entities.Entity;
 import game.entities.Player;
 import game.entities.Players;
@@ -10,18 +17,9 @@ import game.misc.Locator;
 import game.states.StateManager;
 import game.types.GameTime;
 import game.ui.hud.PlayerUI;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
 import math.Rectangle;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
 import util.Node;
 
 public class LevelManager {

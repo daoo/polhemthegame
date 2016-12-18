@@ -4,17 +4,7 @@
 
 package game;
 
-import game.config.Binds;
-import game.config.Config;
-import game.misc.Locator;
-import game.states.StateManager;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import loader.Cache;
-import loader.data.json.ConfigData;
+import com.google.gson.Gson;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -22,9 +12,17 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import util.Random;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-import com.google.gson.Gson;
+import game.config.Binds;
+import game.config.Config;
+import game.misc.Locator;
+import game.states.StateManager;
+import loader.Cache;
+import loader.data.json.ConfigData;
+import util.Random;
 
 public class Launcher extends BasicGame {
   private static final String CONFIG_FILE = "config.js";

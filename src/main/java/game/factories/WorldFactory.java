@@ -4,6 +4,13 @@
 
 package game.factories;
 
+import org.newdawn.slick.Image;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import game.components.misc.KillCreep;
 import game.course.LevelManager;
 import game.course.World;
@@ -24,12 +31,6 @@ import game.triggers.effects.MainMenuEffect;
 import game.triggers.effects.SetForegroundEffect;
 import game.triggers.effects.spawn.SpawnBossEffect;
 import game.triggers.effects.spawn.SpawnCreepEffect;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
@@ -37,8 +38,6 @@ import loader.data.json.types.CreepData;
 import loader.data.json.types.CreepSpawnData;
 import loader.parser.ParserException;
 import math.Rectangle;
-
-import org.newdawn.slick.Image;
 
 
 public class WorldFactory {

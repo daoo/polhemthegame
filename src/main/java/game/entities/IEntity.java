@@ -4,12 +4,11 @@
 
 package game.entities;
 
-import game.types.GameTime;
-import game.types.Message;
-
 import org.newdawn.slick.Graphics;
 
 import debug.IDebuggable;
+import game.types.GameTime;
+import game.types.Message;
 
 /**
  * An interface for objects that can exist in the world.

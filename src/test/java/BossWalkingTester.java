@@ -4,10 +4,6 @@
 
 package tests;
 
-import game.components.ai.Walking;
-import math.Rectangle;
-import math.Vector2;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -17,6 +13,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 
+import game.components.ai.Walking;
+import math.Rectangle;
+import math.Vector2;
 import util.Random;
 
 public class BossWalkingTester extends BasicGame {

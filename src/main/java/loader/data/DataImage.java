@@ -4,13 +4,13 @@
 
 package loader.data;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import loader.IData;
-
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class DataImage extends Image implements IData {
   public DataImage(InputStream is, String string, boolean b)

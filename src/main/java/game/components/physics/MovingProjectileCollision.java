@@ -4,14 +4,13 @@
 
 package game.components.physics;
 
+import java.util.ArrayList;
+
 import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.entities.IEntity;
 import game.types.GameTime;
 import game.types.Message;
-
-import java.util.ArrayList;
-
 import math.Collisions;
 import math.Rectangle;
 import math.Vector2;

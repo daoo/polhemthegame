@@ -4,13 +4,6 @@
 
 package tests;
 
-import game.components.graphics.debug.Outliner;
-import game.components.graphics.debug.SolidQuad;
-import game.components.physics.Movement;
-import game.entities.Entity;
-import math.Collisions;
-import math.Rectangle;
-
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -18,6 +11,13 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+
+import game.components.graphics.debug.Outliner;
+import game.components.graphics.debug.SolidQuad;
+import game.components.physics.Movement;
+import game.entities.Entity;
+import math.Collisions;
+import math.Rectangle;
 
 public class CollisionTester extends BasicGame {
   private static final boolean FULLSCREEN = false;

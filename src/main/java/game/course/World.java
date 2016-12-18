@@ -4,21 +4,20 @@
 
 package game.course;
 
-import game.entities.Entity;
-import game.entities.IEntity;
-import game.triggers.Trigger;
-import game.types.GameTime;
+import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.newdawn.slick.Graphics;
-
-import util.Node;
 import debug.DebugHelper;
 import debug.IDebuggable;
+import game.entities.Entity;
+import game.entities.IEntity;
+import game.triggers.Trigger;
+import game.types.GameTime;
+import util.Node;
 
 public class World implements IDebuggable {
   private final ArrayList<IEntity> misc;

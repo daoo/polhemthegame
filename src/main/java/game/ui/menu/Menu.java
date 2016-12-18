@@ -4,10 +4,10 @@
 
 package game.ui.menu;
 
+import org.newdawn.slick.Graphics;
+
 import java.util.ArrayList;
 import java.util.Collection;
-
-import org.newdawn.slick.Graphics;
 
 public class Menu {
   private final ArrayList<MenuItem> items;

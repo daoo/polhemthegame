@@ -4,10 +4,9 @@
 
 package game.ui.menu;
 
-import game.ui.IUIEvent;
-
 import java.io.IOException;
 
+import game.ui.IUIEvent;
 import loader.parser.ParserException;
 
 public class MenuButton extends MenuItem {

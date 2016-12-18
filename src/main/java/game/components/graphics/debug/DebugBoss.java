@@ -4,6 +4,9 @@
 
 package game.components.graphics.debug;
 
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
+
 import game.components.IRenderComponent;
 import game.components.ai.BossAI;
 import game.components.ai.IBossState;
@@ -12,9 +15,6 @@ import game.types.GameTime;
 import game.types.Message;
 import math.Rectangle;
 import math.Vector2;
-
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Circle;
 
 public class DebugBoss implements IRenderComponent {
   private final Rectangle body;

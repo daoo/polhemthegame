@@ -4,12 +4,12 @@
 
 package loader.parser;
 
+import org.newdawn.slick.SlickException;
+
 import java.io.InputStream;
 
 import loader.IData;
 import loader.data.DataImage;
-
-import org.newdawn.slick.SlickException;
 
 public class PNGParser implements IParser {
   @Override

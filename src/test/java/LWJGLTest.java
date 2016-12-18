@@ -4,8 +4,6 @@
 
 package tests;
 
-import java.io.IOException;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -14,6 +12,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
+
+import java.io.IOException;
 
 public class LWJGLTest {
   private static final int WIDTH = 1024;
@@ -45,7 +45,7 @@ public class LWJGLTest {
 
         Color.white.bind();
         texture.bind();
-        
+
         GL11.glBegin(GL11.GL_QUADS);
           GL11.glTexCoord2f(0, 0);
           GL11.glVertex2f(0, 0);

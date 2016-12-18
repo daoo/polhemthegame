@@ -4,17 +4,15 @@
 
 package game.states;
 
-import game.states.credits.Credits;
-
-import java.util.HashMap;
-
-
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 
+import java.util.HashMap;
+
+import game.states.credits.Credits;
 import util.FontHelper;
 import util.Node;
 
