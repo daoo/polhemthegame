@@ -5,7 +5,7 @@
 package game.misc;
 
 import game.config.Config;
-import game.ui.IUI;
+import game.ui.hud.UI;
 import loader.Cache;
 import util.Random;
 
@@ -15,7 +15,7 @@ import util.Random;
 public final class Locator {
   private static Cache s_cache = null;
   private static Random s_random = null;
-  private static IUI s_ui = null;
+  private static UI s_ui = null;
   private static Config s_config = null;
 
   private Locator() { }
@@ -44,7 +44,7 @@ public final class Locator {
    * Register an UI.
    * @param ui the UI, can not be null
    */
-  public static void registerUI(IUI ui) {
+  public static void registerUI(UI ui) {
     assert ui != null;
 
     s_ui = ui;
@@ -83,7 +83,7 @@ public final class Locator {
    * Note this can return null if no UI have been registered.
    * @return the registered UI, or null
    */
-  public static IUI getUI() {
+  public static UI getUI() {
     return s_ui;
   }
 

@@ -6,7 +6,6 @@ package game.ui.hud;
 
 import game.ui.IDynamicUIElement;
 import game.ui.IStaticUIElement;
-import game.ui.IUI;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +17,7 @@ import org.newdawn.slick.Image;
 /**
  * Simple UI implementation.
  */
-public class UI implements IUI {
+public class UI {
   private final ArrayList<IStaticUIElement> statics;
   private final ArrayList<IDynamicUIElement> dynamics;
 
@@ -44,7 +43,6 @@ public class UI implements IUI {
    * Add a static UI element.
    * @param element the element to add, can not be null
    */
-  @Override
   public void addStatic(IStaticUIElement element) {
     assert element != null;
 
@@ -55,7 +53,6 @@ public class UI implements IUI {
    * Add a dynamic UI element.
    * @param element the element to add, can not be null
    */
-  @Override
   public void addDynamic(IDynamicUIElement element) {
     assert element != null;
 
@@ -65,7 +62,6 @@ public class UI implements IUI {
   /**
    * Updates dynamic elements. Also removes inactive elements.
    */
-  @Override
   public void update() {
     Iterator<IDynamicUIElement> it = dynamics.iterator();
     while (it.hasNext()) {
@@ -86,7 +82,6 @@ public class UI implements IUI {
    * level.
    * @param g the graphics context to use
    */
-  @Override
   public void renderDynamics(Graphics g) {
     for (IDynamicUIElement e : dynamics) {
       e.render(g);
@@ -98,7 +93,6 @@ public class UI implements IUI {
    * window instead of the level.
    * @param g the rendering context to use
    */
-  @Override
   public void renderStatics(Graphics g) {
     for (IStaticUIElement e : statics) {
       e.render(g);
@@ -114,7 +108,6 @@ public class UI implements IUI {
    * above everything else. If image is null the foreground will be cleared.
    * @param image the image to render, if null no image will be rendered.
    */
-  @Override
   public void setForegroundImage(Image image) {
     foreground = image;
 

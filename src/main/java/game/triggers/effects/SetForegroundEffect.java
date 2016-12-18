@@ -7,16 +7,16 @@ package game.triggers.effects;
 import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
-import game.ui.IUI;
+import game.ui.hud.UI;
 
 import org.newdawn.slick.Image;
 
 
 public class SetForegroundEffect implements IEffect {
-  private final IUI ui;
+  private final UI ui;
   private final Image image;
 
-  public SetForegroundEffect(IUI ui, Image image) {
+  public SetForegroundEffect(UI ui, Image image) {
     assert ui != null;
 
     this.ui = ui;
