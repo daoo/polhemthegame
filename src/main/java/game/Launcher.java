@@ -13,6 +13,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -42,39 +43,38 @@ public class Launcher extends BasicGame {
     super(NAME + " - " + VERSION);
   }
 
-  public static void main(String[] args) throws SlickException, IOException {
+  private static Config readConfig() throws IOException {
     File workingDirectory = new File(System.getProperty("user.dir"));
+    File configFile = new File(workingDirectory, CONFIG_FILE);
+    try (FileReader reader = new FileReader(configFile)) {
+      ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
+
+      Binds binds1 = new Binds(
+          configData.player1.walkUp, configData.player1.walkDown,
+          configData.player1.walkLeft, configData.player1.walkRight,
+          configData.player1.fire, configData.player1.previousWeapon,
+          configData.player1.nextWeapon, configData.player1.buy,
+          configData.player1.weapon0, configData.player1.weapon1,
+          configData.player1.weapon2, configData.player1.weapon3,
+          configData.player1.weapon4);
+      Binds binds2 = new Binds(
+          configData.player2.walkUp, configData.player2.walkDown,
+          configData.player2.walkLeft, configData.player2.walkRight,
+          configData.player2.fire, configData.player2.previousWeapon,
+          configData.player2.nextWeapon, configData.player2.buy,
+          configData.player2.weapon0, configData.player2.weapon1,
+          configData.player2.weapon2, configData.player2.weapon3,
+          configData.player2.weapon4);
+
+      return new Config(binds1, binds2);
+    } catch (FileNotFoundException ignored) {
+      return new Config(Binds.DEFAULT, Binds.DEFAULT);
+    }
+  }
+
+  public static void main(String[] args) throws SlickException, IOException {
     try (Cache cache = new Cache()) {
-      final Config config;
-      File configFile = new File(workingDirectory, CONFIG_FILE);
-      if (configFile.exists()) {
-        try (FileReader reader = new FileReader(configFile)) {
-          ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
-
-          Binds binds1 = new Binds(
-              configData.player1.walkUp, configData.player1.walkDown,
-              configData.player1.walkLeft, configData.player1.walkRight,
-              configData.player1.fire, configData.player1.previousWeapon,
-              configData.player1.nextWeapon, configData.player1.buy,
-              configData.player1.weapon0, configData.player1.weapon1,
-              configData.player1.weapon2, configData.player1.weapon3,
-              configData.player1.weapon4);
-          Binds binds2 = new Binds(
-              configData.player2.walkUp, configData.player2.walkDown,
-              configData.player2.walkLeft, configData.player2.walkRight,
-              configData.player2.fire, configData.player2.previousWeapon,
-              configData.player2.nextWeapon, configData.player2.buy,
-              configData.player2.weapon0, configData.player2.weapon1,
-              configData.player2.weapon2, configData.player2.weapon3,
-              configData.player2.weapon4);
-
-          config = new Config(binds1, binds2);
-        }
-      } else {
-        config = new Config(Binds.DEFAULT, Binds.DEFAULT);
-      }
-
-      Locator.registerConfig(config);
+      Locator.registerConfig(readConfig());
       Locator.registerCache(cache);
       Locator.registerRandom(new Random());
 
