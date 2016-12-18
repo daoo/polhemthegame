@@ -7,10 +7,10 @@ package game.config;
 import org.lwjgl.input.Keyboard;
 
 /**
- * Simple POD for keeping track of player bindings.
+ * POJO for keeping track of player bindings.
  */
 public class Binds {
-  private static final String KEY_PREFIX = "KEY_";
+  public final static Binds DEFAULT = new Binds();
 
   public final int walkUp, walkDown, walkLeft, walkRight;
 
@@ -20,7 +20,7 @@ public class Binds {
   /**
    * Use default bindings.
    */
-  public Binds() {
+  private Binds() {
     walkUp         = Keyboard.KEY_W;
     walkDown       = Keyboard.KEY_S;
     walkLeft       = Keyboard.KEY_A;
@@ -52,26 +52,29 @@ public class Binds {
       String walkRight, String fire, String previousWeapon,
       String nextWeapon, String buy, String weapon0, String weapon1,
       String weapon2, String weapon3, String weapon4) {
-    try {
-      this.walkUp     = Keyboard.class.getField(KEY_PREFIX + walkUp).getInt(null);
-      this.walkDown   = Keyboard.class.getField(KEY_PREFIX + walkDown).getInt(null);
-      this.walkLeft   = Keyboard.class.getField(KEY_PREFIX + walkLeft).getInt(null);
-      this.walkRight  = Keyboard.class.getField(KEY_PREFIX + walkRight).getInt(null);
+    this.walkUp    = getKeyOrThrow(walkUp);
+    this.walkDown  = getKeyOrThrow(walkDown);
+    this.walkLeft  = getKeyOrThrow(walkLeft);
+    this.walkRight = getKeyOrThrow(walkRight);
 
-      this.fire = Keyboard.class.getField(KEY_PREFIX + fire).getInt(null);
-      this.buy  = Keyboard.class.getField(KEY_PREFIX + buy).getInt(null);
+    this.fire = getKeyOrThrow(fire);
+    this.buy  = getKeyOrThrow(buy);
 
-      this.previousWeapon = Keyboard.class.getField(KEY_PREFIX + previousWeapon).getInt(null);
-      this.nextWeapon     = Keyboard.class.getField(KEY_PREFIX + nextWeapon).getInt(null);
+    this.previousWeapon = getKeyOrThrow(previousWeapon);
+    this.nextWeapon     = getKeyOrThrow(nextWeapon);
 
-      this.weapon0 = Keyboard.class.getField(KEY_PREFIX + weapon0).getInt(null);
-      this.weapon1 = Keyboard.class.getField(KEY_PREFIX + weapon1).getInt(null);
-      this.weapon2 = Keyboard.class.getField(KEY_PREFIX + weapon2).getInt(null);
-      this.weapon3 = Keyboard.class.getField(KEY_PREFIX + weapon3).getInt(null);
-      this.weapon4 = Keyboard.class.getField(KEY_PREFIX + weapon4).getInt(null);
-    } catch (IllegalArgumentException | IllegalAccessException
-        | NoSuchFieldException | SecurityException e) {
-      throw new IllegalArgumentException("Reflection for key failed", e);
+    this.weapon0 = getKeyOrThrow(weapon0);
+    this.weapon1 = getKeyOrThrow(weapon1);
+    this.weapon2 = getKeyOrThrow(weapon2);
+    this.weapon3 = getKeyOrThrow(weapon3);
+    this.weapon4 = getKeyOrThrow(weapon4);
+  }
+
+  private static int getKeyOrThrow(String name) {
+    int key = Keyboard.getKeyIndex("KEY_" + name);
+    if (key == Keyboard.KEY_NONE) {
+      throw new IllegalArgumentException("Key '" + name + "' is invalid.");
     }
+    return key;
   }
 }

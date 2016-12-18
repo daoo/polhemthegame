@@ -74,7 +74,7 @@ public class Launcher extends BasicGame {
             config = new Config(binds1, binds2);
           }
         } else {
-          config = new Config(new Binds(), new Binds());
+          config = new Config(Binds.DEFAULT, Binds.DEFAULT);
         }
 
         Locator.registerConfig(config);
