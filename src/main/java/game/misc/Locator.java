@@ -11,30 +11,14 @@ import util.Random;
 
 /**
  * Service locator.
- * Implementation of the service locator pattern.
  */
-public class Locator {
-  private static Cache _cache;
-  private static Random _random;
-  private static IUI _ui;
-  private static Config _config;
+public final class Locator {
+  private static Cache s_cache = null;
+  private static Random s_random = null;
+  private static IUI s_ui = null;
+  private static Config s_config = null;
 
-  static {
-    _cache  = null;
-    _random = null;
-    _ui     = null;
-    _config = null;
-  }
-
-  /**
-   * Clear all registered services.
-   */
-  public static void close() {
-    _cache  = null;
-    _random = null;
-    _ui     = null;
-    _config = null;
-  }
+  private Locator() { }
 
   /**
    * Register a cache.
@@ -43,7 +27,7 @@ public class Locator {
   public static void registerCache(Cache cache) {
     assert cache != null;
 
-    _cache = cache;
+    s_cache = cache;
   }
 
   /**
@@ -53,7 +37,7 @@ public class Locator {
   public static void registerRandom(Random random) {
     assert random != null;
 
-    _random = random;
+    s_random = random;
   }
 
   /**
@@ -63,7 +47,7 @@ public class Locator {
   public static void registerUI(IUI ui) {
     assert ui != null;
 
-    _ui = ui;
+    s_ui = ui;
   }
 
   /**
@@ -73,7 +57,7 @@ public class Locator {
   public static void registerConfig(Config config) {
     assert config != null;
 
-    _config = config;
+    s_config = config;
   }
 
   /**
@@ -82,7 +66,7 @@ public class Locator {
    * @return the registered cache, or null
    */
   public static Cache getCache() {
-    return _cache;
+    return s_cache;
   }
 
   /**
@@ -91,7 +75,7 @@ public class Locator {
    * @return the registered RNG, or null
    */
   public static Random getRandom() {
-    return _random;
+    return s_random;
   }
 
   /**
@@ -100,7 +84,7 @@ public class Locator {
    * @return the registered UI, or null
    */
   public static IUI getUI() {
-    return _ui;
+    return s_ui;
   }
 
   /**
@@ -109,6 +93,6 @@ public class Locator {
    * @return the registered config, or null
    */
   public static Config getConfig() {
-    return _config;
+    return s_config;
   }
 }
