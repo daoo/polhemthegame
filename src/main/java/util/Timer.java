@@ -10,7 +10,8 @@ import math.ExtraMath;
  * A simple timer useful for testing if a certain amount of time has passed.
  */
 public class Timer {
-  private final long start, end;
+  private final long start;
+  private final long end;
   private final int length;
 
   private float current;

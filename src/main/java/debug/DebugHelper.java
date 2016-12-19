@@ -9,7 +9,7 @@ import java.util.Collection;
 import util.Node;
 
 public class DebugHelper {
-  public static Node<String> listToNode(String title, Collection<? extends Object> lst) {
+  public static Node<String> listToNode(String title, Collection<?> lst) {
     Node<String> node = new Node<>(title + " (" + lst.size() + ")");
 
     for (Object obj : lst) {

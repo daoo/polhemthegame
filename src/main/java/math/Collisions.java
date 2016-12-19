@@ -42,16 +42,16 @@ public class Collisions {
    */
   public static void blockFromExiting(Rectangle entity, Rectangle cont) {
     float x = entity.getMin().x;
-    float y = entity.getMin().y;
     if (x < cont.getX1()) {
       x = cont.getX1();
-    } else if ((x + entity.getWidth()) >= cont.getX2()) {
+    } else if (x + entity.getWidth() >= cont.getX2()) {
       x = cont.getWidth() - entity.getWidth();
     }
 
+    float y = entity.getMin().y;
     if (y < cont.getY1()) {
       y = cont.getY1();
-    } else if ((y + entity.getHeight()) >= cont.getY2()) {
+    } else if (y + entity.getHeight() >= cont.getY2()) {
       y = cont.getY2() - entity.getHeight();
     }
 

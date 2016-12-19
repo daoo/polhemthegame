@@ -7,7 +7,7 @@ package game.states.credits;
 public class Credits {
   private static final String  DANIEL       = "Daniel Oom";
   private static final String  NIKLAS       = "Niklas Johansson";
-  public static final String[] CREDITS_TEXT = new String[] {
+  public static final String[] CREDITS_TEXT = {
 
       "big:Polhem The Game",
       "big:An Mangoo Entertainment Product",

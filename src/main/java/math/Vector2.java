@@ -13,7 +13,8 @@ public class Vector2 {
   /**
    * X and Y components of the vector.
    */
-  public final float x, y;
+  public final float x;
+  public final float y;
 
   /**
    * Normalized version of the vector.
@@ -89,7 +90,7 @@ public class Vector2 {
    * @return the dot product as a float
    */
   public static float dot(Vector2 a, Vector2 b) {
-    return (a.x * b.x) + (a.y * b.y);
+    return a.x * b.x + a.y * b.y;
   }
 
   /**
@@ -101,7 +102,7 @@ public class Vector2 {
    * @return the distance as a float, greater than or equal to zero
    */
   public static float distance(Vector2 a, Vector2 b) {
-    return (float) Math.sqrt(Vector2.distanceSquared(a, b));
+    return (float) Math.sqrt(distanceSquared(a, b));
   }
 
   /**

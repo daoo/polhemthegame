@@ -54,11 +54,12 @@ public class WorldFactory {
   private final Rectangle rect;
   private final List<Entity> players;
 
-  private EntityFactory entityFactory;
+  private final EntityFactory entityFactory;
 
   private World world;
 
-  private Trigger creepsSpawnTrigger, creepsDeadTrigger;
+  private Trigger creepsSpawnTrigger;
+  private Trigger creepsDeadTrigger;
 
   public WorldFactory(LevelManager gameMode, StateManager stateManager,
                       EntityFactory entityFactory, Rectangle rect,

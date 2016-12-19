@@ -37,6 +37,6 @@ public class Clock {
    * @return true or false if enough time has passed since last sync
    */
   public boolean needsSync(long elapsed) {
-    return (targetFrameTime == 0) || (elapsed > next);
+    return targetFrameTime == 0 || elapsed > next;
   }
 }

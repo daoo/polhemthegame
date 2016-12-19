@@ -83,7 +83,6 @@ public class Inventory implements ILogicComponent {
     // Do nothing
   }
 
-  @SuppressWarnings("boxing")
   @Override
   public String toString() {
     return String.format("Inventory - %d money, %d weapons, %d kills, %f damageDealt",

@@ -36,7 +36,7 @@ public class Tree<T> {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 
-    Tree.toStringHelper(sb, EMPTY_STRING, root);
+    toStringHelper(sb, EMPTY_STRING, root);
 
     return sb.toString();
   }
@@ -49,7 +49,7 @@ public class Tree<T> {
    */
   private static <T> void toStringHelper(StringBuilder sb, String in, Node<T> node) {
     sb.append(in);
-    sb.append(node.value.toString());
+    sb.append(node.value);
     sb.append(NEW_LINE);
     for (Node<T> child : node.nodes) {
       toStringHelper(sb, in + INDENTATION, child);

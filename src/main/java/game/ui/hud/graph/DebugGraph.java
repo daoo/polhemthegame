@@ -8,7 +8,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import util.CircularFloatArray;
-import util.CircularFloatArray.FloatIterator;
 
 public class DebugGraph {
   /**
@@ -23,10 +22,13 @@ public class DebugGraph {
   private static final Color BLUE = new Color(0, 0, 255, 200);
   private static final Color GREEN = new Color(0, 255, 0, 200);
 
-  private int width, height;
+  private final int width;
+  private final int height;
 
-  private final Measure updateMeasure, renderMeasure;
-  private final CircularFloatArray updateData, renderData;
+  private final Measure updateMeasure;
+  private final Measure renderMeasure;
+  private final CircularFloatArray updateData;
+  private final CircularFloatArray renderData;
 
   public DebugGraph(int width, int height) {
     this.width = width;
@@ -75,10 +77,10 @@ public class DebugGraph {
 
   private void drawData(CircularFloatArray graphData, Graphics g) {
     int px = 0;
-    FloatIterator it = graphData.iterator();
+    CircularFloatArray.FloatIterator it = graphData.iterator();
     while (it.hasNext()) {
       double data = it.next();
-      double dataHeight = data / (MILLISECONDS_PER_FRAME);
+      double dataHeight = data / MILLISECONDS_PER_FRAME;
       int pixelHeight = (int) (dataHeight * height);
 
       g.drawLine(px, height - pixelHeight, px, height);

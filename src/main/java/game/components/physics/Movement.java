@@ -48,6 +48,6 @@ public class Movement implements ILogicComponent {
 
   @Override
   public String toString() {
-    return "Movement - " + vel.toString();
+    return "Movement - " + vel;
   }
 }

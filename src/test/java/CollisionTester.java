@@ -47,7 +47,8 @@ public class CollisionTester extends BasicGame {
     }
   }
 
-  private final Entity obj1, obj2;
+  private final Entity obj1;
+  private final Entity obj2;
   private final Movement mov2;
 
   public CollisionTester() {
@@ -89,23 +90,23 @@ public class CollisionTester extends BasicGame {
       Rectangle body = obj2.body;
       float s = 100.0f / delta;
 
-      if (Keyboard.isKeyDown(Keyboard.KEY_UP))
+      if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
         body.addPosition(0, -s);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
         body.addPosition(0, s);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
         body.addPosition(-s, 0);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
         body.addPosition(s, 0);
-
-      else if (Keyboard.isKeyDown(Keyboard.KEY_W))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
         mov2.addVelocity(0, -s);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_S))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
         mov2.addVelocity(0, s);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_A))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
         mov2.addVelocity(-s, 0);
-      else if (Keyboard.isKeyDown(Keyboard.KEY_D))
+      } else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
         mov2.addVelocity(s, 0);
+      }
     }
   }
 }

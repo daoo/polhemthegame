@@ -9,8 +9,10 @@ public class Measure {
 
   private final long timeDelta;
 
-  private long total, measures;
-  private long firstMeasure, lastMeasure;
+  private long total;
+  private long measures;
+  private long firstMeasure;
+  private long lastMeasure;
 
   private boolean finished;
 
@@ -27,8 +29,9 @@ public class Measure {
   public void startMeasure() {
     long timeCurrent = System.nanoTime();
 
-    if (firstMeasure == 0)
+    if (firstMeasure == 0) {
       firstMeasure = timeCurrent;
+    }
 
     lastMeasure = timeCurrent;
   }

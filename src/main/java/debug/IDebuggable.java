@@ -12,11 +12,11 @@ public interface IDebuggable {
    * information related to the game.
    * @return a debug node
    */
-  public Node<String> debugTree();
+  Node<String> debugTree();
 
   /**
    * A short descriptive string with debugging information.
    * @return a string
    */
-  public String debugString();
+  String debugString();
 }

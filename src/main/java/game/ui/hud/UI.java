@@ -23,9 +23,11 @@ public class UI {
 
   private final ArrayList<IDynamicUIElement> toAdd;
 
-  private final int width, height;
+  private final int width;
+  private final int height;
 
-  private int imgX, imgY;
+  private int imgX;
+  private int imgY;
   private Image foreground;
 
   public UI(int width, int height) {

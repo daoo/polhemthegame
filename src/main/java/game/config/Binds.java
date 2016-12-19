@@ -10,12 +10,22 @@ import org.lwjgl.input.Keyboard;
  * POJO for keeping track of player bindings.
  */
 public class Binds {
-  public final static Binds DEFAULT = new Binds();
+  public static final Binds DEFAULT = new Binds();
 
-  public final int walkUp, walkDown, walkLeft, walkRight;
+  public final int walkUp;
+  public final int walkDown;
+  public final int walkLeft;
+  public final int walkRight;
 
-  public final int fire, previousWeapon, nextWeapon, buy;
-  public final int weapon0, weapon1, weapon2, weapon3, weapon4;
+  public final int fire;
+  public final int previousWeapon;
+  public final int nextWeapon;
+  public final int buy;
+  public final int weapon0;
+  public final int weapon1;
+  public final int weapon2;
+  public final int weapon3;
+  public final int weapon4;
 
   /**
    * Use default bindings.

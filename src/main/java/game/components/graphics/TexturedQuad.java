@@ -13,7 +13,8 @@ import game.types.Message;
 import game.types.Orientation;
 
 public class TexturedQuad implements IRenderComponent {
-  private final int centerX, centerY;
+  private final int centerX;
+  private final int centerY;
   private final boolean flip;
   private final int angle;
   private final Image img;

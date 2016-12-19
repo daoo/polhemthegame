@@ -12,7 +12,9 @@ import org.lwjgl.input.Keyboard;
 public class Key {
   private final int key;
 
-  private boolean down, pressed, released;
+  private boolean down;
+  private boolean pressed;
+  private boolean released;
 
   /**
    * Construct a new key for a key identifier.

@@ -5,5 +5,6 @@
 package loader.data.json.types;
 
 public class Offset {
-  public int x, y;
+  public int x;
+  public int y;
 }

@@ -6,8 +6,8 @@ package math;
 
 public class ExtraMath {
   public static final float PI          = (float) Math.PI;
-  public static final float PI_HALF     = ExtraMath.PI / 2.0f;
-  public static final float RAD_PER_DEG = ExtraMath.PI / 180.0f;
+  public static final float PI_HALF     = PI / 2.0f;
+  public static final float RAD_PER_DEG = PI / 180.0f;
 
   public static int square(int x) {
     return x * x;
@@ -29,25 +29,27 @@ public class ExtraMath {
   public static boolean inRange(float v, float a, float b) {
     assert a < b;
 
-    return (v >= a) && (v < b);
+    return v >= a && v < b;
   }
 
   public static float clamp(float min, float max, float value) {
-    if (value < min)
+    if (value < min) {
       return min;
-    else if (value > max)
+    } else if (value > max) {
       return max;
-    else
+    } else {
       return value;
+    }
   }
 
   public static int clamp(int min, int max, int value) {
-    if (value < min)
+    if (value < min) {
       return min;
-    else if (value > max)
+    } else if (value > max) {
       return max;
-    else
+    } else {
       return value;
+    }
   }
 
   /**

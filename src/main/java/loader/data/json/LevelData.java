@@ -12,7 +12,9 @@ import loader.data.json.types.CreepSpawnData;
 
 public class LevelData implements IData {
   public String level;
-  public String loading, completed, preBossImage;
+  public String loading;
+  public String completed;
+  public String preBossImage;
 
   public String boss;
   public ArrayList<CreepSpawnData> creeps;

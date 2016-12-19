@@ -33,7 +33,9 @@ public class MenuState implements IState {
   private final Image background;
   private final Menu  menu;
 
-  private final Key keyUp, keyDown, keyEnter;
+  private final Key keyUp;
+  private final Key keyDown;
+  private final Key keyEnter;
 
   public MenuState(final StateManager manager)
   throws ParserException, IOException {

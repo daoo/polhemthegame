@@ -31,7 +31,7 @@ public class Hand implements IRenderComponent, IProgress {
   public Hand(Entity owner, Orientation orientation, Vector2 handOffset) {
     this.owner = owner;
 
-    offsetCalc = (orientation == Orientation.RIGHT)
+    offsetCalc = orientation == Orientation.RIGHT
         ? new OffsetCalculatorRight(owner, handOffset)
         : new OffsetCalculatorLeft(owner, handOffset);
 
@@ -73,7 +73,7 @@ public class Hand implements IRenderComponent, IProgress {
       float x = pos.x;
       if (weapon.getOrientation() == Orientation.LEFT) {
         // Make sure the projectile does not hit the source entity
-        x = x - factory.getWidth();
+        x -= factory.getWidth();
       }
 
       // Find out if there are any projectiles that want to be spawned
@@ -127,7 +127,7 @@ public class Hand implements IRenderComponent, IProgress {
   @Override
   public String toString() {
     if (weapon != null) {
-      return "Hand - holding " + weapon.toString();
+      return "Hand - holding " + weapon;
     }
 
     return "Hand - not holding anything";

@@ -5,8 +5,6 @@
 package game.components.holdables.weapons;
 
 public class InfiniteMagazine implements IMagazine {
-  public InfiniteMagazine() {
-  }
 
   @Override
   public void takeOne() throws OutOfAmmoException {

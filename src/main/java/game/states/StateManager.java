@@ -15,9 +15,10 @@ import loader.parser.GsonParser;
 import loader.parser.ParserException;
 
 public class StateManager {
-  private static boolean DEBUG = false;
+  private static final boolean DEBUG = false;
 
-  private final int windowWidth, windowHeight;
+  private final int windowWidth;
+  private final int windowHeight;
 
   private boolean exit;
   private IState currentState;
@@ -78,8 +79,9 @@ public class StateManager {
   }
 
   private void switchToState(IState newState) {
-    if (currentState != null)
+    if (currentState != null) {
       currentState.end(this);
+    }
 
     currentState = newState;
     currentState.start(this);

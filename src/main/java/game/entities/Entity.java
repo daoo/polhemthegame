@@ -107,7 +107,7 @@ public class Entity implements IEntity {
 
   @Override
   public boolean isActive() {
-    return active || (!effects.isEmpty());
+    return active || !effects.isEmpty();
   }
 
   @Override
@@ -124,7 +124,7 @@ public class Entity implements IEntity {
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(new Node<>("Body = " + body.toString()));
+    parent.nodes.add(new Node<>("Body = " + body));
     parent.nodes.add(new Node<>("Active = " + Boolean.toString(active)));
 
     parent.nodes.add(DebugHelper.listToNode("Logic components", updates));

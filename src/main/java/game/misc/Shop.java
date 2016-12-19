@@ -23,7 +23,8 @@ public class Shop {
   private class ShopItem {
     public boolean bought;
     public final int price;
-    public final Image icon, iconGray;
+    public final Image icon;
+    public final Image iconGray;
     public final Weapon weapon;
 
     public ShopItem(int price, Image icon, Image iconGray, Weapon weapon) {
@@ -61,11 +62,7 @@ public class Shop {
   public void render(Graphics g, int spacing) {
     int x = spacing;
     for (ShopItem item : items) {
-      if (item.bought)
-        g.drawImage(item.icon, x, spacing);
-      else
-        g.drawImage(item.iconGray, x, spacing);
-
+      g.drawImage(item.bought ? item.icon : item.iconGray, x, spacing);
       x += spacing + item.icon.getWidth();
     }
   }
@@ -75,18 +72,15 @@ public class Shop {
   }
 
   public Weapon buyNext(Wallet wallet) {
-    if (next == null)
+    if (next == null) {
       return null;
+    }
 
     if (wallet.takeMoney(next.price)) {
       next.bought = true;
       Weapon tmp = next.weapon;
 
-      if (it.hasNext()) {
-        next = it.next();
-      } else {
-        next = null;
-      }
+      next = it.hasNext() ? it.next() : null;
 
       return tmp;
     }

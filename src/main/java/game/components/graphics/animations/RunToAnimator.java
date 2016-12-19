@@ -7,7 +7,8 @@ package game.components.graphics.animations;
 
 public class RunToAnimator implements IAnimator {
   private boolean finished;
-  private final Tile size, target;
+  private final Tile size;
+  private final Tile target;
 
   public RunToAnimator(Tile size, Tile target) {
     assert size != null;

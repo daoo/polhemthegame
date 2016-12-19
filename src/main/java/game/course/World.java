@@ -21,10 +21,13 @@ import util.Node;
 
 public class World implements IDebuggable {
   private final ArrayList<IEntity> misc;
-  private final ArrayList<Entity> units, projectiles;
+  private final ArrayList<Entity> units;
+  private final ArrayList<Entity> projectiles;
   private final ArrayList<IEntity> newMisc;
-  private final ArrayList<Entity> newUnits, newProjectiles;
-  private final ArrayList<Trigger> triggers, newTriggers;
+  private final ArrayList<Entity> newUnits;
+  private final ArrayList<Entity> newProjectiles;
+  private final ArrayList<Trigger> triggers;
+  private final ArrayList<Trigger> newTriggers;
 
   public World() {
     misc        = new ArrayList<>();

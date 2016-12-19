@@ -16,7 +16,7 @@ public class MenuButton extends MenuItem {
     throws IOException, ParserException {
     super(name, x, y);
 
-    assert (e != null);
+    assert e != null;
 
     onClick = e;
   }

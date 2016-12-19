@@ -11,7 +11,10 @@ import game.ui.IStaticUIElement;
 
 
 public class BlackBox implements IStaticUIElement {
-  private final int x, y, w, h;
+  private final int x;
+  private final int y;
+  private final int w;
+  private final int h;
 
   public BlackBox(int x, int y, int w, int h) {
     this.x = x;

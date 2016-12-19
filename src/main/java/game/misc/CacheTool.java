@@ -95,7 +95,7 @@ public class CacheTool {
   public static AnimatedSheet getAnimatedSheet(Cache cache,
       Orientation orientation, int angle, SpriteData sprite)
       throws ParserException, IOException {
-    SpriteSheet sheet = CacheTool.getSpriteSheet(cache, sprite);
+    SpriteSheet sheet = getSpriteSheet(cache, sprite);
     return new AnimatedSheet(
       sprite.framerate,
       sprite.offset.x,

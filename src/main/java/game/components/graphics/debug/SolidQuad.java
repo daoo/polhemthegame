@@ -13,7 +13,8 @@ import game.types.Message;
 
 public class SolidQuad implements IRenderComponent {
   private final Color color;
-  private final int width, height;
+  private final int width;
+  private final int height;
 
   public SolidQuad(Color color, int width, int height) {
     this.color  = color;

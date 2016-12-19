@@ -22,7 +22,7 @@ public class Players {
     float dx = 0;
     float dy = rect.getHeight() / (players.size() * 2);
 
-    float x = rect.getX1() + rect.getWidth() * Players.STARING_X;
+    float x = rect.getX1() + rect.getWidth() * STARING_X;
     float y = rect.getY1() + dy;
 
     for (Entity p : players) {

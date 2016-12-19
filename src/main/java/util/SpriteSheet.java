@@ -15,9 +15,11 @@ public class SpriteSheet {
   private final Image original;
   private final Image[][] subImages;
 
-  private final int tileWidth, tileHeight;
+  private final int tileWidth;
+  private final int tileHeight;
 
-  private final int tileCountX, tileCountY;
+  private final int tileCountX;
+  private final int tileCountY;
 
   /**
    * Create a new sprite sheet.

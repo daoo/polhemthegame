@@ -5,5 +5,5 @@
 package game.ui;
 
 public interface IUIEvent {
-  public void fire();
+  void fire();
 }

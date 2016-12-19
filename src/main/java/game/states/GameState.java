@@ -34,12 +34,16 @@ public class GameState implements IState {
   private final LevelManager levels;
   private final Image imgPauseText;
 
-  private final Key keyBackspace, keyEscape;
+  private final Key keyBackspace;
+  private final Key keyEscape;
 
   private long elapsed;
   private boolean paused;
 
-  private final int arenaX, arenaY, windowWidth, windowHeight;
+  private final int arenaX;
+  private final int arenaY;
+  private final int windowWidth;
+  private final int windowHeight;
 
   public GameState(StateManager stateManager, CampaignData data, boolean twoPlayer,
                    int windowWidth, int windowHeight)
@@ -53,15 +57,14 @@ public class GameState implements IState {
     arenaX = 0;
     arenaY = PlayerUI.HEIGHT;
 
-    int arenaWidth  = windowWidth;
-    int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
-
     ui = new UI(windowWidth, windowHeight);
     Locator.registerUI(ui);
     ui.addStatic(new BlackBox(0, 0, windowWidth, PlayerUI.HEIGHT));
     ui.addStatic(new BlackBox(0, windowHeight - PlayerUI.HEIGHT,
           windowWidth, PlayerUI.HEIGHT));
 
+    int arenaWidth  = windowWidth;
+    int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
     levels = new LevelManager(stateManager, twoPlayer, data, windowWidth,
         arenaWidth, arenaHeight);
 
@@ -142,7 +145,7 @@ public class GameState implements IState {
 
   @Override
   public String debugString() {
-    return "GameState, time " + String.valueOf(elapsed);
+    return "GameState, time " + elapsed;
   }
 
   @Override

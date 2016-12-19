@@ -23,12 +23,14 @@ import util.SpriteSheet;
 public class AnimatedSheet implements IRenderComponent {
   private static final IAnimator IDLE = new IdleAnimator();
 
-  private final int offsetX, offsetY;
+  private final int offsetX;
+  private final int offsetY;
   private final float rotation;
   private final boolean flip;
 
   private final SpriteSheet sheet;
-  private final int centerX, centerY;
+  private final int centerX;
+  private final int centerY;
   private final Tile size;
 
   private final Clock clock;
@@ -139,7 +141,6 @@ public class AnimatedSheet implements IRenderComponent {
     }
   }
 
-  @SuppressWarnings("boxing")
   @Override
   public String toString() {
     return String.format("AnimatedSheet - count: %dx%d, size: %dx%d",

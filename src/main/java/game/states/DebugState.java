@@ -32,7 +32,10 @@ public class DebugState implements IState {
   private final IState game;
   private boolean paused;
 
-  private final Key keyF1, keyF2, keyF5, keyF6;
+  private final Key keyF1;
+  private final Key keyF2;
+  private final Key keyF5;
+  private final Key keyF6;
 
   public DebugState(int width, IState game) {
     keyF1 = new Key(Keyboard.KEY_F1);
@@ -91,7 +94,7 @@ public class DebugState implements IState {
     keyF2.update();
     if (keyF2.wasPressed()) {
       Tree<String> tree = new Tree<>(game.debugTree());
-      System.out.println(tree.toString());
+      System.out.println(tree);
     }
   }
 

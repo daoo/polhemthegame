@@ -60,7 +60,8 @@ public class CircularFloatArray {
    */
   public static class FloatIterator {
     private final float[] data;
-    private int c, i;
+    private int c;
+    private int i;
 
     FloatIterator(float[] data, int start) {
       this.data = data;

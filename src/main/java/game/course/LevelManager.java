@@ -26,11 +26,13 @@ public class LevelManager {
   private final StateManager stateManager;
 
   private final Campaign campaign;
-  private final Image background, statics;
+  private final Image background;
+  private final Image statics;
   private final WorldFactory worldFactory;
 
   private World world;
-  private boolean finished, credits;
+  private boolean finished;
+  private boolean credits;
 
   public LevelManager(StateManager stateManager, boolean twoPlayer,
       CampaignData data, int windowWidth, int arenaWidth, int arenaHeight)

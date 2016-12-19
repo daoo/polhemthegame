@@ -18,11 +18,7 @@ public class OffsetCalculatorRight implements IOffsetCalculator {
 
   @Override
   public Vector2 getMuzzlePosition(int weaponWidth, Vector2 muzzleOffset) {
-    Vector2 a = entity.body.getMin();
-    Vector2 b = Vector2.add(a, offset);
-    Vector2 c = Vector2.add(b, muzzleOffset);
-
-    return c;
+    return Vector2.add(Vector2.add(entity.body.getMin(), offset), muzzleOffset);
   }
 
   @Override

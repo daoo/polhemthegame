@@ -22,9 +22,11 @@ public class PlayerUI implements IStaticUIElement {
   private static final String MONEY = "Money: ";
   private static final String KILLS = "Kills: ";
 
-  private final int x, y;
+  private final int x;
+  private final int y;
 
-  private final int stats_x, stats_y;
+  private final int stats_x;
+  private final int stats_y;
   private final int kills_y;
 
   private final Inventory inventory;
@@ -49,8 +51,8 @@ public class PlayerUI implements IStaticUIElement {
 
     shop.render(g, PADDING);
 
-    String mStr = MONEY + String.valueOf(inventory.getWallet().getMoney());
-    String kStr = KILLS + String.valueOf(inventory.getKills());
+    String mStr = MONEY + inventory.getWallet().getMoney();
+    String kStr = KILLS + inventory.getKills();
 
     g.setColor(Color.white);
     g.drawString(mStr, stats_x, stats_y);

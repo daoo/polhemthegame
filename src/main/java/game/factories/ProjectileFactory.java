@@ -43,10 +43,12 @@ import util.SpriteSheet;
 public class ProjectileFactory {
   private final Rectangle rect;
   private final Orientation orientation;
-  private final int launchAngle, spread;
+  private final int launchAngle;
+  private final int spread;
   private final ProjectileData data;
   private final Image img;
-  private final SpriteSheet sprite, explosion;
+  private final SpriteSheet sprite;
+  private final SpriteSheet explosion;
   private final Graphics statics;
 
   /**
@@ -85,7 +87,7 @@ public class ProjectileFactory {
       sprite = null;
     }
 
-    explosion = (data.aoe == null)
+    explosion = data.aoe == null
       ? null
       : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
   }
@@ -117,11 +119,13 @@ public class ProjectileFactory {
       Movement mov = getMovement(p, angle);
       p.addLogicComponent(mov);
 
-      if (data.gravity)
+      if (data.gravity) {
         p.addLogicComponent(new Gravity(mov));
+      }
 
-      if (data.collides)
+      if (data.collides) {
         p.addLogicComponent(new MovingProjectileCollision(p, mov));
+      }
     } else {
       if (data.collides) {
         p.addLogicComponent(new StaticCollision(p));

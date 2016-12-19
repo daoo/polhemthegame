@@ -46,7 +46,7 @@ public class BossAI implements ILogicComponent {
     // Setup the area which the TOP LEFT of the boss body may move around in
     float x1 = arenaRect.getX2() - locationX;
     float y1 = arenaRect.getY1() + entity.body.getHeight();
-    float x2 = arenaRect.getX2() - (3.0f / 2.0f) * entity.body.getWidth();
+    float x2 = arenaRect.getX2() - 3.0f / 2.0f * entity.body.getWidth();
     float y2 = arenaRect.getY2() - entity.body.getHeight();
 
     this.movementRect = new Rectangle(x1, y1, (int) (x2 - x1), (int) (y2 - y1));

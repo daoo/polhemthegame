@@ -28,11 +28,19 @@ public class BossWalkingTester extends BasicGame {
   private final Rectangle rect;
   private final Vector2 circlePosition;
 
-  private final int rx1, ry1, rx2, ry2, rw, rh;
-  private final int cx, cy;
-  private final int cr, crs;
+  private final int rx1;
+  private final int ry1;
+  private final int rx2;
+  private final int ry2;
+  private final int rw;
+  private final int rh;
+  private final int cx;
+  private final int cy;
+  private final int cr;
+  private final int crs;
 
-  private int correct, incorrect;
+  private int correct;
+  private int incorrect;
 
   private Image points;
   private Graphics graphicsPoints;

@@ -32,6 +32,6 @@ public class MovementConstraint implements ILogicComponent {
 
   @Override
   public String toString() {
-    return "MovementConstraint - rect: " + constraints.toString();
+    return "MovementConstraint - rect: " + constraints;
   }
 }

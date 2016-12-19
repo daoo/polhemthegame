@@ -5,7 +5,8 @@
 package loader.data.json.types;
 
 public class ProjectileData {
-  public boolean collides, gravity;
+  public boolean collides;
+  public boolean gravity;
   public Size hitbox;
 
   public AOEData aoe;

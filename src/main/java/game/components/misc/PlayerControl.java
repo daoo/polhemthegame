@@ -27,11 +27,15 @@ public class PlayerControl implements ILogicComponent {
 
   private final Binds binds;
 
-  private final Key keyPreviousWeapon, keyNextWeapon, keyBuy, keyHoldable;
+  private final Key keyPreviousWeapon;
+  private final Key keyNextWeapon;
+  private final Key keyBuy;
+  private final Key keyHoldable;
 
   private final float speed;
 
-  private int lastX, lastY;
+  private int lastX;
+  private int lastY;
 
   public PlayerControl(IEntity owner, Movement movement, Inventory inventory,
       Shop shop, Hand hand, float speed, Binds binds) {
@@ -57,17 +61,21 @@ public class PlayerControl implements ILogicComponent {
     int x = 0;
     int y = 0;
 
-    if (Keyboard.isKeyDown(binds.walkLeft))
+    if (Keyboard.isKeyDown(binds.walkLeft)) {
       x += -1;
-    if (Keyboard.isKeyDown(binds.walkRight))
+    }
+    if (Keyboard.isKeyDown(binds.walkRight)) {
       x += 1;
-    if (Keyboard.isKeyDown(binds.walkUp))
+    }
+    if (Keyboard.isKeyDown(binds.walkUp)) {
       y += -1;
-    if (Keyboard.isKeyDown(binds.walkDown))
+    }
+    if (Keyboard.isKeyDown(binds.walkDown)) {
       y += 1;
+    }
 
-    if ((x != lastX) || (y != lastY)) {
-      if ((y == 0) && (x == 0)) {
+    if (x != lastX || y != lastY) {
+      if (y == 0 && x == 0) {
         owner.sendMessage(Message.STOP_ANIMATION, null);
       } else {
         owner.sendMessage(Message.START_ANIMATION, null);

@@ -13,7 +13,7 @@ public class MainMenuEffect implements IEffect {
   private final StateManager stateManager;
 
   public MainMenuEffect(StateManager stateManager) {
-    assert (stateManager != null);
+    assert stateManager != null;
     this.stateManager = stateManager;
   }
 

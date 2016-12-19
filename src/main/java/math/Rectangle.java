@@ -5,8 +5,13 @@
 package math;
 
 public class Rectangle {
-  private Vector2 min, max, center;
-  private final int width, height, halfWidth, halfHeight;
+  private Vector2 min;
+  private Vector2 max;
+  private Vector2 center;
+  private final int width;
+  private final int height;
+  private final int halfWidth;
+  private final int halfHeight;
 
   /**
    * Copy constructor.
@@ -162,7 +167,6 @@ public class Rectangle {
    * Return a string representation of the rectangle.
    * @return a string
    */
-  @SuppressWarnings("boxing")
   @Override
   public String toString() {
     return String.format("(%f, %f, %f, %f) %dx%d",
@@ -176,8 +180,9 @@ public class Rectangle {
    * @return true or false depending on if they intersecting or not
    */
   public static boolean intersects(Rectangle a, Rectangle b) {
-    return !((a.min.x > b.max.x) || (a.min.y > b.max.y) ||
-             (a.max.x < b.min.x) || (a.max.y < b.min.y));
+    return !(
+        a.min.x > b.max.x || a.min.y > b.max.y ||
+        a.max.x < b.min.x || a.max.y < b.min.y);
   }
 
   /**
@@ -188,8 +193,9 @@ public class Rectangle {
    * @return true or false depending on if b is contained by a or not
    */
   public static boolean contains(Rectangle a, Rectangle b) {
-    return ((b.min.x > a.min.x && b.max.x < a.max.x) &&
-            (b.min.y > a.min.y && b.max.y < a.max.y));
+    return
+        b.min.x > a.min.x && b.max.x < a.max.x &&
+        b.min.y > a.min.y && b.max.y < a.max.y;
   }
 
   /**

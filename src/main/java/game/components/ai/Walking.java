@@ -134,7 +134,8 @@ public class Walking implements IBossState {
       int cx, int cy, int cr) {
     assert cr < ExtraMath.square(ry2 - ry1);
 
-    float targetX, targetY;
+    float targetX;
+    float targetY;
 
     /* The problem:
      * We want to generate a random point within a rectangle (movementRect) but
@@ -165,7 +166,7 @@ public class Walking implements IBossState {
       targetY = rnd.nextFloat(ry1, ry2);
     } else {
       // Here we have to take the circle into account
-      int yRoot = (int) (Math.sqrt(cr - tmp));
+      int yRoot = (int) Math.sqrt(cr - tmp);
 
       // Top and bottom of the circle
       int y1 = cy - yRoot;

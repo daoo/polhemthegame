@@ -18,8 +18,10 @@ import game.ui.IDynamicUIElement;
  */
 public class InfoBar implements IDynamicUIElement {
   private final Entity entity;
-  private final int barWidth, barHeight;
-  private final int offsetX, offsetY;
+  private final int barWidth;
+  private final int barHeight;
+  private final int offsetX;
+  private final int offsetY;
   private final ArrayList<Bar> bars;
 
   /**

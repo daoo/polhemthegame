@@ -43,6 +43,6 @@ public class Magazine implements IMagazine {
 
   @Override
   public float getFractionFilled() {
-    return ((float) ammo / (float) size);
+    return (float) ammo / (float) size;
   }
 }

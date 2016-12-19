@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class FontHelper {
   private static final String FORMATER_SEPARATOR = ":";
   private static final String DEFAULT_FORMATER = "default";
 
-  private static final ColorEffect COLOR_WHITE = new ColorEffect(java.awt.Color.white);
+  private static final ColorEffect COLOR_WHITE = new ColorEffect(Color.white);
 
   public static UnicodeFont getFont(String name, int size)
       throws SlickException {
@@ -61,7 +62,8 @@ public class FontHelper {
     int h = 0;
     for (String line : lines) {
       int i = line.indexOf(FORMATER_SEPARATOR);
-      String formater, text;
+      String formater;
+      String text;
       if (i == -1) {
         formater = DEFAULT_FORMATER;
         text = line;

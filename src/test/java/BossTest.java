@@ -14,8 +14,9 @@ import math.Rectangle;
 import math.Vector2;
 import util.Random;
 
+import static org.junit.Assert.assertTrue;
+
 public class BossTest {
-  @SuppressWarnings("static-method")
   @Test
   public void test() {
     Random rnd = new Random();
@@ -36,8 +37,8 @@ public class BossTest {
     for (int i = 0; i < 9999999; ++i) {
       Vector2 p = Walking.newRandomTarget(rnd, rx1, ry1, rx2, ry2, cx, cy, radiusSquared);
 
-      Assert.assertTrue(Rectangle.contains(rect, p));
-      Assert.assertTrue(Vector2.distanceSquared(cPos, p) >= radiusSquared);
+      assertTrue(Rectangle.contains(rect, p));
+      assertTrue(Vector2.distanceSquared(cPos, p) >= radiusSquared);
     }
   }
 }

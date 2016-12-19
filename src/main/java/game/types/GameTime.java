@@ -11,7 +11,7 @@ public class GameTime {
   public final long elapsedMilli;
 
   public GameTime(float frame, int frameMilli, long elapsedMilli) {
-    this.frame   = frame;
+    this.frame = frame;
     this.frameMilli = frameMilli;
     this.elapsedMilli = elapsedMilli;
   }

@@ -17,7 +17,8 @@ import loader.parser.ParserException;
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;
 
-  private final int x, y;
+  private final int x;
+  private final int y;
 
   private final Image[] stateMap;
 

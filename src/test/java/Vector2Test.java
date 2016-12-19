@@ -14,7 +14,7 @@ import util.Random;
 import static org.junit.Assert.assertEquals;
 
 public class Vector2Test {
-  private static int RANGE = 100;
+  private static final int RANGE = 100;
 
   private Random random;
 
