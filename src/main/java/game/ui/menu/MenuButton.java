@@ -6,22 +6,21 @@ package game.ui.menu;
 
 import java.io.IOException;
 
-import game.ui.IUIEvent;
 import loader.parser.ParserException;
 
 public class MenuButton extends MenuItem {
-  public final IUIEvent onClick;
+  private final Runnable onClick;
 
-  public MenuButton(String name, int x, int y, IUIEvent e)
+  public MenuButton(String name, int x, int y, Runnable onClick)
     throws IOException, ParserException {
     super(name, x, y);
 
-    assert e != null;
+    assert onClick != null;
 
-    onClick = e;
+    this.onClick = onClick;
   }
 
   public void click() {
-    onClick.fire();
+    onClick.run();
   }
 }

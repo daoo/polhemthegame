@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import game.misc.CacheTool;
 import game.misc.Locator;
-import game.ui.IUIEvent;
 import game.ui.menu.Menu;
 import game.ui.menu.MenuButton;
 import game.ui.menu.MenuItem;
@@ -43,21 +42,9 @@ public class MenuState implements IState {
 
     ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
-    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380, new IUIEvent() {
-      @Override public void fire() {
-        manager.enterGame(CAMPAIGN_FILE, false);
-      }
-    }));
-    tmp.add(new MenuButton(BUTTON_COOP, 60, 480, new IUIEvent() {
-      @Override public void fire() {
-        manager.enterGame(CAMPAIGN_FILE, true);
-      }
-    }));
-    tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, new IUIEvent() {
-      @Override public void fire() {
-        manager.quit();
-      }
-    }));
+    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380, () -> manager.enterGame(CAMPAIGN_FILE, false)));
+    tmp.add(new MenuButton(BUTTON_COOP, 60, 480, () -> manager.enterGame(CAMPAIGN_FILE, true)));
+    tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, () -> manager.quit()));
 
     menu = new Menu(tmp);
 
