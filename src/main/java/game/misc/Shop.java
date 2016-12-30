@@ -20,7 +20,7 @@ import loader.data.json.types.ShopItemData;
 import loader.parser.ParserException;
 
 public class Shop {
-  private class ShopItem {
+  private static class ShopItem {
     public boolean bought;
     public final int price;
     public final Image icon;

@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class World implements IDebuggable {
   }
 
   public Iterable<Entity> getUnits() {
-    return units;
+    return Collections.unmodifiableCollection(units);
   }
 
   public void render(Graphics g) {

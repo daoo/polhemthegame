@@ -18,6 +18,7 @@ import game.components.physics.Movement;
 import game.entities.Entity;
 import math.Collisions;
 import math.Rectangle;
+import math.Vector2;
 
 public class CollisionTester extends BasicGame {
   private static final boolean FULLSCREEN = false;
@@ -91,21 +92,21 @@ public class CollisionTester extends BasicGame {
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-        body.addPosition(0, -s);
+        body.addPosition(new Vector2(0, -s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-        body.addPosition(0, s);
+        body.addPosition(new Vector2(0, s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-        body.addPosition(-s, 0);
+        body.addPosition(new Vector2(-s, 0));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-        body.addPosition(s, 0);
+        body.addPosition(new Vector2(s, 0));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-        mov2.addVelocity(0, -s);
+        mov2.addVelocity(new Vector2(0, -s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-        mov2.addVelocity(0, s);
+        mov2.addVelocity(new Vector2(0, s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-        mov2.addVelocity(-s, 0);
+        mov2.addVelocity(new Vector2(-s, 0));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-        mov2.addVelocity(s, 0);
+        mov2.addVelocity(new Vector2(s, 0));
       }
     }
   }

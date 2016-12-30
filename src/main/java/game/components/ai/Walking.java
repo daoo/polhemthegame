@@ -53,7 +53,7 @@ public class Walking implements IBossState {
    * Create a new walk state for boss AI.
    * Instead of specifying the initial target a random target will be chosen
    * instead.
-   * @param entity the boss entity
+   * @param body the body rectangle
    * @param hand the boss hand
    * @param movement the boss movement
    * @param speed the speed of the boss

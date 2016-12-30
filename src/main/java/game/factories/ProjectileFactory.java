@@ -59,7 +59,6 @@ public class ProjectileFactory {
    * @param launchAngle the angle of launching in degrees, zero means horizontal
    * @param spread spread in degrees, [-spread, spread]
    * @param orientation the orientation of the weapon firing this projectile
-   * @param data the projectile data
    * @param statics graphics context for static rendering
    * @throws IOException when fetching images from the drive fails
    * @throws ParserException when fetching images from the drive fails

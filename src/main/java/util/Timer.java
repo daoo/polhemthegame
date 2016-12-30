@@ -31,7 +31,7 @@ public class Timer {
 
   /**
    * Update the state of the time.
-   * @param time the elapsed game time
+   * @param elapsed the elapsed game time
    */
   public void update(long elapsed) {
     current = elapsed;

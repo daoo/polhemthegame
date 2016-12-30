@@ -23,10 +23,6 @@ public class Movement implements ILogicComponent {
     vel = Vector2.add(vel, v);
   }
 
-  public void addVelocity(float x, float y) {
-    vel = Vector2.add(vel, x, y);
-  }
-
   public Vector2 getVelocity() {
     return vel;
   }

@@ -20,7 +20,7 @@ public class Players {
    */
   public static void reposition(List<Entity> players, Rectangle rect) {
     float dx = 0;
-    float dy = rect.getHeight() / (players.size() * 2);
+    float dy = rect.getHeight() / (players.size() * 2.0f);
 
     float x = rect.getX1() + rect.getWidth() * STARING_X;
     float y = rect.getY1() + dy;

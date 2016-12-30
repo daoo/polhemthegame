@@ -21,6 +21,7 @@ import loader.data.json.ShopData;
 import loader.data.json.WeaponsData;
 import loader.data.json.types.SpriteData;
 import loader.parser.GsonParser;
+import loader.parser.IParser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
 import util.SpriteSheet;
@@ -37,14 +38,14 @@ public class CacheTool {
   private static final String FILE_WEAPONS     = "weapons.js";
   private static final String FILE_SHOP        = "shop.js";
 
-  private static final GsonParser BOSSES_PARSER      = new GsonParser(BossesData.class);
-  private static final GsonParser CREEPS_PARSER      = new GsonParser(CreepsData.class);
-  private static final GsonParser LEVEL_PARSER       = new GsonParser(LevelData.class);
-  private static final GsonParser PLAYERS_PARSER     = new GsonParser(PlayersData.class);
-  private static final GsonParser PROJECTILES_PARSER = new GsonParser(ProjectilesData.class);
-  private static final GsonParser WEAPONS_PARSER     = new GsonParser(WeaponsData.class);
-  private static final GsonParser SHOP_PARSER        = new GsonParser(ShopData.class);
-  private static final PNGParser PNG_PARSER          = new PNGParser();
+  private static final IParser BOSSES_PARSER      = new GsonParser(BossesData.class);
+  private static final IParser CREEPS_PARSER      = new GsonParser(CreepsData.class);
+  private static final IParser LEVEL_PARSER       = new GsonParser(LevelData.class);
+  private static final IParser PLAYERS_PARSER     = new GsonParser(PlayersData.class);
+  private static final IParser PROJECTILES_PARSER = new GsonParser(ProjectilesData.class);
+  private static final IParser WEAPONS_PARSER     = new GsonParser(WeaponsData.class);
+  private static final IParser SHOP_PARSER        = new GsonParser(ShopData.class);
+  private static final IParser PNG_PARSER         = new PNGParser();
 
   public static BossesData getBosses(Cache cache)
       throws ParserException, IOException {

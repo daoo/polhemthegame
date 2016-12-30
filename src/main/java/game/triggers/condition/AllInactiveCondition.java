@@ -4,8 +4,6 @@
 
 package game.triggers.condition;
 
-import java.util.Arrays;
-
 import game.course.World;
 import game.entities.IEntity;
 import game.triggers.ICondition;
@@ -16,10 +14,6 @@ public class AllInactiveCondition implements ICondition {
 
   public AllInactiveCondition(Iterable<? extends IEntity> entities) {
     this.entities = entities;
-  }
-
-  public AllInactiveCondition(IEntity entity) {
-    this(Arrays.asList(entity));
   }
 
   @Override

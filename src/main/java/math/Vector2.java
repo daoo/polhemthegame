@@ -107,7 +107,7 @@ public class Vector2 {
 
   /**
    * Calculates the squared distance between two vectors.
-   * @see #Vector2.distance(Vector2 a, Vector2 b)
+   * @see Vector2#distance(Vector2, Vector2)
    * @param a the first vector
    * @param b the second vector
    * @return the squared distance as a float, greater than or equal to zero
@@ -149,18 +149,6 @@ public class Vector2 {
     return new Vector2(a.x - b.x, a.y - b.y);
   }
 
-  /**
-   * Subtract a vector from another vector.
-   * The resulting vector is a vector "from b to a".
-   * Note that this operation is not commutative.
-   * @param a the first vector
-   * @param bx the X component of the second vector
-   * @param by the Y component of the second vector
-   * @return a new vector
-   */
-  public static Vector2 subtract(Vector2 a, float bx, float by) {
-    return new Vector2(a.x - bx, by);
-  }
   /**
    * Multiply a vector with a scalar.
    * @param a the vector

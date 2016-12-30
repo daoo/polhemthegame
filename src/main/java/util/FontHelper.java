@@ -89,7 +89,7 @@ public class FontHelper {
     int middle = w / 2;
     for (Pair<UnicodeFont, String> line : list) {
       g.setFont(line.fst);
-      g.drawString(line.snd, middle - line.fst.getWidth(line.snd) / 2, 0);
+      g.drawString(line.snd, middle - line.fst.getWidth(line.snd) / 2.0f, 0);
 
       g.translate(0, spacing + line.fst.getHeight(line.snd));
     }

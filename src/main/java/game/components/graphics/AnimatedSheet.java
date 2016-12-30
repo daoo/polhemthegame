@@ -103,7 +103,7 @@ public class AnimatedSheet implements IRenderComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.START_ANIMATION) {
-      animator = new ContinuousAnimator(getTileCount());
+      animator = new ContinuousAnimator(size);
     } else if (message == Message.STOP_ANIMATION) {
       if (!animator.isFinished()) {
         current = Tile.ZERO;

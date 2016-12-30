@@ -23,7 +23,7 @@ import game.triggers.IEffect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
-import game.triggers.effects.AddTriggersEffect;
+import game.triggers.effects.AddTriggerEffect;
 import game.triggers.effects.DamageEntitiesEffect;
 import game.triggers.effects.ExecuteWithDelayEffect;
 import game.triggers.effects.LevelCompleteEffect;
@@ -126,12 +126,12 @@ public class WorldFactory {
     levelStartTrigger.addAllEffects(Arrays.asList(
       new SetForegroundEffect(Locator.getUI(), imgLevelStart),
       new ExecuteWithDelayEffect(
-        TRIGGER_DELAY, new AddTriggersEffect(creepsSpawnTrigger))
+        TRIGGER_DELAY, new AddTriggerEffect(creepsSpawnTrigger))
     ));
 
     creepsSpawnTrigger.addAllEffects(Arrays.asList(
       new SetForegroundEffect(Locator.getUI(), null),
-      new AddTriggersEffect(creepsDeadTrigger)
+      new AddTriggerEffect(creepsDeadTrigger)
     ));
 
     List<IEffect> levelCompleteEffects = Arrays.asList(
@@ -149,7 +149,7 @@ public class WorldFactory {
       Unit boss = entityFactory.makeBoss(bossesData.getBoss(level.boss));
 
       Trigger bossDeadTrigger = new Trigger();
-      bossDeadTrigger.addCondition(new AllInactiveCondition(boss.entity));
+      bossDeadTrigger.addCondition(new AllInactiveCondition(Arrays.asList(boss.entity)));
       bossDeadTrigger.addEffect(new ExecuteWithDelayEffect(TRIGGER_DELAY,
         levelCompleteEffects));
 
@@ -159,7 +159,7 @@ public class WorldFactory {
           new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
             new SetForegroundEffect(Locator.getUI(), null),
             new SpawnBossEffect(boss),
-            new AddTriggersEffect(bossDeadTrigger)
+            new AddTriggerEffect(bossDeadTrigger)
           ))
         ))
       );

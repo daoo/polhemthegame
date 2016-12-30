@@ -138,8 +138,8 @@ public class GameState implements IState {
     if (paused) {
       g.setColor(new Color(0, 0, 0, 100));
       g.fillRect(0, 0, windowWidth, windowHeight);
-      g.drawImage(imgPauseText, windowWidth / 2 - imgPauseText.getWidth() / 2,
-          windowHeight / 2 - imgPauseText.getHeight() / 2);
+      g.drawImage(imgPauseText, windowWidth / 2.0f - imgPauseText.getWidth() / 2.0f,
+          windowHeight / 2.0f - imgPauseText.getHeight() / 2.0f);
     }
   }
 

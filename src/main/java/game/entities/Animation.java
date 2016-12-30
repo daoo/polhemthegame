@@ -81,7 +81,7 @@ public class Animation implements IEntity {
     Node<String> parent = new Node<>(debugString());
 
     parent.nodes.add(new Node<>("Animation = " + anim));
-    parent.nodes.add(new Node<>("Active = " + Boolean.toString(isActive())));
+    parent.nodes.add(new Node<>("Active = " + Boolean.toString(active)));
 
     return parent;
   }

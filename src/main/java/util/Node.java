@@ -5,6 +5,7 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Node for a Rose Tree.
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Node<T> {
   public final T value;
-  public final ArrayList<Node<T>> nodes;
+  public final List<Node<T>> nodes;
 
   /**
    * Construct a new node with the specific value
@@ -21,7 +22,7 @@ public class Node<T> {
   public Node(T value) {
     this.value = value;
 
-    nodes = new ArrayList<>();
+    nodes = new ArrayList<>(5);
   }
 
   /**

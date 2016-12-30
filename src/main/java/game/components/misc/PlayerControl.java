@@ -62,13 +62,13 @@ public class PlayerControl implements ILogicComponent {
     int y = 0;
 
     if (Keyboard.isKeyDown(binds.walkLeft)) {
-      x += -1;
+      x -= 1;
     }
     if (Keyboard.isKeyDown(binds.walkRight)) {
       x += 1;
     }
     if (Keyboard.isKeyDown(binds.walkUp)) {
-      y += -1;
+      y -= 1;
     }
     if (Keyboard.isKeyDown(binds.walkDown)) {
       y += 1;

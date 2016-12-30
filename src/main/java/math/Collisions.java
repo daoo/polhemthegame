@@ -4,7 +4,10 @@
 
 package math;
 
-public class Collisions {
+public final class Collisions {
+  private Collisions() {
+  }
+
   /**
    * Approximate method for determining if one moving and one static rectangle
    * will intersect within the given time.
