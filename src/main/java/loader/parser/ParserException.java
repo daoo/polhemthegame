@@ -4,11 +4,7 @@
 
 package loader.parser;
 
-import loader.CacheException;
-
-public class ParserException extends CacheException {
-  private static final long serialVersionUID = 1L;
-
+public class ParserException extends Exception {
   public ParserException(String message) {
     super(message);
   }

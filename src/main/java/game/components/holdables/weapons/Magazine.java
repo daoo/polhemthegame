@@ -28,12 +28,13 @@ public class Magazine implements IMagazine {
   }
 
   @Override
-  public void takeOne() throws OutOfAmmoException {
+  public boolean takeOne() {
     if (ammo <= 0) {
-      throw new OutOfAmmoException();
+      return false;
     }
 
     --ammo;
+    return true;
   }
 
   @Override

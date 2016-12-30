@@ -13,9 +13,9 @@ public interface IMagazine {
 
   /**
    * Take one bullet out of the magazine.
-   * @throws OutOfAmmoException if there are no bullets
+   * @return true if there was ammo, otherwise false
    */
-  void takeOne() throws OutOfAmmoException;
+  boolean takeOne();
 
   /**
    * Reload the magazine.

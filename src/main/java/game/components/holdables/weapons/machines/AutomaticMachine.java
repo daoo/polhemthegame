@@ -84,8 +84,6 @@ public class AutomaticMachine implements IWeaponMachine {
         timer = new Timer(time.elapsedMilli, cooldownLength);
         state = WeaponStates.COOLDOWN;
         break;
-       default:
-         throw new RuntimeException(String.format("Switch got unexpected case: %s", state.toString()));
     }
   }
 
