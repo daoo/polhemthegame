@@ -11,6 +11,7 @@ public final class Collisions {
   /**
    * Approximate method for determining if one moving and one static rectangle
    * will intersect within the given time.
+   *
    * @param a the moving rectangle
    * @param av the velocity of the moving rectangle
    * @param b the static rectangle
@@ -18,10 +19,11 @@ public final class Collisions {
    * @return true or false based on the test result
    */
   public static boolean sweepCollisionTest(Rectangle a, Vector2 av, Rectangle b, float dt) {
-    Vector2 vel    = Vector2.multiply(av, dt);
+    Vector2 vel = Vector2.multiply(av, dt);
     Vector2 target = Vector2.add(a.getMin(), vel);
 
-    float sweepLength = (float) Math.sqrt(ExtraMath.square(a.getWidth()) + ExtraMath.square(a.getHeight()));
+    float sweepLength = (float) Math
+        .sqrt(ExtraMath.square(a.getWidth()) + ExtraMath.square(a.getHeight()));
     Vector2 sweepDelta = Vector2.divide(vel, sweepLength);
     int sweeps = (int) (Vector2.distance(target, a.getMin()) / sweepDelta.magnitude());
     Rectangle sweep = new Rectangle(a);
@@ -40,6 +42,7 @@ public final class Collisions {
   /**
    * Stops an Rectangle from exiting an container Rectangle by aligning the
    * entity to the edges of the container if it's on the outside.
+   *
    * @param entity the Rectangle to restrict
    * @param cont the Rectangle to use as box
    */

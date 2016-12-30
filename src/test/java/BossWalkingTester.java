@@ -20,8 +20,8 @@ import util.Random;
 
 public class BossWalkingTester extends BasicGame {
   private static final boolean FULLSCREEN = false;
-  private static final int WIDTH          = 1920;
-  private static final int HEIGHT         = 1080;
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
 
   private final Random rnd;
 
@@ -61,11 +61,15 @@ public class BossWalkingTester extends BasicGame {
 
     rnd = new Random();
 
-    rx1 = 100; ry1 = 100;
-    rx2 = 500; ry2 = 980;
-    rw = 400; rh = 880;
+    rx1 = 100;
+    ry1 = 100;
+    rx2 = 500;
+    ry2 = 980;
+    rw = 400;
+    rh = 880;
 
-    cx = 300; cy = 300;
+    cx = 300;
+    cy = 300;
     cr = 150;
     crs = cr * cr;
 

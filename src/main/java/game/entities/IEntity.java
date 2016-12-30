@@ -17,6 +17,7 @@ import game.types.Message;
 public interface IEntity extends IDebuggable {
   /**
    * Sends a message to all components that belong to this entity.
+   *
    * @param message the message to send
    * @param args pass along some arguments, can be anything
    */
@@ -24,16 +25,19 @@ public interface IEntity extends IDebuggable {
 
   /**
    * Render the entity.
+   *
    * @param g the graphics context to use
    */
   void render(Graphics g);
 
   /**
    * Updates logic.
+   *
    * @param time the current game time
    */
   void update(GameTime time);
 
   boolean isActive();
+
   void remove();
 }

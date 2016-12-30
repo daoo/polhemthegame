@@ -13,6 +13,7 @@ public class Magazine implements IMagazine {
 
   /**
    * Create a new magazine with space for a certain amount of bullets.
+   *
    * @param size the size of the magazine, greater than zero
    */
   public Magazine(int size) {

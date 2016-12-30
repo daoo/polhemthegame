@@ -15,9 +15,9 @@ import game.types.Message;
 import math.Rectangle;
 
 public class Outliner implements IRenderComponent {
-  private static final Color FIRST  = Color.red;
+  private static final Color FIRST = Color.red;
   private static final Color SECOND = Color.green;
-  private static final Color THIRD  = Color.blue;
+  private static final Color THIRD = Color.blue;
 
   private final Entity owner;
   private final Movement movement;
@@ -25,9 +25,8 @@ public class Outliner implements IRenderComponent {
   private final boolean outlineNext;
   private final boolean linesToNext;
 
-  public Outliner(Entity owner, Movement movement, boolean outlineNext,
-      boolean lineToNext) {
-    this.owner    = owner;
+  public Outliner(Entity owner, Movement movement, boolean outlineNext, boolean lineToNext) {
+    this.owner = owner;
     this.movement = movement;
 
     this.outlineNext = outlineNext;

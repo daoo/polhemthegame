@@ -38,7 +38,7 @@ public class LWJGLTest {
       GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
       Texture texture = TextureLoader.getTexture("PNG",
-        ResourceLoader.getResourceAsStream("data/textures/bosses/wheelchairguy-walk.png"));
+          ResourceLoader.getResourceAsStream("data/textures/bosses/wheelchairguy-walk.png"));
 
       while (!Display.isCloseRequested()) {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
@@ -47,14 +47,14 @@ public class LWJGLTest {
         texture.bind();
 
         GL11.glBegin(GL11.GL_QUADS);
-          GL11.glTexCoord2f(0, 0);
-          GL11.glVertex2f(0, 0);
-          GL11.glTexCoord2f(1, 0);
-          GL11.glVertex2f(texture.getImageWidth(), 0);
-          GL11.glTexCoord2f(1, 1);
-          GL11.glVertex2f(texture.getImageWidth(), texture.getImageHeight());
-          GL11.glTexCoord2f(0, 1);
-          GL11.glVertex2f(0, texture.getImageHeight());
+        GL11.glTexCoord2f(0, 0);
+        GL11.glVertex2f(0, 0);
+        GL11.glTexCoord2f(1, 0);
+        GL11.glVertex2f(texture.getImageWidth(), 0);
+        GL11.glTexCoord2f(1, 1);
+        GL11.glVertex2f(texture.getImageWidth(), texture.getImageHeight());
+        GL11.glTexCoord2f(0, 1);
+        GL11.glVertex2f(0, texture.getImageHeight());
         GL11.glEnd();
 
         Display.update();

@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Node for a Rose Tree.
+ *
  * @param <T> the type held by the node
  */
 public class Node<T> {
@@ -17,6 +18,7 @@ public class Node<T> {
 
   /**
    * Construct a new node with the specific value
+   *
    * @param value the value to hold
    */
   public Node(T value) {
@@ -27,6 +29,7 @@ public class Node<T> {
 
   /**
    * Calls value.toString().
+   *
    * @return value.toString()
    */
   @Override

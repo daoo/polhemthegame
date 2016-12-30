@@ -27,7 +27,8 @@ import util.Key;
 import util.Node;
 
 public class GameState implements IState {
-  private static final String[] PAUSE_TEXT = { "big:Game Paused", "Press Escape to unpause or Backspace to go to the Main Menu" };
+  private static final String[] PAUSE_TEXT = {
+      "big:Game Paused", "Press Escape to unpause or Backspace to go to the Main Menu"};
   private static final int PAUSE_TEXT_SPACING = 10;
 
   private final UI ui;
@@ -45,9 +46,9 @@ public class GameState implements IState {
   private final int windowWidth;
   private final int windowHeight;
 
-  public GameState(StateManager stateManager, CampaignData data, boolean twoPlayer,
-                   int windowWidth, int windowHeight)
-      throws ParserException, IOException, SlickException {
+  public GameState(
+      StateManager stateManager, CampaignData data, boolean twoPlayer, int windowWidth,
+      int windowHeight) throws ParserException, IOException, SlickException {
     this.windowWidth = windowWidth;
     this.windowHeight = windowHeight;
 
@@ -60,13 +61,11 @@ public class GameState implements IState {
     ui = new UI(windowWidth, windowHeight);
     Locator.registerUI(ui);
     ui.addStatic(new BlackBox(0, 0, windowWidth, PlayerUI.HEIGHT));
-    ui.addStatic(new BlackBox(0, windowHeight - PlayerUI.HEIGHT,
-          windowWidth, PlayerUI.HEIGHT));
+    ui.addStatic(new BlackBox(0, windowHeight - PlayerUI.HEIGHT, windowWidth, PlayerUI.HEIGHT));
 
-    int arenaWidth  = windowWidth;
+    int arenaWidth = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
-    levels = new LevelManager(stateManager, twoPlayer, data, windowWidth,
-        arenaWidth, arenaHeight);
+    levels = new LevelManager(stateManager, twoPlayer, data, windowWidth, arenaWidth, arenaHeight);
 
     HashMap<String, UnicodeFont> fonts = new HashMap<>();
     fonts.put("big", FontHelper.getFont("Verdana", 30));

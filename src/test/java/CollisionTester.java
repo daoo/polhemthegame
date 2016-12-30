@@ -22,18 +22,18 @@ import math.Vector2;
 
 public class CollisionTester extends BasicGame {
   private static final boolean FULLSCREEN = false;
-  private static final int WIDTH          = 1920;
-  private static final int HEIGHT         = 1080;
+  private static final int WIDTH = 1920;
+  private static final int HEIGHT = 1080;
 
   private static final int RECTANGLE_X = 1420;
   private static final int RECTANGLE_Y = 340;
   private static final int RECTANGLE_W = 400;
   private static final int RECTANGLE_H = 400;
 
-  private static final int PROJECTILE_X  = 100;
-  private static final int PROJECTILE_Y  = 440;
-  private static final int PROJECTILE_W  = 200;
-  private static final int PROJECTILE_H  = 200;
+  private static final int PROJECTILE_X = 100;
+  private static final int PROJECTILE_Y = 440;
+  private static final int PROJECTILE_W = 200;
+  private static final int PROJECTILE_H = 200;
   private static final int PROJECTILE_DX = 400;
   private static final int PROJECTILE_DY = 0;
 
@@ -77,8 +77,7 @@ public class CollisionTester extends BasicGame {
     obj1.render(g);
     obj2.render(g);
 
-    if (Collisions.sweepCollisionTest(obj2.body, mov2.getVelocity(),
-         obj1.body, 1)) {
+    if (Collisions.sweepCollisionTest(obj2.body, mov2.getVelocity(), obj1.body, 1)) {
       g.drawString("COLLISION!", 100, 10);
     }
   }

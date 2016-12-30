@@ -40,16 +40,18 @@ public class AnimatedSheet implements IRenderComponent {
 
   /**
    * Create a new animated sprite sheet.
+   *
    * @param targetFrameRate the frame rate of the animation, greater than zero
    * @param offsetX translation before rendering
    * @param offsetY translation before rendering
    * @param orientation the orientation of the rendered image, if we want left
-   *        orientation the image will be mirrored along the x-axis.
+   * orientation the image will be mirrored along the x-axis.
    * @param rotation rotation before rendering (degrees)
    * @param sheet the sprite sheet to animate, not null
    */
-  public AnimatedSheet(float targetFrameRate, int offsetX, int offsetY,
-      Orientation orientation, int rotation, SpriteSheet sheet) {
+  public AnimatedSheet(
+      float targetFrameRate, int offsetX, int offsetY, Orientation orientation, int rotation,
+      SpriteSheet sheet) {
     assert targetFrameRate > 0;
     assert sheet != null;
 
@@ -64,7 +66,7 @@ public class AnimatedSheet implements IRenderComponent {
     centerX = sheet.getTileWidth() / 2;
     centerY = sheet.getTileWidth() / 2;
 
-    current  = Tile.ZERO;
+    current = Tile.ZERO;
     animator = IDLE;
 
     clock = new Clock((int) (1000 / targetFrameRate));
@@ -143,7 +145,7 @@ public class AnimatedSheet implements IRenderComponent {
 
   @Override
   public String toString() {
-    return String.format("AnimatedSheet - count: %dx%d, size: %dx%d",
-        size.x, size.y, getWidth(), getHeight());
+    return String.format("AnimatedSheet - count: %dx%d, size: %dx%d", size.x, size.y, getWidth(),
+        getHeight());
   }
 }

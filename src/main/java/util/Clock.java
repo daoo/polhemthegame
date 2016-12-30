@@ -15,6 +15,7 @@ public class Clock {
 
   /**
    * Construct a new clock.
+   *
    * @param targetFrameTime target frame time in milliseconds
    */
   public Clock(int targetFrameTime) {
@@ -25,6 +26,7 @@ public class Clock {
 
   /**
    * Sync the clock.
+   *
    * @param elapsed the elapsed game time in milliseconds
    */
   public void sync(long elapsed) {
@@ -33,6 +35,7 @@ public class Clock {
 
   /**
    * Check if we need to sync.
+   *
    * @param elapsed the elapsed game time in milliseconds
    * @return true or false if enough time has passed since last sync
    */

@@ -27,6 +27,7 @@ public class ProjectileQueue {
 
   /**
    * How many projectiles are waiting to be spawned.
+   *
    * @return an int greater than or equal to zero
    */
   public int getWaiting() {

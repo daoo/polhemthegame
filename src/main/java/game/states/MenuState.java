@@ -30,19 +30,19 @@ public class MenuState implements IState {
   private static final String BUTTON_EXIT = "exit";
 
   private final Image background;
-  private final Menu  menu;
+  private final Menu menu;
 
   private final Key keyUp;
   private final Key keyDown;
   private final Key keyEnter;
 
-  public MenuState(final StateManager manager)
-  throws ParserException, IOException {
+  public MenuState(final StateManager manager) throws ParserException, IOException {
     background = CacheTool.getImage(Locator.getCache(), MENU_BACKGROUND_FILE);
 
     ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
-    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380, () -> manager.enterGame(CAMPAIGN_FILE, false)));
+    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380,
+        () -> manager.enterGame(CAMPAIGN_FILE, false)));
     tmp.add(new MenuButton(BUTTON_COOP, 60, 480, () -> manager.enterGame(CAMPAIGN_FILE, true)));
     tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, () -> manager.quit()));
 

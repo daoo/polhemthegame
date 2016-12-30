@@ -15,6 +15,7 @@ public class Players {
    * Reposition players in the rectangle.
    * Places the players evenly spaced on the y axis with 10% of the width
    * as margin on the left side of the players.
+   *
    * @param players the players to reposition
    * @param rect the rectangle to use for alignment
    */

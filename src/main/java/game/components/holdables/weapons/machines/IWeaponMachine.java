@@ -25,12 +25,14 @@ public interface IWeaponMachine {
 
   /**
    * Update the state.
+   *
    * @param time the game time
    */
   void update(GameTime time);
 
   /**
    * Return the progress as a fraction.
+   *
    * @return a float in the range [0, 1]
    */
   float getProgress();

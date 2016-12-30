@@ -23,6 +23,7 @@ public class Vector2 {
 
   /**
    * Construct a new vector from two floats, X and Y.
+   *
    * @param x the X component
    * @param y the Y component
    */
@@ -35,6 +36,7 @@ public class Vector2 {
 
   /**
    * Return the magnitude of the vector.
+   *
    * @return the magnitude, greater than or equal to zero
    */
   public float magnitude() {
@@ -43,6 +45,7 @@ public class Vector2 {
 
   /**
    * Return the squared magnitude of the vector.
+   *
    * @return the squared magnitude, greater than or equal to zero
    */
   public float magnitudeSquared() {
@@ -52,6 +55,7 @@ public class Vector2 {
   /**
    * Return a normalization of this vector.
    * If the magnitude is zero
+   *
    * @return a normalized vector
    * @throws ArithmeticException when the magnitude of the vector is zero
    */
@@ -67,6 +71,7 @@ public class Vector2 {
   /**
    * Return a string representation of the vector.
    * Format: "(x, y)"
+   *
    * @return a string
    */
   @Override
@@ -76,6 +81,7 @@ public class Vector2 {
 
   /**
    * Square a float.
+   *
    * @param a the float
    * @return the square (a * a)
    */
@@ -85,6 +91,7 @@ public class Vector2 {
 
   /**
    * Calculate the dot product between two vectors.
+   *
    * @param a the first vector
    * @param b the second vector
    * @return the dot product as a float
@@ -97,6 +104,7 @@ public class Vector2 {
    * Calculates the "distance" between two vectors. The vectors are regarded
    * using a shared start point. The distance is then the magnitude of the
    * vector (a - b).
+   *
    * @param a the first vector
    * @param b the second vector
    * @return the distance as a float, greater than or equal to zero
@@ -107,10 +115,11 @@ public class Vector2 {
 
   /**
    * Calculates the squared distance between two vectors.
-   * @see Vector2#distance(Vector2, Vector2)
+   *
    * @param a the first vector
    * @param b the second vector
    * @return the squared distance as a float, greater than or equal to zero
+   * @see Vector2#distance(Vector2, Vector2)
    */
   public static float distanceSquared(Vector2 a, Vector2 b) {
     return sq(a.x - b.x) + sq(a.y - b.y);
@@ -118,6 +127,7 @@ public class Vector2 {
 
   /**
    * Add two vectors.
+   *
    * @param a the first vector
    * @param b the second vector
    * @return a new vector
@@ -128,6 +138,7 @@ public class Vector2 {
 
   /**
    * Add two vectors. Where the second is just X and Y components.
+   *
    * @param a the first vector
    * @param bx the X component of the second vector
    * @param by the Y component of the second vector
@@ -141,6 +152,7 @@ public class Vector2 {
    * Subtract a vector from another vector.
    * The resulting vector is a vector "from b to a".
    * Note that this operation is not commutative.
+   *
    * @param a the first vector
    * @param b the second vector
    * @return a new vector
@@ -151,6 +163,7 @@ public class Vector2 {
 
   /**
    * Multiply a vector with a scalar.
+   *
    * @param a the vector
    * @param scalar the scalar
    * @return a new vector
@@ -161,6 +174,7 @@ public class Vector2 {
 
   /**
    * Divide a vector with a scalar.
+   *
    * @param a the vector
    * @param scalar the scalar
    * @return a new vector

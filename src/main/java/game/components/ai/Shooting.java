@@ -15,7 +15,7 @@ public class Shooting implements IBossState {
   public Shooting(int length) {
     this.length = length;
 
-    endTime  = 0;
+    endTime = 0;
     finished = false;
   }
 

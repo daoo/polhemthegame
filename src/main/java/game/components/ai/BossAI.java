@@ -17,10 +17,10 @@ import math.Vector2;
 
 public class BossAI implements ILogicComponent {
   private static final int INITIAL_TARGET_COUNT = 1;
-  private static final int TARGET_MIN_COUNT     = 1;
-  private static final int TARGET_MAX_COUNT     = 3;
+  private static final int TARGET_MIN_COUNT = 1;
+  private static final int TARGET_MAX_COUNT = 3;
 
-  public static final float MIN_WALK         = 100.0f;
+  public static final float MIN_WALK = 100.0f;
   public static final float MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
   private static final int SHOOTING_TIME_MIN = 1000;
@@ -35,12 +35,13 @@ public class BossAI implements ILogicComponent {
 
   private IBossState state;
 
-  public BossAI(Entity entity, Movement movement, Hand hand, Rectangle arenaRect,
-      float locationX, float speed, Vector2 initialTarget) {
-    this.entity        = entity;
-    this.hand          = hand;
-    this.movement      = movement;
-    this.speed         = speed;
+  public BossAI(
+      Entity entity, Movement movement, Hand hand, Rectangle arenaRect, float locationX,
+      float speed, Vector2 initialTarget) {
+    this.entity = entity;
+    this.hand = hand;
+    this.movement = movement;
+    this.speed = speed;
     this.initialTarget = initialTarget;
 
     // Setup the area which the TOP LEFT of the boss body may move around in
@@ -64,20 +65,18 @@ public class BossAI implements ILogicComponent {
       // Go to next state
 
       if (state.getState() == BossState.WALKING) {
-        int shootingTime = Locator.getRandom().nextInt(
-            SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
+        int shootingTime = Locator.getRandom().nextInt(SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
         state = new Shooting(shootingTime);
 
         movement.setVelocity(Vector2.ZERO);
         entity.sendMessage(Message.STOP_ANIMATION, null);
         hand.startUse();
       } else if (state.getState() == BossState.SHOOTING) {
-        int targets = Locator.getRandom().nextInt(
-            TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-          state = new Walking(entity.body, hand, movement, speed, movementRect, targets);
+        int targets = Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
+        state = new Walking(entity.body, hand, movement, speed, movementRect, targets);
 
-          entity.sendMessage(Message.START_ANIMATION, null);
-          hand.stopUse();
+        entity.sendMessage(Message.START_ANIMATION, null);
+        hand.stopUse();
       }
 
       state.start(time);
@@ -89,8 +88,8 @@ public class BossAI implements ILogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      state = new Walking(entity.body, hand, movement, speed, movementRect,
-        INITIAL_TARGET_COUNT, initialTarget);
+      state = new Walking(entity.body, hand, movement, speed, movementRect, INITIAL_TARGET_COUNT,
+          initialTarget);
 
       entity.sendMessage(Message.START_ANIMATION, null);
 

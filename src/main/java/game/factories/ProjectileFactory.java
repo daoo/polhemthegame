@@ -53,8 +53,9 @@ public class ProjectileFactory {
 
   /**
    * Construct a new projectile factory for a given projectile.
+   *
    * @param bounds boundary rectangle, the projectiles should die when leaving
-   *               this area
+   * this area
    * @param data the projectile data
    * @param launchAngle the angle of launching in degrees, zero means horizontal
    * @param spread spread in degrees, [-spread, spread]
@@ -63,9 +64,9 @@ public class ProjectileFactory {
    * @throws IOException when fetching images from the drive fails
    * @throws ParserException when fetching images from the drive fails
    */
-  public ProjectileFactory(Rectangle bounds, int launchAngle, int spread,
-      Orientation orientation, ProjectileData data, Graphics statics)
-      throws IOException, ParserException {
+  public ProjectileFactory(
+      Rectangle bounds, int launchAngle, int spread, Orientation orientation, ProjectileData data,
+      Graphics statics) throws IOException, ParserException {
     assert data != null;
 
     this.rect = bounds;
@@ -87,8 +88,8 @@ public class ProjectileFactory {
     }
 
     explosion = data.aoe == null
-      ? null
-      : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
+        ? null
+        : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
   }
 
   public int getWidth() {
@@ -97,6 +98,7 @@ public class ProjectileFactory {
 
   /**
    * Make a new projectile.
+   *
    * @param source the source of the projectile (who fired it), can be null
    * @param x the x coordinate of where it starts
    * @param y the y coordinate of where it starts
@@ -166,18 +168,15 @@ public class ProjectileFactory {
       return launchAngle;
     }
 
-    return launchAngle +
-        Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+    return launchAngle + Locator.getRandom().nextInt(-spread, spread) - spread / 2;
   }
 
   private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
-    AnimatedSheet explosionAnim = new AnimatedSheet(
-        data.aoe.explosionSprite.framerate,
-        data.aoe.explosionSprite.offset.x, data.aoe.explosionSprite.offset.y,
-        Orientation.RIGHT, 0, explosion);
+    AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
+        data.aoe.explosionSprite.offset.x, data.aoe.explosionSprite.offset.y, Orientation.RIGHT, 0,
+        explosion);
 
-    effectsOnDeath.add(new AOEDamageEffect(
-      source, p.body, data.aoe.radius, data.aoe.damage));
+    effectsOnDeath.add(new AOEDamageEffect(source, p.body, data.aoe.radius, data.aoe.damage));
     effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, statics));
   }
 
@@ -185,9 +184,8 @@ public class ProjectileFactory {
     if (data.texture != null) {
       return new TexturedQuad(img, orientation, angle);
     } else if (data.sprite != null) {
-      AnimatedSheet sheet = new AnimatedSheet(data.sprite.framerate,
-        data.sprite.offset.x, data.sprite.offset.y,
-        orientation, angle, sprite);
+      AnimatedSheet sheet = new AnimatedSheet(data.sprite.framerate, data.sprite.offset.x,
+          data.sprite.offset.y, orientation, angle, sprite);
 
       if (data.sprite.random) {
         sheet.setAnimator(new RandomAnimator(sheet.getTileCount()));

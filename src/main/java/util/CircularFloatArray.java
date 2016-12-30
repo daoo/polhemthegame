@@ -23,6 +23,7 @@ public class CircularFloatArray {
 
   /**
    * Create a new circular overwriting array.
+   *
    * @param size the size of the array, greater than zero
    * @param def the default which the array is initially filled with
    */
@@ -38,6 +39,7 @@ public class CircularFloatArray {
   /**
    * Add an item to the array.
    * Overwrites next item in the array.
+   *
    * @param item the item to add
    */
   public void add(float item) {
@@ -48,6 +50,7 @@ public class CircularFloatArray {
 
   /**
    * An iterator from the oldest element to the newest.
+   *
    * @return an iterator (without remove support)
    */
   public FloatIterator iterator() {

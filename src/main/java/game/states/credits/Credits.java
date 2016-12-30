@@ -5,44 +5,14 @@
 package game.states.credits;
 
 public class Credits {
-  private static final String  DANIEL       = "Daniel Oom";
-  private static final String  NIKLAS       = "Niklas Johansson";
+  private static final String DANIEL = "Daniel Oom";
+  private static final String NIKLAS = "Niklas Johansson";
   public static final String[] CREDITS_TEXT = {
 
-      "big:Polhem The Game",
-      "big:An Mangoo Entertainment Product",
-      "",
-      "big:Lead Programmer",
-      DANIEL,
-      "",
-      "big:Programmer",
-      NIKLAS,
-      "",
-      "big:Lead Designer",
-      NIKLAS,
-      "",
-      "big:Designer",
-      DANIEL,
-      "",
-      "big:Special Effects",
-      NIKLAS,
-      "",
-      "big:Story",
-      NIKLAS,
-      DANIEL,
-      "",
-      "big:Level Design",
-      NIKLAS,
-      DANIEL,
-      "",
-      "big:Special Thanks To",
-      "Carl Egeberg",
-      "Marcus \"Kalle\" Kalander",
-      "Eric \"Generalen\" McNabb",
-      "",
-      "",
-      "",
-      "big:Thanks for playing!",
-      ""
-  };
+      "big:Polhem The Game", "big:An Mangoo Entertainment Product", "", "big:Lead Programmer",
+      DANIEL, "", "big:Programmer", NIKLAS, "", "big:Lead Designer", NIKLAS, "", "big:Designer",
+      DANIEL, "", "big:Special Effects", NIKLAS, "", "big:Story", NIKLAS, DANIEL, "",
+      "big:Level Design", NIKLAS, DANIEL, "", "big:Special Thanks To", "Carl Egeberg",
+      "Marcus \"Kalle\" Kalander", "Eric \"Generalen\" McNabb", "", "", "",
+      "big:Thanks for playing!", ""};
 }

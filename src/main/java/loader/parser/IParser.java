@@ -11,9 +11,10 @@ import loader.IData;
 public interface IParser {
   /**
    * Parse a input stream.
+   *
    * @param br the input stream to parse
-   * @throws ParserException if for some reason parsing fails
    * @return new data
+   * @throws ParserException if for some reason parsing fails
    */
   IData parse(InputStream br) throws ParserException;
 }

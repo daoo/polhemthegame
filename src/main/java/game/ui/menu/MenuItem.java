@@ -29,8 +29,8 @@ public class MenuItem {
     this.x = x;
     this.y = y;
 
-    Image imgNormal   = CacheTool.getImage(Locator.getCache(), getImagePath(name));
-    Image imgActive   = CacheTool.getImage(Locator.getCache(), getImagePath(name + "m"));
+    Image imgNormal = CacheTool.getImage(Locator.getCache(), getImagePath(name));
+    Image imgActive = CacheTool.getImage(Locator.getCache(), getImagePath(name + "m"));
     Image imgDisabled = imgNormal.copy();
 
     // Make disabled gray
@@ -38,11 +38,11 @@ public class MenuItem {
     setImageColor(imgDisabled, COLOR_DISABLED);
 
     stateMap = new Image[3];
-    stateMap[MenuItemState.NORMAL.ordinal()]   = imgNormal;
-    stateMap[MenuItemState.ACTIVE.ordinal()]   = imgActive;
+    stateMap[MenuItemState.NORMAL.ordinal()] = imgNormal;
+    stateMap[MenuItemState.ACTIVE.ordinal()] = imgActive;
     stateMap[MenuItemState.DISABLED.ordinal()] = imgDisabled;
 
-    state   = MenuItemState.NORMAL;
+    state = MenuItemState.NORMAL;
     current = imgNormal;
   }
 

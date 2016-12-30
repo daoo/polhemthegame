@@ -17,8 +17,8 @@ public class SolidQuad implements IRenderComponent {
   private final int height;
 
   public SolidQuad(Color color, int width, int height) {
-    this.color  = color;
-    this.width  = width;
+    this.color = color;
+    this.width = width;
     this.height = height;
   }
 

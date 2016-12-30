@@ -14,7 +14,7 @@ import math.Vector2;
 import util.Random;
 
 public class Walking implements IBossState {
-  public static final int MIN_WALK         = 100;
+  public static final int MIN_WALK = 100;
   public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
   private final Rectangle body;
@@ -27,32 +27,35 @@ public class Walking implements IBossState {
 
   /**
    * Create a new walk state for boss AI.
+   *
    * @param body the boss body
    * @param hand the boss hand
    * @param movement the boss movement
    * @param speed the speed of the boss
    * @param movementRect the rectangle which the boss should move within
    * @param targets the number of targets (positions the boss should walk to),
-   *                greater than zero
+   * greater than zero
    * @param initialTarget the first target the boss should reach
    */
-  public Walking(Rectangle body, Hand hand, Movement movement, float speed,
-      Rectangle movementRect, int targets, Vector2 initialTarget) {
+  public Walking(
+      Rectangle body, Hand hand, Movement movement, float speed, Rectangle movementRect,
+      int targets, Vector2 initialTarget) {
     assert targets > 0;
     assert initialTarget != null;
 
-    this.body         = body;
-    this.speed        = speed;
-    this.movement     = movement;
-    this.targetsLeft      = targets;
+    this.body = body;
+    this.speed = speed;
+    this.movement = movement;
+    this.targetsLeft = targets;
     this.movementRect = movementRect;
-    this.currentTarget       = initialTarget;
+    this.currentTarget = initialTarget;
   }
 
   /**
    * Create a new walk state for boss AI.
    * Instead of specifying the initial target a random target will be chosen
    * instead.
+   *
    * @param body the body rectangle
    * @param hand the boss hand
    * @param movement the boss movement
@@ -60,14 +63,13 @@ public class Walking implements IBossState {
    * @param movementRect the rectangle which the boss should move within
    * @param targets the number of targets (positions the boss should walk to)
    */
-  public Walking(Rectangle body, Hand hand, Movement movement, float speed,
-      Rectangle movementRect, int targets) {
+  public Walking(
+      Rectangle body, Hand hand, Movement movement, float speed, Rectangle movementRect,
+      int targets) {
     this(body, hand, movement, speed, movementRect, targets,
-        newRandomTarget(Locator.getRandom(),
-            (int) movementRect.getX1(), (int) movementRect.getY1(),
-            (int) movementRect.getX2(), (int) movementRect.getY2(),
-            (int) body.getCenter().x, (int) body.getCenter().y,
-            MIN_WALK_SQUARED));
+        newRandomTarget(Locator.getRandom(), (int) movementRect.getX1(), (int) movementRect.getY1(),
+            (int) movementRect.getX2(), (int) movementRect.getY2(), (int) body.getCenter().x,
+            (int) body.getCenter().y, MIN_WALK_SQUARED));
   }
 
   @Override
@@ -83,11 +85,9 @@ public class Walking implements IBossState {
         --targetsLeft;
         // Target passed
         if (targetsLeft > 0) {
-          currentTarget = newRandomTarget(Locator.getRandom(),
-              (int) movementRect.getX1(), (int) movementRect.getY1(),
-              (int) movementRect.getX2(), (int) movementRect.getY2(),
-              (int) body.getX1(), (int) body.getY1(),
-              MIN_WALK_SQUARED);
+          currentTarget = newRandomTarget(Locator.getRandom(), (int) movementRect.getX1(),
+              (int) movementRect.getY1(), (int) movementRect.getX2(), (int) movementRect.getY2(),
+              (int) body.getX1(), (int) body.getY1(), MIN_WALK_SQUARED);
           headFor(currentTarget);
         }
       }
@@ -111,15 +111,16 @@ public class Walking implements IBossState {
   private void headFor(Vector2 target) {
     assert Rectangle.contains(movementRect, target);
 
-    Vector2 delta     = Vector2.subtract(target, body.getMin());
+    Vector2 delta = Vector2.subtract(target, body.getMin());
     Vector2 direction = delta.normalize();
-    Vector2 velocity  = Vector2.multiply(direction, speed);
+    Vector2 velocity = Vector2.multiply(direction, speed);
     movement.setVelocity(velocity);
   }
 
   /**
    * Generate a random position that lies within a rectangle but outside of a
    * circle.
+   *
    * @param rnd the random generator to use
    * @param rx1 top left x of the rectangle
    * @param ry1 top left y of the rectangle
@@ -130,8 +131,8 @@ public class Walking implements IBossState {
    * @param cr the squared radius of the circle
    * @return a vector specifying a random position
    */
-  public static Vector2 newRandomTarget(Random rnd, int rx1, int ry1, int rx2, int ry2,
-      int cx, int cy, int cr) {
+  public static Vector2 newRandomTarget(
+      Random rnd, int rx1, int ry1, int rx2, int ry2, int cx, int cy, int cr) {
     assert cr < ExtraMath.square(ry2 - ry1);
 
     float targetX;

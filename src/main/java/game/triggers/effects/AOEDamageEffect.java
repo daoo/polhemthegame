@@ -24,6 +24,7 @@ public class AOEDamageEffect implements IEffect {
 
   /**
    * Constructs a new AOEDamage effect.
+   *
    * @param source the source of the damage
    * @param body the body from where the circle will be centered
    * @param range the radius of the area

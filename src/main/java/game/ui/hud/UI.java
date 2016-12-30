@@ -31,18 +31,19 @@ public class UI {
   private Image foreground;
 
   public UI(int width, int height) {
-    this.width  = width;
+    this.width = width;
     this.height = height;
 
     dynamics = new ArrayList<>();
-    statics  = new ArrayList<>();
-    toAdd    = new ArrayList<>();
+    statics = new ArrayList<>();
+    toAdd = new ArrayList<>();
 
     foreground = null;
   }
 
   /**
    * Add a static UI element.
+   *
    * @param element the element to add, can not be null
    */
   public void addStatic(IStaticUIElement element) {
@@ -53,6 +54,7 @@ public class UI {
 
   /**
    * Add a dynamic UI element.
+   *
    * @param element the element to add, can not be null
    */
   public void addDynamic(IDynamicUIElement element) {
@@ -82,6 +84,7 @@ public class UI {
   /**
    * Render dynamics. For example the info bars, these should be relative to the
    * level.
+   *
    * @param g the graphics context to use
    */
   public void renderDynamics(Graphics g) {
@@ -93,6 +96,7 @@ public class UI {
   /**
    * Render statics. For example shop menu, these should be relative to the
    * window instead of the level.
+   *
    * @param g the rendering context to use
    */
   public void renderStatics(Graphics g) {
@@ -108,6 +112,7 @@ public class UI {
   /**
    * Sets an image that is rendered in center of the the foreground. That is
    * above everything else. If image is null the foreground will be cleared.
+   *
    * @param image the image to render, if null no image will be rendered.
    */
   public void setForegroundImage(Image image) {

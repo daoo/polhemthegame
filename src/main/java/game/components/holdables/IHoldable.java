@@ -9,5 +9,6 @@ import game.ui.hud.infobar.IProgress;
 
 public interface IHoldable extends IRenderComponent, IProgress {
   void toggleOn();
+
   void toggleOff();
 }

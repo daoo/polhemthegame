@@ -31,14 +31,14 @@ public class Binds {
    * Use default bindings.
    */
   private Binds() {
-    walkUp         = Keyboard.KEY_W;
-    walkDown       = Keyboard.KEY_S;
-    walkLeft       = Keyboard.KEY_A;
-    walkRight      = Keyboard.KEY_D;
-    fire           = Keyboard.KEY_SPACE;
-    nextWeapon     = Keyboard.KEY_E;
+    walkUp = Keyboard.KEY_W;
+    walkDown = Keyboard.KEY_S;
+    walkLeft = Keyboard.KEY_A;
+    walkRight = Keyboard.KEY_D;
+    fire = Keyboard.KEY_SPACE;
+    nextWeapon = Keyboard.KEY_E;
     previousWeapon = Keyboard.KEY_Q;
-    buy            = Keyboard.KEY_F;
+    buy = Keyboard.KEY_F;
 
     weapon0 = Keyboard.KEY_1;
     weapon1 = Keyboard.KEY_2;
@@ -50,6 +50,7 @@ public class Binds {
   /**
    * Use specific bindings.
    * Uses reflection to decode the key names into their integer values.
+   *
    * @param walkUp a key
    * @param walkDown a key
    * @param walkLeft a key
@@ -58,20 +59,20 @@ public class Binds {
    * @param nextWeapon a key
    * @param buy a key
    */
-  public Binds(String walkUp, String walkDown, String walkLeft,
-      String walkRight, String fire, String previousWeapon,
-      String nextWeapon, String buy, String weapon0, String weapon1,
+  public Binds(
+      String walkUp, String walkDown, String walkLeft, String walkRight, String fire,
+      String previousWeapon, String nextWeapon, String buy, String weapon0, String weapon1,
       String weapon2, String weapon3, String weapon4) {
-    this.walkUp    = getKeyOrThrow(walkUp);
-    this.walkDown  = getKeyOrThrow(walkDown);
-    this.walkLeft  = getKeyOrThrow(walkLeft);
+    this.walkUp = getKeyOrThrow(walkUp);
+    this.walkDown = getKeyOrThrow(walkDown);
+    this.walkLeft = getKeyOrThrow(walkLeft);
     this.walkRight = getKeyOrThrow(walkRight);
 
     this.fire = getKeyOrThrow(fire);
-    this.buy  = getKeyOrThrow(buy);
+    this.buy = getKeyOrThrow(buy);
 
     this.previousWeapon = getKeyOrThrow(previousWeapon);
-    this.nextWeapon     = getKeyOrThrow(nextWeapon);
+    this.nextWeapon = getKeyOrThrow(nextWeapon);
 
     this.weapon0 = getKeyOrThrow(weapon0);
     this.weapon1 = getKeyOrThrow(weapon1);

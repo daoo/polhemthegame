@@ -28,8 +28,9 @@ public class SingleMachine implements IWeaponMachine {
   private boolean fire;
   private WeaponStates state;
 
-  public SingleMachine(int reloadLength, int cooldownLength,
-      IMagazine magazine, ProjectileQueue queue, AnimatedSheet anim) {
+  public SingleMachine(
+      int reloadLength, int cooldownLength, IMagazine magazine, ProjectileQueue queue,
+      AnimatedSheet anim) {
     this.reloadLength = reloadLength;
     this.cooldownLength = cooldownLength;
     this.magazine = magazine;

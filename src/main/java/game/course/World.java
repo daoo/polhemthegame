@@ -31,15 +31,15 @@ public class World implements IDebuggable {
   private final ArrayList<Trigger> newTriggers;
 
   public World() {
-    misc        = new ArrayList<>();
-    units       = new ArrayList<>();
+    misc = new ArrayList<>();
+    units = new ArrayList<>();
     projectiles = new ArrayList<>();
 
-    newMisc        = new ArrayList<>();
-    newUnits       = new ArrayList<>();
+    newMisc = new ArrayList<>();
+    newUnits = new ArrayList<>();
     newProjectiles = new ArrayList<>();
 
-    triggers    = new ArrayList<>();
+    triggers = new ArrayList<>();
     newTriggers = new ArrayList<>();
   }
 
@@ -139,8 +139,7 @@ public class World implements IDebuggable {
     return parent;
   }
 
-  private static void processEntities(Iterable<? extends IEntity> entities,
-      GameTime time) {
+  private static void processEntities(Iterable<? extends IEntity> entities, GameTime time) {
     Iterator<? extends IEntity> itr = entities.iterator();
     while (itr.hasNext()) {
       IEntity e = itr.next();

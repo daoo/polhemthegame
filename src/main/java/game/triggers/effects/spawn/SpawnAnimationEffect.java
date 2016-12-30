@@ -23,8 +23,8 @@ public class SpawnAnimationEffect implements IEffect {
   private final Rectangle rect;
   private final AnimatedSheet anim;
 
-  public SpawnAnimationEffect(Entity entity, AnimatedSheet anim,
-                              Graphics graphics) {
+  public SpawnAnimationEffect(
+      Entity entity, AnimatedSheet anim, Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 
     this.rect = entity.body;

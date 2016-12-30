@@ -36,23 +36,21 @@ public class Weapon implements IHoldable {
    */
   private final ProjectileQueue queue;
 
-  public Weapon(Vector2 muzzleOffset, WeaponMode mode, int reloadLength,
-                int cooldownLength, int magazineSize, Orientation orientation,
-                AnimatedSheet anim, ProjectileFactory projTemplate) {
+  public Weapon(
+      Vector2 muzzleOffset, WeaponMode mode, int reloadLength, int cooldownLength, int magazineSize,
+      Orientation orientation, AnimatedSheet anim, ProjectileFactory projTemplate) {
     this.muzzleOffset = muzzleOffset;
-    this.orientation  = orientation;
-    this.anim         = anim;
+    this.orientation = orientation;
+    this.anim = anim;
     this.projTemplate = projTemplate;
 
     queue = new ProjectileQueue();
 
-    IMagazine magazine = magazineSize == -1
-      ? new InfiniteMagazine()
-      : new Magazine(magazineSize);
+    IMagazine magazine = magazineSize == -1 ? new InfiniteMagazine() : new Magazine(magazineSize);
 
     machine = mode == WeaponMode.AUTOMATIC
-      ? new AutomaticMachine(reloadLength, cooldownLength, magazine, queue, anim)
-      : new SingleMachine(reloadLength, cooldownLength, magazine, queue, anim);
+        ? new AutomaticMachine(reloadLength, cooldownLength, magazine, queue, anim)
+        : new SingleMachine(reloadLength, cooldownLength, magazine, queue, anim);
   }
 
   public Orientation getOrientation() {

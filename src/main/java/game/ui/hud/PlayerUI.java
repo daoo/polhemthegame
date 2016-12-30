@@ -15,9 +15,9 @@ import game.ui.IStaticUIElement;
 public class PlayerUI implements IStaticUIElement {
   public static final int HEIGHT = 75;
 
-  private static final int STATS_WIDTH       = 100;
+  private static final int STATS_WIDTH = 100;
   private static final int STATS_LINE_HEIGHT = 25;
-  private static final int PADDING           = 10;
+  private static final int PADDING = 10;
 
   private static final String MONEY = "Money: ";
   private static final String KILLS = "Kills: ";

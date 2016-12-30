@@ -10,12 +10,14 @@ public interface IDebuggable {
   /**
    * Returns a debug node. A debug node is a node with children that contains
    * information related to the game.
+   *
    * @return a debug node
    */
   Node<String> debugTree();
 
   /**
    * A short descriptive string with debugging information.
+   *
    * @return a string
    */
   String debugString();

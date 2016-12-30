@@ -23,7 +23,7 @@ public class RangeLimiter implements ILogicComponent {
     this.owner = owner;
 
     this.duration = duration;
-    this.range    = range;
+    this.range = range;
   }
 
   @Override

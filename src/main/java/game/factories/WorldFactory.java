@@ -61,20 +61,19 @@ public class WorldFactory {
   private Trigger creepsSpawnTrigger;
   private Trigger creepsDeadTrigger;
 
-  public WorldFactory(LevelManager gameMode, StateManager stateManager,
-                      EntityFactory entityFactory, Rectangle rect,
-                      List<Entity> players) throws ParserException, IOException {
-    this.gameMode      = gameMode;
-    this.stateManager  = stateManager;
+  public WorldFactory(
+      LevelManager gameMode, StateManager stateManager, EntityFactory entityFactory, Rectangle rect,
+      List<Entity> players) throws ParserException, IOException {
+    this.gameMode = gameMode;
+    this.stateManager = stateManager;
     this.entityFactory = entityFactory;
-    this.rect          = rect;
-    this.players       = players;
+    this.rect = rect;
+    this.players = players;
 
     bossesData = CacheTool.getBosses(Locator.getCache());
   }
 
-  private void setupCreeps(List<CreepSpawnData> spawnsData)
-      throws ParserException, IOException {
+  private void setupCreeps(List<CreepSpawnData> spawnsData) throws ParserException, IOException {
     assert spawnsData != null;
 
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
@@ -85,21 +84,17 @@ public class WorldFactory {
       // Make creep
       CreepData creepData = creepsData.getCreep(spawnData.creep);
       float x = rect.getX2() + creepData.unit.hitbox.width;
-      float y = Locator.getRandom().nextFloat(
-        rect.getY1(),
-        rect.getY2() - creepData.unit.hitbox.height
-      );
+      float y = Locator.getRandom()
+          .nextFloat(rect.getY1(), rect.getY2() - creepData.unit.hitbox.height);
 
       Unit creep = entityFactory.makeCreep(x, y, creepData);
 
-      creep.entity.addLogicComponent(
-        new KillCreep(creep.entity, (int) rect.getX1(),
+      creep.entity.addLogicComponent(new KillCreep(creep.entity, (int) rect.getX1(),
           new DamageEntitiesEffect(players, PLAYER_DAMAGE)));
 
       // Add trigger
-      creepsSpawnTrigger.addEffect(
-        new ExecuteWithDelayEffect(
-          spawnData.spawnTime, new SpawnCreepEffect(creep)));
+      creepsSpawnTrigger
+          .addEffect(new ExecuteWithDelayEffect(spawnData.spawnTime, new SpawnCreepEffect(creep)));
 
       creeps.add(creep.entity);
     }
@@ -108,37 +103,31 @@ public class WorldFactory {
   }
 
   public World makeLevel(LevelData level) throws ParserException, IOException {
-    Image imgLevelStart    = CacheTool.getImage(Locator.getCache(), level.loading);
+    Image imgLevelStart = CacheTool.getImage(Locator.getCache(), level.loading);
     Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
-    Image imgGameOver      = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
+    Image imgGameOver = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
 
     world = new World();
 
     creepsSpawnTrigger = new Trigger();
-    creepsDeadTrigger  = new Trigger();
-    Trigger levelStartTrigger  = new Trigger();
+    creepsDeadTrigger = new Trigger();
+    Trigger levelStartTrigger = new Trigger();
     Trigger playersDeadTrigger = new Trigger();
 
     creepsSpawnTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
     levelStartTrigger.addCondition(AlwaysTrueCondition.INSTANCE);
     playersDeadTrigger.addCondition(new AllInactiveCondition(players));
 
-    levelStartTrigger.addAllEffects(Arrays.asList(
-      new SetForegroundEffect(Locator.getUI(), imgLevelStart),
-      new ExecuteWithDelayEffect(
-        TRIGGER_DELAY, new AddTriggerEffect(creepsSpawnTrigger))
-    ));
+    levelStartTrigger.addAllEffects(Arrays
+        .asList(new SetForegroundEffect(Locator.getUI(), imgLevelStart),
+            new ExecuteWithDelayEffect(TRIGGER_DELAY, new AddTriggerEffect(creepsSpawnTrigger))));
 
-    creepsSpawnTrigger.addAllEffects(Arrays.asList(
-      new SetForegroundEffect(Locator.getUI(), null),
-      new AddTriggerEffect(creepsDeadTrigger)
-    ));
+    creepsSpawnTrigger.addAllEffects(Arrays.asList(new SetForegroundEffect(Locator.getUI(), null),
+        new AddTriggerEffect(creepsDeadTrigger)));
 
-    List<IEffect> levelCompleteEffects = Arrays.asList(
-      new SetForegroundEffect(Locator.getUI(), imgLevelComplete),
-      new ExecuteWithDelayEffect(
-        TRIGGER_DELAY, new LevelCompleteEffect(gameMode))
-    );
+    List<IEffect> levelCompleteEffects = Arrays
+        .asList(new SetForegroundEffect(Locator.getUI(), imgLevelComplete),
+            new ExecuteWithDelayEffect(TRIGGER_DELAY, new LevelCompleteEffect(gameMode)));
 
     if (level.boss == null) {
       // No boss, level complete after all creeps dead
@@ -150,29 +139,19 @@ public class WorldFactory {
 
       Trigger bossDeadTrigger = new Trigger();
       bossDeadTrigger.addCondition(new AllInactiveCondition(Arrays.asList(boss.entity)));
-      bossDeadTrigger.addEffect(new ExecuteWithDelayEffect(TRIGGER_DELAY,
-        levelCompleteEffects));
+      bossDeadTrigger.addEffect(new ExecuteWithDelayEffect(TRIGGER_DELAY, levelCompleteEffects));
 
-      creepsDeadTrigger.addEffect(
-        new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
-          new SetForegroundEffect(Locator.getUI(), imgBoss),
-          new ExecuteWithDelayEffect(TRIGGER_DELAY, Arrays.asList(
-            new SetForegroundEffect(Locator.getUI(), null),
-            new SpawnBossEffect(boss),
-            new AddTriggerEffect(bossDeadTrigger)
-          ))
-        ))
-      );
+      creepsDeadTrigger.addEffect(new ExecuteWithDelayEffect(
+          TRIGGER_DELAY, Arrays.asList(new SetForegroundEffect(Locator.getUI(), imgBoss),
+          new ExecuteWithDelayEffect(
+              TRIGGER_DELAY, Arrays
+              .asList(new SetForegroundEffect(Locator.getUI(), null), new SpawnBossEffect(boss),
+                  new AddTriggerEffect(bossDeadTrigger))))));
     }
 
     playersDeadTrigger.addEffect(new ExecuteWithDelayEffect(
-      TRIGGER_DELAY,
-      Arrays.asList(
-        new SetForegroundEffect(Locator.getUI(), imgGameOver),
-        new ExecuteWithDelayEffect(TRIGGER_DELAY,
-          new MainMenuEffect(stateManager))
-      ))
-    );
+        TRIGGER_DELAY, Arrays.asList(new SetForegroundEffect(Locator.getUI(), imgGameOver),
+        new ExecuteWithDelayEffect(TRIGGER_DELAY, new MainMenuEffect(stateManager)))));
 
     world.addTrigger(levelStartTrigger);
     world.addTrigger(playersDeadTrigger);

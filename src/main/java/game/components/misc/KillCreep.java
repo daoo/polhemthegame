@@ -16,8 +16,8 @@ public class KillCreep implements ILogicComponent {
   private final IEffect effect;
 
   public KillCreep(Entity owner, int limit, IEffect effect) {
-    this.owner  = owner;
-    this.limit  = limit;
+    this.owner = owner;
+    this.limit = limit;
     this.effect = effect;
   }
 

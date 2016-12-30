@@ -10,5 +10,6 @@ public interface IRenderComponent extends ILogicComponent {
   void render(Graphics g);
 
   int getWidth();
+
   int getHeight();
 }

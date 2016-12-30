@@ -18,6 +18,7 @@ public class Key {
 
   /**
    * Construct a new key for a key identifier.
+   *
    * @param key the key identifier, must be in the interval [1, 255]
    */
   public Key(int key) {
@@ -52,6 +53,7 @@ public class Key {
 
   /**
    * Was the key pressed during the last call to update.
+   *
    * @return true if the key was pressed, false otherwise
    */
   public boolean wasPressed() {
@@ -60,6 +62,7 @@ public class Key {
 
   /**
    * Was the key released during the last call to update.
+   *
    * @return true if the key was released, false otherwise
    */
   public boolean wasReleased() {
@@ -68,6 +71,7 @@ public class Key {
 
   /**
    * Was the key down during the last call to update.
+   *
    * @return true if the key was down, false otherwise
    */
   public boolean wasDown() {
@@ -76,6 +80,7 @@ public class Key {
 
   /**
    * Internal helper method that polls the keyboard.
+   *
    * @return true if the key is down during the call, false otherwise
    */
   private boolean isKeyDown() {

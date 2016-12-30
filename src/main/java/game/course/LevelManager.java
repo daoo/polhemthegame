@@ -34,56 +34,47 @@ public class LevelManager {
   private boolean finished;
   private boolean credits;
 
-  public LevelManager(StateManager stateManager, boolean twoPlayer,
-      CampaignData data, int windowWidth, int arenaWidth, int arenaHeight)
-      throws ParserException, IOException, SlickException {
+  public LevelManager(
+      StateManager stateManager, boolean twoPlayer, CampaignData data, int windowWidth,
+      int arenaWidth, int arenaHeight) throws ParserException, IOException, SlickException {
     if (data.levels.isEmpty()) {
       throw new IllegalArgumentException("No levels in campaign '" + data.name + "'");
     }
 
     this.stateManager = stateManager;
 
-    int left   = data.constraints[0];
-    int top    = data.constraints[1];
+    int left = data.constraints[0];
+    int top = data.constraints[1];
     int bottom = data.constraints[2];
-    int right  = data.constraints[3];
+    int right = data.constraints[3];
 
-    Rectangle worldRect = new Rectangle(
-        left, top,
-        arenaWidth - left - right,
-        arenaHeight - top - bottom
-    );
+    Rectangle worldRect = new Rectangle(left, top, arenaWidth - left - right,
+        arenaHeight - top - bottom);
 
     statics = new Image(arenaWidth, arenaHeight);
 
-    campaign   = new Campaign(data);
+    campaign = new Campaign(data);
     background = CacheTool.getImage(Locator.getCache(), data.background);
 
 
-    EntityFactory entityFactory = new EntityFactory(worldRect,
-        statics.getGraphics());
+    EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
 
     ArrayList<Entity> players = new ArrayList<>();
-    Player player1 = entityFactory.makePlayer("blue",
-        Locator.getConfig().player1);
+    Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
     Locator.getUI().addDynamic(player1.infoBar);
-    Locator.getUI().addStatic(new PlayerUI(0, 0, windowWidth, player1.shopUI,
-        player1.inventory));
+    Locator.getUI().addStatic(new PlayerUI(0, 0, windowWidth, player1.shopUI, player1.inventory));
     players.add(player1.entity);
 
     if (twoPlayer) {
-      Player player2 = entityFactory.makePlayer("red",
-          Locator.getConfig().player2);
+      Player player2 = entityFactory.makePlayer("red", Locator.getConfig().player2);
       Locator.getUI().addDynamic(player2.infoBar);
-      Locator.getUI().addStatic(new PlayerUI(0, 0, windowWidth, player1.shopUI,
-          player1.inventory));
+      Locator.getUI().addStatic(new PlayerUI(0, 0, windowWidth, player1.shopUI, player1.inventory));
       players.add(player2.entity);
     }
 
     Players.reposition(players, worldRect);
 
-    worldFactory = new WorldFactory(this, stateManager, entityFactory,
-        worldRect, players);
+    worldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
 
     credits = false;
     finished = false;

@@ -23,11 +23,11 @@ public class MovingProjectileCollision implements ILogicComponent {
   private final Movement movement;
 
   public MovingProjectileCollision(Entity owner, Movement movement) {
-    this.owner    = owner;
+    this.owner = owner;
     this.movement = movement;
 
     enableCollisions = true;
-    collidedWith     = new ArrayList<>();
+    collidedWith = new ArrayList<>();
   }
 
   /**

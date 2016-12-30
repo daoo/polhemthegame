@@ -21,7 +21,7 @@ public class Animation implements IEntity {
 
   public Animation(int x, int y, AnimatedSheet anim, Graphics graphics) {
     this.position = new Vector2(x, y);
-    this.anim     = anim;
+    this.anim = anim;
     this.graphics = graphics;
 
     active = true;

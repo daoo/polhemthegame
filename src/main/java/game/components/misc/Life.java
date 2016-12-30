@@ -22,7 +22,7 @@ public class Life implements ILogicComponent, IProgress {
   public Life(IEntity owner, float maxHP) {
     this.owner = owner;
     this.alive = true;
-    this.hp    = maxHP;
+    this.hp = maxHP;
     this.maxHP = maxHP;
   }
 
@@ -57,6 +57,7 @@ public class Life implements ILogicComponent, IProgress {
   /**
    * Deal some damage to this. Also kills if the hp goes to zero or less using
    * the supplied damage source as killer.
+   *
    * @param dmg information about the damage
    */
   private void damage(Damage dmg) {
@@ -73,12 +74,13 @@ public class Life implements ILogicComponent, IProgress {
    * Sends a KILLED_ENTITY message to the killer. If killer is null, no message
    * is sent but the owner is still killed. Nothing happens if we have been
    * killed before.
+   *
    * @param killer the killer to whom the KILLED_ENTITY message is sent, can be
-   *        null.
+   * null.
    */
   private void kill(IEntity killer) {
     if (alive) {
-      hp    = 0;
+      hp = 0;
       alive = false;
       owner.remove();
 

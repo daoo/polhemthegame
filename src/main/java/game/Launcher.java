@@ -26,8 +26,8 @@ import loader.data.json.ConfigData;
 import util.Random;
 
 public class Launcher extends BasicGame {
-  private static final int WIDTH   = 1024;
-  private static final int HEIGHT  = 768;
+  private static final int WIDTH = 1024;
+  private static final int HEIGHT = 768;
   private static final int MAX_FPS = 60;
 
   private static final boolean FULLSCREEN = false;
@@ -44,22 +44,16 @@ public class Launcher extends BasicGame {
     try (FileReader reader = new FileReader(configFile)) {
       ConfigData configData = new Gson().fromJson(reader, ConfigData.class);
 
-      Binds binds1 = new Binds(
-          configData.player1.walkUp, configData.player1.walkDown,
-          configData.player1.walkLeft, configData.player1.walkRight,
-          configData.player1.fire, configData.player1.previousWeapon,
-          configData.player1.nextWeapon, configData.player1.buy,
-          configData.player1.weapon0, configData.player1.weapon1,
-          configData.player1.weapon2, configData.player1.weapon3,
-          configData.player1.weapon4);
-      Binds binds2 = new Binds(
-          configData.player2.walkUp, configData.player2.walkDown,
-          configData.player2.walkLeft, configData.player2.walkRight,
-          configData.player2.fire, configData.player2.previousWeapon,
-          configData.player2.nextWeapon, configData.player2.buy,
-          configData.player2.weapon0, configData.player2.weapon1,
-          configData.player2.weapon2, configData.player2.weapon3,
-          configData.player2.weapon4);
+      Binds binds1 = new Binds(configData.player1.walkUp, configData.player1.walkDown,
+          configData.player1.walkLeft, configData.player1.walkRight, configData.player1.fire,
+          configData.player1.previousWeapon, configData.player1.nextWeapon, configData.player1.buy,
+          configData.player1.weapon0, configData.player1.weapon1, configData.player1.weapon2,
+          configData.player1.weapon3, configData.player1.weapon4);
+      Binds binds2 = new Binds(configData.player2.walkUp, configData.player2.walkDown,
+          configData.player2.walkLeft, configData.player2.walkRight, configData.player2.fire,
+          configData.player2.previousWeapon, configData.player2.nextWeapon, configData.player2.buy,
+          configData.player2.weapon0, configData.player2.weapon1, configData.player2.weapon2,
+          configData.player2.weapon3, configData.player2.weapon4);
 
       return new Config(binds1, binds2);
     } catch (FileNotFoundException ignored) {

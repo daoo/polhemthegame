@@ -85,7 +85,8 @@ public class Inventory implements ILogicComponent {
 
   @Override
   public String toString() {
-    return String.format("Inventory - %d money, %d weapons, %d kills, %f damageDealt",
-      wallet.getMoney(), weapons.size(), kills, damageDealt);
+    return String
+        .format("Inventory - %d money, %d weapons, %d kills, %f damageDealt", wallet.getMoney(),
+            weapons.size(), kills, damageDealt);
   }
 }

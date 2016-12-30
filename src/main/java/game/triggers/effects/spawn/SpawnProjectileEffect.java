@@ -20,7 +20,7 @@ public class SpawnProjectileEffect implements IEffect {
     assert projectile != null;
 
     this.projectile = projectile;
-    this.start      = start;
+    this.start = start;
   }
 
   @Override

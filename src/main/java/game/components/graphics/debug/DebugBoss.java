@@ -22,7 +22,7 @@ public class DebugBoss implements IRenderComponent {
 
   public DebugBoss(Rectangle body, BossAI ai) {
     this.body = body;
-    this.ai   = ai;
+    this.ai = ai;
   }
 
   @Override

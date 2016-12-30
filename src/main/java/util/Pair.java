@@ -6,6 +6,7 @@ public class Pair<A, B> {
 
   /**
    * Construct a new pair with the specific values.
+   *
    * @param a the first value
    * @param b the second value
    */

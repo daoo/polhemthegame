@@ -32,14 +32,14 @@ public class Cache implements Closeable {
    * Retrieve an item from the cache or disk.
    * If there is no item in the cache, the parser will be used to read if from
    * the disk.
+   *
    * @param id the id of the item to retrieve
    * @param parser the parser to use if a disk access is needed
    * @return the requested data
    * @throws IOException if the data is not found on the disk
    * @throws ParserException if parsing the data fails
    */
-  public IData get(String id, IParser parser)
-    throws IOException, ParserException {
+  public IData get(String id, IParser parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
@@ -62,8 +62,7 @@ public class Cache implements Closeable {
     return sb.toString();
   }
 
-  private IData readAndParse(String id, IParser parser)
-      throws IOException, ParserException {
+  private IData readAndParse(String id, IParser parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 

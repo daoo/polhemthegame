@@ -67,8 +67,7 @@ public class Hand implements IRenderComponent, IProgress {
       ProjectileFactory factory = weapon.getProjectileFactory();
       ProjectileQueue queue = weapon.getQueue();
 
-      Vector2 pos = offsetCalc.getMuzzlePosition(weapon.getWidth(),
-          weapon.getMuzzleOffset());
+      Vector2 pos = offsetCalc.getMuzzlePosition(weapon.getWidth(), weapon.getMuzzleOffset());
 
       float x = pos.x;
       if (weapon.getOrientation() == Orientation.LEFT) {

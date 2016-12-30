@@ -28,15 +28,16 @@ public class AutomaticMachine implements IWeaponMachine {
   private boolean fire;
   private WeaponStates state;
 
-  public AutomaticMachine(int reloadLength, int cooldownLength,
-      IMagazine magazine, ProjectileQueue queue, AnimatedSheet anim) {
-    this.reloadLength   = reloadLength;
+  public AutomaticMachine(
+      int reloadLength, int cooldownLength, IMagazine magazine, ProjectileQueue queue,
+      AnimatedSheet anim) {
+    this.reloadLength = reloadLength;
     this.cooldownLength = cooldownLength;
-    this.magazine       = magazine;
-    this.queue          = queue;
-    this.anim           = anim;
+    this.magazine = magazine;
+    this.queue = queue;
+    this.anim = anim;
 
-    fire  = false;
+    fire = false;
     timer = null;
     state = WeaponStates.IDLE;
   }

@@ -18,8 +18,7 @@ public class Vector2Test {
   private final Vector2 unitRight = new Vector2(1, 0);
 
   private Vector2 randomVector2() {
-    return new Vector2(
-      random.nextInt(-RANGE, RANGE), random.nextInt(-RANGE, RANGE));
+    return new Vector2(random.nextInt(-RANGE, RANGE), random.nextInt(-RANGE, RANGE));
   }
 
   @Test
@@ -35,15 +34,9 @@ public class Vector2Test {
       int a = random.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
 
-      assertEquals(
-        v.magnitudeSquared(),
-        Vector2.dot(v, v),
-        0.1f);
+      assertEquals(v.magnitudeSquared(), Vector2.dot(v, v), 0.1f);
 
-      assertEquals(
-        Vector2.multiply(v, a).magnitude(),
-        Math.abs(a) * v.magnitude(),
-        0.1f);
+      assertEquals(Vector2.multiply(v, a).magnitude(), Math.abs(a) * v.magnitude(), 0.1f);
     }
   }
 
@@ -64,30 +57,15 @@ public class Vector2Test {
       Vector2 u = randomVector2();
       Vector2 w = randomVector2();
 
-      assertEquals(
-        Vector2.dot(Vector2.add(u, v), w),
-        Vector2.dot(u, w) + Vector2.dot(v, w),
-        0.1f);
+      assertEquals(Vector2.dot(Vector2.add(u, v), w), Vector2.dot(u, w) + Vector2.dot(v, w), 0.1f);
 
-      assertEquals(
-        Vector2.dot(Vector2.multiply(u, a), v),
-        a * Vector2.dot(v, u),
-        0.1f);
+      assertEquals(Vector2.dot(Vector2.multiply(u, a), v), a * Vector2.dot(v, u), 0.1f);
 
-      assertEquals(
-        Vector2.dot(v, u),
-        Vector2.dot(u, v),
-        0.1f);
+      assertEquals(Vector2.dot(v, u), Vector2.dot(u, v), 0.1f);
 
-      assertEquals(
-        Vector2.dot(u, u),
-        u.magnitudeSquared(),
-        0.1f);
+      assertEquals(Vector2.dot(u, u), u.magnitudeSquared(), 0.1f);
 
-      assertEquals(
-        Vector2.dot(u, u.normalize()),
-        u.magnitude(),
-        0.1f);
+      assertEquals(Vector2.dot(u, u.normalize()), u.magnitude(), 0.1f);
     }
   }
 
@@ -97,10 +75,7 @@ public class Vector2Test {
       Vector2 v = randomVector2();
       Vector2 u = randomVector2();
 
-      assertEquals(
-        Vector2.subtract(v, u).magnitude(),
-        Vector2.distance(u, v),
-        0.1f);
+      assertEquals(Vector2.subtract(v, u).magnitude(), Vector2.distance(u, v), 0.1f);
     }
   }
 }

@@ -17,7 +17,7 @@ public class EffectsOnDeath implements ILogicComponent {
   private final Collection<? extends IEffect> effects;
 
   public EffectsOnDeath(Entity owner, Collection<? extends IEffect> effects) {
-    this.owner   = owner;
+    this.owner = owner;
     this.effects = effects;
   }
 

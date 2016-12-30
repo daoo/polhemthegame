@@ -26,6 +26,7 @@ public class InfoBar implements IDynamicUIElement {
 
   /**
    * Creates a new InfoBar.
+   *
    * @param entity the entity this info bar is attached to
    * @param barWidth the width of each individual bar
    * @param barHeight the height of each individual bar
@@ -33,11 +34,11 @@ public class InfoBar implements IDynamicUIElement {
    * @param offsetY translation on the y axis before rendering
    */
   public InfoBar(Entity entity, int barWidth, int barHeight, int offsetX, int offsetY) {
-    this.entity  = entity;
+    this.entity = entity;
     this.offsetX = offsetX;
     this.offsetY = offsetY;
 
-    this.barWidth  = barWidth;
+    this.barWidth = barWidth;
     this.barHeight = barHeight;
 
     bars = new ArrayList<>();
@@ -45,6 +46,7 @@ public class InfoBar implements IDynamicUIElement {
 
   /**
    * Add a bar to this InfoBar.
+   *
    * @param bar the bar to add, can not be null
    */
   public void add(Bar bar) {
@@ -65,6 +67,7 @@ public class InfoBar implements IDynamicUIElement {
 
   /**
    * Render all bars in the supplied graphics context.
+   *
    * @param g the graphics context to use for rendering
    */
   @Override
@@ -84,6 +87,7 @@ public class InfoBar implements IDynamicUIElement {
   /**
    * Check if this UI component active.
    * Depends on whether the associated entity is active or not.
+   *
    * @return true or false depending on if this is active or not
    */
   @Override

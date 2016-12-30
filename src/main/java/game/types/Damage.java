@@ -11,7 +11,7 @@ public class Damage {
   public final IEntity source;
 
   public Damage(IEntity source, float ammount) {
-    this.source  = source;
+    this.source = source;
     this.ammount = ammount;
   }
 }

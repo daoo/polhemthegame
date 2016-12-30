@@ -33,13 +33,13 @@ public class WeaponFactory {
 
   /**
    * Construct a new weapon factory that can make any weapon.
+   *
    * @param bounds the bounds within projectiles can exists
    * @param statics graphics context were statics can be drawn
    * @throws ParserException when parsing file data fails
    * @throws IOException when reading files fails
    */
-  public WeaponFactory(Rectangle bounds, Graphics statics)
-      throws ParserException, IOException {
+  public WeaponFactory(Rectangle bounds, Graphics statics) throws ParserException, IOException {
     this.bounds = bounds;
     this.statics = statics;
 
@@ -49,35 +49,28 @@ public class WeaponFactory {
 
   /**
    * Make a new weapon by fetching data from the cache.
+   *
    * @param name the name of the weapon
    * @param orientation the orientation of the weapon (affects direction of projectiles)
    * @return a weapon
    * @throws ParserException if parsing fails
    * @throws IOException if file IO fails
    */
-  public Weapon makeWeapon(String name, Orientation orientation)
-      throws ParserException, IOException {
+  public Weapon makeWeapon(String name, Orientation orientation) throws ParserException,
+      IOException {
     WeaponData data = weapons.weapons.get(name);
 
     Vector2 muzzle = new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
     ProjectileData projectileData = projectiles.getProjectile(data.projectile);
 
-    AnimatedSheet anim =
-      CacheTool.getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
+    AnimatedSheet anim = CacheTool
+        .getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
-    ProjectileFactory factory = new ProjectileFactory(bounds, data.launchAngle,
-        data.spread, orientation, projectileData, statics);
+    ProjectileFactory factory = new ProjectileFactory(bounds, data.launchAngle, data.spread,
+        orientation, projectileData, statics);
 
-    return new Weapon(
-      muzzle,
-      data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
-      data.reloadTime,
-      (int) (60000 / data.rpm),
-      data.clipSize,
-      orientation,
-      anim,
-      factory
-    );
+    return new Weapon(muzzle, data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
+        data.reloadTime, (int) (60000 / data.rpm), data.clipSize, orientation, anim, factory);
   }
 }

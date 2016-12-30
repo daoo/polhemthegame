@@ -17,8 +17,7 @@ public class FontHelper {
 
   private static final ColorEffect COLOR_WHITE = new ColorEffect(Color.white);
 
-  public static UnicodeFont getFont(String name, int size)
-      throws SlickException {
+  public static UnicodeFont getFont(String name, int size) throws SlickException {
     Font font = new Font(name, Font.PLAIN, size);
     UnicodeFont ufont = new UnicodeFont(font);
 
@@ -30,8 +29,7 @@ public class FontHelper {
     return ufont;
   }
 
-  public static Image renderString(String s, UnicodeFont font)
-      throws SlickException {
+  public static Image renderString(String s, UnicodeFont font) throws SlickException {
     int width = font.getWidth(s);
     int height = font.getHeight(s);
 
@@ -48,14 +46,15 @@ public class FontHelper {
 
   /**
    * Draw a set of lines to a new image.
+   *
    * @param formaters line formating rules
    * @param spacing vertical spacing between the lines
    * @param lines the lines to render
    * @return a new image
    * @throws SlickException see {@link Image} and {@link Graphics}
    */
-  public static Image renderString(Map<String, UnicodeFont> formaters,
-      int spacing, String[] lines) throws SlickException {
+  public static Image renderString(
+      Map<String, UnicodeFont> formaters, int spacing, String[] lines) throws SlickException {
     ArrayList<Pair<UnicodeFont, String>> list = new ArrayList<>(lines.length);
 
     int w = 0;

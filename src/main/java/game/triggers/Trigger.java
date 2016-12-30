@@ -37,6 +37,7 @@ public class Trigger {
   /**
    * Sets the world in which the conditions should be evaluated and the effects
    * executed.
+   *
    * @param world the world to use, can not be null
    */
   public void setWorld(World world) {
@@ -47,8 +48,9 @@ public class Trigger {
 
   /**
    * Tells if this trigger will run it's effects again.
+   *
    * @return true if this is a looping trigger, if it isn't it will return true
-   *         or false depending on if the trigger have been executed or not.
+   * or false depending on if the trigger have been executed or not.
    */
   public boolean runAgain() {
     return runAgain;
@@ -57,6 +59,7 @@ public class Trigger {
   /**
    * Run the effects if the conditions are true. Also takes looping into
    * account.
+   *
    * @param time the game time to use for execution and evaluation
    */
   public void update(GameTime time) {
@@ -73,6 +76,7 @@ public class Trigger {
    * Checks if the conditions are met.
    * Conditions are met if the list of conditions is non-empty and ALL
    * conditions evaluate to true.
+   *
    * @param time the game time to use when evaluating conditions
    * @return true if all conditions are met or false otherwise
    */
@@ -92,6 +96,7 @@ public class Trigger {
 
   /**
    * Execute all effects with a specific game time.
+   *
    * @param time the time to use
    */
   private void execute(GameTime time) {
@@ -102,6 +107,7 @@ public class Trigger {
 
   /**
    * Adds a condition to the trigger.
+   *
    * @param condition the condition to add, can not be null
    */
   public void addCondition(ICondition condition) {
@@ -112,6 +118,7 @@ public class Trigger {
 
   /**
    * Adds an effect to the trigger.
+   *
    * @param effect the effect to add, can not be null
    */
   public void addEffect(IEffect effect) {

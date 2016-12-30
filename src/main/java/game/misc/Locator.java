@@ -18,10 +18,12 @@ public final class Locator {
   private static UI s_ui = null;
   private static Config s_config = null;
 
-  private Locator() { }
+  private Locator() {
+  }
 
   /**
    * Register a cache.
+   *
    * @param cache the cache, can not be null
    */
   public static void registerCache(Cache cache) {
@@ -32,6 +34,7 @@ public final class Locator {
 
   /**
    * Register a random number generator.
+   *
    * @param random the RNG, can not be null
    */
   public static void registerRandom(Random random) {
@@ -42,6 +45,7 @@ public final class Locator {
 
   /**
    * Register an UI.
+   *
    * @param ui the UI, can not be null
    */
   public static void registerUI(UI ui) {
@@ -52,6 +56,7 @@ public final class Locator {
 
   /**
    * Register a new config.
+   *
    * @param config the config, can not be null
    */
   public static void registerConfig(Config config) {
@@ -63,6 +68,7 @@ public final class Locator {
   /**
    * Retrieve the cache.
    * Note that this can return null if no cache have been registered.
+   *
    * @return the registered cache, or null
    */
   public static Cache getCache() {
@@ -72,6 +78,7 @@ public final class Locator {
   /**
    * Retrieve the RNG.
    * Note that this can return null if no RNG have been registered.
+   *
    * @return the registered RNG, or null
    */
   public static Random getRandom() {
@@ -81,6 +88,7 @@ public final class Locator {
   /**
    * Retrieve the UI.
    * Note this can return null if no UI have been registered.
+   *
    * @return the registered UI, or null
    */
   public static UI getUI() {
@@ -90,6 +98,7 @@ public final class Locator {
   /**
    * Retrieve the config.
    * Note that this can return null if no config has been registered.
+   *
    * @return the registered config, or null
    */
   public static Config getConfig() {

@@ -16,7 +16,7 @@ public class MovementConstraint implements ILogicComponent {
   private final Rectangle constraints;
 
   public MovementConstraint(Entity owner, Rectangle constraints) {
-    this.owner       = owner;
+    this.owner = owner;
     this.constraints = constraints;
   }
 

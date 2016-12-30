@@ -28,11 +28,11 @@ public class Shop {
     public final Weapon weapon;
 
     public ShopItem(int price, Image icon, Image iconGray, Weapon weapon) {
-      this.bought   = false;
-      this.price    = price;
-      this.icon     = icon;
+      this.bought = false;
+      this.price = price;
+      this.icon = icon;
       this.iconGray = iconGray;
-      this.weapon   = weapon;
+      this.weapon = weapon;
     }
   }
 
@@ -40,22 +40,22 @@ public class Shop {
   private final Iterator<ShopItem> it;
   private ShopItem next;
 
-  public Shop(ShopData shop, Orientation orientation, WeaponFactory factory)
-      throws ParserException, IOException {
+  public Shop(ShopData shop, Orientation orientation, WeaponFactory factory) throws ParserException,
+      IOException {
     items = new ArrayList<>();
 
     for (ShopItemData item : shop.items) {
-      Image icon     = CacheTool.getImage(Locator.getCache(), item.icon);
+      Image icon = CacheTool.getImage(Locator.getCache(), item.icon);
       Image iconGray = CacheTool.getImage(Locator.getCache(), item.iconGray);
 
       // These weapons are for players, hence right orientation
-      Weapon weapon  = factory.makeWeapon(item.weapon, orientation);
+      Weapon weapon = factory.makeWeapon(item.weapon, orientation);
 
       ShopItem tmp = new ShopItem(item.price, icon, iconGray, weapon);
       items.add(tmp);
     }
 
-    it   = items.iterator();
+    it = items.iterator();
     next = it.next();
   }
 

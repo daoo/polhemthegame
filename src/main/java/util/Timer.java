@@ -18,6 +18,7 @@ public class Timer {
 
   /**
    * Create a new timer.
+   *
    * @param start the start time
    * @param length the length of the time interval, greater than zero
    */
@@ -31,6 +32,7 @@ public class Timer {
 
   /**
    * Update the state of the time.
+   *
    * @param elapsed the elapsed game time
    */
   public void update(long elapsed) {
@@ -39,6 +41,7 @@ public class Timer {
 
   /**
    * Have the time interval passed?
+   *
    * @return true or false
    */
   public boolean isFinished() {
@@ -47,6 +50,7 @@ public class Timer {
 
   /**
    * Get the progress.
+   *
    * @return a float in the range [0, 1]
    */
   public float getProgress() {

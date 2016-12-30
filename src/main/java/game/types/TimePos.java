@@ -12,6 +12,6 @@ public class TimePos {
 
   public TimePos(long time, Vector2 pos) {
     this.time = time;
-    this.pos  = pos;
+    this.pos = pos;
   }
 }

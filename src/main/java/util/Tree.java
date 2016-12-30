@@ -6,6 +6,7 @@ package util;
 
 /**
  * Simple Rose Tree data structure.
+ *
  * @param <T> type held by the nodes
  */
 public class Tree<T> {
@@ -20,6 +21,7 @@ public class Tree<T> {
 
   /**
    * Create a new tree with the specific root node.
+   *
    * @param root the root node to use in the tree
    */
   public Tree(Node<T> root) {
@@ -30,6 +32,7 @@ public class Tree<T> {
 
   /**
    * Creates an nicely indent string of the entire tree.
+   *
    * @return a string resembling the tree
    */
   @Override
@@ -43,6 +46,7 @@ public class Tree<T> {
 
   /**
    * Recursive method for appending a tree to a string builder.
+   *
    * @param sb the string builder to append to
    * @param in current indentation string
    * @param node the node to recurse over
