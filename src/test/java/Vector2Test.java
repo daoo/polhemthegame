@@ -4,8 +4,6 @@
 
 package tests;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import math.Vector2;
@@ -16,25 +14,12 @@ import static org.junit.Assert.assertEquals;
 public class Vector2Test {
   private static final int RANGE = 100;
 
-  private Random random;
-
-  private Vector2 unitRight;
+  private final Random random = new Random();
+  private final Vector2 unitRight = new Vector2(1, 0);
 
   private Vector2 randomVector2() {
     return new Vector2(
       random.nextInt(-RANGE, RANGE), random.nextInt(-RANGE, RANGE));
-  }
-
-  @Before
-  public void setUp() throws Exception {
-    random = new Random();
-
-    unitRight = new Vector2(1, 0);
-  }
-
-  @After
-  public void tearDown() throws Exception {
-    // Do nothing
   }
 
   @Test

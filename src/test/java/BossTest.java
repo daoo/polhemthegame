@@ -4,8 +4,6 @@
 
 package tests;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import game.components.ai.Walking;

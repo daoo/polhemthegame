@@ -5,11 +5,7 @@
 package util;
 
 public class Random {
-  private final java.util.Random random;
-
-  public Random() {
-    random = new java.util.Random();
-  }
+  private final java.util.Random random = new java.util.Random();
 
   public boolean nextBool() {
     return random.nextBoolean();
