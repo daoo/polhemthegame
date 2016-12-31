@@ -17,21 +17,21 @@ import util.Node;
  * executed when some conditions are met.
  */
 public class Trigger {
-  private final ArrayList<ICondition> conditions;
-  private final ArrayList<IEffect> effects;
+  private final ArrayList<ICondition> mConditions;
+  private final ArrayList<IEffect> mEffects;
 
-  private boolean runAgain;
+  private boolean mRunAgain;
 
-  private World world;
+  private World mWorld;
 
   /**
    * Create a new trigger with no conditions or effects.
    */
   public Trigger() {
-    runAgain = true;
+    mRunAgain = true;
 
-    conditions = new ArrayList<>();
-    effects = new ArrayList<>();
+    mConditions = new ArrayList<>();
+    mEffects = new ArrayList<>();
   }
 
   /**
@@ -42,8 +42,7 @@ public class Trigger {
    */
   public void setWorld(World world) {
     assert world != null;
-
-    this.world = world;
+    mWorld = world;
   }
 
   /**
@@ -53,7 +52,7 @@ public class Trigger {
    * or false depending on if the trigger have been executed or not.
    */
   public boolean runAgain() {
-    return runAgain;
+    return mRunAgain;
   }
 
   /**
@@ -63,11 +62,11 @@ public class Trigger {
    * @param time the game time to use for execution and evaluation
    */
   public void update(GameTime time) {
-    if (runAgain) {
+    if (mRunAgain) {
       if (checkConditions(time)) {
         execute(time);
 
-        runAgain = false;
+        mRunAgain = false;
       }
     }
   }
@@ -81,12 +80,12 @@ public class Trigger {
    * @return true if all conditions are met or false otherwise
    */
   private boolean checkConditions(GameTime time) {
-    if (conditions.isEmpty()) {
+    if (mConditions.isEmpty()) {
       return false;
     }
 
-    for (ICondition condition : conditions) {
-      if (!condition.evaluate(time, world)) {
+    for (ICondition condition : mConditions) {
+      if (!condition.evaluate(time, mWorld)) {
         return false;
       }
     }
@@ -100,8 +99,8 @@ public class Trigger {
    * @param time the time to use
    */
   private void execute(GameTime time) {
-    for (IEffect effect : effects) {
-      effect.execute(time, world);
+    for (IEffect effect : mEffects) {
+      effect.execute(time, mWorld);
     }
   }
 
@@ -113,7 +112,7 @@ public class Trigger {
   public void addCondition(ICondition condition) {
     assert condition != null;
 
-    conditions.add(condition);
+    mConditions.add(condition);
   }
 
   /**
@@ -124,24 +123,24 @@ public class Trigger {
   public void addEffect(IEffect effect) {
     assert effect != null;
 
-    effects.add(effect);
+    mEffects.add(effect);
   }
 
   public void addAllEffects(Collection<? extends IEffect> collection) {
     assert collection != null;
 
-    effects.addAll(collection);
+    mEffects.addAll(collection);
   }
 
   public String debugString() {
-    return "Trigger, runAgain " + Boolean.toString(runAgain);
+    return "Trigger, runAgain " + Boolean.toString(mRunAgain);
   }
 
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(DebugHelper.listToNode("Conditions", conditions));
-    parent.nodes.add(DebugHelper.listToNode("Effects", effects));
+    parent.nodes.add(DebugHelper.listToNode("Conditions", mConditions));
+    parent.nodes.add(DebugHelper.listToNode("Effects", mEffects));
 
     return parent;
   }

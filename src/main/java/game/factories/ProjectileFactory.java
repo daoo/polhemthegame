@@ -41,15 +41,15 @@ import math.Rectangle;
 import util.SpriteSheet;
 
 public class ProjectileFactory {
-  private final Rectangle rect;
-  private final Orientation orientation;
-  private final int launchAngle;
-  private final int spread;
-  private final ProjectileData data;
-  private final Image img;
-  private final SpriteSheet sprite;
-  private final SpriteSheet explosion;
-  private final Graphics statics;
+  private final Rectangle mRect;
+  private final Orientation mOrientation;
+  private final int mLaunchAngle;
+  private final int mSpread;
+  private final ProjectileData mData;
+  private final Image mImg;
+  private final SpriteSheet mSprite;
+  private final SpriteSheet mExplosion;
+  private final Graphics mStatics;
 
   /**
    * Construct a new projectile factory for a given projectile.
@@ -69,31 +69,31 @@ public class ProjectileFactory {
       Graphics statics) throws IOException, ParserException {
     assert data != null;
 
-    this.rect = bounds;
-    this.launchAngle = launchAngle;
-    this.spread = spread;
-    this.orientation = orientation;
-    this.data = data;
-    this.statics = statics;
+    mRect = bounds;
+    mLaunchAngle = launchAngle;
+    mSpread = spread;
+    mOrientation = orientation;
+    mData = data;
+    mStatics = statics;
 
     if (data.texture != null) {
-      img = CacheTool.getImage(Locator.getCache(), data.texture);
-      sprite = null;
+      mImg = CacheTool.getImage(Locator.getCache(), data.texture);
+      mSprite = null;
     } else if (data.sprite != null) {
-      img = null;
-      sprite = CacheTool.getSpriteSheet(Locator.getCache(), data.sprite);
+      mImg = null;
+      mSprite = CacheTool.getSpriteSheet(Locator.getCache(), data.sprite);
     } else {
-      img = null;
-      sprite = null;
+      mImg = null;
+      mSprite = null;
     }
 
-    explosion = data.aoe == null
+    mExplosion = data.aoe == null
         ? null
         : CacheTool.getSpriteSheet(Locator.getCache(), data.aoe.explosionSprite);
   }
 
   public int getWidth() {
-    return data.hitbox.width;
+    return mData.hitbox.width;
   }
 
   /**
@@ -105,30 +105,30 @@ public class ProjectileFactory {
    * @return a new projectile
    */
   public Entity makeProjectile(IEntity source, float x, float y) {
-    Entity p = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    Entity p = new Entity(x, y, mData.hitbox.width, mData.hitbox.height);
 
-    p.addLogicComponent(new Life(p, data.targets));
-    p.addLogicComponent(new RangeLimiter(p, data.duration, data.range));
+    p.addLogicComponent(new Life(p, mData.targets));
+    p.addLogicComponent(new RangeLimiter(p, mData.duration, mData.range));
 
-    p.addLogicComponent(new ProjectileDamage(p, source, data.damage));
-    p.addLogicComponent(new OutOfBounds(p, rect));
+    p.addLogicComponent(new ProjectileDamage(p, source, mData.damage));
+    p.addLogicComponent(new OutOfBounds(p, mRect));
 
     int angle = getRotation();
 
     // If these conditions are met, the projectile is moving
-    if (data.speed != 0 || data.gravity) {
+    if (mData.speed != 0 || mData.gravity) {
       Movement mov = getMovement(p, angle);
       p.addLogicComponent(mov);
 
-      if (data.gravity) {
+      if (mData.gravity) {
         p.addLogicComponent(new Gravity(mov));
       }
 
-      if (data.collides) {
+      if (mData.collides) {
         p.addLogicComponent(new MovingProjectileCollision(p, mov));
       }
     } else {
-      if (data.collides) {
+      if (mData.collides) {
         p.addLogicComponent(new StaticCollision(p));
       }
     }
@@ -141,7 +141,7 @@ public class ProjectileFactory {
     ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
     effectsOnDeath.add(new RemoveEntityEffect(p));
 
-    if (data.aoe != null) {
+    if (mData.aoe != null) {
       setupExplosion(source, p, effectsOnDeath);
     }
 
@@ -153,10 +153,10 @@ public class ProjectileFactory {
   private Movement getMovement(Entity p, int angle) {
     float rad = ExtraMath.degToRad(angle);
 
-    float dx = (float) Math.cos(rad) * data.speed;
-    float dy = (float) Math.sin(rad) * data.speed;
+    float dx = (float) Math.cos(rad) * mData.speed;
+    float dy = (float) Math.sin(rad) * mData.speed;
 
-    if (orientation == Orientation.LEFT) {
+    if (mOrientation == Orientation.LEFT) {
       dx = -dx;
     }
 
@@ -164,30 +164,30 @@ public class ProjectileFactory {
   }
 
   private int getRotation() {
-    if (spread == 0) {
-      return launchAngle;
+    if (mSpread == 0) {
+      return mLaunchAngle;
     }
 
-    return launchAngle + Locator.getRandom().nextInt(-spread, spread) - spread / 2;
+    return mLaunchAngle + Locator.getRandom().nextInt(-mSpread, mSpread) - mSpread / 2;
   }
 
   private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
-    AnimatedSheet explosionAnim = new AnimatedSheet(data.aoe.explosionSprite.framerate,
-        data.aoe.explosionSprite.offset.x, data.aoe.explosionSprite.offset.y, Orientation.RIGHT, 0,
-        explosion);
+    AnimatedSheet explosionAnim = new AnimatedSheet(mData.aoe.explosionSprite.framerate,
+        mData.aoe.explosionSprite.offset.x, mData.aoe.explosionSprite.offset.y, Orientation.RIGHT, 0,
+        mExplosion);
 
-    effectsOnDeath.add(new AOEDamageEffect(source, p.body, data.aoe.radius, data.aoe.damage));
-    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, statics));
+    effectsOnDeath.add(new AOEDamageEffect(source, p.getBody(), mData.aoe.radius, mData.aoe.damage));
+    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, mStatics));
   }
 
   private IRenderComponent getRender(int angle) {
-    if (data.texture != null) {
-      return new TexturedQuad(img, orientation, angle);
-    } else if (data.sprite != null) {
-      AnimatedSheet sheet = new AnimatedSheet(data.sprite.framerate, data.sprite.offset.x,
-          data.sprite.offset.y, orientation, angle, sprite);
+    if (mData.texture != null) {
+      return new TexturedQuad(mImg, mOrientation, angle);
+    } else if (mData.sprite != null) {
+      AnimatedSheet sheet = new AnimatedSheet(mData.sprite.framerate, mData.sprite.offset.x,
+          mData.sprite.offset.y, mOrientation, angle, mSprite);
 
-      if (data.sprite.random) {
+      if (mData.sprite.random) {
         sheet.setAnimator(new RandomAnimator(sheet.getTileCount()));
       } else {
         sheet.setAnimator(new ContinuousAnimator(sheet.getTileCount()));

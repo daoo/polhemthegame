@@ -4,7 +4,7 @@
 
 package loader.data.json.types;
 
-
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class PlayerData {
   public UnitData unit;
 

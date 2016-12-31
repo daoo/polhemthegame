@@ -7,33 +7,33 @@ package game.components.ai;
 import game.types.GameTime;
 
 public class Shooting implements IBossState {
-  private final long length;
+  private final long mLength;
 
-  private long endTime;
-  private boolean finished;
+  private long mEndTime;
+  private boolean mFinished;
 
   public Shooting(int length) {
-    this.length = length;
+    mLength = length;
 
-    endTime = 0;
-    finished = false;
+    mEndTime = 0;
+    mFinished = false;
   }
 
   @Override
   public void start(GameTime time) {
-    endTime = time.elapsedMilli + length;
+    mEndTime = time.elapsedMilli + mLength;
   }
 
   @Override
   public void update(GameTime time) {
-    if (time.elapsedMilli >= endTime) {
-      finished = true;
+    if (time.elapsedMilli >= mEndTime) {
+      mFinished = true;
     }
   }
 
   @Override
   public boolean isFinished() {
-    return finished;
+    return mFinished;
   }
 
   @Override

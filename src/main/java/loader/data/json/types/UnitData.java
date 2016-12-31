@@ -6,6 +6,7 @@ package loader.data.json.types;
 
 import java.util.Map;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class UnitData {
   public Size hitbox;
   public int speed;

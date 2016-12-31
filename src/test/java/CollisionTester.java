@@ -48,23 +48,23 @@ public class CollisionTester extends BasicGame {
     }
   }
 
-  private final Entity obj1;
-  private final Entity obj2;
-  private final Movement mov2;
+  private final Entity mObj1;
+  private final Entity mObj2;
+  private final Movement mMov2;
 
   public CollisionTester() {
     super("Collision Tester");
 
-    obj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
-    obj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
+    mObj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
+    mObj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
 
     // Make projectile
-    obj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
-    mov2 = new Movement(obj2, PROJECTILE_DX, PROJECTILE_DY);
+    mObj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
+    mMov2 = new Movement(mObj2, PROJECTILE_DX, PROJECTILE_DY);
 
-    obj2.addLogicComponent(mov2);
-    obj2.addRenderComponent(new SolidQuad(Color.white, PROJECTILE_W, PROJECTILE_H));
-    obj2.addRenderComponent(new Outliner(obj2, mov2, true, true));
+    mObj2.addLogicComponent(mMov2);
+    mObj2.addRenderComponent(new SolidQuad(Color.white, PROJECTILE_W, PROJECTILE_H));
+    mObj2.addRenderComponent(new Outliner(mObj2, mMov2, true, true));
   }
 
   @Override
@@ -74,10 +74,10 @@ public class CollisionTester extends BasicGame {
 
   @Override
   public void render(GameContainer container, Graphics g) throws SlickException {
-    obj1.render(g);
-    obj2.render(g);
+    mObj1.render(g);
+    mObj2.render(g);
 
-    if (Collisions.sweepCollisionTest(obj2.body, mov2.getVelocity(), obj1.body, 1)) {
+    if (Collisions.sweepCollisionTest(mObj2.getBody(), mMov2.getVelocity(), mObj1.getBody(), 1)) {
       g.drawString("COLLISION!", 100, 10);
     }
   }
@@ -87,7 +87,7 @@ public class CollisionTester extends BasicGame {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       container.exit();
     } else {
-      Rectangle body = obj2.body;
+      Rectangle body = mObj2.getBody();
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
@@ -99,13 +99,13 @@ public class CollisionTester extends BasicGame {
       } else if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
         body.addPosition(new Vector2(s, 0));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-        mov2.addVelocity(new Vector2(0, -s));
+        mMov2.addVelocity(new Vector2(0, -s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-        mov2.addVelocity(new Vector2(0, s));
+        mMov2.addVelocity(new Vector2(0, s));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-        mov2.addVelocity(new Vector2(-s, 0));
+        mMov2.addVelocity(new Vector2(-s, 0));
       } else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-        mov2.addVelocity(new Vector2(s, 0));
+        mMov2.addVelocity(new Vector2(s, 0));
       }
     }
   }

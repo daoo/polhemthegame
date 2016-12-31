@@ -13,18 +13,18 @@ import game.ui.hud.UI;
 
 
 public class SetForegroundEffect implements IEffect {
-  private final UI ui;
-  private final Image image;
+  private final UI mUi;
+  private final Image mImage;
 
   public SetForegroundEffect(UI ui, Image image) {
     assert ui != null;
 
-    this.ui = ui;
-    this.image = image;
+    mUi = ui;
+    mImage = image;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    ui.setForegroundImage(image);
+    mUi.setForegroundImage(mImage);
   }
 }

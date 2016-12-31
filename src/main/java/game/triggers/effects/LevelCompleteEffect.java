@@ -10,14 +10,14 @@ import game.triggers.IEffect;
 import game.types.GameTime;
 
 public class LevelCompleteEffect implements IEffect {
-  private final LevelManager levelManager;
+  private final LevelManager mLevelManager;
 
   public LevelCompleteEffect(LevelManager gameMode) {
-    this.levelManager = gameMode;
+    mLevelManager = gameMode;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    levelManager.nextLevel();
+    mLevelManager.nextLevel();
   }
 }

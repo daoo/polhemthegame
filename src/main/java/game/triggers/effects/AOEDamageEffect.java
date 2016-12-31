@@ -39,7 +39,7 @@ public class AOEDamageEffect implements IEffect {
   @Override
   public void execute(GameTime time, World world) {
     for (Entity e : world.getUnits()) {
-      if (Vector2.distance(e.body.getCenter(), mBody.getCenter()) < mRange) {
+      if (Vector2.distance(e.getBody().getCenter(), mBody.getCenter()) < mRange) {
         e.sendMessage(Message.DAMAGE, mDamage);
       }
     }

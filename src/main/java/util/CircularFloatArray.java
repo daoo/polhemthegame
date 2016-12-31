@@ -14,12 +14,12 @@ import java.util.NoSuchElementException;
  * made float because java boxing is slow.
  */
 public class CircularFloatArray {
-  private final float[] data;
+  private final float[] mData;
 
   /**
    * The index of the most recently added item.
    */
-  private int head;
+  private int mHead;
 
   /**
    * Create a new circular overwriting array.
@@ -30,10 +30,10 @@ public class CircularFloatArray {
   public CircularFloatArray(int size, float def) {
     assert size > 0;
 
-    data = new float[size];
-    head = 0;
+    mData = new float[size];
+    mHead = 0;
 
-    Arrays.fill(data, def);
+    Arrays.fill(mData, def);
   }
 
   /**
@@ -43,9 +43,9 @@ public class CircularFloatArray {
    * @param item the item to add
    */
   public void add(float item) {
-    head = (head + 1) % data.length;
+    mHead = (mHead + 1) % mData.length;
 
-    data[head] = item;
+    mData[mHead] = item;
   }
 
   /**
@@ -54,7 +54,7 @@ public class CircularFloatArray {
    * @return an iterator (without remove support)
    */
   public FloatIterator iterator() {
-    return new FloatIterator(data, (head + 1) % data.length);
+    return new FloatIterator(mData, (mHead + 1) % mData.length);
   }
 
   /**
@@ -62,32 +62,32 @@ public class CircularFloatArray {
    * Does not implement Iterator because we can not implement the remove method.
    */
   public static class FloatIterator {
-    private final float[] data;
-    private int c;
-    private int i;
+    private final float[] mData;
+    private int mCount;
+    private int mIndex;
 
     FloatIterator(float[] data, int start) {
-      this.data = data;
+      mData = data;
 
-      c = 0;
-      i = start;
+      mCount = 0;
+      mIndex = start;
     }
 
     public boolean hasNext() {
-      return c < data.length;
+      return mCount < mData.length;
     }
 
     public float next() {
-      if (c >= data.length) {
+      if (mCount >= mData.length) {
         throw new NoSuchElementException();
       }
 
-      int o = i;
+      int o = mIndex;
 
-      i = (i + 1) % data.length;
-      ++c;
+      mIndex = (mIndex + 1) % mData.length;
+      ++mCount;
 
-      return data[o];
+      return mData[o];
     }
   }
 }

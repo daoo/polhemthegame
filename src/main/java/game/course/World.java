@@ -21,69 +21,69 @@ import game.types.GameTime;
 import util.Node;
 
 public class World implements IDebuggable {
-  private final ArrayList<IEntity> misc;
-  private final ArrayList<Entity> units;
-  private final ArrayList<Entity> projectiles;
-  private final ArrayList<IEntity> newMisc;
-  private final ArrayList<Entity> newUnits;
-  private final ArrayList<Entity> newProjectiles;
-  private final ArrayList<Trigger> triggers;
-  private final ArrayList<Trigger> newTriggers;
+  private final ArrayList<IEntity> mMisc;
+  private final ArrayList<Entity> mUnits;
+  private final ArrayList<Entity> mProjectiles;
+  private final ArrayList<IEntity> mNewMisc;
+  private final ArrayList<Entity> mNewUnits;
+  private final ArrayList<Entity> mNewProjectiles;
+  private final ArrayList<Trigger> mTriggers;
+  private final ArrayList<Trigger> mNewTriggers;
 
   public World() {
-    misc = new ArrayList<>();
-    units = new ArrayList<>();
-    projectiles = new ArrayList<>();
+    mMisc = new ArrayList<>();
+    mUnits = new ArrayList<>();
+    mProjectiles = new ArrayList<>();
 
-    newMisc = new ArrayList<>();
-    newUnits = new ArrayList<>();
-    newProjectiles = new ArrayList<>();
+    mNewMisc = new ArrayList<>();
+    mNewUnits = new ArrayList<>();
+    mNewProjectiles = new ArrayList<>();
 
-    triggers = new ArrayList<>();
-    newTriggers = new ArrayList<>();
+    mTriggers = new ArrayList<>();
+    mNewTriggers = new ArrayList<>();
   }
 
   public void addMisc(IEntity obj) {
     assert obj != null;
 
-    newMisc.add(obj);
+    mNewMisc.add(obj);
   }
 
   public void addUnit(Entity obj) {
     assert obj != null;
 
     obj.setWorld(this);
-    newUnits.add(obj);
+    mNewUnits.add(obj);
   }
 
   public void addProjectile(Entity obj) {
     assert obj != null;
 
     obj.setWorld(this);
-    newProjectiles.add(obj);
+    mNewProjectiles.add(obj);
   }
 
   public Iterable<Entity> getUnits() {
-    return Collections.unmodifiableCollection(units);
+    return Collections.unmodifiableCollection(mUnits);
   }
 
   public void render(Graphics g) {
-    for (IEntity e : misc) {
+    for (IEntity e : mMisc) {
       e.render(g);
     }
 
-    for (IEntity e : units) {
+    for (IEntity e : mUnits) {
       e.render(g);
     }
 
-    for (IEntity e : projectiles) {
+    for (IEntity e : mProjectiles) {
       e.render(g);
     }
   }
 
   public void update(GameTime time) {
     // Triggers
-    Iterator<Trigger> itt = triggers.iterator();
+    Iterator<Trigger> itt = mTriggers.iterator();
     while (itt.hasNext()) {
       Trigger t = itt.next();
       t.update(time);
@@ -94,22 +94,22 @@ public class World implements IDebuggable {
     }
 
     // Entities
-    processEntities(misc, time);
-    processEntities(units, time);
-    processEntities(projectiles, time);
+    processEntities(mMisc, time);
+    processEntities(mUnits, time);
+    processEntities(mProjectiles, time);
 
     // Move new stuff
-    move(newMisc, misc);
-    move(newUnits, units);
-    move(newProjectiles, projectiles);
-    move(newTriggers, triggers);
+    move(mNewMisc, mMisc);
+    move(mNewUnits, mUnits);
+    move(mNewProjectiles, mProjectiles);
+    move(mNewTriggers, mTriggers);
   }
 
   public void addTrigger(Trigger trigger) {
     assert trigger != null;
 
     trigger.setWorld(this);
-    newTriggers.add(trigger);
+    mNewTriggers.add(trigger);
   }
 
   public void addAllTriggers(Collection<Trigger> collection) {
@@ -119,7 +119,7 @@ public class World implements IDebuggable {
       t.setWorld(this);
     }
 
-    newTriggers.addAll(collection);
+    mNewTriggers.addAll(collection);
   }
 
   @Override
@@ -131,10 +131,10 @@ public class World implements IDebuggable {
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(DebugHelper.listToNode("Misc", misc));
-    parent.nodes.add(DebugHelper.listToNode("Units", units));
-    parent.nodes.add(DebugHelper.listToNode("Projectiles", projectiles));
-    parent.nodes.add(DebugHelper.listToNode("Triggers", triggers));
+    parent.nodes.add(DebugHelper.listToNode("Misc", mMisc));
+    parent.nodes.add(DebugHelper.listToNode("Units", mUnits));
+    parent.nodes.add(DebugHelper.listToNode("Projectiles", mProjectiles));
+    parent.nodes.add(DebugHelper.listToNode("Triggers", mTriggers));
 
     return parent;
   }

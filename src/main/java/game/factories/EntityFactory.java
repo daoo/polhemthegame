@@ -53,23 +53,23 @@ public class EntityFactory {
   private static final int BAR_OFFSET_X = 0;
   private static final int BAR_OFFSET_Y = -6;
 
-  private final Rectangle worldRect;
-  private final Graphics statics;
+  private final Rectangle mWorldRect;
+  private final Graphics mStatics;
 
-  private final WeaponFactory weaponFactory;
-  private final ShopData shopData;
-  private final PlayersData playersData;
+  private final WeaponFactory mWeaponFactory;
+  private final ShopData mShopData;
+  private final PlayersData mPlayersData;
 
   public EntityFactory(Rectangle worldRect, Graphics statics) throws ParserException, IOException {
-    this.worldRect = worldRect;
-    this.statics = statics;
+    mWorldRect = worldRect;
+    mStatics = statics;
 
     Rectangle bigRect = new Rectangle(-worldRect.getWidth(), -worldRect.getHeight(),
         3 * worldRect.getWidth(), 3 * worldRect.getHeight());
 
-    weaponFactory = new WeaponFactory(bigRect, statics);
-    shopData = CacheTool.getShop(Locator.getCache());
-    playersData = CacheTool.getPlayers(Locator.getCache());
+    mWeaponFactory = new WeaponFactory(bigRect, statics);
+    mShopData = CacheTool.getShop(Locator.getCache());
+    mPlayersData = CacheTool.getPlayers(Locator.getCache());
   }
 
   private Unit makeUnit(
@@ -89,7 +89,7 @@ public class EntityFactory {
     entity.addRenderComponent(walk);
 
     entity.addLogicComponent(new EffectsOnDeath(entity, Arrays
-        .asList(new SpawnAnimationEffect(entity, death, statics), new RemoveEntityEffect(entity))));
+        .asList(new SpawnAnimationEffect(entity, death, mStatics), new RemoveEntityEffect(entity))));
 
     InfoBar infoBar = new InfoBar(entity, data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X,
         BAR_OFFSET_Y);
@@ -103,21 +103,21 @@ public class EntityFactory {
   }
 
   public Player makePlayer(String playerName, Binds binds) throws ParserException, IOException {
-    PlayerData data = playersData.getPlayer(playerName);
+    PlayerData data = mPlayersData.getPlayer(playerName);
 
     Unit unit = makeUnit(0, 0, 0, 0, PLAYER_ORIENTATION, data.unit);
 
     Hand hand = new Hand(unit.entity, PLAYER_ORIENTATION,
         new Vector2(data.handOffset.x, data.handOffset.y));
-    Shop shop = new Shop(shopData, PLAYER_ORIENTATION, weaponFactory);
+    Shop shop = new Shop(mShopData, PLAYER_ORIENTATION, mWeaponFactory);
 
     Inventory inv = new Inventory(data.startMoney);
-    Weapon weapon = weaponFactory.makeWeapon(data.startWeapon, PLAYER_ORIENTATION);
+    Weapon weapon = mWeaponFactory.makeWeapon(data.startWeapon, PLAYER_ORIENTATION);
     inv.addWeapon(weapon);
     hand.grab(weapon);
 
     // Add components
-    unit.entity.addLogicComponent(new MovementConstraint(unit.entity, worldRect));
+    unit.entity.addLogicComponent(new MovementConstraint(unit.entity, mWorldRect));
     unit.entity.addLogicComponent(inv);
     unit.entity.addRenderComponent(hand);
     unit.entity.addLogicComponent(
@@ -130,17 +130,17 @@ public class EntityFactory {
   }
 
   public Unit makeBoss(BossData data) throws ParserException, IOException {
-    int middleY = (int) (worldRect.getCenter().y - data.unit.hitbox.height / 2);
+    int middleY = (int) (mWorldRect.getCenter().y - data.unit.hitbox.height / 2);
 
-    Vector2 initialTarget = new Vector2(worldRect.getX2() + data.unit.hitbox.width - data.locationX,
+    Vector2 initialTarget = new Vector2(mWorldRect.getX2() + data.unit.hitbox.width - data.locationX,
         middleY);
 
-    Unit unit = makeUnit(worldRect.getX2(), middleY, 0, 0, BOSS_ORIENTATION, data.unit);
+    Unit unit = makeUnit(mWorldRect.getX2(), middleY, 0, 0, BOSS_ORIENTATION, data.unit);
 
     Hand hand = new Hand(unit.entity, BOSS_ORIENTATION,
         new Vector2(data.handOffset.x, data.handOffset.y));
-    Weapon weapon = weaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
-    BossAI ai = new BossAI(unit.entity, unit.movement, hand, worldRect, data.locationX,
+    Weapon weapon = mWeaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
+    BossAI ai = new BossAI(unit.entity, unit.movement, hand, mWorldRect, data.locationX,
         data.unit.speed, initialTarget);
 
     unit.entity.addLogicComponent(ai);

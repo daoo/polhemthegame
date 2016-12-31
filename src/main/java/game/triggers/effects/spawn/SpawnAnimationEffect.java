@@ -19,26 +19,26 @@ import math.Rectangle;
  * Spawn an run-to-last animation at the top left of another entity.
  */
 public class SpawnAnimationEffect implements IEffect {
-  private final Animation spawnee;
-  private final Rectangle rect;
-  private final AnimatedSheet anim;
+  private final Animation mSpawnee;
+  private final Rectangle mRect;
+  private final AnimatedSheet mAnim;
 
   public SpawnAnimationEffect(
       Entity entity, AnimatedSheet anim, Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 
-    this.rect = entity.body;
-    this.anim = anim;
+    mRect = entity.getBody();
+    mAnim = anim;
 
-    spawnee = new Animation(0, 0, anim, graphics);
+    mSpawnee = new Animation(0, 0, anim, graphics);
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    spawnee.setPosition(rect.getMin());
+    mSpawnee.setPosition(mRect.getMin());
 
-    anim.setAnimator(new RunToAnimator(anim.getTileCount(), anim.getLastTile()));
+    mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), mAnim.getLastTile()));
 
-    world.addMisc(spawnee);
+    world.addMisc(mSpawnee);
   }
 }

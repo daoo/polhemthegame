@@ -17,28 +17,28 @@ import loader.parser.ParserException;
 public class StateManager {
   private static final boolean DEBUG = false;
 
-  private final int windowWidth;
-  private final int windowHeight;
+  private final int mWindowWidth;
+  private final int mWindowHeight;
 
-  private boolean exit;
-  private IState currentState;
+  private boolean mExit;
+  private IState mCurrentState;
 
   public StateManager(int windowWidth, int windowHeight) {
-    this.windowWidth = windowWidth;
-    this.windowHeight = windowHeight;
-    exit = false;
+    mWindowWidth = windowWidth;
+    mWindowHeight = windowHeight;
+    mExit = false;
   }
 
   public IState getCurrentState() {
-    return currentState;
+    return mCurrentState;
   }
 
   public boolean shouldExit() {
-    return exit;
+    return mExit;
   }
 
   public void quit() {
-    exit = true;
+    mExit = true;
   }
 
   public void handleException(Exception ex) {
@@ -59,9 +59,9 @@ public class StateManager {
       CampaignData data = (CampaignData) Locator.getCache()
           .get(campaign, new GsonParser(CampaignData.class));
 
-      GameState state = new GameState(this, data, twoPlayer, windowWidth, windowHeight);
+      GameState state = new GameState(this, data, twoPlayer, mWindowWidth, mWindowHeight);
       if (DEBUG) {
-        switchToState(new DebugState(windowWidth, state));
+        switchToState(new DebugState(mWindowWidth, state));
       } else {
         switchToState(state);
       }
@@ -72,18 +72,18 @@ public class StateManager {
 
   public void enterCredits() {
     try {
-      switchToState(new StateCredits(windowWidth, windowHeight));
+      switchToState(new StateCredits(mWindowWidth, mWindowHeight));
     } catch (SlickException ex) {
       handleException(ex);
     }
   }
 
   private void switchToState(IState newState) {
-    if (currentState != null) {
-      currentState.end(this);
+    if (mCurrentState != null) {
+      mCurrentState.end(this);
     }
 
-    currentState = newState;
-    currentState.start(this);
+    mCurrentState = newState;
+    mCurrentState.start(this);
   }
 }

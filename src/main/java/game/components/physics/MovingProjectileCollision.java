@@ -16,18 +16,18 @@ import math.Rectangle;
 import math.Vector2;
 
 public class MovingProjectileCollision implements ILogicComponent {
-  private boolean enableCollisions;
-  private final ArrayList<IEntity> collidedWith;
+  private boolean mEnableCollisions;
+  private final ArrayList<IEntity> mCollidedWith;
 
-  private final Entity owner;
-  private final Movement movement;
+  private final Entity mOwner;
+  private final Movement mMovement;
 
   public MovingProjectileCollision(Entity owner, Movement movement) {
-    this.owner = owner;
-    this.movement = movement;
+    mOwner = owner;
+    mMovement = movement;
 
-    enableCollisions = true;
-    collidedWith = new ArrayList<>();
+    mEnableCollisions = true;
+    mCollidedWith = new ArrayList<>();
   }
 
   /**
@@ -35,22 +35,22 @@ public class MovingProjectileCollision implements ILogicComponent {
    * entity.
    */
   private void collisionCheck(Entity b, float dt) {
-    if (!collidedWith.contains(b)) {
-      Rectangle a = owner.body;
-      Vector2 m = movement.getVelocity();
+    if (!mCollidedWith.contains(b)) {
+      Rectangle a = mOwner.getBody();
+      Vector2 m = mMovement.getVelocity();
 
-      if (Collisions.sweepCollisionTest(a, m, b.body, dt)) {
-        owner.sendMessage(Message.COLLIDED_WITH, b);
-        b.sendMessage(Message.COLLIDED_WITH, owner);
-        collidedWith.add(b);
+      if (Collisions.sweepCollisionTest(a, m, b.getBody(), dt)) {
+        mOwner.sendMessage(Message.COLLIDED_WITH, b);
+        b.sendMessage(Message.COLLIDED_WITH, mOwner);
+        mCollidedWith.add(b);
       }
     }
   }
 
   @Override
   public void update(GameTime time) {
-    if (enableCollisions) {
-      for (Entity e : owner.getWorld().getUnits()) {
+    if (mEnableCollisions) {
+      for (Entity e : mOwner.getWorld().getUnits()) {
         collisionCheck(e, time.frame);
       }
     }
@@ -59,7 +59,7 @@ public class MovingProjectileCollision implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.KILL) {
-      enableCollisions = false;
+      mEnableCollisions = false;
     }
   }
 }

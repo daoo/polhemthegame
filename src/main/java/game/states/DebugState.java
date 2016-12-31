@@ -26,88 +26,88 @@ public class DebugState implements IState {
    */
   private static final int FRAME_LENGTH = 100;
 
-  private final DebugGraph debugGraph;
-  private boolean drawDebugInfo;
+  private final DebugGraph mDebugGraph;
+  private boolean mDrawDebugInfo;
 
-  private final IState game;
-  private boolean paused;
+  private final IState mGame;
+  private boolean mPaused;
 
-  private final Key keyF1;
-  private final Key keyF2;
-  private final Key keyF5;
-  private final Key keyF6;
+  private final Key mKeyF1;
+  private final Key mKeyF2;
+  private final Key mKeyF5;
+  private final Key mKeyF6;
 
   public DebugState(int width, IState game) {
-    keyF1 = new Key(Keyboard.KEY_F1);
-    keyF2 = new Key(Keyboard.KEY_F2);
-    keyF5 = new Key(Keyboard.KEY_F5);
-    keyF6 = new Key(Keyboard.KEY_F6);
+    mKeyF1 = new Key(Keyboard.KEY_F1);
+    mKeyF2 = new Key(Keyboard.KEY_F2);
+    mKeyF5 = new Key(Keyboard.KEY_F5);
+    mKeyF6 = new Key(Keyboard.KEY_F6);
 
-    this.game = game;
+    mGame = game;
 
-    paused = false;
+    mPaused = false;
 
-    drawDebugInfo = true;
-    debugGraph = new DebugGraph(width, 100);
+    mDrawDebugInfo = true;
+    mDebugGraph = new DebugGraph(width, 100);
   }
 
   @Override
   public void start(StateManager stateManager) {
-    game.start(stateManager);
+    mGame.start(stateManager);
   }
 
   @Override
   public void end(StateManager stateManager) {
-    game.end(stateManager);
+    mGame.end(stateManager);
   }
 
   @Override
   public void update(StateManager stateManager, int dt) {
-    if (paused) {
-      keyF5.update();
-      if (keyF5.wasPressed()) {
-        paused = false;
+    if (mPaused) {
+      mKeyF5.update();
+      if (mKeyF5.wasPressed()) {
+        mPaused = false;
       } else {
-        keyF6.update();
-        if (keyF6.wasPressed()) {
-          debugGraph.startUpdateMeasure();
-          game.update(stateManager, FRAME_LENGTH);
-          debugGraph.stopUpdateMeasure();
+        mKeyF6.update();
+        if (mKeyF6.wasPressed()) {
+          mDebugGraph.startUpdateMeasure();
+          mGame.update(stateManager, FRAME_LENGTH);
+          mDebugGraph.stopUpdateMeasure();
         }
       }
     } else {
-      keyF5.update();
-      if (keyF5.wasPressed()) {
-        paused = true;
+      mKeyF5.update();
+      if (mKeyF5.wasPressed()) {
+        mPaused = true;
       } else {
-        debugGraph.startUpdateMeasure();
-        game.update(stateManager, dt);
-        debugGraph.stopUpdateMeasure();
+        mDebugGraph.startUpdateMeasure();
+        mGame.update(stateManager, dt);
+        mDebugGraph.stopUpdateMeasure();
       }
     }
 
-    keyF1.update();
-    if (keyF1.wasPressed()) {
-      drawDebugInfo = !drawDebugInfo;
+    mKeyF1.update();
+    if (mKeyF1.wasPressed()) {
+      mDrawDebugInfo = !mDrawDebugInfo;
     }
 
-    keyF2.update();
-    if (keyF2.wasPressed()) {
-      Tree<String> tree = new Tree<>(game.debugTree());
+    mKeyF2.update();
+    if (mKeyF2.wasPressed()) {
+      Tree<String> tree = new Tree<>(mGame.debugTree());
       System.out.println(tree);
     }
   }
 
   @Override
   public void render(Graphics g) throws SlickException {
-    debugGraph.startRenderMeasure();
-    game.render(g);
-    debugGraph.stopRenderMeasure();
+    mDebugGraph.startRenderMeasure();
+    mGame.render(g);
+    mDebugGraph.stopRenderMeasure();
 
-    if (drawDebugInfo) {
+    if (mDrawDebugInfo) {
       g.pushTransform();
       g.translate(GRAPH_X, GRAPH_Y);
-      debugGraph.render(g);
+      mDebugGraph.render(g);
       g.popTransform();
     }
   }
@@ -120,7 +120,7 @@ public class DebugState implements IState {
   @Override
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
-    parent.nodes.add(game.debugTree());
+    parent.nodes.add(mGame.debugTree());
 
     return parent;
   }

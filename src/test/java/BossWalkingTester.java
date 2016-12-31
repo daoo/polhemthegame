@@ -23,27 +23,27 @@ public class BossWalkingTester extends BasicGame {
   private static final int WIDTH = 1920;
   private static final int HEIGHT = 1080;
 
-  private final Random rnd;
+  private final Random mRnd;
 
-  private final Rectangle rect;
-  private final Vector2 circlePosition;
+  private final Rectangle mRect;
+  private final Vector2 mCirclePosition;
 
-  private final int rx1;
-  private final int ry1;
-  private final int rx2;
-  private final int ry2;
-  private final int rw;
-  private final int rh;
-  private final int cx;
-  private final int cy;
-  private final int cr;
-  private final int crs;
+  private final int mRx1;
+  private final int mRy1;
+  private final int mRx2;
+  private final int mRy2;
+  private final int mRw;
+  private final int mRh;
+  private final int mCx;
+  private final int mCy;
+  private final int mCr;
+  private final int mCrs;
 
-  private int correct;
-  private int incorrect;
+  private int mCorrect;
+  private int mIncorrect;
 
-  private Image points;
-  private Graphics graphicsPoints;
+  private Image mPoints;
+  private Graphics mGraphicsPoints;
 
   public static void main(String[] args) {
     try {
@@ -59,42 +59,42 @@ public class BossWalkingTester extends BasicGame {
   public BossWalkingTester() {
     super("Boss Random Walking Tester");
 
-    rnd = new Random();
+    mRnd = new Random();
 
-    rx1 = 100;
-    ry1 = 100;
-    rx2 = 500;
-    ry2 = 980;
-    rw = 400;
-    rh = 880;
+    mRx1 = 100;
+    mRy1 = 100;
+    mRx2 = 500;
+    mRy2 = 980;
+    mRw = 400;
+    mRh = 880;
 
-    cx = 300;
-    cy = 300;
-    cr = 150;
-    crs = cr * cr;
+    mCx = 300;
+    mCy = 300;
+    mCr = 150;
+    mCrs = mCr * mCr;
 
-    rect = new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1);
-    circlePosition = new Vector2(cx, cy);
+    mRect = new Rectangle(mRx1, mRy1, mRx2 - mRx1, mRy2 - mRy1);
+    mCirclePosition = new Vector2(mCx, mCy);
 
-    correct = 0;
-    incorrect = 0;
+    mCorrect = 0;
+    mIncorrect = 0;
   }
 
   @Override
   public void render(GameContainer container, Graphics g) throws SlickException {
-    g.drawRect(rx1, ry1, rw, rh);
-    g.draw(new Circle(cx, cy, cr));
+    g.drawRect(mRx1, mRy1, mRw, mRh);
+    g.draw(new Circle(mCx, mCy, mCr));
 
-    g.drawImage(points, 0, 0);
+    g.drawImage(mPoints, 0, 0);
 
-    g.drawString("Correct:   " + correct, 100, 10);
-    g.drawString("Incorrect: " + incorrect, 100, 30);
+    g.drawString("Correct:   " + mCorrect, 100, 10);
+    g.drawString("Incorrect: " + mIncorrect, 100, 30);
   }
 
   @Override
   public void init(GameContainer container) throws SlickException {
-    points = new Image(WIDTH, HEIGHT);
-    graphicsPoints = points.getGraphics();
+    mPoints = new Image(WIDTH, HEIGHT);
+    mGraphicsPoints = mPoints.getGraphics();
 
     container.setClearEachFrame(true);
     container.setTargetFrameRate(60);
@@ -103,19 +103,19 @@ public class BossWalkingTester extends BasicGame {
   @Override
   public void update(GameContainer container, int delta) throws SlickException {
     for (int i = 0; i < 100; ++i) {
-      Vector2 p = Walking.newRandomTarget(rnd, rx1, ry1, rx2, ry2, cx, cy, crs);
+      Vector2 p = Walking.newRandomTarget(mRnd, mRx1, mRy1, mRx2, mRy2, mCx, mCy, mCrs);
 
-      if (!Rectangle.contains(rect, p) || Vector2.distance(circlePosition, p) < cr) {
-        graphicsPoints.setColor(Color.red);
-        graphicsPoints.fillRect(p.x - 5, p.y - 5, 10, 10);
-        ++incorrect;
+      if (!Rectangle.contains(mRect, p) || Vector2.distance(mCirclePosition, p) < mCr) {
+        mGraphicsPoints.setColor(Color.red);
+        mGraphicsPoints.fillRect(p.x - 5, p.y - 5, 10, 10);
+        ++mIncorrect;
       } else {
-        graphicsPoints.setColor(Color.white);
-        graphicsPoints.fillRect(p.x, p.y, 1, 1);
-        ++correct;
+        mGraphicsPoints.setColor(Color.white);
+        mGraphicsPoints.fillRect(p.x, p.y, 1, 1);
+        ++mCorrect;
       }
     }
 
-    graphicsPoints.flush();
+    mGraphicsPoints.flush();
   }
 }

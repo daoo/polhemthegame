@@ -12,19 +12,18 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class SpawnBossEffect implements IEffect {
-  private final Unit unit;
+  private final Unit mUnit;
 
   public SpawnBossEffect(Unit boss) {
     assert boss != null;
-
-    this.unit = boss;
+    mUnit = boss;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    world.addUnit(unit.entity);
-    Locator.getUI().addDynamic(unit.infoBar);
+    world.addUnit(mUnit.entity);
+    Locator.getUI().addDynamic(mUnit.infoBar);
 
-    unit.entity.sendMessage(Message.START_BOSS, time);
+    mUnit.entity.sendMessage(Message.START_BOSS, time);
   }
 }

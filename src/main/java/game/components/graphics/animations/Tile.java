@@ -4,6 +4,7 @@
 
 package game.components.graphics.animations;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Tile {
   public static final Tile ZERO = new Tile(0, 0);
 

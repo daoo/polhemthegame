@@ -11,18 +11,18 @@ import game.types.Message;
 import math.Rectangle;
 
 public class OutOfBounds implements ILogicComponent {
-  private final Entity owner;
-  private final Rectangle bounds;
+  private final Entity mOwner;
+  private final Rectangle mBounds;
 
   public OutOfBounds(Entity owner, Rectangle bounds) {
-    this.owner = owner;
-    this.bounds = bounds;
+    mOwner = owner;
+    mBounds = bounds;
   }
 
   @Override
   public void update(GameTime time) {
-    if (!Rectangle.contains(bounds, owner.body)) {
-      owner.remove();
+    if (!Rectangle.contains(mBounds, mOwner.getBody())) {
+      mOwner.remove();
     }
   }
 

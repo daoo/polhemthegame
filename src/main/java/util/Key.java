@@ -10,11 +10,11 @@ import org.lwjgl.input.Keyboard;
  * Helper class for querying status for a single key.
  */
 public class Key {
-  private final int key;
+  private final int mKey;
 
-  private boolean down;
-  private boolean pressed;
-  private boolean released;
+  private boolean mDown;
+  private boolean mPressed;
+  private boolean mReleased;
 
   /**
    * Construct a new key for a key identifier.
@@ -25,11 +25,11 @@ public class Key {
     assert key > Keyboard.CHAR_NONE;
     assert key < Keyboard.KEYBOARD_SIZE;
 
-    this.key = key;
+    mKey = key;
 
-    down = false;
-    pressed = false;
-    released = false;
+    mDown = false;
+    mPressed = false;
+    mReleased = false;
   }
 
   /**
@@ -40,14 +40,14 @@ public class Key {
       // Key is down during this call to update().
       // If the key was down during the last call the key wasn't pressed. If the
       // key was up during the last call the key have been pressed.
-      pressed = !down;
-      down = true;
+      mPressed = !mDown;
+      mDown = true;
     } else {
       // Key is up during this call to update().
       // If it was down during the previous call they key have been released, if
       // it wasn't it has not been released.
-      released = down;
-      down = false;
+      mReleased = mDown;
+      mDown = false;
     }
   }
 
@@ -57,7 +57,7 @@ public class Key {
    * @return true if the key was pressed, false otherwise
    */
   public boolean wasPressed() {
-    return pressed;
+    return mPressed;
   }
 
   /**
@@ -66,7 +66,7 @@ public class Key {
    * @return true if the key was released, false otherwise
    */
   public boolean wasReleased() {
-    return released;
+    return mReleased;
   }
 
   /**
@@ -75,7 +75,7 @@ public class Key {
    * @return true if the key was down, false otherwise
    */
   public boolean wasDown() {
-    return down;
+    return mDown;
   }
 
   /**
@@ -84,6 +84,6 @@ public class Key {
    * @return true if the key is down during the call, false otherwise
    */
   private boolean isKeyDown() {
-    return Keyboard.isKeyDown(key);
+    return Keyboard.isKeyDown(mKey);
   }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import loader.IData;
 import loader.data.json.types.ShopItemData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class ShopData implements IData {
   public ArrayList<ShopItemData> items;
 

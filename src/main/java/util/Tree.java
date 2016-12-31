@@ -17,6 +17,7 @@ public class Tree<T> {
   /**
    * The root node.
    */
+  @SuppressWarnings("InstanceVariableNamingConvention")
   public final Node<T> root;
 
   /**

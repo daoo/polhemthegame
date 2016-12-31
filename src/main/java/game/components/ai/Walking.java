@@ -17,13 +17,13 @@ public class Walking implements IBossState {
   public static final int MIN_WALK = 100;
   public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
-  private final Rectangle body;
-  private final float speed;
-  private final Movement movement;
-  private final Rectangle movementRect;
+  private final Rectangle mBody;
+  private final float mSpeed;
+  private final Movement mMovement;
+  private final Rectangle mMovementRect;
 
-  private Vector2 currentTarget;
-  private int targetsLeft;
+  private Vector2 mCurrentTarget;
+  private int mTargetsLeft;
 
   /**
    * Create a new walk state for boss AI.
@@ -43,12 +43,12 @@ public class Walking implements IBossState {
     assert targets > 0;
     assert initialTarget != null;
 
-    this.body = body;
-    this.speed = speed;
-    this.movement = movement;
-    this.targetsLeft = targets;
-    this.movementRect = movementRect;
-    this.currentTarget = initialTarget;
+    mBody = body;
+    mSpeed = speed;
+    mMovement = movement;
+    mTargetsLeft = targets;
+    mMovementRect = movementRect;
+    mCurrentTarget = initialTarget;
   }
 
   /**
@@ -74,33 +74,33 @@ public class Walking implements IBossState {
 
   @Override
   public void start(GameTime time) {
-    headFor(currentTarget);
+    headFor(mCurrentTarget);
   }
 
   @Override
   public void update(GameTime time) {
-    if (targetsLeft > 0) {
-      Vector2 a = Vector2.subtract(body.getMin(), currentTarget);
-      if (Vector2.dot(a, movement.getVelocity()) >= 0) {
-        --targetsLeft;
+    if (mTargetsLeft > 0) {
+      Vector2 a = Vector2.subtract(mBody.getMin(), mCurrentTarget);
+      if (Vector2.dot(a, mMovement.getVelocity()) >= 0) {
+        --mTargetsLeft;
         // Target passed
-        if (targetsLeft > 0) {
-          currentTarget = newRandomTarget(Locator.getRandom(), (int) movementRect.getX1(),
-              (int) movementRect.getY1(), (int) movementRect.getX2(), (int) movementRect.getY2(),
-              (int) body.getX1(), (int) body.getY1(), MIN_WALK_SQUARED);
-          headFor(currentTarget);
+        if (mTargetsLeft > 0) {
+          mCurrentTarget = newRandomTarget(Locator.getRandom(), (int) mMovementRect.getX1(),
+              (int) mMovementRect.getY1(), (int) mMovementRect.getX2(), (int) mMovementRect.getY2(),
+              (int) mBody.getX1(), (int) mBody.getY1(), MIN_WALK_SQUARED);
+          headFor(mCurrentTarget);
         }
       }
     }
   }
 
   public Vector2 getTarget() {
-    return currentTarget;
+    return mCurrentTarget;
   }
 
   @Override
   public boolean isFinished() {
-    return targetsLeft == 0;
+    return mTargetsLeft == 0;
   }
 
   @Override
@@ -109,12 +109,12 @@ public class Walking implements IBossState {
   }
 
   private void headFor(Vector2 target) {
-    assert Rectangle.contains(movementRect, target);
+    assert Rectangle.contains(mMovementRect, target);
 
-    Vector2 delta = Vector2.subtract(target, body.getMin());
+    Vector2 delta = Vector2.subtract(target, mBody.getMin());
     Vector2 direction = delta.normalize();
-    Vector2 velocity = Vector2.multiply(direction, speed);
-    movement.setVelocity(velocity);
+    Vector2 velocity = Vector2.multiply(direction, mSpeed);
+    mMovement.setVelocity(velocity);
   }
 
   /**

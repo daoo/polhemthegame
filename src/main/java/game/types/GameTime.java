@@ -4,6 +4,7 @@
 
 package game.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class GameTime {
   public final float frame;
 

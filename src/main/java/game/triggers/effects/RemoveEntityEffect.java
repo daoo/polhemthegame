@@ -10,14 +10,14 @@ import game.triggers.IEffect;
 import game.types.GameTime;
 
 public class RemoveEntityEffect implements IEffect {
-  private final IEntity entity;
+  private final IEntity mEntity;
 
   public RemoveEntityEffect(IEntity entity) {
-    this.entity = entity;
+    mEntity = entity;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    entity.remove();
+    mEntity.remove();
   }
 }

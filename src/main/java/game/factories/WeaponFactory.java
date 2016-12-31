@@ -26,10 +26,10 @@ import math.Vector2;
  * Factory for weapons.
  */
 public class WeaponFactory {
-  private final Rectangle bounds;
-  private final WeaponsData weapons;
-  private final ProjectilesData projectiles;
-  private final Graphics statics;
+  private final Rectangle mBounds;
+  private final WeaponsData mWeapons;
+  private final ProjectilesData mProjectiles;
+  private final Graphics mStatics;
 
   /**
    * Construct a new weapon factory that can make any weapon.
@@ -40,11 +40,11 @@ public class WeaponFactory {
    * @throws IOException when reading files fails
    */
   public WeaponFactory(Rectangle bounds, Graphics statics) throws ParserException, IOException {
-    this.bounds = bounds;
-    this.statics = statics;
+    mBounds = bounds;
+    mStatics = statics;
 
-    weapons = CacheTool.getWeapons(Locator.getCache());
-    projectiles = CacheTool.getProjectiles(Locator.getCache());
+    mWeapons = CacheTool.getWeapons(Locator.getCache());
+    mProjectiles = CacheTool.getProjectiles(Locator.getCache());
   }
 
   /**
@@ -58,17 +58,17 @@ public class WeaponFactory {
    */
   public Weapon makeWeapon(String name, Orientation orientation) throws ParserException,
       IOException {
-    WeaponData data = weapons.weapons.get(name);
+    WeaponData data = mWeapons.weapons.get(name);
 
     Vector2 muzzle = new Vector2(data.muzzleOffset.x, data.muzzleOffset.y);
 
-    ProjectileData projectileData = projectiles.getProjectile(data.projectile);
+    ProjectileData projectileData = mProjectiles.getProjectile(data.projectile);
 
     AnimatedSheet anim = CacheTool
         .getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
-    ProjectileFactory factory = new ProjectileFactory(bounds, data.launchAngle, data.spread,
-        orientation, projectileData, statics);
+    ProjectileFactory factory = new ProjectileFactory(mBounds, data.launchAngle, data.spread,
+        orientation, projectileData, mStatics);
 
     return new Weapon(muzzle, data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
         data.reloadTime, (int) (60000 / data.rpm), data.clipSize, orientation, anim, factory);

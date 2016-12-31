@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import loader.IData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class CampaignData implements IData {
   public String name;
   public ArrayList<String> levels;

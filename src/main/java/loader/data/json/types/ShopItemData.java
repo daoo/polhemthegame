@@ -4,6 +4,7 @@
 
 package loader.data.json.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class ShopItemData {
   public String weapon;
   public int price;

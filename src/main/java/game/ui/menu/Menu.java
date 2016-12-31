@@ -10,50 +10,50 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Menu {
-  private final ArrayList<MenuItem> items;
+  private final ArrayList<MenuItem> mItems;
 
-  private int currentIndex;
-  private MenuItem currentItem;
+  private int mCurrentIndex;
+  private MenuItem mCurrentItem;
 
   public Menu(Collection<MenuItem> items) {
-    this.items = new ArrayList<>(items);
+    mItems = new ArrayList<>(items);
 
-    currentIndex = 0;
-    currentItem = this.items.get(currentIndex);
-    currentItem.setState(MenuItemState.ACTIVE);
+    mCurrentIndex = 0;
+    mCurrentItem = mItems.get(mCurrentIndex);
+    mCurrentItem.setState(MenuItemState.ACTIVE);
   }
 
   public void click() {
-    currentItem.click();
+    mCurrentItem.click();
   }
 
   public void render(Graphics g) {
-    for (MenuItem item : items) {
+    for (MenuItem item : mItems) {
       item.render(g);
     }
   }
 
   public void up() {
-    while (currentIndex - 1 >= 0) {
-      currentItem.setState(MenuItemState.NORMAL);
-      --currentIndex;
-      currentItem = items.get(currentIndex);
+    while (mCurrentIndex - 1 >= 0) {
+      mCurrentItem.setState(MenuItemState.NORMAL);
+      --mCurrentIndex;
+      mCurrentItem = mItems.get(mCurrentIndex);
 
-      if (currentItem.getState() == MenuItemState.NORMAL) {
-        currentItem.setState(MenuItemState.ACTIVE);
+      if (mCurrentItem.getState() == MenuItemState.NORMAL) {
+        mCurrentItem.setState(MenuItemState.ACTIVE);
         return;
       }
     }
   }
 
   public void down() {
-    while (currentIndex + 1 < items.size()) {
-      currentItem.setState(MenuItemState.NORMAL);
-      ++currentIndex;
-      currentItem = items.get(currentIndex);
+    while (mCurrentIndex + 1 < mItems.size()) {
+      mCurrentItem.setState(MenuItemState.NORMAL);
+      ++mCurrentIndex;
+      mCurrentItem = mItems.get(mCurrentIndex);
 
-      if (currentItem.getState() == MenuItemState.NORMAL) {
-        currentItem.setState(MenuItemState.ACTIVE);
+      if (mCurrentItem.getState() == MenuItemState.NORMAL) {
+        mCurrentItem.setState(MenuItemState.ACTIVE);
         return;
       }
     }

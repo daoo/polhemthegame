@@ -8,6 +8,7 @@ import game.components.misc.Inventory;
 import game.misc.Shop;
 import game.ui.hud.infobar.InfoBar;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Player {
   public final Entity entity;
   public final Shop shopUI;

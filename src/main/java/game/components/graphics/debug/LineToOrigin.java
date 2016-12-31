@@ -13,20 +13,20 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class LineToOrigin implements IRenderComponent {
-  private final Entity owner;
+  private final Entity mOwner;
 
   public LineToOrigin(Entity owner) {
-    this.owner = owner;
+    mOwner = owner;
   }
 
   @Override
   public int getWidth() {
-    return (int) owner.body.getX2();
+    return (int) mOwner.getBody().getX2();
   }
 
   @Override
   public int getHeight() {
-    return (int) owner.body.getY2();
+    return (int) mOwner.getBody().getY2();
   }
 
   @Override
@@ -42,6 +42,6 @@ public class LineToOrigin implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.setColor(Color.red);
-    g.drawLine(0, 0, -owner.body.getX1(), -owner.body.getY1());
+    g.drawLine(0, 0, -mOwner.getBody().getX1(), -mOwner.getBody().getY1());
   }
 }

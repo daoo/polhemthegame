@@ -13,19 +13,19 @@ import loader.parser.IParser;
 import loader.parser.ParserException;
 
 public class Cache implements Closeable {
-  private final HashMap<String, IData> cache;
+  private final HashMap<String, IData> mCache;
 
   public Cache() {
-    cache = new HashMap<>();
+    mCache = new HashMap<>();
   }
 
   @Override
   public void close() throws IOException {
-    for (IData cacheItem : cache.values()) {
+    for (IData cacheItem : mCache.values()) {
       cacheItem.close();
     }
 
-    cache.clear();
+    mCache.clear();
   }
 
   /**
@@ -43,10 +43,10 @@ public class Cache implements Closeable {
     assert id != null;
     assert parser != null;
 
-    IData data = cache.get(id);
+    IData data = mCache.get(id);
     if (data == null) {
       data = readAndParse(id, parser);
-      cache.put(id, data);
+      mCache.put(id, data);
     }
 
     return data;
@@ -55,7 +55,7 @@ public class Cache implements Closeable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (IData c : cache.values()) {
+    for (IData c : mCache.values()) {
       sb.append(c);
     }
 

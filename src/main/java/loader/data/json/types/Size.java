@@ -4,6 +4,7 @@
 
 package loader.data.json.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Size {
   public int width;
   public int height;

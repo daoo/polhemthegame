@@ -10,6 +10,7 @@ import java.util.Map;
 import loader.IData;
 import loader.data.json.types.ProjectileData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class ProjectilesData implements IData {
   private Map<String, ProjectileData> projectiles;
 

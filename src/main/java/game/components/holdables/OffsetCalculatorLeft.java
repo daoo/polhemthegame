@@ -8,25 +8,25 @@ import game.entities.Entity;
 import math.Vector2;
 
 public class OffsetCalculatorLeft implements IOffsetCalculator {
-  private final Entity entity;
-  private final Vector2 newOffset;
+  private final Entity mEntity;
+  private final Vector2 mNewOffset;
 
   public OffsetCalculatorLeft(Entity entity, Vector2 handOffset) {
-    this.entity = entity;
+    mEntity = entity;
 
     // Since we're flipped, offset come from UPPER RIGHT corner instead of
     // UPPER LEFT.
-    newOffset = new Vector2(entity.body.getWidth() - handOffset.x, handOffset.y);
+    mNewOffset = new Vector2(entity.getBody().getWidth() - handOffset.x, handOffset.y);
   }
 
   @Override
   public Vector2 getMuzzlePosition(int weaponWidth, Vector2 muzzleOffset) {
     return Vector2
-        .add(entity.body.getMin(), newOffset.x - muzzleOffset.x, newOffset.y + muzzleOffset.y);
+        .add(mEntity.getBody().getMin(), mNewOffset.x - muzzleOffset.x, mNewOffset.y + muzzleOffset.y);
   }
 
   @Override
   public Vector2 getWeaponOffset(int weaponWidth) {
-    return new Vector2(newOffset.x - weaponWidth, newOffset.y);
+    return new Vector2(mNewOffset.x - weaponWidth, mNewOffset.y);
   }
 }

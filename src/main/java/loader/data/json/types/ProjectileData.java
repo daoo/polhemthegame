@@ -4,6 +4,7 @@
 
 package loader.data.json.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class ProjectileData {
   public boolean collides;
   public boolean gravity;

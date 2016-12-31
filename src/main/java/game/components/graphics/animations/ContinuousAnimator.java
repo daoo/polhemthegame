@@ -6,11 +6,11 @@ package game.components.graphics.animations;
 
 
 public class ContinuousAnimator implements IAnimator {
-  private final Tile size;
+  private final Tile mSize;
 
   public ContinuousAnimator(Tile size) {
     assert size != null;
-    this.size = size;
+    mSize = size;
   }
 
   @Override
@@ -23,11 +23,11 @@ public class ContinuousAnimator implements IAnimator {
     int x = tile.x + 1;
     int y = tile.y;
 
-    if (x >= size.x) {
+    if (x >= mSize.x) {
       x = 0;
       ++y;
 
-      if (y >= size.y) {
+      if (y >= mSize.y) {
         y = 0;
       }
     }

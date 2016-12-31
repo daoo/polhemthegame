@@ -5,41 +5,41 @@
 package util;
 
 public class Random {
-  private final java.util.Random random = new java.util.Random();
+  private final java.util.Random mRandom = new java.util.Random();
 
   public boolean nextBool() {
-    return random.nextBoolean();
+    return mRandom.nextBoolean();
   }
 
   public int nextInt() {
-    return random.nextInt();
+    return mRandom.nextInt();
   }
 
   public int nextInt(int max) {
     assert max > 0;
 
-    return random.nextInt(max);
+    return mRandom.nextInt(max);
   }
 
   public int nextInt(int min, int max) {
     assert min < max;
 
-    return min + random.nextInt(max - min);
+    return min + mRandom.nextInt(max - min);
   }
 
   public float nextFloat() {
-    return random.nextFloat();
+    return mRandom.nextFloat();
   }
 
   public float nextFloat(float max) {
     assert max > 0;
 
-    return random.nextFloat() * max;
+    return mRandom.nextFloat() * max;
   }
 
   public float nextFloat(float min, float max) {
     assert min < max;
 
-    return min + random.nextFloat() * (max - min);
+    return min + mRandom.nextFloat() * (max - min);
   }
 }

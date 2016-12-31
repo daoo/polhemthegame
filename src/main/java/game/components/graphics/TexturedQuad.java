@@ -13,29 +13,29 @@ import game.types.Message;
 import game.types.Orientation;
 
 public class TexturedQuad implements IRenderComponent {
-  private final int centerX;
-  private final int centerY;
-  private final boolean flip;
-  private final int angle;
-  private final Image img;
+  private final int mCenterX;
+  private final int mCenterY;
+  private final boolean mFlip;
+  private final int mAngle;
+  private final Image mImg;
 
   public TexturedQuad(Image img, Orientation orientation, int angle) {
-    this.img = img;
-    this.flip = orientation == Orientation.LEFT;
-    this.angle = angle;
+    mImg = img;
+    mFlip = orientation == Orientation.LEFT;
+    mAngle = angle;
 
-    centerX = img.getWidth() / 2;
-    centerY = img.getHeight() / 2;
+    mCenterX = img.getWidth() / 2;
+    mCenterY = img.getHeight() / 2;
   }
 
   @Override
   public int getWidth() {
-    return img.getWidth();
+    return mImg.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return img.getHeight();
+    return mImg.getHeight();
   }
 
   @Override
@@ -46,16 +46,16 @@ public class TexturedQuad implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    if (flip) {
+    if (mFlip) {
       // Be sure to flip around the center
-      g.translate(centerX, 0);
+      g.translate(mCenterX, 0);
       g.scale(-1, 1);
-      g.translate(-centerX, 0);
+      g.translate(-mCenterX, 0);
       // Alternatively, translate by width after flip
     }
-    g.rotate(centerX, centerY, angle);
+    g.rotate(mCenterX, mCenterY, mAngle);
 
-    g.drawImage(img, 0, 0);
+    g.drawImage(mImg, 0, 0);
     g.popTransform();
   }
 

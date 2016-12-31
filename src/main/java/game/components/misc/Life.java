@@ -12,27 +12,27 @@ import game.types.Message;
 import game.ui.hud.infobar.IProgress;
 
 public class Life implements ILogicComponent, IProgress {
-  private boolean alive;
+  private boolean mAlive;
 
-  private float hp;
-  private final float maxHP;
+  private float mHp;
+  private final float mMaxHp;
 
-  private final IEntity owner;
+  private final IEntity mOwner;
 
   public Life(IEntity owner, float maxHP) {
-    this.owner = owner;
-    this.alive = true;
-    this.hp = maxHP;
-    this.maxHP = maxHP;
+    mOwner = owner;
+    mAlive = true;
+    mHp = maxHP;
+    mMaxHp = maxHP;
   }
 
   @Override
   public float getProgress() {
-    return hp / maxHP;
+    return mHp / mMaxHp;
   }
 
   public boolean isAlive() {
-    return alive;
+    return mAlive;
   }
 
   @Override
@@ -61,9 +61,9 @@ public class Life implements ILogicComponent, IProgress {
    * @param dmg information about the damage
    */
   private void damage(Damage dmg) {
-    if (alive) {
-      hp -= dmg.ammount;
-      if (hp <= 0) {
+    if (mAlive) {
+      mHp -= dmg.ammount;
+      if (mHp <= 0) {
         kill(dmg.source);
       }
     }
@@ -79,21 +79,21 @@ public class Life implements ILogicComponent, IProgress {
    * null.
    */
   private void kill(IEntity killer) {
-    if (alive) {
-      hp = 0;
-      alive = false;
-      owner.remove();
+    if (mAlive) {
+      mHp = 0;
+      mAlive = false;
+      mOwner.remove();
 
-      owner.sendMessage(Message.KILL, null);
+      mOwner.sendMessage(Message.KILL, null);
 
       if (killer != null) {
-        killer.sendMessage(Message.KILLED_ENTITY, owner);
+        killer.sendMessage(Message.KILLED_ENTITY, mOwner);
       }
     }
   }
 
   @Override
   public String toString() {
-    return "Life - " + hp + "/" + maxHP + " (" + getProgress() + ")";
+    return "Life - " + mHp + "/" + mMaxHp + " (" + getProgress() + ")";
   }
 }

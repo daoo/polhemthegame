@@ -23,16 +23,16 @@ import math.Rectangle;
 import util.Node;
 
 public class LevelManager {
-  private final StateManager stateManager;
+  private final StateManager mStateManager;
 
-  private final Campaign campaign;
-  private final Image background;
-  private final Image statics;
-  private final WorldFactory worldFactory;
+  private final Campaign mCampaign;
+  private final Image mBackground;
+  private final Image mStatics;
+  private final WorldFactory mWorldFactory;
 
-  private World world;
-  private boolean finished;
-  private boolean credits;
+  private World mWorld;
+  private boolean mFinished;
+  private boolean mCredits;
 
   public LevelManager(
       StateManager stateManager, boolean twoPlayer, CampaignData data, int windowWidth,
@@ -41,7 +41,7 @@ public class LevelManager {
       throw new IllegalArgumentException("No levels in campaign '" + data.name + "'");
     }
 
-    this.stateManager = stateManager;
+    mStateManager = stateManager;
 
     int left = data.constraints[0];
     int top = data.constraints[1];
@@ -51,13 +51,13 @@ public class LevelManager {
     Rectangle worldRect = new Rectangle(left, top, arenaWidth - left - right,
         arenaHeight - top - bottom);
 
-    statics = new Image(arenaWidth, arenaHeight);
+    mStatics = new Image(arenaWidth, arenaHeight);
 
-    campaign = new Campaign(data);
-    background = CacheTool.getImage(Locator.getCache(), data.background);
+    mCampaign = new Campaign(data);
+    mBackground = CacheTool.getImage(Locator.getCache(), data.background);
 
 
-    EntityFactory entityFactory = new EntityFactory(worldRect, statics.getGraphics());
+    EntityFactory entityFactory = new EntityFactory(worldRect, mStatics.getGraphics());
 
     ArrayList<Entity> players = new ArrayList<>();
     Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
@@ -74,47 +74,47 @@ public class LevelManager {
 
     Players.reposition(players, worldRect);
 
-    worldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
+    mWorldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
 
-    credits = false;
-    finished = false;
+    mCredits = false;
+    mFinished = false;
   }
 
   public void nextLevel() {
-    if (campaign.hasMoreLevels()) {
+    if (mCampaign.hasMoreLevels()) {
       try {
-        campaign.nextLevel();
-        world = worldFactory.makeLevel(campaign.getCurrentLevel());
+        mCampaign.nextLevel();
+        mWorld = mWorldFactory.makeLevel(mCampaign.getCurrentLevel());
       } catch (ParserException | IOException ex) {
-        stateManager.handleException(ex);
+        mStateManager.handleException(ex);
       }
     } else {
-      finished = true;
-      credits = true;
+      mFinished = true;
+      mCredits = true;
     }
   }
 
   public void update(GameTime time) {
-    world.update(time);
+    mWorld.update(time);
   }
 
   public void render(Graphics g) {
-    g.drawImage(background, 0, 0);
-    g.drawImage(statics, 0, 0);
-    world.render(g);
+    g.drawImage(mBackground, 0, 0);
+    g.drawImage(mStatics, 0, 0);
+    mWorld.render(g);
   }
 
   public boolean isFinished() {
-    return finished;
+    return mFinished;
   }
 
   public boolean isCredits() {
-    return credits;
+    return mCredits;
   }
 
   public Node<String> debugTree() {
     Node<String> parent = new Node<>("LevelManager");
-    parent.nodes.add(world.debugTree());
+    parent.nodes.add(mWorld.debugTree());
 
     return parent;
   }

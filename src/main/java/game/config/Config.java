@@ -4,6 +4,7 @@
 
 package game.config;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Config {
   public final Binds player1;
   public final Binds player2;

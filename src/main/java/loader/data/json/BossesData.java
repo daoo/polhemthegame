@@ -10,6 +10,7 @@ import java.util.Map;
 import loader.IData;
 import loader.data.json.types.BossData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class BossesData implements IData {
   private Map<String, BossData> bosses;
 

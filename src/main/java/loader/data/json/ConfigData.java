@@ -4,6 +4,7 @@
 
 package loader.data.json;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class ConfigData {
   public PlayerBinds player1;
   public PlayerBinds player2;

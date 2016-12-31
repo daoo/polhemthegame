@@ -18,14 +18,14 @@ import game.types.GameTime;
  * The delay condition starts counting when this effect is executed.
  */
 public class ExecuteWithDelayEffect implements IEffect {
-  private final int delay;
-  private final Trigger delayed;
+  private final int mDelay;
+  private final Trigger mDelayed;
 
   public ExecuteWithDelayEffect(int delay, Collection<? extends IEffect> effects) {
-    this.delay = delay;
+    mDelay = delay;
 
-    delayed = new Trigger();
-    delayed.addAllEffects(effects);
+    mDelayed = new Trigger();
+    mDelayed.addAllEffects(effects);
   }
 
   public ExecuteWithDelayEffect(int delay, IEffect effect) {
@@ -34,7 +34,7 @@ public class ExecuteWithDelayEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    delayed.addCondition(new AbsoluteTimerCondition(time.elapsedMilli, delay));
-    world.addTrigger(delayed);
+    mDelayed.addCondition(new AbsoluteTimerCondition(time.elapsedMilli, mDelay));
+    world.addTrigger(mDelayed);
   }
 }

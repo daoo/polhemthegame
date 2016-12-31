@@ -8,11 +8,11 @@ import game.misc.Locator;
 import util.Random;
 
 public class RandomAnimator implements IAnimator {
-  private final Tile size;
+  private final Tile mSize;
 
   public RandomAnimator(Tile size) {
     assert size != null;
-    this.size = size;
+    mSize = size;
   }
 
   @Override
@@ -23,6 +23,6 @@ public class RandomAnimator implements IAnimator {
   @Override
   public Tile next(Tile tile) {
     Random rnd = Locator.getRandom();
-    return new Tile(rnd.nextInt(size.x), rnd.nextInt(size.y));
+    return new Tile(rnd.nextInt(mSize.x), rnd.nextInt(mSize.y));
   }
 }

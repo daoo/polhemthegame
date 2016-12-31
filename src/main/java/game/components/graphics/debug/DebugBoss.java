@@ -17,22 +17,22 @@ import math.Rectangle;
 import math.Vector2;
 
 public class DebugBoss implements IRenderComponent {
-  private final Rectangle body;
-  private final BossAI ai;
+  private final Rectangle mBody;
+  private final BossAI mAi;
 
   public DebugBoss(Rectangle body, BossAI ai) {
-    this.body = body;
-    this.ai = ai;
+    mBody = body;
+    mAi = ai;
   }
 
   @Override
   public int getWidth() {
-    return body.getWidth();
+    return mBody.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return body.getHeight();
+    return mBody.getHeight();
   }
 
   @Override
@@ -47,16 +47,16 @@ public class DebugBoss implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    IBossState state = ai.getState();
+    IBossState state = mAi.getState();
     if (state instanceof Walking) {
       Walking walking = (Walking) state;
-      Vector2 target = Vector2.subtract(walking.getTarget(), body.getMin());
+      Vector2 target = Vector2.subtract(walking.getTarget(), mBody.getMin());
       g.drawLine(0, 0, target.x, target.y);
     }
 
     g.draw(new Circle(0, 0, BossAI.MIN_WALK));
 
-    Vector2 o = Vector2.subtract(ai.getMovementRect().getMin(), body.getMin());
-    g.drawRect(o.x, o.y, ai.getMovementRect().getWidth(), ai.getMovementRect().getHeight());
+    Vector2 o = Vector2.subtract(mAi.getMovementRect().getMin(), mBody.getMin());
+    g.drawRect(o.x, o.y, mAi.getMovementRect().getWidth(), mAi.getMovementRect().getHeight());
   }
 }

@@ -20,33 +20,33 @@ import math.Vector2;
 
 
 public class Hand implements IRenderComponent, IProgress {
-  private final Entity owner;
-  private final IOffsetCalculator offsetCalc;
+  private final Entity mOwner;
+  private final IOffsetCalculator mOffsetCalc;
 
   /**
    * The currently held weapon, null if no weapon is being held.
    */
-  private Weapon weapon;
+  private Weapon mWeapon;
 
   public Hand(Entity owner, Orientation orientation, Vector2 handOffset) {
-    this.owner = owner;
+    mOwner = owner;
 
-    offsetCalc = orientation == Orientation.RIGHT
+    mOffsetCalc = orientation == Orientation.RIGHT
         ? new OffsetCalculatorRight(owner, handOffset)
         : new OffsetCalculatorLeft(owner, handOffset);
 
-    weapon = null;
+    mWeapon = null;
   }
 
   public void startUse() {
-    if (weapon != null) {
-      weapon.toggleOn();
+    if (mWeapon != null) {
+      mWeapon.toggleOn();
     }
   }
 
   public void stopUse() {
-    if (weapon != null) {
-      weapon.toggleOff();
+    if (mWeapon != null) {
+      mWeapon.toggleOff();
     }
   }
 
@@ -56,29 +56,29 @@ public class Hand implements IRenderComponent, IProgress {
     // To grab a new holdable we need to stop using the current one
     stopUse();
 
-    weapon = newItem;
+    mWeapon = newItem;
   }
 
   @Override
   public void update(GameTime time) {
-    if (weapon != null) {
-      weapon.update(time);
+    if (mWeapon != null) {
+      mWeapon.update(time);
 
-      ProjectileFactory factory = weapon.getProjectileFactory();
-      ProjectileQueue queue = weapon.getQueue();
+      ProjectileFactory factory = mWeapon.getProjectileFactory();
+      ProjectileQueue queue = mWeapon.getQueue();
 
-      Vector2 pos = offsetCalc.getMuzzlePosition(weapon.getWidth(), weapon.getMuzzleOffset());
+      Vector2 pos = mOffsetCalc.getMuzzlePosition(mWeapon.getWidth(), mWeapon.getMuzzleOffset());
 
       float x = pos.x;
-      if (weapon.getOrientation() == Orientation.LEFT) {
+      if (mWeapon.getOrientation() == Orientation.LEFT) {
         // Make sure the projectile does not hit the source entity
         x -= factory.getWidth();
       }
 
       // Find out if there are any projectiles that want to be spawned
       for (int i = 0; i < queue.getWaiting(); ++i) {
-        Entity entity = factory.makeProjectile(owner, x, pos.y);
-        owner.addEffect(new SpawnProjectileEffect(entity, pos));
+        Entity entity = factory.makeProjectile(mOwner, x, pos.y);
+        mOwner.addEffect(new SpawnProjectileEffect(entity, pos));
       }
 
       queue.clear();
@@ -87,13 +87,13 @@ public class Hand implements IRenderComponent, IProgress {
 
   @Override
   public void render(Graphics g) {
-    if (weapon != null) {
+    if (mWeapon != null) {
       g.pushTransform();
 
-      Vector2 offset = offsetCalc.getWeaponOffset(weapon.getWidth());
+      Vector2 offset = mOffsetCalc.getWeaponOffset(mWeapon.getWidth());
       g.translate(offset.x, offset.y);
 
-      weapon.render(g);
+      mWeapon.render(g);
 
       g.popTransform();
     }
@@ -110,23 +110,23 @@ public class Hand implements IRenderComponent, IProgress {
 
   @Override
   public int getWidth() {
-    return weapon == null ? 0 : weapon.getWidth();
+    return mWeapon == null ? 0 : mWeapon.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return weapon == null ? 0 : weapon.getWidth();
+    return mWeapon == null ? 0 : mWeapon.getWidth();
   }
 
   @Override
   public float getProgress() {
-    return weapon.getProgress();
+    return mWeapon.getProgress();
   }
 
   @Override
   public String toString() {
-    if (weapon != null) {
-      return "Hand - holding " + weapon;
+    if (mWeapon != null) {
+      return "Hand - holding " + mWeapon;
     }
 
     return "Hand - not holding anything";

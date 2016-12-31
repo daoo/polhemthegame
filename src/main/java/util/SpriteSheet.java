@@ -12,14 +12,14 @@ import org.newdawn.slick.SlickException;
  * Utility class for getting sprites from an image.
  */
 public class SpriteSheet {
-  private final Image original;
-  private final Image[][] subImages;
+  private final Image mOriginal;
+  private final Image[][] mSubImages;
 
-  private final int tileWidth;
-  private final int tileHeight;
+  private final int mTileWidth;
+  private final int mTileHeight;
 
-  private final int tileCountX;
-  private final int tileCountY;
+  private final int mTileCountX;
+  private final int mTileCountY;
 
   /**
    * Create a new sprite sheet.
@@ -39,17 +39,17 @@ public class SpriteSheet {
     assert tileHeight <= original.getHeight();
     assert spacing >= 0;
 
-    this.original = original;
-    this.tileWidth = tileWidth;
-    this.tileHeight = tileHeight;
+    mOriginal = original;
+    mTileWidth = tileWidth;
+    mTileHeight = tileHeight;
 
-    tileCountX = count(original.getWidth(), tileWidth, spacing);
-    tileCountY = count(original.getHeight(), tileHeight, spacing);
+    mTileCountX = count(original.getWidth(), tileWidth, spacing);
+    mTileCountY = count(original.getHeight(), tileHeight, spacing);
 
-    subImages = new Image[tileCountX][tileCountY];
-    for (int y = 0; y < tileCountY; ++y) {
-      for (int x = 0; x < tileCountX; ++x) {
-        subImages[x][y] = getSubImage(original, x, y, tileWidth, tileHeight, spacing);
+    mSubImages = new Image[mTileCountX][mTileCountY];
+    for (int y = 0; y < mTileCountY; ++y) {
+      for (int x = 0; x < mTileCountX; ++x) {
+        mSubImages[x][y] = getSubImage(original, x, y, tileWidth, tileHeight, spacing);
       }
     }
   }
@@ -60,7 +60,7 @@ public class SpriteSheet {
    * @throws SlickException @see Image.destroy()
    */
   public void destroy() throws SlickException {
-    original.destroy();
+    mOriginal.destroy();
   }
 
   /**
@@ -74,10 +74,10 @@ public class SpriteSheet {
    * @param y y offset when rendering
    */
   public void render(Graphics g, int tx, int ty, float x, float y) {
-    assert tx >= 0 && x < tileCountX;
-    assert ty >= 0 && y < tileCountY;
+    assert tx >= 0 && x < mTileCountX;
+    assert ty >= 0 && y < mTileCountY;
 
-    g.drawImage(subImages[tx][ty], x, y);
+    g.drawImage(mSubImages[tx][ty], x, y);
   }
 
   /**
@@ -89,10 +89,10 @@ public class SpriteSheet {
    * @return the image at the specific tile
    */
   public Image getSubImage(int x, int y) {
-    assert x >= 0 && x < tileCountX;
-    assert y >= 0 && y < tileCountY;
+    assert x >= 0 && x < mTileCountX;
+    assert y >= 0 && y < mTileCountY;
 
-    return subImages[x][y];
+    return mSubImages[x][y];
   }
 
   /**
@@ -101,7 +101,7 @@ public class SpriteSheet {
    * @return the width of a tile, int greater than zero
    */
   public int getTileWidth() {
-    return tileWidth;
+    return mTileWidth;
   }
 
   /**
@@ -110,7 +110,7 @@ public class SpriteSheet {
    * @return the height of a tile, int greater than zero
    */
   public int getTileHeight() {
-    return tileHeight;
+    return mTileHeight;
   }
 
   /**
@@ -119,7 +119,7 @@ public class SpriteSheet {
    * @return number of horizontal tiles, int greater than zero
    */
   public int getTileCountX() {
-    return tileCountX;
+    return mTileCountX;
   }
 
   /**
@@ -128,7 +128,7 @@ public class SpriteSheet {
    * @return number of vertical tiles, int greater than zero
    */
   public int getTileCountY() {
-    return tileCountY;
+    return mTileCountY;
   }
 
   /**

@@ -11,18 +11,18 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class ProjectileDamage implements ILogicComponent {
-  private final Damage damageOther;
-  private final Damage damageSelf;
+  private final Damage mDamageOther;
+  private final Damage mDamageSelf;
 
-  private final IEntity owner;
-  private final IEntity source;
+  private final IEntity mOwner;
+  private final IEntity mSource;
 
   public ProjectileDamage(IEntity owner, IEntity source, float damage) {
-    this.owner = owner;
-    this.source = source;
+    mOwner = owner;
+    mSource = source;
 
-    this.damageSelf = new Damage(null, 1);
-    this.damageOther = new Damage(source, damage);
+    mDamageSelf = new Damage(null, 1);
+    mDamageOther = new Damage(source, damage);
   }
 
   @Override
@@ -34,9 +34,9 @@ public class ProjectileDamage implements ILogicComponent {
   public void reciveMessage(Message message, Object args) {
     if (message == Message.COLLIDED_WITH) {
       IEntity entity = (IEntity) args;
-      entity.sendMessage(Message.DAMAGE, damageOther);
-      owner.sendMessage(Message.DAMAGE, damageSelf);
-      source.sendMessage(Message.DEALT_DAMAGE, damageOther);
+      entity.sendMessage(Message.DAMAGE, mDamageOther);
+      mOwner.sendMessage(Message.DAMAGE, mDamageSelf);
+      mSource.sendMessage(Message.DEALT_DAMAGE, mDamageOther);
     }
   }
 }

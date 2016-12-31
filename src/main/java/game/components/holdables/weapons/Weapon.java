@@ -21,57 +21,57 @@ import math.Vector2;
  * Weapon that can fire and be held by a hand.
  */
 public class Weapon implements IHoldable {
-  private final AnimatedSheet anim;
-  private final Vector2 muzzleOffset;
+  private final AnimatedSheet mAnim;
+  private final Vector2 mMuzzleOffset;
 
-  private final Orientation orientation;
-  private final ProjectileFactory projTemplate;
+  private final Orientation mOrientation;
+  private final ProjectileFactory mProjTemplate;
 
-  private final IWeaponMachine machine;
+  private final IWeaponMachine mMachine;
 
   /**
    * Keep track of fired bullets that have not been spawned.
    * Note that it's possible that we never fire more than one bullet until the
    * holder have collected them and spawned them in the world.
    */
-  private final ProjectileQueue queue;
+  private final ProjectileQueue mQueue;
 
   public Weapon(
       Vector2 muzzleOffset, WeaponMode mode, int reloadLength, int cooldownLength, int magazineSize,
       Orientation orientation, AnimatedSheet anim, ProjectileFactory projTemplate) {
-    this.muzzleOffset = muzzleOffset;
-    this.orientation = orientation;
-    this.anim = anim;
-    this.projTemplate = projTemplate;
+    mMuzzleOffset = muzzleOffset;
+    mOrientation = orientation;
+    mAnim = anim;
+    mProjTemplate = projTemplate;
 
-    queue = new ProjectileQueue();
+    mQueue = new ProjectileQueue();
 
     IMagazine magazine = magazineSize == -1 ? new InfiniteMagazine() : new Magazine(magazineSize);
 
-    machine = mode == WeaponMode.AUTOMATIC
-        ? new AutomaticMachine(reloadLength, cooldownLength, magazine, queue, anim)
-        : new SingleMachine(reloadLength, cooldownLength, magazine, queue, anim);
+    mMachine = mode == WeaponMode.AUTOMATIC
+        ? new AutomaticMachine(reloadLength, cooldownLength, magazine, mQueue, anim)
+        : new SingleMachine(reloadLength, cooldownLength, magazine, mQueue, anim);
   }
 
   public Orientation getOrientation() {
-    return orientation;
+    return mOrientation;
   }
 
   public Vector2 getMuzzleOffset() {
-    return muzzleOffset;
+    return mMuzzleOffset;
   }
 
   public ProjectileFactory getProjectileFactory() {
-    return projTemplate;
+    return mProjTemplate;
   }
 
   public ProjectileQueue getQueue() {
-    return queue;
+    return mQueue;
   }
 
   @Override
   public float getProgress() {
-    return machine.getProgress();
+    return mMachine.getProgress();
   }
 
   @Override
@@ -81,32 +81,32 @@ public class Weapon implements IHoldable {
 
   @Override
   public void render(Graphics g) {
-    anim.render(g);
+    mAnim.render(g);
   }
 
   @Override
   public void update(GameTime time) {
-    anim.update(time);
-    machine.update(time);
+    mAnim.update(time);
+    mMachine.update(time);
   }
 
   @Override
   public void toggleOn() {
-    machine.startFiring();
+    mMachine.startFiring();
   }
 
   @Override
   public void toggleOff() {
-    machine.stopFiring();
+    mMachine.stopFiring();
   }
 
   @Override
   public int getWidth() {
-    return anim.getWidth();
+    return mAnim.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return anim.getHeight();
+    return mAnim.getHeight();
   }
 }

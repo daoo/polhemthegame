@@ -19,28 +19,28 @@ public class Outliner implements IRenderComponent {
   private static final Color SECOND = Color.green;
   private static final Color THIRD = Color.blue;
 
-  private final Entity owner;
-  private final Movement movement;
+  private final Entity mOwner;
+  private final Movement mMovement;
 
-  private final boolean outlineNext;
-  private final boolean linesToNext;
+  private final boolean mOutlineNext;
+  private final boolean mLinesToNext;
 
   public Outliner(Entity owner, Movement movement, boolean outlineNext, boolean lineToNext) {
-    this.owner = owner;
-    this.movement = movement;
+    mOwner = owner;
+    mMovement = movement;
 
-    this.outlineNext = outlineNext;
-    this.linesToNext = lineToNext;
+    mOutlineNext = outlineNext;
+    mLinesToNext = lineToNext;
   }
 
   @Override
   public int getWidth() {
-    return owner.body.getWidth();
+    return mOwner.getBody().getWidth();
   }
 
   @Override
   public int getHeight() {
-    return owner.body.getHeight();
+    return mOwner.getBody().getHeight();
   }
 
   @Override
@@ -50,22 +50,22 @@ public class Outliner implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    Rectangle body = owner.body;
+    Rectangle body = mOwner.getBody();
 
     Color tmp = g.getColor();
     g.setColor(FIRST);
     g.drawRect(0, 0, body.getWidth(), body.getHeight());
 
-    if (movement != null) {
-      float dx = movement.getVelocity().x;
-      float dy = movement.getVelocity().y;
+    if (mMovement != null) {
+      float dx = mMovement.getVelocity().x;
+      float dy = mMovement.getVelocity().y;
 
-      if (outlineNext) {
+      if (mOutlineNext) {
         g.setColor(SECOND);
         g.drawRect(dx, dy, body.getWidth(), body.getHeight());
       }
 
-      if (linesToNext) {
+      if (mLinesToNext) {
         g.setColor(THIRD);
 
         float x1 = 0;

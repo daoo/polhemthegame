@@ -4,6 +4,7 @@
 
 package loader.data.json.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class CreepSpawnData {
   public String creep;
   public int spawnTime;

@@ -11,23 +11,21 @@ import game.types.Message;
 import math.Rectangle;
 
 public class StaticCollision implements ILogicComponent {
-  private final Entity owner;
-
-  private boolean enableCollisions;
+  private final Entity mOwner;
+  private boolean mEnableCollisions;
 
   public StaticCollision(Entity owner) {
-    this.owner = owner;
-
-    enableCollisions = true;
+    mOwner = owner;
+    mEnableCollisions = true;
   }
 
   @Override
   public void update(GameTime time) {
-    if (enableCollisions) {
-      for (Entity e : owner.getWorld().getUnits()) {
-        if (Rectangle.intersects(owner.body, e.body)) {
-          owner.sendMessage(Message.COLLIDED_WITH, e);
-          e.sendMessage(Message.COLLIDED_WITH, owner);
+    if (mEnableCollisions) {
+      for (Entity e : mOwner.getWorld().getUnits()) {
+        if (Rectangle.intersects(mOwner.getBody(), e.getBody())) {
+          mOwner.sendMessage(Message.COLLIDED_WITH, e);
+          e.sendMessage(Message.COLLIDED_WITH, mOwner);
         }
       }
     }
@@ -36,7 +34,7 @@ public class StaticCollision implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.KILL) {
-      enableCollisions = false;
+      mEnableCollisions = false;
     }
   }
 }

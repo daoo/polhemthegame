@@ -7,14 +7,14 @@ package game.ui.hud.graph;
 public class Measure {
   // NOTE: All times are in nanoseconds
 
-  private final long timeDelta;
+  private final long mTimeDelta;
 
-  private long total;
-  private long measures;
-  private long firstMeasure;
-  private long lastMeasure;
+  private long mTotal;
+  private long mMeasures;
+  private long mFirstMeasure;
+  private long mLastMeasure;
 
-  private boolean finished;
+  private boolean mFinished;
 
   /**
    * Construct a new measure with the specified interval.
@@ -22,7 +22,7 @@ public class Measure {
    * @param timeDelta the time difference between total measures, in nanoseconds
    */
   public Measure(long timeDelta) {
-    this.timeDelta = timeDelta;
+    mTimeDelta = timeDelta;
 
     reset();
   }
@@ -30,40 +30,40 @@ public class Measure {
   public void startMeasure() {
     long timeCurrent = System.nanoTime();
 
-    if (firstMeasure == 0) {
-      firstMeasure = timeCurrent;
+    if (mFirstMeasure == 0) {
+      mFirstMeasure = timeCurrent;
     }
 
-    lastMeasure = timeCurrent;
+    mLastMeasure = timeCurrent;
   }
 
   public void stopMeasure() {
     long timeCurrent = System.nanoTime();
-    long delta = timeCurrent - lastMeasure;
+    long delta = timeCurrent - mLastMeasure;
 
-    total += delta;
-    ++measures;
+    mTotal += delta;
+    ++mMeasures;
 
-    if (timeCurrent - firstMeasure > timeDelta) {
-      finished = true;
+    if (timeCurrent - mFirstMeasure > mTimeDelta) {
+      mFinished = true;
     }
   }
 
   public void reset() {
-    firstMeasure = 0;
-    lastMeasure = 0;
+    mFirstMeasure = 0;
+    mLastMeasure = 0;
 
-    total = 0;
-    measures = 0;
+    mTotal = 0;
+    mMeasures = 0;
 
-    finished = false;
+    mFinished = false;
   }
 
   public long getAverage() {
-    return total / measures;
+    return mTotal / mMeasures;
   }
 
   public boolean isFinished() {
-    return finished;
+    return mFinished;
   }
 }

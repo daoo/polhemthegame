@@ -24,22 +24,22 @@ public class StateCredits implements IState {
   private static final int Y_SPEED_DELTA = 1;
   private static final int DEFAULT_SPACING = 10;
 
-  private float speed;
-  private float pos_y;
+  private float mSpeed;
+  private float mPosY;
 
-  private final int x;
-  private final Image imgCredits;
+  private final int mX;
+  private final Image mImgCredits;
 
   public StateCredits(int windowWidth, int windowHeight) throws SlickException {
-    speed = DEFAULT_Y_SPEED;
-    pos_y = windowHeight;
+    mSpeed = DEFAULT_Y_SPEED;
+    mPosY = windowHeight;
 
     HashMap<String, UnicodeFont> fonts = new HashMap<>();
     fonts.put("big", FontHelper.getFont("Verdana", FONT_SIZE_BIG));
     fonts.put("default", FontHelper.getFont("Verdana", FONT_SIZE_SMALL));
-    imgCredits = FontHelper.renderString(fonts, DEFAULT_SPACING, Credits.CREDITS_TEXT);
+    mImgCredits = FontHelper.renderString(fonts, DEFAULT_SPACING, Credits.CREDITS_TEXT);
 
-    x = windowWidth / 2 - imgCredits.getWidth() / 2;
+    mX = windowWidth / 2 - mImgCredits.getWidth() / 2;
   }
 
   @Override
@@ -55,8 +55,8 @@ public class StateCredits implements IState {
   @Override
   public void render(Graphics g) throws SlickException {
     g.pushTransform();
-    g.translate(0, pos_y);
-    g.drawImage(imgCredits, x, 0);
+    g.translate(0, mPosY);
+    g.drawImage(mImgCredits, mX, 0);
     g.popTransform();
   }
 
@@ -67,10 +67,10 @@ public class StateCredits implements IState {
     } else if (Keyboard.isKeyDown(Keyboard.KEY_F2)) {
       stateGame.quit();
     } else if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-      speed += Y_SPEED_DELTA;
+      mSpeed += Y_SPEED_DELTA;
     }
 
-    pos_y -= speed * (delta / 1000.0f);
+    mPosY -= mSpeed * (delta / 1000.0f);
   }
 
   @Override

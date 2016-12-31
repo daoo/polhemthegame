@@ -5,32 +5,31 @@
 package game.types;
 
 public class Wallet {
-  private int money;
+  private int mMoney;
 
   public Wallet(int start) {
     assert start >= 0;
-
-    this.money = start;
+    mMoney = start;
   }
 
   public void addMoney(int value) {
     assert value >= 0;
 
-    money += value;
+    mMoney += value;
   }
 
   public boolean takeMoney(int value) {
     assert value >= 0;
 
-    if (money < value) {
+    if (mMoney < value) {
       return false;
     }
 
-    money -= value;
+    mMoney -= value;
     return true;
   }
 
   public int getMoney() {
-    return money;
+    return mMoney;
   }
 }

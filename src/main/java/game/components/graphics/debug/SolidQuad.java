@@ -12,24 +12,24 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class SolidQuad implements IRenderComponent {
-  private final Color color;
-  private final int width;
-  private final int height;
+  private final Color mColor;
+  private final int mWidth;
+  private final int mHeight;
 
   public SolidQuad(Color color, int width, int height) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
+    mColor = color;
+    mWidth = width;
+    mHeight = height;
   }
 
   @Override
   public int getWidth() {
-    return width;
+    return mWidth;
   }
 
   @Override
   public int getHeight() {
-    return height;
+    return mHeight;
   }
 
   @Override
@@ -44,8 +44,8 @@ public class SolidQuad implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    g.setColor(color);
-    g.fillRect(0, 0, width, height);
+    g.setColor(mColor);
+    g.fillRect(0, 0, mWidth, mHeight);
   }
 
 }

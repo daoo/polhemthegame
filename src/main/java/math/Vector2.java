@@ -13,13 +13,15 @@ public class Vector2 {
   /**
    * X and Y components of the vector.
    */
+  @SuppressWarnings("InstanceVariableNamingConvention")
   public final float x;
+  @SuppressWarnings("InstanceVariableNamingConvention")
   public final float y;
 
   /**
    * Normalized version of the vector.
    */
-  private Vector2 normalized;
+  private Vector2 mNormalized;
 
   /**
    * Construct a new vector from two floats, X and Y.
@@ -31,7 +33,7 @@ public class Vector2 {
     this.x = x;
     this.y = y;
 
-    this.normalized = null;
+    mNormalized = null;
   }
 
   /**
@@ -60,12 +62,12 @@ public class Vector2 {
    * @throws ArithmeticException when the magnitude of the vector is zero
    */
   public Vector2 normalize() {
-    if (normalized == null) {
+    if (mNormalized == null) {
       float m = magnitude();
-      normalized = new Vector2(x / m, y / m);
+      mNormalized = new Vector2(x / m, y / m);
     }
 
-    return normalized;
+    return mNormalized;
   }
 
   /**

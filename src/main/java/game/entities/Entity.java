@@ -21,51 +21,55 @@ import math.Rectangle;
 import util.Node;
 
 public class Entity implements IEntity {
-  private World world;
-  private boolean active;
+  private World mWorld;
+  private boolean mActive;
 
-  public final Rectangle body;
+  private final Rectangle mBody;
 
-  private final LinkedList<IEffect> effects;
-  private final ArrayList<ILogicComponent> updates;
-  private final ArrayList<IRenderComponent> renders;
+  private final LinkedList<IEffect> mEffects;
+  private final ArrayList<ILogicComponent> mUpdates;
+  private final ArrayList<IRenderComponent> mRenders;
 
   public Entity(float x, float y, int w, int h) {
-    body = new Rectangle(x, y, w, h);
-    active = true;
+    mBody = new Rectangle(x, y, w, h);
+    mActive = true;
 
-    effects = new LinkedList<>();
+    mEffects = new LinkedList<>();
 
-    updates = new ArrayList<>();
-    renders = new ArrayList<>();
+    mUpdates = new ArrayList<>();
+    mRenders = new ArrayList<>();
   }
 
   public void addEffect(IEffect effect) {
-    effects.add(effect);
+    mEffects.add(effect);
   }
 
   public void addEffects(Collection<? extends IEffect> collection) {
-    effects.addAll(collection);
+    mEffects.addAll(collection);
   }
 
   public void addLogicComponent(ILogicComponent comp) {
-    updates.add(comp);
+    mUpdates.add(comp);
   }
 
   public void addRenderComponent(IRenderComponent comp) {
-    renders.add(comp);
+    mRenders.add(comp);
+  }
+
+  public Rectangle getBody() {
+    return mBody;
   }
 
   public World getWorld() {
-    return world;
+    return mWorld;
   }
 
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(body.getX1(), body.getY1());
+    g.translate(mBody.getX1(), mBody.getY1());
 
-    for (IRenderComponent comp : renders) {
+    for (IRenderComponent comp : mRenders) {
       comp.render(g);
     }
 
@@ -76,43 +80,43 @@ public class Entity implements IEntity {
   public void sendMessage(Message message, Object args) {
     assert message != null;
 
-    for (ILogicComponent comp : updates) {
+    for (ILogicComponent comp : mUpdates) {
       comp.reciveMessage(message, args);
     }
 
-    for (IRenderComponent comp : renders) {
+    for (IRenderComponent comp : mRenders) {
       comp.reciveMessage(message, args);
     }
   }
 
   public void setWorld(World world) {
-    this.world = world;
+    mWorld = world;
   }
 
   @Override
   public void update(GameTime time) {
-    for (ILogicComponent comp : updates) {
+    for (ILogicComponent comp : mUpdates) {
       comp.update(time);
     }
 
-    for (IRenderComponent comp : renders) {
+    for (IRenderComponent comp : mRenders) {
       comp.update(time);
     }
 
-    for (IEffect effect : effects) {
-      effect.execute(time, world);
+    for (IEffect effect : mEffects) {
+      effect.execute(time, mWorld);
     }
-    effects.clear();
+    mEffects.clear();
   }
 
   @Override
   public boolean isActive() {
-    return active || !effects.isEmpty();
+    return mActive || !mEffects.isEmpty();
   }
 
   @Override
   public void remove() {
-    active = false;
+    mActive = false;
   }
 
   @Override
@@ -124,12 +128,12 @@ public class Entity implements IEntity {
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(new Node<>("Body = " + body));
-    parent.nodes.add(new Node<>("Active = " + Boolean.toString(active)));
+    parent.nodes.add(new Node<>("Body = " + mBody));
+    parent.nodes.add(new Node<>("Active = " + Boolean.toString(mActive)));
 
-    parent.nodes.add(DebugHelper.listToNode("Logic components", updates));
-    parent.nodes.add(DebugHelper.listToNode("Render components", renders));
-    parent.nodes.add(DebugHelper.listToNode("Effects", effects));
+    parent.nodes.add(DebugHelper.listToNode("Logic components", mUpdates));
+    parent.nodes.add(DebugHelper.listToNode("Render components", mRenders));
+    parent.nodes.add(DebugHelper.listToNode("Effects", mEffects));
 
     return parent;
   }

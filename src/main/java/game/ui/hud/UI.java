@@ -18,27 +18,27 @@ import game.ui.IStaticUIElement;
  * Simple UI implementation.
  */
 public class UI {
-  private final ArrayList<IStaticUIElement> statics;
-  private final ArrayList<IDynamicUIElement> dynamics;
+  private final ArrayList<IStaticUIElement> mStatics;
+  private final ArrayList<IDynamicUIElement> mDynamics;
 
-  private final ArrayList<IDynamicUIElement> toAdd;
+  private final ArrayList<IDynamicUIElement> mToAdd;
 
-  private final int width;
-  private final int height;
+  private final int mWidth;
+  private final int mHeight;
 
-  private int imgX;
-  private int imgY;
-  private Image foreground;
+  private int mImgX;
+  private int mImgY;
+  private Image mForeground;
 
   public UI(int width, int height) {
-    this.width = width;
-    this.height = height;
+    mWidth = width;
+    mHeight = height;
 
-    dynamics = new ArrayList<>();
-    statics = new ArrayList<>();
-    toAdd = new ArrayList<>();
+    mDynamics = new ArrayList<>();
+    mStatics = new ArrayList<>();
+    mToAdd = new ArrayList<>();
 
-    foreground = null;
+    mForeground = null;
   }
 
   /**
@@ -49,7 +49,7 @@ public class UI {
   public void addStatic(IStaticUIElement element) {
     assert element != null;
 
-    statics.add(element);
+    mStatics.add(element);
   }
 
   /**
@@ -60,14 +60,14 @@ public class UI {
   public void addDynamic(IDynamicUIElement element) {
     assert element != null;
 
-    toAdd.add(element);
+    mToAdd.add(element);
   }
 
   /**
    * Updates dynamic elements. Also removes inactive elements.
    */
   public void update() {
-    Iterator<IDynamicUIElement> it = dynamics.iterator();
+    Iterator<IDynamicUIElement> it = mDynamics.iterator();
     while (it.hasNext()) {
       IDynamicUIElement e = it.next();
       if (e.isActive()) {
@@ -77,8 +77,8 @@ public class UI {
       }
     }
 
-    dynamics.addAll(toAdd);
-    toAdd.clear();
+    mDynamics.addAll(mToAdd);
+    mToAdd.clear();
   }
 
   /**
@@ -88,7 +88,7 @@ public class UI {
    * @param g the graphics context to use
    */
   public void renderDynamics(Graphics g) {
-    for (IDynamicUIElement e : dynamics) {
+    for (IDynamicUIElement e : mDynamics) {
       e.render(g);
     }
   }
@@ -100,12 +100,12 @@ public class UI {
    * @param g the rendering context to use
    */
   public void renderStatics(Graphics g) {
-    for (IStaticUIElement e : statics) {
+    for (IStaticUIElement e : mStatics) {
       e.render(g);
     }
 
-    if (foreground != null) {
-      g.drawImage(foreground, imgX, imgY);
+    if (mForeground != null) {
+      g.drawImage(mForeground, mImgX, mImgY);
     }
   }
 
@@ -116,11 +116,11 @@ public class UI {
    * @param image the image to render, if null no image will be rendered.
    */
   public void setForegroundImage(Image image) {
-    foreground = image;
+    mForeground = image;
 
     if (image != null) {
-      imgX = (width - image.getWidth()) / 2;
-      imgY = (height - image.getHeight()) / 2;
+      mImgX = (mWidth - image.getWidth()) / 2;
+      mImgY = (mHeight - image.getHeight()) / 2;
     }
   }
 }

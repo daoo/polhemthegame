@@ -12,16 +12,16 @@ import math.Vector2;
 public class Gravity implements ILogicComponent {
   private static final float FACTOR = 100.0f;
 
-  private final Movement movement;
+  private final Movement mMovement;
 
   public Gravity(Movement movement) {
-    this.movement = movement;
+    mMovement = movement;
   }
 
   @Override
   public void update(GameTime time) {
     float g = time.frame * FACTOR;
-    movement.addVelocity(new Vector2(0, g));
+    mMovement.addVelocity(new Vector2(0, g));
   }
 
   @Override

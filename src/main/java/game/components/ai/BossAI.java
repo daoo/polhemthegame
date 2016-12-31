@@ -46,9 +46,9 @@ public class BossAI implements ILogicComponent {
 
     // Setup the area which the TOP LEFT of the boss body may move around in
     float x1 = arenaRect.getX2() - locationX;
-    float y1 = arenaRect.getY1() + entity.body.getHeight();
-    float x2 = arenaRect.getX2() - 3.0f / 2.0f * entity.body.getWidth();
-    float y2 = arenaRect.getY2() - entity.body.getHeight();
+    float y1 = arenaRect.getY1() + entity.getBody().getHeight();
+    float x2 = arenaRect.getX2() - 3.0f / 2.0f * entity.getBody().getWidth();
+    float y2 = arenaRect.getY2() - entity.getBody().getHeight();
 
     mMovementRect = new Rectangle(x1, y1, (int) (x2 - x1), (int) (y2 - y1));
   }
@@ -73,7 +73,7 @@ public class BossAI implements ILogicComponent {
         mHand.startUse();
       } else if (mState.getState() == BossState.SHOOTING) {
         int targets = Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-        mState = new Walking(mEntity.body, mHand, mMovement, mSpeed, mMovementRect, targets);
+        mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementRect, targets);
 
         mEntity.sendMessage(Message.START_ANIMATION, null);
         mHand.stopUse();
@@ -88,8 +88,7 @@ public class BossAI implements ILogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      mState = new Walking(
-          mEntity.body, mHand, mMovement, mSpeed, mMovementRect, INITIAL_TARGET_COUNT,
+      mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementRect, INITIAL_TARGET_COUNT,
           mInitialTarget);
 
       mEntity.sendMessage(Message.START_ANIMATION, null);

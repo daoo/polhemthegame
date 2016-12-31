@@ -14,18 +14,18 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class DamageEntitiesEffect implements IEffect {
-  private final Collection<? extends IEntity> entities;
-  private final Damage damage;
+  private final Collection<? extends IEntity> mEntities;
+  private final Damage mDamage;
 
   public DamageEntitiesEffect(Collection<? extends IEntity> entities, int damage) {
-    this.entities = entities;
-    this.damage = new Damage(null, damage);
+    mEntities = entities;
+    mDamage = new Damage(null, damage);
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    for (IEntity entity : entities) {
-      entity.sendMessage(Message.DAMAGE, damage);
+    for (IEntity entity : mEntities) {
+      entity.sendMessage(Message.DAMAGE, mDamage);
     }
   }
 }

@@ -13,12 +13,12 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class EffectsOnDeath implements ILogicComponent {
-  private final Entity owner;
-  private final Collection<? extends IEffect> effects;
+  private final Entity mOwner;
+  private final Collection<? extends IEffect> mEffects;
 
   public EffectsOnDeath(Entity owner, Collection<? extends IEffect> effects) {
-    this.owner = owner;
-    this.effects = effects;
+    mOwner = owner;
+    mEffects = effects;
   }
 
   @Override
@@ -29,12 +29,12 @@ public class EffectsOnDeath implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.KILL) {
-      owner.addEffects(effects);
+      mOwner.addEffects(mEffects);
     }
   }
 
   @Override
   public String toString() {
-    return "EffectsOnDeath - " + effects.size() + " effects";
+    return "EffectsOnDeath - " + mEffects.size() + " effects";
   }
 }

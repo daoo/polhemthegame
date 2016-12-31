@@ -5,13 +5,13 @@
 package math;
 
 public class Rectangle {
-  private Vector2 min;
-  private Vector2 max;
-  private Vector2 center;
-  private final int width;
-  private final int height;
-  private final int halfWidth;
-  private final int halfHeight;
+  private Vector2 mMin;
+  private Vector2 mMax;
+  private Vector2 mCenter;
+  private final int mWidth;
+  private final int mHeight;
+  private final int mHalfWidth;
+  private final int mHalfHeight;
 
   /**
    * Copy constructor.
@@ -21,13 +21,13 @@ public class Rectangle {
   public Rectangle(Rectangle rect) {
     assert rect != null;
 
-    this.min = rect.min;
-    this.max = rect.max;
-    this.center = rect.center;
-    this.width = rect.width;
-    this.height = rect.height;
-    this.halfWidth = rect.halfWidth;
-    this.halfHeight = rect.halfHeight;
+    mMin = rect.mMin;
+    mMax = rect.mMax;
+    mCenter = rect.mCenter;
+    mWidth = rect.mWidth;
+    mHeight = rect.mHeight;
+    mHalfWidth = rect.mHalfWidth;
+    mHalfHeight = rect.mHalfHeight;
   }
 
   /**
@@ -42,15 +42,15 @@ public class Rectangle {
     assert width > 0;
     assert height > 0;
 
-    min = new Vector2(x1, y1);
-    max = new Vector2(x1 + width, y1 + height);
+    mMin = new Vector2(x1, y1);
+    mMax = new Vector2(x1 + width, y1 + height);
 
-    this.width = width;
-    this.height = height;
-    this.halfWidth = width / 2;
-    this.halfHeight = height / 2;
+    mWidth = width;
+    mHeight = height;
+    mHalfWidth = width / 2;
+    mHalfHeight = height / 2;
 
-    center = Vector2.add(min, halfWidth, halfHeight);
+    mCenter = Vector2.add(mMin, mHalfWidth, mHalfHeight);
   }
 
   /**
@@ -69,9 +69,9 @@ public class Rectangle {
    * @param v the new position
    */
   public void setPosition(Vector2 v) {
-    min = v;
-    max = Vector2.add(v, width, height);
-    center = Vector2.add(v, halfWidth, halfHeight);
+    mMin = v;
+    mMax = Vector2.add(v, mWidth, mHeight);
+    mCenter = Vector2.add(v, mHalfWidth, mHalfHeight);
   }
 
   /**
@@ -90,9 +90,9 @@ public class Rectangle {
    * @param y the translation on the y-axis
    */
   public void addPosition(float x, float y) {
-    min = Vector2.add(min, x, y);
-    max = Vector2.add(max, x, y);
-    center = Vector2.add(min, halfWidth, halfHeight);
+    mMin = Vector2.add(mMin, x, y);
+    mMax = Vector2.add(mMax, x, y);
+    mCenter = Vector2.add(mMin, mHalfWidth, mHalfHeight);
   }
 
   /**
@@ -101,7 +101,7 @@ public class Rectangle {
    * @return the top left of the rectangle
    */
   public Vector2 getMin() {
-    return min;
+    return mMin;
   }
 
   /**
@@ -110,7 +110,7 @@ public class Rectangle {
    * @return the bottom right of the rectangle
    */
   public Vector2 getMax() {
-    return max;
+    return mMax;
   }
 
   /**
@@ -119,7 +119,7 @@ public class Rectangle {
    * @return the center position as a vector
    */
   public Vector2 getCenter() {
-    return center;
+    return mCenter;
   }
 
   /**
@@ -129,7 +129,7 @@ public class Rectangle {
    * @return the width of the rectangle, greater than zero
    */
   public int getWidth() {
-    return width;
+    return mWidth;
   }
 
   /**
@@ -139,7 +139,7 @@ public class Rectangle {
    * @return the height of the rectangle, greater than zero
    */
   public int getHeight() {
-    return height;
+    return mHeight;
   }
 
   /**
@@ -148,7 +148,7 @@ public class Rectangle {
    * @return the upper left x coordinate
    */
   public float getX1() {
-    return min.x;
+    return mMin.x;
   }
 
   /**
@@ -157,7 +157,7 @@ public class Rectangle {
    * @return the upper left y coordinate
    */
   public float getY1() {
-    return min.y;
+    return mMin.y;
   }
 
   /**
@@ -166,7 +166,7 @@ public class Rectangle {
    * @return the bottom right x coordinate
    */
   public float getX2() {
-    return max.x;
+    return mMax.x;
   }
 
   /**
@@ -175,7 +175,7 @@ public class Rectangle {
    * @return the bottom right y coordinate
    */
   public float getY2() {
-    return max.y;
+    return mMax.y;
   }
 
   /**
@@ -185,7 +185,7 @@ public class Rectangle {
    */
   @Override
   public String toString() {
-    return String.format("(%f, %f, %f, %f) %dx%d", min.x, min.y, max.x, max.y, width, height);
+    return String.format("(%f, %f, %f, %f) %dx%d", mMin.x, mMin.y, mMax.x, mMax.y, mWidth, mHeight);
   }
 
   /**
@@ -196,8 +196,7 @@ public class Rectangle {
    * @return true or false depending on if they intersecting or not
    */
   public static boolean intersects(Rectangle a, Rectangle b) {
-    return !(
-        a.min.x > b.max.x || a.min.y > b.max.y || a.max.x < b.min.x || a.max.y < b.min.y);
+    return !(a.mMin.x > b.mMax.x || a.mMin.y > b.mMax.y || a.mMax.x < b.mMin.x || a.mMax.y < b.mMin.y);
   }
 
   /**
@@ -209,7 +208,7 @@ public class Rectangle {
    * @return true or false depending on if b is contained by a or not
    */
   public static boolean contains(Rectangle a, Rectangle b) {
-    return b.min.x > a.min.x && b.max.x < a.max.x && b.min.y > a.min.y && b.max.y < a.max.y;
+    return b.mMin.x > a.mMin.x && b.mMax.x < a.mMax.x && b.mMin.y > a.mMin.y && b.mMax.y < a.mMax.y;
   }
 
   /**
@@ -220,6 +219,6 @@ public class Rectangle {
    * @return true or false depending on if p is inside a or not
    */
   public static boolean contains(Rectangle a, Vector2 p) {
-    return ExtraMath.inRange(p.x, a.min.x, a.max.x) && ExtraMath.inRange(p.y, a.min.y, a.max.y);
+    return ExtraMath.inRange(p.x, a.mMin.x, a.mMax.x) && ExtraMath.inRange(p.y, a.mMin.y, a.mMax.y);
   }
 }

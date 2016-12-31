@@ -12,17 +12,17 @@ import math.Collisions;
 import math.Rectangle;
 
 public class MovementConstraint implements ILogicComponent {
-  private final Entity owner;
-  private final Rectangle constraints;
+  private final Entity mOwner;
+  private final Rectangle mConstraints;
 
   public MovementConstraint(Entity owner, Rectangle constraints) {
-    this.owner = owner;
-    this.constraints = constraints;
+    mOwner = owner;
+    mConstraints = constraints;
   }
 
   @Override
   public void update(GameTime time) {
-    Collisions.blockFromExiting(owner.body, constraints);
+    Collisions.blockFromExiting(mOwner.getBody(), mConstraints);
   }
 
   @Override
@@ -32,6 +32,6 @@ public class MovementConstraint implements ILogicComponent {
 
   @Override
   public String toString() {
-    return "MovementConstraint - rect: " + constraints;
+    return "MovementConstraint - rect: " + mConstraints;
   }
 }

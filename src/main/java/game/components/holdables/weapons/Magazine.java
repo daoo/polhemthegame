@@ -8,8 +8,8 @@ package game.components.holdables.weapons;
  * Simple class for managing a gun's magazine.
  */
 public class Magazine implements IMagazine {
-  private final int size;
-  private int ammo;
+  private final int mSize;
+  private int mAmmo;
 
   /**
    * Create a new magazine with space for a certain amount of bullets.
@@ -19,32 +19,32 @@ public class Magazine implements IMagazine {
   public Magazine(int size) {
     assert size > 0;
 
-    this.size = size;
-    ammo = size;
+    mSize = size;
+    mAmmo = size;
   }
 
   @Override
   public boolean isEmpty() {
-    return ammo == 0;
+    return mAmmo == 0;
   }
 
   @Override
   public boolean takeOne() {
-    if (ammo <= 0) {
+    if (mAmmo <= 0) {
       return false;
     }
 
-    --ammo;
+    --mAmmo;
     return true;
   }
 
   @Override
   public void reload() {
-    ammo = size;
+    mAmmo = mSize;
   }
 
   @Override
   public float getFractionFilled() {
-    return ammo / (float) size;
+    return mAmmo / (float) mSize;
   }
 }

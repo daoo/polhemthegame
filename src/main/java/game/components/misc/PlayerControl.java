@@ -19,42 +19,42 @@ import math.Vector2;
 import util.Key;
 
 public class PlayerControl implements ILogicComponent {
-  private final IEntity owner;
-  private final Movement movement;
-  private final Inventory inventory;
-  private final Shop shop;
-  private final Hand hand;
+  private final IEntity mOwner;
+  private final Movement mMovement;
+  private final Inventory mInventory;
+  private final Shop mShop;
+  private final Hand mHand;
 
-  private final Binds binds;
+  private final Binds mBinds;
 
-  private final Key keyPreviousWeapon;
-  private final Key keyNextWeapon;
-  private final Key keyBuy;
-  private final Key keyHoldable;
+  private final Key mKeyPreviousWeapon;
+  private final Key mKeyNextWeapon;
+  private final Key mKeyBuy;
+  private final Key mKeyHoldable;
 
-  private final float speed;
+  private final float mSpeed;
 
-  private int lastX;
-  private int lastY;
+  private int mLastX;
+  private int mLastY;
 
   public PlayerControl(
       IEntity owner, Movement movement, Inventory inventory, Shop shop, Hand hand, float speed,
       Binds binds) {
-    this.owner = owner;
-    this.movement = movement;
-    this.inventory = inventory;
-    this.hand = hand;
-    this.shop = shop;
-    this.speed = speed;
-    this.binds = binds;
+    mOwner = owner;
+    mMovement = movement;
+    mInventory = inventory;
+    mHand = hand;
+    mShop = shop;
+    mSpeed = speed;
+    mBinds = binds;
 
-    this.lastX = 0;
-    this.lastY = 0;
+    mLastX = 0;
+    mLastY = 0;
 
-    keyPreviousWeapon = new Key(binds.previousWeapon);
-    keyNextWeapon = new Key(binds.nextWeapon);
-    keyBuy = new Key(binds.buy);
-    keyHoldable = new Key(binds.fire);
+    mKeyPreviousWeapon = new Key(binds.previousWeapon);
+    mKeyNextWeapon = new Key(binds.nextWeapon);
+    mKeyBuy = new Key(binds.buy);
+    mKeyHoldable = new Key(binds.fire);
   }
 
   @Override
@@ -62,65 +62,65 @@ public class PlayerControl implements ILogicComponent {
     int x = 0;
     int y = 0;
 
-    if (Keyboard.isKeyDown(binds.walkLeft)) {
+    if (Keyboard.isKeyDown(mBinds.walkLeft)) {
       x -= 1;
     }
-    if (Keyboard.isKeyDown(binds.walkRight)) {
+    if (Keyboard.isKeyDown(mBinds.walkRight)) {
       x += 1;
     }
-    if (Keyboard.isKeyDown(binds.walkUp)) {
+    if (Keyboard.isKeyDown(mBinds.walkUp)) {
       y -= 1;
     }
-    if (Keyboard.isKeyDown(binds.walkDown)) {
+    if (Keyboard.isKeyDown(mBinds.walkDown)) {
       y += 1;
     }
 
-    if (x != lastX || y != lastY) {
+    if (x != mLastX || y != mLastY) {
       if (y == 0 && x == 0) {
-        owner.sendMessage(Message.STOP_ANIMATION, null);
+        mOwner.sendMessage(Message.STOP_ANIMATION, null);
       } else {
-        owner.sendMessage(Message.START_ANIMATION, null);
+        mOwner.sendMessage(Message.START_ANIMATION, null);
       }
 
-      lastX = x;
-      lastY = y;
+      mLastX = x;
+      mLastY = y;
     }
 
-    movement.setVelocity(new Vector2(x * speed, y * speed));
+    mMovement.setVelocity(new Vector2(x * mSpeed, y * mSpeed));
 
     // Shooting
-    keyHoldable.update();
-    if (keyHoldable.wasPressed()) {
-      owner.sendMessage(Message.START_HOLDABLE, null);
-    } else if (keyHoldable.wasReleased()) {
-      owner.sendMessage(Message.STOP_HOLDABLE, null);
+    mKeyHoldable.update();
+    if (mKeyHoldable.wasPressed()) {
+      mOwner.sendMessage(Message.START_HOLDABLE, null);
+    } else if (mKeyHoldable.wasReleased()) {
+      mOwner.sendMessage(Message.STOP_HOLDABLE, null);
     }
 
     // Weapon changing
-    keyNextWeapon.update();
-    keyPreviousWeapon.update();
-    if (keyNextWeapon.wasPressed()) {
-      hand.grab(inventory.nextWeapon());
-    } else if (keyPreviousWeapon.wasPressed()) {
-      hand.grab(inventory.previousWeapon());
-    } else if (Keyboard.isKeyDown(binds.weapon0)) {
-      hand.grab(inventory.getWeapon(0));
-    } else if (Keyboard.isKeyDown(binds.weapon1)) {
-      hand.grab(inventory.getWeapon(1));
-    } else if (Keyboard.isKeyDown(binds.weapon2)) {
-      hand.grab(inventory.getWeapon(2));
-    } else if (Keyboard.isKeyDown(binds.weapon3)) {
-      hand.grab(inventory.getWeapon(3));
-    } else if (Keyboard.isKeyDown(binds.weapon4)) {
-      hand.grab(inventory.getWeapon(4));
+    mKeyNextWeapon.update();
+    mKeyPreviousWeapon.update();
+    if (mKeyNextWeapon.wasPressed()) {
+      mHand.grab(mInventory.nextWeapon());
+    } else if (mKeyPreviousWeapon.wasPressed()) {
+      mHand.grab(mInventory.previousWeapon());
+    } else if (Keyboard.isKeyDown(mBinds.weapon0)) {
+      mHand.grab(mInventory.getWeapon(0));
+    } else if (Keyboard.isKeyDown(mBinds.weapon1)) {
+      mHand.grab(mInventory.getWeapon(1));
+    } else if (Keyboard.isKeyDown(mBinds.weapon2)) {
+      mHand.grab(mInventory.getWeapon(2));
+    } else if (Keyboard.isKeyDown(mBinds.weapon3)) {
+      mHand.grab(mInventory.getWeapon(3));
+    } else if (Keyboard.isKeyDown(mBinds.weapon4)) {
+      mHand.grab(mInventory.getWeapon(4));
     }
 
-    keyBuy.update();
-    if (keyBuy.wasPressed()) {
-      if (shop.canAffordNext(inventory.getWallet())) {
-        Weapon weapon = shop.buyNext(inventory.getWallet());
+    mKeyBuy.update();
+    if (mKeyBuy.wasPressed()) {
+      if (mShop.canAffordNext(mInventory.getWallet())) {
+        Weapon weapon = mShop.buyNext(mInventory.getWallet());
         if (weapon != null) {
-          inventory.addWeapon(weapon);
+          mInventory.addWeapon(weapon);
         }
       }
     }

@@ -11,6 +11,7 @@ import game.ui.hud.infobar.InfoBar;
 /**
  * Simple class for keeping track of components in the factories.
  */
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Unit {
   public final Entity entity;
   public final Movement movement;

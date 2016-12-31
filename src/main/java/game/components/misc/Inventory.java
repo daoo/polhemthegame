@@ -16,65 +16,65 @@ import math.ExtraMath;
 
 public class Inventory implements ILogicComponent {
   // Money
-  private final Wallet wallet;
+  private final Wallet mWallet;
 
   // Statistics
-  private float damageDealt;
-  private int kills;
+  private float mDamageDealt;
+  private int mKills;
 
   // Weapons
-  private final ArrayList<Weapon> weapons;
-  private int currentWeapon;
+  private final ArrayList<Weapon> mWeapons;
+  private int mCurrentWeapon;
 
   public Inventory(int money) {
-    wallet = new Wallet(money);
+    mWallet = new Wallet(money);
 
-    damageDealt = 0;
-    kills = 0;
+    mDamageDealt = 0;
+    mKills = 0;
 
-    weapons = new ArrayList<>();
-    currentWeapon = 0;
+    mWeapons = new ArrayList<>();
+    mCurrentWeapon = 0;
   }
 
   public void addWeapon(Weapon w) {
     assert w != null;
 
-    weapons.add(w);
+    mWeapons.add(w);
   }
 
   public int getKills() {
-    return kills;
+    return mKills;
   }
 
   public Wallet getWallet() {
-    return wallet;
+    return mWallet;
   }
 
   public Weapon nextWeapon() {
-    currentWeapon = ExtraMath.clamp(0, weapons.size() - 1, currentWeapon + 1);
-    return weapons.get(currentWeapon);
+    mCurrentWeapon = ExtraMath.clamp(0, mWeapons.size() - 1, mCurrentWeapon + 1);
+    return mWeapons.get(mCurrentWeapon);
   }
 
   public Weapon previousWeapon() {
-    currentWeapon = ExtraMath.clamp(0, weapons.size() - 1, currentWeapon - 1);
-    return weapons.get(currentWeapon);
+    mCurrentWeapon = ExtraMath.clamp(0, mWeapons.size() - 1, mCurrentWeapon - 1);
+    return mWeapons.get(mCurrentWeapon);
   }
 
   public Weapon getWeapon(int i) {
-    if (i >= 0 && i < weapons.size()) {
-      currentWeapon = i;
+    if (i >= 0 && i < mWeapons.size()) {
+      mCurrentWeapon = i;
     }
 
-    return weapons.get(currentWeapon);
+    return mWeapons.get(mCurrentWeapon);
   }
 
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.DEALT_DAMAGE) {
       Damage dmg = (Damage) args;
-      damageDealt += dmg.ammount;
+      mDamageDealt += dmg.ammount;
     } else if (message == Message.KILLED_ENTITY) {
-      ++kills;
+      ++mKills;
     }
   }
 
@@ -86,7 +86,7 @@ public class Inventory implements ILogicComponent {
   @Override
   public String toString() {
     return String
-        .format("Inventory - %d money, %d weapons, %d kills, %f damageDealt", wallet.getMoney(),
-            weapons.size(), kills, damageDealt);
+        .format("Inventory - %d money, %d weapons, %d kills, %f damageDealt", mWallet.getMoney(),
+            mWeapons.size(), mKills, mDamageDealt);
   }
 }

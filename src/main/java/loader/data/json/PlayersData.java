@@ -10,6 +10,7 @@ import java.util.Map;
 import loader.IData;
 import loader.data.json.types.PlayerData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class PlayersData implements IData {
   private Map<String, PlayerData> players;
 

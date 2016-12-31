@@ -10,11 +10,11 @@ import math.ExtraMath;
  * A simple timer useful for testing if a certain amount of time has passed.
  */
 public class Timer {
-  private final long start;
-  private final long end;
-  private final int length;
+  private final long mStart;
+  private final long mEnd;
+  private final int mLength;
 
-  private float current;
+  private float mCurrent;
 
   /**
    * Create a new timer.
@@ -25,9 +25,9 @@ public class Timer {
   public Timer(long start, int length) {
     assert length > 0;
 
-    this.start = start;
-    this.end = start + length;
-    this.length = length;
+    mStart = start;
+    mEnd = start + length;
+    mLength = length;
   }
 
   /**
@@ -36,7 +36,7 @@ public class Timer {
    * @param elapsed the elapsed game time
    */
   public void update(long elapsed) {
-    current = elapsed;
+    mCurrent = elapsed;
   }
 
   /**
@@ -45,7 +45,7 @@ public class Timer {
    * @return true or false
    */
   public boolean isFinished() {
-    return current >= end;
+    return mCurrent >= mEnd;
   }
 
   /**
@@ -58,6 +58,6 @@ public class Timer {
       return 1;
     }
 
-    return ExtraMath.clamp(0, 1, (current - start) / length);
+    return ExtraMath.clamp(0, 1, (mCurrent - mStart) / mLength);
   }
 }

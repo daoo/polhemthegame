@@ -10,6 +10,7 @@ import java.util.Map;
 import loader.IData;
 import loader.data.json.types.CreepData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class CreepsData implements IData {
   private Map<String, CreepData> creeps;
 

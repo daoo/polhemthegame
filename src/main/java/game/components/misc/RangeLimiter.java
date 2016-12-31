@@ -12,32 +12,32 @@ import game.types.TimePos;
 import math.Vector2;
 
 public class RangeLimiter implements ILogicComponent {
-  private final Entity owner;
+  private final Entity mOwner;
 
-  private TimePos start;
+  private TimePos mStart;
 
-  private final int duration;
-  private final int range;
+  private final int mDuration;
+  private final int mRange;
 
   public RangeLimiter(Entity owner, int duration, int range) {
-    this.owner = owner;
+    mOwner = owner;
 
-    this.duration = duration;
-    this.range = range;
+    mDuration = duration;
+    mRange = range;
   }
 
   @Override
   public void update(GameTime time) {
-    if (time.elapsedMilli - start.time > duration ||
-        Vector2.distance(owner.body.getMin(), start.pos) > range) {
-      owner.sendMessage(Message.KILL, null);
+    if (time.elapsedMilli - mStart.time > mDuration ||
+        Vector2.distance(mOwner.getBody().getMin(), mStart.pos) > mRange) {
+      mOwner.sendMessage(Message.KILL, null);
     }
   }
 
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.START_AT) {
-      start = (TimePos) args;
+      mStart = (TimePos) args;
     }
   }
 }

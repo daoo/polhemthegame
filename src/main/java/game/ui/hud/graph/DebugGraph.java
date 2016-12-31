@@ -22,56 +22,56 @@ public class DebugGraph {
   private static final Color BLUE = new Color(0, 0, 255, 200);
   private static final Color GREEN = new Color(0, 255, 0, 200);
 
-  private final int width;
-  private final int height;
+  private final int mWidth;
+  private final int mHeight;
 
-  private final Measure updateMeasure;
-  private final Measure renderMeasure;
-  private final CircularFloatArray updateData;
-  private final CircularFloatArray renderData;
+  private final Measure mUpdateMeasure;
+  private final Measure mRenderMeasure;
+  private final CircularFloatArray mUpdateData;
+  private final CircularFloatArray mRenderData;
 
   public DebugGraph(int width, int height) {
-    this.width = width;
-    this.height = height;
+    mWidth = width;
+    mHeight = height;
 
-    updateData = new CircularFloatArray(width, 0);
-    renderData = new CircularFloatArray(width, 0);
+    mUpdateData = new CircularFloatArray(width, 0);
+    mRenderData = new CircularFloatArray(width, 0);
 
-    updateMeasure = new Measure(MEASURE_TIME_DELTA);
-    renderMeasure = new Measure(MEASURE_TIME_DELTA);
+    mUpdateMeasure = new Measure(MEASURE_TIME_DELTA);
+    mRenderMeasure = new Measure(MEASURE_TIME_DELTA);
   }
 
   public void render(Graphics g) {
     g.setColor(BLUE);
-    drawData(renderData, g);
+    drawData(mRenderData, g);
     g.setColor(GREEN);
-    drawData(updateData, g);
+    drawData(mUpdateData, g);
     g.setColor(Color.white);
-    g.drawRect(0, 0, width, height);
+    g.drawRect(0, 0, mWidth, mHeight);
   }
 
   public void startRenderMeasure() {
-    renderMeasure.startMeasure();
+    mRenderMeasure.startMeasure();
   }
 
   public void stopRenderMeasure() {
-    renderMeasure.stopMeasure();
-    if (renderMeasure.isFinished()) {
-      renderData.add((float) (renderMeasure.getAverage() / (double) NANO_PER_MILLI));
-      renderMeasure.reset();
+    mRenderMeasure.stopMeasure();
+    if (mRenderMeasure.isFinished()) {
+      mRenderData.add((float) (mRenderMeasure.getAverage() / (double) NANO_PER_MILLI));
+      mRenderMeasure.reset();
     }
   }
 
   public void startUpdateMeasure() {
-    updateMeasure.startMeasure();
+    mUpdateMeasure.startMeasure();
   }
 
   public void stopUpdateMeasure() {
-    updateMeasure.stopMeasure();
+    mUpdateMeasure.stopMeasure();
 
-    if (updateMeasure.isFinished()) {
-      updateData.add((float) (updateMeasure.getAverage() / (double) NANO_PER_MILLI));
-      updateMeasure.reset();
+    if (mUpdateMeasure.isFinished()) {
+      mUpdateData.add((float) (mUpdateMeasure.getAverage() / (double) NANO_PER_MILLI));
+      mUpdateMeasure.reset();
     }
   }
 
@@ -81,9 +81,9 @@ public class DebugGraph {
     while (it.hasNext()) {
       double data = it.next();
       double dataHeight = data / MILLISECONDS_PER_FRAME;
-      int pixelHeight = (int) (dataHeight * height);
+      int pixelHeight = (int) (dataHeight * mHeight);
 
-      g.drawLine(px, height - pixelHeight, px, height);
+      g.drawLine(px, mHeight - pixelHeight, px, mHeight);
 
       ++px;
     }

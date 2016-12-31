@@ -6,6 +6,7 @@ package game.types;
 
 import game.entities.IEntity;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Damage {
   public final float ammount;
   public final IEntity source;

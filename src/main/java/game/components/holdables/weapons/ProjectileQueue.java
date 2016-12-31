@@ -9,20 +9,20 @@ package game.components.holdables.weapons;
  * spawned.
  */
 public class ProjectileQueue {
-  private int count;
+  private int mCount;
 
   /**
    * Create a new tracker starting from zero.
    */
   public ProjectileQueue() {
-    count = 0;
+    mCount = 0;
   }
 
   /**
    * Queue up one projectile.
    */
   public void queueUp() {
-    ++count;
+    ++mCount;
   }
 
   /**
@@ -31,13 +31,13 @@ public class ProjectileQueue {
    * @return an int greater than or equal to zero
    */
   public int getWaiting() {
-    return count;
+    return mCount;
   }
 
   /**
    * Reset to zero projectiles.
    */
   public void clear() {
-    count = 0;
+    mCount = 0;
   }
 }

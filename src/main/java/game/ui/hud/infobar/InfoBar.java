@@ -17,12 +17,12 @@ import game.ui.IDynamicUIElement;
  * entity, e.g. remaining health or reload time for the active weapon.
  */
 public class InfoBar implements IDynamicUIElement {
-  private final Entity entity;
-  private final int barWidth;
-  private final int barHeight;
-  private final int offsetX;
-  private final int offsetY;
-  private final ArrayList<Bar> bars;
+  private final Entity mEntity;
+  private final int mBarWidth;
+  private final int mBarHeight;
+  private final int mOffsetX;
+  private final int mOffsetY;
+  private final ArrayList<Bar> mBars;
 
   /**
    * Creates a new InfoBar.
@@ -34,14 +34,14 @@ public class InfoBar implements IDynamicUIElement {
    * @param offsetY translation on the y axis before rendering
    */
   public InfoBar(Entity entity, int barWidth, int barHeight, int offsetX, int offsetY) {
-    this.entity = entity;
-    this.offsetX = offsetX;
-    this.offsetY = offsetY;
+    mEntity = entity;
+    mOffsetX = offsetX;
+    mOffsetY = offsetY;
 
-    this.barWidth = barWidth;
-    this.barHeight = barHeight;
+    mBarWidth = barWidth;
+    mBarHeight = barHeight;
 
-    bars = new ArrayList<>();
+    mBars = new ArrayList<>();
   }
 
   /**
@@ -52,7 +52,7 @@ public class InfoBar implements IDynamicUIElement {
   public void add(Bar bar) {
     assert bar != null;
 
-    bars.add(bar);
+    mBars.add(bar);
   }
 
   /**
@@ -60,7 +60,7 @@ public class InfoBar implements IDynamicUIElement {
    */
   @Override
   public void update() {
-    for (Bar b : bars) {
+    for (Bar b : mBars) {
       b.update();
     }
   }
@@ -73,12 +73,12 @@ public class InfoBar implements IDynamicUIElement {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(entity.body.getX1(), entity.body.getY1());
+    g.translate(mEntity.getBody().getX1(), mEntity.getBody().getY1());
 
-    int y = offsetY;
-    for (Bar b : bars) {
-      b.render(g, offsetX, y, barWidth, barHeight);
-      y += barHeight;
+    int y = mOffsetY;
+    for (Bar b : mBars) {
+      b.render(g, mOffsetX, y, mBarWidth, mBarHeight);
+      y += mBarHeight;
     }
 
     g.popTransform();
@@ -92,6 +92,6 @@ public class InfoBar implements IDynamicUIElement {
    */
   @Override
   public boolean isActive() {
-    return entity.isActive();
+    return mEntity.isActive();
   }
 }

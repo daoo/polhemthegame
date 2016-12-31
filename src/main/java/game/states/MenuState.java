@@ -28,15 +28,15 @@ public class MenuState implements IState {
   private static final String BUTTON_COOP = "coop";
   private static final String BUTTON_EXIT = "exit";
 
-  private final Image background;
-  private final Menu menu;
+  private final Image mBackground;
+  private final Menu mMenu;
 
-  private final Key keyUp;
-  private final Key keyDown;
-  private final Key keyEnter;
+  private final Key mKeyUp;
+  private final Key mKeyDown;
+  private final Key mKeyEnter;
 
   public MenuState(final StateManager manager) throws ParserException, IOException {
-    background = CacheTool.getImage(Locator.getCache(), MENU_BACKGROUND_FILE);
+    mBackground = CacheTool.getImage(Locator.getCache(), MENU_BACKGROUND_FILE);
 
     ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
@@ -46,11 +46,11 @@ public class MenuState implements IState {
     tmp.add(new MenuItem(BUTTON_COOP, 60, 480, enterTwoPlayer));
     tmp.add(new MenuItem(BUTTON_EXIT, 60, 580, manager::quit));
 
-    menu = new Menu(tmp);
+    mMenu = new Menu(tmp);
 
-    keyUp = new Key(Keyboard.KEY_UP);
-    keyDown = new Key(Keyboard.KEY_DOWN);
-    keyEnter = new Key(Keyboard.KEY_RETURN);
+    mKeyUp = new Key(Keyboard.KEY_UP);
+    mKeyDown = new Key(Keyboard.KEY_DOWN);
+    mKeyEnter = new Key(Keyboard.KEY_RETURN);
   }
 
   @Override
@@ -65,26 +65,26 @@ public class MenuState implements IState {
 
   @Override
   public void update(StateManager stateGame, int delta) {
-    keyUp.update();
-    if (keyUp.wasPressed()) {
-      menu.up();
+    mKeyUp.update();
+    if (mKeyUp.wasPressed()) {
+      mMenu.up();
     }
 
-    keyDown.update();
-    if (keyDown.wasPressed()) {
-      menu.down();
+    mKeyDown.update();
+    if (mKeyDown.wasPressed()) {
+      mMenu.down();
     }
 
-    keyEnter.update();
-    if (keyEnter.wasPressed()) {
-      menu.click();
+    mKeyEnter.update();
+    if (mKeyEnter.wasPressed()) {
+      mMenu.click();
     }
   }
 
   @Override
   public void render(Graphics g) throws SlickException {
-    g.drawImage(background, 0, 0);
-    menu.render(g);
+    g.drawImage(mBackground, 0, 0);
+    mMenu.render(g);
   }
 
   @Override

@@ -11,20 +11,20 @@ import game.types.Message;
 import math.Vector2;
 
 public class Movement implements ILogicComponent {
-  private final Entity owner;
-  private Vector2 vel;
+  private final Entity mOwner;
+  private Vector2 mVel;
 
   public Movement(Entity owner, float dx, float dy) {
-    this.owner = owner;
-    vel = new Vector2(dx, dy);
+    mOwner = owner;
+    mVel = new Vector2(dx, dy);
   }
 
   public void addVelocity(Vector2 v) {
-    vel = Vector2.add(vel, v);
+    mVel = Vector2.add(mVel, v);
   }
 
   public Vector2 getVelocity() {
-    return vel;
+    return mVel;
   }
 
   @Override
@@ -33,17 +33,17 @@ public class Movement implements ILogicComponent {
   }
 
   public void setVelocity(Vector2 v) {
-    vel = v;
+    mVel = v;
   }
 
   @Override
   public void update(GameTime time) {
-    Vector2 tmp = Vector2.multiply(vel, time.frame);
-    owner.body.addPosition(tmp);
+    Vector2 tmp = Vector2.multiply(mVel, time.frame);
+    mOwner.getBody().addPosition(tmp);
   }
 
   @Override
   public String toString() {
-    return "Movement - " + vel;
+    return "Movement - " + mVel;
   }
 }

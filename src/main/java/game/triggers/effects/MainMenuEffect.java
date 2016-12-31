@@ -10,15 +10,15 @@ import game.triggers.IEffect;
 import game.types.GameTime;
 
 public class MainMenuEffect implements IEffect {
-  private final StateManager stateManager;
+  private final StateManager mStateManager;
 
   public MainMenuEffect(StateManager stateManager) {
     assert stateManager != null;
-    this.stateManager = stateManager;
+    mStateManager = stateManager;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    stateManager.enterMainMenu();
+    mStateManager.enterMainMenu();
   }
 }

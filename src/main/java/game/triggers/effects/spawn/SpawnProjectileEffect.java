@@ -13,20 +13,20 @@ import game.types.TimePos;
 import math.Vector2;
 
 public class SpawnProjectileEffect implements IEffect {
-  private final Entity projectile;
-  private final Vector2 start;
+  private final Entity mProjectile;
+  private final Vector2 mStart;
 
   public SpawnProjectileEffect(Entity projectile, Vector2 start) {
     assert projectile != null;
 
-    this.projectile = projectile;
-    this.start = start;
+    mProjectile = projectile;
+    mStart = start;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    TimePos tp = new TimePos(time.elapsedMilli, start);
-    projectile.sendMessage(Message.START_AT, tp);
-    world.addProjectile(projectile);
+    TimePos tp = new TimePos(time.elapsedMilli, mStart);
+    mProjectile.sendMessage(Message.START_AT, tp);
+    world.addProjectile(mProjectile);
   }
 }

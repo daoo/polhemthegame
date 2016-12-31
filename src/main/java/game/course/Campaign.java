@@ -14,24 +14,24 @@ import loader.data.json.LevelData;
 import loader.parser.ParserException;
 
 public class Campaign {
-  private LevelData currentLevel;
-  private final Iterator<String> iterator;
+  private LevelData mCurrentLevel;
+  private final Iterator<String> mIterator;
 
   public Campaign(CampaignData data) {
-    iterator = data.levels.iterator();
+    mIterator = data.levels.iterator();
   }
 
   public void nextLevel() throws ParserException, IOException {
-    if (iterator.hasNext()) {
-      currentLevel = CacheTool.getLevel(Locator.getCache(), iterator.next());
+    if (mIterator.hasNext()) {
+      mCurrentLevel = CacheTool.getLevel(Locator.getCache(), mIterator.next());
     }
   }
 
   public LevelData getCurrentLevel() {
-    return currentLevel;
+    return mCurrentLevel;
   }
 
   public boolean hasMoreLevels() {
-    return iterator.hasNext();
+    return mIterator.hasNext();
   }
 }

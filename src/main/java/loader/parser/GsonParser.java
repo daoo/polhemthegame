@@ -14,18 +14,18 @@ import java.lang.reflect.Type;
 import loader.IData;
 
 public class GsonParser implements IParser {
-  private final Gson gson;
-  private final Type typeOf;
+  private final Gson mGson;
+  private final Type mTypeOf;
 
   public GsonParser(Type typeOf) {
-    this.gson = new Gson();
-    this.typeOf = typeOf;
+    mGson = new Gson();
+    mTypeOf = typeOf;
   }
 
   @Override
   public IData parse(InputStream br) throws ParserException {
     try {
-      return gson.fromJson(new InputStreamReader(br), typeOf);
+      return mGson.fromJson(new InputStreamReader(br), mTypeOf);
     } catch (JsonParseException e) {
       throw new ParserException(e);
     }

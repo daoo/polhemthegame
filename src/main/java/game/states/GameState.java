@@ -31,54 +31,54 @@ public class GameState implements IState {
       "big:Game Paused", "Press Escape to unpause or Backspace to go to the Main Menu"};
   private static final int PAUSE_TEXT_SPACING = 10;
 
-  private final UI ui;
-  private final LevelManager levels;
-  private final Image imgPauseText;
+  private final UI mUi;
+  private final LevelManager mLevels;
+  private final Image mImgPauseText;
 
-  private final Key keyBackspace;
-  private final Key keyEscape;
+  private final Key mKeyBackspace;
+  private final Key mKeyEscape;
 
-  private long elapsed;
-  private boolean paused;
+  private long mElapsed;
+  private boolean mPaused;
 
-  private final int arenaX;
-  private final int arenaY;
-  private final int windowWidth;
-  private final int windowHeight;
+  private final int mArenaX;
+  private final int mArenaY;
+  private final int mWindowWidth;
+  private final int mWindowHeight;
 
   public GameState(
       StateManager stateManager, CampaignData data, boolean twoPlayer, int windowWidth,
       int windowHeight) throws ParserException, IOException, SlickException {
-    this.windowWidth = windowWidth;
-    this.windowHeight = windowHeight;
+    mWindowWidth = windowWidth;
+    mWindowHeight = windowHeight;
 
-    keyBackspace = new Key(Keyboard.KEY_BACK);
-    keyEscape = new Key(Keyboard.KEY_ESCAPE);
+    mKeyBackspace = new Key(Keyboard.KEY_BACK);
+    mKeyEscape = new Key(Keyboard.KEY_ESCAPE);
 
-    arenaX = 0;
-    arenaY = PlayerUI.HEIGHT;
+    mArenaX = 0;
+    mArenaY = PlayerUI.HEIGHT;
 
-    ui = new UI(windowWidth, windowHeight);
-    Locator.registerUI(ui);
-    ui.addStatic(new BlackBox(0, 0, windowWidth, PlayerUI.HEIGHT));
-    ui.addStatic(new BlackBox(0, windowHeight - PlayerUI.HEIGHT, windowWidth, PlayerUI.HEIGHT));
+    mUi = new UI(windowWidth, windowHeight);
+    Locator.registerUI(mUi);
+    mUi.addStatic(new BlackBox(0, 0, windowWidth, PlayerUI.HEIGHT));
+    mUi.addStatic(new BlackBox(0, windowHeight - PlayerUI.HEIGHT, windowWidth, PlayerUI.HEIGHT));
 
     int arenaWidth = windowWidth;
     int arenaHeight = windowHeight - PlayerUI.HEIGHT * 2;
-    levels = new LevelManager(stateManager, twoPlayer, data, windowWidth, arenaWidth, arenaHeight);
+    mLevels = new LevelManager(stateManager, twoPlayer, data, windowWidth, arenaWidth, arenaHeight);
 
     HashMap<String, UnicodeFont> fonts = new HashMap<>();
     fonts.put("big", FontHelper.getFont("Verdana", 30));
     fonts.put("default", FontHelper.getFont("Verdana", 20));
-    imgPauseText = FontHelper.renderString(fonts, PAUSE_TEXT_SPACING, PAUSE_TEXT);
+    mImgPauseText = FontHelper.renderString(fonts, PAUSE_TEXT_SPACING, PAUSE_TEXT);
 
-    elapsed = 0;
-    paused = false;
+    mElapsed = 0;
+    mPaused = false;
   }
 
   @Override
   public void start(StateManager stateManager) {
-    levels.nextLevel();
+    mLevels.nextLevel();
   }
 
   @Override
@@ -94,25 +94,25 @@ public class GameState implements IState {
    */
   @Override
   public void update(StateManager stateManager, int dt) {
-    if (paused) {
-      keyBackspace.update();
-      keyEscape.update();
-      if (keyEscape.wasPressed()) {
-        paused = false;
-      } else if (keyBackspace.wasPressed()) {
+    if (mPaused) {
+      mKeyBackspace.update();
+      mKeyEscape.update();
+      if (mKeyEscape.wasPressed()) {
+        mPaused = false;
+      } else if (mKeyBackspace.wasPressed()) {
         stateManager.enterMainMenu();
       }
     } else {
-      keyEscape.update();
-      if (keyEscape.wasPressed()) {
-        paused = true;
+      mKeyEscape.update();
+      if (mKeyEscape.wasPressed()) {
+        mPaused = true;
       } else {
-        elapsed += dt;
-        levels.update(new GameTime(dt / 1000.0f, dt, elapsed));
-        ui.update();
+        mElapsed += dt;
+        mLevels.update(new GameTime(dt / 1000.0f, dt, mElapsed));
+        mUi.update();
 
-        if (levels.isFinished()) {
-          if (levels.isCredits()) {
+        if (mLevels.isFinished()) {
+          if (mLevels.isCredits()) {
             stateManager.enterCredits();
           } else {
             stateManager.enterMainMenu();
@@ -125,32 +125,32 @@ public class GameState implements IState {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(arenaX, arenaY);
+    g.translate(mArenaX, mArenaY);
 
-    levels.render(g);
-    ui.renderDynamics(g);
+    mLevels.render(g);
+    mUi.renderDynamics(g);
 
     g.popTransform();
 
-    ui.renderStatics(g);
+    mUi.renderStatics(g);
 
-    if (paused) {
+    if (mPaused) {
       g.setColor(new Color(0, 0, 0, 100));
-      g.fillRect(0, 0, windowWidth, windowHeight);
-      g.drawImage(imgPauseText, windowWidth / 2.0f - imgPauseText.getWidth() / 2.0f,
-          windowHeight / 2.0f - imgPauseText.getHeight() / 2.0f);
+      g.fillRect(0, 0, mWindowWidth, mWindowHeight);
+      g.drawImage(mImgPauseText, mWindowWidth / 2.0f - mImgPauseText.getWidth() / 2.0f,
+          mWindowHeight / 2.0f - mImgPauseText.getHeight() / 2.0f);
     }
   }
 
   @Override
   public String debugString() {
-    return "GameState, time " + elapsed;
+    return "GameState, time " + mElapsed;
   }
 
   @Override
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
-    parent.nodes.add(levels.debugTree());
+    parent.nodes.add(mLevels.debugTree());
 
     return parent;
   }

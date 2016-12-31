@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import loader.IData;
 import loader.data.json.types.CreepSpawnData;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class LevelData implements IData {
   public String level;
   public String loading;

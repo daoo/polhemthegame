@@ -17,91 +17,91 @@ import util.Timer;
  * State machine for a single-mode weapon.
  */
 public class SingleMachine implements IWeaponMachine {
-  private final int reloadLength;
-  private final int cooldownLength;
-  private final IMagazine magazine;
-  private final ProjectileQueue queue;
-  private final AnimatedSheet anim;
+  private final int mReloadLength;
+  private final int mCooldownLength;
+  private final IMagazine mMagazine;
+  private final ProjectileQueue mQueue;
+  private final AnimatedSheet mAnim;
 
-  private Timer timer;
+  private Timer mTimer;
 
-  private boolean fire;
-  private WeaponStates state;
+  private boolean mFire;
+  private WeaponStates mState;
 
   public SingleMachine(
       int reloadLength, int cooldownLength, IMagazine magazine, ProjectileQueue queue,
       AnimatedSheet anim) {
-    this.reloadLength = reloadLength;
-    this.cooldownLength = cooldownLength;
-    this.magazine = magazine;
-    this.queue = queue;
-    this.anim = anim;
+    mReloadLength = reloadLength;
+    mCooldownLength = cooldownLength;
+    mMagazine = magazine;
+    mQueue = queue;
+    mAnim = anim;
 
-    fire = false;
-    timer = null;
-    state = WeaponStates.IDLE;
+    mFire = false;
+    mTimer = null;
+    mState = WeaponStates.IDLE;
   }
 
   @Override
   public void update(GameTime time) {
-    switch (state) {
+    switch (mState) {
       case IDLE:
-        if (magazine.isEmpty()) {
-          timer = new Timer(time.elapsedMilli, reloadLength);
-          state = WeaponStates.RELOADING;
-        } else if (fire) {
-          state = WeaponStates.FIRE;
+        if (mMagazine.isEmpty()) {
+          mTimer = new Timer(time.elapsedMilli, mReloadLength);
+          mState = WeaponStates.RELOADING;
+        } else if (mFire) {
+          mState = WeaponStates.FIRE;
         }
         break;
       case RELOADING:
-        timer.update(time.elapsedMilli);
+        mTimer.update(time.elapsedMilli);
 
-        if (timer.isFinished()) {
-          magazine.reload();
+        if (mTimer.isFinished()) {
+          mMagazine.reload();
 
-          timer = null;
-          state = WeaponStates.IDLE;
+          mTimer = null;
+          mState = WeaponStates.IDLE;
         }
         break;
       case COOLDOWN:
-        timer.update(time.elapsedMilli);
+        mTimer.update(time.elapsedMilli);
 
-        if (timer.isFinished()) {
-          fire = false;
-          anim.setAnimator(new IdleAnimator());
+        if (mTimer.isFinished()) {
+          mFire = false;
+          mAnim.setAnimator(new IdleAnimator());
 
-          timer = null;
-          state = WeaponStates.IDLE;
+          mTimer = null;
+          mState = WeaponStates.IDLE;
         }
         break;
       case FIRE:
-        magazine.takeOne();
-        queue.queueUp();
+        mMagazine.takeOne();
+        mQueue.queueUp();
 
-        anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
+        mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), Tile.ZERO));
 
-        timer = new Timer(time.elapsedMilli, cooldownLength);
-        state = WeaponStates.COOLDOWN;
+        mTimer = new Timer(time.elapsedMilli, mCooldownLength);
+        mState = WeaponStates.COOLDOWN;
         break;
     }
   }
 
   @Override
   public void startFiring() {
-    fire = true;
+    mFire = true;
   }
 
   @Override
   public void stopFiring() {
-    fire = false;
+    mFire = false;
   }
 
   @Override
   public float getProgress() {
-    if (timer == null) {
-      return magazine.getFractionFilled();
+    if (mTimer == null) {
+      return mMagazine.getFractionFilled();
     }
 
-    return timer.getProgress();
+    return mTimer.getProgress();
   }
 }

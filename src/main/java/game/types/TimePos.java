@@ -6,6 +6,7 @@ package game.types;
 
 import math.Vector2;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class TimePos {
   public final long time;
   public final Vector2 pos;

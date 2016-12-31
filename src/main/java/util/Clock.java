@@ -10,8 +10,8 @@ package util;
  */
 public class Clock {
   // NOTE: All times are in milliseconds
-  private long next;
-  private final int targetFrameTime;
+  private long mNext;
+  private final int mTargetFrameTime;
 
   /**
    * Construct a new clock.
@@ -19,9 +19,8 @@ public class Clock {
    * @param targetFrameTime target frame time in milliseconds
    */
   public Clock(int targetFrameTime) {
-    next = 0;
-
-    this.targetFrameTime = targetFrameTime;
+    mNext = 0;
+    mTargetFrameTime = targetFrameTime;
   }
 
   /**
@@ -30,7 +29,7 @@ public class Clock {
    * @param elapsed the elapsed game time in milliseconds
    */
   public void sync(long elapsed) {
-    next = elapsed + targetFrameTime;
+    mNext = elapsed + mTargetFrameTime;
   }
 
   /**
@@ -40,6 +39,6 @@ public class Clock {
    * @return true or false if enough time has passed since last sync
    */
   public boolean needsSync(long elapsed) {
-    return targetFrameTime == 0 || elapsed > next;
+    return mTargetFrameTime == 0 || elapsed > mNext;
   }
 }

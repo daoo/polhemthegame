@@ -32,7 +32,7 @@ public class Launcher extends BasicGame {
 
   private static final boolean FULLSCREEN = false;
 
-  private StateManager stateGame;
+  private StateManager mStateGame;
 
   private Launcher() {
     super("PolhemTheGame");
@@ -79,21 +79,21 @@ public class Launcher extends BasicGame {
     container.setTargetFrameRate(MAX_FPS);
     container.setVSync(true);
 
-    stateGame = new StateManager(WIDTH, HEIGHT);
-    stateGame.enterMainMenu();
+    mStateGame = new StateManager(WIDTH, HEIGHT);
+    mStateGame.enterMainMenu();
   }
 
   @Override
   public void render(GameContainer container, Graphics g) throws SlickException {
-    stateGame.getCurrentState().render(g);
+    mStateGame.getCurrentState().render(g);
   }
 
   @Override
   public void update(GameContainer container, int delta) throws SlickException {
-    if (stateGame.shouldExit()) {
+    if (mStateGame.shouldExit()) {
       container.exit();
     } else {
-      stateGame.getCurrentState().update(stateGame, delta);
+      mStateGame.getCurrentState().update(mStateGame, delta);
     }
   }
 }

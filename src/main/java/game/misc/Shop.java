@@ -21,13 +21,13 @@ import loader.parser.ParserException;
 
 public class Shop {
   private static class ShopItem {
-    public boolean bought;
-    public final int price;
-    public final Image icon;
-    public final Image iconGray;
-    public final Weapon weapon;
+    private boolean bought;
+    private final int price;
+    private final Image icon;
+    private final Image iconGray;
+    private final Weapon weapon;
 
-    public ShopItem(int price, Image icon, Image iconGray, Weapon weapon) {
+    private ShopItem(int price, Image icon, Image iconGray, Weapon weapon) {
       this.bought = false;
       this.price = price;
       this.icon = icon;
@@ -38,7 +38,7 @@ public class Shop {
 
   private final ArrayList<ShopItem> items;
   private final Iterator<ShopItem> it;
-  private ShopItem next;
+  private ShopItem mNext;
 
   public Shop(ShopData shop, Orientation orientation, WeaponFactory factory) throws ParserException,
       IOException {
@@ -56,7 +56,7 @@ public class Shop {
     }
 
     it = items.iterator();
-    next = it.next();
+    mNext = it.next();
   }
 
   public void render(Graphics g, int spacing) {
@@ -68,19 +68,19 @@ public class Shop {
   }
 
   public boolean canAffordNext(Wallet wallet) {
-    return next != null && wallet.getMoney() >= next.price;
+    return mNext != null && wallet.getMoney() >= mNext.price;
   }
 
   public Weapon buyNext(Wallet wallet) {
-    if (next == null) {
+    if (mNext == null) {
       return null;
     }
 
-    if (wallet.takeMoney(next.price)) {
-      next.bought = true;
-      Weapon tmp = next.weapon;
+    if (wallet.takeMoney(mNext.price)) {
+      mNext.bought = true;
+      Weapon tmp = mNext.weapon;
 
-      next = it.hasNext() ? it.next() : null;
+      mNext = it.hasNext() ? it.next() : null;
 
       return tmp;
     }

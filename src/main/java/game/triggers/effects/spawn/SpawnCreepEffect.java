@@ -12,18 +12,18 @@ import game.types.GameTime;
 import game.types.Message;
 
 public class SpawnCreepEffect implements IEffect {
-  private final Unit unit;
+  private final Unit mUnit;
 
   public SpawnCreepEffect(Unit unit) {
     assert unit != null;
 
-    this.unit = unit;
+    mUnit = unit;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    unit.entity.sendMessage(Message.START_ANIMATION, null);
-    world.addUnit(unit.entity);
-    Locator.getUI().addDynamic(unit.infoBar);
+    mUnit.entity.sendMessage(Message.START_ANIMATION, null);
+    world.addUnit(mUnit.entity);
+    Locator.getUI().addDynamic(mUnit.infoBar);
   }
 }

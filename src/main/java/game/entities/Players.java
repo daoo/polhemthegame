@@ -27,7 +27,7 @@ public class Players {
     float y = rect.getY1() + dy;
 
     for (Entity p : players) {
-      p.body.setPosition(x, y - p.body.getHeight() / 2.0f);
+      p.getBody().setPosition(x, y - p.getBody().getHeight() / 2.0f);
 
       x += dx;
       y += dy;

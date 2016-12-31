@@ -14,24 +14,24 @@ import static org.junit.Assert.assertEquals;
 public class Vector2Test {
   private static final int RANGE = 100;
 
-  private final Random random = new Random();
-  private final Vector2 unitRight = new Vector2(1, 0);
+  private final Random mRandom = new Random();
+  private final Vector2 mUnitRight = new Vector2(1, 0);
 
   private Vector2 randomVector2() {
-    return new Vector2(random.nextInt(-RANGE, RANGE), random.nextInt(-RANGE, RANGE));
+    return new Vector2(mRandom.nextInt(-RANGE, RANGE), mRandom.nextInt(-RANGE, RANGE));
   }
 
   @Test
   public final void testMagnitude() {
-    assertEquals(1, unitRight.magnitude(), 0.1f);
+    assertEquals(1, mUnitRight.magnitude(), 0.1f);
   }
 
   @Test
   public final void testMagnitudeSquared() {
-    assertEquals(1, unitRight.magnitudeSquared(), 0.1f);
+    assertEquals(1, mUnitRight.magnitudeSquared(), 0.1f);
 
     for (int i = 0; i < 100; ++i) {
-      int a = random.nextInt(-RANGE, RANGE);
+      int a = mRandom.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
 
       assertEquals(v.magnitudeSquared(), Vector2.dot(v, v), 0.1f);
@@ -42,7 +42,7 @@ public class Vector2Test {
 
   @Test
   public final void testNormalize() {
-    assertEquals(unitRight, unitRight.normalize());
+    assertEquals(mUnitRight, mUnitRight.normalize());
 
     for (int i = 0; i < 100; ++i) {
       assertEquals(1, randomVector2().normalize().magnitude(), 0.001f);
@@ -52,7 +52,7 @@ public class Vector2Test {
   @Test
   public final void testDot() {
     for (int i = 0; i < 100; ++i) {
-      int a = random.nextInt(-RANGE, RANGE);
+      int a = mRandom.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
       Vector2 u = randomVector2();
       Vector2 w = randomVector2();

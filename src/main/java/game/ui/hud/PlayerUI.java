@@ -22,41 +22,41 @@ public class PlayerUI implements IStaticUIElement {
   private static final String MONEY = "Money: ";
   private static final String KILLS = "Kills: ";
 
-  private final int x;
-  private final int y;
+  private final int mX;
+  private final int mY;
 
-  private final int stats_x;
-  private final int stats_y;
-  private final int kills_y;
+  private final int mStatsX;
+  private final int mStatsY;
+  private final int mKillsY;
 
-  private final Inventory inventory;
-  private final Shop shop;
+  private final Inventory mInventory;
+  private final Shop mShop;
 
   public PlayerUI(int x, int y, int width, Shop shop, Inventory inv) {
-    this.x = x;
-    this.y = y;
+    mX = x;
+    mY = y;
 
-    this.shop = shop;
-    this.inventory = inv;
+    mShop = shop;
+    mInventory = inv;
 
-    stats_x = width - STATS_WIDTH - PADDING;
-    stats_y = PADDING;
-    kills_y = stats_y + STATS_LINE_HEIGHT + PADDING;
+    mStatsX = width - STATS_WIDTH - PADDING;
+    mStatsY = PADDING;
+    mKillsY = mStatsY + STATS_LINE_HEIGHT + PADDING;
   }
 
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(x, y);
+    g.translate(mX, mY);
 
-    shop.render(g, PADDING);
+    mShop.render(g, PADDING);
 
-    String mStr = MONEY + inventory.getWallet().getMoney();
-    String kStr = KILLS + inventory.getKills();
+    String mStr = MONEY + mInventory.getWallet().getMoney();
+    String kStr = KILLS + mInventory.getKills();
 
     g.setColor(Color.white);
-    g.drawString(mStr, stats_x, stats_y);
-    g.drawString(kStr, stats_x, kills_y);
+    g.drawString(mStr, mStatsX, mStatsY);
+    g.drawString(kStr, mStatsX, mKillsY);
 
     g.popTransform();
   }

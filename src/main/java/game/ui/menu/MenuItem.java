@@ -17,20 +17,20 @@ import loader.parser.ParserException;
 public class MenuItem {
   private static final Color COLOR_DISABLED = Color.gray;
 
-  private final int x;
-  private final int y;
+  private final int mX;
+  private final int mY;
 
-  private final Image[] stateMap;
+  private final Image[] mStateMap;
 
-  private Image current;
-  private MenuItemState state;
-  private final Runnable click;
+  private Image mCurrent;
+  private MenuItemState mState;
+  private final Runnable mClick;
 
   public MenuItem(String name, int x, int y, Runnable click) throws IOException, ParserException {
     assert click != null;
 
-    this.x = x;
-    this.y = y;
+    mX = x;
+    mY = y;
 
     Image imgNormal = CacheTool.getImage(Locator.getCache(), getImagePath(name));
     Image imgActive = CacheTool.getImage(Locator.getCache(), getImagePath(name + "m"));
@@ -40,31 +40,31 @@ public class MenuItem {
     imgDisabled.setAlpha(0.5f);
     setImageColor(imgDisabled, COLOR_DISABLED);
 
-    stateMap = new Image[3];
-    stateMap[MenuItemState.NORMAL.ordinal()] = imgNormal;
-    stateMap[MenuItemState.ACTIVE.ordinal()] = imgActive;
-    stateMap[MenuItemState.DISABLED.ordinal()] = imgDisabled;
+    mStateMap = new Image[3];
+    mStateMap[MenuItemState.NORMAL.ordinal()] = imgNormal;
+    mStateMap[MenuItemState.ACTIVE.ordinal()] = imgActive;
+    mStateMap[MenuItemState.DISABLED.ordinal()] = imgDisabled;
 
-    state = MenuItemState.NORMAL;
-    current = imgNormal;
-    this.click = click;
+    mState = MenuItemState.NORMAL;
+    mCurrent = imgNormal;
+    mClick = click;
   }
 
   void render(Graphics g) {
-    g.drawImage(current, x, y);
+    g.drawImage(mCurrent, mX, mY);
   }
 
   public void setState(MenuItemState state) {
-    current = stateMap[state.ordinal()];
-    this.state = state;
+    mCurrent = mStateMap[state.ordinal()];
+    mState = state;
   }
 
   public void click() {
-    click.run();
+    mClick.run();
   }
 
   public MenuItemState getState() {
-    return state;
+    return mState;
   }
 
   private static String getImagePath(String name) {

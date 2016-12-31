@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @param <T> the type held by the node
  */
+@SuppressWarnings("ALL")
 public class Node<T> {
   public final T value;
   public final List<Node<T>> nodes;
