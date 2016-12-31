@@ -7,11 +7,10 @@ package loader.parser;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
+import java.io.Closeable;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-
-import loader.IData;
 
 public class GsonParser implements IParser {
   private final Gson mGson;
@@ -23,7 +22,7 @@ public class GsonParser implements IParser {
   }
 
   @Override
-  public IData parse(InputStream br) throws ParserException {
+  public Closeable parse(InputStream br) throws ParserException {
     try {
       return mGson.fromJson(new InputStreamReader(br), mTypeOf);
     } catch (JsonParseException e) {

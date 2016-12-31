@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
 
-import loader.IData;
 import loader.data.json.types.BossData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class BossesData implements IData {
+public class BossesData implements Closeable {
   private Map<String, BossData> bosses;
 
   public BossData getBoss(String name) {

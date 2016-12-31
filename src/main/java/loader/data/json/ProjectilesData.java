@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
 
-import loader.IData;
 import loader.data.json.types.ProjectileData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class ProjectilesData implements IData {
+public class ProjectilesData implements Closeable {
   private Map<String, ProjectileData> projectiles;
 
   public ProjectileData getProjectile(String name) {

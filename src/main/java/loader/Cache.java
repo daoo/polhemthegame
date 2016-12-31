@@ -8,21 +8,18 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import loader.parser.IParser;
 import loader.parser.ParserException;
 
 public class Cache implements Closeable {
-  private final HashMap<String, IData> mCache;
-
-  public Cache() {
-    mCache = new HashMap<>();
-  }
+  private final Map<String, Closeable> mCache = new HashMap<>();
 
   @Override
   public void close() throws IOException {
-    for (IData cacheItem : mCache.values()) {
-      cacheItem.close();
+    for (Closeable item : mCache.values()) {
+      item.close();
     }
 
     mCache.clear();
@@ -39,11 +36,11 @@ public class Cache implements Closeable {
    * @throws IOException if the data is not found on the disk
    * @throws ParserException if parsing the data fails
    */
-  public IData get(String id, IParser parser) throws IOException, ParserException {
+  public Closeable get(String id, IParser parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    IData data = mCache.get(id);
+    Closeable data = mCache.get(id);
     if (data == null) {
       data = readAndParse(id, parser);
       mCache.put(id, data);
@@ -54,24 +51,24 @@ public class Cache implements Closeable {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    for (IData c : mCache.values()) {
-      sb.append(c);
+    StringBuilder builder = new StringBuilder();
+    for (Closeable item : mCache.values()) {
+      builder.append(item);
     }
 
-    return sb.toString();
+    return builder.toString();
   }
 
-  private IData readAndParse(String id, IParser parser) throws IOException, ParserException {
+  private Closeable readAndParse(String id, IParser parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    final IData result;
+    final Closeable result;
     // FIXME: Prepending the slash here is a hack and should be propagated.
-    try (InputStream is = getClass().getResourceAsStream('/' + id)) {
-      result = parser.parse(is);
-    } catch (ParserException ex) {
-      throw new ParserException("Error parsing: " + id, ex);
+    try (InputStream stream = getClass().getResourceAsStream('/' + id)) {
+      result = parser.parse(stream);
+    } catch (ParserException exception) {
+      throw new ParserException("Error parsing: " + id, exception);
     }
 
     return result;

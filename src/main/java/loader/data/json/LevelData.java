@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.IData;
 import loader.data.json.types.CreepSpawnData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class LevelData implements IData {
+public class LevelData implements Closeable {
   public String level;
   public String loading;
   public String completed;

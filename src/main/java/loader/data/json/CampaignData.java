@@ -4,13 +4,12 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.IData;
-
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class CampaignData implements IData {
+public class CampaignData implements Closeable {
   public String name;
   public ArrayList<String> levels;
 

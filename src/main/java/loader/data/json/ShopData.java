@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import loader.IData;
 import loader.data.json.types.ShopItemData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class ShopData implements IData {
+public class ShopData implements Closeable {
   public ArrayList<ShopItemData> items;
 
   @Override

@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
 
-import loader.IData;
 import loader.data.json.types.CreepData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class CreepsData implements IData {
+public class CreepsData implements Closeable {
   private Map<String, CreepData> creeps;
 
   public CreepData getCreep(String name) {

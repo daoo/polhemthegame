@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
 
-import loader.IData;
 import loader.data.json.types.PlayerData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class PlayersData implements IData {
+public class PlayersData implements Closeable {
   private Map<String, PlayerData> players;
 
   public PlayerData getPlayer(String name) {

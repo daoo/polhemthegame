@@ -4,9 +4,8 @@
 
 package loader.parser;
 
+import java.io.Closeable;
 import java.io.InputStream;
-
-import loader.IData;
 
 public interface IParser {
   /**
@@ -16,5 +15,5 @@ public interface IParser {
    * @return new data
    * @throws ParserException if for some reason parsing fails
    */
-  IData parse(InputStream br) throws ParserException;
+  Closeable parse(InputStream br) throws ParserException;
 }

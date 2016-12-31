@@ -7,12 +7,12 @@ package loader.data;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import java.io.Closeable;
 import java.io.IOException;
 
-import loader.IData;
 import util.SpriteSheet;
 
-public class DataSpriteSheet extends SpriteSheet implements IData {
+public class DataSpriteSheet extends SpriteSheet implements Closeable {
   public DataSpriteSheet(Image original, int tileWidth, int tileHeight, int spacing) {
     super(original, tileWidth, tileHeight, spacing);
   }

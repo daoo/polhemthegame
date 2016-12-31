@@ -4,14 +4,14 @@
 
 package loader.data.json;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Map;
 
-import loader.IData;
 import loader.data.json.types.WeaponData;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
-public class WeaponsData implements IData {
+public class WeaponsData implements Closeable {
   public Map<String, WeaponData> weapons;
 
   @Override
