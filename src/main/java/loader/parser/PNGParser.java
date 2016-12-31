@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 import loader.data.DataImage;
 
-public class PNGParser implements IParser<DataImage> {
+public class PNGParser implements Parser<DataImage> {
   @Override
   public DataImage parse(InputStream is) throws ParserException {
     try {

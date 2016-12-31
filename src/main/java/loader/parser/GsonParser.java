@@ -11,7 +11,7 @@ import java.io.Closeable;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class GsonParser<T extends Closeable> implements IParser<T> {
+public class GsonParser<T extends Closeable> implements Parser<T> {
   private final Gson mGson;
   private final Class<T> mType;
 

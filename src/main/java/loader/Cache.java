@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import loader.parser.IParser;
+import loader.parser.Parser;
 import loader.parser.ParserException;
 
 public class Cache implements Closeable {
@@ -36,7 +36,7 @@ public class Cache implements Closeable {
    * @throws IOException if the data is not found on the disk
    * @throws ParserException if parsing the data fails
    */
-  public <T extends Closeable> T get(String id, IParser<T> parser) throws IOException, ParserException {
+  public <T extends Closeable> T get(String id, Parser<T> parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
@@ -59,7 +59,7 @@ public class Cache implements Closeable {
     return builder.toString();
   }
 
-  private <T extends Closeable> T readAndParse(String id, IParser<T> parser) throws IOException, ParserException {
+  private <T extends Closeable> T readAndParse(String id, Parser<T> parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 

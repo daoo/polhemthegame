@@ -22,7 +22,7 @@ import loader.data.json.ShopData;
 import loader.data.json.WeaponsData;
 import loader.data.json.types.SpriteData;
 import loader.parser.GsonParser;
-import loader.parser.IParser;
+import loader.parser.Parser;
 import loader.parser.PNGParser;
 import loader.parser.ParserException;
 import util.SpriteSheet;
@@ -39,21 +39,21 @@ public class CacheTool {
   private static final String FILE_WEAPONS = "weapons.js";
   private static final String FILE_SHOP = "shop.js";
 
-  private static final IParser<BossesData> BOSSES_PARSER = new GsonParser<>(
+  private static final Parser<BossesData> BOSSES_PARSER = new GsonParser<>(
       Locator.getGson(), BossesData.class);
-  private static final IParser<CreepsData> CREEPS_PARSER = new GsonParser<>(
+  private static final Parser<CreepsData> CREEPS_PARSER = new GsonParser<>(
       Locator.getGson(), CreepsData.class);
-  private static final IParser<LevelData> LEVEL_PARSER = new GsonParser<>(
+  private static final Parser<LevelData> LEVEL_PARSER = new GsonParser<>(
       Locator.getGson(), LevelData.class);
-  private static final IParser<PlayersData> PLAYERS_PARSER = new GsonParser<>(
+  private static final Parser<PlayersData> PLAYERS_PARSER = new GsonParser<>(
       Locator.getGson(), PlayersData.class);
-  private static final IParser<ProjectilesData> PROJECTILES_PARSER = new GsonParser<>(
+  private static final Parser<ProjectilesData> PROJECTILES_PARSER = new GsonParser<>(
       Locator.getGson(), ProjectilesData.class);
-  private static final IParser<WeaponsData> WEAPONS_PARSER = new GsonParser<>(
+  private static final Parser<WeaponsData> WEAPONS_PARSER = new GsonParser<>(
       Locator.getGson(), WeaponsData.class);
-  private static final IParser<ShopData> SHOP_PARSER = new GsonParser<>(
+  private static final Parser<ShopData> SHOP_PARSER = new GsonParser<>(
       Locator.getGson(), ShopData.class);
-  private static final IParser<DataImage> PNG_PARSER = new PNGParser();
+  private static final Parser<DataImage> PNG_PARSER = new PNGParser();
 
   public static BossesData getBosses(Cache cache) throws ParserException, IOException {
     return cache.get(FILE_BOSSES, BOSSES_PARSER);
