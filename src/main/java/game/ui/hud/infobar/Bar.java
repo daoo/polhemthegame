@@ -11,11 +11,11 @@ import org.newdawn.slick.Graphics;
  * Bar for the InfoBar.
  */
 public class Bar {
-  private final Color colorHave;
-  private final Color colorLost;
+  private final Color mColorHave;
+  private final Color mColorLost;
 
-  private final IProgress progress;
-  private float fraction;
+  private final IProgress mProgress;
+  private float mFraction;
 
   /**
    * Construct a new bar backed by a specific progress and rendered using
@@ -32,18 +32,18 @@ public class Bar {
     assert colorHave != null;
     assert colorLost != null;
 
-    this.progress = progress;
-    fraction = progress.getProgress();
+    mProgress = progress;
+    mFraction = progress.getProgress();
 
-    this.colorHave = colorHave;
-    this.colorLost = colorLost;
+    mColorHave = colorHave;
+    mColorLost = colorLost;
   }
 
   /**
    * Update the progress.
    */
   public void update() {
-    fraction = progress.getProgress();
+    mFraction = mProgress.getProgress();
   }
 
   /**
@@ -57,12 +57,12 @@ public class Bar {
    * @param height the height of the bar
    */
   public void render(Graphics g, int x, int y, int width, int height) {
-    int middle = (int) (fraction * width);
+    int middle = (int) (mFraction * width);
 
-    g.setColor(colorHave);
+    g.setColor(mColorHave);
     g.fillRect(x, y, middle, height);
 
-    g.setColor(colorLost);
+    g.setColor(mColorLost);
     g.fillRect(x + middle, y, width - middle, height);
   }
 }

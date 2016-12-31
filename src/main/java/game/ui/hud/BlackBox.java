@@ -9,23 +9,22 @@ import org.newdawn.slick.Graphics;
 
 import game.ui.IStaticUIElement;
 
-
 public class BlackBox implements IStaticUIElement {
-  private final int x;
-  private final int y;
-  private final int w;
-  private final int h;
+  private final int mX;
+  private final int mY;
+  private final int mWidth;
+  private final int mHeight;
 
   public BlackBox(int x, int y, int w, int h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
+    mX = x;
+    mY = y;
+    mWidth = w;
+    mHeight = h;
   }
 
   @Override
   public void render(Graphics g) {
     g.setColor(Color.black);
-    g.fillRect(x, y, w, h);
+    g.fillRect(mX, mY, mWidth, mHeight);
   }
 }

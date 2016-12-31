@@ -9,14 +9,14 @@ import game.triggers.ICondition;
 import game.types.GameTime;
 
 public class AbsoluteTimerCondition implements ICondition {
-  private final long timeAfter;
+  private final long mTimeAfter;
 
   public AbsoluteTimerCondition(long start, int time) {
-    timeAfter = start + time;
+    mTimeAfter = start + time;
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
-    return time.elapsedMilli >= timeAfter;
+    return time.elapsedMilli >= mTimeAfter;
   }
 }

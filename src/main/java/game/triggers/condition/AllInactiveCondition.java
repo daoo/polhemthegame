@@ -10,15 +10,15 @@ import game.triggers.ICondition;
 import game.types.GameTime;
 
 public class AllInactiveCondition implements ICondition {
-  private final Iterable<? extends IEntity> entities;
+  private final Iterable<? extends IEntity> mEntities;
 
   public AllInactiveCondition(Iterable<? extends IEntity> entities) {
-    this.entities = entities;
+    mEntities = entities;
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
-    for (IEntity entity : entities) {
+    for (IEntity entity : mEntities) {
       if (entity.isActive()) {
         return false;
       }

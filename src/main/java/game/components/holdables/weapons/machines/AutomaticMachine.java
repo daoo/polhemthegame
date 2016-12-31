@@ -17,93 +17,92 @@ import util.Timer;
  * State machine for a automatic weapon.
  */
 public class AutomaticMachine implements IWeaponMachine {
-  private final int reloadLength;
-  private final int cooldownLength;
-  private final IMagazine magazine;
-  private final ProjectileQueue queue;
-  private final AnimatedSheet anim;
+  private final int mReloadLength;
+  private final int mCooldownLength;
+  private final IMagazine mMagazine;
+  private final ProjectileQueue mQueue;
+  private final AnimatedSheet mSheet;
 
-  private Timer timer;
-
-  private boolean fire;
-  private WeaponStates state;
+  private Timer mTimer;
+  private boolean mFire;
+  private WeaponStates mState;
 
   public AutomaticMachine(
       int reloadLength, int cooldownLength, IMagazine magazine, ProjectileQueue queue,
-      AnimatedSheet anim) {
-    this.reloadLength = reloadLength;
-    this.cooldownLength = cooldownLength;
-    this.magazine = magazine;
-    this.queue = queue;
-    this.anim = anim;
+      AnimatedSheet sheet) {
+    mReloadLength = reloadLength;
+    mCooldownLength = cooldownLength;
+    mMagazine = magazine;
+    mQueue = queue;
+    mSheet = sheet;
 
-    fire = false;
-    timer = null;
-    state = WeaponStates.IDLE;
+    mFire = false;
+    mTimer = null;
+    mState = WeaponStates.IDLE;
   }
 
   @Override
   public void update(GameTime time) {
-    switch (state) {
+    switch (mState) {
       case IDLE:
-        if (fire) {
-          anim.setAnimator(new ContinuousAnimator(anim.getTileCount()));
-          state = WeaponStates.FIRE;
+        if (mFire) {
+          mSheet.setAnimator(new ContinuousAnimator(mSheet.getTileCount()));
+          mState = WeaponStates.FIRE;
         }
         break;
       case RELOADING:
-        timer.update(time.elapsedMilli);
+        mTimer.update(time.elapsedMilli);
 
-        if (timer.isFinished()) {
-          magazine.reload();
-          timer = null;
-          state = WeaponStates.IDLE;
+        if (mTimer.isFinished()) {
+          mMagazine.reload();
+          mTimer = null;
+          mState = WeaponStates.IDLE;
         }
         break;
       case COOLDOWN:
-        timer.update(time.elapsedMilli);
+        mTimer.update(time.elapsedMilli);
 
-        if (timer.isFinished()) {
-          if (magazine.isEmpty()) {
-            anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
-            timer = new Timer(time.elapsedMilli, reloadLength);
-            state = WeaponStates.RELOADING;
-          } else if (fire) {
-            timer = null;
-            state = WeaponStates.FIRE;
+        if (mTimer.isFinished()) {
+          if (mMagazine.isEmpty()) {
+            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), Tile.ZERO));
+            mTimer = new Timer(time.elapsedMilli, mReloadLength);
+            mState = WeaponStates.RELOADING;
+          } else if (mFire) {
+            mTimer = null;
+            mState = WeaponStates.FIRE;
           } else {
-            anim.setAnimator(new RunToAnimator(anim.getTileCount(), Tile.ZERO));
-            timer = null;
-            state = WeaponStates.IDLE;
+            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), Tile.ZERO));
+            mTimer = null;
+            mState = WeaponStates.IDLE;
           }
         }
         break;
       case FIRE:
-        magazine.takeOne();
-        queue.queueUp();
+        mMagazine.takeOne();
+        mQueue.queueUp();
 
-        timer = new Timer(time.elapsedMilli, cooldownLength);
-        state = WeaponStates.COOLDOWN;
+        mTimer = new Timer(time.elapsedMilli, mCooldownLength);
+        mState = WeaponStates.COOLDOWN;
         break;
     }
   }
 
   @Override
   public void startFiring() {
-    fire = true;
+    mFire = true;
   }
 
   @Override
   public void stopFiring() {
-    fire = false;
+    mFire = false;
   }
 
   @Override
   public float getProgress() {
-    if (timer == null) {
-      return magazine.getFractionFilled();
+    if (mTimer == null) {
+      return mMagazine.getFractionFilled();
     }
 
-    return timer.getProgress();
+    return mTimer.getProgress();
   }
 }

@@ -18,9 +18,9 @@ import math.Vector2;
  * Inflict damage in an circle around a position when executed.
  */
 public class AOEDamageEffect implements IEffect {
-  private final Rectangle body;
-  private final float range;
-  private final Damage damage;
+  private final Rectangle mBody;
+  private final float mRange;
+  private final Damage mDamage;
 
   /**
    * Constructs a new AOEDamage effect.
@@ -31,16 +31,16 @@ public class AOEDamageEffect implements IEffect {
    * @param damage the amount of damage to deal per object in range
    */
   public AOEDamageEffect(IEntity source, Rectangle body, float range, float damage) {
-    this.body = body;
-    this.range = range;
-    this.damage = new Damage(source, damage);
+    mBody = body;
+    mRange = range;
+    mDamage = new Damage(source, damage);
   }
 
   @Override
   public void execute(GameTime time, World world) {
     for (Entity e : world.getUnits()) {
-      if (Vector2.distance(e.body.getCenter(), body.getCenter()) < range) {
-        e.sendMessage(Message.DAMAGE, damage);
+      if (Vector2.distance(e.body.getCenter(), mBody.getCenter()) < mRange) {
+        e.sendMessage(Message.DAMAGE, mDamage);
       }
     }
   }

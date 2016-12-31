@@ -4,6 +4,7 @@
 
 package loader.data.json.types;
 
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class AOEData {
   public float radius;
   public boolean keepEffect;

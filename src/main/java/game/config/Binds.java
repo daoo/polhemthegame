@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 /**
  * POJO for keeping track of player bindings.
  */
+@SuppressWarnings("InstanceVariableNamingConvention")
 public class Binds {
   public static final Binds DEFAULT = new Binds();
 

@@ -23,20 +23,20 @@ import util.SpriteSheet;
 public class AnimatedSheet implements IRenderComponent {
   private static final IAnimator IDLE = new IdleAnimator();
 
-  private final int offsetX;
-  private final int offsetY;
-  private final float rotation;
-  private final boolean flip;
+  private final int mOffsetX;
+  private final int mOffsetY;
+  private final float mRotation;
+  private final boolean mFlip;
 
-  private final SpriteSheet sheet;
-  private final int centerX;
-  private final int centerY;
-  private final Tile size;
+  private final SpriteSheet mSheet;
+  private final int mCenterX;
+  private final int mCenterY;
+  private final Tile mSize;
 
-  private final Clock clock;
+  private final Clock mClock;
 
-  private IAnimator animator;
-  private Tile current;
+  private IAnimator mAnimator;
+  private Tile mCurrent;
 
   /**
    * Create a new animated sprite sheet.
@@ -55,61 +55,57 @@ public class AnimatedSheet implements IRenderComponent {
     assert targetFrameRate > 0;
     assert sheet != null;
 
-    this.sheet = sheet;
+    mSheet = sheet;
 
-    this.offsetX = offsetX;
-    this.offsetY = offsetY;
-    this.flip = orientation == Orientation.LEFT;
-    this.rotation = rotation;
+    mOffsetX = offsetX;
+    mOffsetY = offsetY;
+    mFlip = orientation == Orientation.LEFT;
+    mRotation = rotation;
 
-    size = new Tile(sheet.getTileCountX(), sheet.getTileCountY());
-    centerX = sheet.getTileWidth() / 2;
-    centerY = sheet.getTileWidth() / 2;
+    mSize = new Tile(sheet.getTileCountX(), sheet.getTileCountY());
+    mCenterX = sheet.getTileWidth() / 2;
+    mCenterY = sheet.getTileWidth() / 2;
 
-    current = Tile.ZERO;
-    animator = IDLE;
+    mCurrent = Tile.ZERO;
+    mAnimator = IDLE;
 
-    clock = new Clock((int) (1000 / targetFrameRate));
+    mClock = new Clock((int) (1000 / targetFrameRate));
   }
 
   public Tile getCurrentTile() {
-    return current;
+    return mCurrent;
   }
 
   public Tile getLastTile() {
-    return new Tile(size.x - 1, size.y - 1);
-  }
-
-  public SpriteSheet getSpriteSheet() {
-    return sheet;
+    return new Tile(mSize.x - 1, mSize.y - 1);
   }
 
   public Tile getTileCount() {
-    return size;
+    return mSize;
   }
 
   public void setAnimator(IAnimator animator) {
-    this.animator = animator;
+    mAnimator = animator;
   }
 
   @Override
   public int getHeight() {
-    return sheet.getTileHeight();
+    return mSheet.getTileHeight();
   }
 
   @Override
   public int getWidth() {
-    return sheet.getTileWidth();
+    return mSheet.getTileWidth();
   }
 
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.START_ANIMATION) {
-      animator = new ContinuousAnimator(size);
+      mAnimator = new ContinuousAnimator(mSize);
     } else if (message == Message.STOP_ANIMATION) {
-      if (!animator.isFinished()) {
-        current = Tile.ZERO;
-        animator = new IdleAnimator();
+      if (!mAnimator.isFinished()) {
+        mCurrent = Tile.ZERO;
+        mAnimator = new IdleAnimator();
       }
     }
   }
@@ -117,35 +113,35 @@ public class AnimatedSheet implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.rotate(centerX, centerY, rotation);
+    g.rotate(mCenterX, mCenterY, mRotation);
 
-    if (flip) {
-      // Be sure to flip around the center
-      g.translate(centerX, 0);
+    if (mFlip) {
+      // Be sure to mFlip around the center
+      g.translate(mCenterX, 0);
       g.scale(-1, 1);
-      g.translate(-centerX, 0);
-      // Alternatively, translate by width after flip
+      g.translate(-mCenterX, 0);
+      // Alternatively, translate by width after mFlip
     }
 
-    g.translate(offsetX, offsetY);
+    g.translate(mOffsetX, mOffsetY);
 
-    g.drawImage(sheet.getSubImage(current.x, current.y), 0, 0);
+    g.drawImage(mSheet.getSubImage(mCurrent.x, mCurrent.y), 0, 0);
 
     g.popTransform();
   }
 
   @Override
   public void update(GameTime time) {
-    if (!animator.isFinished() && clock.needsSync(time.elapsedMilli)) {
-      clock.sync(time.elapsedMilli);
+    if (!mAnimator.isFinished() && mClock.needsSync(time.elapsedMilli)) {
+      mClock.sync(time.elapsedMilli);
 
-      current = animator.next(current);
+      mCurrent = mAnimator.next(mCurrent);
     }
   }
 
   @Override
   public String toString() {
-    return String.format("AnimatedSheet - count: %dx%d, size: %dx%d", size.x, size.y, getWidth(),
+    return String.format("AnimatedSheet - count: %dx%d, mSize: %dx%d", mSize.x, mSize.y, getWidth(),
         getHeight());
   }
 }

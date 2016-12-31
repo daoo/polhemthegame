@@ -13,14 +13,14 @@ import game.types.GameTime;
  * Adds a new trigger to the world when this effect is executed.
  */
 public class AddTriggerEffect implements IEffect {
-  private final Trigger trigger;
+  private final Trigger mTrigger;
 
   public AddTriggerEffect(Trigger trigger) {
-    this.trigger = trigger;
+    mTrigger = trigger;
   }
 
   @Override
   public void execute(GameTime time, World world) {
-    world.addTrigger(trigger);
+    world.addTrigger(mTrigger);
   }
 }

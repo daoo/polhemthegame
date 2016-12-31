@@ -13,61 +13,61 @@ import math.Vector2;
 import util.Node;
 
 public class Animation implements IEntity {
-  private final AnimatedSheet anim;
-  private final Graphics graphics;
+  private final AnimatedSheet mSheet;
+  private final Graphics mGraphics;
 
-  private boolean active;
-  private Vector2 position;
+  private boolean mActive;
+  private Vector2 mPosition;
 
   public Animation(int x, int y, AnimatedSheet anim, Graphics graphics) {
-    this.position = new Vector2(x, y);
-    this.anim = anim;
-    this.graphics = graphics;
+    mPosition = new Vector2(x, y);
+    mSheet = anim;
+    mGraphics = graphics;
 
-    active = true;
+    mActive = true;
   }
 
   @Override
   public boolean isActive() {
-    return active;
+    return mActive;
   }
 
   @Override
   public void remove() {
-    active = false;
+    mActive = false;
   }
 
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(position.x, position.y);
+    g.translate(mPosition.x, mPosition.y);
 
-    anim.render(g);
+    mSheet.render(g);
 
     g.popTransform();
   }
 
   @Override
   public void sendMessage(Message message, Object args) {
-    anim.reciveMessage(message, args);
+    mSheet.reciveMessage(message, args);
   }
 
   public void setPosition(Vector2 position) {
-    this.position = position;
+    mPosition = position;
   }
 
   @Override
   public void update(GameTime time) {
-    anim.update(time);
+    mSheet.update(time);
 
-    if (anim.getCurrentTile().isEqual(anim.getLastTile())) {
-      active = false;
+    if (mSheet.getCurrentTile().isEqual(mSheet.getLastTile())) {
+      mActive = false;
 
-      graphics.pushTransform();
-      graphics.translate(position.x, position.y);
-      anim.render(graphics);
-      graphics.popTransform();
-      graphics.flush();
+      mGraphics.pushTransform();
+      mGraphics.translate(mPosition.x, mPosition.y);
+      mSheet.render(mGraphics);
+      mGraphics.popTransform();
+      mGraphics.flush();
     }
   }
 
@@ -80,8 +80,8 @@ public class Animation implements IEntity {
   public Node<String> debugTree() {
     Node<String> parent = new Node<>(debugString());
 
-    parent.nodes.add(new Node<>("Animation = " + anim));
-    parent.nodes.add(new Node<>("Active = " + Boolean.toString(active)));
+    parent.nodes.add(new Node<>("Animation = " + mSheet));
+    parent.nodes.add(new Node<>("Active = " + Boolean.toString(mActive)));
 
     return parent;
   }
