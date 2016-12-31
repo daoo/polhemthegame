@@ -7,7 +7,7 @@ package loader.parser;
 import java.io.Closeable;
 import java.io.InputStream;
 
-public interface IParser {
+public interface IParser<T extends Closeable> {
   /**
    * Parse a input stream.
    *
@@ -15,5 +15,5 @@ public interface IParser {
    * @return new data
    * @throws ParserException if for some reason parsing fails
    */
-  Closeable parse(InputStream br) throws ParserException;
+  T parse(InputStream br) throws ParserException;
 }

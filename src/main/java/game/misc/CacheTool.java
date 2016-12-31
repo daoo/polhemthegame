@@ -12,6 +12,7 @@ import java.io.IOException;
 import game.components.graphics.AnimatedSheet;
 import game.types.Orientation;
 import loader.Cache;
+import loader.data.DataImage;
 import loader.data.json.BossesData;
 import loader.data.json.CreepsData;
 import loader.data.json.LevelData;
@@ -38,41 +39,48 @@ public class CacheTool {
   private static final String FILE_WEAPONS = "weapons.js";
   private static final String FILE_SHOP = "shop.js";
 
-  private static final IParser BOSSES_PARSER = new GsonParser(BossesData.class);
-  private static final IParser CREEPS_PARSER = new GsonParser(CreepsData.class);
-  private static final IParser LEVEL_PARSER = new GsonParser(LevelData.class);
-  private static final IParser PLAYERS_PARSER = new GsonParser(PlayersData.class);
-  private static final IParser PROJECTILES_PARSER = new GsonParser(ProjectilesData.class);
-  private static final IParser WEAPONS_PARSER = new GsonParser(WeaponsData.class);
-  private static final IParser SHOP_PARSER = new GsonParser(ShopData.class);
-  private static final IParser PNG_PARSER = new PNGParser();
+  private static final IParser<BossesData> BOSSES_PARSER = new GsonParser<>(
+      Locator.getGson(), BossesData.class);
+  private static final IParser<CreepsData> CREEPS_PARSER = new GsonParser<>(
+      Locator.getGson(), CreepsData.class);
+  private static final IParser<LevelData> LEVEL_PARSER = new GsonParser<>(
+      Locator.getGson(), LevelData.class);
+  private static final IParser<PlayersData> PLAYERS_PARSER = new GsonParser<>(
+      Locator.getGson(), PlayersData.class);
+  private static final IParser<ProjectilesData> PROJECTILES_PARSER = new GsonParser<>(
+      Locator.getGson(), ProjectilesData.class);
+  private static final IParser<WeaponsData> WEAPONS_PARSER = new GsonParser<>(
+      Locator.getGson(), WeaponsData.class);
+  private static final IParser<ShopData> SHOP_PARSER = new GsonParser<>(
+      Locator.getGson(), ShopData.class);
+  private static final IParser<DataImage> PNG_PARSER = new PNGParser();
 
   public static BossesData getBosses(Cache cache) throws ParserException, IOException {
-    return (BossesData) cache.get(FILE_BOSSES, BOSSES_PARSER);
+    return cache.get(FILE_BOSSES, BOSSES_PARSER);
   }
 
   public static CreepsData getCreeps(Cache cache) throws ParserException, IOException {
-    return (CreepsData) cache.get(FILE_CREEPS, CREEPS_PARSER);
+    return cache.get(FILE_CREEPS, CREEPS_PARSER);
   }
 
   public static Image getImage(Cache cache, String id) throws ParserException, IOException {
-    return (Image) cache.get(id, PNG_PARSER);
+    return cache.get(id, PNG_PARSER);
   }
 
   public static LevelData getLevel(Cache cache, String level) throws ParserException, IOException {
-    return (LevelData) cache.get(DIR_LEVELS + File.separator + level + EXT_JS, LEVEL_PARSER);
+    return cache.get(DIR_LEVELS + File.separator + level + EXT_JS, LEVEL_PARSER);
   }
 
   public static PlayersData getPlayers(Cache cache) throws ParserException, IOException {
-    return (PlayersData) cache.get(FILE_PLAYERS, PLAYERS_PARSER);
+    return cache.get(FILE_PLAYERS, PLAYERS_PARSER);
   }
 
   public static WeaponsData getWeapons(Cache cache) throws ParserException, IOException {
-    return (WeaponsData) cache.get(FILE_WEAPONS, WEAPONS_PARSER);
+    return cache.get(FILE_WEAPONS, WEAPONS_PARSER);
   }
 
   public static ProjectilesData getProjectiles(Cache cache) throws ParserException, IOException {
-    return (ProjectilesData) cache.get(FILE_PROJECTILES, PROJECTILES_PARSER);
+    return cache.get(FILE_PROJECTILES, PROJECTILES_PARSER);
   }
 
   /**
@@ -95,12 +103,12 @@ public class CacheTool {
   }
 
   public static ShopData getShop(Cache cache) throws ParserException, IOException {
-    return (ShopData) cache.get(FILE_SHOP, SHOP_PARSER);
+    return cache.get(FILE_SHOP, SHOP_PARSER);
   }
 
   public static SpriteSheet getSpriteSheet(Cache cache, SpriteData sprite) throws ParserException,
       IOException {
-    Image img = (Image) cache.get(sprite.sprite, PNG_PARSER);
+    Image img = cache.get(sprite.sprite, PNG_PARSER);
 
     return new SpriteSheet(img, sprite.tileSize.width, sprite.tileSize.height, sprite.spacing);
   }

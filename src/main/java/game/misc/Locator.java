@@ -4,6 +4,8 @@
 
 package game.misc;
 
+import com.google.gson.Gson;
+
 import game.config.Config;
 import game.ui.hud.UI;
 import loader.Cache;
@@ -17,6 +19,7 @@ public final class Locator {
   private static Random s_random = null;
   private static UI s_ui = null;
   private static Config s_config = null;
+  private static Gson s_gson = null;
 
   private Locator() {
   }
@@ -65,6 +68,12 @@ public final class Locator {
     s_config = config;
   }
 
+  public static void registerGson(Gson gson) {
+    assert gson != null;
+
+    s_gson = gson;
+  }
+
   /**
    * Retrieve the cache.
    * Note that this can return null if no cache have been registered.
@@ -103,5 +112,9 @@ public final class Locator {
    */
   public static Config getConfig() {
     return s_config;
+  }
+
+  public static Gson getGson() {
+    return s_gson;
   }
 }

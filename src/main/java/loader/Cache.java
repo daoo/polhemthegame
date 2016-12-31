@@ -36,11 +36,11 @@ public class Cache implements Closeable {
    * @throws IOException if the data is not found on the disk
    * @throws ParserException if parsing the data fails
    */
-  public Closeable get(String id, IParser parser) throws IOException, ParserException {
+  public <T extends Closeable> T get(String id, IParser<T> parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    Closeable data = mCache.get(id);
+    T data = (T) mCache.get(id);
     if (data == null) {
       data = readAndParse(id, parser);
       mCache.put(id, data);
@@ -59,11 +59,11 @@ public class Cache implements Closeable {
     return builder.toString();
   }
 
-  private Closeable readAndParse(String id, IParser parser) throws IOException, ParserException {
+  private <T extends Closeable> T readAndParse(String id, IParser<T> parser) throws IOException, ParserException {
     assert id != null;
     assert parser != null;
 
-    final Closeable result;
+    final T result;
     // FIXME: Prepending the slash here is a hack and should be propagated.
     try (InputStream stream = getClass().getResourceAsStream('/' + id)) {
       result = parser.parse(stream);

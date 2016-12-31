@@ -10,21 +10,20 @@ import com.google.gson.JsonParseException;
 import java.io.Closeable;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 
-public class GsonParser implements IParser {
+public class GsonParser<T extends Closeable> implements IParser<T> {
   private final Gson mGson;
-  private final Type mTypeOf;
+  private final Class<T> mType;
 
-  public GsonParser(Type typeOf) {
-    mGson = new Gson();
-    mTypeOf = typeOf;
+  public GsonParser(Gson gson, Class<T> type) {
+    mGson = gson;
+    mType = type;
   }
 
   @Override
-  public Closeable parse(InputStream br) throws ParserException {
+  public T parse(InputStream br) throws ParserException {
     try {
-      return mGson.fromJson(new InputStreamReader(br), mTypeOf);
+      return mGson.fromJson(new InputStreamReader(br), mType);
     } catch (JsonParseException e) {
       throw new ParserException(e);
     }

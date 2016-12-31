@@ -62,10 +62,11 @@ public class Launcher extends BasicGame {
   }
 
   public static void main(String[] args) throws SlickException, IOException {
+    Locator.registerGson(new Gson());
+    Locator.registerConfig(readConfig());
+    Locator.registerRandom(new Random());
     try (Cache cache = new Cache()) {
-      Locator.registerConfig(readConfig());
       Locator.registerCache(cache);
-      Locator.registerRandom(new Random());
 
       AppGameContainer app = new AppGameContainer(new Launcher());
 
