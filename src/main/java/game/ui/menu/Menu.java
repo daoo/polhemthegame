@@ -24,9 +24,7 @@ public class Menu {
   }
 
   public void click() {
-    if (currentItem instanceof MenuButton) {
-      ((MenuButton) currentItem).click();
-    }
+    currentItem.click();
   }
 
   public void render(Graphics g) {

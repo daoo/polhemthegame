@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import game.misc.CacheTool;
 import game.misc.Locator;
 import game.ui.menu.Menu;
-import game.ui.menu.MenuButton;
 import game.ui.menu.MenuItem;
 import loader.parser.ParserException;
 import util.Key;
@@ -41,10 +40,11 @@ public class MenuState implements IState {
 
     ArrayList<MenuItem> tmp = new ArrayList<>(4);
 
-    tmp.add(new MenuButton(BUTTON_SINGLE_PLAYER, 60, 380,
-        () -> manager.enterGame(CAMPAIGN_FILE, false)));
-    tmp.add(new MenuButton(BUTTON_COOP, 60, 480, () -> manager.enterGame(CAMPAIGN_FILE, true)));
-    tmp.add(new MenuButton(BUTTON_EXIT, 60, 580, () -> manager.quit()));
+    Runnable enterOnePlayer = () -> manager.enterGame(CAMPAIGN_FILE, false);
+    Runnable enterTwoPlayer = () -> manager.enterGame(CAMPAIGN_FILE, true);
+    tmp.add(new MenuItem(BUTTON_SINGLE_PLAYER, 60, 380, enterOnePlayer));
+    tmp.add(new MenuItem(BUTTON_COOP, 60, 480, enterTwoPlayer));
+    tmp.add(new MenuItem(BUTTON_EXIT, 60, 580, manager::quit));
 
     menu = new Menu(tmp);
 

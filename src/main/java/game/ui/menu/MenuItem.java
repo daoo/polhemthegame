@@ -24,8 +24,11 @@ public class MenuItem {
 
   private Image current;
   private MenuItemState state;
+  private final Runnable click;
 
-  public MenuItem(String name, int x, int y) throws IOException, ParserException {
+  public MenuItem(String name, int x, int y, Runnable click) throws IOException, ParserException {
+    assert click != null;
+
     this.x = x;
     this.y = y;
 
@@ -44,6 +47,7 @@ public class MenuItem {
 
     state = MenuItemState.NORMAL;
     current = imgNormal;
+    this.click = click;
   }
 
   void render(Graphics g) {
@@ -53,6 +57,10 @@ public class MenuItem {
   public void setState(MenuItemState state) {
     current = stateMap[state.ordinal()];
     this.state = state;
+  }
+
+  public void click() {
+    click.run();
   }
 
   public MenuItemState getState() {
