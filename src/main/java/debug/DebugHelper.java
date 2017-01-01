@@ -13,8 +13,8 @@ public class DebugHelper {
     Node<String> node = new Node<>(title + " (" + lst.size() + ")");
 
     for (Object obj : lst) {
-      if (obj instanceof IDebuggable) {
-        node.nodes.add(((IDebuggable) obj).debugTree());
+      if (obj instanceof Debuggable) {
+        node.nodes.add(((Debuggable) obj).debugTree());
       } else {
         node.nodes.add(new Node<>(obj.toString()));
       }

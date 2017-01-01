@@ -5,7 +5,7 @@
 package game.components.graphics.animations;
 
 
-public class IdleAnimator implements IAnimator {
+public class IdleAnimator implements Animator {
 
   @Override
   public boolean isFinished() {

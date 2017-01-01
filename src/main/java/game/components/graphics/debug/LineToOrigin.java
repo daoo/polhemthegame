@@ -7,15 +7,15 @@ package game.components.graphics.debug;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import game.components.IRenderComponent;
-import game.entities.Entity;
+import game.components.RenderComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 
-public class LineToOrigin implements IRenderComponent {
-  private final Entity mOwner;
+public class LineToOrigin implements RenderComponent {
+  private final EntityImpl mOwner;
 
-  public LineToOrigin(Entity owner) {
+  public LineToOrigin(EntityImpl owner) {
     mOwner = owner;
   }
 

@@ -17,7 +17,7 @@ import util.Tree;
 /**
  * Wrapper state which renders some extra debugging information.
  */
-public class DebugState implements IState {
+public class DebugState implements GameState {
   private static final int GRAPH_X = 0;
   private static final int GRAPH_Y = 80;
 
@@ -29,7 +29,7 @@ public class DebugState implements IState {
   private final DebugGraph mDebugGraph;
   private boolean mDrawDebugInfo;
 
-  private final IState mGame;
+  private final GameState mGame;
   private boolean mPaused;
 
   private final Key mKeyF1;
@@ -37,7 +37,7 @@ public class DebugState implements IState {
   private final Key mKeyF5;
   private final Key mKeyF6;
 
-  public DebugState(int width, IState game) {
+  public DebugState(int width, GameState game) {
     mKeyF1 = new Key(Keyboard.KEY_F1);
     mKeyF2 = new Key(Keyboard.KEY_F2);
     mKeyF5 = new Key(Keyboard.KEY_F5);

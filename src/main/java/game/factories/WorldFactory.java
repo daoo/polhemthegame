@@ -14,12 +14,12 @@ import java.util.List;
 import game.components.misc.KillCreep;
 import game.course.LevelManager;
 import game.course.World;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.entities.Unit;
 import game.misc.CacheTool;
 import game.misc.Locator;
 import game.states.StateManager;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.triggers.Trigger;
 import game.triggers.condition.AllInactiveCondition;
 import game.triggers.condition.AlwaysTrueCondition;
@@ -52,7 +52,7 @@ public class WorldFactory {
   private final StateManager mStateManager;
 
   private final Aabb mBoundary;
-  private final List<Entity> mPlayers;
+  private final List<EntityImpl> mPlayers;
 
   private final EntityFactory mEntityFactory;
 
@@ -63,7 +63,7 @@ public class WorldFactory {
 
   public WorldFactory(
       LevelManager gameMode, StateManager stateManager, EntityFactory entityFactory, Aabb boundary,
-      List<Entity> players) throws ParserException, IOException {
+      List<EntityImpl> players) throws ParserException, IOException {
     mGameMode = gameMode;
     mStateManager = stateManager;
     mEntityFactory = entityFactory;
@@ -78,7 +78,7 @@ public class WorldFactory {
 
     CreepsData creepsData = CacheTool.getCreeps(Locator.getCache());
 
-    ArrayList<Entity> creeps = new ArrayList<>(spawnsData.size());
+    ArrayList<EntityImpl> creeps = new ArrayList<>(spawnsData.size());
 
     for (CreepSpawnData spawnData : spawnsData) {
       // Make creep
@@ -125,7 +125,7 @@ public class WorldFactory {
     mCreepsSpawnTrigger.addAllEffects(Arrays.asList(new SetForegroundEffect(Locator.getUI(), null),
         new AddTriggerEffect(mCreepsDeadTrigger)));
 
-    List<IEffect> levelCompleteEffects = Arrays
+    List<Effect> levelCompleteEffects = Arrays
         .asList(new SetForegroundEffect(Locator.getUI(), imgLevelComplete),
             new ExecuteWithDelayEffect(TRIGGER_DELAY, new LevelCompleteEffect(mGameMode)));
 
@@ -156,7 +156,7 @@ public class WorldFactory {
     mWorld.addTrigger(levelStartTrigger);
     mWorld.addTrigger(playersDeadTrigger);
 
-    for (Entity p : mPlayers) {
+    for (EntityImpl p : mPlayers) {
       mWorld.addUnit(p);
     }
 

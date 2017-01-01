@@ -7,6 +7,6 @@ package game.triggers;
 import game.course.World;
 import game.types.GameTime;
 
-public interface IEffect {
+public interface Effect {
   void execute(GameTime time, World world);
 }

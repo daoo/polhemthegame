@@ -6,7 +6,7 @@ package game.components.holdables;
 
 import math.Vector2;
 
-public interface IOffsetCalculator {
+public interface OffsetCalculator {
   Vector2 getMuzzlePosition(int weaponWidth, Vector2 muzzleOffset);
 
   Vector2 getWeaponOffset(int weaponWidth);

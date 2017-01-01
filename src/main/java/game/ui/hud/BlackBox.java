@@ -7,9 +7,9 @@ package game.ui.hud;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import game.ui.IStaticUIElement;
+import game.ui.StaticUIElement;
 
-public class BlackBox implements IStaticUIElement {
+public class BlackBox implements StaticUIElement {
   private final int mX;
   private final int mY;
   private final int mWidth;

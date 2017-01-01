@@ -6,9 +6,9 @@ package game.components.graphics;
 
 import org.newdawn.slick.Graphics;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.components.graphics.animations.ContinuousAnimator;
-import game.components.graphics.animations.IAnimator;
+import game.components.graphics.animations.Animator;
 import game.components.graphics.animations.IdleAnimator;
 import game.components.graphics.animations.Tile;
 import game.types.GameTime;
@@ -20,8 +20,8 @@ import util.SpriteSheet;
 /**
  * Component for animating a sprite sheet.
  */
-public class AnimatedSheet implements IRenderComponent {
-  private static final IAnimator IDLE = new IdleAnimator();
+public class AnimatedSheet implements RenderComponent {
+  private static final Animator IDLE = new IdleAnimator();
 
   private final int mOffsetX;
   private final int mOffsetY;
@@ -35,7 +35,7 @@ public class AnimatedSheet implements IRenderComponent {
 
   private final Clock mClock;
 
-  private IAnimator mAnimator;
+  private Animator mAnimator;
   private Tile mCurrent;
 
   /**
@@ -84,7 +84,7 @@ public class AnimatedSheet implements IRenderComponent {
     return mSize;
   }
 
-  public void setAnimator(IAnimator animator) {
+  public void setAnimator(Animator animator) {
     mAnimator = animator;
   }
 

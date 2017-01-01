@@ -14,7 +14,7 @@ import math.ExtraMath;
 import math.Vector2;
 import util.Random;
 
-public class Walking implements IBossState {
+public class Walking implements BossState {
   public static final float EPSILON = 0.0001f;
   public static final int MIN_WALK = 100;
   public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
@@ -101,11 +101,6 @@ public class Walking implements IBossState {
   @Override
   public boolean isFinished() {
     return mTargetsLeft == 0;
-  }
-
-  @Override
-  public BossState getState() {
-    return BossState.WALKING;
   }
 
   private void headFor(Vector2 target) {

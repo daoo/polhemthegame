@@ -10,12 +10,12 @@ import game.ui.hud.infobar.InfoBar;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
 public class Player {
-  public final Entity entity;
+  public final EntityImpl entity;
   public final Shop shopUI;
   public final InfoBar infoBar;
   public final Inventory inventory;
 
-  public Player(Entity entity, Shop shopUI, Inventory inventory, InfoBar bar) {
+  public Player(EntityImpl entity, Shop shopUI, Inventory inventory, InfoBar bar) {
     this.entity = entity;
     this.shopUI = shopUI;
     this.inventory = inventory;

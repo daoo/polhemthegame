@@ -10,20 +10,20 @@ import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.RunToAnimator;
 import game.course.World;
 import game.entities.Animation;
-import game.entities.Entity;
-import game.triggers.IEffect;
+import game.entities.EntityImpl;
+import game.triggers.Effect;
 import game.types.GameTime;
 import math.Aabb;
 
 /**
  * Spawn an run-to-last animation at the top left of another entity.
  */
-public class SpawnAnimationEffect implements IEffect {
+public class SpawnAnimationEffect implements Effect {
   private final Animation mSpawnee;
   private final Aabb mBox;
   private final AnimatedSheet mAnim;
 
-  public SpawnAnimationEffect(Entity entity, AnimatedSheet anim, Graphics graphics) {
+  public SpawnAnimationEffect(EntityImpl entity, AnimatedSheet anim, Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 
     mBox = entity.getBody();

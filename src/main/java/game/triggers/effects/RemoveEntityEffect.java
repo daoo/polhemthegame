@@ -5,14 +5,14 @@
 package game.triggers.effects;
 
 import game.course.World;
-import game.entities.IEntity;
-import game.triggers.IEffect;
+import game.entities.Entity;
+import game.triggers.Effect;
 import game.types.GameTime;
 
-public class RemoveEntityEffect implements IEffect {
-  private final IEntity mEntity;
+public class RemoveEntityEffect implements Effect {
+  private final Entity mEntity;
 
-  public RemoveEntityEffect(IEntity entity) {
+  public RemoveEntityEffect(Entity entity) {
     mEntity = entity;
   }
 

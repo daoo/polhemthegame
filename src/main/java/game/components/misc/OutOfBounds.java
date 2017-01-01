@@ -4,17 +4,17 @@
 
 package game.components.misc;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
 
-public class OutOfBounds implements ILogicComponent {
-  private final Entity mOwner;
+public class OutOfBounds implements LogicComponent {
+  private final EntityImpl mOwner;
   private final Aabb mBoundary;
 
-  public OutOfBounds(Entity owner, Aabb boundary) {
+  public OutOfBounds(EntityImpl owner, Aabb boundary) {
     mOwner = owner;
     mBoundary = boundary;
   }

@@ -7,11 +7,11 @@ package game.triggers.effects.spawn;
 import game.course.World;
 import game.entities.Unit;
 import game.misc.Locator;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.types.GameTime;
 import game.types.Message;
 
-public class SpawnCreepEffect implements IEffect {
+public class SpawnCreepEffect implements Effect {
   private final Unit mUnit;
 
   public SpawnCreepEffect(Unit unit) {

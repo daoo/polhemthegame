@@ -7,9 +7,9 @@ package game.components.holdables.weapons;
 import org.newdawn.slick.Graphics;
 
 import game.components.graphics.AnimatedSheet;
-import game.components.holdables.IHoldable;
+import game.components.holdables.Holdable;
 import game.components.holdables.weapons.machines.AutomaticMachine;
-import game.components.holdables.weapons.machines.IWeaponMachine;
+import game.components.holdables.weapons.machines.WeaponMachine;
 import game.components.holdables.weapons.machines.SingleMachine;
 import game.factories.ProjectileFactory;
 import game.types.GameTime;
@@ -20,14 +20,14 @@ import math.Vector2;
 /**
  * Weapon that can fire and be held by a hand.
  */
-public class Weapon implements IHoldable {
+public class Weapon implements Holdable {
   private final AnimatedSheet mAnim;
   private final Vector2 mMuzzleOffset;
 
   private final Orientation mOrientation;
   private final ProjectileFactory mProjTemplate;
 
-  private final IWeaponMachine mMachine;
+  private final WeaponMachine mMachine;
 
   /**
    * Keep track of fired bullets that have not been spawned.
@@ -46,7 +46,7 @@ public class Weapon implements IHoldable {
 
     mQueue = new ProjectileQueue();
 
-    IMagazine magazine = magazineSize == -1 ? new InfiniteMagazine() : new Magazine(magazineSize);
+    Magazine magazine = magazineSize == -1 ? new InfiniteMagazine() : new FiniteMagazine(magazineSize);
 
     mMachine = mode == WeaponMode.AUTOMATIC
         ? new AutomaticMachine(reloadLength, cooldownLength, magazine, mQueue, anim)

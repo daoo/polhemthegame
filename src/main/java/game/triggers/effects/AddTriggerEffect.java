@@ -5,14 +5,14 @@
 package game.triggers.effects;
 
 import game.course.World;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.triggers.Trigger;
 import game.types.GameTime;
 
 /**
  * Adds a new trigger to the world when this effect is executed.
  */
-public class AddTriggerEffect implements IEffect {
+public class AddTriggerEffect implements Effect {
   private final Trigger mTrigger;
 
   public AddTriggerEffect(Trigger trigger) {

@@ -4,14 +4,14 @@
 
 package game.components.holdables;
 
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import math.Vector2;
 
-public class OffsetCalculatorRight implements IOffsetCalculator {
+public class OffsetCalculatorRight implements OffsetCalculator {
   private final Vector2 mOffset;
-  private final Entity mEntity;
+  private final EntityImpl mEntity;
 
-  public OffsetCalculatorRight(Entity entity, Vector2 handOffset) {
+  public OffsetCalculatorRight(EntityImpl entity, Vector2 handOffset) {
     mEntity = entity;
     mOffset = handOffset;
   }

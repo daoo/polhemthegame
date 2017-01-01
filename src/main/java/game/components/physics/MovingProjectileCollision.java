@@ -6,23 +6,23 @@ package game.components.physics;
 
 import java.util.ArrayList;
 
-import game.components.ILogicComponent;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
 import math.Collisions;
 import math.Vector2;
 
-public class MovingProjectileCollision implements ILogicComponent {
+public class MovingProjectileCollision implements LogicComponent {
   private boolean mEnableCollisions;
-  private final ArrayList<IEntity> mCollidedWith;
+  private final ArrayList<Entity> mCollidedWith;
 
-  private final Entity mOwner;
+  private final EntityImpl mOwner;
   private final Movement mMovement;
 
-  public MovingProjectileCollision(Entity owner, Movement movement) {
+  public MovingProjectileCollision(EntityImpl owner, Movement movement) {
     mOwner = owner;
     mMovement = movement;
 
@@ -34,7 +34,7 @@ public class MovingProjectileCollision implements ILogicComponent {
    * Performs collision check and response between the owner and a different
    * entity.
    */
-  private void collisionCheck(Entity b, float dt) {
+  private void collisionCheck(EntityImpl b, float dt) {
     if (!mCollidedWith.contains(b)) {
       Aabb a = mOwner.getBody();
       Vector2 m = mMovement.getVelocity();
@@ -50,7 +50,7 @@ public class MovingProjectileCollision implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if (mEnableCollisions) {
-      for (Entity e : mOwner.getWorld().getUnits()) {
+      for (EntityImpl e : mOwner.getWorld().getUnits()) {
         collisionCheck(e, time.frame);
       }
     }

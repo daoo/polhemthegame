@@ -8,16 +8,16 @@ import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 
-import game.entities.Entity;
-import game.ui.IDynamicUIElement;
+import game.entities.EntityImpl;
+import game.ui.DynamicUIElement;
 
 
 /**
  * Info bar for entities. Can display valuable information (as bars) next to a
  * entity, e.g. remaining health or reload time for the active weapon.
  */
-public class InfoBar implements IDynamicUIElement {
-  private final Entity mEntity;
+public class InfoBar implements DynamicUIElement {
+  private final EntityImpl mEntity;
   private final int mBarWidth;
   private final int mBarHeight;
   private final int mOffsetX;
@@ -33,7 +33,7 @@ public class InfoBar implements IDynamicUIElement {
    * @param offsetX translation on the x axis before rendering
    * @param offsetY translation on the y axis before rendering
    */
-  public InfoBar(Entity entity, int barWidth, int barHeight, int offsetX, int offsetY) {
+  public InfoBar(EntityImpl entity, int barWidth, int barHeight, int offsetX, int offsetY) {
     mEntity = entity;
     mOffsetX = offsetX;
     mOffsetY = offsetY;

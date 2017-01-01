@@ -4,6 +4,12 @@
 
 package game.components.ai;
 
-public enum BossState {
-  SHOOTING, WALKING
+import game.types.GameTime;
+
+public interface BossState {
+  void start(GameTime time);
+
+  void update(GameTime time);
+
+  boolean isFinished();
 }

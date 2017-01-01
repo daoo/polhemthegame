@@ -21,7 +21,7 @@ public class StateManager {
   private final int mWindowHeight;
 
   private boolean mExit;
-  private IState mCurrentState;
+  private GameState mCurrentState;
 
   public StateManager(int windowWidth, int windowHeight) {
     mWindowWidth = windowWidth;
@@ -29,7 +29,7 @@ public class StateManager {
     mExit = false;
   }
 
-  public IState getCurrentState() {
+  public GameState getCurrentState() {
     return mCurrentState;
   }
 
@@ -59,7 +59,7 @@ public class StateManager {
       CampaignData data = Locator.getCache()
           .get(campaign, new GsonParser<>(Locator.getGson(), CampaignData.class));
 
-      GameState state = new GameState(this, data, twoPlayer, mWindowWidth, mWindowHeight);
+      PlayingState state = new PlayingState(this, data, twoPlayer, mWindowWidth, mWindowHeight);
       if (DEBUG) {
         switchToState(new DebugState(mWindowWidth, state));
       } else {
@@ -78,7 +78,7 @@ public class StateManager {
     }
   }
 
-  private void switchToState(IState newState) {
+  private void switchToState(GameState newState) {
     if (mCurrentState != null) {
       mCurrentState.end(this);
     }

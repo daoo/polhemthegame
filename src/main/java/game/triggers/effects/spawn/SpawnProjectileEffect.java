@@ -5,18 +5,18 @@
 package game.triggers.effects.spawn;
 
 import game.course.World;
-import game.entities.Entity;
-import game.triggers.IEffect;
+import game.entities.EntityImpl;
+import game.triggers.Effect;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.TimePos;
 import math.Vector2;
 
-public class SpawnProjectileEffect implements IEffect {
-  private final Entity mProjectile;
+public class SpawnProjectileEffect implements Effect {
+  private final EntityImpl mProjectile;
   private final Vector2 mStart;
 
-  public SpawnProjectileEffect(Entity projectile, Vector2 start) {
+  public SpawnProjectileEffect(EntityImpl projectile, Vector2 start) {
     assert projectile != null;
 
     mProjectile = projectile;

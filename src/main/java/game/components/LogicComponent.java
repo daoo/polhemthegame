@@ -2,16 +2,13 @@
  * Copyright (c) 2009-2012 Daniel Oom, see license.txt for more info.
  */
 
-package game.components.ai;
+package game.components;
 
 import game.types.GameTime;
+import game.types.Message;
 
-public interface IBossState {
-  void start(GameTime time);
-
+public interface LogicComponent {
   void update(GameTime time);
 
-  boolean isFinished();
-
-  BossState getState();
+  void reciveMessage(Message message, Object args);
 }

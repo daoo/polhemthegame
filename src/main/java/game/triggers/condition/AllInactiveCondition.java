@@ -5,20 +5,20 @@
 package game.triggers.condition;
 
 import game.course.World;
-import game.entities.IEntity;
-import game.triggers.ICondition;
+import game.entities.Entity;
+import game.triggers.Condition;
 import game.types.GameTime;
 
-public class AllInactiveCondition implements ICondition {
-  private final Iterable<? extends IEntity> mEntities;
+public class AllInactiveCondition implements Condition {
+  private final Iterable<? extends Entity> mEntities;
 
-  public AllInactiveCondition(Iterable<? extends IEntity> entities) {
+  public AllInactiveCondition(Iterable<? extends Entity> entities) {
     mEntities = entities;
   }
 
   @Override
   public boolean evaluate(GameTime time, World world) {
-    for (IEntity entity : mEntities) {
+    for (Entity entity : mEntities) {
       if (entity.isActive()) {
         return false;
       }

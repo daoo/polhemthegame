@@ -6,7 +6,7 @@ package game.components.misc;
 
 import java.util.ArrayList;
 
-import game.components.ILogicComponent;
+import game.components.LogicComponent;
 import game.components.holdables.weapons.Weapon;
 import game.types.Damage;
 import game.types.GameTime;
@@ -14,7 +14,7 @@ import game.types.Message;
 import game.types.Wallet;
 import math.ExtraMath;
 
-public class Inventory implements ILogicComponent {
+public class Inventory implements LogicComponent {
   // Money
   private final Wallet mWallet;
 

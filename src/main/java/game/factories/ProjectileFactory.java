@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.TexturedQuad;
 import game.components.graphics.animations.ContinuousAnimator;
@@ -25,11 +25,11 @@ import game.components.physics.Gravity;
 import game.components.physics.Movement;
 import game.components.physics.MovingProjectileCollision;
 import game.components.physics.StaticCollision;
+import game.entities.EntityImpl;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.misc.CacheTool;
 import game.misc.Locator;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.triggers.effects.AOEDamageEffect;
 import game.triggers.effects.RemoveEntityEffect;
 import game.triggers.effects.spawn.SpawnAnimationEffect;
@@ -104,8 +104,8 @@ public class ProjectileFactory {
    * @param y the y coordinate of where it starts
    * @return a new projectile
    */
-  public Entity makeProjectile(IEntity source, float x, float y) {
-    Entity p = new Entity(x, y, mData.hitbox.width, mData.hitbox.height);
+  public EntityImpl makeProjectile(Entity source, float x, float y) {
+    EntityImpl p = new EntityImpl(x, y, mData.hitbox.width, mData.hitbox.height);
 
     p.addLogicComponent(new Life(p, mData.targets));
     p.addLogicComponent(new RangeLimiter(p, mData.duration, mData.range));
@@ -133,12 +133,12 @@ public class ProjectileFactory {
       }
     }
 
-    IRenderComponent render = getRender(angle);
+    RenderComponent render = getRender(angle);
     if (render != null) {
       p.addRenderComponent(render);
     }
 
-    ArrayList<IEffect> effectsOnDeath = new ArrayList<>();
+    ArrayList<Effect> effectsOnDeath = new ArrayList<>();
     effectsOnDeath.add(new RemoveEntityEffect(p));
 
     if (mData.aoe != null) {
@@ -150,7 +150,7 @@ public class ProjectileFactory {
     return p;
   }
 
-  private Movement getMovement(Entity p, int angle) {
+  private Movement getMovement(EntityImpl p, int angle) {
     float rad = ExtraMath.degToRad(angle);
 
     float dx = (float) Math.cos(rad) * mData.speed;
@@ -171,7 +171,7 @@ public class ProjectileFactory {
     return mLaunchAngle + Locator.getRandom().nextInt(-mSpread, mSpread) - mSpread / 2;
   }
 
-  private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
+  private void setupExplosion(Entity source, EntityImpl p, List<Effect> effectsOnDeath) {
     AnimatedSheet explosionAnim = new AnimatedSheet(mData.aoe.explosionSprite.framerate,
         mData.aoe.explosionSprite.offset.x, mData.aoe.explosionSprite.offset.y, Orientation.RIGHT,
         0, mExplosion);
@@ -181,7 +181,7 @@ public class ProjectileFactory {
     effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, mStatics));
   }
 
-  private IRenderComponent getRender(int angle) {
+  private RenderComponent getRender(int angle) {
     if (mData.texture != null) {
       return new TexturedQuad(mImg, mOrientation, angle);
     } else if (mData.sprite != null) {

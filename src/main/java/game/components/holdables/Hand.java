@@ -6,29 +6,29 @@ package game.components.holdables;
 
 import org.newdawn.slick.Graphics;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.components.holdables.weapons.Weapon;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.factories.ProjectileFactory;
 import game.triggers.effects.spawn.SpawnProjectileEffect;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
-import game.ui.hud.infobar.IProgress;
+import game.ui.hud.infobar.Progressing;
 import math.Vector2;
 
 
-public class Hand implements IRenderComponent, IProgress {
-  private final Entity mOwner;
-  private final IOffsetCalculator mOffsetCalc;
+public class Hand implements RenderComponent, Progressing {
+  private final EntityImpl mOwner;
+  private final OffsetCalculator mOffsetCalc;
 
   /**
    * The currently held weapon, null if no weapon is being held.
    */
   private Weapon mWeapon;
 
-  public Hand(Entity owner, Orientation orientation, Vector2 handOffset) {
+  public Hand(EntityImpl owner, Orientation orientation, Vector2 handOffset) {
     mOwner = owner;
 
     mOffsetCalc = orientation == Orientation.RIGHT
@@ -77,7 +77,7 @@ public class Hand implements IRenderComponent, IProgress {
 
       // Find out if there are any projectiles that want to be spawned
       for (int i = 0; i < queue.getWaiting(); ++i) {
-        Entity entity = factory.makeProjectile(mOwner, x, pos.y);
+        EntityImpl entity = factory.makeProjectile(mOwner, x, pos.y);
         mOwner.addEffect(new SpawnProjectileEffect(entity, pos));
       }
 

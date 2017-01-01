@@ -5,7 +5,7 @@
 package game.components.graphics.animations;
 
 
-public class RunToAnimator implements IAnimator {
+public class RunToAnimator implements Animator {
   private boolean mFinished;
   private final Tile mSize;
   private final Tile mTarget;

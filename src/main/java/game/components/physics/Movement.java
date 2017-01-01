@@ -4,17 +4,17 @@
 
 package game.components.physics;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;
 
-public class Movement implements ILogicComponent {
-  private final Entity mOwner;
+public class Movement implements LogicComponent {
+  private final EntityImpl mOwner;
   private Vector2 mVel;
 
-  public Movement(Entity owner, float dx, float dy) {
+  public Movement(EntityImpl owner, float dx, float dy) {
     mOwner = owner;
     mVel = new Vector2(dx, dy);
   }

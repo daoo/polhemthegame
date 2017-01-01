@@ -4,7 +4,7 @@
 
 package game.components.holdables.weapons;
 
-public class InfiniteMagazine implements IMagazine {
+public class InfiniteMagazine implements Magazine {
 
   @Override
   public boolean takeOne() {

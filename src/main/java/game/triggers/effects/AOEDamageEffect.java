@@ -5,9 +5,9 @@
 package game.triggers.effects;
 
 import game.course.World;
+import game.entities.EntityImpl;
 import game.entities.Entity;
-import game.entities.IEntity;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
@@ -17,7 +17,7 @@ import math.Vector2;
 /**
  * Inflict damage in an circle around a position when executed.
  */
-public class AOEDamageEffect implements IEffect {
+public class AOEDamageEffect implements Effect {
   private final Aabb mBody;
   private final float mRange;
   private final Damage mDamage;
@@ -30,7 +30,7 @@ public class AOEDamageEffect implements IEffect {
    * @param range the radius of the area
    * @param damage the amount of damage to deal per object in range
    */
-  public AOEDamageEffect(IEntity source, Aabb body, float range, float damage) {
+  public AOEDamageEffect(Entity source, Aabb body, float range, float damage) {
     mBody = body;
     mRange = range;
     mDamage = new Damage(source, damage);
@@ -38,7 +38,7 @@ public class AOEDamageEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    for (Entity e : world.getUnits()) {
+    for (EntityImpl e : world.getUnits()) {
       if (Vector2.distance(e.getBody().getCenter(), mBody.getCenter()) < mRange) {
         e.sendMessage(Message.DAMAGE, mDamage);
       }

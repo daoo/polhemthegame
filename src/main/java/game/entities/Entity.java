@@ -6,137 +6,37 @@ package game.entities;
 
 import org.newdawn.slick.Graphics;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-
-import debug.DebugHelper;
-import game.components.ILogicComponent;
-import game.components.IRenderComponent;
-import game.course.World;
-import game.triggers.IEffect;
+import debug.Debuggable;
 import game.types.GameTime;
 import game.types.Message;
-import math.Aabb;
-import math.Rectangle;
-import math.Vector2;
-import util.Node;
 
-public class Entity implements IEntity {
-  private World mWorld;
-  private boolean mActive;
+/**
+ * Describes objects that can exist within the game world.
+ */
+public interface Entity extends Debuggable {
+  /**
+   * Sends a message to all components that belong to this entity.
+   *
+   * @param message the message to send
+   * @param args pass along some arguments, can be anything
+   */
+  void sendMessage(Message message, Object args);
 
-  private final Aabb mBody;
+  /**
+   * Render the entity.
+   *
+   * @param g the graphics context to use
+   */
+  void render(Graphics g);
 
-  private final LinkedList<IEffect> mEffects;
-  private final ArrayList<ILogicComponent> mUpdates;
-  private final ArrayList<IRenderComponent> mRenders;
+  /**
+   * Updates logic.
+   *
+   * @param time the current game time
+   */
+  void update(GameTime time);
 
-  public Entity(float x, float y, int w, int h) {
-    mBody = new Aabb(new Vector2(x, y), new Rectangle(w, h));
-    mActive = true;
+  boolean isActive();
 
-    mEffects = new LinkedList<>();
-
-    mUpdates = new ArrayList<>();
-    mRenders = new ArrayList<>();
-  }
-
-  public void addEffect(IEffect effect) {
-    mEffects.add(effect);
-  }
-
-  public void addEffects(Collection<? extends IEffect> collection) {
-    mEffects.addAll(collection);
-  }
-
-  public void addLogicComponent(ILogicComponent comp) {
-    mUpdates.add(comp);
-  }
-
-  public void addRenderComponent(IRenderComponent comp) {
-    mRenders.add(comp);
-  }
-
-  public Aabb getBody() {
-    return mBody;
-  }
-
-  public World getWorld() {
-    return mWorld;
-  }
-
-  @Override
-  public void render(Graphics g) {
-    g.pushTransform();
-    g.translate(mBody.getMin().x, mBody.getMin().y);
-
-    for (IRenderComponent comp : mRenders) {
-      comp.render(g);
-    }
-
-    g.popTransform();
-  }
-
-  @Override
-  public void sendMessage(Message message, Object args) {
-    assert message != null;
-
-    for (ILogicComponent comp : mUpdates) {
-      comp.reciveMessage(message, args);
-    }
-
-    for (IRenderComponent comp : mRenders) {
-      comp.reciveMessage(message, args);
-    }
-  }
-
-  public void setWorld(World world) {
-    mWorld = world;
-  }
-
-  @Override
-  public void update(GameTime time) {
-    for (ILogicComponent comp : mUpdates) {
-      comp.update(time);
-    }
-
-    for (IRenderComponent comp : mRenders) {
-      comp.update(time);
-    }
-
-    for (IEffect effect : mEffects) {
-      effect.execute(time, mWorld);
-    }
-    mEffects.clear();
-  }
-
-  @Override
-  public boolean isActive() {
-    return mActive || !mEffects.isEmpty();
-  }
-
-  @Override
-  public void remove() {
-    mActive = false;
-  }
-
-  @Override
-  public String debugString() {
-    return "Entity";
-  }
-
-  @Override
-  public Node<String> debugTree() {
-    Node<String> parent = new Node<>(debugString());
-
-    parent.nodes.add(new Node<>("Body = " + mBody));
-    parent.nodes.add(new Node<>("Active = " + Boolean.toString(mActive)));
-
-    parent.nodes.add(DebugHelper.listToNode("Logic components", mUpdates));
-    parent.nodes.add(DebugHelper.listToNode("Render components", mRenders));
-    parent.nodes.add(DebugHelper.listToNode("Effects", mEffects));
-
-    return parent;
-  }
+  void remove();
 }

@@ -12,7 +12,10 @@ import game.types.Message;
 import math.Vector2;
 import util.Node;
 
-public class Animation implements IEntity {
+/**
+ * Specialized entity for just showing an animation.
+ */
+public class Animation implements Entity {
   private final AnimatedSheet mSheet;
   private final Graphics mGraphics;
 

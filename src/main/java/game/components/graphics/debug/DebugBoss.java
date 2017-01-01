@@ -7,16 +7,16 @@ package game.components.graphics.debug;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.components.ai.BossAI;
-import game.components.ai.IBossState;
+import game.components.ai.BossState;
 import game.components.ai.Walking;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
 import math.Vector2;
 
-public class DebugBoss implements IRenderComponent {
+public class DebugBoss implements RenderComponent {
   private final Aabb mBody;
   private final BossAI mAi;
 
@@ -37,7 +37,7 @@ public class DebugBoss implements IRenderComponent {
 
   @Override
   public void render(Graphics g) {
-    IBossState state = mAi.getState();
+    BossState state = mAi.getState();
     if (state instanceof Walking) {
       Walking walking = (Walking) state;
       Vector2 target = Vector2.subtract(walking.getTarget(), mBody.getMin());

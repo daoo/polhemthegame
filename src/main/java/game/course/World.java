@@ -13,20 +13,20 @@ import java.util.Iterator;
 import java.util.List;
 
 import debug.DebugHelper;
-import debug.IDebuggable;
+import debug.Debuggable;
+import game.entities.EntityImpl;
 import game.entities.Entity;
-import game.entities.IEntity;
 import game.triggers.Trigger;
 import game.types.GameTime;
 import util.Node;
 
-public class World implements IDebuggable {
-  private final ArrayList<IEntity> mMisc;
-  private final ArrayList<Entity> mUnits;
-  private final ArrayList<Entity> mProjectiles;
-  private final ArrayList<IEntity> mNewMisc;
-  private final ArrayList<Entity> mNewUnits;
-  private final ArrayList<Entity> mNewProjectiles;
+public class World implements Debuggable {
+  private final ArrayList<Entity> mMisc;
+  private final ArrayList<EntityImpl> mUnits;
+  private final ArrayList<EntityImpl> mProjectiles;
+  private final ArrayList<Entity> mNewMisc;
+  private final ArrayList<EntityImpl> mNewUnits;
+  private final ArrayList<EntityImpl> mNewProjectiles;
   private final ArrayList<Trigger> mTriggers;
   private final ArrayList<Trigger> mNewTriggers;
 
@@ -43,40 +43,40 @@ public class World implements IDebuggable {
     mNewTriggers = new ArrayList<>();
   }
 
-  public void addMisc(IEntity obj) {
+  public void addMisc(Entity obj) {
     assert obj != null;
 
     mNewMisc.add(obj);
   }
 
-  public void addUnit(Entity obj) {
+  public void addUnit(EntityImpl obj) {
     assert obj != null;
 
     obj.setWorld(this);
     mNewUnits.add(obj);
   }
 
-  public void addProjectile(Entity obj) {
+  public void addProjectile(EntityImpl obj) {
     assert obj != null;
 
     obj.setWorld(this);
     mNewProjectiles.add(obj);
   }
 
-  public Iterable<Entity> getUnits() {
+  public Iterable<EntityImpl> getUnits() {
     return Collections.unmodifiableCollection(mUnits);
   }
 
   public void render(Graphics g) {
-    for (IEntity e : mMisc) {
+    for (Entity e : mMisc) {
       e.render(g);
     }
 
-    for (IEntity e : mUnits) {
+    for (Entity e : mUnits) {
       e.render(g);
     }
 
-    for (IEntity e : mProjectiles) {
+    for (Entity e : mProjectiles) {
       e.render(g);
     }
   }
@@ -139,10 +139,10 @@ public class World implements IDebuggable {
     return parent;
   }
 
-  private static void processEntities(Iterable<? extends IEntity> entities, GameTime time) {
-    Iterator<? extends IEntity> itr = entities.iterator();
+  private static void processEntities(Iterable<? extends Entity> entities, GameTime time) {
+    Iterator<? extends Entity> itr = entities.iterator();
     while (itr.hasNext()) {
-      IEntity e = itr.next();
+      Entity e = itr.next();
       e.update(time);
       if (!e.isActive()) {
         itr.remove();

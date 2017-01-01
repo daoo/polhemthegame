@@ -5,10 +5,10 @@
 package game.triggers.condition;
 
 import game.course.World;
-import game.triggers.ICondition;
+import game.triggers.Condition;
 import game.types.GameTime;
 
-public class AlwaysTrueCondition implements ICondition {
+public class AlwaysTrueCondition implements Condition {
   public static final AlwaysTrueCondition INSTANCE = new AlwaysTrueCondition();
 
   private AlwaysTrueCondition() {

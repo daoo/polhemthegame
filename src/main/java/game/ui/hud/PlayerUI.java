@@ -9,10 +9,10 @@ import org.newdawn.slick.Graphics;
 
 import game.components.misc.Inventory;
 import game.misc.Shop;
-import game.ui.IStaticUIElement;
+import game.ui.StaticUIElement;
 
 
-public class PlayerUI implements IStaticUIElement {
+public class PlayerUI implements StaticUIElement {
   public static final int HEIGHT = 75;
 
   private static final int STATS_WIDTH = 100;

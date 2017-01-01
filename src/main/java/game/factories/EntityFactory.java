@@ -21,7 +21,7 @@ import game.components.misc.PlayerControl;
 import game.components.physics.Movement;
 import game.components.physics.MovementConstraint;
 import game.config.Binds;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.entities.Player;
 import game.entities.Unit;
 import game.misc.CacheTool;
@@ -81,7 +81,7 @@ public class EntityFactory {
     AnimatedSheet death = CacheTool
         .getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprites.get("death"));
 
-    Entity entity = new Entity(x, y, data.hitbox.width, data.hitbox.height);
+    EntityImpl entity = new EntityImpl(x, y, data.hitbox.width, data.hitbox.height);
     Movement mov = new Movement(entity, dx, dy);
     Life life = new Life(entity, data.hitpoints);
 

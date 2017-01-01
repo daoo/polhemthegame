@@ -4,14 +4,14 @@
 
 package game.components.holdables;
 
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import math.Vector2;
 
-public class OffsetCalculatorLeft implements IOffsetCalculator {
-  private final Entity mEntity;
+public class OffsetCalculatorLeft implements OffsetCalculator {
+  private final EntityImpl mEntity;
   private final Vector2 mNewOffset;
 
-  public OffsetCalculatorLeft(Entity entity, Vector2 handOffset) {
+  public OffsetCalculatorLeft(EntityImpl entity, Vector2 handOffset) {
     mEntity = entity;
 
     // Since we're flipped, offset come from UPPER RIGHT corner instead of

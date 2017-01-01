@@ -4,18 +4,18 @@
 
 package game.components.misc;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
-import game.triggers.IEffect;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
+import game.triggers.Effect;
 import game.types.GameTime;
 import game.types.Message;
 
-public class KillCreep implements ILogicComponent {
-  private final Entity mOwner;
+public class KillCreep implements LogicComponent {
+  private final EntityImpl mOwner;
   private final float mLimit;
-  private final IEffect mEffect;
+  private final Effect mEffect;
 
-  public KillCreep(Entity owner, float limit, IEffect effect) {
+  public KillCreep(EntityImpl owner, float limit, Effect effect) {
     mOwner = owner;
     mLimit = limit;
     mEffect = effect;

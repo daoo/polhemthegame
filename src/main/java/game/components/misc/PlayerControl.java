@@ -6,20 +6,20 @@ package game.components.misc;
 
 import org.lwjgl.input.Keyboard;
 
-import game.components.ILogicComponent;
+import game.components.LogicComponent;
 import game.components.holdables.Hand;
 import game.components.holdables.weapons.Weapon;
 import game.components.physics.Movement;
 import game.config.Binds;
-import game.entities.IEntity;
+import game.entities.Entity;
 import game.misc.Shop;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;
 import util.Key;
 
-public class PlayerControl implements ILogicComponent {
-  private final IEntity mOwner;
+public class PlayerControl implements LogicComponent {
+  private final Entity mOwner;
   private final Movement mMovement;
   private final Inventory mInventory;
   private final Shop mShop;
@@ -38,7 +38,7 @@ public class PlayerControl implements ILogicComponent {
   private int mLastY;
 
   public PlayerControl(
-      IEntity owner, Movement movement, Inventory inventory, Shop shop, Hand hand, float speed,
+      Entity owner, Movement movement, Inventory inventory, Shop shop, Hand hand, float speed,
       Binds binds) {
     mOwner = owner;
     mMovement = movement;

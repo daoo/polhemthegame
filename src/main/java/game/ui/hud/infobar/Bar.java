@@ -14,7 +14,7 @@ public class Bar {
   private final Color mColorHave;
   private final Color mColorLost;
 
-  private final IProgress mProgress;
+  private final Progressing mProgress;
   private float mFraction;
 
   /**
@@ -27,7 +27,7 @@ public class Bar {
    * @param colorHave the color for the left part of the bar
    * @param colorLost the color for the right part of the bar
    */
-  public Bar(IProgress progress, Color colorHave, Color colorLost) {
+  public Bar(Progressing progress, Color colorHave, Color colorLost) {
     assert progress != null;
     assert colorHave != null;
     assert colorLost != null;

@@ -4,18 +4,18 @@
 
 package game.components.physics;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
 import math.Collisions;
 
-public class MovementConstraint implements ILogicComponent {
-  private final Entity mOwner;
+public class MovementConstraint implements LogicComponent {
+  private final EntityImpl mOwner;
   private final Aabb mConstraints;
 
-  public MovementConstraint(Entity owner, Aabb constraints) {
+  public MovementConstraint(EntityImpl owner, Aabb constraints) {
     mOwner = owner;
     mConstraints = constraints;
   }

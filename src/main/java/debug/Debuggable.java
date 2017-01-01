@@ -6,7 +6,7 @@ package debug;
 
 import util.Node;
 
-public interface IDebuggable {
+public interface Debuggable {
   /**
    * Returns a debug node. A debug node is a node with children that contains
    * information related to the game.

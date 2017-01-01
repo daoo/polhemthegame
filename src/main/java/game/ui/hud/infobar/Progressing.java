@@ -4,6 +4,6 @@
 
 package game.ui.hud.infobar;
 
-public interface IProgress {
+public interface Progressing {
   float getProgress();
 }

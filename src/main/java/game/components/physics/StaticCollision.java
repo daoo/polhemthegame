@@ -4,16 +4,16 @@
 
 package game.components.physics;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 
-public class StaticCollision implements ILogicComponent {
-  private final Entity mOwner;
+public class StaticCollision implements LogicComponent {
+  private final EntityImpl mOwner;
   private boolean mEnableCollisions;
 
-  public StaticCollision(Entity owner) {
+  public StaticCollision(EntityImpl owner) {
     mOwner = owner;
     mEnableCollisions = true;
   }
@@ -21,7 +21,7 @@ public class StaticCollision implements ILogicComponent {
   @Override
   public void update(GameTime time) {
     if (mEnableCollisions) {
-      for (Entity e : mOwner.getWorld().getUnits()) {
+      for (EntityImpl e : mOwner.getWorld().getUnits()) {
         if (mOwner.getBody().intersects(e.getBody())) {
           mOwner.sendMessage(Message.COLLIDED_WITH, e);
           e.sendMessage(Message.COLLIDED_WITH, mOwner);

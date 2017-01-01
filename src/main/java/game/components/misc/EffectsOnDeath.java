@@ -6,17 +6,17 @@ package game.components.misc;
 
 import java.util.Collection;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
-import game.triggers.IEffect;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
+import game.triggers.Effect;
 import game.types.GameTime;
 import game.types.Message;
 
-public class EffectsOnDeath implements ILogicComponent {
-  private final Entity mOwner;
-  private final Collection<? extends IEffect> mEffects;
+public class EffectsOnDeath implements LogicComponent {
+  private final EntityImpl mOwner;
+  private final Collection<? extends Effect> mEffects;
 
-  public EffectsOnDeath(Entity owner, Collection<? extends IEffect> effects) {
+  public EffectsOnDeath(EntityImpl owner, Collection<? extends Effect> effects) {
     mOwner = owner;
     mEffects = effects;
   }

@@ -20,7 +20,7 @@ import loader.parser.ParserException;
 import util.Key;
 import util.Node;
 
-public class MenuState implements IState {
+public class MenuState implements GameState {
   private static final String CAMPAIGN_FILE = "campaigns/polhem.js";
   private static final String MENU_BACKGROUND_FILE = "textures/menu/main.png";
 

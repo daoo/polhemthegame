@@ -5,7 +5,7 @@
 package game.components.graphics.animations;
 
 
-public class ContinuousAnimator implements IAnimator {
+public class ContinuousAnimator implements Animator {
   private final Tile mSize;
 
   public ContinuousAnimator(Tile size) {

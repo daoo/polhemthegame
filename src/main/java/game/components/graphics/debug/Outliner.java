@@ -7,26 +7,26 @@ package game.components.graphics.debug;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.components.physics.Movement;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
 import math.Vector2;
 
-public class Outliner implements IRenderComponent {
+public class Outliner implements RenderComponent {
   private static final Color FIRST = Color.red;
   private static final Color SECOND = Color.green;
   private static final Color THIRD = Color.blue;
 
-  private final Entity mOwner;
+  private final EntityImpl mOwner;
   private final Movement mMovement;
 
   private final boolean mOutlineNext;
   private final boolean mLinesToNext;
 
-  public Outliner(Entity owner, Movement movement, boolean outlineNext, boolean lineToNext) {
+  public Outliner(EntityImpl owner, Movement movement, boolean outlineNext, boolean lineToNext) {
     mOwner = owner;
     mMovement = movement;
 

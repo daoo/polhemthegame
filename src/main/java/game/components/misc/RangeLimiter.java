@@ -4,22 +4,22 @@
 
 package game.components.misc;
 
-import game.components.ILogicComponent;
-import game.entities.Entity;
+import game.components.LogicComponent;
+import game.entities.EntityImpl;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.TimePos;
 import math.Vector2;
 
-public class RangeLimiter implements ILogicComponent {
-  private final Entity mOwner;
+public class RangeLimiter implements LogicComponent {
+  private final EntityImpl mOwner;
 
   private TimePos mStart;
 
   private final int mDuration;
   private final int mRange;
 
-  public RangeLimiter(Entity owner, int duration, int range) {
+  public RangeLimiter(EntityImpl owner, int duration, int range) {
     mOwner = owner;
 
     mDuration = duration;

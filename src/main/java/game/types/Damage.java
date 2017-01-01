@@ -4,14 +4,14 @@
 
 package game.types;
 
-import game.entities.IEntity;
+import game.entities.Entity;
 
 @SuppressWarnings("InstanceVariableNamingConvention")
 public class Damage {
   public final float ammount;
-  public final IEntity source;
+  public final Entity source;
 
-  public Damage(IEntity source, float ammount) {
+  public Damage(Entity source, float ammount) {
     this.source = source;
     this.ammount = ammount;
   }

@@ -4,47 +4,31 @@
 
 package game.components.holdables.weapons;
 
-/**
- * Simple class for managing a gun's magazine.
- */
-public class Magazine implements IMagazine {
-  private final int mSize;
-  private int mAmmo;
+public interface Magazine {
+  /**
+   * Check if the magazine is empty.
+   *
+   * @return true if the magazine is empty otherwise false
+   */
+  boolean isEmpty();
 
   /**
-   * Create a new magazine with space for a certain amount of bullets.
+   * Take one bullet out of the magazine.
    *
-   * @param size the size of the magazine, greater than zero
+   * @return true if there was ammo, otherwise false
    */
-  public Magazine(int size) {
-    assert size > 0;
+  boolean takeOne();
 
-    mSize = size;
-    mAmmo = size;
-  }
+  /**
+   * Reload the magazine.
+   */
+  void reload();
 
-  @Override
-  public boolean isEmpty() {
-    return mAmmo == 0;
-  }
+  /**
+   * Return the amount of bullets divided by the size of the magazine.
+   *
+   * @return a float in range [0, 1]
+   */
+  float getFractionFilled();
 
-  @Override
-  public boolean takeOne() {
-    if (mAmmo <= 0) {
-      return false;
-    }
-
-    --mAmmo;
-    return true;
-  }
-
-  @Override
-  public void reload() {
-    mAmmo = mSize;
-  }
-
-  @Override
-  public float getFractionFilled() {
-    return mAmmo / (float) mSize;
-  }
 }

@@ -6,7 +6,7 @@ package game.components.ai;
 
 import game.types.GameTime;
 
-public class Shooting implements IBossState {
+public class Shooting implements BossState {
   private final long mLength;
 
   private long mEndTime;
@@ -34,10 +34,5 @@ public class Shooting implements IBossState {
   @Override
   public boolean isFinished() {
     return mFinished;
-  }
-
-  @Override
-  public BossState getState() {
-    return BossState.SHOOTING;
   }
 }

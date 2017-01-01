@@ -4,10 +4,10 @@
 
 package game.components.holdables;
 
-import game.components.IRenderComponent;
-import game.ui.hud.infobar.IProgress;
+import game.components.RenderComponent;
+import game.ui.hud.infobar.Progressing;
 
-public interface IHoldable extends IRenderComponent, IProgress {
+public interface Holdable extends RenderComponent, Progressing {
   void toggleOn();
 
   void toggleOff();

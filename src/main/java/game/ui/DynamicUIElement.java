@@ -6,6 +6,10 @@ package game.ui;
 
 import org.newdawn.slick.Graphics;
 
-public interface IStaticUIElement {
+public interface DynamicUIElement {
+  void update();
+
   void render(Graphics g);
+
+  boolean isActive();
 }

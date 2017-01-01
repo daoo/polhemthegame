@@ -9,7 +9,7 @@ import game.types.GameTime;
 /**
  * State machine for a weapon.
  */
-public interface IWeaponMachine {
+public interface WeaponMachine {
   /**
    * Start firing.
    * Really starts next time we're idle and not out of bullets.

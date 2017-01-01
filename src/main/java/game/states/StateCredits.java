@@ -16,7 +16,7 @@ import game.states.credits.Credits;
 import util.FontHelper;
 import util.Node;
 
-public class StateCredits implements IState {
+public class StateCredits implements GameState {
   private static final int FONT_SIZE_SMALL = 24;
   private static final int FONT_SIZE_BIG = 30;
 

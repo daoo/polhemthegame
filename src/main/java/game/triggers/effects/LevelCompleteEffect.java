@@ -6,10 +6,10 @@ package game.triggers.effects;
 
 import game.course.LevelManager;
 import game.course.World;
-import game.triggers.IEffect;
+import game.triggers.Effect;
 import game.types.GameTime;
 
-public class LevelCompleteEffect implements IEffect {
+public class LevelCompleteEffect implements Effect {
   private final LevelManager mLevelManager;
 
   public LevelCompleteEffect(LevelManager gameMode) {

@@ -4,22 +4,22 @@
 
 package game.components.misc;
 
-import game.components.ILogicComponent;
-import game.entities.IEntity;
+import game.components.LogicComponent;
+import game.entities.Entity;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
-import game.ui.hud.infobar.IProgress;
+import game.ui.hud.infobar.Progressing;
 
-public class Life implements ILogicComponent, IProgress {
+public class Life implements LogicComponent, Progressing {
   private boolean mAlive;
 
   private float mHp;
   private final float mMaxHp;
 
-  private final IEntity mOwner;
+  private final Entity mOwner;
 
-  public Life(IEntity owner, float maxHP) {
+  public Life(Entity owner, float maxHP) {
     mOwner = owner;
     mAlive = true;
     mHp = maxHP;
@@ -38,9 +38,9 @@ public class Life implements ILogicComponent, IProgress {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.KILL) {
-      IEntity sender = null;
-      if (args instanceof IEntity) {
-        sender = (IEntity) args;
+      Entity sender = null;
+      if (args instanceof Entity) {
+        sender = (Entity) args;
       }
 
       kill(sender);
@@ -78,7 +78,7 @@ public class Life implements ILogicComponent, IProgress {
    * @param killer the killer to whom the KILLED_ENTITY message is sent, can be
    * null.
    */
-  private void kill(IEntity killer) {
+  private void kill(Entity killer) {
     if (mAlive) {
       mHp = 0;
       mAlive = false;

@@ -7,7 +7,7 @@ package game.components.graphics.animations;
 import game.misc.Locator;
 import util.Random;
 
-public class RandomAnimator implements IAnimator {
+public class RandomAnimator implements Animator {
   private final Tile mSize;
 
   public RandomAnimator(Tile size) {

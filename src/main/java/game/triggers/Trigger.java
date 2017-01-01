@@ -17,8 +17,8 @@ import util.Node;
  * executed when some conditions are met.
  */
 public class Trigger {
-  private final ArrayList<ICondition> mConditions;
-  private final ArrayList<IEffect> mEffects;
+  private final ArrayList<Condition> mConditions;
+  private final ArrayList<Effect> mEffects;
 
   private boolean mRunAgain;
 
@@ -84,7 +84,7 @@ public class Trigger {
       return false;
     }
 
-    for (ICondition condition : mConditions) {
+    for (Condition condition : mConditions) {
       if (!condition.evaluate(time, mWorld)) {
         return false;
       }
@@ -99,7 +99,7 @@ public class Trigger {
    * @param time the time to use
    */
   private void execute(GameTime time) {
-    for (IEffect effect : mEffects) {
+    for (Effect effect : mEffects) {
       effect.execute(time, mWorld);
     }
   }
@@ -109,7 +109,7 @@ public class Trigger {
    *
    * @param condition the condition to add, can not be null
    */
-  public void addCondition(ICondition condition) {
+  public void addCondition(Condition condition) {
     assert condition != null;
 
     mConditions.add(condition);
@@ -120,13 +120,13 @@ public class Trigger {
    *
    * @param effect the effect to add, can not be null
    */
-  public void addEffect(IEffect effect) {
+  public void addEffect(Effect effect) {
     assert effect != null;
 
     mEffects.add(effect);
   }
 
-  public void addAllEffects(Collection<? extends IEffect> collection) {
+  public void addAllEffects(Collection<? extends Effect> collection) {
     assert collection != null;
 
     mEffects.addAll(collection);

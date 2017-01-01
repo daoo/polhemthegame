@@ -8,7 +8,7 @@ import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.IdleAnimator;
 import game.components.graphics.animations.RunToAnimator;
 import game.components.graphics.animations.Tile;
-import game.components.holdables.weapons.IMagazine;
+import game.components.holdables.weapons.Magazine;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.types.GameTime;
 import util.Timer;
@@ -16,10 +16,10 @@ import util.Timer;
 /**
  * State machine for a single-mode weapon.
  */
-public class SingleMachine implements IWeaponMachine {
+public class SingleMachine implements WeaponMachine {
   private final int mReloadLength;
   private final int mCooldownLength;
-  private final IMagazine mMagazine;
+  private final Magazine mMagazine;
   private final ProjectileQueue mQueue;
   private final AnimatedSheet mAnim;
 
@@ -29,7 +29,7 @@ public class SingleMachine implements IWeaponMachine {
   private WeaponStates mState;
 
   public SingleMachine(
-      int reloadLength, int cooldownLength, IMagazine magazine, ProjectileQueue queue,
+      int reloadLength, int cooldownLength, Magazine magazine, ProjectileQueue queue,
       AnimatedSheet anim) {
     mReloadLength = reloadLength;
     mCooldownLength = cooldownLength;

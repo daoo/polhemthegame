@@ -4,10 +4,10 @@
 
 package game.components.ai;
 
-import game.components.ILogicComponent;
+import game.components.LogicComponent;
 import game.components.holdables.Hand;
 import game.components.physics.Movement;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.misc.Locator;
 import game.types.GameTime;
 import game.types.Message;
@@ -16,7 +16,7 @@ import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
 
-public class BossAI implements ILogicComponent {
+public class BossAI implements LogicComponent {
   private static final int INITIAL_TARGET_COUNT = 1;
   private static final int TARGET_MIN_COUNT = 1;
   private static final int TARGET_MAX_COUNT = 3;
@@ -27,17 +27,17 @@ public class BossAI implements ILogicComponent {
   private static final int SHOOTING_TIME_MIN = 1000;
   private static final int SHOOTING_TIME_MAX = 1500;
 
-  private final Entity mEntity;
+  private final EntityImpl mEntity;
   private final Movement mMovement;
   private final Hand mHand;
   private final Aabb mMovementBox;
   private final Vector2 mInitialTarget;
   private final float mSpeed;
 
-  private IBossState mState;
+  private BossState mState;
 
   public BossAI(
-      Entity entity, Movement movement, Hand hand, Aabb arenaBox, float locationX, float speed,
+      EntityImpl entity, Movement movement, Hand hand, Aabb arenaBox, float locationX, float speed,
       Vector2 initialTarget) {
     mEntity = entity;
     mHand = hand;
@@ -58,7 +58,7 @@ public class BossAI implements ILogicComponent {
     mMovementBox = new Aabb(min, Rectangle.fromExtents(min, max));
   }
 
-  public IBossState getState() {
+  public BossState getState() {
     return mState;
   }
 
@@ -69,14 +69,14 @@ public class BossAI implements ILogicComponent {
     if (mState.isFinished()) {
       // Go to next state
 
-      if (mState.getState() == BossState.WALKING) {
+      if (mState instanceof Walking) {
         int shootingTime = Locator.getRandom().nextInt(SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
         mState = new Shooting(shootingTime);
 
         mMovement.setVelocity(Vector2.ZERO);
         mEntity.sendMessage(Message.STOP_ANIMATION, null);
         mHand.startUse();
-      } else if (mState.getState() == BossState.SHOOTING) {
+      } else if (mState instanceof Shooting) {
         int targets = Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
         mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementBox, targets);
 

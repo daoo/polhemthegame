@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.entities.Player;
 import game.entities.Players;
 import game.factories.EntityFactory;
@@ -61,7 +61,7 @@ public class LevelManager {
 
     EntityFactory entityFactory = new EntityFactory(arenaBox, mStatics.getGraphics());
 
-    ArrayList<Entity> players = new ArrayList<>();
+    ArrayList<EntityImpl> players = new ArrayList<>();
     Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
     Locator.getUI().addDynamic(player1.infoBar);
     Locator.getUI().addStatic(new PlayerUI(0, 0, windowWidth, player1.shopUI, player1.inventory));

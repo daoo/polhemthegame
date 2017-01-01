@@ -13,12 +13,12 @@ import game.ui.hud.infobar.InfoBar;
  */
 @SuppressWarnings("InstanceVariableNamingConvention")
 public class Unit {
-  public final Entity entity;
+  public final EntityImpl entity;
   public final Movement movement;
   public final Life life;
   public final InfoBar infoBar;
 
-  public Unit(Entity entity, Movement movement, Life life, InfoBar infoBar) {
+  public Unit(EntityImpl entity, Movement movement, Life life, InfoBar infoBar) {
     this.entity = entity;
     this.movement = movement;
     this.life = life;

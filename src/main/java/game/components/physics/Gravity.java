@@ -4,12 +4,12 @@
 
 package game.components.physics;
 
-import game.components.ILogicComponent;
+import game.components.LogicComponent;
 import game.types.GameTime;
 import game.types.Message;
 import math.Vector2;
 
-public class Gravity implements ILogicComponent {
+public class Gravity implements LogicComponent {
   private static final float FACTOR = 100.0f;
 
   private final Movement mMovement;

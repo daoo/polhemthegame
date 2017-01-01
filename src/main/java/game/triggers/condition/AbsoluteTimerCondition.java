@@ -5,10 +5,10 @@
 package game.triggers.condition;
 
 import game.course.World;
-import game.triggers.ICondition;
+import game.triggers.Condition;
 import game.types.GameTime;
 
-public class AbsoluteTimerCondition implements ICondition {
+public class AbsoluteTimerCondition implements Condition {
   private final long mTimeAfter;
 
   public AbsoluteTimerCondition(long start, int time) {

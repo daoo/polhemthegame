@@ -7,11 +7,11 @@ package game.components.graphics.debug;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 
-public class SolidQuad implements IRenderComponent {
+public class SolidQuad implements RenderComponent {
   private final Color mColor;
   private final int mWidth;
   private final int mHeight;

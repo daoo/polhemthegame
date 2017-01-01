@@ -15,7 +15,7 @@ import org.newdawn.slick.SlickException;
 import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
-import game.entities.Entity;
+import game.entities.EntityImpl;
 import math.Aabb;
 import math.Collisions;
 import math.Vector2;
@@ -48,18 +48,18 @@ public class CollisionTester extends BasicGame {
     }
   }
 
-  private final Entity mObj1;
-  private final Entity mObj2;
+  private final EntityImpl mObj1;
+  private final EntityImpl mObj2;
   private final Movement mMov2;
 
   public CollisionTester() {
     super("Collision Tester");
 
-    mObj1 = new Entity(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
+    mObj1 = new EntityImpl(RECTANGLE_X, RECTANGLE_Y, RECTANGLE_W, RECTANGLE_H);
     mObj1.addRenderComponent(new SolidQuad(Color.white, RECTANGLE_W, RECTANGLE_H));
 
     // Make projectile
-    mObj2 = new Entity(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
+    mObj2 = new EntityImpl(PROJECTILE_X, PROJECTILE_Y, PROJECTILE_W, PROJECTILE_H);
     mMov2 = new Movement(mObj2, PROJECTILE_DX, PROJECTILE_DY);
 
     mObj2.addLogicComponent(mMov2);

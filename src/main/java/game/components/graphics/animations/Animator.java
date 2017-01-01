@@ -4,8 +4,7 @@
 
 package game.components.graphics.animations;
 
-
-public interface IAnimator {
+public interface Animator {
   boolean isFinished();
 
   Tile next(Tile tile);

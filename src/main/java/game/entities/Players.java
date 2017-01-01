@@ -20,14 +20,14 @@ public class Players {
    * @param players the players to reposition
    * @param box the rectangle to use for alignment
    */
-  public static void reposition(List<Entity> players, Aabb box) {
+  public static void reposition(List<EntityImpl> players, Aabb box) {
     float dx = 0;
     float dy = box.getSize().y / (players.size() * 2.0f);
 
     float x = box.getMin().x + box.getSize().x * STARING_X;
     float y = box.getMin().y + dy;
 
-    for (Entity p : players) {
+    for (EntityImpl p : players) {
       p.getBody().setPosition(new Vector2(x, y - p.getBody().getSize().y / 2.0f));
 
       x += dx;

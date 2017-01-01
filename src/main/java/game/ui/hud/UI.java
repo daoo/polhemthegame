@@ -10,18 +10,18 @@ import org.newdawn.slick.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import game.ui.IDynamicUIElement;
-import game.ui.IStaticUIElement;
+import game.ui.DynamicUIElement;
+import game.ui.StaticUIElement;
 
 
 /**
  * Simple UI implementation.
  */
 public class UI {
-  private final ArrayList<IStaticUIElement> mStatics;
-  private final ArrayList<IDynamicUIElement> mDynamics;
+  private final ArrayList<StaticUIElement> mStatics;
+  private final ArrayList<DynamicUIElement> mDynamics;
 
-  private final ArrayList<IDynamicUIElement> mToAdd;
+  private final ArrayList<DynamicUIElement> mToAdd;
 
   private final int mWidth;
   private final int mHeight;
@@ -46,7 +46,7 @@ public class UI {
    *
    * @param element the element to add, can not be null
    */
-  public void addStatic(IStaticUIElement element) {
+  public void addStatic(StaticUIElement element) {
     assert element != null;
 
     mStatics.add(element);
@@ -57,7 +57,7 @@ public class UI {
    *
    * @param element the element to add, can not be null
    */
-  public void addDynamic(IDynamicUIElement element) {
+  public void addDynamic(DynamicUIElement element) {
     assert element != null;
 
     mToAdd.add(element);
@@ -67,9 +67,9 @@ public class UI {
    * Updates dynamic elements. Also removes inactive elements.
    */
   public void update() {
-    Iterator<IDynamicUIElement> it = mDynamics.iterator();
+    Iterator<DynamicUIElement> it = mDynamics.iterator();
     while (it.hasNext()) {
-      IDynamicUIElement e = it.next();
+      DynamicUIElement e = it.next();
       if (e.isActive()) {
         e.update();
       } else {
@@ -88,7 +88,7 @@ public class UI {
    * @param g the graphics context to use
    */
   public void renderDynamics(Graphics g) {
-    for (IDynamicUIElement e : mDynamics) {
+    for (DynamicUIElement e : mDynamics) {
       e.render(g);
     }
   }
@@ -100,7 +100,7 @@ public class UI {
    * @param g the rendering context to use
    */
   public void renderStatics(Graphics g) {
-    for (IStaticUIElement e : mStatics) {
+    for (StaticUIElement e : mStatics) {
       e.render(g);
     }
 

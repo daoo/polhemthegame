@@ -7,12 +7,12 @@ package game.components.graphics;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import game.components.IRenderComponent;
+import game.components.RenderComponent;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
 
-public class TexturedQuad implements IRenderComponent {
+public class TexturedQuad implements RenderComponent {
   private final int mCenterX;
   private final int mCenterY;
   private final boolean mFlip;

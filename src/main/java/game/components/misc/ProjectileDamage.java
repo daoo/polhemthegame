@@ -4,20 +4,20 @@
 
 package game.components.misc;
 
-import game.components.ILogicComponent;
-import game.entities.IEntity;
+import game.components.LogicComponent;
+import game.entities.Entity;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
 
-public class ProjectileDamage implements ILogicComponent {
+public class ProjectileDamage implements LogicComponent {
   private final Damage mDamageOther;
   private final Damage mDamageSelf;
 
-  private final IEntity mOwner;
-  private final IEntity mSource;
+  private final Entity mOwner;
+  private final Entity mSource;
 
-  public ProjectileDamage(IEntity owner, IEntity source, float damage) {
+  public ProjectileDamage(Entity owner, Entity source, float damage) {
     mOwner = owner;
     mSource = source;
 
@@ -33,7 +33,7 @@ public class ProjectileDamage implements ILogicComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.COLLIDED_WITH) {
-      IEntity entity = (IEntity) args;
+      Entity entity = (Entity) args;
       entity.sendMessage(Message.DAMAGE, mDamageOther);
       mOwner.sendMessage(Message.DAMAGE, mDamageSelf);
       mSource.sendMessage(Message.DEALT_DAMAGE, mDamageOther);
