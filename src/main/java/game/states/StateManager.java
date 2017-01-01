@@ -56,8 +56,8 @@ public class StateManager {
 
   public void enterGame(String campaign, boolean twoPlayer) {
     try {
-      CampaignData data = (CampaignData) Locator.getCache()
-          .get(campaign, new GsonParser(CampaignData.class));
+      CampaignData data = Locator.getCache()
+          .get(campaign, new GsonParser<>(Locator.getGson(), CampaignData.class));
 
       GameState state = new GameState(this, data, twoPlayer, mWindowWidth, mWindowHeight);
       if (DEBUG) {
