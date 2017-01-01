@@ -6,7 +6,6 @@ package game.misc;
 
 import org.newdawn.slick.Image;
 
-import java.io.File;
 import java.io.IOException;
 
 import game.components.graphics.AnimatedSheet;
@@ -22,23 +21,12 @@ import loader.data.json.ShopData;
 import loader.data.json.WeaponsData;
 import loader.data.json.types.SpriteData;
 import loader.parser.GsonParser;
-import loader.parser.Parser;
 import loader.parser.PNGParser;
+import loader.parser.Parser;
 import loader.parser.ParserException;
 import util.SpriteSheet;
 
 public class CacheTool {
-  private static final String EXT_JS = ".js";
-
-  private static final String DIR_LEVELS = "levels";
-
-  private static final String FILE_BOSSES = "bosses.js";
-  private static final String FILE_CREEPS = "creeps.js";
-  private static final String FILE_PLAYERS = "players.js";
-  private static final String FILE_PROJECTILES = "projectiles.js";
-  private static final String FILE_WEAPONS = "weapons.js";
-  private static final String FILE_SHOP = "shop.js";
-
   private static final Parser<BossesData> BOSSES_PARSER = new GsonParser<>(
       Locator.getGson(), BossesData.class);
   private static final Parser<CreepsData> CREEPS_PARSER = new GsonParser<>(
@@ -56,11 +44,11 @@ public class CacheTool {
   private static final Parser<DataImage> PNG_PARSER = new PNGParser();
 
   public static BossesData getBosses(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_BOSSES, BOSSES_PARSER);
+    return cache.get("bosses.js", BOSSES_PARSER);
   }
 
   public static CreepsData getCreeps(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_CREEPS, CREEPS_PARSER);
+    return cache.get("creeps.js", CREEPS_PARSER);
   }
 
   public static Image getImage(Cache cache, String id) throws ParserException, IOException {
@@ -68,19 +56,19 @@ public class CacheTool {
   }
 
   public static LevelData getLevel(Cache cache, String level) throws ParserException, IOException {
-    return cache.get(DIR_LEVELS + File.separator + level + EXT_JS, LEVEL_PARSER);
+    return cache.get("levels/" + level + ".js", LEVEL_PARSER);
   }
 
   public static PlayersData getPlayers(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_PLAYERS, PLAYERS_PARSER);
+    return cache.get("players.js", PLAYERS_PARSER);
   }
 
   public static WeaponsData getWeapons(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_WEAPONS, WEAPONS_PARSER);
+    return cache.get("weapons.js", WEAPONS_PARSER);
   }
 
   public static ProjectilesData getProjectiles(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_PROJECTILES, PROJECTILES_PARSER);
+    return cache.get("projectiles.js", PROJECTILES_PARSER);
   }
 
   /**
@@ -88,28 +76,27 @@ public class CacheTool {
    *
    * @param cache the cache to use for retrieval
    * @param orientation the orientation of the sheet (when rendering)
-   * @param angle the rotation of the sheet (when rendering)
+   * @param rotation the rotation of the sheet (when rendering)
    * @param sprite the sprite data
    * @return a new animated sprite sheet
    * @throws ParserException if parsing fails
    * @throws IOException if IO fails
    */
   public static AnimatedSheet getAnimatedSheet(
-      Cache cache, Orientation orientation, int angle, SpriteData sprite) throws ParserException,
+      Cache cache, Orientation orientation, int rotation, SpriteData sprite) throws ParserException,
       IOException {
-    SpriteSheet sheet = getSpriteSheet(cache, sprite);
-    return new AnimatedSheet(sprite.framerate, sprite.offset.x, sprite.offset.y, orientation, angle,
-        sheet);
+    return new AnimatedSheet(sprite.framerate, sprite.offset.x, sprite.offset.y, orientation,
+        rotation, getSpriteSheet(cache, sprite));
   }
 
   public static ShopData getShop(Cache cache) throws ParserException, IOException {
-    return cache.get(FILE_SHOP, SHOP_PARSER);
+    return cache.get("shop.js", SHOP_PARSER);
   }
 
   public static SpriteSheet getSpriteSheet(Cache cache, SpriteData sprite) throws ParserException,
       IOException {
-    Image img = cache.get(sprite.sprite, PNG_PARSER);
-
-    return new SpriteSheet(img, sprite.tileSize.width, sprite.tileSize.height, sprite.spacing);
+    return new SpriteSheet(
+        cache.get(sprite.sprite, PNG_PARSER), sprite.tileSize.width, sprite.tileSize.height,
+        sprite.spacing);
   }
 }
