@@ -55,20 +55,18 @@ public class EntityFactory {
   private static final int BAR_OFFSET_Y = -6;
 
   private final Aabb mWorldBoundary;
-  private final Graphics mStatics;
 
   private final WeaponFactory mWeaponFactory;
   private final ShopData mShopData;
   private final PlayersData mPlayersData;
 
-  public EntityFactory(Aabb boundary, Graphics statics) throws ParserException, IOException {
+  public EntityFactory(Aabb boundary) throws ParserException, IOException {
     mWorldBoundary = boundary;
-    mStatics = statics;
 
     Aabb projectileBox = new Aabb(new Vector2(-boundary.getSize().x, -boundary.getSize().y),
         new Rectangle(3 * boundary.getSize().x, 3 * boundary.getSize().y));
 
-    mWeaponFactory = new WeaponFactory(projectileBox, statics);
+    mWeaponFactory = new WeaponFactory(projectileBox);
     mShopData = CacheTool.getShop(Locator.getCache());
     mPlayersData = CacheTool.getPlayers(Locator.getCache());
   }
@@ -90,7 +88,7 @@ public class EntityFactory {
     entity.addRenderComponent(walk);
 
     entity.addLogicComponent(new EffectsOnDeath(entity, Arrays
-        .asList(new SpawnAnimationEffect(entity, death, mStatics), new RemoveEntityEffect(entity))));
+        .asList(new SpawnAnimationEffect(entity, death), new RemoveEntityEffect(entity))));
 
     InfoBar infoBar = new InfoBar(entity, data.hitbox.width, BAR_HEIGHT, BAR_OFFSET_X,
         BAR_OFFSET_Y);

@@ -4,7 +4,6 @@
 
 package game.factories;
 
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import java.io.IOException;
@@ -25,8 +24,8 @@ import game.components.physics.Gravity;
 import game.components.physics.Movement;
 import game.components.physics.MovingProjectileCollision;
 import game.components.physics.StaticCollision;
-import game.entities.EntityImpl;
 import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.misc.CacheTool;
 import game.misc.Locator;
 import game.triggers.Effect;
@@ -49,7 +48,6 @@ public class ProjectileFactory {
   private final Image mImg;
   private final SpriteSheet mSprite;
   private final SpriteSheet mExplosion;
-  private final Graphics mStatics;
 
   /**
    * Construct a new projectile factory for a given projectile.
@@ -60,13 +58,12 @@ public class ProjectileFactory {
    * @param launchAngle the angle of launching in degrees, zero means horizontal
    * @param spread spread in degrees, [-spread, spread]
    * @param orientation the orientation of the weapon firing this projectile
-   * @param statics graphics context for static rendering
    * @throws IOException when fetching images from the drive fails
    * @throws ParserException when fetching images from the drive fails
    */
   public ProjectileFactory(
-      Aabb boundary, int launchAngle, int spread, Orientation orientation, ProjectileData data,
-      Graphics statics) throws IOException, ParserException {
+      Aabb boundary, int launchAngle, int spread, Orientation orientation,
+      ProjectileData data) throws IOException, ParserException {
     assert data != null;
 
     mBoundary = boundary;
@@ -74,7 +71,6 @@ public class ProjectileFactory {
     mSpread = spread;
     mOrientation = orientation;
     mData = data;
-    mStatics = statics;
 
     if (data.texture != null) {
       mImg = CacheTool.getImage(Locator.getCache(), data.texture);
@@ -178,7 +174,7 @@ public class ProjectileFactory {
 
     effectsOnDeath
         .add(new AOEDamageEffect(source, p.getBody(), mData.aoe.radius, mData.aoe.damage));
-    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, mStatics));
+    effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim));
   }
 
   private RenderComponent getRender(int angle) {

@@ -17,22 +17,23 @@ import util.Node;
  */
 public class Animation implements Entity {
   private final AnimatedSheet mSheet;
-  private final Graphics mGraphics;
-
+  private final Vector2 mPosition;
   private boolean mActive;
-  private Vector2 mPosition;
 
-  public Animation(int x, int y, AnimatedSheet anim, Graphics graphics) {
-    mPosition = new Vector2(x, y);
+  public Animation(Vector2 position, AnimatedSheet anim) {
+    mPosition = position;
     mSheet = anim;
-    mGraphics = graphics;
-
     mActive = true;
   }
 
   @Override
   public boolean isActive() {
     return mActive;
+  }
+
+  @Override
+  public boolean keepRendering() {
+    return true;
   }
 
   @Override
@@ -44,9 +45,7 @@ public class Animation implements Entity {
   public void render(Graphics g) {
     g.pushTransform();
     g.translate(mPosition.x, mPosition.y);
-
     mSheet.render(g);
-
     g.popTransform();
   }
 
@@ -55,23 +54,11 @@ public class Animation implements Entity {
     mSheet.reciveMessage(message, args);
   }
 
-  public void setPosition(Vector2 position) {
-    mPosition = position;
-  }
-
   @Override
   public void update(GameTime time) {
     mSheet.update(time);
 
-    if (mSheet.getCurrentTile().isEqual(mSheet.getLastTile())) {
-      mActive = false;
-
-      mGraphics.pushTransform();
-      mGraphics.translate(mPosition.x, mPosition.y);
-      mSheet.render(mGraphics);
-      mGraphics.popTransform();
-      mGraphics.flush();
-    }
+    mActive = !mSheet.getCurrentTile().isEqual(mSheet.getLastTile());
   }
 
   @Override

@@ -14,33 +14,26 @@ import java.util.List;
 
 import debug.DebugHelper;
 import debug.Debuggable;
-import game.entities.EntityImpl;
 import game.entities.Entity;
+import game.entities.EntityImpl;
 import game.triggers.Trigger;
 import game.types.GameTime;
 import util.Node;
 
 public class World implements Debuggable {
-  private final ArrayList<Entity> mMisc;
-  private final ArrayList<EntityImpl> mUnits;
-  private final ArrayList<EntityImpl> mProjectiles;
-  private final ArrayList<Entity> mNewMisc;
-  private final ArrayList<EntityImpl> mNewUnits;
-  private final ArrayList<EntityImpl> mNewProjectiles;
-  private final ArrayList<Trigger> mTriggers;
-  private final ArrayList<Trigger> mNewTriggers;
+  private final ArrayList<Entity> mMisc = new ArrayList<>();
+  private final ArrayList<EntityImpl> mUnits = new ArrayList<>();
+  private final ArrayList<EntityImpl> mProjectiles = new ArrayList<>();
+  private final ArrayList<Entity> mNewMisc = new ArrayList<>();
+  private final ArrayList<EntityImpl> mNewUnits = new ArrayList<>();
+  private final ArrayList<EntityImpl> mNewProjectiles = new ArrayList<>();
+  private final ArrayList<Trigger> mTriggers = new ArrayList<>();
+  private final ArrayList<Trigger> mNewTriggers = new ArrayList<>();
 
-  public World() {
-    mMisc = new ArrayList<>();
-    mUnits = new ArrayList<>();
-    mProjectiles = new ArrayList<>();
+  private final Graphics mStatics;
 
-    mNewMisc = new ArrayList<>();
-    mNewUnits = new ArrayList<>();
-    mNewProjectiles = new ArrayList<>();
-
-    mTriggers = new ArrayList<>();
-    mNewTriggers = new ArrayList<>();
+  public World(Graphics statics) {
+    mStatics = statics;
   }
 
   public void addMisc(Entity obj) {
@@ -139,12 +132,15 @@ public class World implements Debuggable {
     return parent;
   }
 
-  private static void processEntities(Iterable<? extends Entity> entities, GameTime time) {
+  private void processEntities(Iterable<? extends Entity> entities, GameTime time) {
     Iterator<? extends Entity> itr = entities.iterator();
     while (itr.hasNext()) {
       Entity e = itr.next();
       e.update(time);
       if (!e.isActive()) {
+        if (!e.keepRendering()) {
+          e.render(mStatics);
+        }
         itr.remove();
       }
     }

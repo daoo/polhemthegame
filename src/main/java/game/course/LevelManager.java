@@ -59,7 +59,7 @@ public class LevelManager {
     mBackground = CacheTool.getImage(Locator.getCache(), data.background);
 
 
-    EntityFactory entityFactory = new EntityFactory(arenaBox, mStatics.getGraphics());
+    EntityFactory entityFactory = new EntityFactory(arenaBox);
 
     ArrayList<EntityImpl> players = new ArrayList<>();
     Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
@@ -86,8 +86,8 @@ public class LevelManager {
     if (mCampaign.hasMoreLevels()) {
       try {
         mCampaign.nextLevel();
-        mWorld = mWorldFactory.makeLevel(mCampaign.getCurrentLevel());
-      } catch (ParserException | IOException ex) {
+        mWorld = mWorldFactory.makeLevel(mCampaign.getCurrentLevel(), mStatics.getGraphics());
+      } catch (ParserException | IOException| SlickException ex) {
         mStateManager.handleException(ex);
       }
     } else {

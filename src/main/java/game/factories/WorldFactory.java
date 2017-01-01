@@ -4,6 +4,7 @@
 
 package game.factories;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import java.io.IOException;
@@ -102,12 +103,12 @@ public class WorldFactory {
     mCreepsDeadTrigger.addCondition(new AllInactiveCondition(creeps));
   }
 
-  public World makeLevel(LevelData level) throws ParserException, IOException {
+  public World makeLevel(LevelData level, Graphics statics) throws ParserException, IOException {
     Image imgLevelStart = CacheTool.getImage(Locator.getCache(), level.loading);
     Image imgLevelComplete = CacheTool.getImage(Locator.getCache(), level.completed);
     Image imgGameOver = CacheTool.getImage(Locator.getCache(), GAME_OVER_IMAGE);
 
-    mWorld = new World();
+    mWorld = new World(statics);
 
     mCreepsSpawnTrigger = new Trigger();
     mCreepsDeadTrigger = new Trigger();

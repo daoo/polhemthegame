@@ -4,8 +4,6 @@
 
 package game.factories;
 
-import org.newdawn.slick.Graphics;
-
 import java.io.IOException;
 
 import game.components.graphics.AnimatedSheet;
@@ -29,19 +27,16 @@ public class WeaponFactory {
   private final Aabb mBounds;
   private final WeaponsData mWeapons;
   private final ProjectilesData mProjectiles;
-  private final Graphics mStatics;
 
   /**
    * Construct a new weapon factory that can make any weapon.
    *
    * @param bounds the bounds within projectiles can exists
-   * @param statics graphics context were statics can be drawn
    * @throws ParserException when parsing file data fails
    * @throws IOException when reading files fails
    */
-  public WeaponFactory(Aabb bounds, Graphics statics) throws ParserException, IOException {
+  public WeaponFactory(Aabb bounds) throws ParserException, IOException {
     mBounds = bounds;
-    mStatics = statics;
 
     mWeapons = CacheTool.getWeapons(Locator.getCache());
     mProjectiles = CacheTool.getProjectiles(Locator.getCache());
@@ -68,7 +63,7 @@ public class WeaponFactory {
         .getAnimatedSheet(Locator.getCache(), orientation, 0, data.sprite);
 
     ProjectileFactory factory = new ProjectileFactory(mBounds, data.launchAngle, data.spread,
-        orientation, projectileData, mStatics);
+        orientation, projectileData);
 
     return new Weapon(muzzle, data.automatic ? WeaponMode.AUTOMATIC : WeaponMode.SINGLE,
         data.reloadTime, (int) (60000 / data.rpm), data.clipSize, orientation, anim, factory);

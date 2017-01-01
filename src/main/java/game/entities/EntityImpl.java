@@ -120,6 +120,11 @@ public class EntityImpl implements Entity {
   }
 
   @Override
+  public boolean keepRendering() {
+    return false;
+  }
+
+  @Override
   public void remove() {
     mActive = false;
   }
