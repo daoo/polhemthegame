@@ -11,5 +11,4 @@ public class SpriteData {
   public String sprite;
   public boolean random;
   public int framerate;
-  public int spacing;
 }

@@ -28,28 +28,26 @@ public class SpriteSheet {
    *
    * @param original the image to get the sprites from
    * @param tileWidth the width of a tile in the sheet, greater than zero, also
-   * has to evenly split the image with the spacing
+   * has to evenly split the image
    * @param tileHeight the height of a tile in the sheet, greater than zero, also
-   * has to evenly split the image with the spacing
-   * @param spacing spacing between the tiles, greater than or equal to zero
+   * has to evenly split the image
    */
-  public SpriteSheet(Image original, int tileWidth, int tileHeight, int spacing) {
+  public SpriteSheet(Image original, int tileWidth, int tileHeight) {
     assert tileWidth > 0 && tileHeight > 0;
     assert tileWidth <= original.getWidth();
     assert tileHeight <= original.getHeight();
-    assert spacing >= 0;
 
     mOriginal = original;
     mTileWidth = tileWidth;
     mTileHeight = tileHeight;
 
-    mTileCountX = count(original.getWidth(), tileWidth, spacing);
-    mTileCountY = count(original.getHeight(), tileHeight, spacing);
+    mTileCountX = count(original.getWidth(), tileWidth);
+    mTileCountY = count(original.getHeight(), tileHeight);
 
     mSubImages = new Image[mTileCountX][mTileCountY];
     for (int y = 0; y < mTileCountY; ++y) {
       for (int x = 0; x < mTileCountX; ++x) {
-        mSubImages[x][y] = getSubImage(original, x, y, tileWidth, tileHeight, spacing);
+        mSubImages[x][y] = getSubImage(original, x, y, tileWidth, tileHeight);
       }
     }
   }
@@ -136,13 +134,12 @@ public class SpriteSheet {
    *
    * @param i the image size (width or height), greater than zero
    * @param t the tile size (width or height), greater than zero
-   * @param s the spacing, greater than or equal to zero
    */
-  private static int count(int i, int t, int s) {
-    assert i > 0 && t > 0 && s >= 0;
-    assert (i - s) % (s + t) == 0 : "Could not evenly split the image";
+  private static int count(int i, int t) {
+    assert i > 0 && t > 0;
+    assert i % t == 0 : "Could not evenly split the image";
 
-    return (i - s) / (s + t);
+    return i / t;
   }
 
   /**
@@ -153,15 +150,13 @@ public class SpriteSheet {
    * @param y y index
    * @param tw tile width
    * @param th tile height
-   * @param s spacing
    */
-  private static Image getSubImage(Image img, int x, int y, int tw, int th, int s) {
+  private static Image getSubImage(Image img, int x, int y, int tw, int th) {
     assert x >= 0 && y >= 0;
     assert tw > 0 && th > 0;
-    assert s >= 0;
 
-    int px = x * s + x * tw;
-    int py = y * s + y * th;
+    int px = x * tw;
+    int py = y * th;
 
     assert px < img.getWidth();
     assert py < img.getHeight();

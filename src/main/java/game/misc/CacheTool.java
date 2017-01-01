@@ -96,7 +96,6 @@ public class CacheTool {
   public static SpriteSheet getSpriteSheet(Cache cache, SpriteData sprite) throws ParserException,
       IOException {
     return new SpriteSheet(
-        cache.get(sprite.sprite, PNG_PARSER), sprite.tileSize.width, sprite.tileSize.height,
-        sprite.spacing);
+        cache.get(sprite.sprite, PNG_PARSER), sprite.tileSize.width, sprite.tileSize.height);
   }
 }
