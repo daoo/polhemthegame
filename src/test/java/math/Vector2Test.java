@@ -2,11 +2,10 @@
  * Copyright (c) 2009-2012 Daniel Oom, see license.txt for more info.
  */
 
-package tests;
+package math;
 
 import org.junit.Test;
 
-import math.Vector2;
 import util.Random;
 
 import static org.junit.Assert.assertEquals;

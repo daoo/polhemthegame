@@ -2,7 +2,7 @@
  * Copyright (c) 2009-2012 Daniel Oom, see license.txt for more info.
  */
 
-package tests;
+package testers;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
