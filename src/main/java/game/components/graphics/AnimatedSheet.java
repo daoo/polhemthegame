@@ -7,10 +7,9 @@ package game.components.graphics;
 import org.newdawn.slick.Graphics;
 
 import game.components.RenderComponent;
-import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.Animator;
+import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.IdleAnimator;
-import game.components.graphics.animations.Tile;
 import game.types.GameTime;
 import game.types.Message;
 import game.types.Orientation;
@@ -31,12 +30,11 @@ public class AnimatedSheet implements RenderComponent {
   private final SpriteSheet mSheet;
   private final int mCenterX;
   private final int mCenterY;
-  private final Tile mSize;
 
   private final Clock mClock;
 
   private Animator mAnimator;
-  private Tile mCurrent;
+  private int mCurrent;
 
   /**
    * Create a new animated sprite sheet.
@@ -62,26 +60,21 @@ public class AnimatedSheet implements RenderComponent {
     mFlip = orientation == Orientation.LEFT;
     mRotation = rotation;
 
-    mSize = new Tile(sheet.getTileCountX(), sheet.getTileCountY());
     mCenterX = sheet.getTileWidth() / 2;
     mCenterY = sheet.getTileWidth() / 2;
 
-    mCurrent = Tile.ZERO;
+    mCurrent = 0;
     mAnimator = IDLE;
 
     mClock = new Clock((int) (1000 / targetFrameRate));
   }
 
-  public Tile getCurrentTile() {
-    return mCurrent;
+  public boolean isFinished() {
+    return mAnimator.isFinished();
   }
 
-  public Tile getLastTile() {
-    return new Tile(mSize.x - 1, mSize.y - 1);
-  }
-
-  public Tile getTileCount() {
-    return mSize;
+  public int getTileCount() {
+    return mSheet.getTileCount();
   }
 
   public void setAnimator(Animator animator) {
@@ -99,10 +92,10 @@ public class AnimatedSheet implements RenderComponent {
   @Override
   public void reciveMessage(Message message, Object args) {
     if (message == Message.START_ANIMATION) {
-      mAnimator = new ContinuousAnimator(mSize);
+      mAnimator = new ContinuousAnimator(mSheet.getTileCount());
     } else if (message == Message.STOP_ANIMATION) {
       if (!mAnimator.isFinished()) {
-        mCurrent = Tile.ZERO;
+        mCurrent = 0;
         mAnimator = new IdleAnimator();
       }
     }
@@ -123,7 +116,7 @@ public class AnimatedSheet implements RenderComponent {
 
     g.translate(mOffsetX, mOffsetY);
 
-    g.drawImage(mSheet.getSubImage(mCurrent.x, mCurrent.y), 0, 0);
+    g.drawImage(mSheet.getSubImage(mCurrent), 0, 0);
 
     g.popTransform();
   }
@@ -135,11 +128,5 @@ public class AnimatedSheet implements RenderComponent {
 
       mCurrent = mAnimator.next(mCurrent);
     }
-  }
-
-  @Override
-  public String toString() {
-    return String.format("AnimatedSheet - count: %dx%d, mSize: %dx%d", mSize.x, mSize.y,
-        mSheet.getTileWidth(), mSheet.getTileHeight());
   }
 }

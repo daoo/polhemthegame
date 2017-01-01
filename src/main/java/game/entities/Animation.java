@@ -58,7 +58,7 @@ public class Animation implements Entity {
   public void update(GameTime time) {
     mSheet.update(time);
 
-    mActive = !mSheet.getCurrentTile().isEqual(mSheet.getLastTile());
+    mActive = !mSheet.isFinished();
   }
 
   @Override

@@ -7,5 +7,5 @@ package game.components.graphics.animations;
 public interface Animator {
   boolean isFinished();
 
-  Tile next(Tile tile);
+  int next(int index);
 }

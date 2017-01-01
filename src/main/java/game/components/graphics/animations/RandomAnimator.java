@@ -5,14 +5,13 @@
 package game.components.graphics.animations;
 
 import game.misc.Locator;
-import util.Random;
 
 public class RandomAnimator implements Animator {
-  private final Tile mSize;
+  private final int mCount;
 
-  public RandomAnimator(Tile size) {
-    assert size != null;
-    mSize = size;
+  public RandomAnimator(int count) {
+    assert count > 0;
+    mCount = count;
   }
 
   @Override
@@ -21,8 +20,7 @@ public class RandomAnimator implements Animator {
   }
 
   @Override
-  public Tile next(Tile tile) {
-    Random rnd = Locator.getRandom();
-    return new Tile(rnd.nextInt(mSize.x), rnd.nextInt(mSize.y));
+  public int next(int index) {
+    return Locator.getRandom().nextInt(mCount);
   }
 }

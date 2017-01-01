@@ -29,7 +29,7 @@ public class SpawnAnimationEffect implements Effect {
 
   @Override
   public void execute(GameTime time, World world) {
-    mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), mAnim.getLastTile()));
+    mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), mAnim.getTileCount()-1));
     world.addMisc(new Animation(mBox.getMin(), mAnim));
   }
 }

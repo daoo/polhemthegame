@@ -4,16 +4,14 @@
 
 package game.components.graphics.animations;
 
-
 public class IdleAnimator implements Animator {
-
   @Override
   public boolean isFinished() {
     return true;
   }
 
   @Override
-  public Tile next(Tile tile) {
-    return tile;
+  public int next(int index) {
+    return index;
   }
 }

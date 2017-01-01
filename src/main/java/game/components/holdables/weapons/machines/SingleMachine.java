@@ -7,7 +7,6 @@ package game.components.holdables.weapons.machines;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.IdleAnimator;
 import game.components.graphics.animations.RunToAnimator;
-import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.Magazine;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.types.GameTime;
@@ -78,7 +77,7 @@ public class SingleMachine implements WeaponMachine {
         mMagazine.takeOne();
         mQueue.queueUp();
 
-        mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), Tile.ZERO));
+        mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), 0));
 
         mTimer = new Timer(time.elapsedMilli, mCooldownLength);
         mState = WeaponStates.COOLDOWN;

@@ -7,7 +7,6 @@ package game.components.holdables.weapons.machines;
 import game.components.graphics.AnimatedSheet;
 import game.components.graphics.animations.ContinuousAnimator;
 import game.components.graphics.animations.RunToAnimator;
-import game.components.graphics.animations.Tile;
 import game.components.holdables.weapons.Magazine;
 import game.components.holdables.weapons.ProjectileQueue;
 import game.types.GameTime;
@@ -64,14 +63,14 @@ public class AutomaticMachine implements WeaponMachine {
 
         if (mTimer.isFinished()) {
           if (mMagazine.isEmpty()) {
-            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), Tile.ZERO));
+            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), 0));
             mTimer = new Timer(time.elapsedMilli, mReloadLength);
             mState = WeaponStates.RELOADING;
           } else if (mFire) {
             mTimer = null;
             mState = WeaponStates.FIRE;
           } else {
-            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), Tile.ZERO));
+            mSheet.setAnimator(new RunToAnimator(mSheet.getTileCount(), 0));
             mTimer = null;
             mState = WeaponStates.IDLE;
           }
