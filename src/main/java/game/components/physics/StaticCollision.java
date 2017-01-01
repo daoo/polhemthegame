@@ -8,7 +8,6 @@ import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.types.GameTime;
 import game.types.Message;
-import math.Rectangle;
 
 public class StaticCollision implements ILogicComponent {
   private final Entity mOwner;
@@ -23,7 +22,7 @@ public class StaticCollision implements ILogicComponent {
   public void update(GameTime time) {
     if (mEnableCollisions) {
       for (Entity e : mOwner.getWorld().getUnits()) {
-        if (Rectangle.intersects(mOwner.getBody(), e.getBody())) {
+        if (mOwner.getBody().intersects(e.getBody())) {
           mOwner.sendMessage(Message.COLLIDED_WITH, e);
           e.sendMessage(Message.COLLIDED_WITH, mOwner);
         }

@@ -8,14 +8,14 @@ import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.types.GameTime;
 import game.types.Message;
+import math.Aabb;
 import math.Collisions;
-import math.Rectangle;
 
 public class MovementConstraint implements ILogicComponent {
   private final Entity mOwner;
-  private final Rectangle mConstraints;
+  private final Aabb mConstraints;
 
-  public MovementConstraint(Entity owner, Rectangle constraints) {
+  public MovementConstraint(Entity owner, Aabb constraints) {
     mOwner = owner;
     mConstraints = constraints;
   }

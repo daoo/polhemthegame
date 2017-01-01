@@ -73,7 +73,7 @@ public class InfoBar implements IDynamicUIElement {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(mEntity.getBody().getX1(), mEntity.getBody().getY1());
+    g.translate(mEntity.getBody().getMin().x, mEntity.getBody().getMin().y);
 
     int y = mOffsetY;
     for (Bar b : mBars) {

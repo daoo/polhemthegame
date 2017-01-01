@@ -108,12 +108,10 @@ public class Hand implements IRenderComponent, IProgress {
     }
   }
 
-  @Override
   public int getWidth() {
     return mWeapon == null ? 0 : mWeapon.getWidth();
   }
 
-  @Override
   public int getHeight() {
     return mWeapon == null ? 0 : mWeapon.getWidth();
   }

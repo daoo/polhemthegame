@@ -19,14 +19,14 @@ import loader.data.json.WeaponsData;
 import loader.data.json.types.ProjectileData;
 import loader.data.json.types.WeaponData;
 import loader.parser.ParserException;
-import math.Rectangle;
+import math.Aabb;
 import math.Vector2;
 
 /**
  * Factory for weapons.
  */
 public class WeaponFactory {
-  private final Rectangle mBounds;
+  private final Aabb mBounds;
   private final WeaponsData mWeapons;
   private final ProjectilesData mProjectiles;
   private final Graphics mStatics;
@@ -39,7 +39,7 @@ public class WeaponFactory {
    * @throws ParserException when parsing file data fails
    * @throws IOException when reading files fails
    */
-  public WeaponFactory(Rectangle bounds, Graphics statics) throws ParserException, IOException {
+  public WeaponFactory(Aabb bounds, Graphics statics) throws ParserException, IOException {
     mBounds = bounds;
     mStatics = statics;
 

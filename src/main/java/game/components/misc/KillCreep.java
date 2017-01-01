@@ -12,10 +12,10 @@ import game.types.Message;
 
 public class KillCreep implements ILogicComponent {
   private final Entity mOwner;
-  private final int mLimit;
+  private final float mLimit;
   private final IEffect mEffect;
 
-  public KillCreep(Entity owner, int limit, IEffect effect) {
+  public KillCreep(Entity owner, float limit, IEffect effect) {
     mOwner = owner;
     mLimit = limit;
     mEffect = effect;
@@ -23,7 +23,7 @@ public class KillCreep implements ILogicComponent {
 
   @Override
   public void update(GameTime time) {
-    if (mOwner.getBody().getX2() < mLimit) {
+    if (mOwner.getBody().getMax().x < mLimit) {
       mOwner.addEffect(mEffect);
       mOwner.remove();
     }

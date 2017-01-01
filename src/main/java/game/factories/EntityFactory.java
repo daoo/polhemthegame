@@ -39,6 +39,7 @@ import loader.data.json.types.CreepData;
 import loader.data.json.types.PlayerData;
 import loader.data.json.types.UnitData;
 import loader.parser.ParserException;
+import math.Aabb;
 import math.Rectangle;
 import math.Vector2;
 
@@ -53,21 +54,21 @@ public class EntityFactory {
   private static final int BAR_OFFSET_X = 0;
   private static final int BAR_OFFSET_Y = -6;
 
-  private final Rectangle mWorldRect;
+  private final Aabb mWorldBoundary;
   private final Graphics mStatics;
 
   private final WeaponFactory mWeaponFactory;
   private final ShopData mShopData;
   private final PlayersData mPlayersData;
 
-  public EntityFactory(Rectangle worldRect, Graphics statics) throws ParserException, IOException {
-    mWorldRect = worldRect;
+  public EntityFactory(Aabb boundary, Graphics statics) throws ParserException, IOException {
+    mWorldBoundary = boundary;
     mStatics = statics;
 
-    Rectangle bigRect = new Rectangle(-worldRect.getWidth(), -worldRect.getHeight(),
-        3 * worldRect.getWidth(), 3 * worldRect.getHeight());
+    Aabb projectileBox = new Aabb(new Vector2(-boundary.getSize().x, -boundary.getSize().y),
+        new Rectangle(3 * boundary.getSize().x, 3 * boundary.getSize().y));
 
-    mWeaponFactory = new WeaponFactory(bigRect, statics);
+    mWeaponFactory = new WeaponFactory(projectileBox, statics);
     mShopData = CacheTool.getShop(Locator.getCache());
     mPlayersData = CacheTool.getPlayers(Locator.getCache());
   }
@@ -117,7 +118,7 @@ public class EntityFactory {
     hand.grab(weapon);
 
     // Add components
-    unit.entity.addLogicComponent(new MovementConstraint(unit.entity, mWorldRect));
+    unit.entity.addLogicComponent(new MovementConstraint(unit.entity, mWorldBoundary));
     unit.entity.addLogicComponent(inv);
     unit.entity.addRenderComponent(hand);
     unit.entity.addLogicComponent(
@@ -130,17 +131,18 @@ public class EntityFactory {
   }
 
   public Unit makeBoss(BossData data) throws ParserException, IOException {
-    int middleY = (int) (mWorldRect.getCenter().y - data.unit.hitbox.height / 2);
+    int middleY = (int) (mWorldBoundary.getCenter().y - data.unit.hitbox.height / 2);
 
-    Vector2 initialTarget = new Vector2(mWorldRect.getX2() + data.unit.hitbox.width - data.locationX,
+    Vector2 initialTarget = new Vector2(
+        mWorldBoundary.getMax().x + data.unit.hitbox.width - data.locationX,
         middleY);
 
-    Unit unit = makeUnit(mWorldRect.getX2(), middleY, 0, 0, BOSS_ORIENTATION, data.unit);
+    Unit unit = makeUnit(mWorldBoundary.getMax().x, middleY, 0, 0, BOSS_ORIENTATION, data.unit);
 
     Hand hand = new Hand(unit.entity, BOSS_ORIENTATION,
         new Vector2(data.handOffset.x, data.handOffset.y));
     Weapon weapon = mWeaponFactory.makeWeapon(data.weapon, BOSS_ORIENTATION);
-    BossAI ai = new BossAI(unit.entity, unit.movement, hand, mWorldRect, data.locationX,
+    BossAI ai = new BossAI(unit.entity, unit.movement, hand, mWorldBoundary, data.locationX,
         data.unit.speed, initialTarget);
 
     unit.entity.addLogicComponent(ai);

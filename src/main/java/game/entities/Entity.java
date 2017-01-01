@@ -17,21 +17,23 @@ import game.course.World;
 import game.triggers.IEffect;
 import game.types.GameTime;
 import game.types.Message;
+import math.Aabb;
 import math.Rectangle;
+import math.Vector2;
 import util.Node;
 
 public class Entity implements IEntity {
   private World mWorld;
   private boolean mActive;
 
-  private final Rectangle mBody;
+  private final Aabb mBody;
 
   private final LinkedList<IEffect> mEffects;
   private final ArrayList<ILogicComponent> mUpdates;
   private final ArrayList<IRenderComponent> mRenders;
 
   public Entity(float x, float y, int w, int h) {
-    mBody = new Rectangle(x, y, w, h);
+    mBody = new Aabb(new Vector2(x, y), new Rectangle(w, h));
     mActive = true;
 
     mEffects = new LinkedList<>();
@@ -56,7 +58,7 @@ public class Entity implements IEntity {
     mRenders.add(comp);
   }
 
-  public Rectangle getBody() {
+  public Aabb getBody() {
     return mBody;
   }
 
@@ -67,7 +69,7 @@ public class Entity implements IEntity {
   @Override
   public void render(Graphics g) {
     g.pushTransform();
-    g.translate(mBody.getX1(), mBody.getY1());
+    g.translate(mBody.getMin().x, mBody.getMin().y);
 
     for (IRenderComponent comp : mRenders) {
       comp.render(g);

@@ -19,11 +19,6 @@ public class Vector2 {
   public final float y;
 
   /**
-   * Normalized version of the vector.
-   */
-  private Vector2 mNormalized;
-
-  /**
    * Construct a new vector from two floats, X and Y.
    *
    * @param x the X component
@@ -32,8 +27,6 @@ public class Vector2 {
   public Vector2(float x, float y) {
     this.x = x;
     this.y = y;
-
-    mNormalized = null;
   }
 
   /**
@@ -62,12 +55,8 @@ public class Vector2 {
    * @throws ArithmeticException when the magnitude of the vector is zero
    */
   public Vector2 normalize() {
-    if (mNormalized == null) {
-      float m = magnitude();
-      mNormalized = new Vector2(x / m, y / m);
-    }
-
-    return mNormalized;
+    float mag = magnitude();
+    return new Vector2(x / mag, y / mag);
   }
 
   /**

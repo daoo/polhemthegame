@@ -19,7 +19,9 @@ import game.types.GameTime;
 import game.ui.hud.PlayerUI;
 import loader.data.json.CampaignData;
 import loader.parser.ParserException;
+import math.Aabb;
 import math.Rectangle;
+import math.Vector2;
 import util.Node;
 
 public class LevelManager {
@@ -48,8 +50,8 @@ public class LevelManager {
     int bottom = data.constraints[2];
     int right = data.constraints[3];
 
-    Rectangle worldRect = new Rectangle(left, top, arenaWidth - left - right,
-        arenaHeight - top - bottom);
+    Rectangle arenaRectangle = new Rectangle(arenaWidth - left - right, arenaHeight - top - bottom);
+    Aabb arenaBox = new Aabb(new Vector2(left, top), arenaRectangle);
 
     mStatics = new Image(arenaWidth, arenaHeight);
 
@@ -57,7 +59,7 @@ public class LevelManager {
     mBackground = CacheTool.getImage(Locator.getCache(), data.background);
 
 
-    EntityFactory entityFactory = new EntityFactory(worldRect, mStatics.getGraphics());
+    EntityFactory entityFactory = new EntityFactory(arenaBox, mStatics.getGraphics());
 
     ArrayList<Entity> players = new ArrayList<>();
     Player player1 = entityFactory.makePlayer("blue", Locator.getConfig().player1);
@@ -72,9 +74,9 @@ public class LevelManager {
       players.add(player2.entity);
     }
 
-    Players.reposition(players, worldRect);
+    Players.reposition(players, arenaBox);
 
-    mWorldFactory = new WorldFactory(this, stateManager, entityFactory, worldRect, players);
+    mWorldFactory = new WorldFactory(this, stateManager, entityFactory, arenaBox, players);
 
     mCredits = false;
     mFinished = false;

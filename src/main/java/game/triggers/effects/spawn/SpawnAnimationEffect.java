@@ -13,21 +13,20 @@ import game.entities.Animation;
 import game.entities.Entity;
 import game.triggers.IEffect;
 import game.types.GameTime;
-import math.Rectangle;
+import math.Aabb;
 
 /**
  * Spawn an run-to-last animation at the top left of another entity.
  */
 public class SpawnAnimationEffect implements IEffect {
   private final Animation mSpawnee;
-  private final Rectangle mRect;
+  private final Aabb mBox;
   private final AnimatedSheet mAnim;
 
-  public SpawnAnimationEffect(
-      Entity entity, AnimatedSheet anim, Graphics graphics) {
+  public SpawnAnimationEffect(Entity entity, AnimatedSheet anim, Graphics graphics) {
     assert entity != null && anim != null && graphics != null;
 
-    mRect = entity.getBody();
+    mBox = entity.getBody();
     mAnim = anim;
 
     mSpawnee = new Animation(0, 0, anim, graphics);
@@ -35,7 +34,7 @@ public class SpawnAnimationEffect implements IEffect {
 
   @Override
   public void execute(GameTime time, World world) {
-    mSpawnee.setPosition(mRect.getMin());
+    mSpawnee.setPosition(mBox.getMin());
 
     mAnim.setAnimator(new RunToAnimator(mAnim.getTileCount(), mAnim.getLastTile()));
 

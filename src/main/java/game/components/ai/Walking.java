@@ -8,21 +8,23 @@ import game.components.holdables.Hand;
 import game.components.physics.Movement;
 import game.misc.Locator;
 import game.types.GameTime;
+import math.Aabb;
+import math.Circle;
 import math.ExtraMath;
-import math.Rectangle;
 import math.Vector2;
 import util.Random;
 
 public class Walking implements IBossState {
+  public static final float EPSILON = 0.0001f;
   public static final int MIN_WALK = 100;
   public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
 
-  private final Rectangle mBody;
+  private final Aabb mBody;
   private final float mSpeed;
   private final Movement mMovement;
-  private final Rectangle mMovementRect;
+  private final Aabb mBoundary;
 
-  private Vector2 mCurrentTarget;
+  private Vector2 mTarget;
   private int mTargetsLeft;
 
   /**
@@ -32,23 +34,23 @@ public class Walking implements IBossState {
    * @param hand the boss hand
    * @param movement the boss movement
    * @param speed the speed of the boss
-   * @param movementRect the rectangle which the boss should move within
+   * @param boundary the rectangle which the boss should move within
    * @param targets the number of targets (positions the boss should walk to),
    * greater than zero
-   * @param initialTarget the first target the boss should reach
+   * @param target the first target the boss should reach
    */
   public Walking(
-      Rectangle body, Hand hand, Movement movement, float speed, Rectangle movementRect,
-      int targets, Vector2 initialTarget) {
+      Aabb body, Hand hand, Movement movement, float speed, Aabb boundary, int targets,
+      Vector2 target) {
     assert targets > 0;
-    assert initialTarget != null;
+    assert target != null;
 
     mBody = body;
     mSpeed = speed;
     mMovement = movement;
     mTargetsLeft = targets;
-    mMovementRect = movementRect;
-    mCurrentTarget = initialTarget;
+    mBoundary = boundary;
+    mTarget = target;
   }
 
   /**
@@ -56,46 +58,44 @@ public class Walking implements IBossState {
    * Instead of specifying the initial target a random target will be chosen
    * instead.
    *
-   * @param body the body rectangle
+   * @param body the body box
    * @param hand the boss hand
    * @param movement the boss movement
    * @param speed the speed of the boss
-   * @param movementRect the rectangle which the boss should move within
+   * @param boundary the box which the boss should move within
    * @param targets the number of targets (positions the boss should walk to)
    */
   public Walking(
-      Rectangle body, Hand hand, Movement movement, float speed, Rectangle movementRect,
-      int targets) {
-    this(body, hand, movement, speed, movementRect, targets,
-        newRandomTarget(Locator.getRandom(), (int) movementRect.getX1(), (int) movementRect.getY1(),
-            (int) movementRect.getX2(), (int) movementRect.getY2(), (int) body.getCenter().x,
-            (int) body.getCenter().y, MIN_WALK_SQUARED));
+      Aabb body, Hand hand, Movement movement, float speed, Aabb boundary, int targets) {
+    this(body, hand, movement, speed, boundary, targets,
+        newRandomTarget(Locator.getRandom(), boundary,
+            new Circle(body.getCenter(), MIN_WALK_SQUARED)));
   }
 
   @Override
   public void start(GameTime time) {
-    headFor(mCurrentTarget);
+    headFor(mTarget);
   }
 
   @Override
   public void update(GameTime time) {
     if (mTargetsLeft > 0) {
-      Vector2 a = Vector2.subtract(mBody.getMin(), mCurrentTarget);
-      if (Vector2.dot(a, mMovement.getVelocity()) >= 0) {
+      Vector2 position = mBody.getMin();
+      Vector2 delta = Vector2.subtract(position, mTarget);
+      if (Vector2.dot(delta, mMovement.getVelocity()) >= 0) {
         --mTargetsLeft;
         // Target passed
         if (mTargetsLeft > 0) {
-          mCurrentTarget = newRandomTarget(Locator.getRandom(), (int) mMovementRect.getX1(),
-              (int) mMovementRect.getY1(), (int) mMovementRect.getX2(), (int) mMovementRect.getY2(),
-              (int) mBody.getX1(), (int) mBody.getY1(), MIN_WALK_SQUARED);
-          headFor(mCurrentTarget);
+          Circle circle = new Circle(position, MIN_WALK_SQUARED);
+          mTarget = newRandomTarget(Locator.getRandom(), mBoundary, circle);
+          headFor(mTarget);
         }
       }
     }
   }
 
   public Vector2 getTarget() {
-    return mCurrentTarget;
+    return mTarget;
   }
 
   @Override
@@ -109,7 +109,7 @@ public class Walking implements IBossState {
   }
 
   private void headFor(Vector2 target) {
-    assert Rectangle.contains(mMovementRect, target);
+    assert mBoundary.contains(target);
 
     Vector2 delta = Vector2.subtract(target, mBody.getMin());
     Vector2 direction = delta.normalize();
@@ -118,26 +118,14 @@ public class Walking implements IBossState {
   }
 
   /**
-   * Generate a random position that lies within a rectangle but outside of a
-   * circle.
+   * Generate a random position that lies within a box but outside of a circle.
    *
    * @param rnd the random generator to use
-   * @param rx1 top left x of the rectangle
-   * @param ry1 top left y of the rectangle
-   * @param rx2 bottom right x of the rectangle
-   * @param ry2 bottom right y of the rectangle
-   * @param cx x position of the circle
-   * @param cy y position of the circle
-   * @param cr the squared radius of the circle
+   * @param boundary the including box
+   * @param circle the excluding circle
    * @return a vector specifying a random position
    */
-  public static Vector2 newRandomTarget(
-      Random rnd, int rx1, int ry1, int rx2, int ry2, int cx, int cy, int cr) {
-    assert cr < ExtraMath.square(ry2 - ry1);
-
-    float targetX;
-    float targetY;
-
+  public static Vector2 newRandomTarget(Random rnd, Aabb boundary, Circle circle) {
     /* The problem:
      * We want to generate a random point within a rectangle (movementRect) but
      * that lies outside of a circle (defined by body position and
@@ -151,7 +139,7 @@ public class Walking implements IBossState {
      */
 
     // First, generate a random x value.
-    targetX = rnd.nextInt(rx1, rx2);
+    float targetX = rnd.nextFloat(boundary.getMin().x, boundary.getMax().y);
 
     /* Now use the circle's equation:
      * (x - a)^2 + (y - b)^2 = r^2
@@ -161,47 +149,45 @@ public class Walking implements IBossState {
      * y values lies outside of the circle for this x.
      */
 
-    float tmp = ExtraMath.square(targetX - cx);
-    if (cr < tmp) {
+    float tmp = ExtraMath.square(targetX - circle.center.x);
+    if (circle.radius < tmp) {
       // Circle is not intersecting our x here
-      targetY = rnd.nextFloat(ry1, ry2);
-    } else {
-      // Here we have to take the circle into account
-      int yRoot = (int) Math.sqrt(cr - tmp);
-
-      // Top and bottom of the circle
-      int y1 = cy - yRoot;
-      int y2 = cy + yRoot + 1; // +1 so that we don't get point in the circle
-
-      // Note that portions of the circle could lie outside of the rectangle.
-      if (y2 < ry1 || y1 > ry2) {
-        // Entire circle is outside of the rectangle
-        targetY = rnd.nextInt(ry1, ry2);
-      } else if (y1 < ry1) {
-        // Top of circle is above the rectangle
-        targetY = rnd.nextInt(y2, ry2);
-      } else if (y2 > ry2) {
-        // Bottom of circle is below the rectangle
-        targetY = rnd.nextInt(ry1, y1);
-      } else {
-        // The part of the circle we're interested in is within the rectangle
-        // We now have two intervals, note that the size of the two intervals
-        // differ, we have to be careful so we get an uniform distribution.
-
-        int topSize = y1 - ry1;
-        int bottomSize = ry2 - y2;
-        int totalSize = topSize + bottomSize;
-
-        if (rnd.nextInt(totalSize) < topSize) {
-          // Upper
-          targetY = rnd.nextInt(ry1, y1);
-        } else {
-          // Lower
-          targetY = rnd.nextInt(y2, ry2);
-        }
-      }
+      return new Vector2(targetX, rnd.nextFloat(boundary.getMin().y, boundary.getMax().y));
     }
 
-    return new Vector2(targetX, targetY);
+    // Here we have to take the circle into account
+    float yRoot = (float) Math.sqrt(circle.radius - tmp);
+
+    // Top and bottom of the circle
+    float top = circle.center.y - yRoot - EPSILON;
+    float bottom = circle.center.y + yRoot + EPSILON;
+
+    // Note that portions of the circle could lie outside of the rectangle.
+    if (bottom < boundary.getMin().y || top > boundary.getMax().y) {
+      // Entire circle is outside of the rectangle
+      return new Vector2(targetX, rnd.nextFloat(boundary.getMin().y, boundary.getMax().y));
+    } else if (top < boundary.getMin().y) {
+      // Top of circle is above the rectangle
+      return new Vector2(targetX, rnd.nextFloat(bottom, boundary.getMax().y));
+    } else if (bottom > boundary.getMax().y) {
+      // Bottom of circle is below the rectangle
+      return new Vector2(targetX, rnd.nextFloat(boundary.getMin().y, top));
+    } else {
+      // The part of the circle we're interested in is within the rectangle
+      // We now have two intervals, note that the size of the two intervals
+      // differ, we have to be careful so we get an uniform distribution.
+
+      float topSize = top - boundary.getMin().y;
+      float bottomSize = boundary.getMax().y - bottom;
+      float totalSize = topSize + bottomSize;
+
+      if (rnd.nextFloat(totalSize) < topSize) {
+        // Upper
+        return new Vector2(targetX, rnd.nextFloat(boundary.getMin().y, top));
+      } else {
+        // Lower
+        return new Vector2(targetX, rnd.nextFloat(bottom, boundary.getMax().y));
+      }
+    }
   }
 }

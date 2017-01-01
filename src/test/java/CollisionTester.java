@@ -16,8 +16,8 @@ import game.components.graphics.debug.Outliner;
 import game.components.graphics.debug.SolidQuad;
 import game.components.physics.Movement;
 import game.entities.Entity;
+import math.Aabb;
 import math.Collisions;
-import math.Rectangle;
 import math.Vector2;
 
 public class CollisionTester extends BasicGame {
@@ -87,7 +87,7 @@ public class CollisionTester extends BasicGame {
     if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
       container.exit();
     } else {
-      Rectangle body = mObj2.getBody();
+      Aabb body = mObj2.getBody();
       float s = 100.0f / delta;
 
       if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {

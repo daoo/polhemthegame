@@ -18,18 +18,17 @@ public final class Collisions {
    * @param dt the time delta
    * @return true or false based on the test result
    */
-  public static boolean sweepCollisionTest(Rectangle a, Vector2 av, Rectangle b, float dt) {
+  public static boolean sweepCollisionTest(Aabb a, Vector2 av, Aabb b, float dt) {
     Vector2 vel = Vector2.multiply(av, dt);
     Vector2 target = Vector2.add(a.getMin(), vel);
 
-    float sweepLength = (float) Math
-        .sqrt(ExtraMath.square(a.getWidth()) + ExtraMath.square(a.getHeight()));
+    float sweepLength = a.getSize().magnitude();
     Vector2 sweepDelta = Vector2.divide(vel, sweepLength);
     int sweeps = (int) (Vector2.distance(target, a.getMin()) / sweepDelta.magnitude());
-    Rectangle sweep = new Rectangle(a);
+    Aabb sweep = new Aabb(a);
 
     for (int i = 0; i < sweeps; ++i) {
-      if (Rectangle.intersects(sweep, b)) {
+      if (sweep.intersects(b)) {
         return true;
       }
 
@@ -44,23 +43,14 @@ public final class Collisions {
    * entity to the edges of the container if it's on the outside.
    *
    * @param entity the Rectangle to restrict
-   * @param cont the Rectangle to use as box
+   * @param boundary the Rectangle to use as box
    */
-  public static void blockFromExiting(Rectangle entity, Rectangle cont) {
-    float x = entity.getMin().x;
-    if (x < cont.getX1()) {
-      x = cont.getX1();
-    } else if (x + entity.getWidth() >= cont.getX2()) {
-      x = cont.getWidth() - entity.getWidth();
-    }
-
-    float y = entity.getMin().y;
-    if (y < cont.getY1()) {
-      y = cont.getY1();
-    } else if (y + entity.getHeight() >= cont.getY2()) {
-      y = cont.getY2() - entity.getHeight();
-    }
-
-    entity.setPosition(x, y);
+  public static void blockFromExiting(Aabb entity, Aabb boundary) {
+    Vector2 min = boundary.getMin();
+    Vector2 max = Vector2.subtract(boundary.getMax(), entity.getSize());
+    Vector2 position = entity.getMin();
+    entity.setPosition(new Vector2(
+        ExtraMath.clamp(min.x, max.x, position.x),
+        ExtraMath.clamp(min.y, max.y, position.y)));
   }
 }

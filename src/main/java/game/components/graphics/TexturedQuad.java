@@ -29,16 +29,6 @@ public class TexturedQuad implements IRenderComponent {
   }
 
   @Override
-  public int getWidth() {
-    return mImg.getWidth();
-  }
-
-  @Override
-  public int getHeight() {
-    return mImg.getHeight();
-  }
-
-  @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
   }

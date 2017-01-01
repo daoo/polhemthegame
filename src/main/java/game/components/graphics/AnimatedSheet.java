@@ -88,12 +88,10 @@ public class AnimatedSheet implements IRenderComponent {
     mAnimator = animator;
   }
 
-  @Override
   public int getHeight() {
     return mSheet.getTileHeight();
   }
 
-  @Override
   public int getWidth() {
     return mSheet.getTileWidth();
   }
@@ -141,7 +139,7 @@ public class AnimatedSheet implements IRenderComponent {
 
   @Override
   public String toString() {
-    return String.format("AnimatedSheet - count: %dx%d, mSize: %dx%d", mSize.x, mSize.y, getWidth(),
-        getHeight());
+    return String.format("AnimatedSheet - count: %dx%d, mSize: %dx%d", mSize.x, mSize.y,
+        mSheet.getTileWidth(), mSheet.getTileHeight());
   }
 }

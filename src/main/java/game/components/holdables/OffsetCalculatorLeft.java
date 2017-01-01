@@ -16,7 +16,7 @@ public class OffsetCalculatorLeft implements IOffsetCalculator {
 
     // Since we're flipped, offset come from UPPER RIGHT corner instead of
     // UPPER LEFT.
-    mNewOffset = new Vector2(entity.getBody().getWidth() - handOffset.x, handOffset.y);
+    mNewOffset = new Vector2(entity.getBody().getSize().x - handOffset.x, handOffset.y);
   }
 
   @Override

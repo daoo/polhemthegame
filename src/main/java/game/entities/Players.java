@@ -6,7 +6,8 @@ package game.entities;
 
 import java.util.List;
 
-import math.Rectangle;
+import math.Aabb;
+import math.Vector2;
 
 public class Players {
   private static final float STARING_X = 0.1f;
@@ -17,17 +18,17 @@ public class Players {
    * as margin on the left side of the players.
    *
    * @param players the players to reposition
-   * @param rect the rectangle to use for alignment
+   * @param box the rectangle to use for alignment
    */
-  public static void reposition(List<Entity> players, Rectangle rect) {
+  public static void reposition(List<Entity> players, Aabb box) {
     float dx = 0;
-    float dy = rect.getHeight() / (players.size() * 2.0f);
+    float dy = box.getSize().y / (players.size() * 2.0f);
 
-    float x = rect.getX1() + rect.getWidth() * STARING_X;
-    float y = rect.getY1() + dy;
+    float x = box.getMin().x + box.getSize().x * STARING_X;
+    float y = box.getMin().y + dy;
 
     for (Entity p : players) {
-      p.getBody().setPosition(x, y - p.getBody().getHeight() / 2.0f);
+      p.getBody().setPosition(new Vector2(x, y - p.getBody().getSize().y / 2.0f));
 
       x += dx;
       y += dy;

@@ -37,7 +37,7 @@ import loader.data.json.LevelData;
 import loader.data.json.types.CreepData;
 import loader.data.json.types.CreepSpawnData;
 import loader.parser.ParserException;
-import math.Rectangle;
+import math.Aabb;
 
 
 public class WorldFactory {
@@ -51,7 +51,7 @@ public class WorldFactory {
   private final LevelManager mGameMode;
   private final StateManager mStateManager;
 
-  private final Rectangle mRect;
+  private final Aabb mBoundary;
   private final List<Entity> mPlayers;
 
   private final EntityFactory mEntityFactory;
@@ -62,12 +62,12 @@ public class WorldFactory {
   private Trigger mCreepsDeadTrigger;
 
   public WorldFactory(
-      LevelManager gameMode, StateManager stateManager, EntityFactory entityFactory, Rectangle rect,
+      LevelManager gameMode, StateManager stateManager, EntityFactory entityFactory, Aabb boundary,
       List<Entity> players) throws ParserException, IOException {
     mGameMode = gameMode;
     mStateManager = stateManager;
     mEntityFactory = entityFactory;
-    mRect = rect;
+    mBoundary = boundary;
     mPlayers = players;
 
     mBossesData = CacheTool.getBosses(Locator.getCache());
@@ -83,13 +83,13 @@ public class WorldFactory {
     for (CreepSpawnData spawnData : spawnsData) {
       // Make creep
       CreepData creepData = creepsData.getCreep(spawnData.creep);
-      float x = mRect.getX2() + creepData.unit.hitbox.width;
+      float x = mBoundary.getMax().x + creepData.unit.hitbox.width;
       float y = Locator.getRandom()
-          .nextFloat(mRect.getY1(), mRect.getY2() - creepData.unit.hitbox.height);
+          .nextFloat(mBoundary.getMin().y, mBoundary.getMax().y - creepData.unit.hitbox.height);
 
       Unit creep = mEntityFactory.makeCreep(x, y, creepData);
 
-      creep.entity.addLogicComponent(new KillCreep(creep.entity, (int) mRect.getX1(),
+      creep.entity.addLogicComponent(new KillCreep(creep.entity, mBoundary.getMin().x,
           new DamageEntitiesEffect(mPlayers, PLAYER_DAMAGE)));
 
       // Add trigger

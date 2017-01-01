@@ -100,12 +100,10 @@ public class Weapon implements IHoldable {
     mMachine.stopFiring();
   }
 
-  @Override
   public int getWidth() {
     return mAnim.getWidth();
   }
 
-  @Override
   public int getHeight() {
     return mAnim.getHeight();
   }

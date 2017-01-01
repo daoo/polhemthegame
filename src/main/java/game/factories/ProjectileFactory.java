@@ -36,12 +36,12 @@ import game.triggers.effects.spawn.SpawnAnimationEffect;
 import game.types.Orientation;
 import loader.data.json.types.ProjectileData;
 import loader.parser.ParserException;
+import math.Aabb;
 import math.ExtraMath;
-import math.Rectangle;
 import util.SpriteSheet;
 
 public class ProjectileFactory {
-  private final Rectangle mRect;
+  private final Aabb mBoundary;
   private final Orientation mOrientation;
   private final int mLaunchAngle;
   private final int mSpread;
@@ -54,7 +54,7 @@ public class ProjectileFactory {
   /**
    * Construct a new projectile factory for a given projectile.
    *
-   * @param bounds boundary rectangle, the projectiles should die when leaving
+   * @param boundary boundary rectangle, the projectiles should die when leaving
    * this area
    * @param data the projectile data
    * @param launchAngle the angle of launching in degrees, zero means horizontal
@@ -65,11 +65,11 @@ public class ProjectileFactory {
    * @throws ParserException when fetching images from the drive fails
    */
   public ProjectileFactory(
-      Rectangle bounds, int launchAngle, int spread, Orientation orientation, ProjectileData data,
+      Aabb boundary, int launchAngle, int spread, Orientation orientation, ProjectileData data,
       Graphics statics) throws IOException, ParserException {
     assert data != null;
 
-    mRect = bounds;
+    mBoundary = boundary;
     mLaunchAngle = launchAngle;
     mSpread = spread;
     mOrientation = orientation;
@@ -111,7 +111,7 @@ public class ProjectileFactory {
     p.addLogicComponent(new RangeLimiter(p, mData.duration, mData.range));
 
     p.addLogicComponent(new ProjectileDamage(p, source, mData.damage));
-    p.addLogicComponent(new OutOfBounds(p, mRect));
+    p.addLogicComponent(new OutOfBounds(p, mBoundary));
 
     int angle = getRotation();
 
@@ -173,10 +173,11 @@ public class ProjectileFactory {
 
   private void setupExplosion(IEntity source, Entity p, List<IEffect> effectsOnDeath) {
     AnimatedSheet explosionAnim = new AnimatedSheet(mData.aoe.explosionSprite.framerate,
-        mData.aoe.explosionSprite.offset.x, mData.aoe.explosionSprite.offset.y, Orientation.RIGHT, 0,
-        mExplosion);
+        mData.aoe.explosionSprite.offset.x, mData.aoe.explosionSprite.offset.y, Orientation.RIGHT,
+        0, mExplosion);
 
-    effectsOnDeath.add(new AOEDamageEffect(source, p.getBody(), mData.aoe.radius, mData.aoe.damage));
+    effectsOnDeath
+        .add(new AOEDamageEffect(source, p.getBody(), mData.aoe.radius, mData.aoe.damage));
     effectsOnDeath.add(new SpawnAnimationEffect(p, explosionAnim, mStatics));
   }
 

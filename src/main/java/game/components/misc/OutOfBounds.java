@@ -8,20 +8,20 @@ import game.components.ILogicComponent;
 import game.entities.Entity;
 import game.types.GameTime;
 import game.types.Message;
-import math.Rectangle;
+import math.Aabb;
 
 public class OutOfBounds implements ILogicComponent {
   private final Entity mOwner;
-  private final Rectangle mBounds;
+  private final Aabb mBoundary;
 
-  public OutOfBounds(Entity owner, Rectangle bounds) {
+  public OutOfBounds(Entity owner, Aabb boundary) {
     mOwner = owner;
-    mBounds = bounds;
+    mBoundary = boundary;
   }
 
   @Override
   public void update(GameTime time) {
-    if (!Rectangle.contains(mBounds, mOwner.getBody())) {
+    if (!mBoundary.contains(mOwner.getBody())) {
       mOwner.remove();
     }
   }

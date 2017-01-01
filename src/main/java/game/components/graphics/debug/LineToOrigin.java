@@ -20,16 +20,6 @@ public class LineToOrigin implements IRenderComponent {
   }
 
   @Override
-  public int getWidth() {
-    return (int) mOwner.getBody().getX2();
-  }
-
-  @Override
-  public int getHeight() {
-    return (int) mOwner.getBody().getY2();
-  }
-
-  @Override
   public void update(GameTime time) {
     // Do nothing
   }
@@ -42,6 +32,6 @@ public class LineToOrigin implements IRenderComponent {
   @Override
   public void render(Graphics g) {
     g.setColor(Color.red);
-    g.drawLine(0, 0, -mOwner.getBody().getX1(), -mOwner.getBody().getY1());
+    g.drawLine(0, 0, -mOwner.getBody().getMin().x, -mOwner.getBody().getMin().y);
   }
 }

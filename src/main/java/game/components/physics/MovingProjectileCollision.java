@@ -11,8 +11,8 @@ import game.entities.Entity;
 import game.entities.IEntity;
 import game.types.GameTime;
 import game.types.Message;
+import math.Aabb;
 import math.Collisions;
-import math.Rectangle;
 import math.Vector2;
 
 public class MovingProjectileCollision implements ILogicComponent {
@@ -36,7 +36,7 @@ public class MovingProjectileCollision implements ILogicComponent {
    */
   private void collisionCheck(Entity b, float dt) {
     if (!mCollidedWith.contains(b)) {
-      Rectangle a = mOwner.getBody();
+      Aabb a = mOwner.getBody();
       Vector2 m = mMovement.getVelocity();
 
       if (Collisions.sweepCollisionTest(a, m, b.getBody(), dt)) {

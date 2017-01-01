@@ -12,7 +12,8 @@ import game.components.physics.Movement;
 import game.entities.Entity;
 import game.types.GameTime;
 import game.types.Message;
-import math.Rectangle;
+import math.Aabb;
+import math.Vector2;
 
 public class Outliner implements IRenderComponent {
   private static final Color FIRST = Color.red;
@@ -34,27 +35,18 @@ public class Outliner implements IRenderComponent {
   }
 
   @Override
-  public int getWidth() {
-    return mOwner.getBody().getWidth();
-  }
-
-  @Override
-  public int getHeight() {
-    return mOwner.getBody().getHeight();
-  }
-
-  @Override
   public void reciveMessage(Message message, Object args) {
     // Do nothing
   }
 
   @Override
   public void render(Graphics g) {
-    Rectangle body = mOwner.getBody();
+    Aabb box = mOwner.getBody();
+    Vector2 size = box.getSize();
 
     Color tmp = g.getColor();
     g.setColor(FIRST);
-    g.drawRect(0, 0, body.getWidth(), body.getHeight());
+    g.drawRect(0, 0, size.x, size.y);
 
     if (mMovement != null) {
       float dx = mMovement.getVelocity().x;
@@ -62,7 +54,7 @@ public class Outliner implements IRenderComponent {
 
       if (mOutlineNext) {
         g.setColor(SECOND);
-        g.drawRect(dx, dy, body.getWidth(), body.getHeight());
+        g.drawRect(dx, dy, size.x, size.y);
       }
 
       if (mLinesToNext) {
@@ -70,8 +62,8 @@ public class Outliner implements IRenderComponent {
 
         float x1 = 0;
         float y1 = 0;
-        float x2 = body.getWidth();
-        float y2 = body.getHeight();
+        float x2 = size.x;
+        float y2 = size.y;
 
         g.drawLine(x1, y1, x1 + dx, y1 + dy);
         g.drawLine(x2, y1, x2 + dx, y1 + dy);

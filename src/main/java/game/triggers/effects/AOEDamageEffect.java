@@ -11,14 +11,14 @@ import game.triggers.IEffect;
 import game.types.Damage;
 import game.types.GameTime;
 import game.types.Message;
-import math.Rectangle;
+import math.Aabb;
 import math.Vector2;
 
 /**
  * Inflict damage in an circle around a position when executed.
  */
 public class AOEDamageEffect implements IEffect {
-  private final Rectangle mBody;
+  private final Aabb mBody;
   private final float mRange;
   private final Damage mDamage;
 
@@ -30,7 +30,7 @@ public class AOEDamageEffect implements IEffect {
    * @param range the radius of the area
    * @param damage the amount of damage to deal per object in range
    */
-  public AOEDamageEffect(IEntity source, Rectangle body, float range, float damage) {
+  public AOEDamageEffect(IEntity source, Aabb body, float range, float damage) {
     mBody = body;
     mRange = range;
     mDamage = new Damage(source, damage);

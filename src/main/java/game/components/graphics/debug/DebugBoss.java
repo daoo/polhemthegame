@@ -13,26 +13,16 @@ import game.components.ai.IBossState;
 import game.components.ai.Walking;
 import game.types.GameTime;
 import game.types.Message;
-import math.Rectangle;
+import math.Aabb;
 import math.Vector2;
 
 public class DebugBoss implements IRenderComponent {
-  private final Rectangle mBody;
+  private final Aabb mBody;
   private final BossAI mAi;
 
-  public DebugBoss(Rectangle body, BossAI ai) {
+  public DebugBoss(Aabb body, BossAI ai) {
     mBody = body;
     mAi = ai;
-  }
-
-  @Override
-  public int getWidth() {
-    return mBody.getWidth();
-  }
-
-  @Override
-  public int getHeight() {
-    return mBody.getHeight();
   }
 
   @Override
@@ -57,6 +47,6 @@ public class DebugBoss implements IRenderComponent {
     g.draw(new Circle(0, 0, BossAI.MIN_WALK));
 
     Vector2 o = Vector2.subtract(mAi.getMovementRect().getMin(), mBody.getMin());
-    g.drawRect(o.x, o.y, mAi.getMovementRect().getWidth(), mAi.getMovementRect().getHeight());
+    g.drawRect(o.x, o.y, mAi.getMovementRect().getSize().x, mAi.getMovementRect().getSize().y);
   }
 }

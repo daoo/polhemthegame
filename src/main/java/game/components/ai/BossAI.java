@@ -11,6 +11,7 @@ import game.entities.Entity;
 import game.misc.Locator;
 import game.types.GameTime;
 import game.types.Message;
+import math.Aabb;
 import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
@@ -29,15 +30,15 @@ public class BossAI implements ILogicComponent {
   private final Entity mEntity;
   private final Movement mMovement;
   private final Hand mHand;
-  private final Rectangle mMovementRect;
+  private final Aabb mMovementBox;
   private final Vector2 mInitialTarget;
   private final float mSpeed;
 
   private IBossState mState;
 
   public BossAI(
-      Entity entity, Movement movement, Hand hand, Rectangle arenaRect, float locationX,
-      float speed, Vector2 initialTarget) {
+      Entity entity, Movement movement, Hand hand, Aabb arenaBox, float locationX, float speed,
+      Vector2 initialTarget) {
     mEntity = entity;
     mHand = hand;
     mMovement = movement;
@@ -45,12 +46,16 @@ public class BossAI implements ILogicComponent {
     mInitialTarget = initialTarget;
 
     // Setup the area which the TOP LEFT of the boss body may move around in
-    float x1 = arenaRect.getX2() - locationX;
-    float y1 = arenaRect.getY1() + entity.getBody().getHeight();
-    float x2 = arenaRect.getX2() - 3.0f / 2.0f * entity.getBody().getWidth();
-    float y2 = arenaRect.getY2() - entity.getBody().getHeight();
+    float bossWidth = entity.getBody().getSize().x;
+    float bossHeight = entity.getBody().getSize().y;
+    float x1 = arenaBox.getMax().x - locationX;
+    float y1 = arenaBox.getMin().y + bossHeight;
+    float x2 = arenaBox.getMax().x - 3.0f / 2.0f * bossWidth;
+    float y2 = arenaBox.getMax().y - bossHeight;
 
-    mMovementRect = new Rectangle(x1, y1, (int) (x2 - x1), (int) (y2 - y1));
+    Vector2 min = new Vector2(x1, y1);
+    Vector2 max = new Vector2(x2, y2);
+    mMovementBox = new Aabb(min, Rectangle.fromExtents(min, max));
   }
 
   public IBossState getState() {
@@ -73,7 +78,7 @@ public class BossAI implements ILogicComponent {
         mHand.startUse();
       } else if (mState.getState() == BossState.SHOOTING) {
         int targets = Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-        mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementRect, targets);
+        mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementBox, targets);
 
         mEntity.sendMessage(Message.START_ANIMATION, null);
         mHand.stopUse();
@@ -88,8 +93,8 @@ public class BossAI implements ILogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementRect, INITIAL_TARGET_COUNT,
-          mInitialTarget);
+      mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementBox,
+          INITIAL_TARGET_COUNT, mInitialTarget);
 
       mEntity.sendMessage(Message.START_ANIMATION, null);
 
@@ -97,7 +102,7 @@ public class BossAI implements ILogicComponent {
     }
   }
 
-  public Rectangle getMovementRect() {
-    return mMovementRect;
+  public Aabb getMovementRect() {
+    return mMovementBox;
   }
 }
