@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Vector2Test {
   private static final int RANGE = 100;
+  private static final float EPSILON = 0.001f;
 
   private final Random mRandom = new Random();
   private final Vector2 mUnitRight = new Vector2(1, 0);
@@ -22,60 +23,63 @@ public class Vector2Test {
   }
 
   @Test
-  public final void testMagnitude() {
-    assertEquals(1, mUnitRight.magnitude(), 0.1f);
+  public void testMagnitude() {
+    assertEquals(1, mUnitRight.magnitude(), EPSILON);
   }
 
   @Test
-  public final void testMagnitudeSquared() {
-    assertEquals(1, mUnitRight.magnitudeSquared(), 0.1f);
+  public void testMagnitudeSquared() {
+    assertEquals(1, mUnitRight.magnitudeSquared(), EPSILON);
 
     for (int i = 0; i < 100; ++i) {
       int a = mRandom.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
 
-      assertEquals(v.magnitudeSquared(), Vector2.dot(v, v), 0.1f);
+      assertEquals(v.magnitudeSquared(), Vector2.dot(v, v), EPSILON);
 
-      assertEquals(Vector2.multiply(v, a).magnitude(), Math.abs(a) * v.magnitude(), 0.1f);
+      assertEquals(Vector2.multiply(v, a).magnitude(), Math.abs(a) * v.magnitude(), EPSILON);
     }
   }
 
   @Test
-  public final void testNormalize() {
-    assertEquals(mUnitRight, mUnitRight.normalize());
+  public void testNormalize() {
+    Vector2 normalized = mUnitRight.normalize();
+    assertEquals(mUnitRight.x, normalized.x, EPSILON);
+    assertEquals(mUnitRight.y, normalized.y, EPSILON);
 
     for (int i = 0; i < 100; ++i) {
-      assertEquals(1, randomVector2().normalize().magnitude(), 0.001f);
+      assertEquals(1, randomVector2().normalize().magnitude(), EPSILON);
     }
   }
 
   @Test
-  public final void testDot() {
+  public void testDot() {
     for (int i = 0; i < 100; ++i) {
       int a = mRandom.nextInt(-RANGE, RANGE);
       Vector2 v = randomVector2();
       Vector2 u = randomVector2();
       Vector2 w = randomVector2();
 
-      assertEquals(Vector2.dot(Vector2.add(u, v), w), Vector2.dot(u, w) + Vector2.dot(v, w), 0.1f);
+      assertEquals(Vector2.dot(Vector2.add(u, v), w), Vector2.dot(u, w) + Vector2.dot(v, w),
+          EPSILON);
 
-      assertEquals(Vector2.dot(Vector2.multiply(u, a), v), a * Vector2.dot(v, u), 0.1f);
+      assertEquals(Vector2.dot(Vector2.multiply(u, a), v), a * Vector2.dot(v, u), EPSILON);
 
-      assertEquals(Vector2.dot(v, u), Vector2.dot(u, v), 0.1f);
+      assertEquals(Vector2.dot(v, u), Vector2.dot(u, v), EPSILON);
 
-      assertEquals(Vector2.dot(u, u), u.magnitudeSquared(), 0.1f);
+      assertEquals(Vector2.dot(u, u), u.magnitudeSquared(), EPSILON);
 
-      assertEquals(Vector2.dot(u, u.normalize()), u.magnitude(), 0.1f);
+      assertEquals(Vector2.dot(u, u.normalize()), u.magnitude(), EPSILON);
     }
   }
 
   @Test
-  public final void testDistanceSubtract() {
+  public void testDistanceSubtract() {
     for (int i = 0; i < 100; ++i) {
       Vector2 v = randomVector2();
       Vector2 u = randomVector2();
 
-      assertEquals(Vector2.subtract(v, u).magnitude(), Vector2.distance(u, v), 0.1f);
+      assertEquals(Vector2.subtract(v, u).magnitude(), Vector2.distance(u, v), EPSILON);
     }
   }
 }
