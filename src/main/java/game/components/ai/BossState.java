@@ -6,10 +6,9 @@ package game.components.ai;
 
 import game.types.GameTime;
 
+// TODO: Better naming
 public interface BossState {
   void start(GameTime time);
 
-  void update(GameTime time);
-
-  boolean isFinished();
+  BossState update(GameTime time);
 }

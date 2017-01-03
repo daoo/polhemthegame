@@ -44,7 +44,7 @@ public class DebugBoss implements RenderComponent {
       g.drawLine(0, 0, target.x, target.y);
     }
 
-    g.draw(new Circle(0, 0, BossAI.MIN_WALK));
+    g.draw(new Circle(0, 0, Walking.MIN_WALK));
 
     Vector2 o = Vector2.subtract(mAi.getMovementRect().getMin(), mBody.getMin());
     g.drawRect(o.x, o.y, mAi.getMovementRect().getSize().x, mAi.getMovementRect().getSize().y);

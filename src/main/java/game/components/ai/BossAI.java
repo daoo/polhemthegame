@@ -8,43 +8,40 @@ import game.components.LogicComponent;
 import game.components.holdables.Hand;
 import game.components.physics.Movement;
 import game.entities.EntityImpl;
-import game.misc.Locator;
 import game.types.GameTime;
 import game.types.Message;
 import math.Aabb;
-import math.ExtraMath;
 import math.Rectangle;
 import math.Vector2;
 
+// TODO: Better naming
 public class BossAI implements LogicComponent {
   private static final int INITIAL_TARGET_COUNT = 1;
-  private static final int TARGET_MIN_COUNT = 1;
-  private static final int TARGET_MAX_COUNT = 3;
 
-  public static final float MIN_WALK = 100.0f;
-  public static final float MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
+  // TODO: Separate class?
+  static class Boss {
+    final EntityImpl entity;
+    final Movement movement;
+    final Hand hand;
+    final Aabb boundary;
+    final float speed;
 
-  private static final int SHOOTING_TIME_MIN = 1000;
-  private static final int SHOOTING_TIME_MAX = 1500;
+    Boss(EntityImpl entity, Movement movement, Hand hand, Aabb boundary, float speed) {
+      this.entity = entity;
+      this.movement = movement;
+      this.hand = hand;
+      this.boundary = boundary;
+      this.speed = speed;
+    }
+  }
 
-  private final EntityImpl mEntity;
-  private final Movement mMovement;
-  private final Hand mHand;
-  private final Aabb mMovementBox;
+  private final Boss mBoss;
   private final Vector2 mInitialTarget;
-  private final float mSpeed;
-
-  private BossState mState;
+  private BossState mState = null;
 
   public BossAI(
       EntityImpl entity, Movement movement, Hand hand, Aabb arenaBox, float locationX, float speed,
       Vector2 initialTarget) {
-    mEntity = entity;
-    mHand = hand;
-    mMovement = movement;
-    mSpeed = speed;
-    mInitialTarget = initialTarget;
-
     // Setup the area which the TOP LEFT of the boss body may move around in
     float bossWidth = entity.getBody().getSize().x;
     float bossHeight = entity.getBody().getSize().y;
@@ -55,7 +52,9 @@ public class BossAI implements LogicComponent {
 
     Vector2 min = new Vector2(x1, y1);
     Vector2 max = new Vector2(x2, y2);
-    mMovementBox = new Aabb(min, Rectangle.fromExtents(min, max));
+    Aabb movementBox = new Aabb(min, Rectangle.fromExtents(min, max));
+    mBoss = new Boss(entity, movement, hand, movementBox, speed);
+    mInitialTarget = initialTarget;
   }
 
   public BossState getState() {
@@ -64,27 +63,11 @@ public class BossAI implements LogicComponent {
 
   @Override
   public void update(GameTime time) {
-    mState.update(time);
-
-    if (mState.isFinished()) {
-      // Go to next state
-
-      if (mState instanceof Walking) {
-        int shootingTime = Locator.getRandom().nextInt(SHOOTING_TIME_MIN, SHOOTING_TIME_MAX);
-        mState = new Shooting(shootingTime);
-
-        mMovement.setVelocity(Vector2.ZERO);
-        mEntity.sendMessage(Message.STOP_ANIMATION, null);
-        mHand.startUse();
-      } else if (mState instanceof Shooting) {
-        int targets = Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1);
-        mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementBox, targets);
-
-        mEntity.sendMessage(Message.START_ANIMATION, null);
-        mHand.stopUse();
+    if (mState != null) {
+      BossState next = mState.update(time);
+      if (next != null) {
+        mState = next;
       }
-
-      mState.start(time);
     }
   }
 
@@ -93,16 +76,12 @@ public class BossAI implements LogicComponent {
     if (message == Message.START_BOSS) {
       GameTime time = (GameTime) args;
 
-      mState = new Walking(mEntity.getBody(), mHand, mMovement, mSpeed, mMovementBox,
-          INITIAL_TARGET_COUNT, mInitialTarget);
-
-      mEntity.sendMessage(Message.START_ANIMATION, null);
-
+      mState = new Walking(mBoss, INITIAL_TARGET_COUNT, mInitialTarget);
       mState.start(time);
     }
   }
 
   public Aabb getMovementRect() {
-    return mMovementBox;
+    return mBoss.boundary;
   }
 }

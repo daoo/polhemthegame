@@ -4,10 +4,9 @@
 
 package game.components.ai;
 
-import game.components.holdables.Hand;
-import game.components.physics.Movement;
 import game.misc.Locator;
 import game.types.GameTime;
+import game.types.Message;
 import math.Aabb;
 import math.Circle;
 import math.ExtraMath;
@@ -15,101 +14,73 @@ import math.Vector2;
 import util.Random;
 
 public class Walking implements BossState {
-  public static final float EPSILON = 0.0001f;
+  private static final float EPSILON = 0.0001f;
   public static final int MIN_WALK = 100;
-  public static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
+  private static final int MIN_WALK_SQUARED = ExtraMath.square(MIN_WALK);
+  private static final int TARGET_MIN_COUNT = 1;
+  private static final int TARGET_MAX_COUNT = 3;
 
-  private final Aabb mBody;
-  private final float mSpeed;
-  private final Movement mMovement;
-  private final Aabb mBoundary;
+  private final BossAI.Boss mBoss;
 
   private Vector2 mTarget;
   private int mTargetsLeft;
 
-  /**
-   * Create a new walk state for boss AI.
-   *
-   * @param body the boss body
-   * @param hand the boss hand
-   * @param movement the boss movement
-   * @param speed the speed of the boss
-   * @param boundary the rectangle which the boss should move within
-   * @param targets the number of targets (positions the boss should walk to),
-   * greater than zero
-   * @param target the first target the boss should reach
-   */
-  public Walking(
-      Aabb body, Hand hand, Movement movement, float speed, Aabb boundary, int targets,
-      Vector2 target) {
+  public Walking(BossAI.Boss boss, int targets, Vector2 target) {
     assert targets > 0;
     assert target != null;
 
-    mBody = body;
-    mSpeed = speed;
-    mMovement = movement;
+    mBoss = boss;
     mTargetsLeft = targets;
-    mBoundary = boundary;
     mTarget = target;
   }
 
-  /**
-   * Create a new walk state for boss AI.
-   * Instead of specifying the initial target a random target will be chosen
-   * instead.
-   *
-   * @param body the body box
-   * @param hand the boss hand
-   * @param movement the boss movement
-   * @param speed the speed of the boss
-   * @param boundary the box which the boss should move within
-   * @param targets the number of targets (positions the boss should walk to)
-   */
-  public Walking(
-      Aabb body, Hand hand, Movement movement, float speed, Aabb boundary, int targets) {
-    this(body, hand, movement, speed, boundary, targets,
-        newRandomTarget(Locator.getRandom(), boundary,
-            new Circle(body.getCenter(), MIN_WALK_SQUARED)));
+  public Walking(BossAI.Boss boss) {
+    this(boss, Locator.getRandom().nextInt(TARGET_MIN_COUNT, TARGET_MAX_COUNT + 1),
+        newRandomTarget(Locator.getRandom(), boss.boundary,
+            new Circle(boss.entity.getBody().getCenter(), MIN_WALK_SQUARED)));
   }
 
   @Override
   public void start(GameTime time) {
     headFor(mTarget);
+
+    mBoss.entity.sendMessage(Message.START_ANIMATION, null);
+    mBoss.hand.stopUse();
   }
 
   @Override
-  public void update(GameTime time) {
-    if (mTargetsLeft > 0) {
-      Vector2 position = mBody.getMin();
-      Vector2 delta = Vector2.subtract(position, mTarget);
-      if (Vector2.dot(delta, mMovement.getVelocity()) >= 0) {
-        --mTargetsLeft;
-        // Target passed
-        if (mTargetsLeft > 0) {
-          Circle circle = new Circle(position, MIN_WALK_SQUARED);
-          mTarget = newRandomTarget(Locator.getRandom(), mBoundary, circle);
-          headFor(mTarget);
-        }
+  public BossState update(GameTime time) {
+    if (mTargetsLeft <= 0) {
+      Shooting shooting = new Shooting(mBoss);
+      shooting.start(time);
+      return shooting;
+    }
+
+    Vector2 position = mBoss.entity.getBody().getMin();
+    Vector2 delta = Vector2.subtract(position, mTarget);
+    if (Vector2.dot(delta, mBoss.movement.getVelocity()) >= 0) {
+      --mTargetsLeft;
+      // Target passed
+      if (mTargetsLeft > 0) {
+        Circle circle = new Circle(position, MIN_WALK_SQUARED);
+        mTarget = newRandomTarget(Locator.getRandom(), mBoss.boundary, circle);
+        headFor(mTarget);
       }
     }
+    return null;
   }
 
   public Vector2 getTarget() {
     return mTarget;
   }
 
-  @Override
-  public boolean isFinished() {
-    return mTargetsLeft == 0;
-  }
-
   private void headFor(Vector2 target) {
-    assert mBoundary.contains(target);
+    assert mBoss.boundary.contains(target);
 
-    Vector2 delta = Vector2.subtract(target, mBody.getMin());
+    Vector2 delta = Vector2.subtract(target, mBoss.entity.getBody().getMin());
     Vector2 direction = delta.normalize();
-    Vector2 velocity = Vector2.multiply(direction, mSpeed);
-    mMovement.setVelocity(velocity);
+    Vector2 velocity = Vector2.multiply(direction, mBoss.speed);
+    mBoss.movement.setVelocity(velocity);
   }
 
   /**
